@@ -16,14 +16,17 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta property="og:type" content="article">
+    <meta name="description" content="STC单片机内部集成了的EEPROM是与程序空间是分开的，利用ISP&#x2F;IAP技术可将内部Data Flash当EEPROM，擦写次数在10万次以上。以下根据datasheet简单介绍一下单片机内部EEPROM的编程方式。 IAP及EEPROM特殊功能寄存器介绍  ISP&#x2F;IAP数据寄存器IAP_DATA ISP&#x2F;IAP地址寄存器IAP_ADDRH和IAP_ADDRL ISP&#x2F;IAP命令">
+<meta property="og:type" content="article">
 <meta property="og:title" content="STC芯片内部EEPROM的程序设计">
 <meta property="og:url" content="http://example.com/2023/04/27/STC%E8%8A%AF%E7%89%87%E5%86%85%E9%83%A8EEPROM%E7%9A%84%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="STC单片机内部集成了的EEPROM是与程序空间是分开的，利用ISP&#x2F;IAP技术可将内部Data Flash当EEPROM，擦写次数在10万次以上。以下根据datasheet简单介绍一下单片机内部EEPROM的编程方式。 IAP及EEPROM特殊功能寄存器介绍  ISP&#x2F;IAP数据寄存器IAP_DATA ISP&#x2F;IAP地址寄存器IAP_ADDRH和IAP_ADDRL ISP&#x2F;IAP命令">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-04-27T09:15:17.000Z">
-<meta property="article:modified_time" content="2023-04-27T09:15:17.688Z">
+<meta property="article:modified_time" content="2023-04-27T10:57:26.987Z">
 <meta property="article:author" content="John Doe">
+<meta property="article:tag" content="stc">
 <meta name="twitter:card" content="summary_large_image">
   
   
@@ -219,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          0 字
+          4.1k 字
         
       </span>
     
@@ -230,7 +233,7 @@
         
         
         
-          1 分钟
+          14 分钟
         
       </span>
     
@@ -273,7 +276,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年4月27日 下午
+                    本文最后更新于：2023年4月27日 晚上
                   
                 
               </p>
@@ -281,7 +284,204 @@
             
               <div class="markdown-body">
                 
-                
+                <p>STC单片机内部集成了的EEPROM是与程序空间是分开的，利用ISP/IAP技术可将内部Data
+Flash当EEPROM，擦写次数在10万次以上。以下根据datasheet简单介绍一下单片机内部EEPROM的编程方式。</p>
+<h3
+id="iap及eeprom特殊功能寄存器介绍">IAP及EEPROM特殊功能寄存器介绍</h3>
+<ul>
+<li>ISP/IAP数据寄存器IAP_DATA</li>
+<li>ISP/IAP地址寄存器IAP_ADDRH和IAP_ADDRL</li>
+<li>ISP/IAP命令寄存器IAP_CMD</li>
+<li>ISP/IAP命令触发寄存器IAP_TRIG</li>
+<li>ISP/IAP控制寄存器IAP_CONTR</li>
+</ul>
+<h3 id="注意事项">注意事项</h3>
+<p>1.<strong>写数据</strong>：如果该字节不是0xFF，则须先将整个扇区擦除，因为只有扇区擦除才可以将
+<strong>0</strong> 变为 <strong>1</strong> 。</p>
+<p>2.<strong>扇区擦除</strong>：将扇区内各字节变为 <strong>0xFF</strong>
+。</p>
+<p>3.同一次修改的数据放在同一扇区中，不是同一次修改的数据放在另外的扇区。</p>
+<p>4.IAP指令完成后，地址不会自动增减，需要手动处理。</p>
+<h3 id="eeprom程序实现">EEPROM程序实现</h3>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">define</span>	IAP_EEPROM__H</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;stc15.h&quot;</span></span>
+
+<span class="hljs-keyword">typedef</span> <span class="hljs-type">unsigned</span> <span class="hljs-type">char</span> <span class="hljs-type">uint8_t</span>;
+<span class="hljs-keyword">typedef</span> <span class="hljs-type">unsigned</span> <span class="hljs-type">short</span> <span class="hljs-type">uint16_t</span>;
+<span class="hljs-keyword">typedef</span> <span class="hljs-type">unsigned</span> <span class="hljs-type">int</span> <span class="hljs-type">uint32_t</span>;
+
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> TOTAL_ITEM (20) <span class="hljs-comment">//存储数据的数量</span></span>
+
+<span class="hljs-comment">/** STC12C5A60S2</span>
+<span class="hljs-comment">  *	eeprom 扇区地址</span>
+<span class="hljs-comment">  * 0x0000 ~ 0x3fff</span>
+<span class="hljs-comment">  */</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> IAP_ADDR_SECTOR_0	0x0000  <span class="hljs-comment">//第一扇区基地址</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> IAP_ADDR_SECTOR_1	0x0200  <span class="hljs-comment">//第二扇区基地址</span></span>
+
+<span class="hljs-comment">/* IAP_CMD register */</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> IAP_CMD_STANDBY			0x00  <span class="hljs-comment">//待机模式</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> IAP_CMD_BYTE_RD			0x01  <span class="hljs-comment">//字节读</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> IAP_CMD_BYTE_WR			0x02  <span class="hljs-comment">//字节写</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> IAP_CMD_SECTOR_ERASE	0x03  <span class="hljs-comment">//扇区擦除</span></span>
+<span class="hljs-comment">/* IAP_TRIG register */</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> IAP_TRIG_FIRST		0x5a</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> IAP_TRIG_SECOND		0xa5</span>
+<span class="hljs-comment">/* IAP_CONTR register */</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> IAP_EN				0x80	<span class="hljs-comment">//IAP使能</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> IAP_ISP				0x60	<span class="hljs-comment">//复位后从系统ISP监控程序区启动</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> IAP_TIMEOUT_1M		0x07	<span class="hljs-comment">//设置系统时钟小于或等于1MHZ</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> IAP_TIMEOUT_2M		0x06	<span class="hljs-comment">//设置系统时钟小于或等于2MHZ</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> IAP_TIMEOUT_3M		0x05	<span class="hljs-comment">//设置系统时钟小于或等于3MHZ</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> IAP_TIMEOUT_6M		0x04	<span class="hljs-comment">//设置系统时钟小于或等于6MHZ</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> IAP_TIMEOUT_12M		0x03	<span class="hljs-comment">//设置系统时钟小于或等于12MHZ</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> IAP_TIMEOUT_20M		0x02	<span class="hljs-comment">//设置系统时钟小于或等于20MHZ</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> IAP_TIMEOUT_24M		0x01	<span class="hljs-comment">//设置系统时钟小于或等于24MHZ</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> IAP_TIMEOUT_30M		0x00	<span class="hljs-comment">//设置系统时钟小于或等于30MHZ</span></span>
+
+<span class="hljs-keyword">extern</span> <span class="hljs-type">uint16_t</span> eeprom_save[TOTAL_ITEM];
+<span class="hljs-keyword">extern</span> <span class="hljs-type">void</span> <span class="hljs-title function_">iap_erase</span><span class="hljs-params">(<span class="hljs-type">unsigned</span> <span class="hljs-type">int</span> addr)</span>;
+<span class="hljs-keyword">extern</span> <span class="hljs-type">void</span> <span class="hljs-title function_">iap_rd_byte</span><span class="hljs-params">(<span class="hljs-type">unsigned</span> <span class="hljs-type">int</span> addr, <span class="hljs-type">unsigned</span> <span class="hljs-type">char</span>* dat)</span>;
+<span class="hljs-keyword">extern</span> <span class="hljs-type">void</span> <span class="hljs-title function_">iap_wr_byte</span><span class="hljs-params">(<span class="hljs-type">unsigned</span> <span class="hljs-type">int</span> addr,<span class="hljs-type">unsigned</span> <span class="hljs-type">char</span>* dat)</span>;
+<span class="hljs-keyword">extern</span> <span class="hljs-type">void</span> <span class="hljs-title function_">iap_rd_data</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span>;
+<span class="hljs-keyword">extern</span> <span class="hljs-type">void</span> <span class="hljs-title function_">iap_wr_data</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span>;
+
+<span class="hljs-meta">#<span class="hljs-keyword">endif</span></span></code></pre></div>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">/**</span>
+<span class="hljs-comment">  ******************************************************************************</span>
+<span class="hljs-comment">  * @file    eeprom.c </span>
+<span class="hljs-comment">  * @version V1.0.0</span>
+<span class="hljs-comment">  * @date    2023.03.16</span>
+<span class="hljs-comment">  * @author  Kayoung</span>
+<span class="hljs-comment">  * @brief   IAP EEPROM 相关功能</span>
+<span class="hljs-comment">  * @details  </span>
+<span class="hljs-comment">  ******************************************************************************</span>
+<span class="hljs-comment">  * @attention </span>
+<span class="hljs-comment">  ******************************************************************************</span>
+<span class="hljs-comment">  */</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;eeprom.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;intrins.h&quot;</span></span>
+
+<span class="hljs-comment">/* 定义一个存储数据数组 */</span>
+<span class="hljs-type">uint16_t</span> eeprom_save[TOTAL_ITEM] = &#123;<span class="hljs-number">0</span>&#125;; <span class="hljs-comment">//注意：每个数据两字节</span>
+
+<span class="hljs-comment">/**</span>
+<span class="hljs-comment">  * @brief  关闭IAP功能</span>
+<span class="hljs-comment">  * @param  None</span>
+<span class="hljs-comment">  * @retval None</span>
+<span class="hljs-comment">  */</span>
+<span class="hljs-type">void</span> <span class="hljs-title function_">iap_disable</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span>
+&#123;
+	IAP_CONTR = <span class="hljs-number">0</span>;
+	IAP_CMD = <span class="hljs-number">0</span>;
+	IAP_TRIG = <span class="hljs-number">0</span>;
+	IAP_ADDRH = <span class="hljs-number">0xff</span>;
+	IAP_ADDRL = <span class="hljs-number">0xff</span>;
+&#125;
+<span class="hljs-comment">/**</span>
+<span class="hljs-comment">  * @brief  擦除某地址所在的扇区</span>
+<span class="hljs-comment">  * @param  addr：待擦除扇区地址</span>
+<span class="hljs-comment">  * @retval None</span>
+<span class="hljs-comment">  */</span>
+<span class="hljs-type">void</span> <span class="hljs-title function_">iap_erase</span><span class="hljs-params">(<span class="hljs-type">uint32_t</span> addr)</span>
+&#123;
+	IAP_CONTR = IAP_EN | IAP_TIMEOUT_12M;<span class="hljs-comment">//允许IAP操作，设置IAP操作速度         </span>
+	IAP_CMD = IAP_CMD_SECTOR_ERASE;<span class="hljs-comment">//扇区擦除命令            </span>
+	IAP_ADDRL = addr;              
+	IAP_ADDRH = addr &gt;&gt; <span class="hljs-number">8</span>;<span class="hljs-comment">//地址赋值          </span>
+	IAP_TRIG = IAP_TRIG_FIRST;                
+	IAP_TRIG = IAP_TRIG_SECOND;<span class="hljs-comment">//触发命令               </span>
+	_nop_();_nop_();         
+	iap_disable();<span class="hljs-comment">//清空IAP操作寄存器等</span>
+&#125;
+<span class="hljs-comment">/**</span>
+<span class="hljs-comment">  * @brief  在某地址写入一个字节</span>
+<span class="hljs-comment">  * @param  addr: 地址</span>
+<span class="hljs-comment">  * @param	dat： 待写入的一字节数据指针</span>
+<span class="hljs-comment">  * @retval None</span>
+<span class="hljs-comment">  */</span>
+<span class="hljs-type">void</span> <span class="hljs-title function_">iap_wr_byte</span><span class="hljs-params">(<span class="hljs-type">uint32_t</span> addr,<span class="hljs-type">uint8_t</span>* dat)</span>
+&#123;
+	IAP_CONTR = IAP_EN | IAP_TIMEOUT_12M;<span class="hljs-comment">//允许IAP操作，设置IAP操作速度   </span>
+	IAP_CMD = IAP_CMD_BYTE_WR;<span class="hljs-comment">//IAP写命令</span>
+	IAP_ADDRL = addr;
+	IAP_ADDRH = addr &gt;&gt; <span class="hljs-number">8</span>;<span class="hljs-comment">//地址赋值</span>
+	IAP_DATA = *dat;<span class="hljs-comment">//更新写寄存器</span>
+	IAP_TRIG = IAP_TRIG_FIRST;
+	IAP_TRIG = IAP_TRIG_SECOND;<span class="hljs-comment">//触发</span>
+	_nop_();
+	iap_disable();<span class="hljs-comment">//清空IAP操作寄存器等</span>
+&#125;
+
+<span class="hljs-comment">/**</span>
+<span class="hljs-comment">  * @brief  读取某地址一个字节</span>
+<span class="hljs-comment">  * @param  addr: 地址</span>
+<span class="hljs-comment">  * @param  dat： 待读取的一字节数据指针</span>
+<span class="hljs-comment">  * @retval None</span>
+<span class="hljs-comment">  */</span>
+<span class="hljs-type">void</span> <span class="hljs-title function_">iap_rd_byte</span><span class="hljs-params">(<span class="hljs-type">uint32_t</span> addr, <span class="hljs-type">uint8_t</span>* dat)</span>
+&#123;
+	IAP_CONTR = IAP_EN | IAP_TIMEOUT_12M;<span class="hljs-comment">//允许IAP</span>
+	IAP_CMD = IAP_CMD_BYTE_RD;<span class="hljs-comment">//IAP读命令</span>
+	IAP_ADDRL = addr;
+	IAP_ADDRH = addr &gt;&gt; <span class="hljs-number">8</span>;<span class="hljs-comment">//地址赋值</span>
+	IAP_TRIG = IAP_TRIG_FIRST;
+	IAP_TRIG = IAP_TRIG_SECOND;<span class="hljs-comment">//触发</span>
+	_nop_();_nop_();
+	*dat = IAP_DATA;
+	iap_disable();<span class="hljs-comment">//清空IAP操作寄存器等</span>
+&#125;
+
+<span class="hljs-comment">/**</span>
+<span class="hljs-comment">  * @brief  读取eeprom存储的参数</span>
+<span class="hljs-comment">  * @param  None</span>
+<span class="hljs-comment">  * @retval None</span>
+<span class="hljs-comment">  */</span>
+<span class="hljs-type">void</span> <span class="hljs-title function_">iap_rd_data</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span>
+&#123;
+	<span class="hljs-type">uint8_t</span> tmp_h = <span class="hljs-number">0</span>, tmp_l = <span class="hljs-number">0</span>; <span class="hljs-comment">//临时变量</span>
+	<span class="hljs-type">uint8_t</span> i;
+	
+	<span class="hljs-keyword">for</span>(i = <span class="hljs-number">0</span>; i &lt; TOTAL_ITEM; i++)
+	&#123;
+		iap_rd_byte(IAP_ADDR_SECTOR_0 + <span class="hljs-number">2</span>*i, &amp;tmp_l);
+		iap_rd_byte(IAP_ADDR_SECTOR_0 + <span class="hljs-number">2</span>*i+<span class="hljs-number">1</span>, &amp;tmp_h);
+		eeprom_save[i] = tmp_h &lt;&lt; <span class="hljs-number">8</span> | tmp_l; <span class="hljs-comment">//EEPROM中每两个字节组成一个数据</span>
+	&#125;		
+&#125;
+<span class="hljs-comment">/**</span>
+<span class="hljs-comment">  * @brief  存储数据到eeprom</span>
+<span class="hljs-comment">  * @param  void</span>
+<span class="hljs-comment">  * @retval None</span>
+<span class="hljs-comment">  */</span>
+<span class="hljs-type">void</span> <span class="hljs-title function_">iap_wr_data</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span>
+&#123;
+	<span class="hljs-type">uint8_t</span> tmp_h = <span class="hljs-number">0</span>, tmp_l = <span class="hljs-number">0</span>; <span class="hljs-comment">//临时变量</span>
+	<span class="hljs-type">uint8_t</span> i;
+		
+	<span class="hljs-comment">/* 保存之前，擦除当前需要保存数据的扇区 */</span>
+	<span class="hljs-keyword">for</span>(i = <span class="hljs-number">0</span>; i &lt; TOTAL_ITEM; i++)
+	&#123;
+		<span class="hljs-keyword">if</span>(eeprom_save[i] != <span class="hljs-number">0xffff</span>)
+		&#123;
+			iap_erase(IAP_ADDR_SECTOR_0);<span class="hljs-comment">//擦除eeprom 1st sector</span>
+			<span class="hljs-keyword">break</span>;
+		&#125;
+	&#125;
+	<span class="hljs-comment">/* 存储数据到eeprom */</span>
+	<span class="hljs-keyword">for</span>(i = <span class="hljs-number">0</span>; i &lt; TOTAL_ITEM; i++)
+	&#123;
+        <span class="hljs-comment">/* 擦除完EEPROM，每个字节数据都是0xff*/</span>
+		<span class="hljs-keyword">if</span>(eeprom_save[i] == <span class="hljs-number">0xffff</span>)
+			eeprom_save[i] = <span class="hljs-number">0</span>;
+		tmp_h = eeprom_save[i] / <span class="hljs-number">256</span>;
+		tmp_l = eeprom_save[i] % <span class="hljs-number">256</span>;
+		iap_wr_byte(IAP_ADDR_SECTOR_0 + <span class="hljs-number">2</span>*i, &amp;tmp_l);
+		iap_wr_byte(IAP_ADDR_SECTOR_0 + <span class="hljs-number">2</span>*i+<span class="hljs-number">1</span>, &amp;tmp_h);
+	&#125;
+&#125;</code></pre></div>
+<p>程序附件 <a
+target="_blank" rel="noopener" href="https://gitee.com/kayoungzhang/my_codehubm.git">iap_eeprom</a></p>
 
                 
               </div>
@@ -290,6 +490,34 @@
             <div>
               <div class="post-metas my-3">
   
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%8D%95%E7%89%87%E6%9C%BA/" class="category-chain-item">单片机</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/stc/">#stc</a>
+      
+    </div>
   
 </div>
 
