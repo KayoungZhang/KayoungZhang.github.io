@@ -1,0 +1,783 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Windows下批处理指令在工作生活中有很大的应用，可实现自动化处理某些任务。打开window中的命令行窗口，输入相应命令加上&#x2F;? 可以查看各命令的详细使用方法（如 dir &#x2F;? ），下面介绍一些常用的指令：  基本指令 rem 这是一条注释语句 ---&gt;命令行注释，可以回显 :: 这是一条注释语句 ---&gt;命令行注释，不可回显 pause ---&gt;暂停批处理文件的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Bat(批处理)指令与应用">
+<meta property="og:url" content="http://example.com/2023/04/13/Bat-%E6%89%B9%E5%A4%84%E7%90%86-%E6%8C%87%E4%BB%A4%E4%B8%8E%E5%BA%94%E7%94%A8/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Windows下批处理指令在工作生活中有很大的应用，可实现自动化处理某些任务。打开window中的命令行窗口，输入相应命令加上&#x2F;? 可以查看各命令的详细使用方法（如 dir &#x2F;? ），下面介绍一些常用的指令：  基本指令 rem 这是一条注释语句 ---&gt;命令行注释，可以回显 :: 这是一条注释语句 ---&gt;命令行注释，不可回显 pause ---&gt;暂停批处理文件的">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-13T09:16:19.000Z">
+<meta property="article:modified_time" content="2023-04-25T06:34:20.247Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="bat">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"✍","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":false},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":false,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+<meta name="referrer" content="no-referrer" />
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>My Tech Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/article.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.1)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Bat(批处理)指令与应用"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-04-13 17:16" pubdate>
+          2023年4月13日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          4.9k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          17 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-12 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Bat(批处理)指令与应用</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：2023年4月25日 下午
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <p>Windows下批处理指令在工作生活中有很大的应用，可实现自动化处理某些任务。打开window中的命令行窗口，输入相应命令加上/?
+可以查看各命令的详细使用方法（如 <strong>dir /?</strong>
+），下面介绍一些常用的指令：</p>
+<hr />
+<h4 id="基本指令">基本指令</h4>
+<p><code>rem 这是一条注释语句</code> ---&gt;命令行注释，可以回显</p>
+<p><code>:: 这是一条注释语句</code> ---&gt;命令行注释，不可回显</p>
+<p><code>pause</code> ---&gt;暂停批处理文件的执行，命令行提示
+<strong>请按任意键继续</strong></p>
+<p><code>@echo off</code>
+---&gt;关闭回显，一般批处理文件第一行都是这句</p>
+<p><code>echo off</code> ---&gt;从下一行开始关闭回显</p>
+<p><code>echo on</code> ---&gt;从下一行开始打开回显</p>
+<p><code>ehco.</code> ---&gt;换行</p>
+<p><code>echo Y | rd /s E:\mybat</code> ---&gt;删除文件提示
+<strong>Y</strong></p>
+<p><code>echo hello word &gt; E:\newfile.txt</code>
+---&gt;创建文件并向文件写内容</p>
+<p><code>echo hello word &gt;&gt; E:\newfile.txt</code>
+---&gt;向文件追加内容</p>
+<p><code>cls</code> ---&gt;清屏</p>
+<p><code>title 这是一个标题</code> ---&gt;设置窗口标题</p>
+<p><code>color 0A</code> ---&gt;设置窗口颜色，颜色的设置具体用法查看
+<strong>color /?</strong></p>
+<p><code>dir</code> ---&gt;显示当前目录下文件</p>
+<p><code>cd 路径</code> ---&gt;切换路径</p>
+<p><code>call test1.bat</code>
+---&gt;在同一个命令窗口调用另一个批处理文件</p>
+<p><code>start e:\test.txt</code>
+---&gt;打开命令行并执行一个新的程序</p>
+<p><code>del /q/a/f d:\temp\*.*</code>
+---&gt;删除指定文件，参数的具体用法查看 <strong>del /?</strong></p>
+<p><code>rd /s/q d:\temp</code> ---&gt;删除文件夹及子文件夹</p>
+<p><code>md mybat</code> ---&gt;创建文件夹</p>
+<p><code>copy C:\mybat.txt D:\</code>
+---&gt;复制文件，不能复制文件夹</p>
+<p><code>ren d:\temp tmp</code> ---&gt;重命名文件</p>
+<p><code>move mybat\1.txt myfile\</code> ---&gt;移动文件</p>
+<p><code>find "abc" mybat\4.txt</code>
+---&gt;在文件中查找字符，参数的具体用法查看 <strong>find /?</strong></p>
+<p><code>type c:\boot.ini</code> ---&gt;显示文件内容</p>
+<p><code>date</code> ---&gt;显示系统日期</p>
+<p><code>time</code> ---&gt;显示系统时间</p>
+<p><code>:label</code> ---&gt;行标签</p>
+<p><code>goto label</code> ---&gt;跳转到指定标签</p>
+<p><code>tree d:\</code> ---&gt;显示目录结构</p>
+<p><code>ping www.baidu.com</code> ---&gt;测试网络连接量</p>
+<p><code>del a.txt &amp;&amp; echo OK</code>
+---&gt;顺序执行多条命令，当碰到执行出错的命令后将不执行后面的命令</p>
+<p><code>del a.txt || echo error</code>
+---&gt;顺序执行多条命令，当碰到执行正确的命令后将不执行后面的命令</p>
+<p><code>dir *.* /s/a | find /c ".exe"</code> --&gt;管道命令表示先执行
+dir 命令，对其输出的结果执行后面的 find 命令</p>
+<hr />
+<h4 id="高级指令">高级指令</h4>
+<p><strong><code>if</code> 判断命令</strong>,具体查看 <strong>if
+/?</strong></p>
+<div class="code-wrapper"><pre><code class="hljs bash"><span class="hljs-keyword">if</span> not exist d:\test.bat (
+    <span class="hljs-built_in">echo</span> @<span class="hljs-built_in">echo</span> off&gt;d:\test.bat
+) <span class="hljs-keyword">else</span> (
+    del d:\test.bat
+) ::如果d盘不存在test.bat文件，则在d盘创建test.bat文件，并写入 @<span class="hljs-built_in">echo</span> off，如果存在则删除此文件</code></pre></div>
+<p><strong><code>for</code> 循环命令</strong>，具体查看 <strong>for
+/?</strong></p>
+<div class="code-wrapper"><pre><code class="hljs bash"><span class="hljs-keyword">for</span> %%i <span class="hljs-keyword">in</span> (d:\*.*) <span class="hljs-keyword">do</span> <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;%%i&quot;</span>  ::找出D盘下所有文件
+<span class="hljs-keyword">for</span> %%i <span class="hljs-keyword">in</span> (*.txt) <span class="hljs-keyword">do</span> find <span class="hljs-string">&quot;abc&quot;</span> %%i   ::对当前目录里所有的txt文件执行 find 命令
+<span class="hljs-keyword">for</span> /r d:\mp3 %%i <span class="hljs-keyword">in</span> (*.mp3) <span class="hljs-keyword">do</span> <span class="hljs-built_in">echo</span> %%i&gt;&gt;d:\mp3.txt   ::把 d:\mp3 及其子目录里的mp3文件的文件名都存到 d:\mp3.txt 里去
+<span class="hljs-keyword">for</span> /l %%i <span class="hljs-keyword">in</span> (2,1,8) <span class="hljs-keyword">do</span> <span class="hljs-built_in">echo</span> %%i   ::生成2345678序列，2是数字序列的开头，8是结尾，1表示每次加1
+<span class="hljs-keyword">for</span> /f <span class="hljs-string">&quot;skip=5 tokens=4&quot;</span> %%a <span class="hljs-keyword">in</span> (<span class="hljs-string">&#x27;dir&#x27;</span>) <span class="hljs-keyword">do</span> <span class="hljs-built_in">echo</span> %%a   ::对<span class="hljs-built_in">dir</span>命令的结果，跳过前5行，余下每行取第4列</code></pre></div>
+<p><strong><code>start</code></strong></p>
+<div class="code-wrapper"><pre><code class="hljs bash">start <span class="hljs-string">&quot;&quot;</span> <span class="hljs-string">&quot;D:\Program Files\Git\git-bash.exe&quot;</span> -c <span class="hljs-string">&quot;hexo clean &amp;&amp; hexo g &amp;&amp; hexo d;bash&quot;</span> 
+::通过命令窗口打开git-bash，并在git-bash中运行hexo命令，完成后bash窗口不关闭
+::参数说明： <span class="hljs-string">&quot;&quot;</span> ---&gt;用于执行计算机空白符
+::参数说明： -c ---&gt;设置启动命令参数，各个参数间用&amp;&amp;分隔
+::参数说明： ;bash结尾符 ---&gt;防止git-bash窗口关闭</code></pre></div>
+<p><strong><code>set</code> 设置变量</strong>，具体查看 <strong>set
+/?</strong></p>
+<ol type="1">
+<li>set接收用户输入数据</li>
+</ol>
+<div class="code-wrapper"><pre><code class="hljs bash"><span class="hljs-built_in">set</span> /p param=请输入密码：
+<span class="hljs-built_in">echo</span> %param%</code></pre></div>
+<ol start="2" type="1">
+<li>set定义变量</li>
+</ol>
+<div class="code-wrapper"><pre><code class="hljs bash"><span class="hljs-built_in">set</span> p=aa1bb1aa2bb2           ::设置变量p并赋值，即aa1bb1aa2bb2, <span class="hljs-string">&quot;变量名=值&quot;</span> 中间不要有空格
+<span class="hljs-built_in">echo</span> %p%                     ::显示变量p代表的字符串，即aa1bb1aa2bb2
+<span class="hljs-built_in">echo</span> %p:~6%                  ::显示变量p中第6个字符以后的所有字符，即aa2bb2
+<span class="hljs-built_in">echo</span> %p:~6,3%                ::显示第6个字符以后的3个字符，即aa2
+<span class="hljs-built_in">echo</span> %p:~0,3%                ::显示前3个字符，即aa1
+<span class="hljs-built_in">echo</span> %p:~-2%                 ::显示最后面的2个字符，即b2
+<span class="hljs-built_in">echo</span> %p:~0,-2%               ::显示除了最后2个字符以外的其它字符，即aa1bb1aa2b
+<span class="hljs-built_in">echo</span> %p:aa=c%                ::用c替换变量p中所有的aa，即显示c1bb1c2bb2
+<span class="hljs-built_in">echo</span> %p:aa=%                 ::将变量p中的所有aa字符串置换为空，即显示1bb12bb2
+<span class="hljs-built_in">echo</span> %p:*bb=c%               ::第一个bb及其之前的所有字符被替换为c，即显示c1aa2bb2
+<span class="hljs-built_in">set</span> p=%p:*bb=c%              ::设置变量p，赋值为 %p:*bb=c% ，即c1aa2bb2
+<span class="hljs-built_in">set</span> /a p=39                  ::设置p为数值型变量，值为39
+<span class="hljs-built_in">set</span> /a p=39/10               ::支持运算符，有小数时用去尾法，39/10=3.9，去尾得3，p=3
+<span class="hljs-built_in">set</span> /a p=p/10                ::用 /a 参数时，在 = 后面的变量可以不加%直接引用
+<span class="hljs-built_in">set</span> /a p=”1&amp;0″               ::”与”运算，要加引号。
+<span class="hljs-built_in">set</span> p=                       ::取消p变量</code></pre></div>
+<ol start="3" type="1">
+<li>set用于数字表达式</li>
+</ol>
+<div class="code-wrapper"><pre><code class="hljs bash">@<span class="hljs-built_in">echo</span> off
+<span class="hljs-built_in">set</span> a=1&amp;<span class="hljs-built_in">set</span> b=6
+<span class="hljs-built_in">set</span> c=%a%+%b% 
+<span class="hljs-built_in">echo</span> %c% ::输出1+6
+<span class="hljs-built_in">set</span> d=a+b
+<span class="hljs-built_in">echo</span> %d% ::输出a+b
+<span class="hljs-built_in">set</span> /a e=a+b
+<span class="hljs-built_in">echo</span> %e% ::输出7
+pause</code></pre></div>
+<p><strong><code>变量%0--%9</code></strong> 命令行传递给批处理的参数</p>
+<div class="code-wrapper"><pre><code class="hljs bash">%0 ::批处理文件本身
+%1 ::第一个参数
+%9 ::第九个参数
+%* ::从第一个参数开始的所有参数
+%~1     :: 删除引号(<span class="hljs-string">&quot;)，扩充 %1</span>
+<span class="hljs-string">%~f1    :: 将 %1 扩充到一个完全合格的路径名</span>
+<span class="hljs-string">%~d1    :: 仅将 %1 扩充到一个驱动器号</span>
+<span class="hljs-string">%~p1    :: 仅将 %1 扩充到一个路径</span>
+<span class="hljs-string">%~n1    :: 仅将 %1 扩充到一个文件名</span>
+<span class="hljs-string">%~x1    :: 仅将 %1 扩充到一个文件扩展名</span>
+<span class="hljs-string">%~s1    :: 扩充的路径指含有短名</span>
+<span class="hljs-string">%~a1    :: 将 %1 扩充到文件属性</span>
+<span class="hljs-string">%~t1    :: 将 %1 扩充到文件的日期/时间</span>
+<span class="hljs-string">%~z1    :: 将 %1 扩充到文件的大小</span>
+<span class="hljs-string">%~dp1   ::只将 %1 扩展到驱动器号和路径</span>
+<span class="hljs-string">%~nx1   ::只将 %1 扩展到文件名和扩展名</span></code></pre></div>
+<p><strong><code>net</code> 网络命令</strong></p>
+<div class="code-wrapper"><pre><code class="hljs bash">::关闭/启动MySQL服务,等待停止/启动的过程,完成后执行之后的代码
+net start MySQL
+net stop MySQL
+net start   ::查看所有运行的服务</code></pre></div>
+<p><strong><code>mshta</code></strong></p>
+<div class="code-wrapper"><pre><code class="hljs bash">::可以调用vb脚本和js脚本
+mshta vbscript:window.execScript(<span class="hljs-string">&quot;alert(&#x27;hello world!&#x27;);&quot;</span>,<span class="hljs-string">&quot;javascript&quot;</span>)(window.close)
+mshta javascript:window.execScript(<span class="hljs-string">&quot;msgBox(&#x27;hello world!&#x27;)(window.close)&quot;</span>,<span class="hljs-string">&quot;vbs&quot;</span>)
+mshta vbscript:msgbox(<span class="hljs-string">&quot;弹窗单行显示内容&quot;</span>,65,<span class="hljs-string">&quot;弹窗的标题&quot;</span>)(window.close)
+mshta vbscript:CreateObject(<span class="hljs-string">&quot;Wscript.Shell&quot;</span>).popup(<span class="hljs-string">&quot;弹窗内容&quot;</span>,7,<span class="hljs-string">&quot;标题&quot;</span>,64)(window.close)
+::连续弹二个信息框
+mshta vbscript:execute(<span class="hljs-string">&quot;msgbox &quot;</span><span class="hljs-string">&quot;one BOX&quot;</span><span class="hljs-string">&quot;:msgbox &quot;</span><span class="hljs-string">&quot;two BOX&quot;</span><span class="hljs-string">&quot;:window.close&quot;</span>)</code></pre></div>
+<p><strong><code>延时</code></strong></p>
+<div class="code-wrapper"><pre><code class="hljs bash">ping 127.0.0.1 -n 3 &gt;nul ---&gt;延时3s
+<span class="hljs-built_in">timeout</span> /t 10   ---&gt;延迟10s，具体查看 <span class="hljs-built_in">timeout</span> /?</code></pre></div>
+<p><strong><code>弹框</code></strong></p>
+<ol type="1">
+<li>MSG命令方式</li>
+</ol>
+<div class="code-wrapper"><pre><code class="hljs bash">@<span class="hljs-built_in">echo</span> off
+::/time:5设置时间弹框的显示时间为5S,5S后自动关闭
+msg * /time:5 这里是弹窗显示的文本
+pause
+::设置弹窗的多行文本
+(<span class="hljs-built_in">echo</span> 这是弹窗的第一行文本
+<span class="hljs-built_in">echo</span> 这是第二行文本)|msg * /time:5
+pause</code></pre></div>
+<ol start="2" type="1">
+<li>调用VBScript的MsgBox实现弹窗</li>
+</ol>
+<div class="code-wrapper"><pre><code class="hljs bash">@<span class="hljs-built_in">echo</span> off
+mshta vbscript:msgbox(<span class="hljs-string">&quot;弹窗单行显示内容&quot;</span>,65,<span class="hljs-string">&quot;弹窗的标题&quot;</span>)(window.close)
+::多行显示文本可在文本中使用vbCrLf或vbNewLine
+<span class="hljs-built_in">set</span> msg=<span class="hljs-string">&quot;多行显示vbCrLf这是第二行vbNewLine这是第三行&quot;</span>
+mshta vbscript:msgbox(Replace(Replace(%msg%,<span class="hljs-string">&quot;vbCrLf&quot;</span>,vbCrLf),<span class="hljs-string">&quot;vbNewLine&quot;</span>,vbNewLine),6,<span class="hljs-string">&quot;自定义标题&quot;</span>)(window.close)
+
+MsgBox的button参数取值如下：
+0 = vbOKOnly - 只显示确定按钮。
+1 = vbOKCancel - 显示确定和取消按钮。
+2 = vbAbortRetryIgnore - 显示放弃、重试和忽略按钮。
+3 = vbYesNoCancel - 显示是、否和取消按钮。
+4 = vbYesNo - 显示是和否按钮。
+5 = vbRetryCancel - 显示重试和取消按钮。
+16 = vbCritical - 显示临界信息图标。
+32 = vbQuestion - 显示警告查询图标。
+48 = vbExclamation - 显示警告消息图标。
+64 = vbInformation - 显示信息消息图标。
+0 = vbDefaultButton1 - 第一个按钮为默认按钮。
+256 = vbDefaultButton2 - 第二个按钮为默认按钮。
+512 = vbDefaultButton3 - 第三个按钮为默认按钮。
+768 = vbDefaultButton4 - 第四个按钮为默认按钮。
+0 = vbApplicationModal - 应用程序模式：用户必须响应消息框才能继续在当前应用程序中工作。
+4096 = vbSystemModal - 系统模式：在用户响应消息框前，所有应用程序都被挂起。
+
+注意：
+第一组值 (0 - 5) 用于描述对话框中显示的按钮类型与数目；
+第二组值 (16, 32, 48, 64) 用于描述图标的样式；
+第三组值 (0, 256, 512) 用于确定默认按钮；
+第四组值 (0, 4096) 则决定消息框的样式。
+在将这些数字相加以生成 buttons 参数值时，只能从每组值中取用一个数字。</code></pre></div>
+<h4 id="参考链接">参考链接</h4>
+<p><a
+target="_blank" rel="noopener" href="https://www.jb51.net/article/245233.htm">bat脚本常用命令及亲测示例代码超详细讲解</a>
+<a
+target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43331089/article/details/124222342">Bat文件的创建及其命令大全</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%85%B6%E5%AE%83/" class="category-chain-item">其它</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/bat/">#bat</a>
+      
+    </div>
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/04/14/Sphinx-reST-github-ReadtheDocs%E7%BC%96%E5%86%99%E5%9C%A8%E7%BA%BF%E6%96%87%E6%A1%A3/" title="Sphinx + reST + github + ReadtheDocs编写在线文档">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Sphinx + reST + github + ReadtheDocs编写在线文档</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/04/12/Hexo%E5%92%8CGithub-Pages%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/" title="Hexo和Github Pages搭建个人博客">
+                        <span class="hidden-mobile">Hexo和Github Pages搭建个人博客</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="twikoo"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/twikoo/1.6.8/twikoo.all.min.js', function() {
+        var options = Object.assign(
+          {"envId":"https://ENV","region":"ap-shanghai","path":"window.location.pathname"},
+          {
+            el: '#twikoo',
+            path: 'window.location.pathname',
+            onCommentLoaded: function() {
+              var imgSelector = '#twikoo .tk-content img:not(.tk-owo-emotion)';
+              Fluid.plugins.imageCaption(imgSelector);
+              Fluid.plugins.fancyBox(imgSelector);
+            }
+          }
+        )
+        twikoo.init(options)
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <p <i class="iconfont icon-copyright"></i> <span>2023 | KayougZhang</span> </p> <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

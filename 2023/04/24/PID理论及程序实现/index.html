@@ -1,0 +1,793 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="PID控制的概念  PID 控制的整体框图：  PID是 Proportion Integration Differentiation 的缩写，由比例项（Proportion ），积分项（Integration ），微分项（Differentiation） 三个部分组成，具体形式就是下面的公式： \[ U(t) &#x3D; Kp \{ err(t) + \frac{1}{Ti}*\int">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PID理论及程序实现">
+<meta property="og:url" content="http://example.com/2023/04/24/PID%E7%90%86%E8%AE%BA%E5%8F%8A%E7%A8%8B%E5%BA%8F%E5%AE%9E%E7%8E%B0/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="PID控制的概念  PID 控制的整体框图：  PID是 Proportion Integration Differentiation 的缩写，由比例项（Proportion ），积分项（Integration ），微分项（Differentiation） 三个部分组成，具体形式就是下面的公式： \[ U(t) &#x3D; Kp \{ err(t) + \frac{1}{Ti}*\int">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230424111806125.png">
+<meta property="article:published_time" content="2023-04-24T07:24:16.000Z">
+<meta property="article:modified_time" content="2023-04-25T03:14:11.659Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="pid">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230424111806125.png">
+  
+  
+  
+  
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"✍","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":false},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":false,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+<meta name="referrer" content="no-referrer" />
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>My Tech Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/article.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.1)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="PID理论及程序实现"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-04-24 15:24" pubdate>
+          2023年4月24日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.3k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          11 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-12 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">PID理论及程序实现</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：2023年4月25日 上午
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h3 id="pid控制的概念">PID控制的概念</h3>
+<hr />
+<p>PID 控制的整体框图：</p>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230424111806125.png" srcset="/img/loading.gif" lazyload alt="image-20230424111806125" style="zoom:80%;" /></p>
+<p>PID是 <strong>P</strong>roportion <strong>I</strong>ntegration
+<strong>D</strong>ifferentiation 的缩写，由<strong>比例项（Proportion
+）</strong>，<strong>积分项（Integration
+）</strong>，<strong>微分项（Differentiation）</strong>
+三个部分组成，具体形式就是下面的公式： <span class="math display">\[
+U(t) = Kp \{ err(t) + \frac{1}{Ti}*\int_0^t err(t)dt +
+Td*\frac{derr(t)}{dt} \}
+\]</span> 其中： <strong>U(t)</strong>
+是调节器的输出信号，<strong>err(t)</strong> 是当前值和目标值的偏差，
+<strong>Kp</strong> 是比例增益， <strong>Ti</strong> 是积分时间，
+<strong>Td</strong> 是微分时间。</p>
+<p>PID控制其实就是对偏差的控制过程；如果偏差为 0,
+则比例环节不起作用，只有存在偏差时，比例环节才起作用；积分环节主要是用来消除静差，所谓静差，就是系统稳定后输出值和设定值之间的差值，积分环节实际上就是偏差累计的过程，把累计的误差加到原有系统上以抵消系统造成的静差；而微分信号则反应了偏差信号的变化规律，也可以说是变化趋势，根据偏差信号的变化趋势来进行超前调节，从而增加了系统的预知性。</p>
+<p><strong>比例项</strong>：某时刻误差值,代表着现在,表明现在预设值与实际的偏差。
+<strong>积分项</strong>：所有时刻误差和,代表着过去，是过去Ti时间内的偏差积累，可以减少震荡。
+<strong>微分项</strong>：某时刻误差变化率,代表着未来，可以超前预测并提出控制。</p>
+<h3 id="pid的离散化公式">PID的离散化公式</h3>
+<hr />
+<p>在数字系统中进行PID算法控制，需要对上述公式进行离散化，然后才好进行程序设计，从而得到：
+<span class="math display">\[
+U(k) = Kp*e(k) + \frac{Kp*T}{Ti}\sum_{n=0}^k e(n)+
+\frac{Kp*Td}{T}(e(k)-e(k-1))
+\]</span> 其中：<strong>e(k)</strong> 是当前值和目标值的偏差，
+<strong>Kp</strong> 是比例增益， <strong>T</strong>
+是控制周期，<strong>Ti</strong> 是积分时间， <strong>Td</strong>
+是微分时间。</p>
+<p>为了方便起见，将这些系数进行统一: <span class="math display">\[
+比例系数Kp= Kp;\ 积分系数Ki = \frac{Kp*T}{Ti};\ 微分系数Kd =
+\frac{Kp*Td}{T}
+\]</span> 则得到 <strong>位置式PID</strong> 公式： <span
+class="math display">\[
+U(k) = Kp*e(k) + Ki\sum_{n=0}^k e(n)+ Kd*(e(k)-e(k-1))
+\]</span> 因为 <code>△U(k) = U(k) - U(k-1)</code>，这样得到
+<strong>增量式PID</strong> 公式： <span class="math display">\[
+△U(k) = Kp*(e(k)-e(k-1)) + Ki*e(k) + Kd*(e(k)-2*e(k-1)+e(k-2))
+\]</span></p>
+<p><span class="math display">\[
+U(k) = △U(k)+U(k-1)
+\]</span></p>
+<h3 id="pid算法的c语言实现">PID算法的C语言实现</h3>
+<hr />
+<p>经过pid算法后得到的输出值，进行处理加工送到执行结构进行系统控制。在温度控制场景中，对于制冷控制，只需要将pid的输出值进行反向处理即可。</p>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">/* 位置式pid和增量式pid的选择 */</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> POSITION_PID</span>
+<span class="hljs-comment">//#define INCREMENT_PID</span>
+
+<span class="hljs-comment">/* pid 参数结构体定义 */</span>
+<span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">pid</span></span>
+<span class="hljs-class">&#123;</span>
+	<span class="hljs-type">float</span> target;  <span class="hljs-comment">//target value 目标值</span>
+	<span class="hljs-type">float</span> curr;    <span class="hljs-comment">//current value 当前值</span>
+	<span class="hljs-type">float</span> err;     <span class="hljs-comment">//err=tag-cur 偏差值</span>
+	<span class="hljs-type">float</span> sum_err; <span class="hljs-comment">//偏差积分和</span>
+	<span class="hljs-type">float</span> last_err; <span class="hljs-comment">//上一个偏差值</span>
+	<span class="hljs-type">float</span> prev_last_err; <span class="hljs-comment">//上上个偏差值</span>
+	<span class="hljs-type">float</span> kp; <span class="hljs-comment">//proportion</span>
+	<span class="hljs-type">float</span> ki; <span class="hljs-comment">//integral</span>
+	<span class="hljs-type">float</span> kd; <span class="hljs-comment">//differential	</span>
+	
+	<span class="hljs-type">float</span> limit_integral; <span class="hljs-comment">//积分限幅</span>
+	<span class="hljs-type">float</span> limit_output; <span class="hljs-comment">//输出限幅</span>
+	
+	<span class="hljs-type">float</span> output;<span class="hljs-comment">//控制输出值</span>
+&#125;<span class="hljs-type">pid_t</span>;
+
+<span class="hljs-comment">/* 限幅处理的宏定义 */</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> LIMIT_MAX(value, max) \</span>
+<span class="hljs-meta">    &#123;                        \</span>
+<span class="hljs-meta">			<span class="hljs-keyword">if</span> (value &gt; max)       \</span>
+<span class="hljs-meta">					value = max;       \</span>
+<span class="hljs-meta">			<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (value &lt; -max) \</span>
+<span class="hljs-meta">					value = -max;      \</span>
+<span class="hljs-meta">    &#125;</span>
+
+<span class="hljs-comment">/**</span>
+<span class="hljs-comment">  * @brief  pid初始化</span>
+<span class="hljs-comment">  * @param  pid：pid结构体指针</span>
+<span class="hljs-comment">  * @retval None</span>
+<span class="hljs-comment">  */</span>
+<span class="hljs-type">void</span> <span class="hljs-title function_">pid_init</span><span class="hljs-params">(<span class="hljs-type">pid_t</span>* pid)</span>
+&#123;
+	pid-&gt;target = <span class="hljs-number">0</span>;
+	pid-&gt;curr = <span class="hljs-number">0</span>;
+	pid-&gt;kp = <span class="hljs-number">2.3</span>;
+	pid-&gt;ki = <span class="hljs-number">0.5</span>;
+	pid-&gt;kd = <span class="hljs-number">5.6</span>;
+	pid-&gt;err = <span class="hljs-number">0</span>;
+	pid-&gt;last_err = <span class="hljs-number">0</span>;
+	pid-&gt;prev_last_err = <span class="hljs-number">0</span>;
+	pid-&gt;sum_err = <span class="hljs-number">0</span>;
+	pid-&gt;output = <span class="hljs-number">0</span>;
+	pid-&gt;limit_integral = <span class="hljs-number">255</span>;<span class="hljs-comment">//根据pwm输出范围进行设置</span>
+	pid-&gt;limit_output = <span class="hljs-number">255</span>; <span class="hljs-comment">//根据pwm输出范围进行设置</span>
+&#125;
+<span class="hljs-comment">/**</span>
+<span class="hljs-comment">  * @brief  pid的运算</span>
+<span class="hljs-comment">  * @param  pid：pid指针</span>
+<span class="hljs-comment">  * @param	current_value：当前值</span>
+<span class="hljs-comment">  * @retval None</span>
+<span class="hljs-comment">  */</span>
+<span class="hljs-type">static</span> <span class="hljs-type">float</span> <span class="hljs-title function_">pid_calc</span><span class="hljs-params">(<span class="hljs-type">pid_t</span>* pid, <span class="hljs-type">float</span> current_value)</span>
+&#123;
+	<span class="hljs-type">float</span> increment = <span class="hljs-number">0</span>;
+	pid-&gt;curr = current_value;
+	pid-&gt;err = pid-&gt;target - pid-&gt;curr;
+	
+<span class="hljs-meta">#<span class="hljs-keyword">ifdef</span> POSITION_PID</span>
+	<span class="hljs-comment">/* 位置式公式：u(t)=Kp*E(t)+Ki*[E(1)+...+E(t)]+Kd*[E(t)-E(t-1)] */</span>
+	pid-&gt;sum_err += pid-&gt;err;
+	LIMIT_MAX(pid-&gt;sum_err, pid-&gt;limit_integral);<span class="hljs-comment">//积分限幅</span>
+	pid-&gt;output = pid-&gt;kp * pid-&gt;err + pid-&gt;ki * pid-&gt;sum_err + \
+								pid-&gt;kd * (pid-&gt;err - pid-&gt;last_err);
+<span class="hljs-meta">#<span class="hljs-keyword">endif</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">ifdef</span> INCREMENT_PID</span>
+	<span class="hljs-comment">/* 增量式公式：△u(t)=Kp*[E(t)-E(t-1)]+Ki*E(t)+Kd*[E(t)-2*E(t-1)+E(t-2)] */</span>
+	increment = pid-&gt;kp * (pid-&gt;err - pid-&gt;last_err) + pid-&gt;ki * pid-&gt;err + \
+										pid-&gt;kd * (pid-&gt;err - <span class="hljs-number">2</span> * pid-&gt;last_err + pid-&gt;prev_last_err);
+	pid-&gt;output += increment;
+<span class="hljs-meta">#<span class="hljs-keyword">endif</span></span>
+	
+	LIMIT_MAX(pid-&gt;output, pid-&gt;limit_output);<span class="hljs-comment">//输出限幅</span>
+	pid-&gt;last_err = pid-&gt;err;
+	pid-&gt;prev_last_err = pid-&gt;last_err;
+	
+	<span class="hljs-keyword">return</span> pid-&gt;output;
+&#125;</code></pre></div>
+<h3 id="pid调试">PID调试</h3>
+<hr />
+<p>借助<a
+target="_blank" rel="noopener" href="https://serialplot.ozderya.net/downloads/serialplot-0.12.0-win32.exe">SerialPlot工具</a>使用printf函数将目标值和实时值图形显示处理，调节不同的Kp，Ki和Kd，可以很方便的进行调试。</p>
+<h4 id="位置式pid调节">位置式PID调节</h4>
+<p>位置型PID的参数整定过程一般是，先整定KP，然后整定KI，最后整定KD；</p>
+<p>参数整定找最佳，从小到大顺序查 先是比例后积分，最后再把微分加
+曲线振荡很频繁，比例度盘要放大(Kp减小)
+曲线漂浮绕大湾，比例度盘往小扳(Kp增大)
+曲线偏离回复慢，积分时间往下降(Ki增大)
+曲线波动周期长，积分时间再加长(Ki减小)
+曲线振荡频率快，先把微分降下来(Kd增大)
+动差大来波动慢。微分时间应加长(Kd减小) 理想曲线两个波，前高后低4比1
+一看二调多分析，调节质量不会低</p>
+<h4 id="增量式pid调节">增量式pid调节</h4>
+<p>增量型PID应该先整定Ki，然后整定Kd，最后整定Kp。这一点需要特别注意，弄错顺序的话会发现整定规律完全不适用的。<strong>网上大多数资料把增量式跟位置式混为一谈</strong></p>
+<h3 id="参考链接">参考链接</h3>
+<p><a
+target="_blank" rel="noopener" href="https://blog.csdn.net/qq_25352981/article/details/81007075?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522168231970816800192213769%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=168231970816800192213769&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-2-81007075-null-null.142%5Ev86%5Ekoosearch_v1,239%5Ev2%5Einsert_chatgpt&amp;utm_term=pid&amp;spm=1018.2226.3001.4187">一文读懂PID控制算法（抛弃公式，从原理上真正理解PID控制）</a></p>
+<p><a
+target="_blank" rel="noopener" href="https://blog.csdn.net/skythinker616/article/details/123019829?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522168231970816800192213769%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=168231970816800192213769&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-1-123019829-null-null.142%5Ev86%5Ekoosearch_v1,239%5Ev2%5Einsert_chatgpt&amp;utm_term=pid&amp;spm=1018.2226.3001.4187">PID超详细教程——PID原理+串级PID+C代码+在线仿真调参</a></p>
+<p><a
+target="_blank" rel="noopener" href="https://blog.csdn.net/qq_45396672/article/details/118057838?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522168231970816800192213769%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=168231970816800192213769&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_click~default-8-118057838-null-null.142%5Ev86%5Ekoosearch_v1,239%5Ev2%5Einsert_chatgpt&amp;utm_term=pid&amp;spm=1018.2226.3001.4187">图文详解PID调参</a></p>
+<p><a
+target="_blank" rel="noopener" href="https://blog.csdn.net/u010312937/article/details/53363831">PID控制算法的C语言实现</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%8D%95%E7%89%87%E6%9C%BA/" class="category-chain-item">单片机</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/pid/">#pid</a>
+      
+    </div>
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/04/24/Typora%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F%E6%A0%BC%E5%BC%8F%E7%BC%96%E8%BE%91%E6%B1%87%E6%80%BB/" title="Typora数学公式格式编辑汇总">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Typora数学公式格式编辑汇总</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/04/24/PID%E5%8F%82%E6%95%B0%E7%9A%84%E8%87%AA%E6%95%B4%E5%AE%9A/" title="PID参数的自整定">
+                        <span class="hidden-mobile">PID参数的自整定</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="twikoo"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/twikoo/1.6.8/twikoo.all.min.js', function() {
+        var options = Object.assign(
+          {"envId":"https://ENV","region":"ap-shanghai","path":"window.location.pathname"},
+          {
+            el: '#twikoo',
+            path: 'window.location.pathname',
+            onCommentLoaded: function() {
+              var imgSelector = '#twikoo .tk-content img:not(.tk-owo-emotion)';
+              Fluid.plugins.imageCaption(imgSelector);
+              Fluid.plugins.fancyBox(imgSelector);
+            }
+          }
+        )
+        twikoo.init(options)
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <p <i class="iconfont icon-copyright"></i> <span>2023 | KayougZhang</span> </p> <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

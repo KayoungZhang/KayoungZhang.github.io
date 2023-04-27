@@ -1,0 +1,883 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="RestructureText(ReST)是Docutils和Sphinx都使用的默认明文标记语言。Docutils提供了基本的重构文本语法，而Sphinx对此进行了扩展，以支持额外的功能。可以使用在线的rst编辑器了解相关语法：rst在线编辑器，下面介绍它的一些常用语法： 1. 章节标题 在文本下一行（或上一行）添加至少与文本长度同宽的符号，即可以使文本成为标题, &#x3D; - &#96; : &#39; &quot;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="reST基础语法">
+<meta property="og:url" content="http://example.com/2023/04/14/reST%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="RestructureText(ReST)是Docutils和Sphinx都使用的默认明文标记语言。Docutils提供了基本的重构文本语法，而Sphinx对此进行了扩展，以支持额外的功能。可以使用在线的rst编辑器了解相关语法：rst在线编辑器，下面介绍它的一些常用语法： 1. 章节标题 在文本下一行（或上一行）添加至少与文本长度同宽的符号，即可以使文本成为标题, &#x3D; - &#96; : &#39; &quot;">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230414210957097.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230414211213549.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230414214640426.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230414214843366.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230414215143223.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230414215340170.png">
+<meta property="article:published_time" content="2023-04-14T12:45:09.000Z">
+<meta property="article:modified_time" content="2023-04-17T00:05:33.125Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230414210957097.png">
+  
+  
+  
+  
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"✍","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":false},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":false,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+<meta name="referrer" content="no-referrer" />
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>My Tech Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/article.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.1)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="reST基础语法"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-04-14 20:45" pubdate>
+          2023年4月14日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          4.3k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          15 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-12 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">reST基础语法</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：2023年4月17日 早上
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <p>RestructureText(ReST)是Docutils和Sphinx都使用的默认明文标记语言。Docutils提供了基本的重构文本语法，而Sphinx对此进行了扩展，以支持额外的功能。可以使用在线的rst编辑器了解相关语法：<a
+target="_blank" rel="noopener" href="http://rst.ninjs.org/">rst在线编辑器</a>，下面介绍它的一些常用语法：</p>
+<h2 id="章节标题">1. 章节标题</h2>
+<p>在文本下一行（或上一行）添加至少与文本长度同宽的符号，即可以使文本成为标题,
+<code>= - ` : ' " ~ ^ _ * + # &lt; &gt;</code> 这些符号都可以</p>
+<div class="code-wrapper"><pre><code class="hljs reStructuredText">===============    一级标题
+~~~~~~~~~~~~~~~    二级标题
+---------------    三级标题
+^^^^^^^^^^^^^^^    四级标题
+&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;    五级标题
+***************    六级标题</code></pre></div>
+<p>效果如下： <img
+src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/section.png" srcset="/img/loading.gif" lazyload
+alt="章节级数" /></p>
+<h2 id="字体样式">2. 字体样式</h2>
+<p>符号外侧必须留有空格, 英文标点符号::</p>
+<div class="code-wrapper"><pre><code class="hljs reStructuredText">**强调**
+*斜体*
+``红色字体块``
+:guilabel:`背景块`
+.. centered:: 黑体中心字体</code></pre></div>
+<p>效果如下： <img
+src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230414210438330.png" srcset="/img/loading.gif" lazyload
+alt="image-20230414210438330" /></p>
+<div class="code-wrapper"><pre><code class="hljs reStructuredText">无序列表:
+- hhhhhhhh
+- hhhhhhhh
+- hhhhhhhh
+
+* 列表第一级
+   + 第二级
+       - 第三级
+   + 第二级的另一个项目
+
+有序列表:
+支持数字、大小写字母和罗马数字
+1. hhhhhhhh
+#. hhhhhhhh
+#. hhhhhhhh
+
+a. hhhhhhhh
+#. hhhhhhhh
+#. hhhhhhhh</code></pre></div>
+<p>效果如下： <img
+src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230414210520680.png" srcset="/img/loading.gif" lazyload
+alt="image-20230414210520680" /></p>
+<h2 id="提示框">3. 提示框</h2>
+<p>特殊提示支持警告、重要、提示、注意等标签，适合做显眼的用途。</p>
+<div class="code-wrapper"><pre><code class="hljs reStructuredText">.. note:: This is note.(注解)
+
+.. attention:: Directives at large.(注意)
+
+.. warning:: This is warning.(警告)
+
+.. caution:: Don&#x27;t take any wooden nickels.(警告)
+
+.. seealso:: This is seealso.(参见)
+
+.. danger:: Mad scientist at work!(危险)
+
+.. error:: Does not compute.(错误)
+
+.. hint:: It&#x27;s bigger than a bread box.(提示)
+
+.. important:: 
+  - Wash behind your ears.
+  - Clean up your room.
+  - Call your mother.
+  - Back up your data.(重要)
+
+.. tip:: 15% if the service is good.(小技巧)
+
+.. admonition:: by the way
+
+  You can make up your own admonition too.</code></pre></div>
+<p>效果如下：
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230414210957097.png" srcset="/img/loading.gif" lazyload alt="image-20230414210957097" style="zoom: 50%;" /></p>
+<h2 id="超链接">4. 超链接</h2>
+<div class="code-wrapper"><pre><code class="hljs reStructuredText">1.直接嵌入： `野火公司官网 &lt;http://www.embedfire.com&gt;`_
+
+2.使用引用的方式把具体网址定义在其它地方： 
+
+- 单个词汇：External hyperlinks, like Python_.
+- 多个词汇时，使用``, `fire website`_
+
+.. _Python: http://www.python.org/ 
+    .. _fire website: http://www.embedfire.com</code></pre></div>
+<p>效果：
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230414211213549.png" srcset="/img/loading.gif" lazyload alt="image-20230414211213549" style="zoom:80%;" /></p>
+<h2 id="图片">5. 图片</h2>
+<p>显示图片直接使用image或figure指令，还需要添加“alt”选项指定图片的描述（类似doc中的题注），以便图片加载失败时显示文字,
+<strong>不要使用bmp图片</strong>
+，bmp图片在生成pdf的时候会丢失，所以不要使用bmp格式的图片。</p>
+<p>figure命令</p>
+<div class="code-wrapper"><pre><code class="hljs reStructuredText">.. figure: pic/fire.png
+    :alt: 野火logo
+    :align: center
+    :caption: 野火logo
+	   
+	align-&gt;&quot;top&quot;, &quot;middle&quot;, &quot;bottom&quot;, &quot;left&quot;, &quot;center&quot;, or &quot;right&quot;</code></pre></div>
+<p>image命令</p>
+<div class="code-wrapper"><pre><code class="hljs reStructuredText">.. image:: pic/fire.png
+    :align: center
+    :alt: 野火logo</code></pre></div>
+<p>效果一样： <img
+src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/fire.png" srcset="/img/loading.gif" lazyload
+alt="野火logo" /></p>
+<p>图片还可以使用 width、heigh、scale等参数，但不推荐使用。</p>
+<h2 id="代码高亮">6. 代码高亮</h2>
+<p>在reST文档中列出代码有三种方式：</p>
+<ul>
+<li><ol type="1">
+<li>单行代码 用 `code`，如：</li>
+</ol>
+<p>`#define LED P23`</p>
+<p>效果： <code>#define LED P23</code></p></li>
+<li><ol start="2" type="1">
+<li>简单代码块
+在代码块的上一个段落后面加2个冒号，空一行后开始代码块，代码块要缩进,
+如：</li>
+</ol>
+<div class="code-wrapper"><pre><code class="hljs reStructuredText">::
+
+     #此命令在主机执行
+     sudo apt install python
+     echo &quot;helloworld,this is a script test!&quot;</code></pre></div>
+<p>效果：</p>
+<div class="code-wrapper"><pre><code class="hljs reStructuredText">#此命令在主机执行
+sudo apt install python
+echo &quot;helloworld,this is a script test!&quot;</code></pre></div></li>
+<li><ol start="3" type="1">
+<li>复杂代码块
+使用code-block指导语句，还可以选择列出行号和高亮重点行等，如：</li>
+</ol>
+<div class="code-wrapper"><pre><code class="hljs reStructuredText">.. code-block:: c
+:caption: test
+:name: test333
+:emphasize-lines: 2,4-9
+:linenos:
+
+int main()
+&#123;
+    printf(&quot;hello, world! This is a C program.\n&quot;);
+    for(int i=0;i&lt;10;i++ )&#123;
+    printf(&quot;output i=%d\n&quot;,i);
+&#125;
+
+return 0;
+&#125;
+
+注意：
+code-block 后面可以是不同的编程语言，sh、c、v(verilog)、python、makefile等
+caption -&gt; 代码前面显示的名字
+name -&gt; 自定义名字，方便其他地方使用此名字加下划线来引用
+emphasize-lines -&gt; 高亮的行
+linenos -&gt; 显示行数</code></pre></div></li>
+</ul>
+<h2 id="表格">7. 表格</h2>
+<p>表格语法说明：http://docutils.sourceforge.net/docs/ref/rst/directives.html#csv-table
+,推荐使用列表式表格，修改比较方便,</p>
+<h4 id="列表式表格">7.1 列表式表格</h4>
+<div class="code-wrapper"><pre><code class="hljs reStructuredText">.. list-table:: Frozen Delights!
+    :widths: 15 10 30
+    :header-rows: 1
+
+    * - Treat
+    - Quantity
+    - Description
+    * - Albatross
+    - 2.99
+    - On a stick!
+    * - Crunchy Frog
+    - 1.49
+    - If we took the bones out, it wouldn&#x27;t be
+    crunchy, now would it?
+    * - Gannet Ripple
+    - 1.99
+    - On a stick!</code></pre></div>
+<p>效果：<img
+src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230414214027390.png" srcset="/img/loading.gif" lazyload
+alt="image-20230414214027390" /></p>
+<h4 id="普通表格">7.2 普通表格</h4>
+<div class="code-wrapper"><pre><code class="hljs reStructuredText">=====  =====  =======
+A      B      A and B
+=====  =====  =======
+False  False  False
+True   False  False
+False  True   False
+True   True   True
+=====  =====  =======</code></pre></div>
+<p>效果：</p>
+<figure>
+<img
+src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230414214149304.png" srcset="/img/loading.gif" lazyload
+alt="image-20230414214149304" />
+<figcaption aria-hidden="true">image-20230414214149304</figcaption>
+</figure>
+<h4 id="csv表格">7.3 CSV表格</h4>
+<div class="code-wrapper"><pre><code class="hljs reStructuredText">.. csv-table:: Frozen Delights!
+    :header: &quot;Treat&quot;, &quot;Quantity&quot;, &quot;Description&quot;
+    :widths: 15, 10, 30
+
+    &quot;Albatross&quot;, 2.99, &quot;On a stick!&quot;
+    &quot;Crunchy Frog&quot;, 1.49, &quot;If we took the bones out, it wouldn&#x27;t be
+    crunchy, now would it?&quot;
+    &quot;Gannet Ripple&quot;, 1.99, &quot;On a stick!&quot;</code></pre></div>
+<p>效果： <img
+src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230414214306558.png" srcset="/img/loading.gif" lazyload
+alt="image-20230414214306558" /></p>
+<h2 id="引用">8. 引用</h2>
+<h4 id="引用图片表格">8.1 引用图片、表格</h4>
+<p>在图片、表格上面加一个下划线的引用标签，然后在下面通过 ref指令引用。
+示例1：</p>
+<div class="code-wrapper"><pre><code class="hljs reStructuredText">.. _my-reference-label:
+
+.. figure: pic/fire.png
+   :alt: 野火logo
+   :align: center
+
+   name
+   
+:ref:`my-reference-label`</code></pre></div>
+<p>效果：</p>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230414214640426.png" srcset="/img/loading.gif" lazyload alt="image-20230414214640426" style="zoom:67%;" /></p>
+<p>示例2：</p>
+<div class="code-wrapper"><pre><code class="hljs reStructuredText">.. _Table1:
+
+.. table:: 拨码开关启动配置表
+
+    ==== ====== ========== ==== == ===
+    编号 名称   NAND FLASH eMMC SD USB
+    ==== ====== ========== ==== == ===
+    1    MODE0  0          0    0  1
+    2    MODE1  1          1    1  0
+    3    CFG1-4 1          0    0  X
+    4    CFG1-5 0          1    0  X
+    5    CFG1-6 0          1    1  X
+    6    CFG1-7 1          0    0  X
+    7    CFG2-3 0          1    0  X
+    8    CFG2-5 0          0    1  X
+    ==== ====== ========== ==== == ===
+
+:ref:`Table1` 
+:ref:`自定义引用名称 &lt;Table1&gt;`</code></pre></div>
+<p>效果：</p>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230414214843366.png" srcset="/img/loading.gif" lazyload alt="image-20230414214843366" style="zoom: 67%;" /></p>
+<h4 id="引用文档">8.2 引用文档</h4>
+<div class="code-wrapper"><pre><code class="hljs reStructuredText">:doc:`base-syntax`
+链接到当前目录的base-syntax.rst文档，且显示为其标题
+
+:doc:`our two different sites &lt;base-syntax&gt;`
+链接到当前目录的base-syntax.rst文档</code></pre></div>
+<p>效果：</p>
+<figure>
+<img
+src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230414215033089.png" srcset="/img/loading.gif" lazyload
+alt="image-20230414215033089" />
+<figcaption aria-hidden="true">image-20230414215033089</figcaption>
+</figure>
+<h4 id="引用非rst文档">8.3 引用非rst文档</h4>
+<p>会呈现出点击后下载文件的效果。注意这种引用方式在生成pdf文件时链接会无效。</p>
+<div class="code-wrapper"><pre><code class="hljs reStructuredText">:download:`引用非rst的本地文档 &lt;base-syntax.rst&gt;`.</code></pre></div>
+<p>效果：</p>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230414215143223.png" srcset="/img/loading.gif" lazyload alt="image-20230414215143223" style="zoom:80%;" /></p>
+<h2 id="脚注">9. 脚注</h2>
+<p>与引用语法类似，只是它在正文中显示的不是文本，而是编号。</p>
+<div class="code-wrapper"><pre><code class="hljs reStructuredText">Footnote references, like [5]_.using [#]_ and [#]_.
+instant[#fourth]_ and [#third]_.reference[DOC]_.                 
+                                                            
+Footnotes                                                       
+
+.. [5] A numerical footnote.
+.. [#] This is the first one. 
+.. [#] This is the second one. 
+.. [#third] a.k.a. third
+.. [#fourth] a.k.a. fourth 
+.. [DOC] A citation</code></pre></div>
+<p>效果：</p>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230414215340170.png" srcset="/img/loading.gif" lazyload alt="image-20230414215340170" style="zoom:67%;" /></p>
+<h2 id="rst格式">10. rst格式</h2>
+<div class="code-wrapper"><pre><code class="hljs reStructuredText">.. include:: ../README.rst	在index.rst中添加其他rst文件
+
+.. contents:: 目录	        生成目录
+.. section-numbering::		生成的目录自动编号
+
+.. contents:: 
+   :local:		  当前主题之下生成目录
+   :depth: 3	  目录深度为3级</code></pre></div>
+<h2 id="参考链接">参考链接</h2>
+<ul>
+<li><a
+target="_blank" rel="noopener" href="https://docutils.sourceforge.io/docs/user/rst/">restruct语法官网</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html">reST参考网站</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://www.jianshu.com/p/1885d5570b37">其他参考网站</a></li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%95%99%E7%A8%8B/" class="category-chain-item">教程</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/04/14/Typora%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95/" title="Typora基本用法">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Typora基本用法</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/04/14/Sphinx-reST-github-ReadtheDocs%E7%BC%96%E5%86%99%E5%9C%A8%E7%BA%BF%E6%96%87%E6%A1%A3/" title="Sphinx + reST + github + ReadtheDocs编写在线文档">
+                        <span class="hidden-mobile">Sphinx + reST + github + ReadtheDocs编写在线文档</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="twikoo"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/twikoo/1.6.8/twikoo.all.min.js', function() {
+        var options = Object.assign(
+          {"envId":"https://ENV","region":"ap-shanghai","path":"window.location.pathname"},
+          {
+            el: '#twikoo',
+            path: 'window.location.pathname',
+            onCommentLoaded: function() {
+              var imgSelector = '#twikoo .tk-content img:not(.tk-owo-emotion)';
+              Fluid.plugins.imageCaption(imgSelector);
+              Fluid.plugins.fancyBox(imgSelector);
+            }
+          }
+        )
+        twikoo.init(options)
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <p <i class="iconfont icon-copyright"></i> <span>2023 | KayougZhang</span> </p> <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
