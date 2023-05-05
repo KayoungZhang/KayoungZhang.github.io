@@ -24,7 +24,7 @@
 <meta property="og:description" content="在创建hexo个人博客时，已经简单介绍了更换主题的方法，下面主要是介绍我在更换 fluid 主题后，进行的一些自定义设置及碰到的问题和解决方法。 1. 下载 fluid 主题及修改配置文件 在本地 Hexo 博客目录中打开 git bash，然后下载 fluid 主题。 git clone https:&#x2F;&#x2F;github.com&#x2F;fluid-dev&#x2F;hexo-theme-fluid.g">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-04-16T04:16:49.000Z">
-<meta property="article:modified_time" content="2023-04-25T06:12:45.556Z">
+<meta property="article:modified_time" content="2023-05-04T14:42:39.129Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -275,7 +275,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年4月25日 下午
+                    本文最后更新于：2023年5月4日 晚上
                   
                 
               </p>
@@ -344,7 +344,7 @@ bash</strong>，然后下载 <strong>fluid</strong> 主题。</p>
 
   # 为空则按 hexo config.<span class="hljs-property">subtitle</span> 显示
   # <span class="hljs-title class_">If</span> empty, text based on <span class="hljs-string">`subtitle`</span> <span class="hljs-keyword">in</span> hexo config
-  <span class="hljs-attr">text</span>: <span class="hljs-string">&quot;不积跬步无以至千里，不积小流无以成江海&quot;</span></code></pre></div>
+  <span class="hljs-attr">text</span>: <span class="hljs-string">&quot;积跬步以至千里，积小流而成江海&quot;</span></code></pre></div>
 <h4 id="文章开头显示更新时间">3.7 文章开头显示更新时间</h4>
 <div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-attr">updated</span>:
   <span class="hljs-attr">enable</span>: <span class="hljs-literal">true</span></code></pre></div>
@@ -392,7 +392,7 @@ target="_blank" rel="noopener" href="https://hexo.fluid-dev.com/docs/icon/">图�
   <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;&#x27;</span>
   <span class="hljs-attr">intro</span>: <span class="hljs-string">&#x27;&#x27;</span> 
 <span class="hljs-attr">icons</span>:
-  - &#123; <span class="hljs-attr">class</span>: <span class="hljs-string">&quot;iconfont icon-github-fill&quot;</span>, <span class="hljs-attr">link</span>: <span class="hljs-string">&quot;https://kayoungzhang.github.io&quot;</span>, <span class="hljs-attr">tip</span>: <span class="hljs-string">&quot;GitHub&quot;</span> &#125;
+  - &#123; <span class="hljs-attr">class</span>: <span class="hljs-string">&quot;iconfont icon-github-fill&quot;</span>, <span class="hljs-attr">link</span>: <span class="hljs-string">&quot;https://github.com/KayoungZhang&quot;</span>, <span class="hljs-attr">tip</span>: <span class="hljs-string">&quot;GitHub&quot;</span> &#125;
   - &#123; <span class="hljs-attr">class</span>: <span class="hljs-string">&quot;iconfont icon-mail&quot;</span>, <span class="hljs-attr">link</span>: <span class="hljs-string">&quot;mailto:zky0830@163.com&quot;</span>, <span class="hljs-attr">tip</span>: <span class="hljs-string">&quot;Email me&quot;</span> &#125;
   - &#123; <span class="hljs-attr">class</span>: <span class="hljs-string">&quot;iconfont icon-wechat-fill&quot;</span>, <span class="hljs-attr">qrcode</span>: <span class="hljs-string">&quot;/img/wechat.png&quot;</span> &#125;</code></pre></div>
 <h4 id="更改about页avatar图像">3.11 更改「about」页avatar图像</h4>
@@ -438,7 +438,7 @@ target="_blank" rel="noopener" href="https://hexo.fluid-dev.com/docs/icon/">图�
   <span class="hljs-comment"># Options: mathjax | katex</span>
   <span class="hljs-attr">engine:</span> <span class="hljs-string">mathjax</span></code></pre></div>
 <p>下载安装： <a
-target="_blank" rel="noopener" href="https://github.com/jgm/pandoc/releases">pandoc</a>，进入本地博客目录下，右键打开<code>git bash</code>,安装
+target="_blank" rel="noopener" href="https://github.com/jgm/pandoc/releases">pandoc</a>，然后进入本地博客目录下，右键打开<code>git bash</code>,安装
 <strong>hexo-renderer-pandoc</strong></p>
 <div class="code-wrapper"><pre><code class="hljs ada">npm uninstall hexo-renderer-marked <span class="hljs-comment">--save  </span>
 npm install hexo-renderer-pandoc <span class="hljs-comment">--save</span></code></pre></div>
