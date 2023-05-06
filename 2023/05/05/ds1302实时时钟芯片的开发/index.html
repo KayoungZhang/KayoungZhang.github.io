@@ -28,7 +28,7 @@
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230505185956240.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230505194024970.png">
 <meta property="article:published_time" content="2023-05-05T10:02:28.000Z">
-<meta property="article:modified_time" content="2023-05-06T00:06:59.704Z">
+<meta property="article:modified_time" content="2023-05-06T01:08:17.646Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="ds1302">
 <meta name="twitter:card" content="summary_large_image">
@@ -281,7 +281,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年5月6日 早上
+                    本文最后更新于：2023年5月6日 上午
                   
                 
               </p>
@@ -338,12 +338,11 @@
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230505185956240.png" srcset="/img/loading.gif" lazyload alt="image-20230505185956240" style="zoom:67%;" /></p>
 <h2 id="bcd码">BCD码</h2>
 <p>BCD码（Binary Coded
-Decimal‎），用4位二进制数来表示1位十进制数。例：0001 0011表示13，1000
-0101表示85，0001
-1010不合法，在十六进制中的体现：0x13表示13，0x85表示85，0x1A不合法</p>
-<p><strong>BCD码转十进制：DEC=BCD/16<em>10+BCD%16;
-（2位BCD）</em></strong></p>
-<p>**十进制转BCD码：BCD=DEC/10*16+DEC%10; （2位BCD）**</p>
+Decimal‎），用4位二进制数来表示1位十进制数，所以4位二进制表示的数字最大到
+<strong>9</strong> 。例：0001 0011表示13，1000 0101表示85，0001
+1010不合法。在十六进制中的体现：0x13表示13，0x85表示85，0x1A不合法</p>
+<p><code>BCD码转十进制：DEC=BCD/16*10+BCD%16; （2位BCD）</code></p>
+<p><code>十进制转BCD码：BCD=DEC/10*16+DEC%10; （2位BCD）</code></p>
 <p>DS1302写数据时需要将十进制数据转为BCD码的形式，读数据时需要将BCD码转为十进制数据形式。</p>
 <h2 id="通信时序">通信时序</h2>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230505194024970.png" srcset="/img/loading.gif" lazyload alt="image-20230505194024970" style="zoom:67%;" /></p>
