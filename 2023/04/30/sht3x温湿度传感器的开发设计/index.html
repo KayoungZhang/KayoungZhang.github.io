@@ -29,8 +29,9 @@
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230429194522708.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230430185828051.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230429235908382.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230507195015130.png">
 <meta property="article:published_time" content="2023-04-30T10:32:38.000Z">
-<meta property="article:modified_time" content="2023-05-04T14:42:39.129Z">
+<meta property="article:modified_time" content="2023-05-11T10:10:43.752Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="温湿度">
 <meta name="twitter:card" content="summary_large_image">
@@ -283,7 +284,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年5月4日 晚上
+                    本文最后更新于：2023年5月11日 晚上
                   
                 
               </p>
@@ -623,47 +624,50 @@ ack_e <span class="hljs-title function_">i2c_wr_byte</span><span class="hljs-par
 &#125;
 
 <span class="hljs-comment">/**</span>
-<span class="hljs-comment">  * @brief	读取sht3x序列号，？单片机无法输出long型？</span>
+<span class="hljs-comment">  * @brief	读取sht3x序列号</span>
 <span class="hljs-comment">  * @param	serialNumber: sht3x序列号指针</span>
 <span class="hljs-comment">  * @retval	error</span>
 <span class="hljs-comment">  */</span>
 etError <span class="hljs-title function_">sht3x_rd_serial_num</span><span class="hljs-params">(<span class="hljs-type">unsigned</span> <span class="hljs-type">long</span>* serialNumber)</span>
 &#123;
-    etError error = NO_ERROR;           <span class="hljs-comment">// error code</span>
-    <span class="hljs-type">uint8_t</span> serialNumWords[<span class="hljs-number">6</span>] = &#123;<span class="hljs-number">0</span>&#125;;      <span class="hljs-comment">//serial number raw value and checksum value</span>
-    <span class="hljs-type">uint8_t</span> i;
+	etError error = NO_ERROR;           <span class="hljs-comment">// error code</span>
+	<span class="hljs-type">uint8_t</span> serialNumWords[<span class="hljs-number">6</span>] = &#123;<span class="hljs-number">0</span>&#125;;      <span class="hljs-comment">//serial number raw value and checksum value</span>
+  <span class="hljs-type">uint8_t</span> i;
 
-    i2c_start();
-    error = i2c_wr_byte(SHT3XWriteHeader);	
-    <span class="hljs-keyword">if</span>(error == NO_ERROR)  error = sht3x_wr_cmd(CMD_READ_SERIALNBR); <span class="hljs-comment">// write &quot;read serial number&quot; command</span>
-    Delay1ms();
-    <span class="hljs-keyword">if</span>(error == NO_ERROR)
-    &#123;
-        i2c_start();
-        error = i2c_wr_byte(SHT3XReadHeader);
-    &#125;
+	i2c_start();
+  error = i2c_wr_byte(SHT3XWriteHeader);	
+	<span class="hljs-keyword">if</span>(error == NO_ERROR)  error = sht3x_wr_cmd(CMD_READ_SERIALNBR); <span class="hljs-comment">// write &quot;read serial number&quot; command</span>
+	Delay1ms();
+	<span class="hljs-keyword">if</span>(error == NO_ERROR)
+	&#123;
+		i2c_start();
+		error = i2c_wr_byte(SHT3XReadHeader);
+	&#125;
 
-    <span class="hljs-comment">/* read temperature and humidity raw values */</span>
-    <span class="hljs-keyword">if</span>(error == NO_ERROR)
-    &#123;
-        <span class="hljs-keyword">for</span>(i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">5</span>; i++)
-        &#123;
-            i2c_rd_byte(&amp;serialNumWords[i], ACK);
-        &#125;
-        i2c_rd_byte(&amp;serialNumWords[i], NACK);<span class="hljs-comment">//i = 5</span>
-        <span class="hljs-comment">//		serialNumWords[6] = &#x27;\0&#x27;;</span>
-        i2c_stop();
-        <span class="hljs-keyword">if</span>(serialNumWords[<span class="hljs-number">2</span>] != crc8_calc(serialNumWords,<span class="hljs-number">2</span>))     error = CHECKSUM_ERROR;
-        <span class="hljs-keyword">if</span>(serialNumWords[<span class="hljs-number">5</span>] != crc8_calc(&amp;serialNumWords[<span class="hljs-number">3</span>],<span class="hljs-number">2</span>)) error = CHECKSUM_ERROR;	
-    &#125;
-    <span class="hljs-comment">/* calc serial number as 32-bit integer */</span>
-    <span class="hljs-keyword">if</span>(error == NO_ERROR)
-    &#123;
-        <span class="hljs-comment">/* print serialNumber */</span>
-        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;serialNumber: 0x%02x%02x\r\n&quot;</span>, serialNumWords[<span class="hljs-number">0</span>], serialNumWords[<span class="hljs-number">1</span>], serialNumWords[<span class="hljs-number">3</span>], serialNumWords[<span class="hljs-number">4</span>]);	
-        *serialNumber = (serialNumWords[<span class="hljs-number">0</span>] &lt;&lt; <span class="hljs-number">24</span>) | (serialNumWords[<span class="hljs-number">1</span>] &lt;&lt; <span class="hljs-number">16</span>)| (serialNumWords[<span class="hljs-number">3</span>] &lt;&lt; <span class="hljs-number">8</span>) | serialNumWords[<span class="hljs-number">4</span>] ;
-    &#125;
-    <span class="hljs-keyword">return</span> error;
+	<span class="hljs-comment">/* read temperature and humidity raw values */</span>
+  <span class="hljs-keyword">if</span>(error == NO_ERROR)
+  &#123;
+		<span class="hljs-keyword">for</span>(i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">5</span>; i++)
+		&#123;
+			 i2c_rd_byte(&amp;serialNumWords[i], ACK);
+		&#125;
+    i2c_rd_byte(&amp;serialNumWords[i], NACK);<span class="hljs-comment">//i = 5</span>
+<span class="hljs-comment">//		serialNumWords[6] = &#x27;\0&#x27;;</span>
+		i2c_stop();
+		<span class="hljs-keyword">if</span>(serialNumWords[<span class="hljs-number">2</span>] != crc8_calc(serialNumWords,<span class="hljs-number">2</span>))     error = CHECKSUM_ERROR;
+	  <span class="hljs-keyword">if</span>(serialNumWords[<span class="hljs-number">5</span>] != crc8_calc(&amp;serialNumWords[<span class="hljs-number">3</span>],<span class="hljs-number">2</span>)) error = CHECKSUM_ERROR;	
+  &#125;
+  <span class="hljs-comment">/* calc serial number as 32-bit integer */</span>
+  <span class="hljs-keyword">if</span>(error == NO_ERROR)
+  &#123;
+		<span class="hljs-comment">/* print serialNumber */</span>
+<span class="hljs-comment">//		printf(&quot;serialNumber: 0x%02x%02x\r\n&quot;, serialNumWords[0], serialNumWords[1], serialNumWords[3], serialNumWords[4]);	</span>
+
+		*serialNumber = serialNumWords[<span class="hljs-number">0</span>] &lt;&lt; <span class="hljs-number">8</span> | serialNumWords[<span class="hljs-number">1</span>];
+		*serialNumber &lt;&lt;= <span class="hljs-number">16</span>;
+		*serialNumber |= serialNumWords[<span class="hljs-number">3</span>] &lt;&lt; <span class="hljs-number">8</span> | serialNumWords[<span class="hljs-number">4</span>];
+	&#125;
+  <span class="hljs-keyword">return</span> error;
 &#125;
 
 <span class="hljs-comment">/**</span>
@@ -871,16 +875,19 @@ etError <span class="hljs-title function_">sht3x_periodic_mode</span><span class
 	<span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>)
 	&#123;
 		<span class="hljs-comment">/* get the serial number */</span>
-		sht3x_rd_serial_num(&amp;serialNumber); <span class="hljs-comment">//printf(&quot;serialNumber: %#lx \r\n&quot;, serialNumber);函数内部输出</span>
+		sht3x_rd_serial_num(&amp;serialNumber); 
+		<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;serial number: %#lx\r\n&quot;</span>, serialNumber);
 		sht3x_periodic_mode(&amp;temperature, &amp;humidity, CMD_MEAS_PERI_1_H); <span class="hljs-comment">//周期性获取温湿度</span>
 <span class="hljs-comment">//		sht3x_single_polling(&amp;temperature, &amp;humidity, CMD_MEAS_POLLING_L, 50); //单次轮询模式获取温湿度</span>
 <span class="hljs-comment">//		sht3x_single_clkStretch(&amp;temperature, &amp;humidity, CMD_MEAS_CLOCKSTR_H, 50);//单次时钟扩展模式获取温湿度</span>
-		<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;temperature = %.3f℃ humidity = %.3f%%&quot;</span>, temperature, humidity);
+		<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;temperature = %.3f℃ humidity = %.3f%%\r\n&quot;</span>, temperature, humidity);
 		Delay500ms();
 	&#125;
 &#125;</code></pre></div>
+<p>串口输出：</p>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230507195015130.png" srcset="/img/loading.gif" lazyload alt="image-20230507195015130" style="zoom: 80%;" /></p>
 <p>工程代码Gitee ：<a
-target="_blank" rel="noopener" href="https://gitee.com/kayoungzhang/my_codehubm.git">sht3x</a></p>
+target="_blank" rel="noopener" href="https://gitee.com/kayoungzhang/my_codehub.git">sht3x</a></p>
 <h3 id="参考链接">参考链接</h3>
 <p><a
 target="_blank" rel="noopener" href="https://sensirion.com/media/documents/213E6A3B/63A5A569/Datasheet_SHT3x_DIS.pdf">Datasheet
