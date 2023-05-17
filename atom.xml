@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2023-05-14T23:42:10.530Z</updated>
+  <updated>2023-05-17T13:56:51.907Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,38 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Altium Designer 快捷键汇总</title>
+    <link href="http://example.com/2023/05/17/Altium-Designer-%E5%BF%AB%E6%8D%B7%E9%94%AE%E6%B1%87%E6%80%BB/"/>
+    <id>http://example.com/2023/05/17/Altium-Designer-%E5%BF%AB%E6%8D%B7%E9%94%AE%E6%B1%87%E6%80%BB/</id>
+    <published>2023-05-17T12:42:19.000Z</published>
+    <updated>2023-05-17T13:56:51.907Z</updated>
+    
+    <content type="html"><![CDATA[<p>最近新项目需要设计电路和PCB，刚好结合之前整理的AltiumDesigner快捷键汇总一下：</p><ul><li><h4 id="对齐">对齐</h4></li></ul><table><thead><tr class="header"><th>快捷键</th><th>功能</th></tr></thead><tbody><tr class="odd"><td>A</td><td>弹出对齐对话框</td></tr><tr class="even"><td>A+L</td><td>向左对齐</td></tr><tr class="odd"><td>A+R</td><td>向右对齐</td></tr><tr class="even"><td>A+D</td><td>横向等间距</td></tr><tr class="odd"><td>A+T</td><td>向上对齐</td></tr><tr class="even"><td>A+B</td><td>向下对齐</td></tr><tr class="odd"><td>A+S</td><td>纵向等间距</td></tr></tbody></table><ul><li><h4 id="元件调整">元件调整</h4></li></ul><table><thead><tr class="header"><th>快捷键</th><th>功能</th></tr></thead><tbody><tr class="odd"><td>M</td><td>元件调整</td></tr><tr class="even"><td>N</td><td>飞线的显示与隐藏</td></tr><tr class="odd"><td>M+S</td><td>器件任意位置移动</td></tr><tr class="even"><td>A+P</td><td>调整位号位置</td></tr><tr class="odd"><td>F11</td><td>选中器件，按下F11</td></tr><tr class="even"><td>E+A</td><td>特殊粘贴</td></tr></tbody></table><ul><li><h4 id="选择">选择</h4></li></ul><table><thead><tr class="header"><th>快捷键</th><th>功能</th></tr></thead><tbody><tr class="odd"><td>S+I</td><td>框选</td></tr><tr class="even"><td>S+O</td><td>反选</td></tr><tr class="odd"><td>S+L</td><td>线选</td></tr><tr class="even"><td>S+N</td><td>选择网络</td></tr><tr class="odd"><td>S+C</td><td>选中直接相连的网络</td></tr><tr class="even"><td>J+C</td><td>查询与搜索器件</td></tr><tr class="odd"><td>J+N</td><td>查询与搜索网络</td></tr><tr class="even"><td>S+T</td><td>切换选择</td></tr></tbody></table><ul><li><h4 id="设置">设置</h4></li></ul><table><thead><tr class="header"><th>快捷键</th><th>功能</th></tr></thead><tbody><tr class="odd"><td>D+C</td><td>进入Class设置</td></tr><tr class="even"><td>D+R</td><td>PCB 规则设置</td></tr><tr class="odd"><td>T+D</td><td>DRC检查</td></tr><tr class="even"><td>T+M</td><td>复位DRC检查</td></tr><tr class="odd"><td>O+B</td><td>PCB板选项设置</td></tr><tr class="even"><td>G</td><td>设置栅格属性</td></tr><tr class="odd"><td>T+N</td><td>器件位号重新编排</td></tr><tr class="even"><td>T+P</td><td>进行系统设置</td></tr></tbody></table><ul><li><h4 id="显示">显示</h4></li></ul><table><thead><tr class="header"><th>快捷键</th><th>功能</th></tr></thead><tbody><tr class="odd"><td>shift+E</td><td>可捕获至中点</td></tr><tr class="even"><td>shift+H</td><td>坐标信息的隐藏与显示</td></tr><tr class="odd"><td>shift+D</td><td>切换悬浮的坐标显示风格</td></tr><tr class="even"><td>shift+S</td><td>单层切换显示</td></tr><tr class="odd"><td>shift+M</td><td>PCB的洞察力镜头</td></tr><tr class="even"><td>shift+空格</td><td>切换走线模式</td></tr><tr class="odd"><td>Ctrl+L</td><td>图层控制</td></tr><tr class="even"><td>Ctrl+D</td><td>Object的隐藏与显示</td></tr><tr class="odd"><td>Ctrl+G</td><td>栅格设置</td></tr><tr class="even"><td>*</td><td>层切换</td></tr><tr class="odd"><td>V+B</td><td>板子翻转</td></tr><tr class="even"><td>L</td><td>器件正反面放置</td></tr><tr class="odd"><td>O+G</td><td>背景和格点设置(PCB与原理图通用)</td></tr></tbody></table><ul><li><h4 id="走线">走线</h4></li></ul><table><thead><tr class="header"><th>快捷键</th><th>功能</th></tr></thead><tbody><tr class="odd"><td>shift+R</td><td>切换走线模式</td></tr><tr class="even"><td>shift+G</td><td>显示走线长度</td></tr><tr class="odd"><td>shift+E</td><td>切换捕获栅格模式</td></tr><tr class="even"><td>E+K</td><td>截断走线</td></tr><tr class="odd"><td>*或-或+</td><td>走线时切换到其他层(自动加过孔)</td></tr><tr class="even"><td>[</td><td>走线时可单独显示要连接的地方高亮</td></tr><tr class="odd"><td>E+D</td><td>连续删线</td></tr><tr class="even"><td>Shift+W</td><td>走线时，设置走线的线宽</td></tr><tr class="odd"><td>Shift+V</td><td>走线时，设置焊盘大小</td></tr><tr class="even"><td>U+M</td><td>AD17 多根相同间距走线，先选中，再U+M走线</td></tr><tr class="odd"><td>T+T+M</td><td>选中多根线，然后同时走线</td></tr><tr class="even"><td>Ctrl+点击焊盘</td><td>同一网络快速走线</td></tr><tr class="odd"><td>Ctrl+H</td><td>高显</td></tr><tr class="even"><td>Ctrl+W</td><td>可视化间距显示(AD16版本以上才有此功能)</td></tr></tbody></table><ul><li><h4 id="功能">功能</h4></li></ul><table><thead><tr class="header"><th>快捷键</th><th>功能</th></tr></thead><tbody><tr class="odd"><td>Alt+点击GND</td><td>全部与GND相连的线高亮（单个网络高亮）</td></tr><tr class="even"><td>T+E</td><td>泪滴增加与移除</td></tr><tr class="odd"><td>P+Y</td><td>分离铜皮（按Tab可以设置线宽）</td></tr><tr class="even"><td>D+S+D</td><td>快速定义板框</td></tr><tr class="odd"><td>Ctrl+M</td><td>测量尺寸</td></tr><tr class="even"><td>Ctrl+Q或Q</td><td>改变单位（mm/mil）</td></tr></tbody></table><p>另外，以前学习凡亿教育课程，因为在设计时常用的操作就那几个，所以可以将常用快捷键设置为单个按键，这样在设计时就可快速方便的进行操作，提高了效率，方法是：<strong>按住Ctrl键不放，点击软件各功能选择图标，然后就可设置惯用的快捷键</strong>，主要有以下几个：</p><table><thead><tr class="header"><th>快捷键</th><th>功能设置</th><th>快捷键</th><th>功能设置</th></tr></thead><tbody><tr class="odd"><td>F2</td><td><strong>电气走线</strong></td><td>Alt+F2</td><td>差分走线</td></tr><tr class="even"><td>F3</td><td><strong>放置过孔</strong></td><td>Alt+F3</td><td>放置fill</td></tr><tr class="odd"><td>F4</td><td><strong>敷铜</strong></td><td>Alt+F4</td><td><strong>重新敷铜</strong></td></tr><tr class="even"><td>F5</td><td>颜色开关</td><td></td><td></td></tr><tr class="odd"><td>F6</td><td><strong>矩形框放置器件</strong></td><td></td><td></td></tr><tr class="even"><td>F7</td><td>原理图与layout交互映射</td><td></td><td></td></tr></tbody></table><table><thead><tr class="header"><th>快捷键</th><th>功能设置</th><th>快捷键</th><th>功能设置</th></tr></thead><tbody><tr class="odd"><td>`</td><td><strong>删除</strong></td><td>Alt+`</td><td><strong>删除物理连接</strong></td></tr><tr class="even"><td>1</td><td>选择物理连接</td><td>Alt+1</td><td>显示长度</td></tr><tr class="odd"><td>2</td><td><strong>线选</strong></td><td>Alt+2</td><td>测量中心距</td></tr><tr class="even"><td>3</td><td><strong>框选</strong></td><td>Alt+3</td><td>移动选择</td></tr><tr class="odd"><td>4</td><td>单线等长(蛇形线)</td><td>Alt+4</td><td>差分等长</td></tr><tr class="even"><td>5</td><td><strong>保持原间距走线</strong></td><td>Alt+5</td><td>等间距走线</td></tr><tr class="odd"><td>6</td><td>坐标移动</td><td></td><td></td></tr><tr class="even"><td>7</td><td><strong>修铜</strong></td><td>Alt+7</td><td>M+G</td></tr></tbody></table><table><thead><tr class="header"><th>小键盘数字键</th><th>功能设置</th></tr></thead><tbody><tr class="odd"><td><strong>1</strong></td><td><strong>左对齐</strong></td></tr><tr class="even"><td><strong>2</strong></td><td><strong>下对齐</strong></td></tr><tr class="odd"><td><strong>3</strong></td><td><strong>右对齐</strong></td></tr><tr class="even"><td><strong>4</strong></td><td><strong>水平等间距</strong></td></tr><tr class="odd"><td><strong>5</strong></td><td><strong>上对齐</strong></td></tr><tr class="even"><td><strong>6</strong></td><td><strong>垂直等间距</strong></td></tr><tr class="odd"><td><strong>7</strong></td><td><strong>器件位号排列</strong></td></tr></tbody></table><p>以上加粗部分是常用功能，可根据自己的需要灵活更改。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;最近新项目需要设计电路和PCB，刚好结合之前整理的Altium
+Designer快捷键汇总一下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;h4 id=&quot;对齐&quot;&gt;对齐&lt;/h4&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&quot;header&quot;&gt;
+</summary>
+      
+    
+    
+    
+    <category term="硬件" scheme="http://example.com/categories/%E7%A1%AC%E4%BB%B6/"/>
+    
+    
+    <category term="pcb" scheme="http://example.com/tags/pcb/"/>
+    
+  </entry>
   
   <entry>
     <title>ssd3as压力传感器的开发设计</title>
@@ -526,33 +558,6 @@ Designer创建工程，完成工程后，需要进行打包传输，这时候会
     
     
     
-    
-  </entry>
-  
-  <entry>
-    <title>BAM-1020 连续颗粒物监测仪器手册</title>
-    <link href="http://example.com/2023/04/17/BAM1020%E8%BF%9E%E7%BB%AD%E9%A2%97%E7%B2%92%E7%89%A9%E7%9B%91%E6%B5%8B%E4%BB%AA%E5%99%A8%E6%89%8B%E5%86%8C/"/>
-    <id>http://example.com/2023/04/17/BAM1020%E8%BF%9E%E7%BB%AD%E9%A2%97%E7%B2%92%E7%89%A9%E7%9B%91%E6%B5%8B%E4%BB%AA%E5%99%A8%E6%89%8B%E5%86%8C/</id>
-    <published>2023-04-17T04:33:42.000Z</published>
-    <updated>2023-05-11T10:10:43.737Z</updated>
-    
-    <content type="html"><![CDATA[<p>前两年部门采购了几套美国 <strong>MetOne</strong> 公司的颗粒物采样设备<code>BAM-1020</code>，查看了它的使用说明手册，都是英文的，且没有电子版，后来为了好好研究一下它的操作规程，便于后期翻阅查看，我就把纸质版说明书拍照下来，借助<strong>OCR工具</strong> （<ahref="http://ocr.tianruo.net/">天若OCR文字识别</a>），整理成电子版，然后借助翻译软件（<ahref="https://copytranslator.github.io/">CopyTranslator</a>）将其翻译下来。当然这两款软件并不是很智能，也会存在识别不出来，翻译不正确的地方，这就需要自己细心认真的进行处理，但借助它可以缩短我整理和翻译的速度，提高了效率，现在记录一下。</p><p>英文目录：</p><div class="code-wrapper"><pre><code class="hljs tex">Table of Contents1  INTRODUCTION11.1  About This Manual11.2  Technical Service11.3  BAM: Beta Attenuation Monitor21.4  Beta Radiation Safety Statement31.5  BAM 1020 US-EPA Configurations31.6  BAM 1020 Other Configurations31.7  BAM 1020 Specifications32  SITE SELECTION AND INSTALLATION42.1  Unpacking, Inspection, and Evaluation Testing42.2  Enclosure Selection and Temperature Control52.3  Site Selection and Inlet Positioning Criteria62.4  Mounting Options in a Walk-In Shelter62.5  BAM 1020 Installation Instructions72.6  BAM 1020 Power and Electrical Service133  INITIAL SETUP OF THE BAM 1020143.1  Power up153.2  Warm-up Period153.3  The Main Menu and Using the Keypad and Display153.4  Filter Tape Loading163.5  Self-Test173.6  Initial SETUP Settings Considerations183.7  Initial Leak Check and Flow Check193.8  Starting a Measurement Cycle193.9  Accessing the Flow Statistics Screen193.10  The OPERATE Menus193.11  The NORMAL Operation Screen203.12  The INSTANTANEOUS and AVERAGE Operation Screens204  THE MEASUREMENT CYCLE214.1  The One-Hour Cycle Timeline214.2  Automatic Span Checks During The Cycle224.3  Filter Tape Use235  FLOW SYSTEM and FLOW CALIBRATIONS235.1  Flow System Diagram235.2  Flow Control and Flow Reporting Types - Standard or Actual Flow245.2.1  ACTUAL Flow Control:245.2.2  STANDARD Flow Control:245.3  Total Flow(QTOT) and Flow Rate(LPM) Conversions255.4  About Leak Checks, Nozzle Cleaning, and Flow Checks255.5  Leak Check Procedure255.5.1  Basic Leak Check265.5.2  Advanced Leak Checks275.6  Nozzle and Vane Cleaning Procedure295.7  Field Calibration of the Flow System - Actual Flow Mode315.8  Field Calibration of the Flow System - Standard Flow Mode326  SETUP MENU DESCRIPTIONS336.1  CLOCK Setup Screen346.2  SAMPLE Setup Screen -Range, Sample, and Timing Settings346.3  CALIBRATE Setup Screen-Flow and Calibration Settings366.4  EXTRA1 Setup Screen386.5  ERRORS Setup Screen for the Analog Output386.6  PASSWORD Setup Screen396.7  INTERFACE Setup Screen406.8  SENSOR Setup Screen for External Met Sensors406.9  HEATER Setup Screen - RH Control Settings416.10  QUERY Setup Screen -Custom Data Array Setup436.11  REPORTS Setup Screen - Daily Data and Dynamic Ranges446.11.1  Daily Data Range446.11.2  Dynamic Range446.11.3  Log BP456.11.4  Log Membrane456.12  HJ 653 Setup Screen -Chinese Data Formatting457 MAINTENANCE, DIAGNOSTICS and TROUBLESHOOTING457.1  Met One Recommended Periodic Maintenance Table467.2  BAM 1020 Error and Alarm Descriptions467.3  Comparison of BAM 1020 Data to Integrated Filter Sampler Data507.4  Power Up Problems and Electrical Safety Considerations517.5  Basic Problem and Cause/Solution Table537.6  Nozzle Component Service and O-ring Replacement567.7  Performing the 72-Hour Zero Filter Background Test587.8  The TEST Menu System - Overview597.9  COUNT Test Menu -Beta Detector Count Tests607.10  PUMP Test Menu - Manual Pump and Nozzle Tests607.11  TAPE Test Menu -Manual Filter Forward/Backward Tests617.12  DAC Test Menu - Analog Output Test617.13  CALIBRATE Test Menu - Span Membrane Mass Tests617.14  INTERFACE Test Menu -Relay IO Channel Tests627.15  FLOW Test Menu627.16  ALIGN Test Menu -Tape Transport Motor and Photosensor Tests627.17  HEATER Test Menu637.18  FILTER-T Test Menu -Filter Temperature Sensor Tests647.19  FILTER-RH Test Menu - Filter Humidity Sensor Test and Calibration648  EXTERNAL DATA LOGGER INTERFACE SYSTEM658.1  Analog Concentration Output Signal658.2  Early Cycle Mode Option For Analog Data Collection668.3  Telemetry and Error Relays678.4  Interfacing a Digital Data logger with the BAM 1020699  DIGITAL COMMUNICATIONS AND DATA RETRIEVAL709.1  Direct Serial Port Connections and Settings719.2  Using Met One Comet Communications Software719.3  Downloading Data Using Simple Terminal Programs729.4  System Menu and File Descriptions Using a Terminal Program739.5  Printer Output Port Functions809.6  Modem Option819.7  BAM 1020 Firmware Upgrades819.8  Resetting the Data Pointer for New Data Collection849.9  Data Collection Using the Query Output or Bayern-Hessen Protocol8410  ACCESSORIES and PARTS8610.1  Consumables, Replacement Parts, and Accessories8610.2  BX-500 Series Meteorological Sensor Configurations9111  THEORY OF OPERATION9311.1  Converting Data Between EPA Standard and Actual Conditions95</code></pre></div><p>中文目录：</p><div class="code-wrapper"><pre><code class="hljs tex">目录1  概况11.1 关于本手册11.2 技术服务11.3 BAM: β衰减监测仪21.4 β辐射安全声明21.5 BAM 1020 US-EPA 配置21.6 BAM 1020 其他配置31.7 BAM 1020 规格32  采样点选择与安装42.1  拆箱，检视和评估测试42.2  外罩选择和温度控制42.3  选址和入口定位标准52.4  移动式方舱中的安装选项52.5  BAM 1020 安装指南52.6  BAM 1020 电力和电气服务113   BAM 1020的初始设置123.1  开机123.2  预热阶段133.3  主菜单和使用键盘和显示器133.4  过滤带加载143.5  自测143.6  初始设置注意事项153.7  初始泄漏检查和流量检查153.8  开始一个测量周期163.9  访问流量统计信息界面163.10  操作菜单163.11  NORMAL操作界面173.12  瞬时和平均操作界面174  测量周期174.1  一小时周期时间线184.2  循环期间自动量程（Span）检查194.3  滤带使用195  流量系统和流量校准195.1 流程系统图195.2  流量控制和流量报告类型-标况或工况流量205.2.1  工况流量控制:205.2.2  标况流量控制:205.3  总体积流量(QTOT) 和流量(LPM) 转换215.4  关于泄漏检查、喷嘴清洁和流量检查215.5  泄漏检查过程215.5.1 基本泄漏检查215.5.2  高级泄漏检查225.6  喷嘴和卡环清洁程序245.7  流量系统的现场校准-工况流量模式255.8  流量系统的现场校准-标况流量模式276  设置菜单说明276.1  时钟设置界面286.2  采样设置界面-范围、采样和时间设置286.3  校准设置界面-流量和校准设置306.4  EXTRA1设置界面316.5 模拟输出错误设置界面316.6  密码设置界面336.7  接口设置界面336.8  外部气象传感器的传感器设置界面336.9  加热器设置界面-相对湿度控制设置346.10  查询设置界面-自定义数据项设置356.11 报告设置界面-每日数据和动态范围366.11.1  每日数据范围376.11.2  动态范围376.11.3  BP日志376.11.4  膜日志376.12  HJ 653设置界面-中文数据格式377 维护、诊断和故障排除387.1 Met One建议的定期维护表387.2 BAM 1020错误和报警描述397.3 BAM 1020数据与集成过滤采样器数据的比较417.4 开机问题和电气安全注意事项427.5 基本问题及原因/解决方案表437.6 喷嘴部件维修和O形圈更换467.7 执行72小时零过滤器背景测试477.8 测试菜单系统-概述487.9 计数测试菜单-β探测器计数测试487.10 泵测试菜单-手动泵和喷嘴测试497.11 滤带测试菜单-过滤器向前/向后手动测试497.12 DAC测试菜单-模拟输出测试497.13 校准测试菜单-量程膜质量测试507.14 接口测试菜单-继电器IO通道测试507.15 流量测试菜单507.16 校准测试菜单-滤带传输电机和光电传感器测试507.17 加热器测试菜单517.18 FILTER-T 测试菜单-滤带温度传感器测试517.19 FILTER-RH 测试菜单 - 滤带湿度传感器测试和校准528  外部数据记录器接口系统528.1  模拟浓度输出信号538.2  模拟数据采集的早期循环模式选项538.3  遥测和错误继电器548.4 数字数据记录器与BAM 1020的接口569  数字通信与数据检索579.1  直接串行端口连接和设置579.2  使用Met One Comet通信软件589.3  使用简单的终端程序下载数据599.4  使用终端程序的系统菜单和文件说明609.5  打印机输出端口功能669.6  调制解调器选项669.7  BAM 1020固件升级669.8  重置新数据收集的数据指针699.9  使用查询输出或拜仁-黑森协议进行数据收集6910  附件和零件7010.1  消耗品、可替换的零件和附件7010.2  BX-500系列气象传感器配置7511  操作理论7811.1  在EPA标况（Standard）和工况（Actual）条件之间转换数据79</code></pre></div><p>因为能力有限，好多专业词汇翻译不够详尽，肯定还有很多翻译不正确的地方，但相比于长篇英语文章，后期翻阅就比较容易上手了，手册详细内容已上传：</p><p><ahref="https://gitee.com/kayoungzhang/my_codehub.git">码云Gitee</a></p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;前两年部门采购了几套美国 &lt;strong&gt;MetOne&lt;/strong&gt; 公司的颗粒物采样设备
-&lt;code&gt;BAM-1020&lt;/code&gt;，查看了它的使用说明手册，都是英文的，且没有电子版，后来为了好好研究一下它的操作规程，便于后期翻阅查看，我就把纸质版说明书拍照下来，借</summary>
-      
-    
-    
-    
-    <category term="其它" scheme="http://example.com/categories/%E5%85%B6%E5%AE%83/"/>
-    
-    
-    <category term="英语" scheme="http://example.com/tags/%E8%8B%B1%E8%AF%AD/"/>
-    
-    <category term="环境" scheme="http://example.com/tags/%E7%8E%AF%E5%A2%83/"/>
     
   </entry>
   
