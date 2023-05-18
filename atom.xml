@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2023-05-17T13:56:51.907Z</updated>
+  <updated>2023-05-18T14:52:03.168Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Altium Designer Gerber Files 生成步骤</title>
+    <link href="http://example.com/2023/05/18/Altium-Designer-Gerber-Files-%E7%94%9F%E6%88%90%E6%AD%A5%E9%AA%A4/"/>
+    <id>http://example.com/2023/05/18/Altium-Designer-Gerber-Files-%E7%94%9F%E6%88%90%E6%AD%A5%E9%AA%A4/</id>
+    <published>2023-05-18T13:35:48.000Z</published>
+    <updated>2023-05-18T14:52:03.168Z</updated>
+    
+    <content type="html"><![CDATA[<p>pcblayout完成后，然后就可以发送到PCB板厂进行生产制造了，一般为了保密性质，发送给厂商的是GerberFiles文件，所以，就需要生成GerberFiles。以下说一下AltiumDesigner生成GerberFiles的具体的操作步骤：</p><p>生成Gerber文件前，需要设置PCB原点，工艺边，定位孔，钻孔描述(drill层放置'.legend')，尺寸标注(一般为mechanic1、2层)。但是对于普通PCB设计者来说，这些不是必须要设置的。</p><ol type="1"><li><p>打开Gerber Setup，Files -&gt; Fabrication Outputs -&gt; GerberFiles</p><p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/wps1.jpg" alt="img"  /></p></li><li><p>勾选要生成Gerber文件层面，在右侧Mechanical列表中选择要加载到各个Gerber层的机械尺寸信息。勾选左侧的Mechanical1，则在光绘文件GM1单层显示，勾选右侧的Mechanical1则每层都会加入机械层信息，“Include unconnected mid-layerpads”项仅限于包含了中间层的PCB 文件输出Gerber 时使能。</p></li></ol><figure><imgsrc="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/wps2.jpg"alt="img" /><figcaption aria-hidden="true">img</figcaption></figure><ol start="3" type="1"><li>勾选Drill层</li></ol><figure><imgsrc="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/wps3.jpg"alt="img" /><figcaption aria-hidden="true">img</figcaption></figure><ol start="4" type="1"><li>勾选光圈</li></ol><figure><imgsrc="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/wps4.jpg"alt="img" /><figcaption aria-hidden="true">img</figcaption></figure><ol start="5" type="1"><li>设置影像大小</li></ol><figure><imgsrc="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/wps5.jpg"alt="img" /><figcaption aria-hidden="true">img</figcaption></figure><ol start="6" type="1"><li>生成钻孔文件，Files -&gt; Fabrication Outputs -&gt; NC Drillfiles</li></ol><figure><imgsrc="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/wps6.jpg"alt="img" /><figcaption aria-hidden="true">img</figcaption></figure><ol start="7" type="1"><li>生成测试网表，Files -&gt; Fabrication Outputs -&gt; Test PointReport</li></ol><p><imgsrc="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/wps7.jpg" /></p><ol start="8" type="1"><li>生成SMT贴片零件位置表，Files -&gt; Assembly Outputs -&gt; Generatespick and place files</li></ol><figure><imgsrc="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/wps8.jpg"alt="img" /><figcaption aria-hidden="true">img</figcaption></figure><ol start="9" type="1"><li>生成SMT贴片零件PCB组装图，Files -&gt; Smart PDF</li></ol><figure><imgsrc="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/wps9.jpg"alt="img" /><figcaption aria-hidden="true">img</figcaption></figure><figure><imgsrc="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/wps10.jpg"alt="img" /><figcaption aria-hidden="true">img</figcaption></figure><figure><imgsrc="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/wps11.jpg"alt="img" /><figcaption aria-hidden="true">img</figcaption></figure><p>将前面7个步骤生成的文件打包发送给pcb板厂就可以制造PCB了，如果还需要贴片，就需要第8步和第9步生成的组装文件了。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;pcb
+layout完成后，然后就可以发送到PCB板厂进行生产制造了，一般为了保密性质，发送给厂商的是GerberFiles文件，所以，就需要生成GerberFiles。以下说一下Altium
+Designer生成GerberFiles的具体的操作步骤：&lt;/p&gt;
+&lt;p</summary>
+      
+    
+    
+    
+    <category term="硬件" scheme="http://example.com/categories/%E7%A1%AC%E4%BB%B6/"/>
+    
+    
+    <category term="pcb" scheme="http://example.com/tags/pcb/"/>
+    
+  </entry>
   
   <entry>
     <title>Altium Designer 快捷键汇总</title>
@@ -536,28 +563,6 @@ Designer创建工程，完成工程后，需要进行打包传输，这时候会
     
     
     <category term="bash" scheme="http://example.com/tags/bash/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>添加U盘图标的方法</title>
-    <link href="http://example.com/2023/04/18/%E6%B7%BB%E5%8A%A0U%E7%9B%98%E5%9B%BE%E6%A0%87%E7%9A%84%E6%96%B9%E6%B3%95/"/>
-    <id>http://example.com/2023/04/18/%E6%B7%BB%E5%8A%A0U%E7%9B%98%E5%9B%BE%E6%A0%87%E7%9A%84%E6%96%B9%E6%B3%95/</id>
-    <published>2023-04-17T23:46:09.000Z</published>
-    <updated>2023-04-18T00:08:37.962Z</updated>
-    
-    <content type="html"><![CDATA[<p>有时候我们想让U盘插到电脑上显示一个漂亮的图标，这样看起来就比较美观，其实，它的实现方式很简单，只需要进行几步设置，就可以打造出一个个性化的U盘出场方式，以下简单说明一下：</p><ol type="1"><li>准备一个漂亮的U盘 <strong>ico</strong>格式的图标，借助图片处理工具将像素大小设置为<strong>256像素x256像素</strong>，同时将图标命名为<code>u_disk.ico</code></li><li>使用记事本创建一个文件，重命名为<strong>autorun.inf</strong>,进入文件，写入以下内容：</li></ol><div class="code-wrapper"><pre><code class="hljs bash">[autorun]  icon=u_disk.ico,0label=Kayoung</code></pre></div><p><code>label</code> 显示的是U盘的名字。</p><ol start="3" type="1"><li>将这两个文件同时拷贝到U盘中，并各自右键打开文件的属性，设置为隐藏模式。</li><li>依次打开 <strong>工具</strong> -&gt; <strong>文件夹选项</strong>-&gt; <strong>查看</strong> -&gt; <strong>隐藏文件和文件夹</strong>-&gt; <code>勾选</code><strong>不显示隐藏的文件、文件夹或驱动器</strong>, 然后点击<strong>确定</strong>，这样，U盘中的两个文件就被隐藏了。</li></ol><p>效果图：</p><figure><imgsrc="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230418080723296.png"alt="image-20230418080723296" /><figcaption aria-hidden="true">image-20230418080723296</figcaption></figure>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;有时候我们想让U盘插到电脑上显示一个漂亮的图标，这样看起来就比较美观，其实，它的实现方式很简单，只需要进行几步设置，就可以打造出一个个性化的U盘出场方式，以下简单说明一下：&lt;/p&gt;
-&lt;ol type=&quot;1&quot;&gt;
-&lt;li&gt;准备一个漂亮的U盘 &lt;strong&gt;ico&lt;/str</summary>
-      
-    
-    
-    
     
   </entry>
   

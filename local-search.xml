@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>Altium Designer Gerber Files 生成步骤</title>
+    <link href="/2023/05/18/Altium-Designer-Gerber-Files-%E7%94%9F%E6%88%90%E6%AD%A5%E9%AA%A4/"/>
+    <url>/2023/05/18/Altium-Designer-Gerber-Files-%E7%94%9F%E6%88%90%E6%AD%A5%E9%AA%A4/</url>
+    
+    <content type="html"><![CDATA[<p>pcblayout完成后，然后就可以发送到PCB板厂进行生产制造了，一般为了保密性质，发送给厂商的是GerberFiles文件，所以，就需要生成GerberFiles。以下说一下AltiumDesigner生成GerberFiles的具体的操作步骤：</p><p>生成Gerber文件前，需要设置PCB原点，工艺边，定位孔，钻孔描述(drill层放置'.legend')，尺寸标注(一般为mechanic1、2层)。但是对于普通PCB设计者来说，这些不是必须要设置的。</p><ol type="1"><li><p>打开Gerber Setup，Files -&gt; Fabrication Outputs -&gt; GerberFiles</p><p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/wps1.jpg" alt="img"  /></p></li><li><p>勾选要生成Gerber文件层面，在右侧Mechanical列表中选择要加载到各个Gerber层的机械尺寸信息。勾选左侧的Mechanical1，则在光绘文件GM1单层显示，勾选右侧的Mechanical1则每层都会加入机械层信息，“Include unconnected mid-layerpads”项仅限于包含了中间层的PCB 文件输出Gerber 时使能。</p></li></ol><figure><imgsrc="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/wps2.jpg"alt="img" /><figcaption aria-hidden="true">img</figcaption></figure><ol start="3" type="1"><li>勾选Drill层</li></ol><figure><imgsrc="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/wps3.jpg"alt="img" /><figcaption aria-hidden="true">img</figcaption></figure><ol start="4" type="1"><li>勾选光圈</li></ol><figure><imgsrc="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/wps4.jpg"alt="img" /><figcaption aria-hidden="true">img</figcaption></figure><ol start="5" type="1"><li>设置影像大小</li></ol><figure><imgsrc="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/wps5.jpg"alt="img" /><figcaption aria-hidden="true">img</figcaption></figure><ol start="6" type="1"><li>生成钻孔文件，Files -&gt; Fabrication Outputs -&gt; NC Drillfiles</li></ol><figure><imgsrc="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/wps6.jpg"alt="img" /><figcaption aria-hidden="true">img</figcaption></figure><ol start="7" type="1"><li>生成测试网表，Files -&gt; Fabrication Outputs -&gt; Test PointReport</li></ol><p><imgsrc="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/wps7.jpg" /></p><ol start="8" type="1"><li>生成SMT贴片零件位置表，Files -&gt; Assembly Outputs -&gt; Generatespick and place files</li></ol><figure><imgsrc="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/wps8.jpg"alt="img" /><figcaption aria-hidden="true">img</figcaption></figure><ol start="9" type="1"><li>生成SMT贴片零件PCB组装图，Files -&gt; Smart PDF</li></ol><figure><imgsrc="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/wps9.jpg"alt="img" /><figcaption aria-hidden="true">img</figcaption></figure><figure><imgsrc="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/wps10.jpg"alt="img" /><figcaption aria-hidden="true">img</figcaption></figure><figure><imgsrc="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/wps11.jpg"alt="img" /><figcaption aria-hidden="true">img</figcaption></figure><p>将前面7个步骤生成的文件打包发送给pcb板厂就可以制造PCB了，如果还需要贴片，就需要第8步和第9步生成的组装文件了。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>硬件</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>pcb</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Altium Designer 快捷键汇总</title>
     <link href="/2023/05/17/Altium-Designer-%E5%BF%AB%E6%8D%B7%E9%94%AE%E6%B1%87%E6%80%BB/"/>
     <url>/2023/05/17/Altium-Designer-%E5%BF%AB%E6%8D%B7%E9%94%AE%E6%B1%87%E6%80%BB/</url>
