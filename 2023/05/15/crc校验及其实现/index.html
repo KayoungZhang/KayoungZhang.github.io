@@ -16,18 +16,20 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="最近新项目需要设计电路和PCB，刚好结合之前整理的Altium Designer快捷键汇总一下：  对齐     快捷键 功能     A 弹出对齐对话框   A+L 向左对齐   A+R 向右对齐   A+D 横向等间距   A+T 向上对齐   A+B 向下对齐   A+S 纵向等间距     元件调整">
+    <meta name="description" content="在通信领域传输数据时，为了避免接收到错误的数据，一般会对源数据和接收到的数据进行特定的校验处理，如果一致，则说明传输正确，否则传输发生了错误。常用的校验算法有奇偶校验、校验和、CRC等，这里主要看看CRC校验。 CRC简介 循环冗余校验（Cyclic Redundancy Check， CRC），它是利用除法及余数的原理来作错误侦测的，对数据进行多项式计算，并将得到的结果附在帧的后面，接收设">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Altium Designer 快捷键汇总">
-<meta property="og:url" content="http://example.com/2023/05/17/Altium-Designer-%E5%BF%AB%E6%8D%B7%E9%94%AE%E6%B1%87%E6%80%BB/index.html">
+<meta property="og:title" content="crc校验及其实现">
+<meta property="og:url" content="http://example.com/2023/05/15/crc%E6%A0%A1%E9%AA%8C%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="最近新项目需要设计电路和PCB，刚好结合之前整理的Altium Designer快捷键汇总一下：  对齐     快捷键 功能     A 弹出对齐对话框   A+L 向左对齐   A+R 向右对齐   A+D 横向等间距   A+T 向上对齐   A+B 向下对齐   A+S 纵向等间距     元件调整">
+<meta property="og:description" content="在通信领域传输数据时，为了避免接收到错误的数据，一般会对源数据和接收到的数据进行特定的校验处理，如果一致，则说明传输正确，否则传输发生了错误。常用的校验算法有奇偶校验、校验和、CRC等，这里主要看看CRC校验。 CRC简介 循环冗余校验（Cyclic Redundancy Check， CRC），它是利用除法及余数的原理来作错误侦测的，对数据进行多项式计算，并将得到的结果附在帧的后面，接收设">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-05-17T12:42:19.000Z">
-<meta property="article:modified_time" content="2023-05-17T13:56:51.907Z">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230515215944403.png">
+<meta property="article:published_time" content="2023-05-15T13:33:18.000Z">
+<meta property="article:modified_time" content="2023-05-24T10:18:09.948Z">
 <meta property="article:author" content="John Doe">
-<meta property="article:tag" content="pcb">
+<meta property="article:tag" content="crc">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230515215944403.png">
   
   
   
@@ -199,7 +201,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Altium Designer 快捷键汇总"></span>
+            <span id="subtitle" data-typed-text="crc校验及其实现"></span>
           
         </div>
 
@@ -210,8 +212,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-05-17 20:42" pubdate>
-          2023年5月17日 晚上
+        <time datetime="2023-05-15 21:33" pubdate>
+          2023年5月15日 晚上
         </time>
       </span>
     
@@ -233,7 +235,7 @@
         
         
         
-          5 分钟
+          4 分钟
         
       </span>
     
@@ -271,12 +273,12 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Altium Designer 快捷键汇总</h1>
+            <h1 style="display: none">crc校验及其实现</h1>
             
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年5月17日 晚上
+                    本文最后更新于：2023年5月24日 晚上
                   
                 
               </p>
@@ -284,496 +286,54 @@
             
               <div class="markdown-body">
                 
-                <p>最近新项目需要设计电路和PCB，刚好结合之前整理的Altium
-Designer快捷键汇总一下：</p>
+                <p>在通信领域传输数据时，为了避免接收到错误的数据，一般会对源数据和接收到的数据进行特定的校验处理，如果一致，则说明传输正确，否则传输发生了错误。常用的校验算法有奇偶校验、校验和、CRC等，这里主要看看CRC校验。</p>
+<h3 id="crc简介">CRC简介</h3>
+<p>循环冗余校验（Cyclic Redundancy Check，
+CRC），它是利用除法及余数的原理来作错误侦测的，对数据进行多项式计算，并将得到的结果附在帧的后面，接收设备也执行类似的算法，以保证数据传输的正确性和完整性。具体原理参考：</p>
+<p><a
+target="_blank" rel="noopener" href="https://www.cnblogs.com/liushui-sky/p/9962123.html">CRC码计算及校验原理的最通俗诠释</a></p>
+<h3 id="crc参数模型">CRC参数模型</h3>
+<p>一个完整的CRC参数模型应该包含以下信息：WIDTH，POLY，INIT，REFIN，REFOUT，XOROUT。</p>
 <ul>
-<li><h4 id="对齐">对齐</h4></li>
+<li>NAME：参数模型名称。</li>
+<li>WIDTH：宽度，即生成的CRC数据位宽，如CRC-8，生成的CRC为8位</li>
+<li>POLY：十六进制多项式，省略最高位1，如 x8 + x2 + x + 1，二进制为1
+0000 0111，省略最高位1，转换为十六进制为0x07。</li>
+<li>INIT：CRC初始值，和WIDTH位宽一致。</li>
+<li>REFIN：true或false，在进行计算之前，原始数据是否翻转，如原始数据：0x34
+= 0011 0100，如果REFIN为true，进行翻转之后为0010 1100 = 0x2c</li>
+<li>REFOUT：true或false，运算完成之后，得到的CRC值是否进行翻转，如计算得到的CRC值：0x97
+= 1001 0111，如果REFOUT为true，进行翻转之后为11101001 = 0xE9。</li>
+<li>XOROUT：计算结果与此参数进行异或运算后得到最终的CRC值，和WIDTH位宽一致。</li>
 </ul>
-<table>
-<thead>
-<tr class="header">
-<th>快捷键</th>
-<th>功能</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>A</td>
-<td>弹出对齐对话框</td>
-</tr>
-<tr class="even">
-<td>A+L</td>
-<td>向左对齐</td>
-</tr>
-<tr class="odd">
-<td>A+R</td>
-<td>向右对齐</td>
-</tr>
-<tr class="even">
-<td>A+D</td>
-<td>横向等间距</td>
-</tr>
-<tr class="odd">
-<td>A+T</td>
-<td>向上对齐</td>
-</tr>
-<tr class="even">
-<td>A+B</td>
-<td>向下对齐</td>
-</tr>
-<tr class="odd">
-<td>A+S</td>
-<td>纵向等间距</td>
-</tr>
-</tbody>
-</table>
+<p>通常如果只给了一个多项式，其他的没有说明则：INIT=0x00，REFIN=false，REFOUT=false，XOROUT=0x00。</p>
+<p>常用的21个标准CRC参数模型：</p>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230515215944403.png" srcset="/img/loading.gif" lazyload alt="image-20230515215944403" style="zoom:80%;" /></p>
+<p>CRC校验在电子通信领域非常常用，可以说有通信存在的地方，就有CRC校验：</p>
 <ul>
-<li><h4 id="元件调整">元件调整</h4></li>
+<li>美信(MAXIM)的芯片DS2401/DS18B20，都是使用的CRC-8/MAXIM模型</li>
+<li>SD卡或MMC使用的是CRC-7/MMC模型</li>
+<li>Modbus通信使用的是CRC-16/MODBUS参数模型</li>
+<li>USB协议中使用的CRC-5/USB和CRC-16/USB模型</li>
+<li>STM32自带的硬件CRC计算模块使用的是CRC-32模型</li>
 </ul>
-<table>
-<thead>
-<tr class="header">
-<th>快捷键</th>
-<th>功能</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>M</td>
-<td>元件调整</td>
-</tr>
-<tr class="even">
-<td>N</td>
-<td>飞线的显示与隐藏</td>
-</tr>
-<tr class="odd">
-<td>M+S</td>
-<td>器件任意位置移动</td>
-</tr>
-<tr class="even">
-<td>A+P</td>
-<td>调整位号位置</td>
-</tr>
-<tr class="odd">
-<td>F11</td>
-<td>选中器件，按下F11</td>
-</tr>
-<tr class="even">
-<td>E+A</td>
-<td>特殊粘贴</td>
-</tr>
-</tbody>
-</table>
+<h3 id="crc计算的程序实现">CRC计算的程序实现</h3>
+<p>CRC的程序实现，网上有很多比较完备的开源CRC计算库，可以直接使用，没有必要重复造轮子。</p>
 <ul>
-<li><h4 id="选择">选择</h4></li>
+<li>https://github.com/whik/crc-lib-c</li>
+<li><a target="_blank" rel="noopener" href="https://www.libcrc.org/">LibCRC – Open Source CRC Library
+in C</a></li>
 </ul>
-<table>
-<thead>
-<tr class="header">
-<th>快捷键</th>
-<th>功能</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>S+I</td>
-<td>框选</td>
-</tr>
-<tr class="even">
-<td>S+O</td>
-<td>反选</td>
-</tr>
-<tr class="odd">
-<td>S+L</td>
-<td>线选</td>
-</tr>
-<tr class="even">
-<td>S+N</td>
-<td>选择网络</td>
-</tr>
-<tr class="odd">
-<td>S+C</td>
-<td>选中直接相连的网络</td>
-</tr>
-<tr class="even">
-<td>J+C</td>
-<td>查询与搜索器件</td>
-</tr>
-<tr class="odd">
-<td>J+N</td>
-<td>查询与搜索网络</td>
-</tr>
-<tr class="even">
-<td>S+T</td>
-<td>切换选择</td>
-</tr>
-</tbody>
-</table>
+<h3 id="crc计算工具">CRC计算工具</h3>
 <ul>
-<li><h4 id="设置">设置</h4></li>
+<li><a
+target="_blank" rel="noopener" href="http://www.geshe.com/zh-cn/products/gtoolbox">格西CRC计算器</a></li>
+<li>http://www.ip33.com/crc.html</li>
+<li>https://www.lammertbies.nl/comm/info/crc-calculation</li>
 </ul>
-<table>
-<thead>
-<tr class="header">
-<th>快捷键</th>
-<th>功能</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>D+C</td>
-<td>进入Class设置</td>
-</tr>
-<tr class="even">
-<td>D+R</td>
-<td>PCB 规则设置</td>
-</tr>
-<tr class="odd">
-<td>T+D</td>
-<td>DRC检查</td>
-</tr>
-<tr class="even">
-<td>T+M</td>
-<td>复位DRC检查</td>
-</tr>
-<tr class="odd">
-<td>O+B</td>
-<td>PCB板选项设置</td>
-</tr>
-<tr class="even">
-<td>G</td>
-<td>设置栅格属性</td>
-</tr>
-<tr class="odd">
-<td>T+N</td>
-<td>器件位号重新编排</td>
-</tr>
-<tr class="even">
-<td>T+P</td>
-<td>进行系统设置</td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li><h4 id="显示">显示</h4></li>
-</ul>
-<table>
-<thead>
-<tr class="header">
-<th>快捷键</th>
-<th>功能</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>shift+E</td>
-<td>可捕获至中点</td>
-</tr>
-<tr class="even">
-<td>shift+H</td>
-<td>坐标信息的隐藏与显示</td>
-</tr>
-<tr class="odd">
-<td>shift+D</td>
-<td>切换悬浮的坐标显示风格</td>
-</tr>
-<tr class="even">
-<td>shift+S</td>
-<td>单层切换显示</td>
-</tr>
-<tr class="odd">
-<td>shift+M</td>
-<td>PCB的洞察力镜头</td>
-</tr>
-<tr class="even">
-<td>shift+空格</td>
-<td>切换走线模式</td>
-</tr>
-<tr class="odd">
-<td>Ctrl+L</td>
-<td>图层控制</td>
-</tr>
-<tr class="even">
-<td>Ctrl+D</td>
-<td>Object的隐藏与显示</td>
-</tr>
-<tr class="odd">
-<td>Ctrl+G</td>
-<td>栅格设置</td>
-</tr>
-<tr class="even">
-<td>*</td>
-<td>层切换</td>
-</tr>
-<tr class="odd">
-<td>V+B</td>
-<td>板子翻转</td>
-</tr>
-<tr class="even">
-<td>L</td>
-<td>器件正反面放置</td>
-</tr>
-<tr class="odd">
-<td>O+G</td>
-<td>背景和格点设置(PCB与原理图通用)</td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li><h4 id="走线">走线</h4></li>
-</ul>
-<table>
-<thead>
-<tr class="header">
-<th>快捷键</th>
-<th>功能</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>shift+R</td>
-<td>切换走线模式</td>
-</tr>
-<tr class="even">
-<td>shift+G</td>
-<td>显示走线长度</td>
-</tr>
-<tr class="odd">
-<td>shift+E</td>
-<td>切换捕获栅格模式</td>
-</tr>
-<tr class="even">
-<td>E+K</td>
-<td>截断走线</td>
-</tr>
-<tr class="odd">
-<td>*或-或+</td>
-<td>走线时切换到其他层(自动加过孔)</td>
-</tr>
-<tr class="even">
-<td>[</td>
-<td>走线时可单独显示要连接的地方高亮</td>
-</tr>
-<tr class="odd">
-<td>E+D</td>
-<td>连续删线</td>
-</tr>
-<tr class="even">
-<td>Shift+W</td>
-<td>走线时，设置走线的线宽</td>
-</tr>
-<tr class="odd">
-<td>Shift+V</td>
-<td>走线时，设置焊盘大小</td>
-</tr>
-<tr class="even">
-<td>U+M</td>
-<td>AD17 多根相同间距走线，先选中，再U+M走线</td>
-</tr>
-<tr class="odd">
-<td>T+T+M</td>
-<td>选中多根线，然后同时走线</td>
-</tr>
-<tr class="even">
-<td>Ctrl+点击焊盘</td>
-<td>同一网络快速走线</td>
-</tr>
-<tr class="odd">
-<td>Ctrl+H</td>
-<td>高显</td>
-</tr>
-<tr class="even">
-<td>Ctrl+W</td>
-<td>可视化间距显示(AD16版本以上才有此功能)</td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li><h4 id="功能">功能</h4></li>
-</ul>
-<table>
-<thead>
-<tr class="header">
-<th>快捷键</th>
-<th>功能</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Alt+点击GND</td>
-<td>全部与GND相连的线高亮（单个网络高亮）</td>
-</tr>
-<tr class="even">
-<td>T+E</td>
-<td>泪滴增加与移除</td>
-</tr>
-<tr class="odd">
-<td>P+Y</td>
-<td>分离铜皮（按Tab可以设置线宽）</td>
-</tr>
-<tr class="even">
-<td>D+S+D</td>
-<td>快速定义板框</td>
-</tr>
-<tr class="odd">
-<td>Ctrl+M</td>
-<td>测量尺寸</td>
-</tr>
-<tr class="even">
-<td>Ctrl+Q或Q</td>
-<td>改变单位（mm/mil）</td>
-</tr>
-</tbody>
-</table>
-<p>另外，以前学习凡亿教育课程，因为在设计时常用的操作就那几个，所以可以将常用快捷键设置为单个按键，这样在设计时就可快速方便的进行操作，提高了效率，方法是：
-<strong>按住Ctrl键不放，点击软件各功能选择图标，然后就可设置惯用的快捷键</strong>，主要有以下几个：</p>
-<table>
-<thead>
-<tr class="header">
-<th>快捷键</th>
-<th>功能设置</th>
-<th>快捷键</th>
-<th>功能设置</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>F2</td>
-<td><strong>电气走线</strong></td>
-<td>Alt+F2</td>
-<td>差分走线</td>
-</tr>
-<tr class="even">
-<td>F3</td>
-<td><strong>放置过孔</strong></td>
-<td>Alt+F3</td>
-<td>放置fill</td>
-</tr>
-<tr class="odd">
-<td>F4</td>
-<td><strong>敷铜</strong></td>
-<td>Alt+F4</td>
-<td><strong>重新敷铜</strong></td>
-</tr>
-<tr class="even">
-<td>F5</td>
-<td>颜色开关</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>F6</td>
-<td><strong>矩形框放置器件</strong></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>F7</td>
-<td>原理图与layout交互映射</td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<table>
-<thead>
-<tr class="header">
-<th>快捷键</th>
-<th>功能设置</th>
-<th>快捷键</th>
-<th>功能设置</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>`</td>
-<td><strong>删除</strong></td>
-<td>Alt+`</td>
-<td><strong>删除物理连接</strong></td>
-</tr>
-<tr class="even">
-<td>1</td>
-<td>选择物理连接</td>
-<td>Alt+1</td>
-<td>显示长度</td>
-</tr>
-<tr class="odd">
-<td>2</td>
-<td><strong>线选</strong></td>
-<td>Alt+2</td>
-<td>测量中心距</td>
-</tr>
-<tr class="even">
-<td>3</td>
-<td><strong>框选</strong></td>
-<td>Alt+3</td>
-<td>移动选择</td>
-</tr>
-<tr class="odd">
-<td>4</td>
-<td>单线等长(蛇形线)</td>
-<td>Alt+4</td>
-<td>差分等长</td>
-</tr>
-<tr class="even">
-<td>5</td>
-<td><strong>保持原间距走线</strong></td>
-<td>Alt+5</td>
-<td>等间距走线</td>
-</tr>
-<tr class="odd">
-<td>6</td>
-<td>坐标移动</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>7</td>
-<td><strong>修铜</strong></td>
-<td>Alt+7</td>
-<td>M+G</td>
-</tr>
-</tbody>
-</table>
-<table>
-<thead>
-<tr class="header">
-<th>小键盘数字键</th>
-<th>功能设置</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>1</strong></td>
-<td><strong>左对齐</strong></td>
-</tr>
-<tr class="even">
-<td><strong>2</strong></td>
-<td><strong>下对齐</strong></td>
-</tr>
-<tr class="odd">
-<td><strong>3</strong></td>
-<td><strong>右对齐</strong></td>
-</tr>
-<tr class="even">
-<td><strong>4</strong></td>
-<td><strong>水平等间距</strong></td>
-</tr>
-<tr class="odd">
-<td><strong>5</strong></td>
-<td><strong>上对齐</strong></td>
-</tr>
-<tr class="even">
-<td><strong>6</strong></td>
-<td><strong>垂直等间距</strong></td>
-</tr>
-<tr class="odd">
-<td><strong>7</strong></td>
-<td><strong>器件位号排列</strong></td>
-</tr>
-</tbody>
-</table>
-<p>以上加粗部分是常用功能，可根据自己的需要灵活更改。</p>
+<h3 id="参考链接">参考链接</h3>
+<p><a
+target="_blank" rel="noopener" href="http://www.wangchaochao.top/2020/09/20/Principle-and-implementation-of-CRC/">CRC校验原理及其实现</a></p>
 
                 
               </div>
@@ -792,7 +352,7 @@ Designer快捷键汇总一下：</p>
     
       <span class="category-chain">
         
-  <a href="/categories/%E7%A1%AC%E4%BB%B6/" class="category-chain-item">硬件</a>
+  <a href="/categories/C%E8%AF%AD%E8%A8%80/" class="category-chain-item">C语言</a>
   
   
 
@@ -807,7 +367,7 @@ Designer快捷键汇总一下：</p>
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/pcb/">#pcb</a>
+        <a href="/tags/crc/">#crc</a>
       
     </div>
   
@@ -821,9 +381,9 @@ Designer快捷键汇总一下：</p>
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/05/18/Altium-Designer-Gerber-Files-%E7%94%9F%E6%88%90%E6%AD%A5%E9%AA%A4/" title="Altium Designer Gerber Files 生成步骤">
+                      <a href="/2023/05/17/Altium-Designer-%E5%BF%AB%E6%8D%B7%E9%94%AE%E6%B1%87%E6%80%BB/" title="Altium Designer 快捷键汇总">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Altium Designer Gerber Files 生成步骤</span>
+                        <span class="hidden-mobile">Altium Designer 快捷键汇总</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -831,8 +391,8 @@ Designer快捷键汇总一下：</p>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/05/15/crc%E6%A0%A1%E9%AA%8C%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0/" title="crc校验及其实现">
-                        <span class="hidden-mobile">crc校验及其实现</span>
+                      <a href="/2023/05/14/ssd3as%E5%8E%8B%E5%8A%9B%E4%BC%A0%E6%84%9F%E5%99%A8%E7%9A%84%E5%BC%80%E5%8F%91%E8%AE%BE%E8%AE%A1/" title="ssd3as压力传感器的开发设计">
+                        <span class="hidden-mobile">ssd3as压力传感器的开发设计</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
