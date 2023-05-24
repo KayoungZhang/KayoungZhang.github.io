@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2023-05-24T10:18:09.964Z</updated>
+  <updated>2023-05-24T14:40:06.233Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>PCB layout rules</title>
+    <link href="http://example.com/2023/05/24/PCB-layout-rules/"/>
+    <id>http://example.com/2023/05/24/PCB-layout-rules/</id>
+    <published>2023-05-24T11:23:43.000Z</published>
+    <updated>2023-05-24T14:40:06.233Z</updated>
+    
+    <content type="html"><![CDATA[<p>PCB设计过程中，器件的整体布局和关键信号的layout至关重要，布局得当，信号线layout顺畅，就会在后续设计开发过程中，减少不必要的麻烦，相反，布局不当，layout失误，一是影响PCB整体的美观程度，二是在测试应用中带来诸多麻烦。为了减少不必要的设计麻烦，下面介绍一些常用的PCB设计的布局和layout规则：</p><h3 id="pcb布局">PCB布局</h3><ul><li>首先对结构有限高或位置要求的器件进行摆放。布局要美观，器件间尽量对齐。</li><li>PCB整体布局要考虑散热，电源，模拟、数字电路和高速、中速、低速电路等要分开布局。强电流、高电压、强辐射元件要远离弱电流、低电压、敏感器件。</li></ul><p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230524194603654.png" alt="image-20230524194603654" style="zoom:80%;" /></p><ul><li><p>以每个功能电路的核心组件为中心，围绕它进行布局，尽量减少和缩短各零件间的引线和连接。</p></li><li><p>高压元器件和低压元器件之间最好要有较宽的电气隔离带。</p></li><li><p>布局要考虑布线通道和空间，预估电源通道，不要来回绕。</p></li><li><p>接口保护器件尽量靠近接口摆放，采用一字型布局。信号转换芯片靠近插接口放置。</p></li><li><p>插拔器件或板边连接器周围3mm范围内尽量不布置SMD，以防止连接器插拔时产生的应力损伤器件。</p></li><li><p>器件摆放要外围留有足够的焊接空间，考虑后期可手动焊接。</p></li><li><p>有极性或方向性的插件器件在布局上方向一致，排列整齐。</p></li><li><p>对于会产生磁场的元件，如变压器、扬声器、电感等，布局时应注意减少磁力线对印制导线的切割，相邻元件磁场方向应相互垂直，减少彼此之间的耦合。</p></li></ul><p><imgsrc="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230524222945408.png" /></p><ul><li><p>晶振不要放置到PCB板边，滤波电容与晶体采用π型滤波方式摆放。</p></li><li><p>元器件的编号应该紧靠元器件的边框布置，大小统一，方向整齐，不与元器件、过孔和焊盘重叠。</p></li><li><p>滤波电容尽量靠近芯片管脚，容值越小，越靠近管脚且先经过电容再进入芯片。</p></li></ul><h3 id="pcb-layout">PCB layout</h3><ul><li>首先对重要的信号或要求比较严格的信号进行走线，信号线的过孔尽量少，信号线与其回路构成的环面积要尽可能小，环面积越小，对外的辐射越少，接收外界的干扰也越小。</li></ul><p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230524202049996.png" alt="image-20230524202049996" style="zoom:80%;" /></p><ul><li>输入/输出端导线尽量避免相邻平行，最好加地线隔离，以免发生耦合。</li><li>电源部分尽量采用铺铜方式，保证载流得当。</li><li>CHIP器件走线和焊盘连接要避免不对称走线。</li></ul><p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230524214904856.png" alt="image-20230524214904856" style="zoom:80%;" /></p><ul><li>贴片焊盘上不要有过孔，走线避免出现直角或锐角。</li><li>对于密间距的IC，走线从焊盘出线时，宽度不能比焊盘宽。</li></ul><p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230524214930539.png" alt="image-20230524214930539" style="zoom:80%;" /></p><p>以上是设计中常用的规则，应该还有其它常用的规则，后续遇到了再进行添加。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;PCB设计过程中，器件的整体布局和关键信号的layout至关重要，布局得当，信号线layout顺畅，就会在后续设计开发过程中，减少不必要的麻烦，相反，布局不当，layout失误，一是影响PCB整体的美观程度，二是在测试应用中带来诸多麻烦。为了减少不必要的设计麻烦，下面介绍一</summary>
+      
+    
+    
+    
+    <category term="硬件" scheme="http://example.com/categories/%E7%A1%AC%E4%BB%B6/"/>
+    
+    
+    <category term="pcb" scheme="http://example.com/tags/pcb/"/>
+    
+  </entry>
   
   <entry>
     <title>pcb设计之重要信号线layout注意事项</title>
@@ -541,32 +565,6 @@ ROM(内部集成EEPROM)，片内基本RAM(256字节)</summary>
     <category term="stc" scheme="http://example.com/tags/stc/"/>
     
     <category term="存储器" scheme="http://example.com/tags/%E5%AD%98%E5%82%A8%E5%99%A8/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>STC12C5A60S2单片机注意事项</title>
-    <link href="http://example.com/2023/04/23/STC12C5A60S2%E5%8D%95%E7%89%87%E6%9C%BA%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/"/>
-    <id>http://example.com/2023/04/23/STC12C5A60S2%E5%8D%95%E7%89%87%E6%9C%BA%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/</id>
-    <published>2023-04-23T10:25:03.000Z</published>
-    <updated>2023-04-23T14:45:37.782Z</updated>
-    
-    <content type="html"><![CDATA[<p>STC12C5A60S2单片机是stc12系列一款比较经典的MCU，下面对照它的参考手册，摘录其使用时注意事项：</p><ol type="1"><li><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230423184155244.png" alt="image-20230423184155244" style="zoom:80%;" /></li><li><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230423184511042.png" alt="image-20230423184511042" style="zoom:80%;" /></li><li><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230423185326975.png" alt="image-20230423185326975" style="zoom:80%;" /></li><li><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230423190016475.png" alt="image-20230423190016475" style="zoom:80%;" /></li><li><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230423190316983.png" alt="image-20230423190316983" style="zoom:80%;" /></li><li><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230423222004968.png" alt="image-20230423222004968" style="zoom: 80%;" /></li><li><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230423193706324.png" alt="image-20230423193706324" style="zoom:80%;" /></li></ol><p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230423194010351.png" alt="image-20230423194010351" style="zoom:80%;" /></p><ol start="7" type="1"><li><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230423194201742.png" alt="image-20230423194201742" style="zoom:80%;" /></li><li><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230423194225873.png" alt="image-20230423194225873" style="zoom:80%;" /></li><li><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230423222448627.png" alt="image-20230423222448627" style="zoom:80%;" /></li><li><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230423223648757.png" alt="image-20230423223648757" style="zoom:80%;" /></li></ol><p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230423224016123.png" alt="image-20230423224016123" style="zoom:80%;" /></p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;STC12C5A60S2单片机是stc12系列一款比较经典的MCU，下面对照它的参考手册，摘录其使用时注意事项：&lt;/p&gt;
-&lt;ol type=&quot;1&quot;&gt;
-&lt;li&gt;&lt;img src=&quot;https://gitee.com/kayoungzhang/picgo_res/raw/m</summary>
-      
-    
-    
-    
-    <category term="单片机" scheme="http://example.com/categories/%E5%8D%95%E7%89%87%E6%9C%BA/"/>
-    
-    
-    <category term="stc" scheme="http://example.com/tags/stc/"/>
     
   </entry>
   

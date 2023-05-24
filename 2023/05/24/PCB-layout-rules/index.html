@@ -16,28 +16,23 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="这一篇主要看看pcb设计中重要信号线的layout注意事项：  差分信号线尽量在一起同一层走线     差分间距无法满足20mil，最好进行包地    image-20230521104926751 - 副本   usb按90欧姆差分阻抗进行走线，等长处理    usb打孔换层应在旁边放置地过孔回流    网口按100欧姆差分阻抗走线，等长处理">
+    <meta name="description" content="PCB设计过程中，器件的整体布局和关键信号的layout至关重要，布局得当，信号线layout顺畅，就会在后续设计开发过程中，减少不必要的麻烦，相反，布局不当，layout失误，一是影响PCB整体的美观程度，二是在测试应用中带来诸多麻烦。为了减少不必要的设计麻烦，下面介绍一些常用的PCB设计的布局和layout规则： PCB布局  首先对结构有限高或位置要求的器件进行摆放。布局要美观，器件间">
 <meta property="og:type" content="article">
-<meta property="og:title" content="pcb设计之重要信号线layout注意事项">
-<meta property="og:url" content="http://example.com/2023/05/20/pcb%E8%AE%BE%E8%AE%A1%E4%B9%8B%E9%87%8D%E8%A6%81%E4%BF%A1%E5%8F%B7%E7%BA%BFlayout%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/index.html">
+<meta property="og:title" content="PCB layout rules">
+<meta property="og:url" content="http://example.com/2023/05/24/PCB-layout-rules/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="这一篇主要看看pcb设计中重要信号线的layout注意事项：  差分信号线尽量在一起同一层走线     差分间距无法满足20mil，最好进行包地    image-20230521104926751 - 副本   usb按90欧姆差分阻抗进行走线，等长处理    usb打孔换层应在旁边放置地过孔回流    网口按100欧姆差分阻抗走线，等长处理">
+<meta property="og:description" content="PCB设计过程中，器件的整体布局和关键信号的layout至关重要，布局得当，信号线layout顺畅，就会在后续设计开发过程中，减少不必要的麻烦，相反，布局不当，layout失误，一是影响PCB整体的美观程度，二是在测试应用中带来诸多麻烦。为了减少不必要的设计麻烦，下面介绍一些常用的PCB设计的布局和layout规则： PCB布局  首先对结构有限高或位置要求的器件进行摆放。布局要美观，器件间">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230521104356728.png">
-<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230521104659980.png">
-<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230520105039307.png">
-<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230521105612441%20-%20%E5%89%AF%E6%9C%AC.png">
-<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230521105139287%20-%20%E5%89%AF%E6%9C%AC.png">
-<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230521105447526%20-%20%E5%89%AF%E6%9C%AC.png">
-<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230521105746352%20-%20%E5%89%AF%E6%9C%AC.png">
-<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230521110154465%20-%20%E5%89%AF%E6%9C%AC.png">
-<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230521110323383%20-%20%E5%89%AF%E6%9C%AC.png">
-<meta property="article:published_time" content="2023-05-20T09:46:27.000Z">
-<meta property="article:modified_time" content="2023-05-24T10:18:09.964Z">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230524194603654.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230524202049996.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230524214904856.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230524214930539.png">
+<meta property="article:published_time" content="2023-05-24T11:23:43.000Z">
+<meta property="article:modified_time" content="2023-05-24T14:40:06.233Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="pcb">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230521104356728.png">
+<meta name="twitter:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230524194603654.png">
   
   
   
@@ -209,7 +204,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="pcb设计之重要信号线layout注意事项"></span>
+            <span id="subtitle" data-typed-text="PCB layout rules"></span>
           
         </div>
 
@@ -220,8 +215,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-05-20 17:46" pubdate>
-          2023年5月20日 下午
+        <time datetime="2023-05-24 19:23" pubdate>
+          2023年5月24日 晚上
         </time>
       </span>
     
@@ -232,7 +227,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          249 字
+          921 字
         
       </span>
     
@@ -243,7 +238,7 @@
         
         
         
-          1 分钟
+          4 分钟
         
       </span>
     
@@ -281,7 +276,7 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">pcb设计之重要信号线layout注意事项</h1>
+            <h1 style="display: none">PCB layout rules</h1>
             
               <p class="note note-info">
                 
@@ -294,57 +289,47 @@
             
               <div class="markdown-body">
                 
-                <p>这一篇主要看看pcb设计中重要信号线的layout注意事项：</p>
+                <p>PCB设计过程中，器件的整体布局和关键信号的layout至关重要，布局得当，信号线layout顺畅，就会在后续设计开发过程中，减少不必要的麻烦，相反，布局不当，layout失误，一是影响PCB整体的美观程度，二是在测试应用中带来诸多麻烦。为了减少不必要的设计麻烦，下面介绍一些常用的PCB设计的布局和layout规则：</p>
+<h3 id="pcb布局">PCB布局</h3>
 <ul>
-<li><strong>差分信号线尽量在一起同一层走线</strong></li>
+<li>首先对结构有限高或位置要求的器件进行摆放。布局要美观，器件间尽量对齐。</li>
+<li>PCB整体布局要考虑散热，电源，模拟、数字电路和高速、中速、低速电路等要分开布局。强电流、高电压、强辐射元件要远离弱电流、低电压、敏感器件。</li>
 </ul>
-<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230521104356728.png" srcset="/img/loading.gif" lazyload alt="image-20230521104356728" style="zoom:80%;" /></p>
-<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230521104659980.png" srcset="/img/loading.gif" lazyload alt="image-20230521104659980" style="zoom:80%;" /></p>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230524194603654.png" srcset="/img/loading.gif" lazyload alt="image-20230524194603654" style="zoom:80%;" /></p>
 <ul>
-<li><strong>差分间距无法满足20mil，最好进行包地</strong></li>
-</ul>
-<figure>
-<img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230521104926751%20-%20%E5%89%AF%E6%9C%AC.png" srcset="/img/loading.gif" lazyload
-alt="image-20230521104926751 - 副本" />
-<figcaption aria-hidden="true">image-20230521104926751 -
-副本</figcaption>
-</figure>
-<ul>
-<li><strong>usb按90欧姆差分阻抗进行走线，等长处理</strong></li>
-</ul>
-<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230520105039307.png" srcset="/img/loading.gif" lazyload alt="image-20230520105039307" style="zoom:80%;" /></p>
-<ul>
-<li><strong>usb打孔换层应在旁边放置地过孔回流</strong></li>
-</ul>
-<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230521105612441%20-%20%E5%89%AF%E6%9C%AC.png" srcset="/img/loading.gif" lazyload alt="image-20230521105612441 - 副本" style="zoom:80%;" /></p>
-<ul>
-<li><strong>网口按100欧姆差分阻抗走线，等长处理</strong></li>
-</ul>
-<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230521105139287%20-%20%E5%89%AF%E6%9C%AC.png" srcset="/img/loading.gif" lazyload alt="image-20230521105139287 - 副本" style="zoom:80%;" /></p>
-<ul>
-<li><strong>LVDS差分信号包地处理</strong></li>
-</ul>
-<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230521105447526%20-%20%E5%89%AF%E6%9C%AC.png" srcset="/img/loading.gif" lazyload alt="image-20230521105447526 - 副本" style="zoom:80%;" /></p>
-<ul>
-<li><strong>差分线等长处理不易幅度过大</strong></li>
-</ul>
-<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230521105746352%20-%20%E5%89%AF%E6%9C%AC.png" srcset="/img/loading.gif" lazyload alt="image-20230521105746352 - 副本" style="zoom:80%;" /></p>
-<ul>
-<li><strong>DDR所有的走线都应该在ddr的电源分割区域内，且分割区域不能有其他信号线</strong></li>
+<li><p>以每个功能电路的核心组件为中心，围绕它进行布局，尽量减少和缩短各零件间的引线和连接。</p></li>
+<li><p>高压元器件和低压元器件之间最好要有较宽的电气隔离带。</p></li>
+<li><p>布局要考虑布线通道和空间，预估电源通道，不要来回绕。</p></li>
+<li><p>接口保护器件尽量靠近接口摆放，采用一字型布局。信号转换芯片靠近插接口放置。</p></li>
+<li><p>插拔器件或板边连接器周围3mm范围内尽量不布置SMD，以防止连接器插拔时产生的应力损伤器件。</p></li>
+<li><p>器件摆放要外围留有足够的焊接空间，考虑后期可手动焊接。</p></li>
+<li><p>有极性或方向性的插件器件在布局上方向一致，排列整齐。</p></li>
+<li><p>对于会产生磁场的元件，如变压器、扬声器、电感等，布局时应注意减少磁力线对印制导线的切割，相邻元件磁场方向应相互垂直，减少彼此之间的耦合。</p></li>
 </ul>
 <p><img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/wps1%20-%20%E5%89%AF%E6%9C%AC.jpg" srcset="/img/loading.gif" lazyload /></p>
-<p><img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/wps2%20-%20%E5%89%AF%E6%9C%AC.jpg" srcset="/img/loading.gif" lazyload /></p>
+src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230524222945408.png" srcset="/img/loading.gif" lazyload /></p>
 <ul>
-<li><strong>DDR走线要保证同组同层，不要表层一部分，内层一部分</strong></li>
+<li><p>晶振不要放置到PCB板边，滤波电容与晶体采用π型滤波方式摆放。</p></li>
+<li><p>元器件的编号应该紧靠元器件的边框布置，大小统一，方向整齐，不与元器件、过孔和焊盘重叠。</p></li>
+<li><p>滤波电容尽量靠近芯片管脚，容值越小，越靠近管脚且先经过电容再进入芯片。</p></li>
 </ul>
-<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230521110154465%20-%20%E5%89%AF%E6%9C%AC.png" srcset="/img/loading.gif" lazyload alt="image-20230521110154465 - 副本" style="zoom:80%;" /></p>
+<h3 id="pcb-layout">PCB layout</h3>
 <ul>
-<li><strong>DDR布线要满足3W原则</strong></li>
+<li>首先对重要的信号或要求比较严格的信号进行走线，信号线的过孔尽量少，信号线与其回路构成的环面积要尽可能小，环面积越小，对外的辐射越少，接收外界的干扰也越小。</li>
 </ul>
-<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230521110323383%20-%20%E5%89%AF%E6%9C%AC.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></p>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230524202049996.png" srcset="/img/loading.gif" lazyload alt="image-20230524202049996" style="zoom:80%;" /></p>
+<ul>
+<li>输入/输出端导线尽量避免相邻平行，最好加地线隔离，以免发生耦合。</li>
+<li>电源部分尽量采用铺铜方式，保证载流得当。</li>
+<li>CHIP器件走线和焊盘连接要避免不对称走线。</li>
+</ul>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230524214904856.png" srcset="/img/loading.gif" lazyload alt="image-20230524214904856" style="zoom:80%;" /></p>
+<ul>
+<li>贴片焊盘上不要有过孔，走线避免出现直角或锐角。</li>
+<li>对于密间距的IC，走线从焊盘出线时，宽度不能比焊盘宽。</li>
+</ul>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230524214930539.png" srcset="/img/loading.gif" lazyload alt="image-20230524214930539" style="zoom:80%;" /></p>
+<p>以上是设计中常用的规则，应该还有其它常用的规则，后续遇到了再进行添加。</p>
 
                 
               </div>
@@ -392,18 +377,12 @@ src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/wps2%20-%20%E5%89%A
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/05/24/PCB-layout-rules/" title="PCB layout rules">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">PCB layout rules</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/05/20/pcb%E8%AE%BE%E8%AE%A1%E4%B9%8B%E6%99%AE%E9%80%9A%E4%BF%A1%E5%8F%B7%E7%BA%BFlayout%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" title="pcb设计之普通信号线layout注意事项">
-                        <span class="hidden-mobile">pcb设计之普通信号线layout注意事项</span>
+                      <a href="/2023/05/20/pcb%E8%AE%BE%E8%AE%A1%E4%B9%8B%E9%87%8D%E8%A6%81%E4%BF%A1%E5%8F%B7%E7%BA%BFlayout%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" title="pcb设计之重要信号线layout注意事项">
+                        <span class="hidden-mobile">pcb设计之重要信号线layout注意事项</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
