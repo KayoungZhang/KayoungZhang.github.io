@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2023-05-24T14:40:06.233Z</updated>
+  <updated>2023-05-25T10:17:06.975Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>pcb layout 审核表</title>
+    <link href="http://example.com/2023/05/25/pcb-layout-%E5%AE%A1%E6%A0%B8%E8%A1%A8/"/>
+    <id>http://example.com/2023/05/25/pcb-layout-%E5%AE%A1%E6%A0%B8%E8%A1%A8/</id>
+    <published>2023-05-25T09:32:57.000Z</published>
+    <updated>2023-05-25T10:17:06.975Z</updated>
+    
+    <content type="html"><![CDATA[<p>PCB设计完成需要进行综合检查，除了设计软件设定的规则外，还需要手动确认一些其它重要的信息。</p><h3 id="结构">结构</h3><ul><li><p>PCB中的定位孔位置大小是否和结构的要求一致，旁边是否有挨得太近的器件（保留间距大于1mm）；</p></li><li><p>接插件的型号，方向，顺序是否和要求一致，位置是否合理；</p></li><li><p>母板，子板的连接座的方向，顺序是否一致，位置是否合理；</p></li><li><p>新器件的封装，脚位定义，电气连接都需校对；</p></li></ul><h3 id="原理图和pcb">原理图和PCB</h3><ul><li>确保从原理图导入的网表无误（务必在审核PCB时实际导入，核对）；</li><li>核对PCB的板层设置是否合理；</li></ul><h3 id="电源">电源</h3><ul><li>电源线路要求尽量短，粗，考虑温升；</li><li>关掉敷铜层和走线，点亮地网络，检查地过孔是否足够；</li><li>IC的散热焊盘上是否有多过孔接地；</li></ul><h3 id="usb">USB</h3><ul><li>USB的脚位排序是否正确（VBUS/DM/DP/GND）；</li><li>USB DM,DP走线是否满足差分要求，不要有节点；</li><li>请注意DM，DP走线是否和其它数据线平行（临层平行）</li><li>HOST端口的电源走线宽度是否满足要求；</li></ul><h3 id="wifi">WIFI</h3><ul><li>WIFI天线是否进行包地处理；</li><li>WIFI的接地检查；模块是否可靠接地，模块的散热焊盘不能全敷铜接地；</li><li>晶体Layout检查；晶体电路下方必须铺地，且下面的其它层尽量只走控制线，最好铺地；</li></ul><h3 id="audio">Audio</h3><ul><li>电源的滤波电容是否靠近IC电源管脚，电源线是否有数据线干扰；</li><li>音频IC的下方不能走数据线；</li><li>音频的输入，输出走线（包括MIC）是否包地，是否有高频干扰信号，临层是否有电源层和数字信号；</li><li>如音频线的走线比较长（100mil以上)，建议左右声道中间隔地；</li><li>I2S走线是否分组，在同一区域布线，各数据线是否等长；</li></ul><h3 id="sd">SD</h3><ul><li>SDIO走线是否为一组，在同一区域布线，各数据和CLK等长，CLK尽量包地；</li><li>SD卡座电源管脚位置放置10uF的电容；</li><li>检查SD卡脚位的正确性；</li></ul><h3 id="sdram">SDRAM</h3><ul><li>DDR的走线分四组：数据线（DQ，DM，DQS），地址线，命令线，CLK线。</li></ul><ol start="2" type="1"><li>DQS走线位置应在组内的DQ中间；</li><li>DQS与时钟不要相邻；</li><li>地址/命令/控制信号采用T型拓扑方式，分叉点到DDR芯片两端的长度须尽量等长（若不等长，可走蛇形线使两端等长）；</li><li>蛇形线的中心间距至少3倍线宽；</li></ol><ul><li>尽量拉大数据线与数据线的距离；相邻层的数据线避免正对并行；</li><li>DDR的数据线尽量走PCB的表层，方便阻抗匹配；</li><li>CLK差分对之间是否有端接电阻；</li></ul><h3 id="camera">Camera</h3><ul><li>电源的滤波电容是否靠近相应的IC电源管脚，电源走线是否受到数据线干扰；</li><li>数据线分组，Layout在同一区域，需要控制数据线的等长，误差在500mil之内；</li><li>CLKin/out信号串电阻并电容，复位信号高低电平；</li><li>CLKin和CLKout应包地处理，不要其它数据线相互平行（注意临层平行）；</li></ul><h3 id="lcd">LCD</h3><ul><li>核对LCD座的封装，脚位顺序，屏的插入方式；</li><li>LCD的走线分组，Layout在同一区域，需要控制数据线和CLK的线的等长，误差在500mil之内，特别是有HDMI和RK1000S时；</li><li>LCD的clk最好能包地，串磁珠，并电容；CLK的参考层最好不要换；</li><li>TMDS信号是否按差分线要求Layout；</li><li>LCD的数据线最好的方式是走中间层，尽量少走外层；</li><li>LCD部分的走线和器件需要屏蔽（包括LVDS IC，HDMI IC）</li><li>LCD的FPC位置下面的表层PCB上要留有接地的漏铜区，便于FPC包屏蔽材料接地(如需过EMI测试，LCD一定会要可靠接地）；</li></ul><h3 id="hdmi">HDMI</h3><ul><li>数据线是否分组，同一区域布线，是否等长（误差不超过500mil），CLK上需要串串磁珠并电容到地；</li><li>电源的滤波电容是否靠近IC电源管脚，电源走线是否避开数据线；</li><li>TMDS信号是否按差分线要求Layout；</li><li>HDMI走线和器件需严控屏蔽；</li></ul><h3 id="g">3G</h3><ul><li>电源的走线宽度是否足够宽；滤波电容是否靠近相应的电源管脚；</li><li>3G整机需要有严格的屏蔽（RF电路和数字电路分开屏蔽）；</li><li>3G通话要注意结构上喇叭和MIC位置的处理，喇叭和MIC要有各自的腔体；</li><li>天线的Layout检查；</li></ul><h3 id="gps">GPS</h3><ul><li>电源和滤波电容的位置；</li><li>是否有有严格的屏蔽（RF电路和数字电路分开屏蔽）,所有的具有数字信号的器件都有要求，如Code,LCD,LVDS,HDMI，并且LCD的FPC，摄像头的FPC，喇叭连接线附近都要预留漏铜区便于相关连接线屏蔽接地；</li><li>GPS的天线位置是否合理，和金属部件的距离是否有6mm以上的距离；</li></ul><h3 id="compass">Compass</h3><ul><li>尽量不要放在屏蔽壳内(如有必要，需采用)；</li><li>周围是否大电流的数据线；</li><li>是否和磁感器件，软铁材料保持需要的距离（喇叭，SD卡座）</li></ul><h3 id="测试点检查">测试点检查</h3><ul><li>是否放置如下测试点：开机键；USB口；触摸屏；电池座，耳机座，DC座;外响焊点；</li><li>测试点直径需要0.8mm，测试点与测试点的距离不能小于1.25mm，测试点与器件的距离不能小于0.2mm；</li></ul><h3 id="发热器件">发热器件</h3><ul><li>发热器件应该放置在利于散热的位置上,且注意不要放置在对温度敏感的器件旁边；</li><li>不同发热器件的距离最好能拉开距离，尽量保持在20mm以上；</li></ul><h3 id="其它">其它</h3><ul><li>WIFI天线不能放在手能握住的地方，避免客户使用机器的时候信号不好；</li><li>调试口是否接出；</li><li>PCB的版本和日期是否标识清晰；</li><li>如果有其它器件，请参考它们的Layout规格；</li></ul><p>以上部分摘录自PCB联盟网，PCB设计完成后，对照审核表进行详细检查，可以避免PCB设计的错误，另外，“<ahref="https://dfm.elecfans.com/viewer/?tid=DFM-dh">华秋DFM</a>”软件可检查PCB的可制造性，它可自动分析PCB的设计缺陷。</p><p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230525180738659.png" alt="image-20230525180738659" style="zoom:80%;" /></p><p><a href="https://gitee.com/kayoungzhang/my_codehub.git">PCB layoutchecklist</a></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;PCB设计完成需要进行综合检查，除了设计软件设定的规则外，还需要手动确认一些其它重要的信息。&lt;/p&gt;
+&lt;h3 id=&quot;结构&quot;&gt;结构&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;PCB中的定位孔位置大小是否和结构的要求一致，旁边是否有挨得太近的器件（保留间距大于1mm）；&lt;/p&gt;</summary>
+      
+    
+    
+    
+    <category term="硬件" scheme="http://example.com/categories/%E7%A1%AC%E4%BB%B6/"/>
+    
+    
+    <category term="pcb" scheme="http://example.com/tags/pcb/"/>
+    
+  </entry>
   
   <entry>
     <title>PCB layout rules</title>
@@ -536,35 +563,6 @@ id=&quot;iap及eeprom特</summary>
     
     
     <category term="pid" scheme="http://example.com/tags/pid/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>stc单片机存储器</title>
-    <link href="http://example.com/2023/04/23/stc%E5%8D%95%E7%89%87%E6%9C%BA%E5%AD%98%E5%82%A8%E5%99%A8/"/>
-    <id>http://example.com/2023/04/23/stc%E5%8D%95%E7%89%87%E6%9C%BA%E5%AD%98%E5%82%A8%E5%99%A8/</id>
-    <published>2023-04-23T11:46:01.000Z</published>
-    <updated>2023-04-23T14:18:50.361Z</updated>
-    
-    <content type="html"><![CDATA[<p>stc单片机存储器结构的主要特点是 <strong>程序存储器</strong> 和<strong>数据存储器</strong>是各自独立编址的。单片机内部在物理和逻辑上有三个独立的地址空间：flashROM(内部集成EEPROM)，片内基本RAM(256字节)和片内扩展RAM(1024字节)。</p><h3 id="程序存储器flash-rom">程序存储器flash ROM：</h3><p>程序存储器用于存放用户程序、数据和表格等信息。内部集成了的EEPROM是与程序空间是分开的，利用ISP/IAP技术可将内部DataFlash当EEPROM。</p><p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230423212147712.png" alt="image-20230423212147712" style="zoom:67%;" /></p><h3 id="片内基本ram">片内基本RAM：</h3><p>片内基本RAM分低128字节和高128字节。</p><p>低128字节分为三个区：工作寄存器组区、可位寻址区、通用RAM区。</p><p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230423212429407.png" alt="image-20230423212429407" style="zoom:80%;" /></p><p>高128字节RAM与特殊功能寄存器区貌似共用相同的地址范围，都使用80H~FFH,地址空间虽然貌似重叠，但物理上是独立的，使用时通过不同的寻址方式加以区分。高128字节RAM只能间接寻址，特殊功能寄存器区只可直接寻址。</p><p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230423212649092.png" alt="image-20230423212649092" style="zoom: 80%;" /></p><h3 id="片内扩展ram">片内扩展RAM：</h3><p>在C语言中，可使用 <strong>xdata</strong> 声明扩展RAM变量存储类型，如<code>unsigned  char  xdata  i=0;</code>。默认情况下，选择的是片内扩展RAM，当需要访问片外RAM时，EXTRAM必须为1.</p><p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230423213425262.png" alt="image-20230423213425262" style="zoom:67%;" /></p><p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230423213920633.png" alt="image-20230423213920633" style="zoom: 80%;" /></p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;stc单片机存储器结构的主要特点是 &lt;strong&gt;程序存储器&lt;/strong&gt; 和
-&lt;strong&gt;数据存储器&lt;/strong&gt;
-是各自独立编址的。单片机内部在物理和逻辑上有三个独立的地址空间：flash
-ROM(内部集成EEPROM)，片内基本RAM(256字节)</summary>
-      
-    
-    
-    
-    <category term="单片机" scheme="http://example.com/categories/%E5%8D%95%E7%89%87%E6%9C%BA/"/>
-    
-    
-    <category term="stc" scheme="http://example.com/tags/stc/"/>
-    
-    <category term="存储器" scheme="http://example.com/tags/%E5%AD%98%E5%82%A8%E5%99%A8/"/>
     
   </entry>
   
