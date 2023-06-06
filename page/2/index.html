@@ -225,15 +225,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/05/27/%E7%BB%8F%E5%85%B8%E8%BF%90%E6%94%BE%E7%94%B5%E8%B7%AF%E7%9A%84%E5%88%86%E6%9E%90%E4%B8%8E%E8%AE%A1%E7%AE%97/" target="_self">
-          经典运放电路的分析与计算
+        <a href="/2023/05/29/STM32CubeMX%E4%B9%8BRTC/" target="_self">
+          STM32CubeMX之RTC
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/27/%E7%BB%8F%E5%85%B8%E8%BF%90%E6%94%BE%E7%94%B5%E8%B7%AF%E7%9A%84%E5%88%86%E6%9E%90%E4%B8%8E%E8%AE%A1%E7%AE%97/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/29/STM32CubeMX%E4%B9%8BRTC/" target="_self">
         <div>
-          基本运放电路是模拟电路的学习重点，复杂的模拟电路很多都是由基本运放电路组成的。在运放电路中，一般运用运放的“虚短”和“虚断”来进行分析，然后应用欧姆定律等电流电压关系，即可得输入输出的关系。 “虚短”是指在分析运算放大器处于线性状态时，可把两输入端视为等电位（V+ = V- ），这一特性称为虚假短路，简称虚短。显然不能将两输入端真正短路。 “虚断”是指在分析运放处于线性状态时，可以把两输入
+          STM32的实时时钟RTC是一个独立的定时器,RTC模块和时钟配置系统（RCC_BDCR寄存器）是在后背区域，即在系统复位或从待机模式唤醒后RTC的设置和事件维持不变。但是在系统复位后，会自动禁止访问后备寄存器和RTC，以防止对后备区域（BKP）的意外操作。所以在要设置时间之前，要先取消备份区域写保护。 RTC的功能框图如下：  RTC由两个主要部分组成：第一部分（APB1接口）用来和APB
         </div>
       </a>
 
@@ -241,8 +241,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-05-27 12:36" pubdate>
-              2023-05-27
+            <time datetime="2023-05-29 21:11" pubdate>
+              2023-05-29
             </time>
           </div>
         
@@ -257,7 +257,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E7%A1%AC%E4%BB%B6/" class="category-chain-item">硬件</a>
+  <a href="/categories/stm32/" class="category-chain-item">stm32</a>
   
   
 
@@ -272,7 +272,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/%E7%94%B5%E8%B7%AF/">#电路</a>
+              <a href="/tags/stm32/">#stm32</a>
             
           </div>
         
@@ -286,15 +286,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/05/26/%E5%87%A0%E7%A7%8D%E5%B8%B8%E7%94%A8%E7%9A%84%E7%94%B5%E5%B9%B3%E8%BD%AC%E6%8D%A2%E6%96%B9%E6%B3%95/" target="_self">
-          几种常用的电平转换方法
+        <a href="/2023/05/29/STM32CubeMX%E4%B9%8B%E4%BD%8E%E5%8A%9F%E8%80%97/" target="_self">
+          STM32CubeMX之低功耗
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/26/%E5%87%A0%E7%A7%8D%E5%B8%B8%E7%94%A8%E7%9A%84%E7%94%B5%E5%B9%B3%E8%BD%AC%E6%8D%A2%E6%96%B9%E6%B3%95/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/29/STM32CubeMX%E4%B9%8B%E4%BD%8E%E5%8A%9F%E8%80%97/" target="_self">
         <div>
-          在电路设计时，有时会遇到电压域不匹配的问题，如外部接口芯片为1.8V供电，而MCU为3.3V供电。这时候就需要进行电平转换才能通讯。下面总结几种常用的电平转换电路。 二极管电平转换电路 一些通讯模块（4G、NB模块等）的串口是1.8V电平，与常用MCU的3.3V，这时就需要电平转换。需要注意转换的方向，高电压端和低电压端不可调换。  当TX为低电平时，D1导通，RX被拉低； 当TX为高电
+          STM32F10xxx有三种低功耗模式:  睡眠模式(Sleep mode)（CM3 内核停止，外设包括核心外设如NVIC，SysTick等仍然运行，功耗最高） 停止模式(Stop mode)（所有时钟都停止，功耗中等） 待机模式(Standby mode)（1.8V 内核电源关闭，功耗最低）  此外，在运行模式下，为了降低功耗，可以通过降低系统时钟和关闭APB和AHB总线上未使
         </div>
       </a>
 
@@ -302,8 +302,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-05-26 22:48" pubdate>
-              2023-05-26
+            <time datetime="2023-05-29 16:08" pubdate>
+              2023-05-29
             </time>
           </div>
         
@@ -318,7 +318,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E7%A1%AC%E4%BB%B6/" class="category-chain-item">硬件</a>
+  <a href="/categories/stm32/" class="category-chain-item">stm32</a>
   
   
 
@@ -333,7 +333,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/%E7%94%B5%E8%B7%AF/">#电路</a>
+              <a href="/tags/stm32/">#stm32</a>
             
           </div>
         
@@ -347,15 +347,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/05/25/PT100%E6%B5%8B%E6%B8%A9%E7%94%B5%E8%B7%AF%E6%80%BB%E7%BB%93%E5%88%86%E6%9E%90/" target="_self">
-          PT100测温电路总结分析
+        <a href="/2023/05/28/STM32CubeMX%E4%B9%8B%E8%BE%93%E5%85%A5%E6%8D%95%E8%8E%B7/" target="_self">
+          STM32CubeMX之输入捕获
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/25/PT100%E6%B5%8B%E6%B8%A9%E7%94%B5%E8%B7%AF%E6%80%BB%E7%BB%93%E5%88%86%E6%9E%90/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/28/STM32CubeMX%E4%B9%8B%E8%BE%93%E5%85%A5%E6%8D%95%E8%8E%B7/" target="_self">
         <div>
-          PT100 温度传感器是一种以铂(Pt)作成的电阻式温度传感器，属于正电阻系数,其电阻和温度变化的关系为：R=R0(1+αT) 其中α=0.003851,Ro 为 100Ω(在 0℃的电阻值),T 为摄氏温度。 PT100测温采样电路主要有电桥法、恒流源法、集成芯片法等，分别介绍如下： 一、惠斯通电桥法 惠斯通电桥（Wheatstone bridge）又称为惠斯登电桥，是一种测量工具，
+          输入捕获简介 输入捕获一般应用在两个方面，一是信号脉宽/频率的测量，二是 PWM 的输入测量。  脉宽/频率测量:   可以看到只需要一个捕获通道就可以根据捕获值的差值计算脉宽和频率。 捕获过程中，两次边沿捕获之间会产生N次定时器溢出，所以: 脉宽 = (N*ARR + (value2-value1))*CNT计数周期; 频率 = CNT计数周期/(N*ARR + (value
         </div>
       </a>
 
@@ -363,8 +363,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-05-25 22:31" pubdate>
-              2023-05-25
+            <time datetime="2023-05-28 22:00" pubdate>
+              2023-05-28
             </time>
           </div>
         
@@ -379,7 +379,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E7%A1%AC%E4%BB%B6/" class="category-chain-item">硬件</a>
+  <a href="/categories/stm32/" class="category-chain-item">stm32</a>
   
   
 
@@ -394,7 +394,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/%E7%94%B5%E8%B7%AF/">#电路</a>
+              <a href="/tags/stm32/">#stm32</a>
             
           </div>
         
@@ -408,15 +408,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/05/25/pcb-layout-%E5%AE%A1%E6%A0%B8%E8%A1%A8/" target="_self">
-          pcb layout 审核表
+        <a href="/2023/05/28/STM32CubeMX%E4%B9%8BPWM%E8%BE%93%E5%87%BA/" target="_self">
+          STM32CubeMX之PWM输出
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/25/pcb-layout-%E5%AE%A1%E6%A0%B8%E8%A1%A8/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/28/STM32CubeMX%E4%B9%8BPWM%E8%BE%93%E5%87%BA/" target="_self">
         <div>
-          PCB设计完成需要进行综合检查，除了设计软件设定的规则外，还需要手动确认一些其它重要的信息。 结构  PCB中的定位孔位置大小是否和结构的要求一致，旁边是否有挨得太近的器件（保留间距大于1mm）； 接插件的型号，方向，顺序是否和要求一致，位置是否合理； 母板，子板的连接座的方向，顺序是否一致，位置是否合理； 新器件的封装，脚位定义，电气连接都需校对；  原理图和PCB  确保从
+          PWM 简介 脉冲宽度调制（PWM,Pulse Width Modulation）简称脉宽调制，是利用微处理器的数字输出来对模拟电路进行控制的一种非常有效的技术。PWM 输出就是对外输出脉宽（即占空比）可调的方波信号，信号频率由自动重装寄存器 ARR 的值决定，占空比由比较寄存器 CCR 的值决定。 PWM 模式分为两种：mode1 和 mode2，它们的区别如下：     P
         </div>
       </a>
 
@@ -424,8 +424,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-05-25 17:32" pubdate>
-              2023-05-25
+            <time datetime="2023-05-28 20:55" pubdate>
+              2023-05-28
             </time>
           </div>
         
@@ -440,7 +440,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E7%A1%AC%E4%BB%B6/" class="category-chain-item">硬件</a>
+  <a href="/categories/stm32/" class="category-chain-item">stm32</a>
   
   
 
@@ -455,7 +455,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/pcb/">#pcb</a>
+              <a href="/tags/stm32/">#stm32</a>
             
           </div>
         
@@ -469,15 +469,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/05/24/PCB-layout-rules/" target="_self">
-          PCB layout rules
+        <a href="/2023/05/28/STM32CubeMX%E4%B9%8B%E7%AA%97%E5%8F%A3%E7%9C%8B%E9%97%A8%E7%8B%97/" target="_self">
+          STM32CubeMX之窗口看门狗
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/24/PCB-layout-rules/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/28/STM32CubeMX%E4%B9%8B%E7%AA%97%E5%8F%A3%E7%9C%8B%E9%97%A8%E7%8B%97/" target="_self">
         <div>
-          PCB设计过程中，器件的整体布局和关键信号的layout至关重要，布局得当，信号线layout顺畅，就会在后续设计开发过程中，减少不必要的麻烦，相反，布局不当，layout失误，一是影响PCB整体的美观程度，二是在测试应用中带来诸多麻烦。为了减少不必要的设计麻烦，下面介绍一些常用的PCB设计的布局和layout规则： PCB布局  首先对结构有限高或位置要求的器件进行摆放。布局要美观，器件间
+          窗口看门狗简介 窗口看门狗（WWDG）通常被用来监测由外部干扰或不可预见的逻辑条件造成的应用程序背离正常的运行序列而产生的软件故障。递减计数器需要在一个有限的时间窗口中被刷新才不会产生MCU复位，否则就会产生RESET。WWDG 窗口看门狗时序图：   硬件设计 我们将通过USART1来打印调试信息，然后通过 LED1 提示复位状态。(LED1常亮则系统正常，LED1闪烁则系统一直复
         </div>
       </a>
 
@@ -485,8 +485,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-05-24 19:23" pubdate>
-              2023-05-24
+            <time datetime="2023-05-28 15:19" pubdate>
+              2023-05-28
             </time>
           </div>
         
@@ -501,7 +501,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E7%A1%AC%E4%BB%B6/" class="category-chain-item">硬件</a>
+  <a href="/categories/stm32/" class="category-chain-item">stm32</a>
   
   
 
@@ -516,7 +516,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/pcb/">#pcb</a>
+              <a href="/tags/stm32/">#stm32</a>
             
           </div>
         
@@ -530,15 +530,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/05/20/pcb%E8%AE%BE%E8%AE%A1%E4%B9%8B%E9%87%8D%E8%A6%81%E4%BF%A1%E5%8F%B7%E7%BA%BFlayout%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" target="_self">
-          pcb设计之重要信号线layout注意事项
+        <a href="/2023/05/28/STM32CubeMX%E4%B9%8B%E7%8B%AC%E7%AB%8B%E7%9C%8B%E9%97%A8%E7%8B%97/" target="_self">
+          STM32CubeMX之独立看门狗
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/20/pcb%E8%AE%BE%E8%AE%A1%E4%B9%8B%E9%87%8D%E8%A6%81%E4%BF%A1%E5%8F%B7%E7%BA%BFlayout%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/28/STM32CubeMX%E4%B9%8B%E7%8B%AC%E7%AB%8B%E7%9C%8B%E9%97%A8%E7%8B%97/" target="_self">
         <div>
-          这一篇主要看看pcb设计中重要信号线的layout注意事项：  差分信号线尽量在一起同一层走线     差分间距无法满足20mil，最好进行包地    image-20230521104926751 - 副本   usb按90欧姆差分阻抗进行走线，等长处理    usb打孔换层应在旁边放置地过孔回流    网口按100欧姆差分阻抗走线，等长处理
+          独立看门狗简介 STM32F1内部自带了 2 个看门狗：独立看门狗（IWDG）和窗口看门狗（WWDG)。这一章主要来看看独立看门狗，从功能上说它在程序发生意外（程序进入死循环或跑飞）的时候，能重新回复到系统刚上电状态。 独立看门狗由内部专门的 40Khz 低速RC 时钟驱动，即使主时钟发生故障，它也仍然有效。但它是在 30~60Khz 之间的一个可变化的时钟，只是我们在估算的时候，以 4
         </div>
       </a>
 
@@ -546,8 +546,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-05-20 17:46" pubdate>
-              2023-05-20
+            <time datetime="2023-05-28 15:18" pubdate>
+              2023-05-28
             </time>
           </div>
         
@@ -562,7 +562,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E7%A1%AC%E4%BB%B6/" class="category-chain-item">硬件</a>
+  <a href="/categories/stm32/" class="category-chain-item">stm32</a>
   
   
 
@@ -577,7 +577,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/pcb/">#pcb</a>
+              <a href="/tags/stm32/">#stm32</a>
             
           </div>
         
@@ -591,15 +591,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/05/20/pcb%E8%AE%BE%E8%AE%A1%E4%B9%8B%E6%99%AE%E9%80%9A%E4%BF%A1%E5%8F%B7%E7%BA%BFlayout%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" target="_self">
-          pcb设计之普通信号线layout注意事项
+        <a href="/2023/05/28/STM32CubeMX%E4%B9%8B%E5%AE%9A%E6%97%B6%E5%99%A8%E4%B8%AD%E6%96%AD/" target="_self">
+          STM32CubeMX之定时器中断
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/20/pcb%E8%AE%BE%E8%AE%A1%E4%B9%8B%E6%99%AE%E9%80%9A%E4%BF%A1%E5%8F%B7%E7%BA%BFlayout%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/28/STM32CubeMX%E4%B9%8B%E5%AE%9A%E6%97%B6%E5%99%A8%E4%B8%AD%E6%96%AD/" target="_self">
         <div>
-          这一篇主要看普通信号线的layout注意事项：  走线不要出现直角锐角     走线不要超过焊盘宽度，应以焊盘同宽出线，可出完焊盘后立即加粗    尽量减少环路      7个地焊盘只有两个地孔，最多最多三个焊盘一个过孔    所有层中间间距拉开一点，加到15mil~20mil    走线不要压到电源内缩层    2023052010202
+          定时器中断简介 STM32 的定时器功能十分强大，有 TIME1 和 TIME8 等高级定时器，也有 TIME2~TIME5 等通用定时器，还有 TIME6 和TIME7 等基本定时器。这一章主要介绍通用定时器，是一个通过可编程预分频器（PSC）驱动的 16 位自动装载计数器（CNT）构成。STM32 的通用定时器可以被用于：测量输入信号的脉冲长度(输入捕获)或者产生输出波形(输出比较和
         </div>
       </a>
 
@@ -607,8 +607,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-05-20 17:45" pubdate>
-              2023-05-20
+            <time datetime="2023-05-28 11:53" pubdate>
+              2023-05-28
             </time>
           </div>
         
@@ -623,7 +623,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E7%A1%AC%E4%BB%B6/" class="category-chain-item">硬件</a>
+  <a href="/categories/stm32/" class="category-chain-item">stm32</a>
   
   
 
@@ -638,7 +638,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/pcb/">#pcb</a>
+              <a href="/tags/stm32/">#stm32</a>
             
           </div>
         
@@ -652,15 +652,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/05/20/pcb%E8%AE%BE%E8%AE%A1%E4%B9%8B%E7%94%B5%E6%BA%90layout%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" target="_self">
-          pcb设计之电源layout注意事项
+        <a href="/2023/05/28/STM32CubeMX%E4%B9%8BUART/" target="_self">
+          STM32CubeMX之UART
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/20/pcb%E8%AE%BE%E8%AE%A1%E4%B9%8B%E7%94%B5%E6%BA%90layout%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/28/STM32CubeMX%E4%B9%8BUART/" target="_self">
         <div>
-          pcb设计中，在layout时需要遵循一定规范，才会避免设计出不合格的pcb板，下面几篇文章主要总结一下layout过程中常见的问题，本篇是关于电源layout，内容主要来源自pcb联盟网论坛。  电源滤波电容尽量靠近IC管脚放置。    电源走线载流过小，加大铺铜宽度，保证载流量     image-20230520205310933   电源分割线20mil以上，分
+          串口简介 STM32F103ZET6 最多可提供 5 路串口，有分数波特率发生器、支持同步单线通信和半双工单线通讯、支持 LIN、支持调制解调器操作、智能卡协议和 IrDA SIR ENDEC 规范、具有 DMA等。 我们通常使用的是异步通信，异步通信规定传输的数据格式由起始位（start bit）、数据位（data bit）、奇偶校验位（parity bit）和停止位（stop b
         </div>
       </a>
 
@@ -668,8 +668,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-05-20 17:44" pubdate>
-              2023-05-20
+            <time datetime="2023-05-28 11:53" pubdate>
+              2023-05-28
             </time>
           </div>
         
@@ -684,7 +684,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E7%A1%AC%E4%BB%B6/" class="category-chain-item">硬件</a>
+  <a href="/categories/stm32/" class="category-chain-item">stm32</a>
   
   
 
@@ -699,7 +699,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/pcb/">#pcb</a>
+              <a href="/tags/stm32/">#stm32</a>
             
           </div>
         
@@ -713,15 +713,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/05/19/Altium-Designer%E8%BD%AF%E4%BB%B6%E5%BA%94%E7%94%A8%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/" target="_self">
-          Altium Designer软件应用常见问题
+        <a href="/2023/05/28/STM32CubeMX%E4%B9%8BEXTI/" target="_self">
+          STM32CubeMX之EXTI
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/19/Altium-Designer%E8%BD%AF%E4%BB%B6%E5%BA%94%E7%94%A8%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/28/STM32CubeMX%E4%B9%8BEXTI/" target="_self">
         <div>
-          使用Altium Designer时，有时候会碰到一些不常见的问题，以下总结几个，后续发现了问题，再增加。  高版本AD无法寻找系统设置项  解决方法： 高版本在软件右上角有个设置图标即是设置项或 Tools -&gt; Preferences.  在低版本AD，PCB中拖动元件，元件不显示。  解决方法：  Preferences -&gt; PCB Editor -&
+          EXTI介绍 STM32F103 的外部中断/事件控制器支持 19个外部中断/事件请求（互联网型产品支持20个）。每个中断设有状态位，每个中断/事件都有独立的触发和屏蔽设置。 STM32F103的19个外部中断为：  EXTI线0~15：对应外部IO口的输入中断 EXTI线16：连接到PVD输出 EXTI线17：连接到RTC闹钟事件 EXTI线18：连接到USB唤醒事件 EXTI
         </div>
       </a>
 
@@ -729,8 +729,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-05-19 22:42" pubdate>
-              2023-05-19
+            <time datetime="2023-05-28 11:51" pubdate>
+              2023-05-28
             </time>
           </div>
         
@@ -745,7 +745,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E7%A1%AC%E4%BB%B6/" class="category-chain-item">硬件</a>
+  <a href="/categories/stm32/" class="category-chain-item">stm32</a>
   
   
 
@@ -760,7 +760,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/pcb/">#pcb</a>
+              <a href="/tags/stm32/">#stm32</a>
             
           </div>
         
@@ -774,15 +774,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/05/18/Altium-Designer-Gerber-Files-%E7%94%9F%E6%88%90%E6%AD%A5%E9%AA%A4/" target="_self">
-          Altium Designer Gerber Files 生成步骤
+        <a href="/2023/05/28/STM32CubeMX%E4%B9%8B%E6%8C%89%E9%94%AE%E8%BE%93%E5%85%A5/" target="_self">
+          STM32CubeMX之按键输入
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/18/Altium-Designer-Gerber-Files-%E7%94%9F%E6%88%90%E6%AD%A5%E9%AA%A4/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/28/STM32CubeMX%E4%B9%8B%E6%8C%89%E9%94%AE%E8%BE%93%E5%85%A5/" target="_self">
         <div>
-          pcb layout完成后，然后就可以发送到PCB板厂进行生产制造了，一般为了保密性质，发送给厂商的是GerberFiles文件，所以，就需要生成GerberFiles。以下说一下Altium Designer生成GerberFiles的具体的操作步骤： 生成Gerber文件前，需要设置PCB原点，工艺边，定位孔，钻孔描述(drill层放置 '.legend')，尺寸标注(一般为mecha
+          上一节介绍了GPIO的输出使用，这一节介绍一下GPIO的输入，GPIO口作为输入使用的时候，是通过读取GPIOx_IDR寄存器内容来获得IO口的状态。 硬件设计    image-20230528102842722  通过开发板上的4 个按钮（KEY_UP、KEY0、KEY1 和 KEY2）来控制板上的 2 个 LED（DS0 和 DS1）和蜂鸣器。  KEY_UP 控制蜂鸣器
         </div>
       </a>
 
@@ -790,8 +790,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-05-18 21:35" pubdate>
-              2023-05-18
+            <time datetime="2023-05-28 10:13" pubdate>
+              2023-05-28
             </time>
           </div>
         
@@ -806,7 +806,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E7%A1%AC%E4%BB%B6/" class="category-chain-item">硬件</a>
+  <a href="/categories/stm32/" class="category-chain-item">stm32</a>
   
   
 
@@ -821,7 +821,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/pcb/">#pcb</a>
+              <a href="/tags/stm32/">#stm32</a>
             
           </div>
         
@@ -833,7 +833,7 @@
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/#board">3</a><a class="page-number" href="/page/4/#board">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/#board">6</a><a class="extend next" rel="next" href="/page/3/#board"><i class="iconfont icon-arrowright"></i></a>
+      <a class="extend prev" rel="prev" href="/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/#board">3</a><a class="page-number" href="/page/4/#board">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/#board">7</a><a class="extend next" rel="next" href="/page/3/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 

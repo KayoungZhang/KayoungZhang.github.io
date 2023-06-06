@@ -1,0 +1,1181 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="TFTLCD简介 TFT-LCD（thin film transistor-liquid crystal display）即薄膜晶体管液晶显示器。液晶显示屏的每一个像素上都设置有一个薄膜晶体管（TFT），每个像素都可以通过点脉冲直接控制。 常用的通信模式有6800模式和8080模式，本例程使用8080并口模式（简称80并口），8080接口有5条基本的控制线和多条数据线（8&#x2F;9&#x2F;16&#x2F;18位）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="STM32CubeMX之FSMC_TFTLCD">
+<meta property="og:url" content="http://example.com/2023/05/30/STM32CubeMX%E4%B9%8BFSMC-TFTLCD/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="TFTLCD简介 TFT-LCD（thin film transistor-liquid crystal display）即薄膜晶体管液晶显示器。液晶显示屏的每一个像素上都设置有一个薄膜晶体管（TFT），每个像素都可以通过点脉冲直接控制。 常用的通信模式有6800模式和8080模式，本例程使用8080并口模式（简称80并口），8080接口有5条基本的控制线和多条数据线（8&#x2F;9&#x2F;16&#x2F;18位）">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531102629121.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230606082242026.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230606082317721.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230606082349293.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230606082521224.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531103242060.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230530152947731.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230530155325449.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531083826527.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531084817727.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531091707020.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531091542061.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531095320326.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531100226860.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531100246088.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531113726434.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230530152024061.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531114601180.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531115913269.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230604142633939.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230604142703634.png">
+<meta property="article:published_time" content="2023-05-30T03:40:01.000Z">
+<meta property="article:modified_time" content="2023-06-06T00:27:17.694Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="stm32">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531102629121.png">
+  
+  
+  
+  
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"✍","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":false},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":false,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+<meta name="referrer" content="no-referrer" />
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>My Tech Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/article.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.1)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="STM32CubeMX之FSMC_TFTLCD"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-05-30 11:40" pubdate>
+          2023年5月30日 中午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          12k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          41 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-12 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">STM32CubeMX之FSMC_TFTLCD</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：2023年6月6日 早上
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h3 id="tftlcd简介">TFTLCD简介</h3>
+<p>TFT-LCD（thin film transistor-liquid crystal
+display）即薄膜晶体管液晶显示器。液晶显示屏的每一个像素上都设置有一个薄膜晶体管（TFT），每个像素都可以通过点脉冲直接控制。</p>
+<p>常用的通信模式有6800模式和8080模式，本例程使用8080并口模式（简称80并口），8080接口有5条基本的控制线和多条数据线（8/9/16/18位）：</p>
+<ul>
+<li><p>CS：TFTLCD 片选信号。</p></li>
+<li><p>WR：向 TFTLCD 写入数据。</p></li>
+<li><p>RD：从 TFTLCD 读取数据。</p></li>
+<li><p>RST：硬复位 TFTLCD。</p></li>
+<li><p>RS：命令/数据标志（0，读写命令；1，读写数据）。</p></li>
+<li><p>D[15：0]：16 位双向数据线。</p></li>
+</ul>
+<p>实验中使用的LCD是正点原子TFTLCD，其内部控制芯片ILI9341，其功能框图如下：</p>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531102629121.png" srcset="/img/loading.gif" lazyload alt="image-20230531102629121"  /></p>
+<p><strong>ILI9341 部分重要命令</strong></p>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230606082242026.png" srcset="/img/loading.gif" lazyload alt="image-20230606082242026" style="zoom:80%;" /></p>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230606082317721.png" srcset="/img/loading.gif" lazyload alt="image-20230606082317721" style="zoom:80%;" /></p>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230606082349293.png" srcset="/img/loading.gif" lazyload alt="image-20230606082349293" style="zoom:80%;" /></p>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230606082521224.png" srcset="/img/loading.gif" lazyload alt="image-20230606082521224" style="zoom:80%;" /></p>
+<p><strong>8080时序图：</strong></p>
+<figure>
+<img
+src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531103103667.png" srcset="/img/loading.gif" lazyload
+alt="image-20230531103103667" />
+<figcaption aria-hidden="true">image-20230531103103667</figcaption>
+</figure>
+<p>一般 TFTLCD 模块的使用流程：</p>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531103242060.png" srcset="/img/loading.gif" lazyload alt="image-20230531103242060" style="zoom:80%;" /></p>
+<p>其中，其中硬复位和初始化序列，只需要执行一次。</p>
+<p>例如点操作流程：</p>
+<ul>
+<li>画点：设置坐标 → 写 GRAM 指令 → 写入颜色数据 → LCD 上显示颜色；</li>
+<li>读点：设置坐标 → 读 GRAM 指令 → 读取颜色数据 →
+获取到对应点的颜色；</li>
+</ul>
+<p>设置TFT液晶显示通常需要以下几个步骤：</p>
+<ul>
+<li><p>设置STM32F1与TFTLCD模块连接的IO口，将与TFTLCD模块相连的IO口进行初始化，以便驱动LCD，ILI9341
+的 8080 通讯接口时序可以由 STM32 普通 I/O
+接口进行模拟，但这样效率太低，STM32 提供了一种特别的控制方法——使用 FSMC
+接口实现 8080接口时序。</p></li>
+<li><p>初始化TFTLCD模块，向LCD控制器写入一系列的设置值（比如RGB格式、LCD显示方向、伽马校准等），这部分代码一般LCD厂商会提供，初始化之后LCD才可以正常使用。</p></li>
+<li><p>通过函数将字符和数字显示到TFTLCD模块上，点操作只是一个点的处理，因此需要设计一个函数来多次使用这个步骤以实现字符和数字的显示。</p></li>
+</ul>
+<h3 id="fsmc-简介">FSMC 简介</h3>
+<p>FSMC（Flexible Static Memory
+Controller即灵活的静态存储控制器）是STM32系列采用的一种新型存储器扩展技术，能够连接同步、异步存储器和16位PC存储卡，STM32通过FSMC可以与SRAM、ROM、PSRAM、NOR
+Flash和NAND Flash等存储器的引脚直接相连。</p>
+<h4 id="stm32f1的fsmc内部框图">STM32F1的FSMC内部框图</h4>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230530152947731.png" srcset="/img/loading.gif" lazyload alt="image-20230530152947731" style="zoom:80%;" /></p>
+<p>从上图我们可以看出，STM32 的 FSMC 将外部设备分为 3 类：NOR/PSRAM
+设备、NAND设备、PC卡设备。他们共用地址、数据总线等信号，具有不同的片选(NE[4:1])以区分不同的设备。</p>
+<h4 id="fsmc-存储器划分">FSMC 存储器划分</h4>
+<p>FSMC 将外部存储器划分固定大小为 256M 字节的四个存储块,如下所示：</p>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230530155325449.png" srcset="/img/loading.gif" lazyload alt="image-20230530155325449" style="zoom:80%;" /></p>
+<ul>
+<li><strong>NOR/PSRAM块</strong>有四个区：</li>
+</ul>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531083826527.png" srcset="/img/loading.gif" lazyload alt="image-20230531083826527" style="zoom:80%;" /></p>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531084817727.png" srcset="/img/loading.gif" lazyload alt="image-20230531084817727" style="zoom:80%;" /></p>
+<ul>
+<li><strong>NAND Flash块和PC Card块</strong>：</li>
+</ul>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531091707020.png" srcset="/img/loading.gif" lazyload alt="image-20230531091707020" style="zoom:80%;" /></p>
+<p>​ 其中，NAND Flash有三个区：</p>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531091542061.png" srcset="/img/loading.gif" lazyload alt="image-20230531091542061" style="zoom:80%;" /></p>
+<h4 id="传输时序模式">传输时序模式</h4>
+<ul>
+<li><p>NOR Flash/PSRAM 控制器 <strong>异步</strong> 传输时序模式：</p>
+<ul>
+<li><p><strong>Mode 1</strong> - SRAM/PSRAM (CRAM)</p></li>
+<li><p><strong>Mode A</strong> - SRAM/PSRAM (CRAM) 输出使能触发</p></li>
+<li><p><strong>Mode 2/B</strong> - NOR Flash</p></li>
+<li><p><strong>Mode C</strong> - NOR Flash 输出使能触发</p></li>
+<li><p><strong>Mode D</strong> - 扩展地址异步传输</p></li>
+<li><p><strong>Muxed mode</strong> - NOR Flash复合异步传输</p></li>
+</ul></li>
+<li><p>NAND Flash和PC Card只有一种异步传输时序模式：</p></li>
+</ul>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531095320326.png" srcset="/img/loading.gif" lazyload alt="image-20230531095320326" style="zoom:80%;" /></p>
+<p>本实验中使用的TFTLCD采用Mode A模式连接到STM32 FSMC上，其Mode
+A读写时序如下：</p>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531100226860.png" srcset="/img/loading.gif" lazyload alt="image-20230531100226860" style="zoom:80%;" /></p>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531100246088.png" srcset="/img/loading.gif" lazyload alt="image-20230531100246088" style="zoom:80%;" /></p>
+<h3 id="硬件设计">硬件设计</h3>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531113726434.png" srcset="/img/loading.gif" lazyload alt="image-20230531113726434" style="zoom:80%;" /></p>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230530152024061.png" srcset="/img/loading.gif" lazyload alt="image-20230530152024061" style="zoom:80%;" /></p>
+<h3 id="软件设计">软件设计</h3>
+<h4 id="stm32cubemx设置">STM32CubeMX设置</h4>
+<ul>
+<li>RCC设置外接HSE，时钟设置为72M</li>
+<li>设置PB0为GPIO输出模式，上拉，高速，默认低电平。（背光控制信号）</li>
+<li>选择FSMC，选中Bank1，片选为NE4（即Bank1的第4区），存储器类型选为LCD
+Interface，LCD寄存器选择（RS）设置为A10，数据宽度设为16位</li>
+</ul>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531114601180.png" srcset="/img/loading.gif" lazyload alt="image-20230531114601180" style="zoom:80%;" /></p>
+<ul>
+<li>在FSMC配置菜单中，使能存储器写，根据LCD驱动芯片的数据参数设置地址建立时间、数据保存时间、总线周转阶段持续时间（设置为0），模式A</li>
+</ul>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531115913269.png" srcset="/img/loading.gif" lazyload alt="image-20230531115913269" style="zoom:80%;" /></p>
+<ul>
+<li>输入工程名，选择工程路径（不要有中文），选择MDK-ARM
+V5；勾选Generated peripheral initialization as a pair of ‘.c/.h’ files
+per peripheral；点击GENERATE CODE，生成工程代码</li>
+</ul>
+<h4 id="mdk-arm编程">MDK-ARM编程</h4>
+<ul>
+<li>创建TFTLCD驱动文件tftlcd.c和tftlcd.h,部分代码如下，详细代码见工程。</li>
+</ul>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">/* LCD重要参数集 */</span>
+<span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span></span>
+<span class="hljs-class">&#123;</span>
+    <span class="hljs-type">uint16_t</span> width;     <span class="hljs-comment">/* LCD 宽度 */</span>
+    <span class="hljs-type">uint16_t</span> height;    <span class="hljs-comment">/* LCD 高度 */</span>
+	<span class="hljs-type">uint16_t</span> lcd_id;    <span class="hljs-comment">/* lcd id */</span>
+    <span class="hljs-type">uint8_t</span> dir;        <span class="hljs-comment">/* 横屏还是竖屏控制：0，竖屏；1，横屏。 */</span>
+&#125;<span class="hljs-type">lcd_dev_t</span>;
+
+<span class="hljs-comment">/* LCD背光控制 */</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> LCD_BL(x)   do&#123; x ? \</span>
+<span class="hljs-meta">                      HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_SET) : \</span>
+<span class="hljs-meta">                      HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_RESET); \</span>
+<span class="hljs-meta">                     &#125;while(0)</span>
+
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> FSMC_ADDR_CMD  ((uint32_t*)0x6C000000)</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> FSMC_ADDR_DATA ((uint32_t*)0x6C000800)										 </span>
+<span class="hljs-comment">/******************************************************************************************/</span>
+<span class="hljs-comment">/* LCD 属性,根据使用的屏幕改变其属性 */</span>
+<span class="hljs-comment">/** ---------------------------------</span>
+<span class="hljs-comment"> * | LCD ID Type | Width or Height |</span>
+<span class="hljs-comment"> * ---------------------------------</span>
+<span class="hljs-comment"> * |    9343     |     240*320     | </span>
+<span class="hljs-comment"> * ---------------------------------</span>
+<span class="hljs-comment"> * | 5510/1963   |     480*800     |</span>
+<span class="hljs-comment"> * ---------------------------------</span>
+<span class="hljs-comment"> * |    5310     |     320*480     |</span>
+<span class="hljs-comment"> * ---------------------------------</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> LCD_WIDTH       240</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> LCD_HEIGHT      320</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> LCD_VERTICAL    0  </span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> LCD_HORIZONTAL  1</span>
+
+<span class="hljs-comment">/* LCD device ID */</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> LCD_9341    (0X9341)</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> LCD_8552    (0X8552)</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> LCD_5510    (0X5510)</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> LCD_1963    (0X1963)</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> LCD_5310    (0X5310)</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> LCD_7789    (0x7789)</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> LCD_5761    (0X5761)</span>
+
+<span class="hljs-comment">/******************************************************************************************/</span>
+<span class="hljs-comment">/* ILI9341、SSD1963、ST7789、NT35310 command */</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> LCD9341_READ_ID   0xd3     <span class="hljs-comment">//Read IC device code.</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> LCD7789_READ_ID   0x04     <span class="hljs-comment">//Read IC device code.</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> LCD5310_READ_ID   0xd4     <span class="hljs-comment">//Read IC device code.</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> LCD1963_READ_ID   0xa1     <span class="hljs-comment">//Read IC device code.</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> LCD_SCAN_DIR       0x36     <span class="hljs-comment">//scanning direction of frame memory.</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> LCD_DISPLAY_ON     0x29     <span class="hljs-comment">//Display on</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> LCD_DISPLAY_OFF    0x28     <span class="hljs-comment">//Display off</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> LCD_ADDR_COLUMN    0x2a     <span class="hljs-comment">//X坐标 Column Address Set</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> LCD_ADDR_PAGE      0x2b     <span class="hljs-comment">//Y坐标 Page Address Set </span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> LCD_WR_GRAM        0x2c     <span class="hljs-comment">//Memory Write</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> LCD_RD_GRAM        0x2e     <span class="hljs-comment">//Memory Read</span></span>
+<span class="hljs-comment">/* NT5510 command */</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> LCD5510_READ_IDH       0xC500     <span class="hljs-comment">//Read IC device code.</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> LCD5510_READ_IDL       0xC501     <span class="hljs-comment">//Read IC device code.</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> LCD5510_SCAN_DIR       0x3600     <span class="hljs-comment">//scanning direction of frame memory.</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> LCD5510_DISPLAY_ON     0x2900     <span class="hljs-comment">//Display on</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> LCD5510_DISPLAY_OFF    0x2800     <span class="hljs-comment">//Display off</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> LCD5510_ADDR_COLUMN    0X2A00     <span class="hljs-comment">//X坐标 Column Address Set</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> LCD5510_ADDR_PAGE      0X2B00     <span class="hljs-comment">//Y坐标 Page Address Set </span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> LCD5510_WR_GRAM        0X2C00     <span class="hljs-comment">//Memory Write</span></span>
+
+<span class="hljs-comment">/* 屏幕扫描方向定义 */</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> L2R_U2D         0           <span class="hljs-comment">/* 从左到右,从上到下, 默认的扫描方向 */</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> L2R_D2U         1           <span class="hljs-comment">/* 从左到右,从下到上 */</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> R2L_U2D         2           <span class="hljs-comment">/* 从右到左,从上到下 */</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> R2L_D2U         3           <span class="hljs-comment">/* 从右到左,从下到上 */</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> U2D_L2R         4           <span class="hljs-comment">/* 从上到下,从左到右 */</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> U2D_R2L         5           <span class="hljs-comment">/* 从上到下,从右到左 */</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> D2U_L2R         6           <span class="hljs-comment">/* 从下到上,从左到右 */</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> D2U_R2L         7           <span class="hljs-comment">/* 从下到上,从右到左 */</span></span>
+<span class="hljs-comment">/******************************************************************************************/</span>
+<span class="hljs-keyword">extern</span> <span class="hljs-type">void</span> <span class="hljs-title function_">lcd_wr_data</span><span class="hljs-params">(<span class="hljs-keyword">volatile</span> <span class="hljs-type">uint16_t</span> value)</span>;
+<span class="hljs-keyword">extern</span> <span class="hljs-type">void</span> <span class="hljs-title function_">lcd_wr_cmd</span><span class="hljs-params">(<span class="hljs-keyword">volatile</span> <span class="hljs-type">uint16_t</span> cmd)</span>;
+<span class="hljs-keyword">extern</span> <span class="hljs-type">void</span> <span class="hljs-title function_">lcd_write_reg</span><span class="hljs-params">(<span class="hljs-type">uint16_t</span> cmd, <span class="hljs-type">uint16_t</span> value)</span>;
+<span class="hljs-keyword">extern</span> <span class="hljs-type">void</span> <span class="hljs-title function_">lcd_init</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span>;                        <span class="hljs-comment">/* 初始化LCD */</span> 
+<span class="hljs-keyword">extern</span> <span class="hljs-type">void</span> <span class="hljs-title function_">lcd_clear</span><span class="hljs-params">(<span class="hljs-type">uint16_t</span> color)</span>;     <span class="hljs-comment">/* LCD清屏 */</span>
+<span class="hljs-keyword">extern</span> <span class="hljs-type">void</span> <span class="hljs-title function_">lcd_draw_line</span><span class="hljs-params">(<span class="hljs-type">uint16_t</span> x1, <span class="hljs-type">uint16_t</span> y1, <span class="hljs-type">uint16_t</span> x2, <span class="hljs-type">uint16_t</span> y2, <span class="hljs-type">uint16_t</span> color)</span>;     <span class="hljs-comment">/* 画直线 */</span>
+<span class="hljs-keyword">extern</span> <span class="hljs-type">void</span> <span class="hljs-title function_">lcd_draw_rectangle</span><span class="hljs-params">(<span class="hljs-type">uint16_t</span> x1, <span class="hljs-type">uint16_t</span> y1, <span class="hljs-type">uint16_t</span> x2, <span class="hljs-type">uint16_t</span> y2, <span class="hljs-type">uint16_t</span> color)</span>;<span class="hljs-comment">/* 画矩形 */</span>
+
+<span class="hljs-keyword">extern</span> <span class="hljs-type">void</span> <span class="hljs-title function_">lcd_show_char</span><span class="hljs-params">(<span class="hljs-type">uint16_t</span> x, <span class="hljs-type">uint16_t</span> y, <span class="hljs-type">char</span> chr, <span class="hljs-type">uint8_t</span> size, <span class="hljs-type">uint8_t</span> mode, <span class="hljs-type">uint16_t</span> color)</span>;
+<span class="hljs-keyword">extern</span> <span class="hljs-type">void</span> <span class="hljs-title function_">lcd_show_num</span><span class="hljs-params">(<span class="hljs-type">uint16_t</span> x, <span class="hljs-type">uint16_t</span> y, <span class="hljs-type">uint32_t</span> num, <span class="hljs-type">uint8_t</span> len, <span class="hljs-type">uint8_t</span> size, <span class="hljs-type">uint16_t</span> color)</span>;
+<span class="hljs-keyword">extern</span> <span class="hljs-type">void</span> <span class="hljs-title function_">lcd_show_xnum</span><span class="hljs-params">(<span class="hljs-type">uint16_t</span> x, <span class="hljs-type">uint16_t</span> y, <span class="hljs-type">uint32_t</span> num, <span class="hljs-type">uint8_t</span> len, <span class="hljs-type">uint8_t</span> size, <span class="hljs-type">uint8_t</span> mode, <span class="hljs-type">uint16_t</span> color)</span>;
+<span class="hljs-keyword">extern</span> <span class="hljs-type">void</span> <span class="hljs-title function_">lcd_show_string</span><span class="hljs-params">(<span class="hljs-type">uint16_t</span> x, <span class="hljs-type">uint16_t</span> y, <span class="hljs-type">uint16_t</span> width, <span class="hljs-type">uint16_t</span> height, <span class="hljs-type">uint8_t</span> size, <span class="hljs-type">char</span> *p, <span class="hljs-type">uint16_t</span> color)</span>;</code></pre></div>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">/* 定义一个LCD结构体变量 */</span>
+<span class="hljs-type">lcd_dev_t</span> lcddev = &#123;
+	.width = LCD_WIDTH,
+	.height = LCD_HEIGHT,
+	.dir = LCD_VERTICAL  <span class="hljs-comment">/* 默认为竖屏 */</span>
+&#125;;
+
+<span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * @brief       LCD写数据</span>
+<span class="hljs-comment"> * @param       data: 要写入的数据</span>
+<span class="hljs-comment"> * @retval      无</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-type">void</span> <span class="hljs-title function_">lcd_wr_data</span><span class="hljs-params">(<span class="hljs-keyword">volatile</span> <span class="hljs-type">uint16_t</span> value)</span>
+&#123;
+    *( __IO <span class="hljs-type">uint16_t</span> * )(FSMC_ADDR_DATA) = value;
+&#125;
+<span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * @brief       LCD写指令</span>
+<span class="hljs-comment"> * @param       cmd: lcd指令</span>
+<span class="hljs-comment"> * @retval      无</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-type">void</span> <span class="hljs-title function_">lcd_wr_cmd</span><span class="hljs-params">(<span class="hljs-keyword">volatile</span> <span class="hljs-type">uint16_t</span> cmd)</span>
+&#123;
+    *( __IO <span class="hljs-type">uint16_t</span> * )(FSMC_ADDR_CMD) = cmd;
+&#125;
+
+<span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * @brief       LCD读数据</span>
+<span class="hljs-comment"> * @param       无</span>
+<span class="hljs-comment"> * @retval      读取到的数据</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-type">uint16_t</span> <span class="hljs-title function_">lcd_rd_data</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span>
+&#123;
+    <span class="hljs-keyword">return</span> (*( __IO <span class="hljs-type">uint16_t</span> * )(FSMC_ADDR_DATA));
+&#125;
+
+<span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * @brief       LCD写寄存器</span>
+<span class="hljs-comment"> * @param       cmd:指令</span>
+<span class="hljs-comment"> * @param       data:要写入的数据</span>
+<span class="hljs-comment"> * @retval      无</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-type">void</span> <span class="hljs-title function_">lcd_write_reg</span><span class="hljs-params">(<span class="hljs-type">uint16_t</span> cmd, <span class="hljs-type">uint16_t</span> value)</span>
+&#123;
+    *( __IO <span class="hljs-type">uint16_t</span> * )(FSMC_ADDR_CMD) = cmd;       <span class="hljs-comment">/* 写入要写的指令 */</span>
+    *( __IO <span class="hljs-type">uint16_t</span> * )(FSMC_ADDR_DATA) = value;    <span class="hljs-comment">/* 写入数据 */</span>
+&#125;
+
+<span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * @brief       初始化LCD</span>
+<span class="hljs-comment"> * @note        该初始化函数可以初始化各种型号的LCD(详见本.c文件最前面的描述)</span>
+<span class="hljs-comment"> * @param       无</span>
+<span class="hljs-comment"> * @retval      无</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-type">void</span> <span class="hljs-title function_">lcd_init</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span>
+&#123;
+	  <span class="hljs-comment">/* 获取屏幕id */</span>
+	  lcddev.lcd_id = lcd_read_id();
+	  <span class="hljs-comment">/* 显示之前必须lcd芯片初始化 */</span>
+    <span class="hljs-keyword">if</span> (lcddev.lcd_id == LCD_7789)
+    &#123;
+        lcd_ex_st7789_reginit();    <span class="hljs-comment">/* 执行ST7789初始化 */</span>
+    &#125;
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (lcddev.lcd_id == LCD_9341)
+    &#123;
+        lcd_ex_ili9341_reginit();   <span class="hljs-comment">/* 执行ILI9341初始化 */</span>
+    &#125;
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (lcddev.lcd_id == LCD_5310)
+    &#123;
+        lcd_ex_nt35310_reginit();   <span class="hljs-comment">/* 执行NT35310初始化 */</span>
+    &#125;
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (lcddev.lcd_id == LCD_5510)
+    &#123;
+        lcd_ex_nt35510_reginit();   <span class="hljs-comment">/* 执行NT35510初始化 */</span>
+    &#125;
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (lcddev.lcd_id == LCD_1963)
+    &#123;
+        lcd_ex_ssd1963_reginit();   <span class="hljs-comment">/* 执行SSD1963初始化 */</span>
+        lcd_ssd_set_backlight(<span class="hljs-number">100</span>); <span class="hljs-comment">/* 背光设置为最亮 */</span>
+    &#125;
+    <span class="hljs-comment">/* 设置屏幕大小、方向及扫描方向 */</span>
+	  lcd_set_scan_dir(L2R_U2D);
+    <span class="hljs-comment">/* 开背光 */</span>
+    LCD_BL(<span class="hljs-number">1</span>);   
+    <span class="hljs-comment">/* 清屏 */</span>		
+    lcd_clear(WHITE);
+&#125;
+<span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * @brief       读取屏幕id</span>
+<span class="hljs-comment"> * @param       None</span>
+<span class="hljs-comment"> * @retval      屏幕id</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-type">uint16_t</span> <span class="hljs-title function_">lcd_read_id</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span>
+&#123;
+	  <span class="hljs-comment">/* 尝试9341 ID的读取 */</span>
+    lcd_wr_cmd(LCD9341_READ_ID);
+    lcddev.lcd_id = lcd_rd_data();  <span class="hljs-comment">/* dummy read */</span>
+    lcddev.lcd_id = lcd_rd_data();  <span class="hljs-comment">/* 读到0X00 */</span>
+    lcddev.lcd_id = lcd_rd_data();  <span class="hljs-comment">/* 读取93 */</span>
+    lcddev.lcd_id &lt;&lt;= <span class="hljs-number">8</span>;
+    lcddev.lcd_id |= lcd_rd_data(); <span class="hljs-comment">/* 读取41 */</span>
+
+    <span class="hljs-keyword">if</span> (lcddev.lcd_id != LCD_9341)    <span class="hljs-comment">/* 不是 9341 , 尝试看看是不是 ST7789 */</span>
+    &#123;
+        lcd_wr_cmd(LCD7789_READ_ID);
+        lcddev.lcd_id = lcd_rd_data();      <span class="hljs-comment">/* dummy read */</span>
+        lcddev.lcd_id = lcd_rd_data();      <span class="hljs-comment">/* 读到0X85 */</span>
+        lcddev.lcd_id = lcd_rd_data();      <span class="hljs-comment">/* 读取0X85 */</span>
+        lcddev.lcd_id &lt;&lt;= <span class="hljs-number">8</span>;
+        lcddev.lcd_id |= lcd_rd_data();     <span class="hljs-comment">/* 读取0X52 */</span>
+        
+        <span class="hljs-keyword">if</span> (lcddev.lcd_id == LCD_8552)        <span class="hljs-comment">/* 将8552的ID转换成7789 */</span>
+        &#123;
+            lcddev.lcd_id = LCD_7789;
+        &#125;
+
+        <span class="hljs-keyword">if</span> (lcddev.lcd_id != LCD_7789)        <span class="hljs-comment">/* 也不是ST7789, 尝试是不是 NT35310 */</span>
+        &#123;
+            lcd_wr_cmd(LCD5310_READ_ID);
+            lcddev.lcd_id = lcd_rd_data();  <span class="hljs-comment">/* dummy read */</span>
+            lcddev.lcd_id = lcd_rd_data();  <span class="hljs-comment">/* 读回0X01 */</span>
+            lcddev.lcd_id = lcd_rd_data();  <span class="hljs-comment">/* 读回0X53 */</span>
+            lcddev.lcd_id &lt;&lt;= <span class="hljs-number">8</span>;
+            lcddev.lcd_id |= lcd_rd_data(); <span class="hljs-comment">/* 这里读回0X10 */</span>
+
+            <span class="hljs-keyword">if</span> (lcddev.lcd_id != LCD_5310)    <span class="hljs-comment">/* 也不是NT35310,尝试看看是不是NT35510 */</span>
+            &#123;
+                <span class="hljs-comment">/* 发送秘钥（厂家提供,照搬即可） */</span>
+                lcd_write_reg(<span class="hljs-number">0xF000</span>, <span class="hljs-number">0x0055</span>);
+                lcd_write_reg(<span class="hljs-number">0xF001</span>, <span class="hljs-number">0x00AA</span>);
+                lcd_write_reg(<span class="hljs-number">0xF002</span>, <span class="hljs-number">0x0052</span>);
+                lcd_write_reg(<span class="hljs-number">0xF003</span>, <span class="hljs-number">0x0008</span>);
+                lcd_write_reg(<span class="hljs-number">0xF004</span>, <span class="hljs-number">0x0001</span>);
+                
+                lcd_wr_cmd(LCD5510_READ_IDH);           <span class="hljs-comment">/* 读取ID高8位 */</span>
+                lcddev.lcd_id = lcd_rd_data();      <span class="hljs-comment">/* 读回0X55 */</span>
+                lcddev.lcd_id &lt;&lt;= <span class="hljs-number">8</span>;
+
+                lcd_wr_cmd(LCD5510_READ_IDL);           <span class="hljs-comment">/* 读取ID低8位 */</span>
+                lcddev.lcd_id |= lcd_rd_data();     <span class="hljs-comment">/* 读回0X10 */</span>
+                HAL_Delay(<span class="hljs-number">5</span>);
+                
+                <span class="hljs-keyword">if</span> (lcddev.lcd_id != LCD_5510)        <span class="hljs-comment">/* 也不是NT5510,尝试看看是不是SSD1963 */</span>
+                &#123;
+                    lcd_wr_cmd(LCD1963_READ_ID);
+                    lcddev.lcd_id = lcd_rd_data();
+                    lcddev.lcd_id = lcd_rd_data();  <span class="hljs-comment">/* 读回0X57 */</span>
+                    lcddev.lcd_id &lt;&lt;= <span class="hljs-number">8</span>;
+                    lcddev.lcd_id |= lcd_rd_data(); <span class="hljs-comment">/* 读回0X61 */</span>
+
+                    <span class="hljs-keyword">if</span> (lcddev.lcd_id == LCD_5761)lcddev.lcd_id = LCD_1963; <span class="hljs-comment">/* SSD1963读回的ID是5761H,为方便区分,我们强制设置为1963 */</span>
+                &#125;
+            &#125;
+        &#125;
+    &#125;
+		
+		<span class="hljs-keyword">return</span> lcddev.lcd_id;
+&#125;
+<span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * @brief       设置LCD的自动扫描方向(对RGB屏无效)</span>
+<span class="hljs-comment"> * @note</span>
+<span class="hljs-comment"> *              9341/5310/5510/1963/7789等IC已经实际测试</span>
+<span class="hljs-comment"> *              注意:其他函数可能会受到此函数设置的影响(尤其是9341),</span>
+<span class="hljs-comment"> *              所以,一般设置为L2R_U2D即可,如果设置为其他扫描方式,可能导致显示不正常.</span>
+<span class="hljs-comment"> *</span>
+<span class="hljs-comment"> * @param       dir:0~7,代表8个方向</span>
+<span class="hljs-comment"> * @retval      无</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-type">void</span> <span class="hljs-title function_">lcd_set_scan_dir</span><span class="hljs-params">(<span class="hljs-type">uint8_t</span> dir)</span>
+&#123;
+    <span class="hljs-type">uint16_t</span> regval = <span class="hljs-number">0</span>;
+    <span class="hljs-type">uint16_t</span> dirreg = <span class="hljs-number">0</span>;
+    <span class="hljs-type">uint16_t</span> temp;
+
+    <span class="hljs-comment">/* 横屏时，对1963不改变扫描方向！其他IC改变扫描方向！竖屏时1963改变方向，其他IC不改变扫描方向 */</span>
+    <span class="hljs-keyword">if</span> ((lcddev.dir == LCD_HORIZONTAL &amp;&amp; lcddev.lcd_id != LCD_1963) || (lcddev.dir == LCD_VERTICAL &amp;&amp; lcddev.lcd_id == LCD_1963))
+    &#123;
+        <span class="hljs-keyword">switch</span> (dir)   <span class="hljs-comment">/* 方向转换 */</span>
+        &#123;
+            <span class="hljs-keyword">case</span> <span class="hljs-number">0</span>: dir = <span class="hljs-number">6</span>; <span class="hljs-keyword">break</span>;
+            <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>: dir = <span class="hljs-number">7</span>; <span class="hljs-keyword">break</span>;
+            <span class="hljs-keyword">case</span> <span class="hljs-number">2</span>: dir = <span class="hljs-number">4</span>; <span class="hljs-keyword">break</span>;
+            <span class="hljs-keyword">case</span> <span class="hljs-number">3</span>: dir = <span class="hljs-number">5</span>; <span class="hljs-keyword">break</span>;
+            <span class="hljs-keyword">case</span> <span class="hljs-number">4</span>: dir = <span class="hljs-number">1</span>; <span class="hljs-keyword">break</span>;
+            <span class="hljs-keyword">case</span> <span class="hljs-number">5</span>: dir = <span class="hljs-number">0</span>; <span class="hljs-keyword">break</span>;
+            <span class="hljs-keyword">case</span> <span class="hljs-number">6</span>: dir = <span class="hljs-number">3</span>; <span class="hljs-keyword">break</span>;
+            <span class="hljs-keyword">case</span> <span class="hljs-number">7</span>: dir = <span class="hljs-number">2</span>; <span class="hljs-keyword">break</span>;
+        &#125;
+    &#125;
+
+		<span class="hljs-comment">/* 根据扫描方式 设置 0X36/0X3600 寄存器 bit 5,6,7 位的值 */</span>
+		<span class="hljs-keyword">switch</span> (dir)
+		&#123;
+				<span class="hljs-keyword">case</span> L2R_U2D:<span class="hljs-comment">/* 从左到右,从上到下 */</span>
+						regval |= (<span class="hljs-number">0</span> &lt;&lt; <span class="hljs-number">7</span>) | (<span class="hljs-number">0</span> &lt;&lt; <span class="hljs-number">6</span>) | (<span class="hljs-number">0</span> &lt;&lt; <span class="hljs-number">5</span>);
+						<span class="hljs-keyword">break</span>;
+
+				<span class="hljs-keyword">case</span> L2R_D2U:<span class="hljs-comment">/* 从左到右,从下到上 */</span>
+						regval |= (<span class="hljs-number">1</span> &lt;&lt; <span class="hljs-number">7</span>) | (<span class="hljs-number">0</span> &lt;&lt; <span class="hljs-number">6</span>) | (<span class="hljs-number">0</span> &lt;&lt; <span class="hljs-number">5</span>);
+						<span class="hljs-keyword">break</span>;
+
+				<span class="hljs-keyword">case</span> R2L_U2D:<span class="hljs-comment">/* 从右到左,从上到下 */</span>
+						regval |= (<span class="hljs-number">0</span> &lt;&lt; <span class="hljs-number">7</span>) | (<span class="hljs-number">1</span> &lt;&lt; <span class="hljs-number">6</span>) | (<span class="hljs-number">0</span> &lt;&lt; <span class="hljs-number">5</span>);
+						<span class="hljs-keyword">break</span>;
+
+				<span class="hljs-keyword">case</span> R2L_D2U:<span class="hljs-comment">/* 从右到左,从下到上 */</span>
+						regval |= (<span class="hljs-number">1</span> &lt;&lt; <span class="hljs-number">7</span>) | (<span class="hljs-number">1</span> &lt;&lt; <span class="hljs-number">6</span>) | (<span class="hljs-number">0</span> &lt;&lt; <span class="hljs-number">5</span>);
+						<span class="hljs-keyword">break</span>;
+
+				<span class="hljs-keyword">case</span> U2D_L2R:<span class="hljs-comment">/* 从上到下,从左到右 */</span>
+						regval |= (<span class="hljs-number">0</span> &lt;&lt; <span class="hljs-number">7</span>) | (<span class="hljs-number">0</span> &lt;&lt; <span class="hljs-number">6</span>) | (<span class="hljs-number">1</span> &lt;&lt; <span class="hljs-number">5</span>);
+						<span class="hljs-keyword">break</span>;
+
+				<span class="hljs-keyword">case</span> U2D_R2L:<span class="hljs-comment">/* 从上到下,从右到左 */</span>
+						regval |= (<span class="hljs-number">0</span> &lt;&lt; <span class="hljs-number">7</span>) | (<span class="hljs-number">1</span> &lt;&lt; <span class="hljs-number">6</span>) | (<span class="hljs-number">1</span> &lt;&lt; <span class="hljs-number">5</span>);
+						<span class="hljs-keyword">break</span>;
+
+				<span class="hljs-keyword">case</span> D2U_L2R:<span class="hljs-comment">/* 从下到上,从左到右 */</span>
+						regval |= (<span class="hljs-number">1</span> &lt;&lt; <span class="hljs-number">7</span>) | (<span class="hljs-number">0</span> &lt;&lt; <span class="hljs-number">6</span>) | (<span class="hljs-number">1</span> &lt;&lt; <span class="hljs-number">5</span>);
+						<span class="hljs-keyword">break</span>;
+
+				<span class="hljs-keyword">case</span> D2U_R2L:<span class="hljs-comment">/* 从下到上,从右到左 */</span>
+						regval |= (<span class="hljs-number">1</span> &lt;&lt; <span class="hljs-number">7</span>) | (<span class="hljs-number">1</span> &lt;&lt; <span class="hljs-number">6</span>) | (<span class="hljs-number">1</span> &lt;&lt; <span class="hljs-number">5</span>);
+						<span class="hljs-keyword">break</span>;
+		&#125;
+
+		dirreg = LCD_SCAN_DIR;  <span class="hljs-comment">/* 对绝大部分驱动IC, 由0X36寄存器控制 */</span>
+
+    <span class="hljs-keyword">if</span> (lcddev.lcd_id == LCD_5510)
+    &#123;
+        dirreg = LCD5510_SCAN_DIR;    <span class="hljs-comment">/* 对于5510, 和其他驱动ic的寄存器有差异 */</span>
+    &#125;
+
+     <span class="hljs-comment">/* 9341 &amp; 7789 要设置BGR位 */</span>
+    <span class="hljs-keyword">if</span> (lcddev.lcd_id == LCD_9341 || lcddev.lcd_id == LCD_7789)
+    &#123;
+        regval |= <span class="hljs-number">0X08</span>;
+    &#125;
+
+		lcd_write_reg(dirreg, regval);
+
+		<span class="hljs-keyword">if</span> (lcddev.lcd_id != LCD_1963)   <span class="hljs-comment">/* 1963不做坐标处理 */</span>
+		&#123;
+				<span class="hljs-keyword">if</span> (regval &amp; <span class="hljs-number">0X20</span>)
+				&#123;
+						<span class="hljs-keyword">if</span> (lcddev.width &lt; lcddev.height)   <span class="hljs-comment">/* 交换X,Y */</span>
+						&#123;
+								temp = lcddev.width;
+								lcddev.width = lcddev.height;
+								lcddev.height = temp;
+						&#125;
+				&#125;
+				<span class="hljs-keyword">else</span>
+				&#123;
+						<span class="hljs-keyword">if</span> (lcddev.width &gt; lcddev.height)   <span class="hljs-comment">/* 交换X,Y */</span>
+						&#123;
+								temp = lcddev.width;
+								lcddev.width = lcddev.height;
+								lcddev.height = temp;
+						&#125;
+				&#125;
+		&#125;
+
+		<span class="hljs-comment">/* 设置显示区域(开窗)大小 */</span>
+		<span class="hljs-keyword">if</span> (lcddev.lcd_id == LCD_5510)
+		&#123;
+				lcd_wr_cmd(LCD5510_ADDR_COLUMN);
+				lcd_wr_data(<span class="hljs-number">0</span>);
+				lcd_wr_cmd(LCD5510_ADDR_COLUMN + <span class="hljs-number">1</span>);
+				lcd_wr_data(<span class="hljs-number">0</span>);
+				lcd_wr_cmd(LCD5510_ADDR_COLUMN + <span class="hljs-number">2</span>);
+				lcd_wr_data((lcddev.width - <span class="hljs-number">1</span>) &gt;&gt; <span class="hljs-number">8</span>);
+				lcd_wr_cmd(LCD5510_ADDR_COLUMN + <span class="hljs-number">3</span>);
+				lcd_wr_data((lcddev.width - <span class="hljs-number">1</span>) &amp; <span class="hljs-number">0XFF</span>);
+				lcd_wr_cmd(LCD5510_ADDR_PAGE);
+				lcd_wr_data(<span class="hljs-number">0</span>);
+				lcd_wr_cmd(LCD5510_ADDR_PAGE + <span class="hljs-number">1</span>);
+				lcd_wr_data(<span class="hljs-number">0</span>);
+				lcd_wr_cmd(LCD5510_ADDR_PAGE + <span class="hljs-number">2</span>);
+				lcd_wr_data((lcddev.height - <span class="hljs-number">1</span>) &gt;&gt; <span class="hljs-number">8</span>);
+				lcd_wr_cmd(LCD5510_ADDR_PAGE + <span class="hljs-number">3</span>);
+				lcd_wr_data((lcddev.height - <span class="hljs-number">1</span>) &amp; <span class="hljs-number">0XFF</span>);
+		&#125;
+		<span class="hljs-keyword">else</span>
+		&#123;
+				lcd_wr_cmd(LCD_ADDR_COLUMN);
+				lcd_wr_data(<span class="hljs-number">0</span>);
+				lcd_wr_data(<span class="hljs-number">0</span>);
+				lcd_wr_data((lcddev.width - <span class="hljs-number">1</span>) &gt;&gt; <span class="hljs-number">8</span>);
+				lcd_wr_data((lcddev.width - <span class="hljs-number">1</span>) &amp; <span class="hljs-number">0XFF</span>);
+				lcd_wr_cmd(LCD_ADDR_PAGE);
+				lcd_wr_data(<span class="hljs-number">0</span>);
+				lcd_wr_data(<span class="hljs-number">0</span>);
+				lcd_wr_data((lcddev.height - <span class="hljs-number">1</span>) &gt;&gt; <span class="hljs-number">8</span>);
+				lcd_wr_data((lcddev.height - <span class="hljs-number">1</span>) &amp; <span class="hljs-number">0XFF</span>);
+		&#125;
+&#125;
+<span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * @brief       清屏函数</span>
+<span class="hljs-comment"> * @param       color: 要清屏的颜色</span>
+<span class="hljs-comment"> * @retval      无</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-type">void</span> <span class="hljs-title function_">lcd_clear</span><span class="hljs-params">(<span class="hljs-type">uint16_t</span> color)</span>
+&#123;
+    <span class="hljs-type">uint32_t</span> index = <span class="hljs-number">0</span>;
+    <span class="hljs-type">uint32_t</span> totalpoint = lcddev.width;
+    totalpoint *= lcddev.height;    <span class="hljs-comment">/* 得到总点数 */</span>
+    lcd_set_cursor(<span class="hljs-number">0x00</span>, <span class="hljs-number">0x0000</span>);   <span class="hljs-comment">/* 设置光标位置 */</span>
+	  <span class="hljs-keyword">if</span>(lcddev.lcd_id == LCD_5510)
+		&#123;
+			  lcd_wr_cmd(LCD5510_WR_GRAM);        <span class="hljs-comment">/* 开始写入GRAM */</span>
+		&#125;
+		<span class="hljs-keyword">else</span>
+		&#123;
+			  lcd_wr_cmd(LCD_WR_GRAM);        <span class="hljs-comment">/* 开始写入GRAM */</span>
+		&#125;
+
+    <span class="hljs-keyword">for</span> (index = <span class="hljs-number">0</span>; index &lt; totalpoint; index++)
+    &#123;
+			  lcd_wr_data(color);
+    &#125;
+&#125;</code></pre></div>
+<ul>
+<li>在main.c文件下编写TFTLCD测试代码</li>
+</ul>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">/* USER CODE BEGIN Includes */</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;./Lcd/tftlcd.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-comment">/* USER CODE END Includes */</span>
+
+<span class="hljs-comment">/* USER CODE BEGIN 1 */</span>
+<span class="hljs-type">uint8_t</span> x = <span class="hljs-number">0</span>;
+<span class="hljs-type">uint8_t</span> dev_id[<span class="hljs-number">12</span>];
+<span class="hljs-comment">/* USER CODE END 1 */</span>
+
+<span class="hljs-comment">/* USER CODE BEGIN 2 */</span>
+lcd_init();                                         <span class="hljs-comment">/* 初始化LCD */</span>
+<span class="hljs-built_in">sprintf</span>((<span class="hljs-type">char</span> *)dev_id, <span class="hljs-string">&quot;LCD ID:%04X&quot;</span>, lcddev.lcd_id);  <span class="hljs-comment">/* 将LCD ID打印到lcd_id数组 */</span>
+<span class="hljs-comment">//	printf(&quot;LCD ID:%x\r\n&quot;, lcddev.lcd_id); /* 打印LCD ID 此处没有初始化串口，无法打印 */</span>
+<span class="hljs-comment">/* USER CODE END 2 */</span>
+
+<span class="hljs-keyword">while</span> (<span class="hljs-number">1</span>)
+&#123;
+    <span class="hljs-keyword">switch</span> (x)
+    &#123;
+        <span class="hljs-keyword">case</span> <span class="hljs-number">0</span>: lcd_clear(WHITE);	<span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>: lcd_clear(BLACK);	<span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-number">2</span>: lcd_clear(BLUE);	<span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-number">3</span>: lcd_clear(RED);		<span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-number">4</span>: lcd_clear(MAGENTA);	<span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-number">5</span>: lcd_clear(GREEN);	<span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-number">6</span>: lcd_clear(CYAN);	<span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-number">7</span>: lcd_clear(YELLOW);  <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-number">8</span>: lcd_clear(BRRED);	<span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-number">9</span>: lcd_clear(GRAY);	<span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-number">10</span>: lcd_clear(LGRAY);	<span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-number">11</span>: lcd_clear(BROWN);	<span class="hljs-keyword">break</span>;
+    &#125;
+
+    lcd_show_string(<span class="hljs-number">10</span>, <span class="hljs-number">40</span>, <span class="hljs-number">240</span>, <span class="hljs-number">32</span>, <span class="hljs-number">32</span>, <span class="hljs-string">&quot;STM32&quot;</span>, RED);
+    lcd_show_string(<span class="hljs-number">10</span>, <span class="hljs-number">80</span>, <span class="hljs-number">240</span>, <span class="hljs-number">24</span>, <span class="hljs-number">24</span>, <span class="hljs-string">&quot;TFTLCD TEST&quot;</span>, GREEN);
+    lcd_show_string(<span class="hljs-number">10</span>, <span class="hljs-number">110</span>, <span class="hljs-number">240</span>, <span class="hljs-number">16</span>, <span class="hljs-number">16</span>, <span class="hljs-string">&quot;KayoungZhang&quot;</span>, GREEN);
+    lcd_show_string(<span class="hljs-number">10</span>, <span class="hljs-number">130</span>, <span class="hljs-number">240</span>, <span class="hljs-number">16</span>, <span class="hljs-number">16</span>, (<span class="hljs-type">char</span> *)dev_id, RED); <span class="hljs-comment">/* 显示LCD ID */</span>
+
+    <span class="hljs-keyword">if</span> (x++ == <span class="hljs-number">12</span>)
+        x = <span class="hljs-number">0</span>;
+    HAL_Delay(<span class="hljs-number">1000</span>); <span class="hljs-comment">//1s轮换一次画面</span>
+&#125;</code></pre></div>
+<ul>
+<li>编译无误下载到开发板后，LCD屏循环显示相应的文字</li>
+</ul>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230604142633939.png" srcset="/img/loading.gif" lazyload alt="image-20230604142633939" style="zoom: 50%;" />
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230604142703634.png" srcset="/img/loading.gif" lazyload alt="image-20230604142703634" style="zoom: 50%;" /></p>
+<p>工程文件Gitee：<a
+target="_blank" rel="noopener" href="https://gitee.com/kayoungzhang/my_codehub/raw/master/stm32/tftlcd.zip">tftlcd</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/stm32/" class="category-chain-item">stm32</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/stm32/">#stm32</a>
+      
+    </div>
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/05/31/STM32CubeMX%E4%B9%8B%E5%A4%96%E9%83%A8SRAM/" title="STM32CubeMX之外部SRAM">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">STM32CubeMX之外部SRAM</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/05/30/STM32CubeMX%E4%B9%8BSPI-Flash/" title="STM32CubeMX之SPI_Flash">
+                        <span class="hidden-mobile">STM32CubeMX之SPI_Flash</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="twikoo"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/twikoo/1.6.8/twikoo.all.min.js', function() {
+        var options = Object.assign(
+          {"envId":"https://ENV","region":"ap-shanghai","path":"window.location.pathname"},
+          {
+            el: '#twikoo',
+            path: 'window.location.pathname',
+            onCommentLoaded: function() {
+              var imgSelector = '#twikoo .tk-content img:not(.tk-owo-emotion)';
+              Fluid.plugins.imageCaption(imgSelector);
+              Fluid.plugins.fancyBox(imgSelector);
+            }
+          }
+        )
+        twikoo.init(options)
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <p <i class="iconfont icon-copyright"></i> <span>2023 | KayougZhang</span> </p> <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

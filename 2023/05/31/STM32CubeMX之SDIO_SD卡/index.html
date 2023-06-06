@@ -1,0 +1,804 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="SD卡介绍 SD卡（Secure Digital Memory Card）即：安全数码卡。 根据容量大小，有下面几种分类：  关于SD卡其他介绍，可参考 SD卡通识篇 SD卡物理结构：   image-20230531182505470     SD卡寄存器 描述     CID（Card identification number） SD卡唯一识别码">
+<meta property="og:type" content="article">
+<meta property="og:title" content="STM32CubeMX之SDIO_SD卡">
+<meta property="og:url" content="http://example.com/2023/05/31/STM32CubeMX%E4%B9%8BSDIO_SD%E5%8D%A1/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="SD卡介绍 SD卡（Secure Digital Memory Card）即：安全数码卡。 根据容量大小，有下面几种分类：  关于SD卡其他介绍，可参考 SD卡通识篇 SD卡物理结构：   image-20230531182505470     SD卡寄存器 描述     CID（Card identification number） SD卡唯一识别码">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531172428049.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531192743598.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531193038925.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531193736005.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531195623706.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531195739768.png">
+<meta property="article:published_time" content="2023-05-31T05:22:11.000Z">
+<meta property="article:modified_time" content="2023-06-06T00:12:18.398Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="stm32">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531172428049.png">
+  
+  
+  
+  
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"✍","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":false},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":false,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+<meta name="referrer" content="no-referrer" />
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>My Tech Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/article.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.1)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="STM32CubeMX之SDIO_SD卡"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-05-31 13:22" pubdate>
+          2023年5月31日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.6k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          12 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-12 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">STM32CubeMX之SDIO_SD卡</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：2023年6月6日 早上
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h3 id="sd卡介绍">SD卡介绍</h3>
+<p>SD卡（Secure Digital Memory Card）即：安全数码卡。</p>
+<p>根据容量大小，有下面几种分类：</p>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531172428049.png" srcset="/img/loading.gif" lazyload alt="image-20230531172428049" style="zoom:80%;" /></p>
+<p>关于SD卡其他介绍，可参考 <a
+target="_blank" rel="noopener" href="https://www.baidu.com/link?url=sXgupcfG8fflzEDeeUlhH7psACkhlMJWwL8aFDGca27sSn-LNEp_vK-jAyAPEjvk&amp;wd=&amp;eqid=c46ac4b50003b4c30000000664771096">SD卡通识篇</a></p>
+<p>SD卡物理结构：</p>
+<figure>
+<img
+src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531182505470.png" srcset="/img/loading.gif" lazyload
+alt="image-20230531182505470" />
+<figcaption aria-hidden="true">image-20230531182505470</figcaption>
+</figure>
+<table>
+<thead>
+<tr class="header">
+<th>SD卡寄存器</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>CID（Card identification number）</td>
+<td>SD卡唯一识别码</td>
+</tr>
+<tr class="even">
+<td>RCA（Relative card address）</td>
+<td>SD卡本地系统相对地址</td>
+</tr>
+<tr class="odd">
+<td>DSR（Driver Stage Register）</td>
+<td>配置SD卡输出驱动</td>
+</tr>
+<tr class="even">
+<td>CSD（Card Specific Data）</td>
+<td>SD卡操作状态特定信息</td>
+</tr>
+<tr class="odd">
+<td>SCR（SD Configuration Register）</td>
+<td>SD卡特殊信息性能配置</td>
+</tr>
+<tr class="even">
+<td>OCR（Operation conditions Register）</td>
+<td>SD卡操作状态信息</td>
+</tr>
+<tr class="odd">
+<td>SSR（SD Status）</td>
+<td>SD卡属性信息</td>
+</tr>
+<tr class="even">
+<td>CSR（Card Status）</td>
+<td>SD卡的状态</td>
+</tr>
+</tbody>
+</table>
+<p>SD卡初始化流程：</p>
+<figure>
+<img
+src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531190032444.png" srcset="/img/loading.gif" lazyload
+alt="image-20230531190032444" />
+<figcaption aria-hidden="true">image-20230531190032444</figcaption>
+</figure>
+<h3 id="sdio-简介">SDIO 简介</h3>
+<p>SDIO ，全称： Secure Digital Input and
+Output，即安全数字输入输出接口。STM32的SDIO控制器支持多媒体卡（MMC卡）、SD存储卡、SD
+I/O卡和CE-ATA设备。</p>
+<p>SDIO框图：</p>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531192743598.png" srcset="/img/loading.gif" lazyload alt="image-20230531192743598" style="zoom:80%;" /></p>
+<p>其中，SDIO 适配器</p>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531193038925.png" srcset="/img/loading.gif" lazyload alt="image-20230531193038925" style="zoom:80%;" /></p>
+<h3 id="硬件设计">硬件设计</h3>
+<p>插上SD卡，开机的初始化 SD 卡，如果 SD
+卡初始化完成，则串口1打印初始化成功，没初始化成功，则打印初始化失败。然后打印SD卡相关信息，最后写入和读取
+SD 卡扇区 0 的数据，通过串口1发送到电脑。</p>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531193736005.png" srcset="/img/loading.gif" lazyload alt="image-20230531193736005" style="zoom:80%;" /></p>
+<h3 id="软件设计">软件设计</h3>
+<h4 id="stm32cubemx设置">STM32CubeMX设置</h4>
+<ul>
+<li>RCC设置外接HSE，时钟设置为72M</li>
+<li>USART1选择为异步通讯方式，波特率设置为115200Bits/s，传输数据长度为8Bit，无奇偶校验，1位停止位</li>
+<li>激活SDIO，选择4线SD模式，使能硬件流控，分频因子设为4，其余默认设置</li>
+</ul>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531195623706.png" srcset="/img/loading.gif" lazyload alt="image-20230531195623706" style="zoom:80%;" /></p>
+<ul>
+<li>最好激活CRC功能，以避免后续读写SD卡报CRC校验错误</li>
+</ul>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531195739768.png" srcset="/img/loading.gif" lazyload alt="image-20230531195739768" style="zoom:80%;" /></p>
+<ul>
+<li>输入工程名，选择工程路径（不要有中文），选择MDK-ARM V5；勾选Generate
+peripheral initialization as a pair of ‘.c/.h’ files per
+peripheral；点击 GENERATE CODE，生成工程代码。</li>
+</ul>
+<h4 id="mdk-arm编程">MDK-ARM编程</h4>
+<ul>
+<li>在sdio.c文件下可以看到sdio初始化函数，同时在该文件下添加显示SD卡信息函数,并在sdio.h头文件中声明。</li>
+</ul>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">/* USER CODE BEGIN 1 */</span>
+<span class="hljs-comment">//显示SD卡信息函数</span>
+<span class="hljs-type">void</span> <span class="hljs-title function_">Show_SDMMC_Info</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span>
+&#123;
+	HAL_SD_CardCIDTypeDef SDCard_CID;
+	HAL_SD_CardInfoTypeDef SDCard_INFO;
+	<span class="hljs-type">uint64_t</span> CardCap;						<span class="hljs-comment">//SD卡容量</span>
+	HAL_SD_GetCardCID(&amp;hsd,&amp;SDCard_CID);	<span class="hljs-comment">//获取CID</span>
+	HAL_SD_GetCardInfo(&amp;hsd,&amp;SDCard_INFO);	<span class="hljs-comment">//获取SD卡信息</span>
+	
+	<span class="hljs-keyword">switch</span>(SDCard_INFO.CardType)			<span class="hljs-comment">//SD卡类型</span>
+	&#123;
+		<span class="hljs-keyword">case</span> CARD_SDSC:
+			<span class="hljs-keyword">if</span>(SDCard_INFO.CardVersion == CARD_V1_X)
+      &#123;
+				<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Card Type: SDSC V1\r\n&quot;</span>);
+			&#125;
+			<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(SDCard_INFO.CardVersion == CARD_V2_X)
+      &#123;
+				<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Card Type: SDSC V2\r\n&quot;</span>);
+			&#125;
+			<span class="hljs-keyword">break</span>;
+		<span class="hljs-keyword">case</span> CARD_SDHC_SDXC:
+			<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Card Type: SDHC\r\n&quot;</span>);
+			<span class="hljs-keyword">break</span>;
+	&#125;
+	
+	CardCap = (<span class="hljs-type">uint64_t</span>)(SDCard_INFO.LogBlockNbr)*(<span class="hljs-type">uint64_t</span>)(SDCard_INFO.LogBlockSize)/<span class="hljs-number">1024</span>/<span class="hljs-number">1024</span>;	<span class="hljs-comment">//计算SD卡容量(单位：MB)</span>
+	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Card ManufacturerID: %d\r\n&quot;</span>,SDCard_CID.ManufacturerID);	<span class="hljs-comment">//制造商ID</span>
+	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Card RelativeAddress: %d\r\n&quot;</span>,SDCard_INFO.RelCardAdd);		<span class="hljs-comment">//卡相对地址</span>
+	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;LogicBlockNumber: %d\r\n&quot;</span>,SDCard_INFO.LogBlockNbr);	<span class="hljs-comment">//逻辑块数量</span>
+	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;LogBlockSize: %d\r\n&quot;</span>,SDCard_INFO.LogBlockSize);	<span class="hljs-comment">//逻辑块大小</span>
+	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Card Capacity: %d MB\r\n&quot;</span>,(<span class="hljs-type">uint32_t</span>)CardCap);	<span class="hljs-comment">//显示容量</span>
+	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Card BlockSize: %d\r\n&quot;</span>,SDCard_INFO.BlockSize);	<span class="hljs-comment">//块大小</span>
+&#125;
+<span class="hljs-comment">/* USER CODE END 1 */</span></code></pre></div>
+<ul>
+<li>在uart.c文件中添加fputc重定义函数，并添加头文件<code>&lt;stdio.h&gt;</code>，勾选keil软件<strong>Use
+MicroLIB</strong>选项。</li>
+<li>在main.c文件中编写SD卡读写测试代码</li>
+</ul>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">/* USER CODE BEGIN Includes */</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string.h&gt;</span></span>
+<span class="hljs-comment">/* USER CODE END Includes */</span>
+
+<span class="hljs-comment">/* USER CODE BEGIN 1 */</span>
+<span class="hljs-type">uint8_t</span> Buffer_Tx[<span class="hljs-number">256</span>],Buffer_Rx[<span class="hljs-number">256</span>] = &#123;<span class="hljs-number">0</span>&#125;;
+<span class="hljs-type">uint32_t</span> i;
+<span class="hljs-comment">/* USER CODE END 1 */</span>
+
+<span class="hljs-comment">/* USER CODE BEGIN 2 */</span> 
+Show_SDMMC_Info();
+<span class="hljs-comment">/* 准备好数据 */</span>
+<span class="hljs-comment">//  memset(Buffer_Tx,0x15,sizeof(Buffer_Tx));</span>
+<span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>; i&lt;<span class="hljs-number">256</span>; i++)
+&#123;
+    Buffer_Tx[i] = i;
+&#125;
+<span class="hljs-comment">/* USER CODE END 2 */</span>
+
+<span class="hljs-keyword">while</span> (<span class="hljs-number">1</span>)
+&#123;
+    <span class="hljs-comment">/* 擦除SD卡 */</span>
+    <span class="hljs-keyword">if</span>(HAL_SD_Erase(&amp;hsd,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>) == HAL_OK)
+    &#123;
+        <span class="hljs-keyword">while</span>(HAL_SD_GetCardState(&amp;hsd) != HAL_SD_CARD_TRANSFER);
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;\r\nErase Block Success!\r\n&quot;</span>);
+    &#125;
+    <span class="hljs-keyword">else</span>
+    &#123;
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;\r\nErase Block Failed!\r\n&quot;</span>);				
+    &#125;
+    HAL_Delay(<span class="hljs-number">100</span>);
+    <span class="hljs-comment">/* 向SD卡写数据 */</span>    
+    <span class="hljs-keyword">if</span>(HAL_SD_WriteBlocks(&amp;hsd,Buffer_Tx,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">0xffffffff</span>) == HAL_OK)
+    &#123;
+        <span class="hljs-keyword">while</span>(HAL_SD_GetCardState(&amp;hsd) != HAL_SD_CARD_TRANSFER);
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Write Block Success!\r\n&quot;</span>);
+        <span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>; i&lt;<span class="hljs-keyword">sizeof</span>(Buffer_Tx); i++)
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;0x%02x:%02d  &quot;</span>, i, Buffer_Tx[i]);
+    &#125;
+    <span class="hljs-keyword">else</span>
+    &#123;
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Write Block Failed!\r\n&quot;</span>);
+    &#125;
+    HAL_Delay(<span class="hljs-number">100</span>);
+    <span class="hljs-comment">/* 读取SD卡数据 */</span>
+    <span class="hljs-keyword">if</span>(HAL_SD_ReadBlocks(&amp;hsd,Buffer_Rx,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">0xffffffff</span>) == HAL_OK)
+    &#123;
+        <span class="hljs-keyword">while</span>(HAL_SD_GetCardState(&amp;hsd) != HAL_SD_CARD_TRANSFER);
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;\r\nRead Block Success!\r\n&quot;</span>);
+        <span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>; i&lt;<span class="hljs-keyword">sizeof</span>(Buffer_Rx); i++)
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;0x%02x:%02d  &quot;</span>, i, Buffer_Rx[i]);
+    &#125;
+    <span class="hljs-keyword">else</span>
+    &#123;
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;\r\nRead Block Failed!\r\n&quot;</span>);			
+    &#125;
+    HAL_Delay(<span class="hljs-number">2000</span>);
+&#125;
+</code></pre></div>
+<ul>
+<li>编译无误下载到开发板后，插入SD卡，打开串口助手，显示SD卡信息及其他数据</li>
+</ul>
+<figure>
+<img
+src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230602185047037.png" srcset="/img/loading.gif" lazyload
+alt="image-20230602185047037" />
+<figcaption aria-hidden="true">image-20230602185047037</figcaption>
+</figure>
+<p>工程文件Gitee：<a
+target="_blank" rel="noopener" href="https://gitee.com/kayoungzhang/my_codehub/raw/master/stm32/sdio.zip">sdio</a></p>
+<h3 id="参考链接">参考链接：</h3>
+<p>https://www.sdcard.org/downloads/pls/</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/stm32/" class="category-chain-item">stm32</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/stm32/">#stm32</a>
+      
+    </div>
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/05/31/STM32CubeMX%E4%B9%8BFatfs%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" title="STM32CubeMX之FatFs文件系统">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">STM32CubeMX之FatFs文件系统</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/05/31/STM32CubeMX%E4%B9%8B%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" title="STM32CubeMX之内存管理">
+                        <span class="hidden-mobile">STM32CubeMX之内存管理</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="twikoo"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/twikoo/1.6.8/twikoo.all.min.js', function() {
+        var options = Object.assign(
+          {"envId":"https://ENV","region":"ap-shanghai","path":"window.location.pathname"},
+          {
+            el: '#twikoo',
+            path: 'window.location.pathname',
+            onCommentLoaded: function() {
+              var imgSelector = '#twikoo .tk-content img:not(.tk-owo-emotion)';
+              Fluid.plugins.imageCaption(imgSelector);
+              Fluid.plugins.fancyBox(imgSelector);
+            }
+          }
+        )
+        twikoo.init(options)
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <p <i class="iconfont icon-copyright"></i> <span>2023 | KayougZhang</span> </p> <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

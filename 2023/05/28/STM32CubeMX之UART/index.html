@@ -1,0 +1,818 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="串口简介 STM32F103ZET6 最多可提供 5 路串口，有分数波特率发生器、支持同步单线通信和半双工单线通讯、支持 LIN、支持调制解调器操作、智能卡协议和 IrDA SIR ENDEC 规范、具有 DMA等。 我们通常使用的是异步通信，异步通信规定传输的数据格式由起始位（start bit）、数据位（data bit）、奇偶校验位（parity bit）和停止位（stop b">
+<meta property="og:type" content="article">
+<meta property="og:title" content="STM32CubeMX之UART">
+<meta property="og:url" content="http://example.com/2023/05/28/STM32CubeMX%E4%B9%8BUART/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="串口简介 STM32F103ZET6 最多可提供 5 路串口，有分数波特率发生器、支持同步单线通信和半双工单线通讯、支持 LIN、支持调制解调器操作、智能卡协议和 IrDA SIR ENDEC 规范、具有 DMA等。 我们通常使用的是异步通信，异步通信规定传输的数据格式由起始位（start bit）、数据位（data bit）、奇偶校验位（parity bit）和停止位（stop b">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230528133425092.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230528140811005.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230528141728742.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230528144050587.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230528150421728.png">
+<meta property="article:published_time" content="2023-05-28T03:53:27.000Z">
+<meta property="article:modified_time" content="2023-06-01T00:17:40.925Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="stm32">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230528133425092.png">
+  
+  
+  
+  
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"✍","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":false},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":false,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+<meta name="referrer" content="no-referrer" />
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>My Tech Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/article.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.1)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="STM32CubeMX之UART"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-05-28 11:53" pubdate>
+          2023年5月28日 中午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          4.5k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          16 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-12 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">STM32CubeMX之UART</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：2023年6月1日 早上
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h3 id="串口简介">串口简介</h3>
+<p>STM32F103ZET6 最多可提供 5
+路串口，有分数波特率发生器、支持同步单线通信和半双工单线通讯、支持
+LIN、支持调制解调器操作、智能卡协议和 IrDA SIR ENDEC 规范、具有
+DMA等。</p>
+<p>我们通常使用的是异步通信，异步通信规定传输的数据格式由起始位（start
+bit）、数据位（data bit）、奇偶校验位（parity bit）和停止位（stop
+bit）组成。在进行传输之前，双方一定要使用相同的波特率，波特率就是每秒钟传输的数据位数。串口通讯有HAL
+库轮询，中断，DMA 三种通信模式：</p>
+<ul>
+<li><strong>轮询方式</strong>：CPU不断查询IO设备，如设备有请求则加以处理。例如CPU不断查询串口是否传输完成，如传输超过则返回超时错误。轮询方式会占用CPU处理时间，效率较低。</li>
+<li><strong>中断控制方式</strong>：当I/O操作完成时，输入输出设备控制器通过中断请求线向处理器发出中断信号，处理器收到中断信号之后，转到中断处理程序，对数据传送工作进行相应的处理。</li>
+<li><strong>直接内存存取技术（DMA）方式</strong>：所谓直接传送，即在内存与IO设备间传送一个数据块的过程中，不需要CPU的任何中间干涉，只需要CPU在过程开始时向设备发出“传送块数据”的命令，然后通过中断来得知过程是否结束和下次操作是否准备就绪。</li>
+</ul>
+<h3 id="硬件设计">硬件设计</h3>
+<p>战舰开发板板载了 1 个 USB和 2 个 RS232
+串口。通过CH340芯片把串口1与PC的USB口进行连接，实现串口传输。我们将利用串口
+1
+不停的打印信息到电脑上，同时接收从串口发过来的数据，把发送过来的数据直接送回给电脑。</p>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230528133425092.png" srcset="/img/loading.gif" lazyload alt="image-20230528133425092" style="zoom:80%;" /></p>
+<h3 id="软件设计">软件设计</h3>
+<h4 id="stm32cubemx设置">STM32CubeMX设置</h4>
+<ul>
+<li>RCC设置外接HSE，时钟设置为72M</li>
+<li>USART1选择为异步通讯方式，波特率设置为115200Bits/s，传输数据长度为8Bit，无奇偶校验，1位停止位</li>
+</ul>
+<figure>
+<img
+src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230528134337560.png" srcset="/img/loading.gif" lazyload
+alt="image-20230528134337560" />
+<figcaption aria-hidden="true">image-20230528134337560</figcaption>
+</figure>
+<ul>
+<li>若使用中断方式，还需要开启串口中断</li>
+</ul>
+<figure>
+<img
+src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230528134456998.png" srcset="/img/loading.gif" lazyload
+alt="image-20230528134456998" />
+<figcaption aria-hidden="true">image-20230528134456998</figcaption>
+</figure>
+<ul>
+<li>若使用直接内存存取（DMA）方式，除以上步骤外（串口中断要开启，否则程序只能发送一次数据，且不能判断DMA传输是否完成，USART一直处于busy状态）还需要设置DMA传输方向、通道、优先级、数据长度以及指针递增与否</li>
+</ul>
+<figure>
+<img
+src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230528134749373.png" srcset="/img/loading.gif" lazyload
+alt="image-20230528134749373" />
+<figcaption aria-hidden="true">image-20230528134749373</figcaption>
+</figure>
+<ul>
+<li>输入工程名，选择工程路径（不要有中文），选择MDK-ARM
+V5；勾选Generated periphera initialization as a pair of ‘.c/.h’ files
+per IP ；点击GENERATE CODE，生成工程代码</li>
+</ul>
+<h4 id="mdk-arm软件编程">MDK-ARM软件编程</h4>
+<p>在生成的usart.c文件中，软件已经帮我们实现了UART1和GPIO的初始化操作，以下只看轮询方式初始化函数。</p>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-type">void</span> <span class="hljs-title function_">MX_USART1_UART_Init</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span>
+&#123;
+
+  <span class="hljs-comment">/* USER CODE BEGIN USART1_Init 0 */</span>
+
+  <span class="hljs-comment">/* USER CODE END USART1_Init 0 */</span>
+
+  <span class="hljs-comment">/* USER CODE BEGIN USART1_Init 1 */</span>
+
+  <span class="hljs-comment">/* USER CODE END USART1_Init 1 */</span>
+  huart1.Instance = USART1;
+  huart1.Init.BaudRate = <span class="hljs-number">115200</span>;
+  huart1.Init.WordLength = UART_WORDLENGTH_8B;
+  huart1.Init.StopBits = UART_STOPBITS_1;
+  huart1.Init.Parity = UART_PARITY_NONE;
+  huart1.Init.Mode = UART_MODE_TX_RX;
+  huart1.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+  huart1.Init.OverSampling = UART_OVERSAMPLING_16;
+  <span class="hljs-keyword">if</span> (HAL_UART_Init(&amp;huart1) != HAL_OK)
+  &#123;
+    Error_Handler();
+  &#125;
+  <span class="hljs-comment">/* USER CODE BEGIN USART1_Init 2 */</span>
+
+  <span class="hljs-comment">/* USER CODE END USART1_Init 2 */</span>
+
+&#125;
+
+<span class="hljs-type">void</span> <span class="hljs-title function_">HAL_UART_MspInit</span><span class="hljs-params">(UART_HandleTypeDef* uartHandle)</span>
+&#123;
+
+  GPIO_InitTypeDef GPIO_InitStruct = &#123;<span class="hljs-number">0</span>&#125;;
+  <span class="hljs-keyword">if</span>(uartHandle-&gt;Instance==USART1)
+  &#123;
+  <span class="hljs-comment">/* USER CODE BEGIN USART1_MspInit 0 */</span>
+
+  <span class="hljs-comment">/* USER CODE END USART1_MspInit 0 */</span>
+    <span class="hljs-comment">/* USART1 clock enable */</span>
+    __HAL_RCC_USART1_CLK_ENABLE();
+
+    __HAL_RCC_GPIOA_CLK_ENABLE();
+    <span class="hljs-comment">/**USART1 GPIO Configuration</span>
+<span class="hljs-comment">    PA9     ------&gt; USART1_TX</span>
+<span class="hljs-comment">    PA10     ------&gt; USART1_RX</span>
+<span class="hljs-comment">    */</span>
+    GPIO_InitStruct.Pin = GPIO_PIN_9;
+    GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
+    HAL_GPIO_Init(GPIOA, &amp;GPIO_InitStruct);
+
+    GPIO_InitStruct.Pin = GPIO_PIN_10;
+    GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+    GPIO_InitStruct.Pull = GPIO_NOPULL;
+    HAL_GPIO_Init(GPIOA, &amp;GPIO_InitStruct);
+
+  <span class="hljs-comment">/* USER CODE BEGIN USART1_MspInit 1 */</span>
+
+  <span class="hljs-comment">/* USER CODE END USART1_MspInit 1 */</span>
+  &#125;
+&#125;
+
+<span class="hljs-type">void</span> <span class="hljs-title function_">HAL_UART_MspDeInit</span><span class="hljs-params">(UART_HandleTypeDef* uartHandle)</span>
+&#123;
+
+  <span class="hljs-keyword">if</span>(uartHandle-&gt;Instance==USART1)
+  &#123;
+  <span class="hljs-comment">/* USER CODE BEGIN USART1_MspDeInit 0 */</span>
+
+  <span class="hljs-comment">/* USER CODE END USART1_MspDeInit 0 */</span>
+    <span class="hljs-comment">/* Peripheral clock disable */</span>
+    __HAL_RCC_USART1_CLK_DISABLE();
+
+    <span class="hljs-comment">/**USART1 GPIO Configuration</span>
+<span class="hljs-comment">    PA9     ------&gt; USART1_TX</span>
+<span class="hljs-comment">    PA10     ------&gt; USART1_RX</span>
+<span class="hljs-comment">    */</span>
+    HAL_GPIO_DeInit(GPIOA, GPIO_PIN_9|GPIO_PIN_10);
+
+  <span class="hljs-comment">/* USER CODE BEGIN USART1_MspDeInit 1 */</span>
+
+  <span class="hljs-comment">/* USER CODE END USART1_MspDeInit 1 */</span>
+  &#125;
+&#125;</code></pre></div>
+<p>打印输出会使用到printf函数，若要printf输出到串口，需要将fputc函数里面的输出指向串口(重定向)，在<code>usart.c</code>文件中重定向<code>fputc</code>函数：</p>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">fputc</span><span class="hljs-params">(<span class="hljs-type">int</span> ch, FILE *f)</span>
+&#123;
+	HAL_UART_Transmit(&amp;huart1, (<span class="hljs-type">uint8_t</span>*)&amp;ch, <span class="hljs-number">1</span>, <span class="hljs-number">0xffff</span>);
+	<span class="hljs-keyword">return</span> ch;
+&#125;</code></pre></div>
+<p>同时需要勾选 <strong>Use MicroLIB</strong></p>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230528140811005.png" srcset="/img/loading.gif" lazyload alt="image-20230528140811005" style="zoom:80%;" /></p>
+<p>下面在main函数中针对UART1三种操作方式进行编写程序：</p>
+<ul>
+<li>轮询方式</li>
+</ul>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">/* USER CODE BEGIN WHILE */</span>
+<span class="hljs-keyword">while</span> (<span class="hljs-number">1</span>)
+&#123;
+    HAL_UART_Transmit(&amp;huart1, <span class="hljs-string">&quot;HAL_UART_Transmit Test...&quot;</span>, <span class="hljs-number">25</span>, <span class="hljs-number">0xffff</span>);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;\r\n uart test...\r\n&quot;</span>);
+    HAL_Delay(<span class="hljs-number">500</span>);
+    <span class="hljs-comment">/* USER CODE END WHILE */</span>
+
+    <span class="hljs-comment">/* USER CODE BEGIN 3 */</span>
+&#125;</code></pre></div>
+<p>实验现象：</p>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230528141728742.png" srcset="/img/loading.gif" lazyload alt="image-20230528141728742" style="zoom:80%;" /></p>
+<ul>
+<li>中断方式</li>
+</ul>
+<p>在
+<strong>stm32f1xx_hal_uart.c</strong>文件中找到弱符号中断接收完成回调函数原型，并在usart.c中自定义该回调函数
+<code>__weak void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)</code></p>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-keyword">extern</span> <span class="hljs-type">uint8_t</span> RxMsg[<span class="hljs-number">20</span>];
+<span class="hljs-type">void</span> <span class="hljs-title function_">HAL_UART_RxCpltCallback</span><span class="hljs-params">(UART_HandleTypeDef *huart)</span>
+&#123;
+	<span class="hljs-keyword">if</span>(huart-&gt;Instance == USART1)
+	&#123;
+		HAL_UART_Transmit(&amp;huart1,RxMsg,<span class="hljs-number">10</span>,<span class="hljs-number">0xffff</span>);	<span class="hljs-comment">//将接收的数据通过串口1发送回去</span>
+		HAL_UART_Receive_IT(&amp;huart1,RxMsg,<span class="hljs-number">10</span>);		<span class="hljs-comment">//再次开启接收中断</span>
+	&#125;
+&#125;</code></pre></div>
+<p>在<strong>main.c</strong>中添加以下代码： <div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">/* USER CODE BEGIN PV */</span>
+<span class="hljs-type">uint8_t</span> TxMsg[] = <span class="hljs-string">&quot;\r\n*****USART communication based on IT*****\r\n&quot;</span>;
+<span class="hljs-type">uint8_t</span> RxMsg[<span class="hljs-number">20</span>];
+<span class="hljs-comment">/* USER CODE END PV */</span>
+
+<span class="hljs-comment">/* USER CODE BEGIN 2 */</span>
+HAL_UART_Transmit_IT(&amp;huart1,TxMsg,<span class="hljs-keyword">sizeof</span>(TxMsg)); <span class="hljs-comment">//开启发送数据中断</span>
+HAL_UART_Receive_IT(&amp;huart1,RxMsg,<span class="hljs-number">10</span>); <span class="hljs-comment">//开启接收数据中断</span>
+<span class="hljs-comment">/* USER CODE END 2 */</span></code></pre></div></p>
+<p>使用串口助手发送10个字符，串口助手回显发送的数据；串口要发够10个字符才会触发中断；超过10个字符，串口只会发送10个字符（<strong>注意</strong>不要勾选‘发送新行’）</p>
+<p>实验现象：</p>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230528144050587.png" srcset="/img/loading.gif" lazyload alt="image-20230528144050587" style="zoom:80%;" /></p>
+<ul>
+<li>DMA方式</li>
+</ul>
+<p>在 main.c中添加如下代码：</p>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">/* USER CODE BEGIN PV */</span>
+<span class="hljs-type">uint8_t</span> TxMsg[] = <span class="hljs-string">&quot;\r\n*****USART communication based on DMA*****\r\n&quot;</span>;
+<span class="hljs-comment">/* USER CODE END PV */</span>
+
+<span class="hljs-comment">/* USER CODE BEGIN WHILE */</span>
+<span class="hljs-keyword">while</span> (<span class="hljs-number">1</span>)
+&#123;
+    HAL_UART_Transmit_DMA(&amp;huart1,TxMsg,<span class="hljs-keyword">sizeof</span>(TxMsg));
+    HAL_Delay(<span class="hljs-number">500</span>);
+
+    <span class="hljs-comment">/* USER CODE END WHILE */</span>
+
+    <span class="hljs-comment">/* USER CODE BEGIN 3 */</span>
+&#125;
+<span class="hljs-comment">/* USER CODE END 3 */</span></code></pre></div>
+<p>另外需要<strong>注意</strong>,
+软件会将DMA初始化函数放到uart初始化函数后面，这样无法实现DMA寄存器设置，无法实现功能。必须将MX_DMA_Init函数放在UART
+DMA配置之前调用。</p>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">/* Initialize all configured peripherals */</span>
+MX_DMA_Init();
+MX_GPIO_Init();
+MX_USART1_UART_Init();
+
+<span class="hljs-comment">/* USER CODE BEGIN 2 */</span></code></pre></div>
+<p>实验现象：</p>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230528150421728.png" srcset="/img/loading.gif" lazyload alt="image-20230528150421728" style="zoom:80%;" /></p>
+<p>工程文件Gitee：<a
+target="_blank" rel="noopener" href="https://gitee.com/kayoungzhang/my_codehub/raw/master/stm32/uart.zip">uart</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/stm32/" class="category-chain-item">stm32</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/stm32/">#stm32</a>
+      
+    </div>
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/05/28/STM32CubeMX%E4%B9%8B%E5%AE%9A%E6%97%B6%E5%99%A8%E4%B8%AD%E6%96%AD/" title="STM32CubeMX之定时器中断">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">STM32CubeMX之定时器中断</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/05/28/STM32CubeMX%E4%B9%8BEXTI/" title="STM32CubeMX之EXTI">
+                        <span class="hidden-mobile">STM32CubeMX之EXTI</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="twikoo"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/twikoo/1.6.8/twikoo.all.min.js', function() {
+        var options = Object.assign(
+          {"envId":"https://ENV","region":"ap-shanghai","path":"window.location.pathname"},
+          {
+            el: '#twikoo',
+            path: 'window.location.pathname',
+            onCommentLoaded: function() {
+              var imgSelector = '#twikoo .tk-content img:not(.tk-owo-emotion)';
+              Fluid.plugins.imageCaption(imgSelector);
+              Fluid.plugins.fancyBox(imgSelector);
+            }
+          }
+        )
+        twikoo.init(options)
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <p <i class="iconfont icon-copyright"></i> <span>2023 | KayougZhang</span> </p> <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
