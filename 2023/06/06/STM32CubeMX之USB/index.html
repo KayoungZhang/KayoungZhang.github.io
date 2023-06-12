@@ -16,27 +16,26 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="FatFs 文件系统 文件系统是为了存储和管理数据，而在存储介质中建立的一种组织结构，这些结构包括操作系统引导区、目录和文件。常见的 windows 下的文件系统格式包括 FAT32、NTFS、exFAT。在使用文件系统前，要先对存储介质进行格式化。 使用文件系统时，数据都以文件的形式存储。写入新文件时，先在目录中创建一个文件索引，它指示了文件存放的物理地址，再把数据存储到该地址中。当需要">
+    <meta name="description" content="USB简介 USB（Universal Serial BUS）通用串行总线，是一个外部总线标准。USB 接口支持设备的即插即用和热插拔功能。 标准 USB 共四根线组成,除 VCC&#x2F;GND 外,另外为 D+,D-，这两根数据线采用的是差分电压的方式进行数据传输的。在 USB 主机上，D-和 D+都是接了 15K 的电阻到低的，所以在没有设备接入的时候，D+、D-均是低电平。而在 USB">
 <meta property="og:type" content="article">
-<meta property="og:title" content="STM32CubeMX之FatFs文件系统">
-<meta property="og:url" content="http://example.com/2023/05/31/STM32CubeMX%E4%B9%8BFatfs%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/index.html">
+<meta property="og:title" content="STM32CubeMX之USB">
+<meta property="og:url" content="http://example.com/2023/06/06/STM32CubeMX%E4%B9%8BUSB/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="FatFs 文件系统 文件系统是为了存储和管理数据，而在存储介质中建立的一种组织结构，这些结构包括操作系统引导区、目录和文件。常见的 windows 下的文件系统格式包括 FAT32、NTFS、exFAT。在使用文件系统前，要先对存储介质进行格式化。 使用文件系统时，数据都以文件的形式存储。写入新文件时，先在目录中创建一个文件索引，它指示了文件存放的物理地址，再把数据存储到该地址中。当需要">
+<meta property="og:description" content="USB简介 USB（Universal Serial BUS）通用串行总线，是一个外部总线标准。USB 接口支持设备的即插即用和热插拔功能。 标准 USB 共四根线组成,除 VCC&#x2F;GND 外,另外为 D+,D-，这两根数据线采用的是差分电压的方式进行数据传输的。在 USB 主机上，D-和 D+都是接了 15K 的电阻到低的，所以在没有设备接入的时候，D+、D-均是低电平。而在 USB">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531201529949.png">
-<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531202042461.png">
-<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531193736005.png">
-<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531195623706.png">
-<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531215923184.png">
-<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531220058287.png">
-<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230605205919074.png">
-<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230605210046746.png">
-<meta property="article:published_time" content="2023-05-31T05:22:46.000Z">
-<meta property="article:modified_time" content="2023-06-06T00:12:18.396Z">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230606220817086.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230606221327095.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230606222512234.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230606222338962.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230606222858420.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230606235349209.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230606235715688.png">
+<meta property="article:published_time" content="2023-06-06T13:47:48.000Z">
+<meta property="article:modified_time" content="2023-06-07T11:38:13.934Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="stm32">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531201529949.png">
+<meta name="twitter:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230606220817086.png">
   
   
   
@@ -208,7 +207,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="STM32CubeMX之FatFs文件系统"></span>
+            <span id="subtitle" data-typed-text="STM32CubeMX之USB"></span>
           
         </div>
 
@@ -219,8 +218,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-05-31 13:22" pubdate>
-          2023年5月31日 下午
+        <time datetime="2023-06-06 21:47" pubdate>
+          2023年6月6日 晚上
         </time>
       </span>
     
@@ -231,7 +230,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.7k 字
+          2.9k 字
         
       </span>
     
@@ -242,7 +241,7 @@
         
         
         
-          13 分钟
+          10 分钟
         
       </span>
     
@@ -280,12 +279,12 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">STM32CubeMX之FatFs文件系统</h1>
+            <h1 style="display: none">STM32CubeMX之USB</h1>
             
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年6月6日 早上
+                    本文最后更新于：2023年6月7日 晚上
                   
                 
               </p>
@@ -293,44 +292,51 @@
             
               <div class="markdown-body">
                 
-                <h3 id="fatfs-文件系统">FatFs 文件系统</h3>
-<p>文件系统是为了存储和管理数据，而在存储介质中建立的一种组织结构，这些结构包括操作系统引导区、目录和文件。常见的
-windows 下的文件系统格式包括
-FAT32、NTFS、exFAT。在使用文件系统前，要先对存储介质进行格式化。</p>
-<p>使用文件系统时，数据都以文件的形式存储。写入新文件时，先在目录中创建一个文件索引，它指示了文件存放的物理地址，再把数据存储到该地址中。当需要读取数据时，可以从目录中找到该文件的索引，进而在相应的地址中读取出数据。</p>
-<p>FatFs 就是一个完全免费开源，面向小型嵌入式系统的一种通用的 FAT
-文件系统。它完全是由 ANSI C 语言编写并且完全独立于底层的 I/O
-介质。因此它可以很容易地不加修改地移植到其他的处理器当中，如
-8051、PIC、AVR、SH、Z80、H8、ARM 等。FatFs 支持 FAT12、FAT16、FAT32
-等格式。</p>
-<p>FatFs 文件系统官网：http://elm-chan.org/fsw/ff/00index_e.html</p>
-<p>FatFs 模块的层次结构如下图示：</p>
-<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531201529949.png" srcset="/img/loading.gif" lazyload alt="image-20230531201529949" style="zoom:80%;" /></p>
-<p>一般只需要编写最底层驱动代码，它包括存储媒介读／写接口（disk
-I/O）和供给文件创建修改时间的实时时钟等。</p>
-<p>FatFs
-源码相关文件如下表示，移植时，一般只需要修改2个文件（即<strong>ffconf.h</strong>和<strong>diskio.c</strong>）</p>
-<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531202042461.png" srcset="/img/loading.gif" lazyload alt="image-20230531202042461" style="zoom:80%;" /></p>
+                <h3 id="usb简介">USB简介</h3>
+<p>USB（Universal Serial BUS）通用串行总线，是一个外部总线标准。USB
+接口支持设备的即插即用和热插拔功能。</p>
+<p>标准 USB 共四根线组成,除 VCC/GND 外,另外为
+D+,D-，这两根数据线采用的是差分电压的方式进行数据传输的。在 USB
+主机上，D-和 D+都是接了 15K
+的电阻到低的，所以在没有设备接入的时候，D+、D-均是低电平。而在 USB
+设备中，如果是高速设备，则会在 D+上接一个 1.5K 的电阻到
+VCC，而如果是低速设备，则会在 D-上接一个 1.5K 的电阻到
+VCC。这样当设备接入主机的时候，主机就可以判断是否有设备接入，并能判断设备是高速设备还是低速设备。</p>
+<p>STM32F103 的 MCU 自带 USB 从控制器，符合 USB 规范的通信连接；PC
+主机和微控制器之间的数据传输是通过共享一专用的数据缓冲区来完成的，该数据缓冲区能被
+USB
+外设直接访问。这块专用数据缓冲区的大小由所使用的端点数目和每个端点最大的数据分组大小所决定，每个端点最大可使用
+512 字节缓冲区（专用的 512 字节，和 CAN 共用），最多可用于 16 个单向或 8
+个双向端点。USB 模块同 PC 主机通信，根据 USB
+规范实现令牌分组的检测，数据发送/接收的处理，和握手分组的处理。整个传输的格式由硬件完成，其中包括
+CRC 的生成和校验。</p>
+<p>USB功能框图：</p>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230606220817086.png" srcset="/img/loading.gif" lazyload alt="image-20230606220817086" style="zoom:80%;" /></p>
+<p>整个 USB 通信的详细过程是很复杂的，要正常使用 STM32F1 的
+USB，就得编写 USB 驱动，好在ST 官方提供了一套完整的 USB
+驱动库，通过这个库，我们可以很方便的实现USB功能，而不需要详细了解 USB
+的整个驱动，大大缩短了我们的开发时间和精力。</p>
 <h3 id="硬件设计">硬件设计</h3>
-<p>使用FatFs 文件系统对SD卡进行相关操作，并使用串口1来打印调试信息。</p>
-<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531193736005.png" srcset="/img/loading.gif" lazyload alt="image-20230531193736005" style="zoom:80%;" /></p>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230606221327095.png" srcset="/img/loading.gif" lazyload alt="image-20230606221327095" style="zoom:80%;" /></p>
+<p>利用 STM32 自带的 USB 功能,连接电脑 USB,虚拟出一个
+USB串口，实现电脑和开发板的数据通信。</p>
 <h3 id="软件设计">软件设计</h3>
 <h4 id="stm32cubemx设置">STM32CubeMX设置</h4>
 <ul>
-<li>RCC设置外接HSE，时钟设置为72M</li>
-<li>USART1选择为异步通讯方式，波特率设置为115200Bits/s，传输数据长度为8Bit，无奇偶校验，1位停止位</li>
-<li>激活CRC；</li>
-<li>激活SDIO，选择4线SD模式，使能硬件流控，分频因子设为4，其余默认设置</li>
+<li>激活USB，参数默认即可。</li>
 </ul>
-<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531195623706.png" srcset="/img/loading.gif" lazyload alt="image-20230531195623706" style="zoom:80%;" /></p>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230606222512234.png" srcset="/img/loading.gif" lazyload alt="image-20230606222512234" style="zoom:80%;" /></p>
 <ul>
-<li>打开FATFS文件系统，按下图配置，其余默认值</li>
+<li>RCC设置外接HSE，主时钟设置为72M，USB时钟设置为48M。</li>
 </ul>
-<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531215923184.png" srcset="/img/loading.gif" lazyload alt="image-20230531215923184" style="zoom:80%;" /></p>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230606222338962.png" srcset="/img/loading.gif" lazyload alt="image-20230606222338962" style="zoom:80%;" /></p>
 <ul>
-<li>增大堆空间</li>
+<li>在中间件中选择 <code>USB_DEVICE</code> 设置，在
+<code>Class For FS IP</code> 设备类别选择
+<code>Communication Device Class（Virtual Port Com）</code>
+虚拟串口，参数保持默认。</li>
 </ul>
-<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531220058287.png" srcset="/img/loading.gif" lazyload alt="image-20230531220058287" style="zoom:80%;" /></p>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230606222858420.png" srcset="/img/loading.gif" lazyload alt="image-20230606222858420" style="zoom:80%;" /></p>
 <ul>
 <li>输入工程名，选择工程路径（不要有中文），选择MDK-ARM V5；勾选Generate
 peripheral initialization as a pair of ‘.c/.h’ files per
@@ -338,123 +344,86 @@ peripheral；点击GENERATE CODE，生成工程代码</li>
 </ul>
 <h4 id="mdk-arm编程">MDK-ARM编程</h4>
 <ul>
-<li>在main.c中添加测试代码</li>
+<li>在usbd_cdc_if.c文件中找到发送和接收函数，其中，发生函数可以在外调用，接收函数则是自动触发，为了在串口助手中回送数据，需要在接收函数中添加发送函数。</li>
 </ul>
-<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">/* USER CODE BEGIN PV */</span>
-<span class="hljs-type">uint32_t</span> wr_size;                <span class="hljs-comment">/* File write counts */</span>
-<span class="hljs-type">uint32_t</span> rd_size;                 <span class="hljs-comment">/* File read counts */</span>
-<span class="hljs-type">uint8_t</span> wr_buffer[] = <span class="hljs-string">&quot;This is STM32 working with FatFs.&quot;</span>; <span class="hljs-comment">/* File write buffer */</span>
-<span class="hljs-type">uint8_t</span> rd_buffer[<span class="hljs-number">100</span>] = &#123;<span class="hljs-number">0</span>&#125;;                   <span class="hljs-comment">/* File read buffers */</span>
-<span class="hljs-type">char</span> *filename = <span class="hljs-string">&quot;STM32cubemx.txt&quot;</span>; <span class="hljs-comment">/* File will be open */</span>
-<span class="hljs-type">char</span> *sensor_file = <span class="hljs-string">&quot;Sensor.txt&quot;</span>; <span class="hljs-comment">/* File will be create */</span>
-<span class="hljs-type">char</span> sensor_buffer[<span class="hljs-number">100</span>] = &#123;<span class="hljs-number">0</span>&#125;; <span class="hljs-comment">/* 写入的数据缓存*/</span>
-<span class="hljs-comment">/* USER CODE END PV */</span>
-
-<span class="hljs-type">void</span> <span class="hljs-title function_">fatfs_test</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">/**</span>
+<span class="hljs-comment">  * @brief  Data received over USB OUT endpoint are sent over CDC interface</span>
+<span class="hljs-comment">  *         through this function.</span>
+<span class="hljs-comment">  *</span>
+<span class="hljs-comment">  *         @note</span>
+<span class="hljs-comment">  *         This function will issue a NAK packet on any OUT packet received on</span>
+<span class="hljs-comment">  *         USB endpoint until exiting this function. If you exit this function</span>
+<span class="hljs-comment">  *         before transfer is complete on CDC interface (ie. using DMA controller)</span>
+<span class="hljs-comment">  *         it will result in receiving more data while previous ones are still</span>
+<span class="hljs-comment">  *         not sent.</span>
+<span class="hljs-comment">  *</span>
+<span class="hljs-comment">  * @param  Buf: Buffer of data to be received</span>
+<span class="hljs-comment">  * @param  Len: Number of data received (in bytes)</span>
+<span class="hljs-comment">  * @retval Result of the operation: USBD_OK if all operations are OK else USBD_FAIL</span>
+<span class="hljs-comment">  */</span>
+<span class="hljs-type">static</span> <span class="hljs-type">int8_t</span> <span class="hljs-title function_">CDC_Receive_FS</span><span class="hljs-params">(<span class="hljs-type">uint8_t</span>* Buf, <span class="hljs-type">uint32_t</span> *Len)</span>
 &#123;
-	<span class="hljs-comment">/* 1.挂载SD卡，进行格式化测试 */</span>
-	retSD = f_mount(&amp;SDFatFS,SDPath,<span class="hljs-number">1</span>);
-	<span class="hljs-keyword">if</span>(retSD == FR_NO_FILESYSTEM)<span class="hljs-comment">/* SD卡没有文件系统 */</span>
-  &#123;
-		<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;&gt;&gt; SD卡还没有文件系统，即将进行格式化...\r\n&quot;</span>);
-		
-		retSD = f_mkfs(SDPath, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>);<span class="hljs-comment">/* 格式化 */</span>
-		<span class="hljs-keyword">if</span>(retSD == FR_OK)
-		&#123;
-			<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;&gt;&gt; SD卡格式化成功。\r\n&quot;</span>);
-			retSD = f_mount(<span class="hljs-literal">NULL</span>, SDPath, <span class="hljs-number">1</span>);<span class="hljs-comment">/* 格式化后，先取消挂载 */</span>
-			retSD = f_mount(&amp;SDFatFS, SDPath, <span class="hljs-number">1</span>);<span class="hljs-comment">/* 重新挂载 */</span>
-		&#125;
-		<span class="hljs-keyword">else</span>
-		&#123;
-			<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;&gt;&gt; SD卡格式化失败。\r\n&quot;</span>);
-			<span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>);
-		&#125;
+  <span class="hljs-comment">/* USER CODE BEGIN 6 */</span>
+  USBD_CDC_SetRxBuffer(&amp;hUsbDeviceFS, &amp;Buf[<span class="hljs-number">0</span>]);
+  USBD_CDC_ReceivePacket(&amp;hUsbDeviceFS);
+  CDC_Transmit_FS(Buf, *Len);<span class="hljs-comment">//添加回送函数</span>
+  <span class="hljs-keyword">return</span> (USBD_OK);
+  <span class="hljs-comment">/* USER CODE END 6 */</span>
+&#125;
+<span class="hljs-comment">/**</span>
+<span class="hljs-comment">  * @brief  CDC_Transmit_FS</span>
+<span class="hljs-comment">  *         Data to send over USB IN endpoint are sent over CDC interface</span>
+<span class="hljs-comment">  *         through this function.</span>
+<span class="hljs-comment">  *         @note</span>
+<span class="hljs-comment">  *</span>
+<span class="hljs-comment">  *</span>
+<span class="hljs-comment">  * @param  Buf: Buffer of data to be sent</span>
+<span class="hljs-comment">  * @param  Len: Number of data to be sent (in bytes)</span>
+<span class="hljs-comment">  * @retval USBD_OK if all operations are OK else USBD_FAIL or USBD_BUSY</span>
+<span class="hljs-comment">  */</span>
+<span class="hljs-type">uint8_t</span> <span class="hljs-title function_">CDC_Transmit_FS</span><span class="hljs-params">(<span class="hljs-type">uint8_t</span>* Buf, <span class="hljs-type">uint16_t</span> Len)</span>
+&#123;
+  <span class="hljs-type">uint8_t</span> result = USBD_OK;
+  <span class="hljs-comment">/* USER CODE BEGIN 7 */</span>
+  USBD_CDC_HandleTypeDef *hcdc = (USBD_CDC_HandleTypeDef*)hUsbDeviceFS.pClassData;
+  <span class="hljs-keyword">if</span> (hcdc-&gt;TxState != <span class="hljs-number">0</span>)&#123;
+    <span class="hljs-keyword">return</span> USBD_BUSY;
   &#125;
-	<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(retSD != FR_OK) <span class="hljs-comment">/* SD卡挂载出现其它错误，打印错误码 */</span>
-	&#123;
-		<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;&gt;&gt; SD卡挂载失败。%d \r\n&quot;</span>, retSD);
-		<span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>);
-	&#125;
-	<span class="hljs-keyword">else</span><span class="hljs-comment">/* SD卡挂载成功 */</span>
-	&#123;
-		<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;&gt;&gt; 文件系统挂载成功，可以进行读写测试!!!\r\n&quot;</span>);
-	&#125;
-	
-	<span class="hljs-comment">/* 2.文件系统测试，写测试 */</span>
-  <span class="hljs-keyword">if</span>(f_open(&amp;SDFile, filename, FA_CREATE_ALWAYS | FA_WRITE) == FR_OK)
-  &#123;
-		<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;&gt;&gt; 打开文件成功，开始写入指定数据...\r\n&quot;</span>);
-		
-		retSD = f_write(&amp;SDFile, wr_buffer, <span class="hljs-keyword">sizeof</span>(wr_buffer), &amp;wr_size);<span class="hljs-comment">/* 将指定存储区内容写入到文件内 */</span>
-		<span class="hljs-keyword">if</span>(retSD == FR_OK)
-		&#123;
-			<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;&gt;&gt; 成功写入 %d 字节数据。\r\n&quot;</span>, wr_size);
-			<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;&gt;&gt; 写入的数据 : %s\r\n&quot;</span>, wr_buffer);
-		&#125;
-		<span class="hljs-keyword">else</span>
-		&#123;
-			<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;&gt;&gt; 文件写入失败，错误码： %d\r\n&quot;</span>, retSD);
-		&#125;
-		f_close(&amp;SDFile);		<span class="hljs-comment">/* 不再读写，关闭文件 */</span>
-  &#125;
-	<span class="hljs-keyword">else</span>
-	&#123;
-		<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;&gt;&gt; 文件打开失败。\r\n&quot;</span>);
-	&#125;
-
-	<span class="hljs-comment">/* 3.文件系统测试，读测试 */</span>
-	<span class="hljs-keyword">if</span>(f_open(&amp;SDFile, filename, FA_OPEN_EXISTING | FA_READ) == FR_OK)
-	&#123;
-		<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;&gt;&gt; 打开文件成功，开始读取数据...\r\n&quot;</span>);
-		
-		retSD = f_read(&amp;SDFile, rd_buffer, <span class="hljs-keyword">sizeof</span>(rd_buffer), &amp;rd_size);<span class="hljs-comment">/* 读取数据 */</span>
-		<span class="hljs-keyword">if</span>(retSD == FR_OK) 
-		&#123;
-			<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;&gt;&gt; 成功读取 %d 字节数据。\r\n&quot;</span>, rd_size);
-			<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;&gt;&gt; 读取的数据: %s\r\n&quot;</span>, rd_buffer);
-		&#125;
-		<span class="hljs-keyword">else</span>
-		&#123;
-			<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;&gt;&gt; 读取文件失败，错误码： %d\r\n&quot;</span>, retSD);
-		&#125;
-		f_close(&amp;SDFile);<span class="hljs-comment">/* 不再读写，关闭文件 */</span>
-	&#125;
-	<span class="hljs-keyword">else</span>
-	&#123;
-		<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;&gt;&gt; 文件打开失败。\r\n&quot;</span>);
-	&#125;
-
-	<span class="hljs-comment">/* 4.文件系统测试，创建文件 */</span>
-	<span class="hljs-keyword">if</span>(f_open(&amp;SDFile,sensor_file,FA_CREATE_ALWAYS|FA_WRITE) == FR_OK)
-	&#123;
-		<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;&gt;&gt; %s 文件创建成功。\r\n&quot;</span>, sensor_file);
-		
-		<span class="hljs-comment">/* 首先写入项目栏参数 */</span>
-		<span class="hljs-built_in">sprintf</span>(sensor_buffer, <span class="hljs-string">&quot;Item\tTemp\tHumi\tLight\r\n&quot;</span>);
-		f_write(&amp;SDFile, sensor_buffer, <span class="hljs-built_in">strlen</span>(sensor_buffer), &amp;wr_size);
-    <span class="hljs-comment">/* 然后写入具体数据 */</span>
-		<span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10</span>; i++)
-		&#123;
-			<span class="hljs-built_in">sprintf</span>(sensor_buffer, <span class="hljs-string">&quot;%d\t%d\t%d\t%d\r\n&quot;</span>,i + <span class="hljs-number">1</span>, i + <span class="hljs-number">20</span>, i + <span class="hljs-number">30</span>, i + <span class="hljs-number">40</span>);
-			f_write(&amp;SDFile,sensor_buffer, <span class="hljs-built_in">strlen</span>(sensor_buffer), &amp;wr_size);
-			f_sync(&amp;SDFile);
-		&#125;
-		f_close(&amp;SDFile);
-  &#125;
-	
-  f_mount(<span class="hljs-literal">NULL</span>, SDPath, <span class="hljs-number">1</span>);<span class="hljs-comment">/* 不再使用文件系统，取消挂载文件系统 */</span>
+  USBD_CDC_SetTxBuffer(&amp;hUsbDeviceFS, Buf, Len);
+  result = USBD_CDC_TransmitPacket(&amp;hUsbDeviceFS);
+  <span class="hljs-comment">/* USER CODE END 7 */</span>
+  <span class="hljs-keyword">return</span> result;
 &#125;</code></pre></div>
 <ul>
-<li>在uart.c文件中添加fputc重定义函数，并添加头文件<code>&lt;stdio.h&gt;</code>，勾选keil软件<strong>Use
-MicroLIB</strong>选项。</li>
-<li>编译无误下载到开发板后，串口打印出如下信息：</li>
+<li>在main.c函数中添加测试代码：</li>
 </ul>
-<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230605205919074.png" srcset="/img/loading.gif" lazyload alt="image-20230605205919074" style="zoom:80%;" /></p>
-<p>将SD卡插入PC后，可以看到SD卡里建立了2个文件：Sensor.txt和STM32cubemx.txt，打开文件后可以看到写入的数据</p>
-<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230605210046746.png" srcset="/img/loading.gif" lazyload alt="image-20230605210046746" style="zoom: 67%;" /></p>
-<p>工程代码Gitee：<a
-target="_blank" rel="noopener" href="https://gitee.com/kayoungzhang/my_codehub/raw/master/stm32/fatfs_sd.zip">fatfs</a></p>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">/* USER CODE BEGIN Includes */</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;usbd_cdc_if.h&quot;</span></span>
+<span class="hljs-comment">/* USER CODE END Includes */</span>
+
+<span class="hljs-comment">/* USER CODE BEGIN PV */</span>
+<span class="hljs-type">uint8_t</span> usb_send_buffer[] = <span class="hljs-string">&quot;This is USB Virtual Test.\r\n&quot;</span>;
+<span class="hljs-comment">/* USER CODE END PV */</span>
+
+<span class="hljs-comment">/* USER CODE BEGIN WHILE */</span>
+<span class="hljs-keyword">while</span> (<span class="hljs-number">1</span>)
+&#123;
+CDC_Transmit_FS(usb_send_buffer, <span class="hljs-keyword">sizeof</span>(usb_send_buffer));
+HAL_Delay(<span class="hljs-number">1000</span>);
+<span class="hljs-comment">/* USER CODE END WHILE */</span>
+
+<span class="hljs-comment">/* USER CODE BEGIN 3 */</span>
+&#125;</code></pre></div>
+<ul>
+<li>编译正常，下载到开发板，将USB连接线连接电脑和开发板的USB
+SLAVE口，打开串口助手，选择出现的虚拟端口号，串口不停的发送数据，当从串口助手发送数据时，也会回显到串口助手上。</li>
+</ul>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230606235349209.png" srcset="/img/loading.gif" lazyload alt="image-20230606235349209" style="zoom:80%;" /></p>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230606235715688.png" srcset="/img/loading.gif" lazyload alt="image-20230606235715688" style="zoom:80%;" /></p>
+<p>工程文件Gitee：<a
+target="_blank" rel="noopener" href="https://gitee.com/kayoungzhang/my_codehub/raw/master/stm32/usb.zip">usb</a></p>
+<h4 id="参考链接">参考链接：</h4>
+<p>http://t.csdn.cn/ZrHap</p>
 
                 
               </div>
@@ -502,9 +471,9 @@ target="_blank" rel="noopener" href="https://gitee.com/kayoungzhang/my_codehub/r
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/06/06/STM32CubeMX%E4%B9%8BUSB/" title="STM32CubeMX之USB">
+                      <a href="/2023/06/07/STM32%E6%9C%89%E7%BA%BF%E7%BD%91%E7%BB%9CEthernet/" title="STM32以太网通信">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">STM32CubeMX之USB</span>
+                        <span class="hidden-mobile">STM32以太网通信</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -512,8 +481,8 @@ target="_blank" rel="noopener" href="https://gitee.com/kayoungzhang/my_codehub/r
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/05/31/STM32CubeMX%E4%B9%8BSDIO_SD%E5%8D%A1/" title="STM32CubeMX之SDIO_SD卡">
-                        <span class="hidden-mobile">STM32CubeMX之SDIO_SD卡</span>
+                      <a href="/2023/05/31/STM32CubeMX%E4%B9%8BFatfs%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" title="STM32CubeMX之FatFs文件系统">
+                        <span class="hidden-mobile">STM32CubeMX之FatFs文件系统</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
