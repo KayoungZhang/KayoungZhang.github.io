@@ -16,18 +16,24 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="OSI、TCP&#x2F;IP 和 LwIP 简介 OSI（Open System Interconnect），即开放式系统互联， 一般都叫OSI参考模型。 TCP&#x2F;IP（Transmission Control Protocol&#x2F;Internet Protocol），传输控制协议&#x2F;网际协议，又名网络通讯协议，是 Internet 最基本的协议、Internet 国际互联网络的基础，由网络层的 I">
+    <meta name="description" content="Qt简介 Qt 是一个跨平台的 C++开发库，主要用来开发图形用户界面（Graphical User Interface，简称 GUI）程序。Qt 是跨平台的，支持 Windows、Linux、macOS、Android、iOS、WinRT 等平台，将已编写好的 Qt 程序移植到这些平台，只需重新编译一次源代码即可。 Qt Creator的下载安装 Qt Creator是Qt集成开发">
 <meta property="og:type" content="article">
-<meta property="og:title" content="STM32以太网通信">
-<meta property="og:url" content="http://example.com/2023/06/07/STM32%E6%9C%89%E7%BA%BF%E7%BD%91%E7%BB%9CEthernet/index.html">
+<meta property="og:title" content="Qt开发环境的搭建">
+<meta property="og:url" content="http://example.com/2023/06/14/Qt%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E7%9A%84%E6%90%AD%E5%BB%BA/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="OSI、TCP&#x2F;IP 和 LwIP 简介 OSI（Open System Interconnect），即开放式系统互联， 一般都叫OSI参考模型。 TCP&#x2F;IP（Transmission Control Protocol&#x2F;Internet Protocol），传输控制协议&#x2F;网际协议，又名网络通讯协议，是 Internet 最基本的协议、Internet 国际互联网络的基础，由网络层的 I">
+<meta property="og:description" content="Qt简介 Qt 是一个跨平台的 C++开发库，主要用来开发图形用户界面（Graphical User Interface，简称 GUI）程序。Qt 是跨平台的，支持 Windows、Linux、macOS、Android、iOS、WinRT 等平台，将已编写好的 Qt 程序移植到这些平台，只需重新编译一次源代码即可。 Qt Creator的下载安装 Qt Creator是Qt集成开发">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-06-07T11:39:13.000Z">
-<meta property="article:modified_time" content="2023-06-12T12:08:29.933Z">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614181334729.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614180858111.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614182944200.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614185126853.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614183307230.png">
+<meta property="article:published_time" content="2023-06-14T09:15:03.000Z">
+<meta property="article:modified_time" content="2023-06-14T10:52:15.539Z">
 <meta property="article:author" content="John Doe">
-<meta property="article:tag" content="stm32">
+<meta property="article:tag" content="Qt">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614181334729.png">
   
   
   
@@ -199,7 +205,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="STM32以太网通信"></span>
+            <span id="subtitle" data-typed-text="Qt开发环境的搭建"></span>
           
         </div>
 
@@ -210,8 +216,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-06-07 19:39" pubdate>
-          2023年6月7日 晚上
+        <time datetime="2023-06-14 17:15" pubdate>
+          2023年6月14日 下午
         </time>
       </span>
     
@@ -222,7 +228,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.7k 字
+          819 字
         
       </span>
     
@@ -233,7 +239,7 @@
         
         
         
-          6 分钟
+          3 分钟
         
       </span>
     
@@ -271,12 +277,12 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">STM32以太网通信</h1>
+            <h1 style="display: none">Qt开发环境的搭建</h1>
             
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年6月12日 晚上
+                    本文最后更新于：2023年6月14日 晚上
                   
                 
               </p>
@@ -284,74 +290,62 @@
             
               <div class="markdown-body">
                 
-                <h3 id="ositcpip-和-lwip-简介">OSI、TCP/IP 和 LwIP 简介</h3>
-<p><strong>OSI</strong>（Open System Interconnect），即开放式系统互联，
-一般都叫OSI参考模型。</p>
-<p><strong>TCP/IP</strong>（Transmission Control Protocol/Internet
-Protocol），传输控制协议/网际协议，又名网络通讯协议，是 Internet
-最基本的协议、Internet 国际互联网络的基础，由网络层的 IP 协议和传输层的
-TCP 协议组成。TCP/IP
-定义了电子设备如何连入因特网，以及数据如何在它们之间传输的标准。</p>
-<p><strong>LwIP</strong>（Light weight IP），一种开源轻量级的 IP
-协议,占用内存少，它只需十几 KB 的 RAM 和 40K 左右的 ROM
-就可以运行。其网址：http://savannah.nongnu.org/projects/lwip/。</p>
-<p><strong>MAC</strong> （Medium Access
-Control），简称媒体访问控制，数据链路层的芯片称之为MAC控制器。</p>
-<p><strong>PHY</strong>（Physical），端口物理层，物理层的芯片称之为PHY，是IEEE
-802.3规定的一个标准模块。IEEE定义了0~15这16个寄存器的功能，16~31这16个寄存器由厂商自行实现。</p>
-<h3 id="网络模型">网络模型</h3>
+                <h3 id="qt简介">Qt简介</h3>
+<p>Qt 是一个跨平台的 C++开发库，主要用来开发图形用户界面（Graphical User
+Interface，简称 GUI）程序。Qt 是跨平台的，支持
+Windows、Linux、macOS、Android、iOS、WinRT 等平台，将已编写好的 Qt
+程序移植到这些平台，只需重新编译一次源代码即可。</p>
+<h3 id="qt-creator的下载安装">Qt Creator的下载安装</h3>
+<p>Qt
+Creator是Qt集成开发环境（IDE），包括C++代码编辑器，集成的GUI外观和版式设计器（Qt
+Designer），项目生成和管理工具，集成的上下文相关帮助系统，图形化调试器，代码管理和浏览工具等。</p>
+<h4 id="下载qt-creator">1.下载Qt Creator</h4>
+<p>官网地址：https://download.qt.io/</p>
+<p>5.14及之前版本可以下载完整安装包，进行离线安装，5.15版本之后不再提供离线安装包，只能通过下载器进行在线安装。</p>
+<p>离线版：</p>
 <figure>
 <img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230606202025717.png" srcset="/img/loading.gif" lazyload
-alt="image-20230606202025717" />
-<figcaption aria-hidden="true">image-20230606202025717</figcaption>
+src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614174035183.png" srcset="/img/loading.gif" lazyload
+alt="image-20230614174035183" />
+<figcaption aria-hidden="true">image-20230614174035183</figcaption>
 </figure>
-<h3 id="通信实现">通信实现</h3>
-<p>实现以太网通信硬件电路一般情况是SOC+MAC+PHY+网络变压器+RJ45，如下图：</p>
+<p>在线版：</p>
 <figure>
 <img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230512193517675.png" srcset="/img/loading.gif" lazyload
-alt="image-20230512193517675" />
-<figcaption aria-hidden="true">image-20230512193517675</figcaption>
+src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614174826980.png" srcset="/img/loading.gif" lazyload
+alt="image-20230614174826980" />
+<figcaption aria-hidden="true">image-20230614174826980</figcaption>
 </figure>
-<p>通信硬件主要部分：MAC和PHY。对于内置MAC的SOC，其外部必须搭配一个PHY芯片。内部没有MAC的SOC芯片，就需要使用外置的MAC+PHY一体芯片了。具体实现有以下几种方式：</p>
+<p>一般从官网下载比较慢，可以通过国内镜像网站进行下载安装，国内著名的 Qt
+镜像网站，主要是各个高校的：</p>
 <ul>
-<li><strong>SOC（集成MAC层），外接一个PHY芯片（比如DM9162，LAN8720等），网络变压器和RJ45，总计4个器件，需单片机需处理TCP/IP协议栈。</strong></li>
+<li>中国科学技术大学：http://mirrors.ustc.edu.cn/qtproject/</li>
+<li>清华大学：https://mirrors.tuna.tsinghua.edu.cn/qt/</li>
+<li>中国互联网络信息中心：https://mirrors.cnnic.cn/qt/</li>
 </ul>
-<figure>
-<img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230512192817057.png" srcset="/img/loading.gif" lazyload
-alt="image-20230512192817057" />
-<figcaption aria-hidden="true">image-20230512192817057</figcaption>
-</figure>
+<h4 id="安装qt-creator">2.安装Qt Creator</h4>
+<p>这里我下载的是离线版本：qt-opensource-windows-x86-5.14.2.exe。</p>
+<p><strong>注意：</strong>
+若已经安装了其他版本的Qt，请先卸载，再安装，否则会发生一些奇奇怪怪的错误。</p>
 <ul>
-<li><p><strong>SOC，外加一个MAC和PHY集成一体芯片（包含MAC和PHY，比如DM9000、ENC28J60等），外加RJ45（集成网络变压器），总计3个电子器件，需单片机处理TCP/IP协议栈</strong>。</p></li>
-<li><p><strong>SOC，外加一个MAC和PHY集成一体芯片（包含MAC+PHY+TCP/IP协议栈，如W5500,CH9121,CH395等），外加RJ45（集成网络变压器），总计3个电子器件，无需详细了解TCP/IP协议栈，开发方便。</strong></p></li>
+<li>双击安装包进行安装，登录Qt账户，如果没有账号，进行注册。（断网后重新安装可跳过此步骤）</li>
 </ul>
-<figure>
-<img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230512192748527.png" srcset="/img/loading.gif" lazyload
-alt="image-20230512192748527" />
-<figcaption aria-hidden="true">image-20230512192748527</figcaption>
-</figure>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614181334729.png" srcset="/img/loading.gif" lazyload alt="image-20230614181334729" style="zoom:80%;" /></p>
 <ul>
-<li><strong>SOC，加一个MAC芯片和一个PHY芯片，外加RJ45（集成网络变压器），总共4个器件。需单片机需处理TCP/IP协议栈。此方式使用较少。</strong></li>
+<li>选择安装路径</li>
 </ul>
-<p>其中：</p>
-<p>MII/RMII接口用来传输网络数据，MIDO接口用来读写PHY的内部寄存器。</p>
-<p><strong>MII</strong>(Media Independent
-Interface)，介质独立接口，它是IEEE-802.3定义的以太网标准接口，用于以太网MAC连接PHY芯片。</p>
-<p><strong>RMII</strong>(Reduced Media Independent
-Interface)，精简的介质独立接口。</p>
-<p><strong>MDIO</strong>(Management Data
-Input/Output)，管理数据输入输出接口，是一个两线串行接口，一根MDIO数据线，一根MDC时钟线。可以通过MDIO和MDC这两根线访问PHY芯片的任意一个寄存器。</p>
-<p>网络变压器用于隔离以及滤波等，现在很多RJ45座子内部已经集成了网络变压器，比如最常用的HR911105A就是内置网络变压器的RJ45座。RJ45座子上一般有两个灯，绿灯亮表示网络正常，黄色闪烁说明正在进行网络通信。PHY芯片会有两个引脚来控制这两个灯。</p>
-<h4 id="参考链接">参考链接：</h4>
-<p>https://www.jianshu.com/p/bb363a41afcf</p>
-<p>https://xie.infoq.cn/article/29110ce061176979d5d61959b</p>
-<p>https://mp.weixin.qq.com/s/Wys9IgAgimCgHmVvvywK3w</p>
-<p>http://t.csdn.cn/qLH6F</p>
-<p>http://t.csdn.cn/Ob4tg</p>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614180858111.png" srcset="/img/loading.gif" lazyload alt="image-20230614180858111" style="zoom:80%;" /></p>
+<ul>
+<li>按需选择组件，一般只需选择对应的编译环境即可，其他组件后续可以再进行补充安装。</li>
+</ul>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614182944200.png" srcset="/img/loading.gif" lazyload alt="image-20230614182944200" style="zoom:80%;" /></p>
+<ul>
+<li>完成安装</li>
+</ul>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614185126853.png" srcset="/img/loading.gif" lazyload alt="image-20230614185126853" style="zoom:80%;" /></p>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614183307230.png" srcset="/img/loading.gif" lazyload alt="image-20230614183307230" style="zoom:80%;" /></p>
+<h3 id="参考链接">参考链接</h3>
+<p>http://t.csdn.cn/VNaHm</p>
 
                 
               </div>
@@ -370,7 +364,7 @@ Input/Output)，管理数据输入输出接口，是一个两线串行接口，�
     
       <span class="category-chain">
         
-  <a href="/categories/stm32/" class="category-chain-item">stm32</a>
+  <a href="/categories/Qt/" class="category-chain-item">Qt</a>
   
   
 
@@ -385,7 +379,7 @@ Input/Output)，管理数据输入输出接口，是一个两线串行接口，�
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/stm32/">#stm32</a>
+        <a href="/tags/Qt/">#Qt</a>
       
     </div>
   
@@ -399,9 +393,9 @@ Input/Output)，管理数据输入输出接口，是一个两线串行接口，�
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/06/14/Qt%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E7%9A%84%E6%90%AD%E5%BB%BA/" title="Qt开发环境的搭建">
+                      <a href="/2023/06/14/Qt-Creator%E7%9A%84%E4%BD%BF%E7%94%A8/" title="Qt Creator的使用">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Qt开发环境的搭建</span>
+                        <span class="hidden-mobile">Qt Creator的使用</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -409,8 +403,8 @@ Input/Output)，管理数据输入输出接口，是一个两线串行接口，�
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/06/06/STM32CubeMX%E4%B9%8BUSB/" title="STM32CubeMX之USB">
-                        <span class="hidden-mobile">STM32CubeMX之USB</span>
+                      <a href="/2023/06/07/STM32%E6%9C%89%E7%BA%BF%E7%BD%91%E7%BB%9CEthernet/" title="STM32以太网通信">
+                        <span class="hidden-mobile">STM32以太网通信</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

@@ -1,3 +1,5 @@
+http://example.com/2023/06/14/Qt-Creator%E7%9A%84%E4%BD%BF%E7%94%A8/
+http://example.com/2023/06/14/Qt%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E7%9A%84%E6%90%AD%E5%BB%BA/
 http://example.com/2023/06/07/STM32%E6%9C%89%E7%BA%BF%E7%BD%91%E7%BB%9CEthernet/
 http://example.com/2023/06/06/STM32CubeMX%E4%B9%8BUSB/
 http://example.com/2023/05/30/STM32CubeMX%E4%B9%8BSPI-Flash/
@@ -84,6 +86,7 @@ http://example.com/tags/Linux/
 http://example.com/tags/%E5%91%BD%E4%BB%A4/
 http://example.com/tags/pid/
 http://example.com/tags/%E7%94%B5%E8%B7%AF/
+http://example.com/tags/Qt/
 http://example.com/tags/stc/
 http://example.com/tags/stm32/
 http://example.com/tags/Typora/
@@ -94,12 +97,12 @@ http://example.com/tags/git/
 http://example.com/tags/printf/
 http://example.com/tags/sensor/
 http://example.com/tags/%E5%AD%98%E5%82%A8%E5%99%A8/
-http://example.com/tags/SRAM/
 http://example.com/tags/%E5%86%85%E5%AD%98%E8%AE%A1%E7%AE%97/
-http://example.com/tags/%E7%A8%8B%E5%BA%8F%E6%9E%B6%E6%9E%84/
+http://example.com/tags/SRAM/
 http://example.com/tags/lcd/
 http://example.com/tags/bash/
 http://example.com/tags/%E6%B8%A9%E5%BA%A6%E4%BC%A0%E6%84%9F%E5%99%A8/
+http://example.com/tags/%E7%A8%8B%E5%BA%8F%E6%9E%B6%E6%9E%84/
 http://example.com/tags/%E8%B0%83%E8%AF%95/
 http://example.com/tags/RTD/
 http://example.com/tags/%E7%83%AD%E7%94%B5%E5%81%B6/
@@ -110,4 +113,5 @@ http://example.com/categories/%E5%85%B6%E5%AE%83/
 http://example.com/categories/%E6%95%99%E7%A8%8B/
 http://example.com/categories/Linux/
 http://example.com/categories/%E5%8D%95%E7%89%87%E6%9C%BA/
+http://example.com/categories/Qt/
 http://example.com/categories/stm32/

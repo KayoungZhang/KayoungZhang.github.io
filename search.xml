@@ -4,6 +4,56 @@
   
     
     <entry>
+      <title>Qt Creator的使用</title>
+      <link href="/2023/06/14/Qt-Creator%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
+      <url>/2023/06/14/Qt-Creator%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
+      
+        <content type="html"><![CDATA[<h3 id="qt-creator的设置">Qt Creator的设置</h3><p>打开Qt Creator, 选择Tools -&gt; Options 进入设置界面：</p><p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614190132386.png" alt="image-20230614190132386" style="zoom:80%;" /></p><ul><li>Environment：可以设置相应的主题和语言环境及UI颜色。</li></ul><p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614190238354.png" alt="image-20230614190238354" style="zoom:80%;" /></p><ul><li>Text Editor：可以进行相应的文本编辑设置。</li></ul><p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614190418754.png" alt="image-20230614190418754" style="zoom:80%;" /></p><ul><li>Build &amp; Run：进行编译和运行的设置</li></ul><p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614190635317.png" alt="image-20230614190635317" style="zoom:80%;" /></p><h3 id="新建qt-widget项目">新建Qt Widget项目</h3><ul><li>依次点击 File -&gt; New File or Project,选择Qt WidgetApplication</li></ul><p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614191012944.png" alt="image-20230614191012944" style="zoom:80%;" /></p><ul><li>填写工程名和选择存储路径，选择 qmake 编译，用 qmake 生成 Makefile用于项目的编译。</li></ul><p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614191554835.png" alt="image-20230614191554835" style="zoom:80%;" /></p><ul><li>选择基类：</li></ul><p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614192700423.png" alt="image-20230614192700423" style="zoom:80%;" /></p><ul><li>选择目标平台的编译器：</li></ul><p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614192942055.png" alt="image-20230614192942055" style="zoom:80%;" /></p><ul><li>可选择版本控制：</li></ul><p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614193215345.png" alt="image-20230614193215345" style="zoom:80%;" /></p><ul><li>完成项目创建，可点击左下角绿色图标编译运行，此时会弹出一个空白框。</li></ul><p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614193358548.png" alt="image-20230614193358548" style="zoom:80%;" /></p><h3 id="项目文件介绍">项目文件介绍</h3><ul><li>demo.pro: 项目管理文件。</li></ul><figure><imgsrc="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614194650370.png"alt="image-20230614194650370" /><figcaption aria-hidden="true">image-20230614194650370</figcaption></figure><p>还可以在其中设置应用程序其他信息：</p><div class="code-wrapper"><pre><code class="hljs bash"><span class="hljs-comment">#程序版本</span>VERSION = 1.0.0.0<span class="hljs-comment">#程序图标</span>RC_ICONS = client.ico<span class="hljs-comment">#公司名称</span>QMAKE_TARGET_COMPANY =<span class="hljs-string">&quot;KayoungZhang&quot;</span><span class="hljs-comment">#程序说明</span>QMAKE_TARGET_DESCRIPTION = <span class="hljs-string">&quot;TCP Client&quot;</span><span class="hljs-comment">#版权信息</span>QMAKE_TARGET_COPYRIGHT = <span class="hljs-string">&quot;Copyright(C) 2022&quot;</span><span class="hljs-comment">#程序名称</span>QMAKE_TARGET_PRODUCT = <span class="hljs-string">&quot;app&quot;</span><span class="hljs-comment">#程序语言</span><span class="hljs-comment">#0x0800代表和系统当前语言一致</span>RC_LANG = 0x0800</code></pre></div><ul><li><p>Header 分组，存放的是项目内所有的头文件*.h。</p></li><li><p>Source 分组，存放的是项目内的所有C++源码文件*.cpp。</p></li><li><p>Forms分组，存放项目内所有界面文件*.ui。双击ui文件就可以进入图形设计界面，返回时则点击左边Edit图标。</p></li></ul><figure><imgsrc="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614195710035.png"alt="image-20230614195710035" /><figcaption aria-hidden="true">image-20230614195710035</figcaption></figure><p>在控件区，拖拽一个<strong>Label</strong>组件到中间的设计区，编辑文字内容为：“<strong>Hello，Qt！</strong>”，选择此<strong>Lable</strong> 然后在其属性区，找到 <strong>geometry</strong>,将 <strong>Width</strong> 改为 <strong>80</strong>，<strong>Height</strong> 改为 <strong>30</strong>，然后找到<strong>font</strong>，将 <strong>Point Size</strong>设置为<strong>12</strong>，勾选 <strong>Bold</strong>。</p><figure><imgsrc="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614201322669.png"alt="image-20230614201322669" /><figcaption aria-hidden="true">image-20230614201322669</figcaption></figure><h3 id="项目的编译和运行">项目的编译和运行</h3><p>单击左窗口的 <strong>Projects</strong> 图标，查看编译工具。</p><figure><imgsrc="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614201800354.png"alt="image-20230614201800354" /><figcaption aria-hidden="true">image-20230614201800354</figcaption></figure><p>然后点击左下角编译运行：</p><p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614201932984.png" alt="image-20230614201932984" style="zoom:80%;" /></p><p>至此完成一个简单的项目创建。</p><h3 id="项目的发布">项目的发布</h3><p>当项目全部完成后，就可以进行打包发行了。</p><p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614202600194.png" alt="image-20230614202600194" style="zoom:80%;" /></p><p>选择<strong>Release</strong>后，编译运行完，打开项目工程目录，找到编译后的exe文件，双击运行，会发现运行不了，是因为缺少dll动态链接库。可以将Qt的bin目录添加到电脑系统的Path环境变量中，为了保证在其他电脑上也可以正常运行，需要找到相应的dll文件，Qt提供了一个<strong>windeployqt</strong>工具，可以自动创建可部署的文件夹，具体操作如下：</p><ol type="1"><li>将生成的exe文件复制到一个空的文件夹中。</li></ol><p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614203121788.png" alt="image-20230614203121788" style="zoom:80%;" /></p><ol start="2" type="1"><li>打开Qt的MinGW命令行，进入刚才的文件夹，然后输入命令：<strong>windeployqt</strong>后面跟程序名。</li></ol><p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614204728719.png" alt="image-20230614204728719" style="zoom:80%;" /></p><ol start="3" type="1"><li>可以将部分不需要的内容删除，如下所示：</li></ol><figure><imgsrc="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614205216379.png"alt="image-20230614205216379" /><figcaption aria-hidden="true">image-20230614205216379</figcaption></figure><ol start="4" type="1"><li><p>将精简后的程序压缩即可在其他同平台电脑运行了,也可以使用工具“单文件制作封装工具(Enigma VirtualBox)”将其打包成独立版程序。如果需要整理成一个安装程序，就需要专用工具进行打包处理，一般用到的工具有：</p><ul><li>HM NIS Edit（https://hmne.sourceforge.net/）</li><li>NSIS</li><li>Inno setup（https://jrsoftware.org/）</li></ul><p>后面再做详细介绍。</p></li></ol><p>工程文件：<ahref="https://gitee.com/kayoungzhang/my_codehub/raw/master/Qt/demo.zip">Qtdemo</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Qt </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Qt </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Qt开发环境的搭建</title>
+      <link href="/2023/06/14/Qt%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E7%9A%84%E6%90%AD%E5%BB%BA/"/>
+      <url>/2023/06/14/Qt%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E7%9A%84%E6%90%AD%E5%BB%BA/</url>
+      
+        <content type="html"><![CDATA[<h3 id="qt简介">Qt简介</h3><p>Qt 是一个跨平台的 C++开发库，主要用来开发图形用户界面（Graphical UserInterface，简称 GUI）程序。Qt 是跨平台的，支持Windows、Linux、macOS、Android、iOS、WinRT 等平台，将已编写好的 Qt程序移植到这些平台，只需重新编译一次源代码即可。</p><h3 id="qt-creator的下载安装">Qt Creator的下载安装</h3><p>QtCreator是Qt集成开发环境（IDE），包括C++代码编辑器，集成的GUI外观和版式设计器（QtDesigner），项目生成和管理工具，集成的上下文相关帮助系统，图形化调试器，代码管理和浏览工具等。</p><h4 id="下载qt-creator">1.下载Qt Creator</h4><p>官网地址：https://download.qt.io/</p><p>5.14及之前版本可以下载完整安装包，进行离线安装，5.15版本之后不再提供离线安装包，只能通过下载器进行在线安装。</p><p>离线版：</p><figure><imgsrc="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614174035183.png"alt="image-20230614174035183" /><figcaption aria-hidden="true">image-20230614174035183</figcaption></figure><p>在线版：</p><figure><imgsrc="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614174826980.png"alt="image-20230614174826980" /><figcaption aria-hidden="true">image-20230614174826980</figcaption></figure><p>一般从官网下载比较慢，可以通过国内镜像网站进行下载安装，国内著名的 Qt镜像网站，主要是各个高校的：</p><ul><li>中国科学技术大学：http://mirrors.ustc.edu.cn/qtproject/</li><li>清华大学：https://mirrors.tuna.tsinghua.edu.cn/qt/</li><li>中国互联网络信息中心：https://mirrors.cnnic.cn/qt/</li></ul><h4 id="安装qt-creator">2.安装Qt Creator</h4><p>这里我下载的是离线版本：qt-opensource-windows-x86-5.14.2.exe。</p><p><strong>注意：</strong>若已经安装了其他版本的Qt，请先卸载，再安装，否则会发生一些奇奇怪怪的错误。</p><ul><li>双击安装包进行安装，登录Qt账户，如果没有账号，进行注册。（断网后重新安装可跳过此步骤）</li></ul><p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614181334729.png" alt="image-20230614181334729" style="zoom:80%;" /></p><ul><li>选择安装路径</li></ul><p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614180858111.png" alt="image-20230614180858111" style="zoom:80%;" /></p><ul><li>按需选择组件，一般只需选择对应的编译环境即可，其他组件后续可以再进行补充安装。</li></ul><p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614182944200.png" alt="image-20230614182944200" style="zoom:80%;" /></p><ul><li>完成安装</li></ul><p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614185126853.png" alt="image-20230614185126853" style="zoom:80%;" /></p><p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614183307230.png" alt="image-20230614183307230" style="zoom:80%;" /></p><h3 id="参考链接">参考链接</h3><p>http://t.csdn.cn/VNaHm</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Qt </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Qt </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>STM32以太网通信</title>
       <link href="/2023/06/07/STM32%E6%9C%89%E7%BA%BF%E7%BD%91%E7%BB%9CEthernet/"/>
       <url>/2023/06/07/STM32%E6%9C%89%E7%BA%BF%E7%BD%91%E7%BB%9CEthernet/</url>
