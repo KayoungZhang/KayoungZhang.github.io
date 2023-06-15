@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>Qt的信号与槽机制</title>
+    <link href="/2023/06/15/Qt%E7%9A%84%E4%BF%A1%E5%8F%B7%E4%B8%8E%E6%A7%BD%E6%9C%BA%E5%88%B6/"/>
+    <url>/2023/06/15/Qt%E7%9A%84%E4%BF%A1%E5%8F%B7%E4%B8%8E%E6%A7%BD%E6%9C%BA%E5%88%B6/</url>
+    
+    <content type="html"><![CDATA[<h3 id="qt信号与槽简介">Qt信号与槽简介</h3><p>Qt对标准C++进行了扩展，引入了一些新的概念和功能，例如信号与槽机制，对象属性等。Qt中有一个预处理器，称为元对象编译器（Meta-ObjectCompiler，MOC），它会将Qt源程序在编译前先转换为标准C++兼容形式，再由C++标准编译器进行编译，所以，信号与槽机制中，必须添加宏：<strong>Q_OBJECT</strong>，这样MOC才能对信号与槽程序进行代码预处理。</p><p>信号与槽是Qt的一个核心特点，也是区别于其它框架的重要特性。Qt使用信号与槽的机制实现对象间通信，它隐藏了复杂的底层实现。与回调函数相比，应用起来会更灵活。</p><p><strong>信号（Signals）</strong>就是在指定情况下发生的事件，QtWidgets 提供了很多信号，例如 QPushButton最常见的信号就是鼠标单击时的clicked()信号，同时，我们也可以自己定义信号。</p><p><strong>槽（Slots）</strong>就是对信号响应的函数。槽就是一个函数，可以具有任何参数，也可以被直接调用。当槽函数与信号关联后，如果信号发生，那么关联的槽函数就会被执行。QtWidgets提供有很多槽函数，我们也可以自己定义槽函数。</p><p>信号与槽关联是用 QObject::connect() 函数实现的，connect() 是 QObject类的一个静态函数，而QObject 是所有 Qt类的基类，在实际调用时可以忽略前面的限定符。</p><p>一个信号可以连接多个槽，多个信号可以连接同一个槽，一个信号可以连接另外一个信号。如下：</p><figure><imgsrc="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230615203504152.png"alt="image-20230615203504152" /><figcaption aria-hidden="true">image-20230615203504152</figcaption></figure><p>connect函数有多重参数形式，一般使用最广的是以下三种：</p><ul><li><strong>一般参数形式</strong></li></ul><p><code>QMetaObject::Connection QObject::connect(const QObject *sender, const char *signal, const QObject *receiver, const char *method, Qt::ConnectionType type = Qt::AutoConnection)</code></p><p>简化：<strong>connect(sender, SIGNAL(signal()), receiver,SLOT(slot()));</strong></p><p>这里使用宏SIGNAL()和SLOT()指定信号和槽函数，如果信号和槽带有参数，还需要注明参数类型，且参数类型要一致，如：</p><p><strong>connect(scrollBar, SIGNAL(valueChanged(int)), label,SLOT(setNum(int)));</strong></p><ul><li><strong>函数指针形式</strong></li></ul><p><code>QMetaObject::Connection QObject::connect(const QObject *sender, const QMetaMethod &amp;signal, const QObject *receiver, const QMetaMethod &amp;method, Qt::ConnectionType type = Qt::AutoConnection)</code></p><p>简化：<strong>connect(sender, &amp;Sender::signal, receiver,&amp;Receiver::slot);</strong></p><p>如： <strong>connect(ui-&gt;lineEdit, &amp;QLineEdit::textChanged,ui-&gt;label, &amp;QLabel::setText);</strong></p><ul><li><strong>lambda 表达式形式</strong></li></ul><div class="code-wrapper"><pre><code class="hljs c++"><span class="hljs-comment">//Qt不传递参数lambda</span><span class="hljs-built_in">connect</span>(ui-&gt;button, &amp;QButton::clicked,[=]&#123;    <span class="hljs-built_in">qDebug</span>()&lt;&lt;<span class="hljs-built_in">QString</span>(<span class="hljs-string">&quot;test&quot;</span>);&#125;);<span class="hljs-comment">//Qt带传递参数lambda</span><span class="hljs-built_in">connect</span>(UI-&gt;button, &amp;QButton::clicked,[=](QString path)&#123;    <span class="hljs-built_in">qDebug</span>()&lt;&lt;path;&#125;);</code></pre></div><p>lamdba表达式介绍:</p><p>[] 不捕获任何变量。</p><p>[&amp;]捕获外部作用域中所有变量，并作为引用在函数体中使用（按引用捕获）。</p><p>[&amp;, a]a以传值方式捕获，其余变量以传引用的方式在函数体中使用（a按值，其余按引用捕获）。</p><p>[a，&amp;b]a以传值方式捕获，b以传引用方式捕获（a按值捕获，b按引用捕获）。</p><p>[=]捕获外部作用域中所有变量，并作为副本在函数体中使用（按值捕获）。</p><p>[=，&amp;b] 按值捕获外部作用域中所有变量，并按引用捕获 b 变量。</p><p>[a] 仅按值捕获 a 变量，但不捕获其他变量。</p><h3 id="信号与槽的创建">信号与槽的创建</h3><p>Qt中信号与槽的创建一般有以下几种方式：</p><ul><li>在UI设计界面的控件上右键-&gt;转到槽，在ui.widget.h文件中将会通过connectSlotsByName，为每个信号/槽创建connect。如希望点击关闭按钮，窗口会关闭，操作如下：</li></ul><p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230615214658423.png" alt="image-20230615214658423" style="zoom:80%;" /></p><p>这样，就会自动创建一个槽函数的声明和一个空的槽函数，需要自己添加相应执行的内容，这里调用的是widget的close()槽函数。<imgsrc="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230615215256504.png"alt="image-20230615215256504" /></p><ul><li>通过UI设计界面中Signals &amp; SlotsEditor添加信号/槽，它们就会在系统内建立关联。如下，同样可以实现上面的功能：</li></ul><p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230615220602008.png" alt="image-20230615220602008" style="zoom:80%;" /></p><ul><li>手动创建信号/槽。</li></ul><p>在widget.h文件中手动创建信号（signals:）或槽函数（slots:）声明，在widget.cpp文件中定义槽函数并手动创建connect函数，将信号与槽函数进行连接。</p><p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230615222721918.png" alt="image-20230615222721918" style="zoom:80%;" /></p><p>以上是Qt中信号与槽机制的基本使用方式，需要熟练掌握，另外，通过Qt的帮助文档，可以详细查看Qt已为各个类定义好的信号与槽函数。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Qt</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Qt</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Qt Creator的使用</title>
     <link href="/2023/06/14/Qt-Creator%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
     <url>/2023/06/14/Qt-Creator%E7%9A%84%E4%BD%BF%E7%94%A8/</url>

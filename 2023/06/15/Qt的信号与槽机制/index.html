@@ -16,33 +16,22 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Qt Creator的设置 打开Qt Creator, 选择Tools -&gt; Options 进入设置界面：   Environment：可以设置相应的主题和语言环境及UI颜色。    Text Editor：可以进行相应的文本编辑设置。    Build &amp; Run：进行编译和运行的设置   新建Qt Widget项目  依次点击 File -&amp;g">
+    <meta name="description" content="Qt信号与槽简介 Qt对标准C++进行了扩展，引入了一些新的概念和功能，例如信号与槽机制，对象属性等。Qt中有一个预处理器，称为元对象编译器（Meta-Object Compiler，MOC），它会将Qt源程序在编译前先转换为标准C++兼容形式，再由C++标准编译器进行编译，所以，信号与槽机制中，必须添加宏： Q_OBJECT，这样MOC才能对信号与槽程序进行代码预处理。 信号与槽是Qt的">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Qt Creator的使用">
-<meta property="og:url" content="http://example.com/2023/06/14/Qt-Creator%E7%9A%84%E4%BD%BF%E7%94%A8/index.html">
+<meta property="og:title" content="Qt的信号与槽机制">
+<meta property="og:url" content="http://example.com/2023/06/15/Qt%E7%9A%84%E4%BF%A1%E5%8F%B7%E4%B8%8E%E6%A7%BD%E6%9C%BA%E5%88%B6/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Qt Creator的设置 打开Qt Creator, 选择Tools -&gt; Options 进入设置界面：   Environment：可以设置相应的主题和语言环境及UI颜色。    Text Editor：可以进行相应的文本编辑设置。    Build &amp; Run：进行编译和运行的设置   新建Qt Widget项目  依次点击 File -&amp;g">
+<meta property="og:description" content="Qt信号与槽简介 Qt对标准C++进行了扩展，引入了一些新的概念和功能，例如信号与槽机制，对象属性等。Qt中有一个预处理器，称为元对象编译器（Meta-Object Compiler，MOC），它会将Qt源程序在编译前先转换为标准C++兼容形式，再由C++标准编译器进行编译，所以，信号与槽机制中，必须添加宏： Q_OBJECT，这样MOC才能对信号与槽程序进行代码预处理。 信号与槽是Qt的">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614190132386.png">
-<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614190238354.png">
-<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614190418754.png">
-<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614190635317.png">
-<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614191012944.png">
-<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614191554835.png">
-<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614192700423.png">
-<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614192942055.png">
-<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614193215345.png">
-<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614193358548.png">
-<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614201932984.png">
-<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614202600194.png">
-<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614203121788.png">
-<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614204728719.png">
-<meta property="article:published_time" content="2023-06-14T10:41:05.000Z">
-<meta property="article:modified_time" content="2023-06-14T13:09:51.222Z">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230615214658423.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230615220602008.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230615222721918.png">
+<meta property="article:published_time" content="2023-06-15T09:14:41.000Z">
+<meta property="article:modified_time" content="2023-06-15T14:35:17.696Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="Qt">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614190132386.png">
+<meta name="twitter:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230615214658423.png">
   
   
   
@@ -214,7 +203,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Qt Creator的使用"></span>
+            <span id="subtitle" data-typed-text="Qt的信号与槽机制"></span>
           
         </div>
 
@@ -225,8 +214,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-06-14 18:41" pubdate>
-          2023年6月14日 晚上
+        <time datetime="2023-06-15 17:14" pubdate>
+          2023年6月15日 下午
         </time>
       </span>
     
@@ -237,7 +226,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.5k 字
+          2.3k 字
         
       </span>
     
@@ -248,7 +237,7 @@
         
         
         
-          6 分钟
+          8 分钟
         
       </span>
     
@@ -286,12 +275,12 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Qt Creator的使用</h1>
+            <h1 style="display: none">Qt的信号与槽机制</h1>
             
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年6月14日 晚上
+                    本文最后更新于：2023年6月15日 晚上
                   
                 
               </p>
@@ -299,147 +288,88 @@
             
               <div class="markdown-body">
                 
-                <h3 id="qt-creator的设置">Qt Creator的设置</h3>
-<p>打开Qt Creator, 选择Tools -&gt; Options 进入设置界面：</p>
-<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614190132386.png" srcset="/img/loading.gif" lazyload alt="image-20230614190132386" style="zoom:80%;" /></p>
-<ul>
-<li>Environment：可以设置相应的主题和语言环境及UI颜色。</li>
-</ul>
-<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614190238354.png" srcset="/img/loading.gif" lazyload alt="image-20230614190238354" style="zoom:80%;" /></p>
-<ul>
-<li>Text Editor：可以进行相应的文本编辑设置。</li>
-</ul>
-<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614190418754.png" srcset="/img/loading.gif" lazyload alt="image-20230614190418754" style="zoom:80%;" /></p>
-<ul>
-<li>Build &amp; Run：进行编译和运行的设置</li>
-</ul>
-<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614190635317.png" srcset="/img/loading.gif" lazyload alt="image-20230614190635317" style="zoom:80%;" /></p>
-<h3 id="新建qt-widget项目">新建Qt Widget项目</h3>
-<ul>
-<li>依次点击 File -&gt; New File or Project,选择Qt Widget
-Application</li>
-</ul>
-<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614191012944.png" srcset="/img/loading.gif" lazyload alt="image-20230614191012944" style="zoom:80%;" /></p>
-<ul>
-<li>填写工程名和选择存储路径，选择 qmake 编译，用 qmake 生成 Makefile
-用于项目的编译。</li>
-</ul>
-<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614191554835.png" srcset="/img/loading.gif" lazyload alt="image-20230614191554835" style="zoom:80%;" /></p>
-<ul>
-<li>选择基类：</li>
-</ul>
-<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614192700423.png" srcset="/img/loading.gif" lazyload alt="image-20230614192700423" style="zoom:80%;" /></p>
-<ul>
-<li>选择目标平台的编译器：</li>
-</ul>
-<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614192942055.png" srcset="/img/loading.gif" lazyload alt="image-20230614192942055" style="zoom:80%;" /></p>
-<ul>
-<li>可选择版本控制：</li>
-</ul>
-<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614193215345.png" srcset="/img/loading.gif" lazyload alt="image-20230614193215345" style="zoom:80%;" /></p>
-<ul>
-<li>完成项目创建，可点击左下角绿色图标编译运行，此时会弹出一个空白框。</li>
-</ul>
-<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614193358548.png" srcset="/img/loading.gif" lazyload alt="image-20230614193358548" style="zoom:80%;" /></p>
-<h3 id="项目文件介绍">项目文件介绍</h3>
-<ul>
-<li>demo.pro: 项目管理文件。</li>
-</ul>
+                <h3 id="qt信号与槽简介">Qt信号与槽简介</h3>
+<p>Qt对标准C++进行了扩展，引入了一些新的概念和功能，例如信号与槽机制，对象属性等。Qt中有一个预处理器，称为元对象编译器（Meta-Object
+Compiler，MOC），它会将Qt源程序在编译前先转换为标准C++兼容形式，再由C++标准编译器进行编译，所以，信号与槽机制中，必须添加宏：
+<strong>Q_OBJECT</strong>，这样MOC才能对信号与槽程序进行代码预处理。</p>
+<p>信号与槽是Qt的一个核心特点，也是区别于其它框架的重要特性。Qt使用信号与槽的机制实现对象间通信，它隐藏了复杂的底层实现。与回调函数相比，应用起来会更灵活。</p>
+<p><strong>信号（Signals）</strong>就是在指定情况下发生的事件，Qt
+Widgets 提供了很多信号，例如 QPushButton
+最常见的信号就是鼠标单击时的clicked()
+信号，同时，我们也可以自己定义信号。</p>
+<p><strong>槽（Slots）</strong>就是对信号响应的函数。槽就是一个函数，可以具有任何参数，也可以被直接调用。当槽函数与信号关联后，如果信号发生，那么关联的槽函数就会被执行。Qt
+Widgets提供有很多槽函数，我们也可以自己定义槽函数。</p>
+<p>信号与槽关联是用 QObject::connect() 函数实现的，connect() 是 QObject
+类的一个静态函数，而QObject 是所有 Qt
+类的基类，在实际调用时可以忽略前面的限定符。</p>
+<p>一个信号可以连接多个槽，多个信号可以连接同一个槽，一个信号可以连接另外一个信号。如下：</p>
 <figure>
 <img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614194650370.png" srcset="/img/loading.gif" lazyload
-alt="image-20230614194650370" />
-<figcaption aria-hidden="true">image-20230614194650370</figcaption>
+src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230615203504152.png" srcset="/img/loading.gif" lazyload
+alt="image-20230615203504152" />
+<figcaption aria-hidden="true">image-20230615203504152</figcaption>
 </figure>
-<p>还可以在其中设置应用程序其他信息：</p>
-<div class="code-wrapper"><pre><code class="hljs bash"><span class="hljs-comment">#程序版本</span>
-VERSION = 1.0.0.0
-<span class="hljs-comment">#程序图标</span>
-RC_ICONS = client.ico
-<span class="hljs-comment">#公司名称</span>
-QMAKE_TARGET_COMPANY =<span class="hljs-string">&quot;KayoungZhang&quot;</span>
-<span class="hljs-comment">#程序说明</span>
-QMAKE_TARGET_DESCRIPTION = <span class="hljs-string">&quot;TCP Client&quot;</span>
-<span class="hljs-comment">#版权信息</span>
-QMAKE_TARGET_COPYRIGHT = <span class="hljs-string">&quot;Copyright(C) 2022&quot;</span>
-<span class="hljs-comment">#程序名称</span>
-QMAKE_TARGET_PRODUCT = <span class="hljs-string">&quot;app&quot;</span>
-<span class="hljs-comment">#程序语言</span>
-<span class="hljs-comment">#0x0800代表和系统当前语言一致</span>
-RC_LANG = 0x0800</code></pre></div>
+<p>connect函数有多重参数形式，一般使用最广的是以下三种：</p>
 <ul>
-<li><p>Header 分组，存放的是项目内所有的头文件*.h。</p></li>
-<li><p>Source 分组，存放的是项目内的所有C++源码文件*.cpp。</p></li>
-<li><p>Forms
-分组，存放项目内所有界面文件*.ui。双击ui文件就可以进入图形设计界面，返回时则点击左边Edit图标。</p></li>
+<li><strong>一般参数形式</strong></li>
 </ul>
-<figure>
-<img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614195710035.png" srcset="/img/loading.gif" lazyload
-alt="image-20230614195710035" />
-<figcaption aria-hidden="true">image-20230614195710035</figcaption>
-</figure>
-<p>在控件区，拖拽一个<strong>Label</strong>组件到中间的设计区，编辑文字内容为：“<strong>Hello，Qt！</strong>”，选择此
-<strong>Lable</strong> 然后在其属性区，找到 <strong>geometry</strong>
-,将 <strong>Width</strong> 改为 <strong>80</strong>，
-<strong>Height</strong> 改为 <strong>30</strong>，然后找到
-<strong>font</strong>，将 <strong>Point Size</strong>设置为
-<strong>12</strong>，勾选 <strong>Bold</strong>。</p>
-<figure>
-<img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614201322669.png" srcset="/img/loading.gif" lazyload
-alt="image-20230614201322669" />
-<figcaption aria-hidden="true">image-20230614201322669</figcaption>
-</figure>
-<h3 id="项目的编译和运行">项目的编译和运行</h3>
-<p>单击左窗口的 <strong>Projects</strong> 图标，查看编译工具。</p>
-<figure>
-<img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614201800354.png" srcset="/img/loading.gif" lazyload
-alt="image-20230614201800354" />
-<figcaption aria-hidden="true">image-20230614201800354</figcaption>
-</figure>
-<p>然后点击左下角编译运行：</p>
-<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614201932984.png" srcset="/img/loading.gif" lazyload alt="image-20230614201932984" style="zoom:80%;" /></p>
-<p>至此完成一个简单的项目创建。</p>
-<h3 id="项目的发布">项目的发布</h3>
-<p>当项目全部完成后，就可以进行打包发行了。</p>
-<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614202600194.png" srcset="/img/loading.gif" lazyload alt="image-20230614202600194" style="zoom:80%;" /></p>
-<p>选择<strong>Release</strong>后，编译运行完，打开项目工程目录，找到编译后的exe文件，双击运行，会发现运行不了，是因为缺少dll动态链接库。可以将Qt的bin目录添加到电脑系统的Path环境变量中，为了保证在其他电脑上也可以正常运行，需要找到相应的dll文件，Qt提供了一个
-<strong>windeployqt</strong>
-工具，可以自动创建可部署的文件夹，具体操作如下：</p>
-<ol type="1">
-<li>将生成的exe文件复制到一个空的文件夹中。</li>
-</ol>
-<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614203121788.png" srcset="/img/loading.gif" lazyload alt="image-20230614203121788" style="zoom:80%;" /></p>
-<ol start="2" type="1">
-<li>打开Qt的Min
-GW命令行，进入刚才的文件夹，然后输入命令：<strong>windeployqt</strong>后面跟程序名。</li>
-</ol>
-<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614204728719.png" srcset="/img/loading.gif" lazyload alt="image-20230614204728719" style="zoom:80%;" /></p>
-<ol start="3" type="1">
-<li>可以将部分不需要的内容删除，如下所示：</li>
-</ol>
-<figure>
-<img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614205216379.png" srcset="/img/loading.gif" lazyload
-alt="image-20230614205216379" />
-<figcaption aria-hidden="true">image-20230614205216379</figcaption>
-</figure>
-<ol start="4" type="1">
-<li><p>将精简后的程序压缩即可在其他同平台电脑运行了,也可以使用工具
-“单文件制作封装工具(Enigma Virtual
-Box)”将其打包成独立版程序。如果需要整理成一个安装程序，就需要专用工具进行打包处理，一般用到的工具有：</p>
+<p><code>QMetaObject::Connection QObject::connect(const QObject *sender, const char *signal, const QObject *receiver, const char *method, Qt::ConnectionType type = Qt::AutoConnection)</code></p>
+<p>简化：<strong>connect(sender, SIGNAL(signal()), receiver,
+SLOT(slot()));</strong></p>
+<p>这里使用宏SIGNAL()和SLOT()指定信号和槽函数，如果信号和槽带有参数，还需要注明参数类型，且参数类型要一致，如：</p>
+<p><strong>connect(scrollBar, SIGNAL(valueChanged(int)), label,
+SLOT(setNum(int)));</strong></p>
 <ul>
-<li>HM NIS Edit（https://hmne.sourceforge.net/）</li>
-<li>NSIS</li>
-<li>Inno setup（https://jrsoftware.org/）</li>
+<li><strong>函数指针形式</strong></li>
 </ul>
-<p>后面再做详细介绍。</p></li>
-</ol>
-<p>工程文件：<a
-target="_blank" rel="noopener" href="https://gitee.com/kayoungzhang/my_codehub/raw/master/Qt/demo.zip">Qt
-demo</a></p>
+<p><code>QMetaObject::Connection QObject::connect(const QObject *sender, const QMetaMethod &amp;signal, const QObject *receiver, const QMetaMethod &amp;method, Qt::ConnectionType type = Qt::AutoConnection)</code></p>
+<p>简化：<strong>connect(sender, &amp;Sender::signal, receiver,
+&amp;Receiver::slot);</strong></p>
+<p>如： <strong>connect(ui-&gt;lineEdit, &amp;QLineEdit::textChanged,
+ui-&gt;label, &amp;QLabel::setText);</strong></p>
+<ul>
+<li><strong>lambda 表达式形式</strong></li>
+</ul>
+<div class="code-wrapper"><pre><code class="hljs c++"><span class="hljs-comment">//Qt不传递参数lambda</span>
+<span class="hljs-built_in">connect</span>(ui-&gt;button, &amp;QButton::clicked,[=]&#123;
+    <span class="hljs-built_in">qDebug</span>()&lt;&lt;<span class="hljs-built_in">QString</span>(<span class="hljs-string">&quot;test&quot;</span>);
+&#125;);
+<span class="hljs-comment">//Qt带传递参数lambda</span>
+<span class="hljs-built_in">connect</span>(UI-&gt;button, &amp;QButton::clicked,[=](QString path)&#123;
+    <span class="hljs-built_in">qDebug</span>()&lt;&lt;path;
+&#125;);</code></pre></div>
+<p>lamdba表达式介绍:</p>
+<p>[] 不捕获任何变量。</p>
+<p>[&amp;]
+捕获外部作用域中所有变量，并作为引用在函数体中使用（按引用捕获）。</p>
+<p>[&amp;, a]
+a以传值方式捕获，其余变量以传引用的方式在函数体中使用（a按值，其余按引用捕获）。</p>
+<p>[a，&amp;b]
+a以传值方式捕获，b以传引用方式捕获（a按值捕获，b按引用捕获）。</p>
+<p>[=]
+捕获外部作用域中所有变量，并作为副本在函数体中使用（按值捕获）。</p>
+<p>[=，&amp;b] 按值捕获外部作用域中所有变量，并按引用捕获 b 变量。</p>
+<p>[a] 仅按值捕获 a 变量，但不捕获其他变量。</p>
+<h3 id="信号与槽的创建">信号与槽的创建</h3>
+<p>Qt中信号与槽的创建一般有以下几种方式：</p>
+<ul>
+<li>在UI设计界面的控件上右键-&gt;转到槽，在ui.widget.h文件中将会通过connectSlotsByName，为每个信号/槽创建connect。如希望点击关闭按钮，窗口会关闭，操作如下：</li>
+</ul>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230615214658423.png" srcset="/img/loading.gif" lazyload alt="image-20230615214658423" style="zoom:80%;" /></p>
+<p>这样，就会自动创建一个槽函数的声明和一个空的槽函数，需要自己添加相应执行的内容，这里调用的是widget的close()槽函数。<img
+src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230615215256504.png" srcset="/img/loading.gif" lazyload
+alt="image-20230615215256504" /></p>
+<ul>
+<li>通过UI设计界面中Signals &amp; Slots
+Editor添加信号/槽，它们就会在系统内建立关联。如下，同样可以实现上面的功能：</li>
+</ul>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230615220602008.png" srcset="/img/loading.gif" lazyload alt="image-20230615220602008" style="zoom:80%;" /></p>
+<ul>
+<li>手动创建信号/槽。</li>
+</ul>
+<p>在widget.h文件中手动创建信号（signals:）或槽函数（slots:）声明，在widget.cpp文件中定义槽函数并手动创建connect函数，将信号与槽函数进行连接。</p>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230615222721918.png" srcset="/img/loading.gif" lazyload alt="image-20230615222721918" style="zoom:80%;" /></p>
+<p>以上是Qt中信号与槽机制的基本使用方式，需要熟练掌握，另外，通过Qt的帮助文档，可以详细查看Qt已为各个类定义好的信号与槽函数。</p>
 
                 
               </div>
@@ -487,18 +417,12 @@ demo</a></p>
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/06/15/Qt%E7%9A%84%E4%BF%A1%E5%8F%B7%E4%B8%8E%E6%A7%BD%E6%9C%BA%E5%88%B6/" title="Qt的信号与槽机制">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Qt的信号与槽机制</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/06/14/Qt%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E7%9A%84%E6%90%AD%E5%BB%BA/" title="Qt开发环境的搭建">
-                        <span class="hidden-mobile">Qt开发环境的搭建</span>
+                      <a href="/2023/06/14/Qt-Creator%E7%9A%84%E4%BD%BF%E7%94%A8/" title="Qt Creator的使用">
+                        <span class="hidden-mobile">Qt Creator的使用</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
