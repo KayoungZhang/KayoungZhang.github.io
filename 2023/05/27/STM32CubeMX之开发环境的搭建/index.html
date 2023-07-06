@@ -1,0 +1,717 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="在ST公司推出HAL库之前，开发SMT32一般使用的是标准库，但后来为了便于移植程序，官方不再更新STM32标准库，而大力推崇HAL库，伴随HAL库的兴起，ST推出了STM32CubeMX开发工具，它是STM32芯片图形化配置工具， 允许用户使用图形化向导生成C 初始化代码，极大限度内减少了工程师的工作量，转而把工作重点放在项目逻辑层、应用层的实现。另外，ST也同时推出一整套IDE软件STM3">
+<meta property="og:type" content="article">
+<meta property="og:title" content="STM32CubeMX之开发环境的搭建">
+<meta property="og:url" content="http://example.com/2023/05/27/STM32CubeMX%E4%B9%8B%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E7%9A%84%E6%90%AD%E5%BB%BA/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="在ST公司推出HAL库之前，开发SMT32一般使用的是标准库，但后来为了便于移植程序，官方不再更新STM32标准库，而大力推崇HAL库，伴随HAL库的兴起，ST推出了STM32CubeMX开发工具，它是STM32芯片图形化配置工具， 允许用户使用图形化向导生成C 初始化代码，极大限度内减少了工程师的工作量，转而把工作重点放在项目逻辑层、应用层的实现。另外，ST也同时推出一整套IDE软件STM3">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230527210938403.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230527212452472.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230527211706175.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230527213020674.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230527213741351.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230527214001528.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230527213852127.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230527214446420.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230527214726370.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230527215030571.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230527215605956.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230527221407553.png">
+<meta property="article:published_time" content="2023-05-27T12:39:20.000Z">
+<meta property="article:modified_time" content="2023-05-30T01:34:59.843Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="stm32">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230527210938403.png">
+  
+  
+  
+  
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"✍","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":false},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":false,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+<meta name="referrer" content="no-referrer" />
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>My Tech Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/article.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.1)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="STM32CubeMX之开发环境的搭建"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-05-27 20:39" pubdate>
+          2023年5月27日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.3k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          5 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-12 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">STM32CubeMX之开发环境的搭建</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：2023年5月30日 上午
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <p>在ST公司推出HAL库之前，开发SMT32一般使用的是标准库，但后来为了便于移植程序，官方不再更新STM32标准库，而大力推崇HAL库，伴随HAL库的兴起，ST推出了STM32CubeMX开发工具，它是STM32芯片图形化配置工具，
+允许用户使用图形化向导生成C
+初始化代码，极大限度内减少了工程师的工作量，转而把工作重点放在项目逻辑层、应用层的实现。另外，ST也同时推出一整套IDE软件STM32CubeIDE
+，本章不做过多介绍。</p>
+<p>HAL 的全称是：<strong>Hardware Abstraction Layer
+(硬件抽象层)</strong>，HAL
+位于操作系统内核与硬件电路之间的接口层，其目的在于将硬件抽象化。它是一个由
+ST公司基于硬件抽象层而设计的软件函数包，由程序、数据结构、宏等组成，包括了微控制器所有外设的性能特征。此外HAL函数库包括每一个外设的驱动描述和应用实例，为开发者访问底层硬件提供了一个中间
+API，所以说通过使用 HAL
+库，工程师不需要花过多精力去深入掌握底层硬件细节，就可以应用STM32的每个外设，实现快速二次开发的目的。</p>
+<h3 id="smt32开发环境的搭建">SMT32开发环境的搭建</h3>
+<p><strong>友情提醒：全程下载安装过程中尽量不要使用中文目录，防止个别异常情况发生。</strong></p>
+<h4 id="一keil-mdk-arm软件的安装">一、Keil MDK-ARM软件的安装</h4>
+<ol type="1">
+<li>获取Keil MDK-ARM软件：<a
+target="_blank" rel="noopener" href="https://developer.arm.com/Tools%20and%20Software/Keil%20MDK">官网</a></li>
+</ol>
+<figure>
+<img
+src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230527210314137.png" srcset="/img/loading.gif" lazyload
+alt="image-20230527210314137" />
+<figcaption aria-hidden="true">image-20230527210314137</figcaption>
+</figure>
+<p>可以安装社区版，免费正版使用一年，需要进行注册才能下载，为了学习可以在网上查找其他方式进行安装。</p>
+<ol start="2" type="1">
+<li>获取STM32芯片设备安装包：<a
+target="_blank" rel="noopener" href="https://www.keil.arm.com/devices/?q=&amp;vendor=stmicroelectronics&amp;core=Cortex-M3&amp;sort_by=">官网</a></li>
+</ol>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230527210938403.png" srcset="/img/loading.gif" lazyload alt="image-20230527210938403"  /></p>
+<p>选择对应的厂商和内核版本，进行相应下载即可。</p>
+<ol start="3" type="1">
+<li>安装keil软件和STM32设备安装包</li>
+</ol>
+<h4 id="二stm32cubemx软件的安装">二、STM32CubeMX软件的安装</h4>
+<p>安装STM32CubeMX必须具备的条件：</p>
+<ul>
+<li>JRE（Java Runtime Environment）：JAVA运行环境。</li>
+<li>STM32CubeMX软件：生成初始化代码的地方。</li>
+<li>HAL库
+PACK包：F0、F1、F3、H7等Cortex内核，都需要对应的PACK包安装。</li>
+</ul>
+<ol type="1">
+<li>安装JRE：JRE官网下载链接：
+https://www.java.com/en/download/manual.jsp</li>
+</ol>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230527212452472.png" srcset="/img/loading.gif" lazyload alt="image-20230527212452472" style="zoom:80%;" /></p>
+<ol start="2" type="1">
+<li>获取STM32CubeMX：<a
+target="_blank" rel="noopener" href="https://www.st.com/en/development-tools/stm32cubemx.html">官网</a></li>
+</ol>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230527211706175.png" srcset="/img/loading.gif" lazyload alt="image-20230527211706175"  /></p>
+<ol start="3" type="1">
+<li>获取HAL库 PACK包，由两种方式：</li>
+</ol>
+<ul>
+<li>通过STM32CubeMX软件进行安装</li>
+</ul>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230527213020674.png" srcset="/img/loading.gif" lazyload alt="image-20230527213020674" style="zoom: 67%;" /></p>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230527213741351.png" srcset="/img/loading.gif" lazyload alt="image-20230527213741351" style="zoom: 80%;" /></p>
+<ul>
+<li>下载离线PACK包，然后通过STM32CubeMX软件进行安装：<a
+target="_blank" rel="noopener" href="https://www.st.com/en/development-tools/stm32cubemx.html#tools-software">官网</a></li>
+</ul>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230527214001528.png" srcset="/img/loading.gif" lazyload alt="image-20230527214001528" style="zoom: 67%;" /></p>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230527213852127.png" srcset="/img/loading.gif" lazyload alt="image-20230527213852127" style="zoom:80%;" /></p>
+<h4 id="三stm32cubemx使用">三、STM32CubeMX使用</h4>
+<ul>
+<li>新建工程，选择对应开发MCU</li>
+</ul>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230527214446420.png" srcset="/img/loading.gif" lazyload alt="image-20230527214446420"  /></p>
+<ul>
+<li>RCC设置，选择HSE（外部高速时钟）为Crystal/Ceramic
+Resonator（晶振/陶瓷谐振器）</li>
+</ul>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230527214726370.png" srcset="/img/loading.gif" lazyload alt="image-20230527214726370"  /></p>
+<ul>
+<li>时钟配置，STM32F103最高时钟为72M</li>
+</ul>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230527215030571.png" srcset="/img/loading.gif" lazyload alt="image-20230527215030571"  /></p>
+<ul>
+<li>功能外设配置，以PA0/PA1为例，设置GPIO引脚相关参数</li>
+</ul>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230527215605956.png" srcset="/img/loading.gif" lazyload alt="image-20230527215605956"  /></p>
+<figure>
+<img
+src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230527215826116.png" srcset="/img/loading.gif" lazyload
+alt="image-20230527215826116" />
+<figcaption aria-hidden="true">image-20230527215826116</figcaption>
+</figure>
+<ul>
+<li>工程设置并生成Keil工程</li>
+</ul>
+<figure>
+<img
+src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230527220345421.png" srcset="/img/loading.gif" lazyload
+alt="image-20230527220345421" />
+<figcaption aria-hidden="true">image-20230527220345421</figcaption>
+</figure>
+<figure>
+<img
+src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230530093411899.png" srcset="/img/loading.gif" lazyload
+alt="image-20230530093411899" />
+<figcaption aria-hidden="true">image-20230530093411899</figcaption>
+</figure>
+<ul>
+<li>点击Open
+Project，打开keil工程，至此就配置好了工程外设初始化；在gpio.c文件中可以看到PA0/PA1管脚的初始化函数；至此用户可以根据自已的需求编写应用程序</li>
+</ul>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230527221407553.png" srcset="/img/loading.gif" lazyload alt="image-20230527221407553" style="zoom: 80%;" /></p>
+<figure>
+<img
+src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230527222104592.png" srcset="/img/loading.gif" lazyload
+alt="image-20230527222104592" />
+<figcaption aria-hidden="true">image-20230527222104592</figcaption>
+</figure>
+<h4 id="参考链接">参考链接：</h4>
+<p><a target="_blank" rel="noopener" href="http://t.csdn.cn/dnLul">STM32CubeMX系列</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/stm32/" class="category-chain-item">stm32</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/stm32/">#stm32</a>
+      
+    </div>
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/05/27/STM32CubeMX%E4%B9%8BLED%E9%97%AA%E7%83%81/" title="STM32CubeMX之LED闪烁">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">STM32CubeMX之LED闪烁</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/05/27/%E7%BB%8F%E5%85%B8%E8%BF%90%E6%94%BE%E7%94%B5%E8%B7%AF%E7%9A%84%E5%88%86%E6%9E%90%E4%B8%8E%E8%AE%A1%E7%AE%97/" title="经典运放电路的分析与计算">
+                        <span class="hidden-mobile">经典运放电路的分析与计算</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="twikoo"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/twikoo/1.6.8/twikoo.all.min.js', function() {
+        var options = Object.assign(
+          {"envId":"https://ENV","region":"ap-shanghai","path":"window.location.pathname"},
+          {
+            el: '#twikoo',
+            path: 'window.location.pathname',
+            onCommentLoaded: function() {
+              var imgSelector = '#twikoo .tk-content img:not(.tk-owo-emotion)';
+              Fluid.plugins.imageCaption(imgSelector);
+              Fluid.plugins.fancyBox(imgSelector);
+            }
+          }
+        )
+        twikoo.init(options)
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <p <i class="iconfont icon-copyright"></i> <span>2023 | KayougZhang</span> </p> <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

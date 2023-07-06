@@ -1,0 +1,797 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="I2C 简介 I2C（Inter-Integrated Circuit）总线是由PHILIPS公司开发的由数据线SDA和时钟线SCL构成的两线式串行总线，用于连接微控制器及其外围I2C设备。 在物理层结构框图上：   img  它有如下特点：  在一个 I2C 通讯总线中，可连接多个 I2C 设备，支持多个通讯主机及多个通讯从机。每个连接到总线的设备都有一个独立的地址，主机利">
+<meta property="og:type" content="article">
+<meta property="og:title" content="STM32CubeMX之I2C_EEPROM">
+<meta property="og:url" content="http://example.com/2023/05/30/STM32CubeMX%E4%B9%8BI2C-EEPROM/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="I2C 简介 I2C（Inter-Integrated Circuit）总线是由PHILIPS公司开发的由数据线SDA和时钟线SCL构成的两线式串行总线，用于连接微控制器及其外围I2C设备。 在物理层结构框图上：   img  它有如下特点：  在一个 I2C 通讯总线中，可连接多个 I2C 设备，支持多个通讯主机及多个通讯从机。每个连接到总线的设备都有一个独立的地址，主机利">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230530122039619.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230601204436710.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230601220435162.png">
+<meta property="article:published_time" content="2023-05-30T03:32:09.000Z">
+<meta property="article:modified_time" content="2023-06-02T00:35:17.524Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="stm32">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230530122039619.png">
+  
+  
+  
+  
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"✍","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":false},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":false,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+<meta name="referrer" content="no-referrer" />
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>My Tech Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/article.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.1)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="STM32CubeMX之I2C_EEPROM"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-05-30 11:32" pubdate>
+          2023年5月30日 中午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          4k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          14 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-12 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">STM32CubeMX之I2C_EEPROM</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：2023年6月2日 早上
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h3 id="i2c-简介">I2C 简介</h3>
+<p>I2C（Inter-Integrated
+Circuit）总线是由PHILIPS公司开发的由数据线SDA和时钟线SCL构成的两线式串行总线，用于连接微控制器及其外围I2C设备。</p>
+<p>在物理层结构框图上：</p>
+<figure>
+<img
+src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/9f8e02deafc832aa7db61065c5a469b8f2d0f1d4.png@831w_276h_progressive.webp" srcset="/img/loading.gif" lazyload
+alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+<p>它有如下特点：</p>
+<ul>
+<li><p>在一个 I2C 通讯总线中，可连接多个 I2C
+设备，支持多个通讯主机及多个通讯从机。每个连接到总线的设备都有一个独立的地址，主机利用这个地址进行不同设备之间的访问；</p></li>
+<li><p>总线通过上拉电阻接到电源。当 I2C
+设备空闲时，会输出高阻态，而当所有设备都空闲，都输出高阻态时，由上拉电阻把总线拉成高电平。</p></li>
+<li><p>多个主机同时使用总线时，为了防止数据冲突，会利用仲裁方式决定由哪个设备占用总线。</p></li>
+<li><p>有三种传输模式，标准模式（100kbit/s）、快速模式（400kbit/s）、高速模式（3.4Mbit/s
+多数I2C设备不支持）</p></li>
+<li><p>连接到相同总线的 I2C 设备数量受到总线的最大电容 400pF
+限制。</p></li>
+</ul>
+<p>在I2C协议层上：</p>
+<figure>
+<img
+src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/1487d890ccbbd39731bc795c2c18b007b6f09e6f.png@831w_236h_progressive.webp" srcset="/img/loading.gif" lazyload
+alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+<p>I2C总线在传送数据的过程中共有三种类型信号：</p>
+<ul>
+<li>开始信号:SCL为高电平时，SDA由高电平向低电平跳变，开始传送数据</li>
+<li>结束信号:SCL为高电平时，SDA由低电平向高电平跳变，结束传送数据</li>
+<li>应答信号:接收数据的IC在接收到8位数据后，向发送数据的IC发出特定的低电平脉冲，表示已经收到数据。</li>
+</ul>
+<p>I2C总线寻址按照从机地址可分为7位和10位（寻址字节）寻址两种，D7~D1位组成从机的地址，D0位是数据传送方向（0表示主机向从机写数据/1表示主机由从机读数据）</p>
+<h3 id="eeprom简介">EEPROM简介</h3>
+<p>EEPROM
+芯片具有掉电后存储内容不丢失的功能，所以一般用来存储参数数据，比较常用的AT24C02芯片，内部含有256个字节，具有I2C通讯接口。</p>
+<p>AT24C02芯片的器件地址为7位，高4位固定为1010，低3位有上表中的A0/A1/A2引脚的电平决定，还有一位（最低位R/W）用来选择读写方向。</p>
+<figure>
+<img
+src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230530124753089.png" srcset="/img/loading.gif" lazyload
+alt="image-20230530124753089" />
+<figcaption aria-hidden="true">image-20230530124753089</figcaption>
+</figure>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230530122039619.png" srcset="/img/loading.gif" lazyload alt="image-20230530122039619" style="zoom:80%;" /></p>
+<p>通过向AT24C02写入特定的数据，然后断电从其中读取数据，通过串口1打印出来。</p>
+<h3 id="软件设计">软件设计</h3>
+<p>I2C程序可以通过gpio模拟的方式编写，但STM32集成有I2C控制器，所以可以直接通过其I2C控制器进行程序的控制。</p>
+<h4 id="stm32cubemx设置">STM32CubeMX设置</h4>
+<ul>
+<li>RCC设置外接HSE，时钟设置为72M</li>
+<li>USART1选择为异步通讯方式，波特率设置为115200Bits/s，传输数据长度为8Bit，无奇偶校验，1位停止位</li>
+<li>激活I2C1，选择标准传输模式，选择7位寻址地址，其余默认设置</li>
+</ul>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230601204436710.png" srcset="/img/loading.gif" lazyload alt="image-20230601204436710" style="zoom:80%;" /></p>
+<ul>
+<li>输入工程名，选择工程路径（不要有中文），选择MDK-ARM V5；勾选Generate
+peripheral initialization as a pair of ‘.c/.h’ files per
+peripheral；点击GENERATE CODE，生成工程代码</li>
+</ul>
+<h4 id="mdk-arm编程">MDK-ARM编程</h4>
+<ul>
+<li><p>在i2c.c文件下可以看到I2C1初始化函数;</p></li>
+<li><p>在uart.c文件中添加fputc重定义函数，并添加头文件<code>&lt;stdio.h&gt;</code>，勾选keil软件<strong>Use
+MicroLIB</strong>选项。</p></li>
+<li><p>添加AT24C02驱动文件24cxx.c和24cxx.h,并添加头文件和头文件路径，主要代码如下：</p></li>
+</ul>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">/**</span>
+<span class="hljs-comment">  * @brief   从EEPROM里面读取一块数据   </span>
+<span class="hljs-comment">  *	@param     pBuffer:存放从EEPROM读取的数据的缓冲区指针</span>
+<span class="hljs-comment">  *	@param     WriteAddr:接收数据的EEPROM的地址</span>
+<span class="hljs-comment">  * @param     NumByteToWrite:要从EEPROM读取的字节数</span>
+<span class="hljs-comment">  * @retval  无</span>
+<span class="hljs-comment">  */</span>
+<span class="hljs-type">uint32_t</span> <span class="hljs-title function_">at24cxx_BufferRead</span><span class="hljs-params">(<span class="hljs-type">uint8_t</span>* pBuffer, <span class="hljs-type">uint8_t</span> ReadAddr, <span class="hljs-type">uint16_t</span> NumByteToRead)</span>
+&#123;
+	HAL_StatusTypeDef status = HAL_OK;
+	
+	status=HAL_I2C_Mem_Read(&amp;hi2c1,EEPROM_ADDRESS,ReadAddr, I2C_MEMADD_SIZE_8BIT, (<span class="hljs-type">uint8_t</span> *)pBuffer, NumByteToRead,<span class="hljs-number">1000</span>);
+
+	<span class="hljs-keyword">return</span> status;
+&#125;
+
+<span class="hljs-comment">/**</span>
+<span class="hljs-comment">  * @brief     将缓冲区中的数据写到I2C EEPROM中  </span>
+<span class="hljs-comment">  *	@param     pBuffer:缓冲区指针</span>
+<span class="hljs-comment">  *	@param     WriteAddr:写地址</span>
+<span class="hljs-comment">  * @param     NumByteToWrite:写的字节数</span>
+<span class="hljs-comment">  * @retval    无</span>
+<span class="hljs-comment">  */</span>
+<span class="hljs-type">void</span> <span class="hljs-title function_">at24cxx_BufferWrite</span><span class="hljs-params">(<span class="hljs-type">uint8_t</span>* pBuffer, <span class="hljs-type">uint8_t</span> WriteAddr, <span class="hljs-type">uint16_t</span> NumByteToWrite)</span>
+&#123;
+  <span class="hljs-type">uint8_t</span> NumOfPage = <span class="hljs-number">0</span>, NumOfSingle = <span class="hljs-number">0</span>, Addr = <span class="hljs-number">0</span>, count = <span class="hljs-number">0</span>;
+
+  Addr = WriteAddr % EEPROM_PAGESIZE;
+  count = EEPROM_PAGESIZE - Addr;
+  NumOfPage =  NumByteToWrite / EEPROM_PAGESIZE;
+  NumOfSingle = NumByteToWrite % EEPROM_PAGESIZE;
+ 
+  <span class="hljs-comment">/* If WriteAddr is I2C_PageSize aligned  */</span>
+  <span class="hljs-keyword">if</span>(Addr == <span class="hljs-number">0</span>) 
+  &#123;
+    <span class="hljs-comment">/* If NumByteToWrite &lt; I2C_PageSize */</span>
+    <span class="hljs-keyword">if</span>(NumOfPage == <span class="hljs-number">0</span>) 
+    &#123;
+      at24cxx_PageWrite(pBuffer, WriteAddr, NumOfSingle);
+    &#125;
+    <span class="hljs-comment">/* If NumByteToWrite &gt; I2C_PageSize */</span>
+    <span class="hljs-keyword">else</span>  
+    &#123;
+      <span class="hljs-keyword">while</span>(NumOfPage--)
+      &#123;
+        at24cxx_PageWrite(pBuffer, WriteAddr, EEPROM_PAGESIZE); 
+        WriteAddr +=  EEPROM_PAGESIZE;
+        pBuffer += EEPROM_PAGESIZE;
+      &#125;
+
+      <span class="hljs-keyword">if</span>(NumOfSingle!=<span class="hljs-number">0</span>)
+      &#123;
+        at24cxx_PageWrite(pBuffer, WriteAddr, NumOfSingle);
+      &#125;
+    &#125;
+  &#125;
+  <span class="hljs-comment">/* If WriteAddr is not I2C_PageSize aligned  */</span>
+  <span class="hljs-keyword">else</span> 
+  &#123;
+    <span class="hljs-comment">/* If NumByteToWrite &lt; I2C_PageSize */</span>
+    <span class="hljs-keyword">if</span>(NumOfPage== <span class="hljs-number">0</span>) 
+    &#123;
+      at24cxx_PageWrite(pBuffer, WriteAddr, NumOfSingle);
+    &#125;
+    <span class="hljs-comment">/* If NumByteToWrite &gt; I2C_PageSize */</span>
+    <span class="hljs-keyword">else</span>
+    &#123;
+      NumByteToWrite -= count;
+      NumOfPage =  NumByteToWrite / EEPROM_PAGESIZE;
+      NumOfSingle = NumByteToWrite % EEPROM_PAGESIZE;	
+      
+      <span class="hljs-keyword">if</span>(count != <span class="hljs-number">0</span>)
+      &#123;  
+        at24cxx_PageWrite(pBuffer, WriteAddr, count);
+        WriteAddr += count;
+        pBuffer += count;
+      &#125; 
+      
+      <span class="hljs-keyword">while</span>(NumOfPage--)
+      &#123;
+        at24cxx_PageWrite(pBuffer, WriteAddr, EEPROM_PAGESIZE);
+        WriteAddr +=  EEPROM_PAGESIZE;
+        pBuffer += EEPROM_PAGESIZE;  
+      &#125;
+      <span class="hljs-keyword">if</span>(NumOfSingle != <span class="hljs-number">0</span>)
+      &#123;
+        at24cxx_PageWrite(pBuffer, WriteAddr, NumOfSingle); 
+      &#125;
+    &#125;
+  &#125;  
+&#125;</code></pre></div>
+<ul>
+<li>在main.c中添加测试代码：</li>
+</ul>
+<p>AT24C02的2Kbit分为32页，每页8个字节。而EEPROM也可以按页写入，本例使用了按页写入的方式，分32次写入。注意每次写入完毕需要延时5ms，是AT24C02芯片的要求；读取数据没有页的限制，可以一次全部读取256个字节</p>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">/* USER CODE BEGIN 1 */</span>
+<span class="hljs-type">uint8_t</span> WriteBuf[<span class="hljs-number">256</span>];
+<span class="hljs-type">uint8_t</span> ReadBuf[<span class="hljs-number">256</span>];
+<span class="hljs-type">uint16_t</span> i;
+<span class="hljs-comment">/* USER CODE END 1 */</span>
+
+<span class="hljs-comment">/* USER CODE BEGIN 2 */</span>
+<span class="hljs-keyword">for</span>(i = <span class="hljs-number">0</span>;i &lt; <span class="hljs-number">256</span>; i++)
+&#123;	 <span class="hljs-comment">//初始化写数据缓冲区</span>
+    WriteBuf[i] = i;
+&#125;
+<span class="hljs-comment">/* USER CODE END 2 */</span>
+
+<span class="hljs-keyword">while</span> (<span class="hljs-number">1</span>)
+&#123;
+    at24cxx_BufferWrite(WriteBuf, <span class="hljs-number">0x00</span>, <span class="hljs-number">256</span>);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;EEPROM 24C02 write Test OK!\r\n&quot;</span>);
+    HAL_Delay(<span class="hljs-number">3000</span>); <span class="hljs-comment">//延时3s</span>
+
+    <span class="hljs-comment">/* EEPROM读取没有页限制，可以一次读取256个字节 */</span>
+    at24cxx_BufferRead(ReadBuf, <span class="hljs-number">0x00</span>, (<span class="hljs-type">uint16_t</span>)<span class="hljs-number">256</span>);
+    <span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">256</span>;i++)
+    &#123;
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;0x%02X &quot;</span>,ReadBuf[i]);
+    &#125;
+
+    <span class="hljs-keyword">if</span>(<span class="hljs-built_in">memcmp</span>(WriteBuf,ReadBuf,<span class="hljs-number">256</span>) == <span class="hljs-number">0</span>)
+    &#123;	<span class="hljs-comment">//通过内存比较，判断读取和写入的数据是否相同</span>
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;\r\nEEPROM 24C02 Read Test OK!\r\n&quot;</span>);
+    &#125;
+    <span class="hljs-keyword">else</span>
+    &#123;
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;\r\nEEPROM 24C02 Read Test False!\r\n&quot;</span>);
+    &#125;
+    HAL_Delay(<span class="hljs-number">500</span>);
+&#125;</code></pre></div>
+<ul>
+<li>编译无误下载到开发板后，同时串口助手打印出相应信息</li>
+</ul>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230601220435162.png" srcset="/img/loading.gif" lazyload alt="image-20230601220435162" style="zoom:80%;" /></p>
+<p>工程文件Gitee：<a
+target="_blank" rel="noopener" href="https://gitee.com/kayoungzhang/my_codehub/raw/master/stm32/i2c_eeprom.zip">i2c_eeprom</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/stm32/" class="category-chain-item">stm32</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/stm32/">#stm32</a>
+      
+    </div>
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/05/30/STM32CubeMX%E4%B9%8BSPI-Flash/" title="STM32CubeMX之SPI_Flash">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">STM32CubeMX之SPI_Flash</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/05/29/STM32CubeMX%E4%B9%8BMCU%E5%86%85%E9%83%A8%E6%B8%A9%E5%BA%A6%E4%BC%A0%E6%84%9F%E5%99%A8/" title="STM32CubeMX之MCU内部温度传感器">
+                        <span class="hidden-mobile">STM32CubeMX之MCU内部温度传感器</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="twikoo"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/twikoo/1.6.8/twikoo.all.min.js', function() {
+        var options = Object.assign(
+          {"envId":"https://ENV","region":"ap-shanghai","path":"window.location.pathname"},
+          {
+            el: '#twikoo',
+            path: 'window.location.pathname',
+            onCommentLoaded: function() {
+              var imgSelector = '#twikoo .tk-content img:not(.tk-owo-emotion)';
+              Fluid.plugins.imageCaption(imgSelector);
+              Fluid.plugins.fancyBox(imgSelector);
+            }
+          }
+        )
+        twikoo.init(options)
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <p <i class="iconfont icon-copyright"></i> <span>2023 | KayougZhang</span> </p> <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

@@ -1,0 +1,727 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="USB简介 USB（Universal Serial BUS）通用串行总线，是一个外部总线标准。USB 接口支持设备的即插即用和热插拔功能。 标准 USB 共四根线组成,除 VCC&#x2F;GND 外,另外为 D+,D-，这两根数据线采用的是差分电压的方式进行数据传输的。在 USB 主机上，D-和 D+都是接了 15K 的电阻到低的，所以在没有设备接入的时候，D+、D-均是低电平。而在 USB">
+<meta property="og:type" content="article">
+<meta property="og:title" content="STM32CubeMX之USB">
+<meta property="og:url" content="http://example.com/2023/06/06/STM32CubeMX%E4%B9%8BUSB/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="USB简介 USB（Universal Serial BUS）通用串行总线，是一个外部总线标准。USB 接口支持设备的即插即用和热插拔功能。 标准 USB 共四根线组成,除 VCC&#x2F;GND 外,另外为 D+,D-，这两根数据线采用的是差分电压的方式进行数据传输的。在 USB 主机上，D-和 D+都是接了 15K 的电阻到低的，所以在没有设备接入的时候，D+、D-均是低电平。而在 USB">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230606220817086.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230606221327095.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230606222512234.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230606222338962.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230606222858420.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230606235349209.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230606235715688.png">
+<meta property="article:published_time" content="2023-06-06T13:47:48.000Z">
+<meta property="article:modified_time" content="2023-06-07T11:38:13.934Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="stm32">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230606220817086.png">
+  
+  
+  
+  
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"✍","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":false},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":false,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+<meta name="referrer" content="no-referrer" />
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>My Tech Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/article.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.1)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="STM32CubeMX之USB"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-06-06 21:47" pubdate>
+          2023年6月6日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.9k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          10 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-12 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">STM32CubeMX之USB</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：2023年6月7日 晚上
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h3 id="usb简介">USB简介</h3>
+<p>USB（Universal Serial BUS）通用串行总线，是一个外部总线标准。USB
+接口支持设备的即插即用和热插拔功能。</p>
+<p>标准 USB 共四根线组成,除 VCC/GND 外,另外为
+D+,D-，这两根数据线采用的是差分电压的方式进行数据传输的。在 USB
+主机上，D-和 D+都是接了 15K
+的电阻到低的，所以在没有设备接入的时候，D+、D-均是低电平。而在 USB
+设备中，如果是高速设备，则会在 D+上接一个 1.5K 的电阻到
+VCC，而如果是低速设备，则会在 D-上接一个 1.5K 的电阻到
+VCC。这样当设备接入主机的时候，主机就可以判断是否有设备接入，并能判断设备是高速设备还是低速设备。</p>
+<p>STM32F103 的 MCU 自带 USB 从控制器，符合 USB 规范的通信连接；PC
+主机和微控制器之间的数据传输是通过共享一专用的数据缓冲区来完成的，该数据缓冲区能被
+USB
+外设直接访问。这块专用数据缓冲区的大小由所使用的端点数目和每个端点最大的数据分组大小所决定，每个端点最大可使用
+512 字节缓冲区（专用的 512 字节，和 CAN 共用），最多可用于 16 个单向或 8
+个双向端点。USB 模块同 PC 主机通信，根据 USB
+规范实现令牌分组的检测，数据发送/接收的处理，和握手分组的处理。整个传输的格式由硬件完成，其中包括
+CRC 的生成和校验。</p>
+<p>USB功能框图：</p>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230606220817086.png" srcset="/img/loading.gif" lazyload alt="image-20230606220817086" style="zoom:80%;" /></p>
+<p>整个 USB 通信的详细过程是很复杂的，要正常使用 STM32F1 的
+USB，就得编写 USB 驱动，好在ST 官方提供了一套完整的 USB
+驱动库，通过这个库，我们可以很方便的实现USB功能，而不需要详细了解 USB
+的整个驱动，大大缩短了我们的开发时间和精力。</p>
+<h3 id="硬件设计">硬件设计</h3>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230606221327095.png" srcset="/img/loading.gif" lazyload alt="image-20230606221327095" style="zoom:80%;" /></p>
+<p>利用 STM32 自带的 USB 功能,连接电脑 USB,虚拟出一个
+USB串口，实现电脑和开发板的数据通信。</p>
+<h3 id="软件设计">软件设计</h3>
+<h4 id="stm32cubemx设置">STM32CubeMX设置</h4>
+<ul>
+<li>激活USB，参数默认即可。</li>
+</ul>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230606222512234.png" srcset="/img/loading.gif" lazyload alt="image-20230606222512234" style="zoom:80%;" /></p>
+<ul>
+<li>RCC设置外接HSE，主时钟设置为72M，USB时钟设置为48M。</li>
+</ul>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230606222338962.png" srcset="/img/loading.gif" lazyload alt="image-20230606222338962" style="zoom:80%;" /></p>
+<ul>
+<li>在中间件中选择 <code>USB_DEVICE</code> 设置，在
+<code>Class For FS IP</code> 设备类别选择
+<code>Communication Device Class（Virtual Port Com）</code>
+虚拟串口，参数保持默认。</li>
+</ul>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230606222858420.png" srcset="/img/loading.gif" lazyload alt="image-20230606222858420" style="zoom:80%;" /></p>
+<ul>
+<li>输入工程名，选择工程路径（不要有中文），选择MDK-ARM V5；勾选Generate
+peripheral initialization as a pair of ‘.c/.h’ files per
+peripheral；点击GENERATE CODE，生成工程代码</li>
+</ul>
+<h4 id="mdk-arm编程">MDK-ARM编程</h4>
+<ul>
+<li>在usbd_cdc_if.c文件中找到发送和接收函数，其中，发生函数可以在外调用，接收函数则是自动触发，为了在串口助手中回送数据，需要在接收函数中添加发送函数。</li>
+</ul>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">/**</span>
+<span class="hljs-comment">  * @brief  Data received over USB OUT endpoint are sent over CDC interface</span>
+<span class="hljs-comment">  *         through this function.</span>
+<span class="hljs-comment">  *</span>
+<span class="hljs-comment">  *         @note</span>
+<span class="hljs-comment">  *         This function will issue a NAK packet on any OUT packet received on</span>
+<span class="hljs-comment">  *         USB endpoint until exiting this function. If you exit this function</span>
+<span class="hljs-comment">  *         before transfer is complete on CDC interface (ie. using DMA controller)</span>
+<span class="hljs-comment">  *         it will result in receiving more data while previous ones are still</span>
+<span class="hljs-comment">  *         not sent.</span>
+<span class="hljs-comment">  *</span>
+<span class="hljs-comment">  * @param  Buf: Buffer of data to be received</span>
+<span class="hljs-comment">  * @param  Len: Number of data received (in bytes)</span>
+<span class="hljs-comment">  * @retval Result of the operation: USBD_OK if all operations are OK else USBD_FAIL</span>
+<span class="hljs-comment">  */</span>
+<span class="hljs-type">static</span> <span class="hljs-type">int8_t</span> <span class="hljs-title function_">CDC_Receive_FS</span><span class="hljs-params">(<span class="hljs-type">uint8_t</span>* Buf, <span class="hljs-type">uint32_t</span> *Len)</span>
+&#123;
+  <span class="hljs-comment">/* USER CODE BEGIN 6 */</span>
+  USBD_CDC_SetRxBuffer(&amp;hUsbDeviceFS, &amp;Buf[<span class="hljs-number">0</span>]);
+  USBD_CDC_ReceivePacket(&amp;hUsbDeviceFS);
+  CDC_Transmit_FS(Buf, *Len);<span class="hljs-comment">//添加回送函数</span>
+  <span class="hljs-keyword">return</span> (USBD_OK);
+  <span class="hljs-comment">/* USER CODE END 6 */</span>
+&#125;
+<span class="hljs-comment">/**</span>
+<span class="hljs-comment">  * @brief  CDC_Transmit_FS</span>
+<span class="hljs-comment">  *         Data to send over USB IN endpoint are sent over CDC interface</span>
+<span class="hljs-comment">  *         through this function.</span>
+<span class="hljs-comment">  *         @note</span>
+<span class="hljs-comment">  *</span>
+<span class="hljs-comment">  *</span>
+<span class="hljs-comment">  * @param  Buf: Buffer of data to be sent</span>
+<span class="hljs-comment">  * @param  Len: Number of data to be sent (in bytes)</span>
+<span class="hljs-comment">  * @retval USBD_OK if all operations are OK else USBD_FAIL or USBD_BUSY</span>
+<span class="hljs-comment">  */</span>
+<span class="hljs-type">uint8_t</span> <span class="hljs-title function_">CDC_Transmit_FS</span><span class="hljs-params">(<span class="hljs-type">uint8_t</span>* Buf, <span class="hljs-type">uint16_t</span> Len)</span>
+&#123;
+  <span class="hljs-type">uint8_t</span> result = USBD_OK;
+  <span class="hljs-comment">/* USER CODE BEGIN 7 */</span>
+  USBD_CDC_HandleTypeDef *hcdc = (USBD_CDC_HandleTypeDef*)hUsbDeviceFS.pClassData;
+  <span class="hljs-keyword">if</span> (hcdc-&gt;TxState != <span class="hljs-number">0</span>)&#123;
+    <span class="hljs-keyword">return</span> USBD_BUSY;
+  &#125;
+  USBD_CDC_SetTxBuffer(&amp;hUsbDeviceFS, Buf, Len);
+  result = USBD_CDC_TransmitPacket(&amp;hUsbDeviceFS);
+  <span class="hljs-comment">/* USER CODE END 7 */</span>
+  <span class="hljs-keyword">return</span> result;
+&#125;</code></pre></div>
+<ul>
+<li>在main.c函数中添加测试代码：</li>
+</ul>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">/* USER CODE BEGIN Includes */</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;usbd_cdc_if.h&quot;</span></span>
+<span class="hljs-comment">/* USER CODE END Includes */</span>
+
+<span class="hljs-comment">/* USER CODE BEGIN PV */</span>
+<span class="hljs-type">uint8_t</span> usb_send_buffer[] = <span class="hljs-string">&quot;This is USB Virtual Test.\r\n&quot;</span>;
+<span class="hljs-comment">/* USER CODE END PV */</span>
+
+<span class="hljs-comment">/* USER CODE BEGIN WHILE */</span>
+<span class="hljs-keyword">while</span> (<span class="hljs-number">1</span>)
+&#123;
+CDC_Transmit_FS(usb_send_buffer, <span class="hljs-keyword">sizeof</span>(usb_send_buffer));
+HAL_Delay(<span class="hljs-number">1000</span>);
+<span class="hljs-comment">/* USER CODE END WHILE */</span>
+
+<span class="hljs-comment">/* USER CODE BEGIN 3 */</span>
+&#125;</code></pre></div>
+<ul>
+<li>编译正常，下载到开发板，将USB连接线连接电脑和开发板的USB
+SLAVE口，打开串口助手，选择出现的虚拟端口号，串口不停的发送数据，当从串口助手发送数据时，也会回显到串口助手上。</li>
+</ul>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230606235349209.png" srcset="/img/loading.gif" lazyload alt="image-20230606235349209" style="zoom:80%;" /></p>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230606235715688.png" srcset="/img/loading.gif" lazyload alt="image-20230606235715688" style="zoom:80%;" /></p>
+<p>工程文件Gitee：<a
+target="_blank" rel="noopener" href="https://gitee.com/kayoungzhang/my_codehub/raw/master/stm32/usb.zip">usb</a></p>
+<h4 id="参考链接">参考链接：</h4>
+<p>http://t.csdn.cn/ZrHap</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/stm32/" class="category-chain-item">stm32</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/stm32/">#stm32</a>
+      
+    </div>
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/06/07/STM32%E6%9C%89%E7%BA%BF%E7%BD%91%E7%BB%9CEthernet/" title="STM32以太网通信">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">STM32以太网通信</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/05/31/STM32CubeMX%E4%B9%8BFatfs%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" title="STM32CubeMX之FatFs文件系统">
+                        <span class="hidden-mobile">STM32CubeMX之FatFs文件系统</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="twikoo"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/twikoo/1.6.8/twikoo.all.min.js', function() {
+        var options = Object.assign(
+          {"envId":"https://ENV","region":"ap-shanghai","path":"window.location.pathname"},
+          {
+            el: '#twikoo',
+            path: 'window.location.pathname',
+            onCommentLoaded: function() {
+              var imgSelector = '#twikoo .tk-content img:not(.tk-owo-emotion)';
+              Fluid.plugins.imageCaption(imgSelector);
+              Fluid.plugins.fancyBox(imgSelector);
+            }
+          }
+        )
+        twikoo.init(options)
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <p <i class="iconfont icon-copyright"></i> <span>2023 | KayougZhang</span> </p> <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
