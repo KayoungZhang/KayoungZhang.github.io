@@ -1,958 +1,0 @@
-
-
-<!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=auto>
-
-
-
-<head>
-  <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
-  <link rel="icon" href="/img/fluid.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  
-  <meta name="theme-color" content="#2f4154">
-  <meta name="author" content="John Doe">
-  <meta name="keywords" content="">
-  
-    <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/page/4/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:locale" content="zh_CN">
-<meta property="article:author" content="John Doe">
-<meta name="twitter:card" content="summary_large_image">
-  
-  
-  
-  
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
-
-
-
-
-
-<!-- 主题依赖的图标库，不要自行修改 -->
-<!-- Do not modify the link that theme dependent icons -->
-
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
-
-
-
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
-
-
-<link  rel="stylesheet" href="/css/main.css" />
-
-
-  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
-  
-    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
-  
-
-
-
-
-  <script id="fluid-configs">
-    var Fluid = window.Fluid || {};
-    Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"✍","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":false},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":false,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
-
-    if (CONFIG.web_analytics.follow_dnt) {
-      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
-      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
-    }
-  </script>
-  <script  src="/js/utils.js" ></script>
-  <script  src="/js/color-schema.js" ></script>
-  
-
-
-  
-<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-</head>
-
-<meta name="referrer" content="no-referrer" />
-
-<body>
-  
-
-  <header>
-    
-
-<div class="header-inner" style="height: 100vh;">
-  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
-  <div class="container">
-    <a class="navbar-brand" href="/">
-      <strong>My Tech Blog</strong>
-    </a>
-
-    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <div class="animated-icon"><span></span><span></span><span></span></div>
-    </button>
-
-    <!-- Collapsible content -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ml-auto text-center">
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/">
-                <i class="iconfont icon-home-fill"></i>
-                <span>首页</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/archives/">
-                <i class="iconfont icon-archive-fill"></i>
-                <span>归档</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/categories/">
-                <i class="iconfont icon-category-fill"></i>
-                <span>分类</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/tags/">
-                <i class="iconfont icon-tags-fill"></i>
-                <span>标签</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/about/">
-                <i class="iconfont icon-user-fill"></i>
-                <span>关于</span>
-              </a>
-            </li>
-          
-        
-        
-          <li class="nav-item" id="search-btn">
-            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
-              <i class="iconfont icon-search"></i>
-            </a>
-          </li>
-          
-        
-        
-          <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
-              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
-            </a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-</nav>
-
-  
-
-<div id="banner" class="banner" parallax=true
-     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
-  <div class="full-bg-img">
-    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.1)">
-      <div class="banner-text text-center fade-in-up">
-        <div class="h2">
-          
-            <span id="subtitle" data-typed-text="积跬步以至千里，积小流而成江海"></span>
-          
-        </div>
-
-        
-      </div>
-
-      
-        <div class="scroll-down-bar">
-          <i class="iconfont icon-arrowdown"></i>
-        </div>
-      
-    </div>
-  </div>
-</div>
-
-</div>
-
-  </header>
-
-  <main>
-    
-      <div class="container nopadding-x-md">
-        <div id="board"
-          style="margin-top: 0">
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
-
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/05/25/pcb-layout-%E5%AE%A1%E6%A0%B8%E8%A1%A8/" target="_self">
-          pcb layout 审核表
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/25/pcb-layout-%E5%AE%A1%E6%A0%B8%E8%A1%A8/" target="_self">
-        <div>
-          PCB设计完成需要进行综合检查，除了设计软件设定的规则外，还需要手动确认一些其它重要的信息。 结构  PCB中的定位孔位置大小是否和结构的要求一致，旁边是否有挨得太近的器件（保留间距大于1mm）； 接插件的型号，方向，顺序是否和要求一致，位置是否合理； 母板，子板的连接座的方向，顺序是否一致，位置是否合理； 新器件的封装，脚位定义，电气连接都需校对；  原理图和PCB  确保从
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-05-25 17:32" pubdate>
-              2023-05-25
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E7%A1%AC%E4%BB%B6/" class="category-chain-item">硬件</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/pcb/">#pcb</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/05/24/PCB-layout-rules/" target="_self">
-          PCB layout rules
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/24/PCB-layout-rules/" target="_self">
-        <div>
-          PCB设计过程中，器件的整体布局和关键信号的layout至关重要，布局得当，信号线layout顺畅，就会在后续设计开发过程中，减少不必要的麻烦，相反，布局不当，layout失误，一是影响PCB整体的美观程度，二是在测试应用中带来诸多麻烦。为了减少不必要的设计麻烦，下面介绍一些常用的PCB设计的布局和layout规则： PCB布局  首先对结构有限高或位置要求的器件进行摆放。布局要美观，器件间
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-05-24 19:23" pubdate>
-              2023-05-24
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E7%A1%AC%E4%BB%B6/" class="category-chain-item">硬件</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/pcb/">#pcb</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/05/20/pcb%E8%AE%BE%E8%AE%A1%E4%B9%8B%E9%87%8D%E8%A6%81%E4%BF%A1%E5%8F%B7%E7%BA%BFlayout%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" target="_self">
-          pcb设计之重要信号线layout注意事项
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/20/pcb%E8%AE%BE%E8%AE%A1%E4%B9%8B%E9%87%8D%E8%A6%81%E4%BF%A1%E5%8F%B7%E7%BA%BFlayout%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" target="_self">
-        <div>
-          这一篇主要看看pcb设计中重要信号线的layout注意事项：  差分信号线尽量在一起同一层走线     差分间距无法满足20mil，最好进行包地    image-20230521104926751 - 副本   usb按90欧姆差分阻抗进行走线，等长处理    usb打孔换层应在旁边放置地过孔回流    网口按100欧姆差分阻抗走线，等长处理
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-05-20 17:46" pubdate>
-              2023-05-20
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E7%A1%AC%E4%BB%B6/" class="category-chain-item">硬件</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/pcb/">#pcb</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/05/20/pcb%E8%AE%BE%E8%AE%A1%E4%B9%8B%E6%99%AE%E9%80%9A%E4%BF%A1%E5%8F%B7%E7%BA%BFlayout%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" target="_self">
-          pcb设计之普通信号线layout注意事项
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/20/pcb%E8%AE%BE%E8%AE%A1%E4%B9%8B%E6%99%AE%E9%80%9A%E4%BF%A1%E5%8F%B7%E7%BA%BFlayout%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" target="_self">
-        <div>
-          这一篇主要看普通信号线的layout注意事项：  走线不要出现直角锐角     走线不要超过焊盘宽度，应以焊盘同宽出线，可出完焊盘后立即加粗    尽量减少环路      7个地焊盘只有两个地孔，最多最多三个焊盘一个过孔    所有层中间间距拉开一点，加到15mil~20mil    走线不要压到电源内缩层    2023052010202
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-05-20 17:45" pubdate>
-              2023-05-20
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E7%A1%AC%E4%BB%B6/" class="category-chain-item">硬件</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/pcb/">#pcb</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/05/20/pcb%E8%AE%BE%E8%AE%A1%E4%B9%8B%E7%94%B5%E6%BA%90layout%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" target="_self">
-          pcb设计之电源layout注意事项
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/20/pcb%E8%AE%BE%E8%AE%A1%E4%B9%8B%E7%94%B5%E6%BA%90layout%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" target="_self">
-        <div>
-          pcb设计中，在layout时需要遵循一定规范，才会避免设计出不合格的pcb板，下面几篇文章主要总结一下layout过程中常见的问题，本篇是关于电源layout，内容主要来源自pcb联盟网论坛。  电源滤波电容尽量靠近IC管脚放置。    电源走线载流过小，加大铺铜宽度，保证载流量     image-20230520205310933   电源分割线20mil以上，分
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-05-20 17:44" pubdate>
-              2023-05-20
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E7%A1%AC%E4%BB%B6/" class="category-chain-item">硬件</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/pcb/">#pcb</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/05/19/Altium-Designer%E8%BD%AF%E4%BB%B6%E5%BA%94%E7%94%A8%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/" target="_self">
-          Altium Designer软件应用常见问题
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/19/Altium-Designer%E8%BD%AF%E4%BB%B6%E5%BA%94%E7%94%A8%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/" target="_self">
-        <div>
-          使用Altium Designer时，有时候会碰到一些不常见的问题，以下总结几个，后续发现了问题，再增加。  高版本AD无法寻找系统设置项  解决方法： 高版本在软件右上角有个设置图标即是设置项或 Tools -&gt; Preferences.  在低版本AD，PCB中拖动元件，元件不显示。  解决方法：  Preferences -&gt; PCB Editor -&
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-05-19 22:42" pubdate>
-              2023-05-19
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E7%A1%AC%E4%BB%B6/" class="category-chain-item">硬件</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/pcb/">#pcb</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/05/18/Altium-Designer-Gerber-Files-%E7%94%9F%E6%88%90%E6%AD%A5%E9%AA%A4/" target="_self">
-          Altium Designer Gerber Files 生成步骤
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/18/Altium-Designer-Gerber-Files-%E7%94%9F%E6%88%90%E6%AD%A5%E9%AA%A4/" target="_self">
-        <div>
-          pcb layout完成后，然后就可以发送到PCB板厂进行生产制造了，一般为了保密性质，发送给厂商的是GerberFiles文件，所以，就需要生成GerberFiles。以下说一下Altium Designer生成GerberFiles的具体的操作步骤： 生成Gerber文件前，需要设置PCB原点，工艺边，定位孔，钻孔描述(drill层放置 '.legend')，尺寸标注(一般为mecha
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-05-18 21:35" pubdate>
-              2023-05-18
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E7%A1%AC%E4%BB%B6/" class="category-chain-item">硬件</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/pcb/">#pcb</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/05/17/Altium-Designer-%E5%BF%AB%E6%8D%B7%E9%94%AE%E6%B1%87%E6%80%BB/" target="_self">
-          Altium Designer 快捷键汇总
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/17/Altium-Designer-%E5%BF%AB%E6%8D%B7%E9%94%AE%E6%B1%87%E6%80%BB/" target="_self">
-        <div>
-          最近新项目需要设计电路和PCB，刚好结合之前整理的Altium Designer快捷键汇总一下：  对齐     快捷键 功能     A 弹出对齐对话框   A+L 向左对齐   A+R 向右对齐   A+D 横向等间距   A+T 向上对齐   A+B 向下对齐   A+S 纵向等间距     元件调整
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-05-17 20:42" pubdate>
-              2023-05-17
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E7%A1%AC%E4%BB%B6/" class="category-chain-item">硬件</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/pcb/">#pcb</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/05/15/crc%E6%A0%A1%E9%AA%8C%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0/" target="_self">
-          crc校验及其实现
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/15/crc%E6%A0%A1%E9%AA%8C%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0/" target="_self">
-        <div>
-          在通信领域传输数据时，为了避免接收到错误的数据，一般会对源数据和接收到的数据进行特定的校验处理，如果一致，则说明传输正确，否则传输发生了错误。常用的校验算法有奇偶校验、校验和、CRC等，这里主要看看CRC校验。 CRC简介 循环冗余校验（Cyclic Redundancy Check， CRC），它是利用除法及余数的原理来作错误侦测的，对数据进行多项式计算，并将得到的结果附在帧的后面，接收设
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-05-15 21:33" pubdate>
-              2023-05-15
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/C%E8%AF%AD%E8%A8%80/" class="category-chain-item">C语言</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/crc/">#crc</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/05/14/ssd3as%E5%8E%8B%E5%8A%9B%E4%BC%A0%E6%84%9F%E5%99%A8%E7%9A%84%E5%BC%80%E5%8F%91%E8%AE%BE%E8%AE%A1/" target="_self">
-          ssd3as压力传感器的开发设计
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/14/ssd3as%E5%8E%8B%E5%8A%9B%E4%BC%A0%E6%84%9F%E5%99%A8%E7%9A%84%E5%BC%80%E5%8F%91%E8%AE%BE%E8%AE%A1/" target="_self">
-        <div>
-          spi通讯在开发过程中会经常用到，譬如下面介绍的数字压力传感器SSD系列，在传输压力值时就可以通过spi协议进行通讯。 产品特点  中压量程： 7Kpa ~ 1Mpa 供电：3.3V / 5V可选 输出：SPI / I2C，压力14位，温度，11位 温度补偿：-10 ~ 50℃  引脚定义  压力类型  压力公式 此传感器可模拟输出和数字输出，这里只对数字输出进行处理。
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-05-14 20:58" pubdate>
-              2023-05-14
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E5%8D%95%E7%89%87%E6%9C%BA/" class="category-chain-item">单片机</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/sensor/">#sensor</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-
-
-  <nav aria-label="navigation">
-    <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/page/3/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/#board">5</a><a class="page-number" href="/page/6/#board">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/#board">8</a><a class="extend next" rel="next" href="/page/5/#board"><i class="iconfont icon-arrowright"></i></a>
-    </span>
-  </nav>
-
-
-
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    
-
-    
-      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
-        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
-      </a>
-    
-
-    
-      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
-     aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
-        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body mx-3">
-        <div class="md-form mb-5">
-          <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
-        </div>
-        <div class="list-group" id="local-search-result"></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-    
-
-    
-  </main>
-
-  <footer>
-    <div class="footer-inner">
-  
-    <div class="footer-content">
-       <p <i class="iconfont icon-copyright"></i> <span>2023 | KayougZhang</span> </p> <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
-    </div>
-  
-  
-  
-  
-</div>
-
-  </footer>
-
-  <!-- Scripts -->
-  
-  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
-  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
-
-  <script>
-    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
-    NProgress.start()
-    window.addEventListener('load', function() {
-      NProgress.done();
-    })
-  </script>
-
-
-<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
-<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
-<script  src="/js/events.js" ></script>
-<script  src="/js/plugins.js" ></script>
-
-
-  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
-  <script>
-    (function (window, document) {
-      var typing = Fluid.plugins.typing;
-      var subtitle = document.getElementById('subtitle');
-      if (!subtitle || !typing) {
-        return;
-      }
-      var text = subtitle.getAttribute('data-typed-text');
-      
-        typing(text);
-      
-    })(window, document);
-  </script>
-
-
-
-
-  
-    <script  src="/js/img-lazyload.js" ></script>
-  
-
-
-
-
-  <script  src="/js/local-search.js" ></script>
-
-
-
-
-
-<!-- 主题的启动项，将它保持在最底部 -->
-<!-- the boot of the theme, keep it at the bottom -->
-<script  src="/js/boot.js" ></script>
-
-
-  
-
-  <noscript>
-    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
-  </noscript>
-</body>
-</html>
