@@ -23,10 +23,12 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="在创建hexo个人博客时，已经简单介绍了更换主题的方法，下面主要是介绍我在更换 fluid 主题后，进行的一些自定义设置及碰到的问题和解决方法。 1. 下载 fluid 主题及修改配置文件 在本地 Hexo 博客目录中打开 git bash，然后下载 fluid 主题。 git clone https:&#x2F;&#x2F;github.com&#x2F;fluid-dev&#x2F;hexo-theme-fluid.g">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230706225516667.png">
 <meta property="article:published_time" content="2023-04-16T04:16:49.000Z">
-<meta property="article:modified_time" content="2023-05-04T14:42:39.129Z">
+<meta property="article:modified_time" content="2023-07-06T14:56:28.929Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230706225516667.png">
   
   
   
@@ -275,7 +277,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年5月4日 晚上
+                    本文最后更新于：2023年7月6日 晚上
                   
                 
               </p>
@@ -447,6 +449,9 @@ npm install hexo-renderer-pandoc <span class="hljs-comment">--save</span></code>
 <code>_config.yml</code>，添加pandoc软件的路径。</p>
 <div class="code-wrapper"><pre><code class="hljs arcade">pandoc:
   pandoc_path: C:<span class="hljs-regexp">/Program Files/</span>Pandoc/pandoc.exe</code></pre></div>
+<p><strong>注意：</strong>
+有时部署博客文章会出现关于pandoc的错误，可根据提示，进行相应的修改。</p>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230706225516667.png" srcset="/img/loading.gif" lazyload alt="image-20230706225516667" style="zoom:80%;" /></p>
 <p>在需要显示数学公式的文档前面添加
 <code>math: true</code>,之后页面就会显示公式。为了方便，可以打开
 <code>\scaffolds\post.md</code>文件，添加<code>math:</code>,这样，在以后需要显示公式的文档中将math后面添加true即可。</p>
