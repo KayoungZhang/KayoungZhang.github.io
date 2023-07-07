@@ -1,0 +1,753 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="算法简介 所谓算法（Algorithm），即解决问题的方法。同一个问题，使用不同的算法，虽然得到的结果相同，但耗费的时间和资源肯定有所差异。 注意，程序和算法是完全不同的概念。算法是解决某个问题的想法、思路；而程序是在根据算法编写出来的真正可以运行的代码。例如，要依次输出一维数组中的数据元素的值，首先想到的是使用循环结构，在这个算法的基础上，我们才开始编写程序。 程序的运行效率具体可以从 2">
+<meta property="og:type" content="article">
+<meta property="og:title" content="算法中的时间和空间复杂度">
+<meta property="og:url" content="http://example.com/2023/07/07/%E7%AE%97%E6%B3%95%E4%B8%AD%E7%9A%84%E6%97%B6%E9%97%B4%E5%92%8C%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="算法简介 所谓算法（Algorithm），即解决问题的方法。同一个问题，使用不同的算法，虽然得到的结果相同，但耗费的时间和资源肯定有所差异。 注意，程序和算法是完全不同的概念。算法是解决某个问题的想法、思路；而程序是在根据算法编写出来的真正可以运行的代码。例如，要依次输出一维数组中的数据元素的值，首先想到的是使用循环结构，在这个算法的基础上，我们才开始编写程序。 程序的运行效率具体可以从 2">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-07-07T01:26:35.000Z">
+<meta property="article:modified_time" content="2023-07-07T05:17:39.675Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="算法">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"✍","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":false},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":false,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+<meta name="referrer" content="no-referrer" />
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>My Tech Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/article.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.1)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="算法中的时间和空间复杂度"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-07-07 09:26" pubdate>
+          2023年7月7日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.8k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          10 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-12 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">算法中的时间和空间复杂度</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：2023年7月7日 下午
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="算法简介">算法简介</h2>
+<p>所谓算法（Algorithm），即解决问题的方法。同一个问题，使用不同的算法，虽然得到的结果相同，但耗费的时间和资源肯定有所差异。</p>
+<p><strong>注意</strong>，程序和算法是完全不同的概念。算法是解决某个问题的想法、思路；而程序是在根据算法编写出来的真正可以运行的代码。例如，要依次输出一维数组中的数据元素的值，首先想到的是使用循环结构，在这个算法的基础上，我们才开始编写程序。</p>
+<p>程序的运行效率具体可以从 2 个方面衡量，分别为：</p>
+<ul>
+<li>程序的运行时间。（时间维度）</li>
+<li>程序运行所需内存空间的大小。（空间维度）</li>
+</ul>
+<p>程序运行时间越短，运行期间占用的内存越少，该程序运行效率就越高，这样算法也就更好。衡量一个算法所编写出程序的运行效率在数据结构中，用<strong>时间复杂度</strong>来衡量程序运行时间的多少；用<strong>空间复杂度</strong>来衡量程序运行所需内存空间的大小。</p>
+<h2 id="算法中复杂度的表示方法">算法中复杂度的表示方法</h2>
+<p>在数据结构中，每条语句的执行次数，被称为该语句的频度，整段代码的总执行次数，为整段代码的频度。所以算法复杂度的一般通用表示方法是：「
+<strong>大O符号表示法</strong> 」，即
+<strong>O(频度)</strong>。大O符号表示法是一种算法复杂度的相对表示方式。</p>
+<h2 id="时间复杂度">时间复杂度</h2>
+<h3 id="时间复杂度概念">时间复杂度概念</h3>
+<p>一个算法所编程序运行时间的多少，并不是在计算机上运行所消耗的时间来度量的，而是根据合理方法得到的预估值。那么，如何预估一个算法所编程序的运行时间呢？就是计算程序中每行代码的执行次数，然后用总的执行次数间接表示程序的运行时间，即：</p>
+<p><strong>T(n) = O(f(n))</strong></p>
+<p>其中：<strong>T(n)</strong>表示程序执行的时间；<strong>f(n)</strong>
+表示每行代码执行次数之和；而 <strong>O</strong> 表示 T(n) 与 f(n)
+成正比关系，这个公式的全称是：<strong>算法的渐进时间复杂度</strong>。</p>
+<p>我们先来看个例子：</p>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span> ; i &lt; n ; i++)     <span class="hljs-comment">//&lt;- 从 0 到 n，执行 n+1 次</span>
+&#123;
+    a++;                         <span class="hljs-comment">//&lt;- 从 0 到 n-1，执行 n 次</span>
+&#125;</code></pre></div>
+<p>因此，整段代码中所有语句共执行了 (n+1)+n 次，即 <strong>2n+1</strong>
+次。</p>
+<p>再看一个例子：</p>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span> ; i &lt; n ; i++)           <span class="hljs-comment">// n+1次</span>
+&#123; 
+    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j = <span class="hljs-number">0</span> ; j &lt; m ; j++)       <span class="hljs-comment">// n*(m+1)次</span>
+    &#123;
+        num++;                         <span class="hljs-comment">// n*m次</span>
+    &#125;
+&#125;</code></pre></div>
+<p>这段代码一共执行的次数是：(2*n*m+2*n+1)。当 n、m 都无限大时，可认为
+n==m，则可以简化为
+<strong>2n²+2n+1</strong>，这就是此段程序在最坏情况下的运行频度。</p>
+<p>在数据结构中，一般会使用 <strong>无限大的思想</strong>
+来简化频度表达式。可以这样简化：</p>
+<ul>
+<li>首先去掉常数分子。例如 <strong>2n²+2n+1</strong> 简化为
+<strong>2n²+2n</strong> ；</li>
+<li>然后有多项无限大的变量的，只保留一个最高项变量,且最高项系数为1。例如
+<strong>2n²+2n</strong> 简化为 <strong>n²</strong>；</li>
+</ul>
+<p>这样，就可以得到以上两个例子的时间复杂度分别为 <strong>O(n)</strong>
+和 <strong>O(n²)</strong> 。</p>
+<h3 id="常见的时间复杂度量级">常见的时间复杂度量级</h3>
+<p>常见的时间复杂度量级有：</p>
+<ul>
+<li><strong>常数阶O(1)</strong></li>
+<li><strong>对数阶O(logn)</strong></li>
+<li><strong>线性阶O(n)</strong></li>
+<li><strong>线性对数阶O(nlogn)</strong></li>
+<li><strong>平方阶O(n²)</strong></li>
+<li><strong>立方阶O(n³)</strong></li>
+<li><strong>指数阶(2^n)</strong></li>
+</ul>
+<p>上面从上至下依次的时间复杂度越来越大，执行的效率越来越低。<strong>注意</strong>，这里仅以最坏情况下的频度作为时间复杂度，而在某些实际场景中，还可以用最好情况下的频度和最坏情况下的频度的平均值来作为算法的平均时间复杂度。</p>
+<p>下面分别举例说明：</p>
+<ol type="1">
+<li><strong>常数阶O(1)</strong></li>
+</ol>
+<p>无论代码执行了多少行，哪怕执行上万行，只要是没有循环等复杂结构，那这个代码的时间复杂度就都是O(1),如：</p>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-type">int</span> i = <span class="hljs-number">1</span>;
+<span class="hljs-type">int</span> j = <span class="hljs-number">2</span>;
+++i;
+j++;
+<span class="hljs-type">int</span> m = i + j;</code></pre></div>
+<ol start="2" type="1">
+<li><strong>对数阶O(logn)</strong></li>
+</ol>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-type">int</span> i = <span class="hljs-number">1</span>;     <span class="hljs-comment">//执行1次</span>
+<span class="hljs-keyword">while</span>(i&lt;n)     <span class="hljs-comment">//执行log2^n次</span>
+&#123;
+    i = i * <span class="hljs-number">2</span>; <span class="hljs-comment">//执行log2^n次</span>
+&#125;</code></pre></div>
+<p>这段代码总的执行次数是 <strong>2log2^n + 1</strong>;
+简化：<strong>log2^n</strong>,
+对数的底是不确定的，这里恰好是2，一般会去掉对数的底，所以可以进一步简化：<strong>logn</strong>，即时间复杂度：<strong>O(logn)</strong>
+。</p>
+<ol start="3" type="1">
+<li><strong>线性阶O(n)</strong></li>
+</ol>
+<p>如：</p>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-keyword">for</span>(i=<span class="hljs-number">1</span>; i&lt;=n; ++i) <span class="hljs-comment">//执行了n次</span>
+&#123;
+   j++ = i;   <span class="hljs-comment">//执行了 n-1 次</span>
+&#125;</code></pre></div>
+<p>这段代码执行了 <strong>2n-1</strong> 次，简化后，即时间复杂度
+<strong>O(n)</strong> 。</p>
+<ol start="4" type="1">
+<li><strong>线性对数阶O(nlogn)</strong></li>
+</ol>
+<p>将时间复杂度为O(logn)的代码循环n遍的话，那么它的时间复杂度就是 n *
+O(logn)，也就是了O(nlogn)。</p>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-keyword">for</span>(m=<span class="hljs-number">1</span>; m&lt;n; m++) <span class="hljs-comment">//执行n次</span>
+&#123;
+    i = <span class="hljs-number">1</span>;       <span class="hljs-comment">//执行n次</span>
+    <span class="hljs-keyword">while</span>(i&lt;n)   <span class="hljs-comment">//执行 n*log2^n次</span>
+    &#123;
+        i = i * <span class="hljs-number">2</span>;  <span class="hljs-comment">//执行n*log2^n次</span>
+    &#125;
+&#125;</code></pre></div>
+<p>这段代码执行了 <strong>2n+2nlog2^n</strong> 次，简化后，即时间复杂度
+<strong>O(nlogn)</strong> 。</p>
+<ol start="5" type="1">
+<li><strong>平方阶O(n²)</strong></li>
+</ol>
+<p>如果把 O(n) 的代码再嵌套循环一遍，它的时间复杂度就是 O(n²) 了。</p>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-keyword">for</span>(x=<span class="hljs-number">1</span>; i&lt;=n; x++) <span class="hljs-comment">//执行n次</span>
+&#123;
+   <span class="hljs-keyword">for</span>(i=<span class="hljs-number">1</span>; i&lt;=n; i++) <span class="hljs-comment">//执行n*n次</span>
+    &#123;
+       j++ = i;  <span class="hljs-comment">//执行n*n次</span>
+    &#125;
+&#125;</code></pre></div>
+<p>这段代码执行了 <strong>n+2n²</strong> 次，简化后，即时间复杂度
+<strong>O(n²)</strong> 。</p>
+<ol start="6" type="1">
+<li><strong>立方阶O(n³)</strong></li>
+</ol>
+<p>O(n³)相当于三层n循环，其它的类似。</p>
+<ol start="7" type="1">
+<li><strong>指数阶(2^n)</strong></li>
+</ol>
+<p>在递归调用程序中，会有指数阶，如：</p>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-type">int</span> <span class="hljs-title function_">f</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span>
+&#123;
+   <span class="hljs-keyword">if</span> (n == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+   <span class="hljs-keyword">return</span> f(n<span class="hljs-number">-1</span>) + f(n - <span class="hljs-number">1</span>);
+&#125;</code></pre></div>
+<p>这里执行的次数计算: 2^0 + 2^1 + 2^2 + …… +
+2^n，即2^(n+1)-1,进一步简化则时间复杂度:<strong>O(2^n)</strong> 。</p>
+<p>除此之外，其实还有
+<strong>平均时间复杂度、均摊时间复杂度、最坏时间复杂度、最好时间复杂度</strong>
+，有点复杂，这里这里就不展开了。</p>
+<h2 id="空间复杂度">空间复杂度</h2>
+<p>空间复杂度是对一个算法在运行过程中临时占用存储空间大小的一个量度，同样反映的是一个趋势，我们用
+S(n) 来定义。和时间复杂度类似，也用 「 <strong>大O符号表示法</strong> 」
+来表示。</p>
+<p>事实上，<strong>对算法的空间复杂度影响最大的，往往是程序运行过程中所申请的临时存储空间</strong>。如：</p>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-type">int</span> n;
+<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>, &amp;n);
+<span class="hljs-type">int</span> a[<span class="hljs-number">10</span>];</code></pre></div>
+<p>这段程序在运行时所申请的临时空间，并不随 n 的值而变化。而如果将第 3
+行代码改为<code>int a[n]</code>, 此时程序运行所申请的临时空间，和 n
+值有直接的关联。</p>
+<p>所以，如果程序所占用的存储空间和输入值无关，则该程序的空间复杂度就为
+<strong>O(1)</strong>；反之则需要进一步判断它们之间的关系：</p>
+<ul>
+<li>输入值 n
+不断增大，程序申请的临时空间成线性增长，则程序的空间复杂度用
+<strong>O(n)</strong> 表示;</li>
+<li>输入值 n 不断增大，程序申请的临时空间成 n²
+关系增长，则程序的空间复杂度用 <strong>O(n²)</strong> 表示；</li>
+<li>输入值 n 不断增大，程序申请的临时空间成 n³
+关系增长，则程序的空间复杂度用 <strong>O(n³)</strong> 表示；</li>
+</ul>
+<blockquote>
+<p><strong>在多数场景中，一个好的算法往往更注重的是时间复杂度的比较，而空间复杂度只要在一个合理的范围内就可以。空间复杂度比较常用的有：O(1)、O(n)、O(n²)</strong></p>
+</blockquote>
+<p>参考链接：</p>
+<p>http://c.biancheng.net/view/8081.html</p>
+<p>https://zhuanlan.zhihu.com/p/50479555</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" class="category-chain-item">数据结构与算法</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E7%AE%97%E6%B3%95/">#算法</a>
+      
+    </div>
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/07/07/QPainter%E5%9F%BA%E6%9C%AC%E5%9B%BE%E5%BD%A2%E7%BB%98%E5%88%B6%E7%94%A8%E6%B3%95/" title="QPainter基本图形绘制用法">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">QPainter基本图形绘制用法</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/07/05/Typora%E4%B8%AD%E5%B8%B8%E7%94%A8HTML%E6%A0%BC%E5%BC%8F%E8%AE%BE%E7%BD%AE/" title="Typora中常用HTML格式设置">
+                        <span class="hidden-mobile">Typora中常用HTML格式设置</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="twikoo"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/twikoo/1.6.8/twikoo.all.min.js', function() {
+        var options = Object.assign(
+          {"envId":"https://ENV","region":"ap-shanghai","path":"window.location.pathname"},
+          {
+            el: '#twikoo',
+            path: 'window.location.pathname',
+            onCommentLoaded: function() {
+              var imgSelector = '#twikoo .tk-content img:not(.tk-owo-emotion)';
+              Fluid.plugins.imageCaption(imgSelector);
+              Fluid.plugins.fancyBox(imgSelector);
+            }
+          }
+        )
+        twikoo.init(options)
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <p <i class="iconfont icon-copyright"></i> <span>2023 | KayougZhang</span> </p> <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

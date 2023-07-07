@@ -1,0 +1,770 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="QPainter概念 QPainter 是用于执行绘图操作的类，它可以绘制简单的点、线，也可以绘制饼图、文本、图像等复杂的形状。 QPainter 一般在绘图事件 paintEvent() 中进行绘制，当窗口需要改变或者重新绘制时，当使用 repaint()和 update() 后，就会自动调用成员函数 paintEvent()。 QPainter 的用法，简单的几个步骤:  1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="QPainter基本图形绘制用法">
+<meta property="og:url" content="http://example.com/2023/07/07/QPainter%E5%9F%BA%E6%9C%AC%E5%9B%BE%E5%BD%A2%E7%BB%98%E5%88%B6%E7%94%A8%E6%B3%95/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="QPainter概念 QPainter 是用于执行绘图操作的类，它可以绘制简单的点、线，也可以绘制饼图、文本、图像等复杂的形状。 QPainter 一般在绘图事件 paintEvent() 中进行绘制，当窗口需要改变或者重新绘制时，当使用 repaint()和 update() 后，就会自动调用成员函数 paintEvent()。 QPainter 的用法，简单的几个步骤:  1">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230707153153942.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/20230707155314.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230707155800251.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230707161014066.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230707161401036.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230707162043411.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230707163819634.png">
+<meta property="article:published_time" content="2023-07-07T10:22:02.000Z">
+<meta property="article:modified_time" content="2023-07-07T08:50:25.696Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Qt">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230707153153942.png">
+  
+  
+  
+  
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"✍","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":false},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":false,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+<meta name="referrer" content="no-referrer" />
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>My Tech Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/article.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.1)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="QPainter基本图形绘制用法"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-07-07 18:22" pubdate>
+          2023年7月7日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.3k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          11 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-12 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">QPainter基本图形绘制用法</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：2023年7月7日 下午
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="qpainter概念">QPainter概念</h2>
+<p>QPainter
+是用于执行绘图操作的类，它可以绘制简单的点、线，也可以绘制饼图、文本、图像等复杂的形状。</p>
+<p>QPainter 一般在绘图事件 <strong>paintEvent()</strong>
+中进行绘制，当窗口需要改变或者重新绘制时，当使用
+<strong>repaint()</strong>和 <strong>update()</strong>
+后，就会自动调用成员函数 <strong>paintEvent()</strong>。</p>
+<p>QPainter 的用法，简单的几个步骤:</p>
+<ul>
+<li><p>1.构造一个 <strong>QPainter</strong> 对象</p></li>
+<li><p>2.设置画笔，画刷等</p></li>
+<li><p>3.绘制图形</p></li>
+<li><p>4.销毁绘图工具</p></li>
+</ul>
+<h2 id="qpainter主要属性">Qpainter主要属性</h2>
+<ul>
+<li><strong>font()</strong>用于绘制文本的字体。</li>
+<li><strong>brush()</strong>定义用于填充形状的颜色或图案。</li>
+<li><strong>pen()</strong>定义用于绘制的线条或边框，也可定义线条颜色。</li>
+<li><strong>viewport()、window()、worldTransform()</strong>
+构成了painter的坐标转换系统。</li>
+</ul>
+<h2 id="qpainter绘图">Qpainter绘图</h2>
+<p>QPainter提供了绘制大多数基本图形的函数，如drawPoint()、drawLine()、drawRect()等，所有这些函数都有多个整数和浮点版本（推荐使用浮点数版本）。下面对常用的绘图功能进行说明：</p>
+<ul>
+<li><strong>绘制点</strong></li>
+</ul>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-type">void</span> <span class="hljs-title function_">Widget::paintEvent</span><span class="hljs-params">(QPaintEvent *event)</span>
+&#123;
+    Q_UNUSED(event); <span class="hljs-comment">//不使用event事件</span>
+    QPainter <span class="hljs-title function_">painter</span><span class="hljs-params">(this)</span>;
+    painter.drawPoint(<span class="hljs-number">10</span>, <span class="hljs-number">10</span>);
+    painter.drawPoint(QPoint(<span class="hljs-number">20</span>, <span class="hljs-number">20</span>));
+    painter.drawPoint(QPointF(<span class="hljs-number">30</span>, <span class="hljs-number">30</span>));
+
+    QPoint points[<span class="hljs-number">3</span>] = &#123;QPoint(<span class="hljs-number">50</span>,<span class="hljs-number">50</span>),QPoint(<span class="hljs-number">60</span>,<span class="hljs-number">60</span>),QPoint(<span class="hljs-number">70</span>,<span class="hljs-number">70</span>)&#125;;
+    painter.drawPoints(points, <span class="hljs-number">3</span>);
+&#125;</code></pre></div>
+<figure>
+<img
+src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230707150523540.png" srcset="/img/loading.gif" lazyload
+alt="image-20230707150523540" />
+<figcaption aria-hidden="true">image-20230707150523540</figcaption>
+</figure>
+<ul>
+<li><strong>绘制线</strong></li>
+</ul>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-type">void</span> <span class="hljs-title function_">Widget::paintEvent</span><span class="hljs-params">(QPaintEvent *event)</span>
+&#123;
+    Q_UNUSED(event); <span class="hljs-comment">//不使用event事件</span>
+    
+    QPainter <span class="hljs-title function_">painter</span><span class="hljs-params">(this)</span>;
+    painter.setPen(QColor(Qt::red));<span class="hljs-comment">//设置画笔颜色</span>
+    
+    QLine <span class="hljs-title function_">line</span><span class="hljs-params">(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">100</span>, <span class="hljs-number">100</span>)</span>;
+    painter.drawLine(line);
+    painter.drawLine(<span class="hljs-number">0</span>,<span class="hljs-number">100</span>, <span class="hljs-number">100</span>, <span class="hljs-number">0</span>);
+    painter.drawLine(QPoint(<span class="hljs-number">50</span>, <span class="hljs-number">0</span>), QPoint(<span class="hljs-number">50</span>, <span class="hljs-number">100</span>));
+
+    QVector&lt;QLine&gt; vectorLine;
+    vectorLine &lt;&lt; QLine(<span class="hljs-number">10</span>, <span class="hljs-number">0</span>, <span class="hljs-number">10</span>, <span class="hljs-number">100</span>);
+    vectorLine &lt;&lt; QLine(<span class="hljs-number">30</span>, <span class="hljs-number">0</span>, <span class="hljs-number">30</span>, <span class="hljs-number">100</span>);
+    vectorLine &lt;&lt; QLine(<span class="hljs-number">50</span>, <span class="hljs-number">0</span>, <span class="hljs-number">50</span>, <span class="hljs-number">100</span>);
+    vectorLine &lt;&lt; QLine(<span class="hljs-number">70</span>, <span class="hljs-number">0</span>, <span class="hljs-number">70</span>, <span class="hljs-number">100</span>);
+    vectorLine &lt;&lt; QLine(<span class="hljs-number">90</span>, <span class="hljs-number">0</span>, <span class="hljs-number">90</span>, <span class="hljs-number">100</span>);
+    painter.drawLines(vectorLine);
+&#125;</code></pre></div>
+<figure>
+<img
+src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230707151808304.png" srcset="/img/loading.gif" lazyload
+alt="image-20230707151808304" />
+<figcaption aria-hidden="true">image-20230707151808304</figcaption>
+</figure>
+<ul>
+<li><strong>绘制矩形</strong></li>
+</ul>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-type">void</span> <span class="hljs-title function_">Widget::paintEvent</span><span class="hljs-params">(QPaintEvent *event)</span>
+&#123;
+    Q_UNUSED(event); <span class="hljs-comment">//不使用event事件</span>
+
+    QPainter <span class="hljs-title function_">painter</span><span class="hljs-params">(this)</span>;
+    painter.setPen(QColor(<span class="hljs-number">10</span>,<span class="hljs-number">60</span>,<span class="hljs-number">200</span>));<span class="hljs-comment">//设置画笔颜色</span>
+    painter.setBrush(QColor(<span class="hljs-number">200</span>, <span class="hljs-number">100</span>, <span class="hljs-number">100</span>));<span class="hljs-comment">//设置画刷颜色</span>
+    painter.drawRect(<span class="hljs-number">50</span>, <span class="hljs-number">50</span>, <span class="hljs-number">150</span>, <span class="hljs-number">150</span>);
+
+    QRect <span class="hljs-title function_">rect</span><span class="hljs-params">(QPoint(<span class="hljs-number">160</span>, <span class="hljs-number">160</span>),QPoint(<span class="hljs-number">220</span>,<span class="hljs-number">220</span>))</span>;
+    painter.drawRect(rect);
+&#125;</code></pre></div>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230707153153942.png" srcset="/img/loading.gif" lazyload alt="image-20230707153153942" style="zoom:67%;" /></p>
+<ul>
+<li><strong>绘制圆弧</strong></li>
+</ul>
+<p>0°在时钟三点的位置，圆弧是逆时针转动，起始角度和跨度角度都必须是度数的1/16，如：整个圆的角度就是
+**16*360**.</p>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/20230707155314.png" srcset="/img/loading.gif" lazyload alt="20230707155314" style="zoom: 67%;" /></p>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-type">void</span> <span class="hljs-title function_">Widget::paintEvent</span><span class="hljs-params">(QPaintEvent *event)</span>
+&#123;
+    Q_UNUSED(event); <span class="hljs-comment">//不使用event事件</span>
+
+    QPainter <span class="hljs-title function_">painter</span><span class="hljs-params">(this)</span>;
+
+    QRectF <span class="hljs-title function_">rectangle</span><span class="hljs-params">(<span class="hljs-number">50.0</span>, <span class="hljs-number">50.0</span>, <span class="hljs-number">60.0</span>, <span class="hljs-number">60.0</span>)</span>;
+
+    <span class="hljs-type">int</span> startAngle = <span class="hljs-number">30</span> * <span class="hljs-number">16</span>;
+    <span class="hljs-type">int</span> spanAngle = <span class="hljs-number">130</span> * <span class="hljs-number">16</span>;
+
+    painter.drawArc(rectangle, startAngle, spanAngle);
+    painter.setPen(QPen(Qt::blue,<span class="hljs-number">3</span>,Qt::DotLine));
+    painter.drawRect(rectangle);
+&#125;</code></pre></div>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230707155800251.png" srcset="/img/loading.gif" lazyload alt="image-20230707155800251" style="zoom:80%;" /></p>
+<ul>
+<li><strong>绘制椭圆</strong></li>
+</ul>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-type">void</span> <span class="hljs-title function_">Widget::paintEvent</span><span class="hljs-params">(QPaintEvent *event)</span>
+&#123;
+    Q_UNUSED(event);
+
+    QPainter <span class="hljs-title function_">painter</span><span class="hljs-params">(this)</span>;
+    painter.setRenderHint(QPainter::Antialiasing, <span class="hljs-literal">true</span>);<span class="hljs-comment">//抗锯齿</span>
+    painter.drawEllipse(QPointF(<span class="hljs-number">120</span>, <span class="hljs-number">60</span>), <span class="hljs-number">50</span>, <span class="hljs-number">20</span>);
+
+    painter.setBrush(QColor(<span class="hljs-number">255</span>, <span class="hljs-number">160</span>, <span class="hljs-number">90</span>)); <span class="hljs-comment">//设置画刷颜色</span>
+    painter.drawEllipse(QPointF(<span class="hljs-number">120</span>, <span class="hljs-number">140</span>), <span class="hljs-number">40</span>, <span class="hljs-number">40</span>); <span class="hljs-comment">//绘制圆</span>
+&#125;</code></pre></div>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230707161014066.png" srcset="/img/loading.gif" lazyload alt="image-20230707161014066" style="zoom:67%;" /></p>
+<ul>
+<li><strong>绘制多边形</strong></li>
+</ul>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-type">void</span> <span class="hljs-title function_">Widget::paintEvent</span><span class="hljs-params">(QPaintEvent *event)</span>
+&#123;
+    Q_UNUSED(event);
+
+    QPainter <span class="hljs-title function_">painter</span><span class="hljs-params">(this)</span>;
+    painter.setRenderHint(QPainter::Antialiasing, <span class="hljs-literal">true</span>);<span class="hljs-comment">//抗锯齿</span>
+
+    QPointF points[<span class="hljs-number">4</span>] = &#123;QPointF(<span class="hljs-number">30</span>, <span class="hljs-number">40</span>), QPointF(<span class="hljs-number">60</span>, <span class="hljs-number">150</span>), QPointF(<span class="hljs-number">150</span>, <span class="hljs-number">160</span>), QPointF(<span class="hljs-number">220</span>, <span class="hljs-number">100</span>)&#125;;
+
+    painter.drawPolygon(points, <span class="hljs-number">4</span>);
+&#125;</code></pre></div>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230707161401036.png" srcset="/img/loading.gif" lazyload alt="image-20230707161401036" style="zoom:67%;" /></p>
+<ul>
+<li><strong>绘制文本</strong></li>
+</ul>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-type">void</span> <span class="hljs-title function_">Widget::paintEvent</span><span class="hljs-params">(QPaintEvent *event)</span>
+&#123;
+    Q_UNUSED(event);
+
+    QPainter <span class="hljs-title function_">painter</span><span class="hljs-params">(this)</span>;
+    painter.setPen(QColor(<span class="hljs-number">0</span>, <span class="hljs-number">160</span>, <span class="hljs-number">230</span>));<span class="hljs-comment">//设置画笔颜色</span>
+    QFont font;<span class="hljs-comment">//设置字体属性</span>
+    font.setFamily(<span class="hljs-string">&quot;Microsoft YaHei&quot;</span>);<span class="hljs-comment">//字体样式</span>
+    font.setPointSize(<span class="hljs-number">50</span>);<span class="hljs-comment">//字体点大小</span>
+    font.setItalic(<span class="hljs-literal">true</span>);<span class="hljs-comment">//字体斜体</span>
+    painter.setFont(font);
+    painter.drawText(rect(), Qt::AlignCenter, <span class="hljs-string">&quot;QPainter&quot;</span>);<span class="hljs-comment">//绘制文本</span>
+&#125;</code></pre></div>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230707162043411.png" srcset="/img/loading.gif" lazyload alt="image-20230707162043411" style="zoom:67%;" /></p>
+<ul>
+<li><strong>绘制图像</strong></li>
+</ul>
+<p>绘制图像函数有<strong>drawPixmap()、drawImage()</strong>，drawPixmap在屏幕设备上更快，drawImage()在QPrinter或其他设备上可能更快。</p>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-type">void</span> <span class="hljs-title function_">Widget::paintEvent</span><span class="hljs-params">(QPaintEvent *event)</span>
+&#123;
+    Q_UNUSED(event);
+
+    QPainter <span class="hljs-title function_">painter</span><span class="hljs-params">(this)</span>;
+
+    QPixmap pixmap;
+    pixmap.load(<span class="hljs-string">&quot;:/pic/a.png&quot;</span>);
+    painter.drawPixmap(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">150</span>, <span class="hljs-number">150</span>, pixmap);
+    QImage image;
+    image.load(<span class="hljs-string">&quot;:/pic/b.png&quot;</span>);
+    painter.drawImage(<span class="hljs-number">160</span>, <span class="hljs-number">0</span>, image);
+&#125;</code></pre></div>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230707163819634.png" srcset="/img/loading.gif" lazyload alt="image-20230707163819634" style="zoom:67%;" /></p>
+<p>工程文件：<a
+target="_blank" rel="noopener" href="https://gitee.com/kayoungzhang/my_codehub/raw/master/Qt/painter.zip">painter</a></p>
+<p>参考链接：</p>
+<p>http://t.csdn.cn/Q72tA</p>
+<p>http://t.csdn.cn/acIsw</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Qt/" class="category-chain-item">Qt</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Qt/">#Qt</a>
+      
+    </div>
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/07/07/%E7%AE%97%E6%B3%95%E4%B8%AD%E7%9A%84%E6%97%B6%E9%97%B4%E5%92%8C%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/" title="算法中的时间和空间复杂度">
+                        <span class="hidden-mobile">算法中的时间和空间复杂度</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="twikoo"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/twikoo/1.6.8/twikoo.all.min.js', function() {
+        var options = Object.assign(
+          {"envId":"https://ENV","region":"ap-shanghai","path":"window.location.pathname"},
+          {
+            el: '#twikoo',
+            path: 'window.location.pathname',
+            onCommentLoaded: function() {
+              var imgSelector = '#twikoo .tk-content img:not(.tk-owo-emotion)';
+              Fluid.plugins.imageCaption(imgSelector);
+              Fluid.plugins.fancyBox(imgSelector);
+            }
+          }
+        )
+        twikoo.init(options)
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <p <i class="iconfont icon-copyright"></i> <span>2023 | KayougZhang</span> </p> <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

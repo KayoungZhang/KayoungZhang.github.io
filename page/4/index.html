@@ -225,6 +225,128 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2023/05/29/STM32CubeMX%E4%B9%8BADC/" target="_self">
+          STM32CubeMX之ADC
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/29/STM32CubeMX%E4%B9%8BADC/" target="_self">
+        <div>
+          ADC简介 ADC（analog to digital converter）即模数转换器，它可以将模拟量信号转换为数字信号，按照转换原理主要分为逐次逼近型、双积分型、电压频率转换型三种。 STM32 的 ADC 是 12 位逐次逼近型的模拟数字转换器。它有 18 个通道，可测量 16 个外部和 2 个内部信号源。各通道的 A/D 转换模式有单次、连续、扫描或间断模式。ADC 的转换结果
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-05-29 21:14" pubdate>
+              2023-05-29
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/stm32/" class="category-chain-item">stm32</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/stm32/">#stm32</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/05/29/STM32CubeMX%E4%B9%8BRTC/" target="_self">
+          STM32CubeMX之RTC
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/29/STM32CubeMX%E4%B9%8BRTC/" target="_self">
+        <div>
+          STM32的实时时钟RTC是一个独立的定时器,RTC模块和时钟配置系统（RCC_BDCR寄存器）是在后背区域，即在系统复位或从待机模式唤醒后RTC的设置和事件维持不变。但是在系统复位后，会自动禁止访问后备寄存器和RTC，以防止对后备区域（BKP）的意外操作。所以在要设置时间之前，要先取消备份区域写保护。 RTC的功能框图如下：  RTC由两个主要部分组成：第一部分（APB1接口）用来和APB
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-05-29 21:11" pubdate>
+              2023-05-29
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/stm32/" class="category-chain-item">stm32</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/stm32/">#stm32</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2023/05/29/STM32CubeMX%E4%B9%8B%E4%BD%8E%E5%8A%9F%E8%80%97/" target="_self">
           STM32CubeMX之低功耗
         </a>
@@ -707,133 +829,11 @@
     </article>
   </div>
 
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/05/28/STM32CubeMX%E4%B9%8B%E6%8C%89%E9%94%AE%E8%BE%93%E5%85%A5/" target="_self">
-          STM32CubeMX之按键输入
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/28/STM32CubeMX%E4%B9%8B%E6%8C%89%E9%94%AE%E8%BE%93%E5%85%A5/" target="_self">
-        <div>
-          上一节介绍了GPIO的输出使用，这一节介绍一下GPIO的输入，GPIO口作为输入使用的时候，是通过读取GPIOx_IDR寄存器内容来获得IO口的状态。 硬件设计    image-20230528102842722  通过开发板上的4 个按钮（KEY_UP、KEY0、KEY1 和 KEY2）来控制板上的 2 个 LED（DS0 和 DS1）和蜂鸣器。  KEY_UP 控制蜂鸣器
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-05-28 10:13" pubdate>
-              2023-05-28
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/stm32/" class="category-chain-item">stm32</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/stm32/">#stm32</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/05/27/STM32CubeMX%E4%B9%8BLED%E9%97%AA%E7%83%81/" target="_self">
-          STM32CubeMX之LED闪烁
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/27/STM32CubeMX%E4%B9%8BLED%E9%97%AA%E7%83%81/" target="_self">
-        <div>
-          下面结合正点原子战舰开发板，对多个外设介绍，并编程实验。 开发板使用的MCU是STM32F103ZET6，进入ST官网，下载其相关资料。STM32F103ZE   image-20230527225335619  GPIO口简介 每个GPIO端口有两个32位配置寄存器（GPIOx_CRL和GPIOx_CRH），两个32位数据寄存器（GPIOx_IDR和GPIOx_ODR），一个32位
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-05-27 22:39" pubdate>
-              2023-05-27
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/stm32/" class="category-chain-item">stm32</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/stm32/">#stm32</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
 
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/page/3/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/#board">5</a><a class="page-number" href="/page/6/#board">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/#board">9</a><a class="extend next" rel="next" href="/page/5/#board"><i class="iconfont icon-arrowright"></i></a>
+      <a class="extend prev" rel="prev" href="/page/3/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/#board">5</a><a class="page-number" href="/page/6/#board">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/#board">10</a><a class="extend next" rel="next" href="/page/5/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 
