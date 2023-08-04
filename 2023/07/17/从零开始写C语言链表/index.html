@@ -18,13 +18,13 @@
   
     <meta name="description" content="链表的概念 链表（Linked List）是一种物理存储结构上非连续、非顺序的存储结构，数据元素（节点）的逻辑顺序是通过链表中的指针链接次序实现的 。 相比数组这种在定义即分配一段连续且固定空间大小的数据结构，链表可以根据需要动态分配离散的内存空间，解决了数组插入或删除元素需要移动大量元素的弊端，不过它的缺点就是需要牺牲更大的内存空间。一般链表在操作系统里面应用比较广泛。 链表的结构">
 <meta property="og:type" content="article">
-<meta property="og:title" content="数据结构之链表">
-<meta property="og:url" content="http://example.com/2023/07/17/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E9%93%BE%E8%A1%A8/index.html">
+<meta property="og:title" content="从零开始写C语言链表">
+<meta property="og:url" content="http://example.com/2023/07/17/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E5%86%99C%E8%AF%AD%E8%A8%80%E9%93%BE%E8%A1%A8/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="链表的概念 链表（Linked List）是一种物理存储结构上非连续、非顺序的存储结构，数据元素（节点）的逻辑顺序是通过链表中的指针链接次序实现的 。 相比数组这种在定义即分配一段连续且固定空间大小的数据结构，链表可以根据需要动态分配离散的内存空间，解决了数组插入或删除元素需要移动大量元素的弊端，不过它的缺点就是需要牺牲更大的内存空间。一般链表在操作系统里面应用比较广泛。 链表的结构">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-07-17T13:11:13.000Z">
-<meta property="article:modified_time" content="2023-07-20T14:40:51.808Z">
+<meta property="article:modified_time" content="2023-07-27T14:44:50.553Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="链表">
 <meta name="twitter:card" content="summary_large_image">
@@ -199,7 +199,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="数据结构之链表"></span>
+            <span id="subtitle" data-typed-text="从零开始写C语言链表"></span>
           
         </div>
 
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          5.9k 字
+          5.6k 字
         
       </span>
     
@@ -233,7 +233,7 @@
         
         
         
-          20 分钟
+          19 分钟
         
       </span>
     
@@ -271,12 +271,12 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">数据结构之链表</h1>
+            <h1 style="display: none">从零开始写C语言链表</h1>
             
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年7月20日 晚上
+                    本文最后更新于：2023年7月27日 晚上
                   
                 
               </p>
@@ -296,7 +296,7 @@ List）</strong>是一种物理存储结构上非连续、非顺序的存储结�
 <li>数据元素的 <strong>数据域</strong></li>
 <li>下一个节点的 <strong>指针域</strong></li>
 </ul>
-<p>一个完整的链表结构如下图所示：</p>
+<p>先来认识一个完整的简单链表，如下图所示：</p>
 <figure>
 <img
 src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230720131138188.png" srcset="/img/loading.gif" lazyload
@@ -338,85 +338,60 @@ alt="image-20230720213847180" />
 <figcaption aria-hidden="true">image-20230720213847180</figcaption>
 </figure>
 <h2 id="单向链表的操作">单向链表的操作</h2>
-<p>对于一个单向链表的定义，需要使用 C
-语言中的结构体，具体实现代码为：</p>
+<p>以上直观了解了链表的实现方式，那么怎么来创建和操作一个链表呢？首先看单向链表，我们需要定义它的数据结构，具体实现代码为：</p>
 <div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span> &#123;</span>
-    <span class="hljs-type">int</span> data;       <span class="hljs-comment">//数据类型，你可以把int型的data换成任意数据类型，包括结构体struct等复合类型</span>
+    <span class="hljs-type">int</span> data;       <span class="hljs-comment">//数据类型，可以把int型的data换成任意数据类型，包括结构体struct等复合类型</span>
     <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span> *<span class="hljs-title">next</span>;</span>  <span class="hljs-comment">//单链表的指针域</span>
-&#125; <span class="hljs-type">node_t</span>;  <span class="hljs-comment">//Node表示节点的类型，LinkedList表示指向Node节点类型的指针类型</span></code></pre></div>
-<h4 id="单向链表的初始化"><strong>单向链表的初始化</strong></h4>
-<div class="code-wrapper"><pre><code class="hljs c">LinkedList <span class="hljs-title function_">linkedlist_init</span><span class="hljs-params">()</span>&#123;
-    <span class="hljs-type">node_t</span> *L = (<span class="hljs-type">node_t</span>*)<span class="hljs-built_in">malloc</span>(<span class="hljs-keyword">sizeof</span>(<span class="hljs-type">node_t</span>));      <span class="hljs-comment">//开辟空间 </span>
-    <span class="hljs-keyword">if</span>(L == <span class="hljs-literal">NULL</span>)&#123;                     <span class="hljs-comment">//判断是否开辟空间失败，这一步很有必要</span>
-        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;申请空间失败&quot;</span>);
-        <span class="hljs-comment">//exit(0);                  //开辟空间失败可以考虑直接结束程序</span>
-    &#125;
-    L-&gt;next = <span class="hljs-literal">NULL</span>;       <span class="hljs-comment">//指针指向空</span>
-&#125;</code></pre></div>
+&#125;<span class="hljs-type">node_t</span>;</code></pre></div>
 <h4 id="单向链表的创建">单向链表的创建</h4>
-<p>链表的创建主要有两种方式：头插法和尾插法。</p>
+<p>单向链表的数据结构定义好后，就可以着手创建链表了，创建单链表的节点，主要分以下步骤:</p>
 <ul>
-<li><strong>头插法建立单链表</strong></li>
+<li>给当前的每个节点的数据结构分配空间大小</li>
+<li>将每个节点数据清零（分配的堆内存空间不一定是干净的）</li>
+<li>给节点初始化数据</li>
+<li>将该节点的指针域设置为NULL</li>
 </ul>
-<p>在初始化之后，就可以着手开始创建单链表了，单链表的创建分为头插入法和尾插入法两种，两者并无本质上的不同，都是利用指针指向下一个节点元素的方式进行逐个创建，只不过使用头插入法最终得到的结果是逆序的。</p>
-<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-type">node_t</span>* <span class="hljs-title function_">linkedlist_creat_head</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> &#123;
-    <span class="hljs-type">node_t</span> *L;
-    L = (<span class="hljs-type">node_t</span> *)<span class="hljs-built_in">malloc</span>(<span class="hljs-keyword">sizeof</span>(<span class="hljs-type">node_t</span>));   <span class="hljs-comment">//申请头节点空间</span>
-    L-&gt;next = <span class="hljs-literal">NULL</span>;                      <span class="hljs-comment">//初始化一个空链表</span>
-  
-    <span class="hljs-type">int</span> x;                         <span class="hljs-comment">//x为链表数据域中的数据</span>
-    <span class="hljs-keyword">while</span>(<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>,&amp;x) != EOF) &#123;
-        <span class="hljs-type">node_t</span> *p;
-        p = (<span class="hljs-type">node_t</span> *)<span class="hljs-built_in">malloc</span>(<span class="hljs-keyword">sizeof</span>(<span class="hljs-type">node_t</span>));   <span class="hljs-comment">//申请新的节点</span>
-        p-&gt;data = x;                     <span class="hljs-comment">//节点数据域赋值</span>
-        p-&gt;next = L-&gt;next;     <span class="hljs-comment">//将节点插入到表头L--&gt;|2|--&gt;|1|--&gt;NULL</span>
-        L-&gt;next = p;
-    &#125;
-    <span class="hljs-keyword">return</span> L;
-&#125;</code></pre></div>
-<ul>
-<li><strong>尾插法建立单链表</strong></li>
-</ul>
-<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-type">node_t</span>* <span class="hljs-title function_">linkedlist_creat_tail</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> &#123;
-    <span class="hljs-type">node_t</span> *L;
-    L = (<span class="hljs-type">node_t</span> *)<span class="hljs-built_in">malloc</span>(<span class="hljs-keyword">sizeof</span>(<span class="hljs-type">node_t</span>));   <span class="hljs-comment">//申请头节点空间</span>
-    L-&gt;next = <span class="hljs-literal">NULL</span>;                  <span class="hljs-comment">//初始化一个空链表</span>
-    <span class="hljs-type">node_t</span> *r;
-    r = L;                          <span class="hljs-comment">//r始终指向终端节点，开始时指向头节点</span>
-    <span class="hljs-type">int</span> x;                         <span class="hljs-comment">//x为链表数据域中的数据</span>
-    <span class="hljs-keyword">while</span>(<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>,&amp;x) != EOF) &#123;
-        <span class="hljs-type">node_t</span> *p;
-        p = (<span class="hljs-type">node_t</span> *)<span class="hljs-built_in">malloc</span>(<span class="hljs-keyword">sizeof</span>(<span class="hljs-type">node_t</span>));   <span class="hljs-comment">//申请新的节点</span>
-        p-&gt;data = x;                     <span class="hljs-comment">//节点数据域赋值</span>
-        r-&gt;next = p;            <span class="hljs-comment">//将节点插入到表头L--&gt;|1|--&gt;|2|--&gt;NULL</span>
-        r = p;
-    &#125;
-    r-&gt;next = <span class="hljs-literal">NULL</span>;
-    <span class="hljs-keyword">return</span> L;
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">/* 创建一个节点的函数 */</span>
+<span class="hljs-type">node_t</span> *<span class="hljs-title function_">linkedlist_create</span><span class="hljs-params">(<span class="hljs-type">int</span> data)</span>
+&#123;
+	<span class="hljs-type">node_t</span> *node = (<span class="hljs-type">node_t</span> *)<span class="hljs-built_in">malloc</span>(<span class="hljs-keyword">sizeof</span>(<span class="hljs-type">node_t</span>));<span class="hljs-comment">//1、定义一个头指针，然后分配内存空间</span>
+	<span class="hljs-keyword">if</span>(node == <span class="hljs-literal">NULL</span>)&#123;
+		<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;malloc error!\n&quot;</span>);
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;
+	&#125;
+	<span class="hljs-built_in">memset</span>(node,<span class="hljs-number">0</span>,<span class="hljs-keyword">sizeof</span>(<span class="hljs-type">node_t</span>));<span class="hljs-comment">//2、清一下内存</span>
+	node-&gt;data = data;  <span class="hljs-comment">//3、给链表节点的数据赋值</span>
+	node-&gt;next = <span class="hljs-literal">NULL</span>;  <span class="hljs-comment">//4、将链表的指针域指向空</span>
+	<span class="hljs-keyword">return</span> node;
 &#125;</code></pre></div>
 <h4
 id="遍历单向链表遍历修改查找"><strong>遍历单向链表（遍历，修改，查找）</strong></h4>
 <p>进行遍历，修改，查找的思路极其简单，只需要建立一个指向链表L的节点，然后沿着链表L逐个向后搜索即可。</p>
 <div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">//打印链表数据</span>
-<span class="hljs-type">void</span> <span class="hljs-title function_">linkedlist_print</span><span class="hljs-params">(<span class="hljs-type">node_t</span>* L)</span>&#123;
-    <span class="hljs-type">node_t</span> *temp = L-&gt;next; <span class="hljs-comment">//临时指针指向首元节点 </span>
-    <span class="hljs-type">int</span> i = <span class="hljs-number">0</span>;
-    <span class="hljs-keyword">while</span>(temp != <span class="hljs-literal">NULL</span>)&#123;
-        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;第%d个元素的值为:%d\n&quot;</span>, ++i, temp-&gt;data);
-        temp = temp-&gt;next;
-    &#125;
+<span class="hljs-type">void</span> <span class="hljs-title function_">linkedlist_print</span><span class="hljs-params">(<span class="hljs-type">node_t</span>* pH)</span>
+&#123;
+  <span class="hljs-type">node_t</span> *temp = pH-&gt;next; <span class="hljs-comment">//临时指针指向第一个节点 </span>
+  <span class="hljs-type">int</span> i = <span class="hljs-number">0</span>;
+  <span class="hljs-keyword">while</span>(<span class="hljs-literal">NULL</span> != temp)<span class="hljs-comment">//如果当前位置节点不为空</span>
+  &#123;
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;第%d个元素的值为:%d\n&quot;</span>, ++i, temp-&gt;data);
+    temp = temp-&gt;next;
+  &#125;  
 &#125;</code></pre></div>
 <div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">//链表内容的修改，链表中值为val1的元素变为val2。</span>
-<span class="hljs-type">node_t</span>* <span class="hljs-title function_">linkedlist_modify</span><span class="hljs-params">(<span class="hljs-type">node_t</span>* L,<span class="hljs-type">int</span> val1,<span class="hljs-type">int</span> val2)</span> &#123;
-    <span class="hljs-type">node_t</span> *p = L-&gt;next;
-    <span class="hljs-type">int</span> i = <span class="hljs-number">0</span>;
-    <span class="hljs-keyword">while</span>(p)&#123;
-        <span class="hljs-keyword">if</span>(p-&gt;data == val1)&#123;
-            p-&gt;data = val2;
-        &#125;
-        p = p-&gt;next;
+<span class="hljs-type">node_t</span>* <span class="hljs-title function_">linkedlist_modify</span><span class="hljs-params">(<span class="hljs-type">node_t</span>* pH,<span class="hljs-type">int</span> val1,<span class="hljs-type">int</span> val2)</span> 
+&#123;
+  <span class="hljs-type">node_t</span> *p = pH-&gt;next;
+  <span class="hljs-type">int</span> i = <span class="hljs-number">0</span>;
+  <span class="hljs-keyword">while</span>(p)
+  &#123;
+    <span class="hljs-keyword">if</span>(p-&gt;data == val1)
+    &#123;
+      p-&gt;data = val2;
     &#125;
-    <span class="hljs-keyword">return</span> L;
+    p = p-&gt;next;
+  &#125;
+  <span class="hljs-keyword">return</span> pH;
 &#125;</code></pre></div>
 <div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">//p为原链表，elem表示被查找元素</span>
 <span class="hljs-type">int</span> <span class="hljs-title function_">linkedlist_find</span><span class="hljs-params">(<span class="hljs-type">node_t</span>* p, <span class="hljs-type">int</span> elem)</span> &#123;
@@ -446,21 +421,36 @@ alt="image-20230720201354416" />
 <figcaption aria-hidden="true">image-20230720201354416</figcaption>
 </figure>
 <p>不管是哪种方式，链表插入节点操作主要分为查找到第i个位置，将该位置的next指针修改为指向新插入的节点，而新插入的节点next指针指向(i+1)个位置的节点。其操作方式可以设置一个临时节点，利用循环找到第i个位置，再进行插入。</p>
-<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">//单链表的插入，在链表的第pos个位置插入val的元素</span>
-<span class="hljs-type">node_t</span>* <span class="hljs-title function_">linkedlist_insert</span><span class="hljs-params">(<span class="hljs-type">node_t</span>* L,<span class="hljs-type">int</span> pos,<span class="hljs-type">int</span> val)</span> &#123;
-    <span class="hljs-type">node_t</span> *pre;                      <span class="hljs-comment">//pre为临时节点</span>
-    pre = L;
-    <span class="hljs-type">int</span> i = <span class="hljs-number">0</span>;
-    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">1</span>; i &lt; pos; i++) &#123;
-        pre = pre-&gt;next;                 <span class="hljs-comment">//查找第pos个位置的节点</span>
-    &#125;
-    <span class="hljs-type">node_t</span> *new_node;                                <span class="hljs-comment">//插入的节点为p</span>
-    new_node = (<span class="hljs-type">node_t</span> *)<span class="hljs-built_in">malloc</span>(<span class="hljs-keyword">sizeof</span>(<span class="hljs-type">node_t</span>));
-    new_node-&gt;data = val;
-    new_node-&gt;next = pre-&gt;next;
-    pre-&gt;next = new_node;
-  
-    <span class="hljs-keyword">return</span> L;
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">/* 链表的头部插入 */</span> 
+<span class="hljs-type">void</span> <span class="hljs-title function_">linkedlist_top_insert</span><span class="hljs-params">(<span class="hljs-type">node_t</span> *pH , <span class="hljs-type">node_t</span> *new)</span>
+&#123;
+	<span class="hljs-type">node_t</span> *p = pH ;<span class="hljs-comment">//获取当前的位置head </span>
+	new-&gt;next = p-&gt;next ;<span class="hljs-comment">//新的节点的下一个节点设置为原来头节点的下一个节点</span>
+	p-&gt;next = new ;<span class="hljs-comment">//原来的头节点的下一个节点设置为现在新插入的头节点 </span>
+&#125;
+
+<span class="hljs-comment">/* 链表的中部插入 */</span>
+<span class="hljs-type">void</span> <span class="hljs-title function_">linkedlist_tail_insert</span><span class="hljs-params">(<span class="hljs-type">node_t</span> *pH , <span class="hljs-type">node_t</span> *new, <span class="hljs-type">int</span> pos)</span>
+&#123;
+	<span class="hljs-type">node_t</span> *p = pH ; <span class="hljs-comment">//获取当前的位置 </span>
+	<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>;
+	<span class="hljs-keyword">for</span>(i = <span class="hljs-number">1</span>; i &lt; pos; i++)
+	&#123;
+		p = p-&gt;next ;<span class="hljs-comment">//查找第pos个位置的节点 </span>
+	&#125;
+	p-&gt;next = new ;<span class="hljs-comment">//此时把新插入的节点赋值给这个位置 </span>
+&#125;
+
+<span class="hljs-comment">/* 链表的尾部插入 */</span>
+<span class="hljs-type">void</span> <span class="hljs-title function_">linkedlist_tail_insert</span><span class="hljs-params">(<span class="hljs-type">node_t</span> *pH , <span class="hljs-type">node_t</span> *new)</span>
+&#123;
+	<span class="hljs-type">node_t</span> *p = pH ; <span class="hljs-comment">//获取当前的位置head </span>
+	
+	<span class="hljs-keyword">while</span>(<span class="hljs-literal">NULL</span> != p-&gt;next)<span class="hljs-comment">//如果当前位置的下一个节点不为空 </span>
+	&#123;
+		p = p-&gt;next ;<span class="hljs-comment">//移动到下一个节点 </span>
+	&#125;
+	p-&gt;next = new ;<span class="hljs-comment">//此时把新插入的节点赋值给这个位置 </span>
 &#125;</code></pre></div>
 <h4 id="单向链表删除操作"><strong>单向链表删除操作</strong></h4>
 <p>删除元素要建立一个前驱节点和一个当前节点，当找到了我们需要删除的数据时，直接使用前驱节点跳过要删除的节点指向要删除节点的后一个节点，再将原有的节点通过free函数释放掉。</p>
@@ -603,6 +593,7 @@ alt="image-20230720221311648" />
 <p>附件：<a
 target="_blank" rel="noopener" href="https://gitee.com/kayoungzhang/my_codehub/blob/master/Data%20Structures%20and%20Algorithms/linkedlist.drawio">链表图形编辑源图</a></p>
 <h4 id="参考链接">参考链接：</h4>
+<p>https://zhuanlan.zhihu.com/p/85504177</p>
 <p>https://www.dotcpp.com/course/ds-link/</p>
 <p>http://data.biancheng.net/view/166.html</p>
 <p><a

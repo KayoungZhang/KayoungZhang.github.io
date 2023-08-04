@@ -16,29 +16,18 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="在网上发现了几款小工具，有的时候应该会使用到，所以我就下载来使用了一番，觉得蛮好玩的，以下分享一下。 关于鼠标和按键类小工具 按键可视化工具 - Keyviz 官网：Keyviz  这是一款印度免费开源的按键可视化工具，可以实时显示用户当前按下的按键，用户可自定义显示按键风格、样式，非常适合录屏、演示等场合。打开软件后，当按下按键或点击鼠标，在屏幕上就会实时显示当前的按键，如下所示：">
+    <meta name="description" content="同GPIO库一样，ST官方给出了ADC外设库的使用方法，下面具体看看ADC外设库中的步骤： 1. 配置ADC顶层参数  使能ADC接口  建议在 HAL_ADC_MspInit() 函数中配置ADC时钟 （STM32F1 ADC时钟频率最大14MHz）如：  RCC_PeriphCLKInitTypeDef PeriphClkInit; __ADC1_CLK_ENABLE();">
 <meta property="og:type" content="article">
-<meta property="og:title" content="推荐几款小工具">
-<meta property="og:url" content="http://example.com/2023/07/16/%E6%8E%A8%E8%8D%90%E5%87%A0%E6%AC%BE%E5%B0%8F%E5%B7%A5%E5%85%B7/index.html">
+<meta property="og:title" content="stm32f1xx_hal_adc库的使用">
+<meta property="og:url" content="http://example.com/2023/08/03/stm32f1xx-hal-adc%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="在网上发现了几款小工具，有的时候应该会使用到，所以我就下载来使用了一番，觉得蛮好玩的，以下分享一下。 关于鼠标和按键类小工具 按键可视化工具 - Keyviz 官网：Keyviz  这是一款印度免费开源的按键可视化工具，可以实时显示用户当前按下的按键，用户可自定义显示按键风格、样式，非常适合录屏、演示等场合。打开软件后，当按下按键或点击鼠标，在屏幕上就会实时显示当前的按键，如下所示：">
+<meta property="og:description" content="同GPIO库一样，ST官方给出了ADC外设库的使用方法，下面具体看看ADC外设库中的步骤： 1. 配置ADC顶层参数  使能ADC接口  建议在 HAL_ADC_MspInit() 函数中配置ADC时钟 （STM32F1 ADC时钟频率最大14MHz）如：  RCC_PeriphCLKInitTypeDef PeriphClkInit; __ADC1_CLK_ENABLE();">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230716171550372.png">
-<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230716173232343.png">
-<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230716174556296.png">
-<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230716183416023.png">
-<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230716185103598.png">
-<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230716185036872.png">
-<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230716190429416.png">
-<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230716191042266.png">
-<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230716191807139.png">
-<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230716192034228.png">
-<meta property="article:published_time" content="2023-07-16T08:49:51.000Z">
-<meta property="article:modified_time" content="2023-07-17T13:09:44.014Z">
+<meta property="article:published_time" content="2023-08-03T13:03:11.000Z">
+<meta property="article:modified_time" content="2023-08-03T23:50:34.450Z">
 <meta property="article:author" content="John Doe">
-<meta property="article:tag" content="key">
+<meta property="article:tag" content="adc">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230716171550372.png">
   
   
   
@@ -210,7 +199,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="推荐几款小工具"></span>
+            <span id="subtitle" data-typed-text="stm32f1xx_hal_adc库的使用"></span>
           
         </div>
 
@@ -221,8 +210,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-07-16 16:49" pubdate>
-          2023年7月16日 下午
+        <time datetime="2023-08-03 21:03" pubdate>
+          2023年8月3日 晚上
         </time>
       </span>
     
@@ -233,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1k 字
+          3.5k 字
         
       </span>
     
@@ -244,7 +233,7 @@
         
         
         
-          4 分钟
+          12 分钟
         
       </span>
     
@@ -282,12 +271,12 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">推荐几款小工具</h1>
+            <h1 style="display: none">stm32f1xx_hal_adc库的使用</h1>
             
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年7月17日 晚上
+                    本文最后更新于：2023年8月4日 早上
                   
                 
               </p>
@@ -295,59 +284,163 @@
             
               <div class="markdown-body">
                 
-                <p>在网上发现了几款小工具，有的时候应该会使用到，所以我就下载来使用了一番，觉得蛮好玩的，以下分享一下。</p>
-<h2 id="关于鼠标和按键类小工具">关于鼠标和按键类小工具</h2>
-<h3 id="按键可视化工具---keyviz">按键可视化工具 - Keyviz</h3>
-<p><strong>官网：<a
-target="_blank" rel="noopener" href="https://mularahul.github.io/keyviz/">Keyviz</a> </strong></p>
-<p>这是一款印度免费开源的按键可视化工具，可以实时显示用户当前按下的按键，用户可自定义显示按键风格、样式，非常适合录屏、演示等场合。打开软件后，当按下按键或点击鼠标，在屏幕上就会实时显示当前的按键，如下所示：</p>
-<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230716171550372.png" srcset="/img/loading.gif" lazyload alt="image-20230716171550372" style="zoom:67%;" /></p>
-<p>另外，可根据自己的喜好进行简单的配置。</p>
-<h3 id="按键可视化工具---keystroke-visualizer">按键可视化工具 -
-Keystroke Visualizer</h3>
-<p><strong>官网：<a
-target="_blank" rel="noopener" href="https://vovsoft.com/software/keystroke-visualizer/">Keystroke
-Visualizer</a></strong></p>
-<p>这也是一款免费开源的按键可视化工具，这一款可以设置中文。另外设置上更简单一些。其显示如下：</p>
-<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230716173232343.png" srcset="/img/loading.gif" lazyload alt="image-20230716173232343" style="zoom:67%;" /></p>
-<h3 id="按键音效工具---tickeys">按键音效工具 - Tickeys</h3>
-<p><strong>官网：<a
-target="_blank" rel="noopener" href="http://www.yingdev.com/projects/tickeys">Tickeys</a></strong></p>
-<p>这是一款中文版键盘音效工具，可以让你在敲键盘时，发出声音，有声音的节奏，会让你敲起来更带感。它有以下几种音效，可以根据自己的喜好进行设置。</p>
-<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230716174556296.png" srcset="/img/loading.gif" lazyload alt="image-20230716174556296" style="zoom:67%;" /></p>
-<p>当你快速敲击键盘按键时，伴随着悦耳的声音，明显感觉打字的速度变快了，这种感觉挺好的，哈哈。</p>
-<h2 id="关于桌面涂鸦小工具">关于桌面涂鸦小工具</h2>
-<h3 id="pointofix">Pointofix</h3>
-<p><strong>官网：<a
-target="_blank" rel="noopener" href="https://www.pointofix.de/download.php">Pointofix</a></strong></p>
-<p>这是一款德国免费软件，可以随时将电脑桌面当作画布，然后在桌面上进行涂写标注，在讲解演示时很是方便，国内使用的比较多。这是一款德文软件，所以需要用户在软件下载页面同时下载语言包。</p>
-<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230716183416023.png" srcset="/img/loading.gif" lazyload alt="image-20230716183416023" style="zoom:67%;" /></p>
-<p>打开软件后，点击
-<strong>开始</strong>，电脑桌面就会被冻结，同时软件会伸展开，然后就可以在桌面上进行自由涂鸦标注了，若想退出来，点击软件上的
-<strong>退出</strong>
-按钮即可，同时软件会收缩成一个按钮图标，这样就不会占用屏幕空间。</p>
-<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230716185103598.png" srcset="/img/loading.gif" lazyload alt="image-20230716185103598" style="zoom:80%;" />
-<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230716185036872.png" srcset="/img/loading.gif" lazyload alt="image-20230716185036872" style="zoom: 80%;" /></p>
-<p><strong>注意：</strong>
-如果使用语言包还是不能显示中文，那就在上述下载界面下载以下小工具，进行相应设置。</p>
-<figure>
-<img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230716185843116.png" srcset="/img/loading.gif" lazyload
-alt="image-20230716185843116" />
-<figcaption aria-hidden="true">image-20230716185843116</figcaption>
-</figure>
-<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230716190429416.png" srcset="/img/loading.gif" lazyload alt="image-20230716190429416" style="zoom:80%;" /></p>
-<h3 id="gink">gInk</h3>
-<p>这也是一款非常优秀的屏幕标注，支持多种语言，设置比较简单，项目地址：https://github.com/geovens/gInk</p>
-<p>镜像地址：https://gitcode.net/mirrors/geovens/gInk?utm_source=csdn_github_accelerator</p>
-<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230716191042266.png" srcset="/img/loading.gif" lazyload alt="image-20230716191042266" style="zoom:80%;" /></p>
-<h3 id="电子教鞭">电子教鞭</h3>
-<p>这也是一款纯中文桌面涂鸦软件，不需要过多的设置，使用起来比较简单。下载地址：https://wwx.lanzoui.com/b08mbl9jg
-（密码：g18f）。</p>
-<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230716191807139.png" srcset="/img/loading.gif" lazyload alt="image-20230716191807139" style="zoom:67%;" /></p>
-<p>打开软件后，显示界面如下：</p>
-<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230716192034228.png" srcset="/img/loading.gif" lazyload alt="image-20230716192034228" style="zoom:80%;" /></p>
-<p>相较于另两款，它没有悬浮窗功能，不能收缩，打开后就会一直维持原大小，这就会占用屏幕空间，影响视觉。</p>
+                <p>同GPIO库一样，ST官方给出了ADC外设库的使用方法，下面具体看看ADC外设库中的步骤：</p>
+<h3 id="配置adc顶层参数">1. 配置ADC顶层参数</h3>
+<ul>
+<li><strong>使能ADC接口</strong>
+<ul>
+<li>建议在 HAL_ADC_MspInit() 函数中配置ADC时钟 （<strong>STM32F1
+ADC时钟频率最大14MHz</strong>）如：
+<ul>
+<li>RCC_PeriphCLKInitTypeDef PeriphClkInit;</li>
+<li>__ADC1_CLK_ENABLE();</li>
+<li>PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_ADC;</li>
+<li>PeriphClkInit.AdcClockSelection = RCC_ADCPCLK2_DIV2;</li>
+<li>HAL_RCCEx_PeriphCLKConfig(&amp;PeriphClkInit);</li>
+</ul></li>
+</ul></li>
+<li><strong>配置ADC管脚</strong>
+<ul>
+<li>使能ADC GPIOs。__HAL_RCC_GPIOx_CLK_ENABLE()</li>
+<li>在GPIO初始化函数中配置ADC管脚为 <strong>analog mode</strong>。
+HAL_GPIO_Init()</li>
+</ul></li>
+<li><strong>当使用ADC中断时：</strong>
+<ul>
+<li>配置ADC的NVIC：HAL_NVIC_EnableIRQ(ADCx_IRQn)</li>
+<li>将ADC中断处理函数HAL_ADC_IRQHandler()插入到相应ADC中断向量ADCx_IRQHandler()的函数中。</li>
+</ul></li>
+<li><strong>当使用ADC DMA时：</strong>
+<ul>
+<li>配置DMA (如：DMA 通道, 正常模式或循环模式等)。HAL_DMA_Init()</li>
+<li>配置DMA的NVIC。HAL_NVIC_EnableIRQ(DMAx_Channelx_IRQn)</li>
+<li>将ADC中断处理函数HAL_ADC_IRQHandler()插入到相应的DMA中断向量DMAx_Channelx_IRQHandler()的函数中。</li>
+</ul></li>
+</ul>
+<h3 id="配置adc常规组或注入组groups-regularinjected通道等参数">2.
+配置ADC常规组或注入组(groups regular/injected)，通道等参数</h3>
+<ul>
+<li>配置ADC参数 (分辨率, 数据对齐方式等) 和 常规组或注入组参数
+(转换触发, 序列等)。HAL_ADC_Init()</li>
+<li>配置常规组通道参数(通道号, 通道排列顺序等)
+。HAL_ADC_ConfigChannel()</li>
+<li>当使用注入组时，配置注入组各参数。
+HAL_ADCEx_InjectedConfigChannel()</li>
+<li>当使用模拟看门狗时，配置其参数(监控的通道, 阈值等)。
+HAL_ADC_AnalogWDGConfig()</li>
+<li>当使用多个ADC时，配置多模式参数。HAL_ADCEx_MultiModeConfigChannel()</li>
+</ul>
+<h3 id="执行adc转换">3. 执行ADC转换</h3>
+<ul>
+<li>当需要提高转换精度时，执行ADC自动校准函数：HAL_ADCEx_Calibration_Start()。</li>
+<li>ADC可在三种模式下转换:
+<strong>轮询（polling）,中断（interruption）和 DMA</strong>
+<ul>
+<li><strong>轮询转换</strong>
+<ul>
+<li>激活ADC外设，开启转换。HAL_ADC_Start()</li>
+<li>等待转换完成。HAL_ADC_PollForConversion() 或
+HAL_ADCEx_InjectedPollForConversion()(注入组)</li>
+<li>得到转换结果。HAL_ADC_GetValue() 或
+HAL_ADCEx_InjectedGetValue()(注入组)</li>
+<li>停止转换并关闭ADC外设。HAL_ADC_Stop()</li>
+</ul></li>
+<li><strong>中断转换</strong>
+<ul>
+<li>激活ADC外设，开启转换。HAL_ADC_Start_IT()</li>
+<li>等待转换完成并进入回调函数。HAL_ADC_ConvCpltCallback() 或
+HAL_ADCEx_InjectedConvCpltCallback()(注入组)</li>
+<li>得到转换结果。HAL_ADC_GetValue() 或
+HAL_ADCEx_InjectedGetValue()(注入组)</li>
+<li>停止转换并关闭ADC外设。HAL_ADC_Stop_IT()</li>
+</ul></li>
+<li><strong>DMA转换</strong>
+<ul>
+<li>激活ADC外设，开启转换。 HAL_ADC_Start_DMA()</li>
+<li>等待转换完成并进入回调函数。HAL_ADC_ConvCpltCallback()
+或HAL_ADC_ConvHalfCpltCallback()。</li>
+<li>转换结果由DMA自动转换到目标地址。</li>
+<li>停止转换并关闭ADC外设。HAL_ADC_Stop_DMA()</li>
+</ul></li>
+<li><strong>对于多个ADC设备多方式转换</strong>
+<ul>
+<li>激活ADC外设从设备，开启转换。HAL_ADC_Start()</li>
+<li>激活ADC外设主设备，开启转换。HAL_ADCEx_MultiModeStart_DMA()</li>
+<li>等待转换完成并进入回调函数。HAL_ADC_ConvCpltCallback()
+或HAL_ADC_ConvHalfCpltCallback()</li>
+<li>转换结果由DMA自动转换到目标地址。</li>
+<li>停止转换并关闭ADC外设主设备。HAL_ADCEx_MultiModeStop_DMA()</li>
+<li>停止转换并关闭ADC外设从设备。HAL_ADC_Stop_IT()</li>
+</ul></li>
+</ul></li>
+<li>回调函数必须在用户程序中实现
+<ul>
+<li>HAL_ADC_ErrorCallback()</li>
+<li>HAL_ADC_LevelOutOfWindowCallback() (callback of analog
+watchdog)</li>
+<li>HAL_ADC_ConvCpltCallback()</li>
+<li>HAL_ADC_ConvHalfCpltCallback()</li>
+<li>HAL_ADCEx_InjectedConvCpltCallback()</li>
+</ul></li>
+</ul>
+<h3 id="adc的析构deinitialization">4. ADC的析构(Deinitialization)</h3>
+<ul>
+<li>关闭ADC外设接口
+<ul>
+<li>ADC外设的硬复位。 __ADCx_FORCE_RESET(), __ADCx_RELEASE_RESET()</li>
+<li>关闭ADC时钟。如：
+<ul>
+<li>PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_ADC</li>
+<li>PeriphClkInit.AdcClockSelection = RCC_ADCPLLCLK2_OFF</li>
+<li>HAL_RCCEx_PeriphCLKConfig(&amp;PeriphClkInit)</li>
+</ul></li>
+</ul></li>
+<li>关闭ADC GPIO管脚时钟 __HAL_RCC_GPIOx_CLK_DISABLE()</li>
+<li>当使用ADC的中断时，则关闭ADC的NVIC。HAL_NVIC_EnableIRQ(ADCx_IRQn)</li>
+<li>当使用ADC的DMA时
+<ul>
+<li>析构DMA。HAL_DMA_Init()</li>
+<li>关闭DMA的NVIC。HAL_NVIC_EnableIRQ(DMAx_Channelx_IRQn)</li>
+</ul></li>
+</ul>
+<h3 id="回调函数的注册">5. 回调函数的注册</h3>
+<ul>
+<li><p>当 <strong>USE_HAL_ADC_REGISTER_CALLBACKS</strong>
+设置为1时，允许用户配置回调函数。HAL_ADC_RegisterCallback()，回调ID：</p>
+<ul>
+<li>ConvCpltCallback : ADC转换完成的回调</li>
+<li>ConvHalfCpltCallback : ADC转换DMA传输过半的回调</li>
+<li>LevelOutOfWindowCallback : ADC模拟看门狗1的回调</li>
+<li>ErrorCallback : ADC错误的回调</li>
+<li>InjectedConvCpltCallback : ADC注入组转换完成的回调</li>
+<li>MspInitCallback : ADC Msp初始化的回调</li>
+<li>MspDeInitCallback : ADC Msp析构的回调</li>
+</ul>
+<p>此函数以HAL外设句柄和回调ID和指向用户回调函数的指针作为参数。</p></li>
+<li><p>函数 HAL_ADC_UnRegisterCallback()
+用来复位回调函数到默认的弱定义函数。</p>
+<ul>
+<li>ConvCpltCallback : ADC转换完成的回调</li>
+<li>ConvHalfCpltCallback : ADC转换DMA传输过半的回调</li>
+<li>LevelOutOfWindowCallback : ADC模拟看门狗1的回调</li>
+<li>ErrorCallback : ADC错误的回调</li>
+<li>InjectedConvCpltCallback : ADC注入组转换完成的回调</li>
+<li>MspInitCallback : ADC Msp初始化的回调</li>
+<li>MspDeInitCallback : ADC Msp析构的回调</li>
+</ul></li>
+<li><p>默认情况下，ADC初始化后(HAL_ADC_Init()) ,当ADC的状态是
+<strong>HAL_ADC_STATE_RESET</strong>
+时，所有的回调被设置到相应的弱函数。（MspInit 和
+MspDeInit除外，它们会被复位到传统弱函数）</p></li>
+<li><p>如果MspInit或MspDeInit不为空,
+无论ADC在哪种状态，HAL_ADC_Init()和HAL_ADC_DeInit()函数可保持和使用用户MspInit/MspDeInit回调函数(预先注册过)。</p></li>
+<li><p>只有ADC状态在
+HAL_ADC_STATE_READY时，回调函数才能注册或注销。</p></li>
+<li><p>在调用
+HAL_ADC_DeInit()或HAL_ADC_Init()之前，用户可以首先注册MspInit/MspDeInit用户回调函数</p></li>
+<li><p>当 <strong>USE_HAL_ADC_REGISTER_CALLBACKS</strong>
+设置为0或没有定义时，回调注册功能不可用，所有回调都被设置为相应的弱函数。</p></li>
+</ul>
 
                 
               </div>
@@ -366,7 +459,7 @@ alt="image-20230716185843116" />
     
       <span class="category-chain">
         
-  <a href="/categories/%E5%85%B6%E5%AE%83/" class="category-chain-item">其它</a>
+  <a href="/categories/stm32/" class="category-chain-item">stm32</a>
   
   
 
@@ -381,7 +474,7 @@ alt="image-20230716185843116" />
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/key/">#key</a>
+        <a href="/tags/adc/">#adc</a>
       
     </div>
   
@@ -395,9 +488,9 @@ alt="image-20230716185843116" />
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/07/17/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E5%86%99C%E8%AF%AD%E8%A8%80%E9%93%BE%E8%A1%A8/" title="从零开始写C语言链表">
+                      <a href="/2023/08/03/stm32f1xx-hal-cortex%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" title="stm32f1xx_hal_cortex库的使用">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">从零开始写C语言链表</span>
+                        <span class="hidden-mobile">stm32f1xx_hal_cortex库的使用</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -405,8 +498,8 @@ alt="image-20230716185843116" />
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/07/15/Blender%E5%9F%BA%E7%A1%80/" title="Blender基础">
-                        <span class="hidden-mobile">Blender基础</span>
+                      <a href="/2023/08/03/stm32f1xx-hal-gpio%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" title="stm32f1xx_hal_gpio库的使用">
+                        <span class="hidden-mobile">stm32f1xx_hal_gpio库的使用</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
