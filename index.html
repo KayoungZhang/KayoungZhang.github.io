@@ -225,15 +225,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/08/03/stm32f1xx-hal-cortex%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
-          stm32f1xx_hal_cortex库的使用
+        <a href="/2023/08/07/stm32f1xx-hal-sd%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
+          stm32f1xx_hal_sd库的使用
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/08/03/stm32f1xx-hal-cortex%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/08/07/stm32f1xx-hal-sd%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
         <div>
-          在HAL库中，关于内核控制外设，初始化和析构的相关配置在 stm32f1xx_hal_cortex.c 文件中，下面来具体看看它怎么使用。 配置NVIC interrupts (IRQ)中断  配置NVIC优先级分组。HAL_NVIC_SetPriorityGrouping()   当选择 NVIC_PRIORITYGROUP_0 时，则无抢占优先级，中断优先级只由子优先级管理
+          Secure Digital,简称SD,SD内存卡是一种使用非常广泛的存储设备，以下来看看HAL库关于SD卡的使用方法。 SD外设库的使用 这是一个通用分层的SDIO存储驱动，它使用HAL SDIO驱动函数来连接SD内存卡。 1. 初始化SDIO底层。HAL_SD_MspInit()  使能SDIO接口时钟。__HAL_RCC_SDIO_CLK_ENABLE() 配置SDIO引脚
         </div>
       </a>
 
@@ -241,8 +241,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-08-03 22:09" pubdate>
-              2023-08-03
+            <time datetime="2023-08-07 18:30" pubdate>
+              2023-08-07
             </time>
           </div>
         
@@ -272,7 +272,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/cortex/">#cortex</a>
+              <a href="/tags/sd/">#sd</a>
             
           </div>
         
@@ -286,15 +286,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/08/03/stm32f1xx-hal-adc%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
-          stm32f1xx_hal_adc库的使用
+        <a href="/2023/08/07/stm32f1xx-hal-mmc%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
+          stm32f1xx_hal_mmc库的使用
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/08/03/stm32f1xx-hal-adc%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/08/07/stm32f1xx-hal-mmc%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
         <div>
-          同GPIO库一样，ST官方给出了ADC外设库的使用方法，下面具体看看ADC外设库中的步骤： 1. 配置ADC顶层参数  使能ADC接口  建议在 HAL_ADC_MspInit() 函数中配置ADC时钟 （STM32F1 ADC时钟频率最大14MHz）如：  RCC_PeriphCLKInitTypeDef PeriphClkInit; __ADC1_CLK_ENABLE();
+          MultiMediaCard,简称MMC,它属于SD卡的一种，是一种一体化、可拆卸、多功能的内存卡,以下来看看HAL库关于MMC的使用方法。 MMC外设库的使用 这是一个通用分层的MMC存储器驱动，它使用HAL SDMMC 驱动函数来连接MMC和eMMC卡。 1. 初始化MMC底层。HAL_MMC_MspInit()  使能MMC接口时钟。__HAL_RCC_SDMMC_CLK_ENA
         </div>
       </a>
 
@@ -302,8 +302,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-08-03 21:03" pubdate>
-              2023-08-03
+            <time datetime="2023-08-07 17:30" pubdate>
+              2023-08-07
             </time>
           </div>
         
@@ -333,7 +333,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/adc/">#adc</a>
+              <a href="/tags/mmc/">#mmc</a>
             
           </div>
         
@@ -347,15 +347,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/08/03/stm32f1xx-hal-gpio%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
-          stm32f1xx_hal_gpio库的使用
+        <a href="/2023/08/07/stm32f1xx-hal-nor%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
+          stm32f1xx_hal_nor库的使用
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/08/03/stm32f1xx-hal-gpio%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/08/07/stm32f1xx-hal-nor%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
         <div>
-          怎么使用stm32库文件呢？在 *.c文件中, ST官方已经给出了使用方法，下面具体看看GPIO外设库中的特点和使用步骤： GPIO外设库的特点  GPIO外设库可独立配置模式：   输入模式 Input mode 模拟模式 Analog mode 输出模式 Output mode 复用功能模式 Alternate function mode 外部中断或事件模式 Extern
+          下面来看看HAL库关于Nor flash存储器的使用方法。 NOR存储器外设库的使用 此驱动是一个通用的分层驱动程序，包含一组用于控制NOR闪存的API。它使用FSMC层函数来连接NOR 闪存。  配置NOR flash 存储器的控制和时序参数。HAL_NOR_Init() 读取NOR flash 存储器制造商和设备ID。HAL_NOR_Read_ID() 读取的信息存储在函数调用的
         </div>
       </a>
 
@@ -363,8 +363,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-08-03 20:03" pubdate>
-              2023-08-03
+            <time datetime="2023-08-07 12:15" pubdate>
+              2023-08-07
             </time>
           </div>
         
@@ -394,7 +394,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/gpio/">#gpio</a>
+              <a href="/tags/nor/">#nor</a>
             
           </div>
         
@@ -408,15 +408,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/07/26/%E4%B8%80%E6%AC%BE%E6%B5%8F%E8%A7%88%E5%99%A8%E7%BF%BB%E8%AF%91%E6%8F%92%E4%BB%B6/" target="_self">
-          一款浏览器翻译插件
+        <a href="/2023/08/07/stm32f1xx-hal-pccard%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
+          stm32f1xx_hal_pccard库的使用
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/07/26/%E4%B8%80%E6%AC%BE%E6%B5%8F%E8%A7%88%E5%99%A8%E7%BF%BB%E8%AF%91%E6%8F%92%E4%BB%B6/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/08/07/stm32f1xx-hal-pccard%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
         <div>
-          平时查看资料，会接触到很多英文文档，偶尔一篇英语短文章，阅读起来不成问题，但一旦碰到了一篇很长的文章且通篇都是一些专业名词，此时就不太想看下去了。日前发现一款免费的浏览器翻译插件（沉浸式翻译），觉得挺实用的。 官网：https://immersivetranslate.com/ GitHub：https://github.com/immersive-translate/immersive-tr
+          下面来看看HAL库关于PCCARD存储器的使用方法。 PCCARD存储器外设库的使用 此驱动是一个通用的分层驱动程序，包含一组用于控制PCCARD/小型闪存的API。它使用FSMC层函数来连接PCCARD存储器。  配置PCCARD/小型闪存的控制和时序参数。HAL_PCCARD_Init()/HAL_CF_Init() 读取PCCARD/小型闪存制造商和设备ID。HAL_PCCARD_
         </div>
       </a>
 
@@ -424,8 +424,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-07-26 19:23" pubdate>
-              2023-07-26
+            <time datetime="2023-08-07 12:15" pubdate>
+              2023-08-07
             </time>
           </div>
         
@@ -440,7 +440,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E5%85%B6%E5%AE%83/" class="category-chain-item">其它</a>
+  <a href="/categories/stm32/" class="category-chain-item">stm32</a>
   
   
 
@@ -455,7 +455,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/%E5%B7%A5%E5%85%B7/">#工具</a>
+              <a href="/tags/pccard/">#pccard</a>
             
           </div>
         
@@ -469,15 +469,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/07/17/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E5%86%99C%E8%AF%AD%E8%A8%80%E9%93%BE%E8%A1%A8/" target="_self">
-          从零开始写C语言链表
+        <a href="/2023/08/06/stm32f1xx-hal-nand%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
+          stm32f1xx_hal_nand库的使用
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/07/17/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E5%86%99C%E8%AF%AD%E8%A8%80%E9%93%BE%E8%A1%A8/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/08/06/stm32f1xx-hal-nand%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
         <div>
-          链表的概念 链表（Linked List）是一种物理存储结构上非连续、非顺序的存储结构，数据元素（节点）的逻辑顺序是通过链表中的指针链接次序实现的 。 相比数组这种在定义即分配一段连续且固定空间大小的数据结构，链表可以根据需要动态分配离散的内存空间，解决了数组插入或删除元素需要移动大量元素的弊端，不过它的缺点就是需要牺牲更大的内存空间。一般链表在操作系统里面应用比较广泛。 链表的结构
+          下面来看看HAL库关于NAND flash存储器的使用方法。 NAND外设库的使用  配置NAND flash 存储器。HAL_NAND_Init() 读取NAND flash 存储器制造商和设备ID。HAL_NAND_Read_ID() 读取的信息存储在函数调用的NAND_ID_TypeDef类型结构体中。 对NAND flash存储器进行读写操作：  HAL_NAND_Read
         </div>
       </a>
 
@@ -485,8 +485,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-07-17 21:11" pubdate>
-              2023-07-17
+            <time datetime="2023-08-06 22:32" pubdate>
+              2023-08-06
             </time>
           </div>
         
@@ -501,7 +501,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" class="category-chain-item">数据结构与算法</a>
+  <a href="/categories/stm32/" class="category-chain-item">stm32</a>
   
   
 
@@ -516,7 +516,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/%E9%93%BE%E8%A1%A8/">#链表</a>
+              <a href="/tags/nand/">#nand</a>
             
           </div>
         
@@ -530,15 +530,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/07/16/%E6%8E%A8%E8%8D%90%E5%87%A0%E6%AC%BE%E5%B0%8F%E5%B7%A5%E5%85%B7/" target="_self">
-          推荐几款小工具
+        <a href="/2023/08/06/stm32f1xx-hal-rtc%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
+          stm32f1xx_hal_rtc库的使用
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/07/16/%E6%8E%A8%E8%8D%90%E5%87%A0%E6%AC%BE%E5%B0%8F%E5%B7%A5%E5%85%B7/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/08/06/stm32f1xx-hal-rtc%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
         <div>
-          在网上发现了几款小工具，有的时候应该会使用到，所以我就下载来使用了一番，觉得蛮好玩的，以下分享一下。 关于鼠标和按键类小工具 按键可视化工具 - Keyviz 官网：Keyviz  这是一款印度免费开源的按键可视化工具，可以实时显示用户当前按下的按键，用户可自定义显示按键风格、样式，非常适合录屏、演示等场合。打开软件后，当按下按键或点击鼠标，在屏幕上就会实时显示当前的按键，如下所示：
+          Real Time Clock，简称RTC，实时时钟，以下来看看HAL库关于RTC的使用方法。 RTC外设库的使用  使能RTC域。 配置RTC预分频系数(异步预分频器生成RTC 1Hz时基)。 HAL_RTC_Init() 配置时间和日期。  配置RTC日历(时间和日期)。HAL_RTC_SetTime()，HAL_RTC_SetDate() 读RTC日历。HAL_RTC_Ge
         </div>
       </a>
 
@@ -546,8 +546,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-07-16 16:49" pubdate>
-              2023-07-16
+            <time datetime="2023-08-06 21:10" pubdate>
+              2023-08-06
             </time>
           </div>
         
@@ -562,7 +562,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E5%85%B6%E5%AE%83/" class="category-chain-item">其它</a>
+  <a href="/categories/stm32/" class="category-chain-item">stm32</a>
   
   
 
@@ -577,7 +577,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/key/">#key</a>
+              <a href="/tags/rtc/">#rtc</a>
             
           </div>
         
@@ -591,15 +591,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/07/15/Blender%E5%9F%BA%E7%A1%80/" target="_self">
-          Blender基础
+        <a href="/2023/08/06/stm32f1xx-hal-spi%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
+          stm32f1xx_hal_spi库的使用
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/07/15/Blender%E5%9F%BA%E7%A1%80/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/08/06/stm32f1xx-hal-spi%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
         <div>
-          看到有些视频讲解时使用到了动画演示，比较生动形象，这种方式更有助于我们理解所讲解的知识内容，简单的了解了一下，它们是通过一些专业的软件进行设计的，以下要介绍的Blender软件就是其中的一款。 Blender简介  Blender是一个体积小巧，但完整集成的自由开源3D创作套件，提供了大量的基础工具，包括 建模 、 渲染 、 动画 &amp; 绑定 、 视频编辑 、 视觉效果 、
+          Serial Peripheral Interface，简称SPI，串行外设接口。以下来看看HAL库关于SPI的使用方法。 SPI外设库的使用  声明一个 SPI_HandleTypeDef 结构体,如：SPI_HandleTypeDef hspi; 初始化SPI底层。HAL_SPI_MspInit()   使能SPIx 接口时钟。 配置SPI引脚  使能SPI GPIO
         </div>
       </a>
 
@@ -607,8 +607,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-07-15 11:32" pubdate>
-              2023-07-15
+            <time datetime="2023-08-06 20:50" pubdate>
+              2023-08-06
             </time>
           </div>
         
@@ -623,7 +623,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E6%95%99%E7%A8%8B/" class="category-chain-item">教程</a>
+  <a href="/categories/stm32/" class="category-chain-item">stm32</a>
   
   
 
@@ -638,7 +638,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/3D/">#3D</a>
+              <a href="/tags/spi/">#spi</a>
             
           </div>
         
@@ -652,15 +652,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/07/12/%E9%9D%99%E6%80%81%E7%AB%99%E7%82%B9%E7%94%9F%E6%88%90%E5%99%A8/" target="_self">
-          静态站点生成器
+        <a href="/2023/08/06/stm32f1xx-hal-smartcard%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
+          stm32f1xx_hal_smartcard库的使用
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/07/12/%E9%9D%99%E6%80%81%E7%AB%99%E7%82%B9%E7%94%9F%E6%88%90%E5%99%A8/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/08/06/stm32f1xx-hal-smartcard%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
         <div>
-          静态站点生成器（Static Site Generators，简称 SSG）是一种软件工具，可以快速轻松地生成静态站点，它采用模板、组件和内容源，然后生成网站所需的 HTML、CSS 和 JavaScript 文件，它已经改变或正在改变我们构建网站的方式。 静态站点生成器使网站加载速度更快，因为它会在用户请求之前预先构建网站所需的必要文件。它非常适合创建营销、文档和博客等网站。但不适用于想
+          Smart Card，智能卡，以下来看看HAL库关于SMARTCARD的使用方法。 SMARTCARD外设库的使用  声明一个 SMARTCARD_HandleTypeDef 结构体。 初始化SMARTCARD底层。HAL_SMARTCARD_MSMARTCARDnit()   使能SMARTCARDx关联到USARTx 的接口时钟。 配置SMARTCARD引脚  使能SMAR
         </div>
       </a>
 
@@ -668,8 +668,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-07-12 21:09" pubdate>
-              2023-07-12
+            <time datetime="2023-08-06 20:32" pubdate>
+              2023-08-06
             </time>
           </div>
         
@@ -684,61 +684,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E5%85%B6%E5%AE%83/" class="category-chain-item">其它</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/07/07/QPainter%E5%9F%BA%E6%9C%AC%E5%9B%BE%E5%BD%A2%E7%BB%98%E5%88%B6%E7%94%A8%E6%B3%95/" target="_self">
-          QPainter基本图形绘制用法
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/07/07/QPainter%E5%9F%BA%E6%9C%AC%E5%9B%BE%E5%BD%A2%E7%BB%98%E5%88%B6%E7%94%A8%E6%B3%95/" target="_self">
-        <div>
-          QPainter概念 QPainter 是用于执行绘图操作的类，它可以绘制简单的点、线，也可以绘制饼图、文本、图像等复杂的形状。 QPainter 一般在绘图事件 paintEvent() 中进行绘制，当窗口需要改变或者重新绘制时，当使用 repaint()和 update() 后，就会自动调用成员函数 paintEvent()。 QPainter 的用法，简单的几个步骤:  1
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-07-07 18:22" pubdate>
-              2023-07-07
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/Qt/" class="category-chain-item">Qt</a>
+  <a href="/categories/stm32/" class="category-chain-item">stm32</a>
   
   
 
@@ -753,7 +699,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/Qt/">#Qt</a>
+              <a href="/tags/smartcard/">#smartcard</a>
             
           </div>
         
@@ -767,15 +713,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/07/07/%E7%AE%97%E6%B3%95%E4%B8%AD%E7%9A%84%E6%97%B6%E9%97%B4%E5%92%8C%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/" target="_self">
-          算法中的时间和空间复杂度
+        <a href="/2023/08/06/stm32f1xx-hal-tim%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
+          stm32f1xx_hal_tim库的使用
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/07/07/%E7%AE%97%E6%B3%95%E4%B8%AD%E7%9A%84%E6%97%B6%E9%97%B4%E5%92%8C%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/08/06/stm32f1xx-hal-tim%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
         <div>
-          算法简介 所谓算法（Algorithm），即解决问题的方法。同一个问题，使用不同的算法，虽然得到的结果相同，但耗费的时间和资源肯定有所差异。 注意，程序和算法是完全不同的概念。算法是解决某个问题的想法、思路；而程序是在根据算法编写出来的真正可以运行的代码。例如，要依次输出一维数组中的数据元素的值，首先想到的是使用循环结构，在这个算法的基础上，我们才开始编写程序。 程序的运行效率具体可以从 2
+          timer, 简称TIM，定时器是MCU控制中使用最广泛的外设，STM32中有多个TIM，下面来看看HAL库关于TIM的介绍和使用方法。 TIM外设库的一般特性  16位向上，向下，向上向下自动重装载计数器 16位可编程预分频系数，允许对计数器时钟进行 1 ~ 65536 的分频。 多达4各独立的通道：  输入捕获 Input Capture 输出比较 Output Compar
         </div>
       </a>
 
@@ -783,8 +729,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-07-07 09:26" pubdate>
-              2023-07-07
+            <time datetime="2023-08-06 20:20" pubdate>
+              2023-08-06
             </time>
           </div>
         
@@ -799,7 +745,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" class="category-chain-item">数据结构与算法</a>
+  <a href="/categories/stm32/" class="category-chain-item">stm32</a>
   
   
 
@@ -814,7 +760,68 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/%E7%AE%97%E6%B3%95/">#算法</a>
+              <a href="/tags/tim/">#tim</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/08/06/stm32f1xx-hal-sram%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
+          stm32f1xx_hal_sram库的使用
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/08/06/stm32f1xx-hal-sram%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
+        <div>
+          下面来看看HAL库关于SRAM 内存的使用方法。 SRAM外设库的使用 这是一个通用的分层驱动，包含一套控制SRAM内存的API。它使用FSMC层函数与SRAM设备进行连接。要配置FSMC与SRAM/PSRAM的连接，应遵循以下顺序：  声明一个SRAM_HandleTypeDef类型结构体。如：SRAM_HandleTypeDef hsram;  对SRAM_HandleTypeD
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-08-06 19:20" pubdate>
+              2023-08-06
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/stm32/" class="category-chain-item">stm32</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/sram/">#sram</a>
             
           </div>
         
@@ -826,7 +833,7 @@
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/#board">10</a><a class="extend next" rel="next" href="/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/#board">13</a><a class="extend next" rel="next" href="/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 

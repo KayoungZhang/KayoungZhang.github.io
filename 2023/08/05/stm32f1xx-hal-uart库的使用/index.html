@@ -1,0 +1,705 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="下面来看看 UART HAL库关于 UART使用方法。 UART外设库的使用  声明一个 UART_HandleTypeDef 结构体句柄。如： UART_HandleTypeDef huart。 初始化UART底层配置。HAL_UART_MspInit()  使能串口 USARTx 时钟。 串口USARTx引脚的配置。  使能UART GPIO时钟。 配置 UART TX、">
+<meta property="og:type" content="article">
+<meta property="og:title" content="stm32f1xx_hal_uart库的使用">
+<meta property="og:url" content="http://example.com/2023/08/05/stm32f1xx-hal-uart%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="下面来看看 UART HAL库关于 UART使用方法。 UART外设库的使用  声明一个 UART_HandleTypeDef 结构体句柄。如： UART_HandleTypeDef huart。 初始化UART底层配置。HAL_UART_MspInit()  使能串口 USARTx 时钟。 串口USARTx引脚的配置。  使能UART GPIO时钟。 配置 UART TX、">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-08-05T03:19:31.000Z">
+<meta property="article:modified_time" content="2023-08-07T05:07:43.030Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="uart">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"✍","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":false},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":false,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+<meta name="referrer" content="no-referrer" />
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>My Tech Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/article.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.1)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="stm32f1xx_hal_uart库的使用"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-08-05 11:19" pubdate>
+          2023年8月5日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.5k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          9 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-12 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">stm32f1xx_hal_uart库的使用</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：2023年8月7日 下午
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <p>下面来看看 UART HAL库关于 UART使用方法。</p>
+<h3 id="uart外设库的使用">UART外设库的使用</h3>
+<ol type="1">
+<li>声明一个 UART_HandleTypeDef 结构体句柄。如： UART_HandleTypeDef
+huart。</li>
+<li>初始化UART底层配置。HAL_UART_MspInit()
+<ul>
+<li>使能串口 USARTx 时钟。</li>
+<li>串口USARTx引脚的配置。
+<ul>
+<li>使能UART GPIO时钟。</li>
+<li>配置 UART TX、RX引脚为复用功能，上拉。</li>
+</ul></li>
+<li>如果需要使用中断，则配置NVIC。HAL_UART_Transmit_IT()
+，HAL_UART_Receive_IT()
+<ul>
+<li>配置串口 USARTx 中断优先级</li>
+<li>使能NVIC USART IRQ中断。</li>
+</ul></li>
+<li>如果需要使用DMA，则配置DMA。HAL_UART_Transmit_DMA()，HAL_UART_Receive_DMA()
+<ul>
+<li>为串口Tx和Rx通道声明一个DMA结构体句柄。</li>
+<li>使能DMAx接口时钟。</li>
+<li>配置刚声明的DMA结构体中所需要的Tx/Rx参数。</li>
+<li>配置DMA Tx/Rx 通道。</li>
+<li>将DMA句柄和串口Tx/Rx句柄进行关联。</li>
+<li>当DMA
+Tx/Rx通道数据传输完成产生中断时，则配置NVIC的优先级并使能。</li>
+<li>配置USART中断优先级并使能NVIC USART
+IRQ中断。（用于DMA非循环模式下的最后一个字节发送完成的检测）</li>
+</ul></li>
+</ul></li>
+<li>在串口huart
+初始化结构体中配置串口的波特率、字节长度，停止位，奇偶校验位，硬件流控和模式（接收/发送）。</li>
+<li>对于串口异步模式，初始化串口寄存器。HAL_UART_Init()</li>
+<li>对于串口半双工模式，初始化串口寄存器。HAL_HalfDuplex_Init()</li>
+<li>对于串口LIN模式，初始化串口寄存器。HAL_LIN_Init()</li>
+<li>对于多处理器模式，初始化串口寄存器。HAL_MultiProcessor_Init()</li>
+</ol>
+<p>指定的串口中断(传输完成中断，接收非空中断和错误中断）可使用宏定义控制。__HAL_UART_ENABLE_IT()
+, __HAL_UART_DISABLE_IT()</p>
+<p>HAL_UART_Init()和HAL_HalfDuplex_Init()等底层硬件初始化都会调用
+HAL_UART_MspInit()。</p>
+<h3 id="回调函数的注册">回调函数的注册</h3>
+<ol type="1">
+<li>USE_HAL_UART_REGISTER_CALLBACKS
+设置为1，用户就可以使用回调函数了。回调函数的注册和注销函数分别是：HAL_UART_RegisterCallback()、HAL_UART_UnRegisterCallback()</li>
+</ol>
+<p>​ 回调函数ID：</p>
+<ul>
+<li><p>TxHalfCpltCallback : 发送过半</p></li>
+<li><p>TxCpltCallback : 发送完成</p></li>
+<li><p>RxHalfCpltCallback : 接收过半</p></li>
+<li><p>RxCpltCallback : 接收完成</p></li>
+<li><p>ErrorCallback : 发生错误</p></li>
+<li><p>AbortCpltCallback : 中止完成</p></li>
+<li><p>AbortTransmitCpltCallback : 中止发生完成</p></li>
+<li><p>AbortReceiveCpltCallback : 中止接收完成</p></li>
+<li><p>MspInitCallback : UART底层初始化</p></li>
+<li><p>MspDeInitCallback : UART 析构</p></li>
+</ul>
+<ol start="2" type="1">
+<li>对于指定的接收事件回调，使用回调函数：HAL_UART_RegisterRxEventCallback()
+, HAL_UART_UnRegisterRxEventCallback()</li>
+<li>默认情况下，串口初始化之后，当串口状态是
+<strong>HAL_UART_STATE_RESET</strong>
+，所有的回调函数被设置为相应的弱函数。如：HAL_UART_TxCpltCallback(),
+HAL_UART_RxHalfCpltCallback()。</li>
+<li>只有在串口状态HAL_UART_STATE_READY 时，回调函数才能注册或注销。</li>
+<li>当USE_HAL_UART_REGISTER_CALLBACKS设置为0，注册的回调函数特性就不能使用，回调函数就当作一个弱函数使用。</li>
+</ol>
+<h3 id="uart的操作模式">UART的操作模式</h3>
+<ul>
+<li>轮询模式IO的操作
+<ul>
+<li>以阻塞模式发送一定数量的数据。HAL_UART_Transmit()</li>
+<li>以阻塞模式接收一定数量的数据。HAL_UART_Receive()</li>
+</ul></li>
+<li>中断模式IO的操作
+<ul>
+<li>非阻塞模式发送一定数量的数据。HAL_UART_Transmit_IT()</li>
+<li>传输完成，执行HAL_UART_TxCpltCallback()
+回调函数，用户自行添加代码。</li>
+<li>非阻塞模式接收一定数量的数据。HAL_UART_Receive_IT()</li>
+<li>接收完成，执行HAL_UART_RxCpltCallback()
+回调函数，用户自行添加代码。</li>
+<li>当传输出错时，执行HAL_UART_ErrorCallback()
+回调函数，用户自行添加代码。</li>
+</ul></li>
+<li>DMA模式IO的操作
+<ul>
+<li>非阻塞DMA模式发送一定数量的数据。HAL_UART_Transmit_DMA()</li>
+<li>传输过半，执行 HAL_UART_TxHalfCpltCallback()
+回调函数，用户自行添加代码。</li>
+<li>传输完成，执行 HAL_UART_TxCpltCallback ()
+回调函数，用户自行添加代码。</li>
+<li>非阻塞DMA模式接收一定数量的数据。HAL_UART_Receive_DMA()</li>
+<li>接收过半，执行HAL_UART_RxHalfCpltCallback()
+回调函数，用户自行添加代码。</li>
+<li>接收完成，执行HAL_UART_RxCpltCallback()
+回调函数，用户自行添加代码。</li>
+<li>当传输出错时，执行HAL_UART_ErrorCallback()
+回调函数，用户自行添加代码。</li>
+<li>DMA传输暂停。 HAL_UART_DMAPause()</li>
+<li>重新开始串口DMA传输。HAL_UART_DMAResume()</li>
+<li>停止串口DMA传输。HAL_UART_DMAStop()</li>
+</ul></li>
+</ul>
+<h3 id="uart-hal常用宏定义列表">UART HAL常用宏定义列表</h3>
+<ul>
+<li>__HAL_UART_ENABLE: 使能串口</li>
+<li>___HAL_UART_DISABLE: 关闭串口</li>
+<li>__HAL_UART_GET_FLAG : 获取串口标志是否设置</li>
+<li>__HAL_UART_CLEAR_FLAG : 清除串口挂起标志</li>
+<li>__HAL_UART_ENABLE_IT: 使能串口中断</li>
+<li>__HAL_UART_DISABLE_IT: 关闭串口中断</li>
+<li>__HAL_UART_GET_IT_SOURCE: 检查串口中断是否发生</li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/stm32/" class="category-chain-item">stm32</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/uart/">#uart</a>
+      
+    </div>
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/08/05/stm32f1xx-hal-usart%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" title="stm32f1xx_hal_usart库的使用">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">stm32f1xx_hal_usart库的使用</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/08/05/stm32f1xx-hal-dma%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" title="stm32f1xx_hal_dma库的使用">
+                        <span class="hidden-mobile">stm32f1xx_hal_dma库的使用</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="twikoo"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/twikoo/1.6.8/twikoo.all.min.js', function() {
+        var options = Object.assign(
+          {"envId":"https://ENV","region":"ap-shanghai","path":"window.location.pathname"},
+          {
+            el: '#twikoo',
+            path: 'window.location.pathname',
+            onCommentLoaded: function() {
+              var imgSelector = '#twikoo .tk-content img:not(.tk-owo-emotion)';
+              Fluid.plugins.imageCaption(imgSelector);
+              Fluid.plugins.fancyBox(imgSelector);
+            }
+          }
+        )
+        twikoo.init(options)
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <p <i class="iconfont icon-copyright"></i> <span>2023 | KayougZhang</span> </p> <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

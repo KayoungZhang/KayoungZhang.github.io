@@ -1,0 +1,685 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Real Time Clock，简称RTC，实时时钟，以下来看看HAL库关于RTC的使用方法。 RTC外设库的使用  使能RTC域。 配置RTC预分频系数(异步预分频器生成RTC 1Hz时基)。 HAL_RTC_Init() 配置时间和日期。  配置RTC日历(时间和日期)。HAL_RTC_SetTime()，HAL_RTC_SetDate() 读RTC日历。HAL_RTC_Ge">
+<meta property="og:type" content="article">
+<meta property="og:title" content="stm32f1xx_hal_rtc库的使用">
+<meta property="og:url" content="http://example.com/2023/08/06/stm32f1xx-hal-rtc%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Real Time Clock，简称RTC，实时时钟，以下来看看HAL库关于RTC的使用方法。 RTC外设库的使用  使能RTC域。 配置RTC预分频系数(异步预分频器生成RTC 1Hz时基)。 HAL_RTC_Init() 配置时间和日期。  配置RTC日历(时间和日期)。HAL_RTC_SetTime()，HAL_RTC_SetDate() 读RTC日历。HAL_RTC_Ge">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-08-06T13:10:31.000Z">
+<meta property="article:modified_time" content="2023-08-07T14:39:01.246Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="rtc">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"✍","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":false},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":false,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+<meta name="referrer" content="no-referrer" />
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>My Tech Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/article.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.1)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="stm32f1xx_hal_rtc库的使用"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-08-06 21:10" pubdate>
+          2023年8月6日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          7 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-12 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">stm32f1xx_hal_rtc库的使用</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：2023年8月7日 晚上
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <p>Real Time
+Clock，简称RTC，实时时钟，以下来看看HAL库关于RTC的使用方法。</p>
+<h3 id="rtc外设库的使用">RTC外设库的使用</h3>
+<ol type="1">
+<li>使能RTC域。</li>
+<li>配置RTC预分频系数(异步预分频器生成RTC 1Hz时基)。 HAL_RTC_Init()</li>
+<li>配置时间和日期。
+<ul>
+<li>配置RTC日历(时间和日期)。HAL_RTC_SetTime()，HAL_RTC_SetDate()</li>
+<li>读RTC日历。HAL_RTC_GetTime() ，HAL_RTC_GetDate()</li>
+</ul></li>
+<li>闹钟配置。
+<ul>
+<li>配置RTC闹钟。HAL_RTC_SetAlarm() ，HAL_RTC_SetAlarm_IT()</li>
+<li>读RTC闹钟。HAL_RTC_GetAlarm()</li>
+</ul></li>
+<li>RTC 入侵检测配置。RTC Tamper
+<ul>
+<li>使能RTC
+Tamper，配置Tamper电平。HAL_RTCEx_SetTamper()，HAL_RTCEx_SetTamper_IT()</li>
+<li>TAMPER1 复用功能映射到PC13 。</li>
+</ul></li>
+<li>配置备份数据寄存器（Backup Data Registers）
+<ul>
+<li>向RTC备份数据寄存器写数据。HAL_RTCEx_BKUPWrite()</li>
+<li>读RTC备份数据寄存器。HAL_RTCEx_BKUPRead()</li>
+</ul></li>
+</ol>
+<h3 id="警告-hal-rtc驱动限制条件">==警告: HAL RTC驱动限制条件==</h3>
+<ul>
+<li>STM32F1系列芯片上的RTC版本是V1，F1系列芯片不支持V2版本（其它系列）的所有特性。</li>
+<li>对于V2版本，RTC主要的特性是通过硬件控制的。但在F1芯片，日期特性完全由软件控制。</li>
+<li>跟其它系列芯片相比，F1系列芯片有一些限制：
+<ul>
+<li>HAL库只支持24小时格式（不支持12小时）。</li>
+<li>日期保存在SRAM中，当MCU处于停止或待机模式时，日期就会丢失。用户应该在进入低功耗模式之前保存日期。（基于备份寄存器的固件包提供了一个示例）</li>
+<li>每次调用时间和日期函数时，日期就会自动更新。HAL_RTC_GetTime()
+，HAL_RTC_GetDate()</li>
+<li>闹钟检测被限制在一天内，它只会过期一次（无重复闹钟，需要编一个新的闹钟）。</li>
+</ul></li>
+</ul>
+<h3 id="备用域操作条件">备用域操作条件</h3>
+<ul>
+<li>当主电源关闭时，可通过VBAT电源来给RTC和RTC备份寄存器供电。当VDD关闭，为了维持RTC备份寄存器的内容和给RTC供电，VBAT引脚连接到一个电池或其它电源的备用电源。</li>
+<li>当主数字电源（VDD）关闭，为了RTC的操作，VBAT引脚需为以下模块供电：
+<ul>
+<li>RTC</li>
+<li>LSE振荡器</li>
+<li>使能低功耗备用稳压器时的备用SRAM</li>
+<li>PC13 ~ PC15 I/O引脚，加上 PI8引脚 (当可使用时)</li>
+</ul></li>
+<li>当备用域通过VDD（模拟开关连接到VDD）供电，可使用PC13引脚，用作入侵检测引脚。</li>
+<li>当备用域通过VBAT（模拟开关连接到VBAT，因为VDD不存在）供电，可使用PC13引脚，用作入侵检测引脚。</li>
+</ul>
+<h3 id="备用域复位">备用域复位</h3>
+<ul>
+<li>备用域复位将所有的RTC寄存器和RCC_BDCR寄存器设为复位值。</li>
+<li>当发生以下任一事件，就会产生备用域复位：
+<ul>
+<li>设置RCC备用域控制寄存器（RCC_BDCR）中的BDRST位触发软件复位。</li>
+<li>如果两个供电之前都关闭了，那么VDD或VBAT电压就会打开。</li>
+<li>入侵检测事件复位所有的数据备份寄存器。</li>
+</ul></li>
+</ul>
+<h3 id="访问备用域">访问备用域</h3>
+<ul>
+<li>复位后, 备用域 (RTC寄存器,
+RTC备份数据寄存器和备份SRAM)就会被保护，不能进行写操作。</li>
+<li>为了访问RTC域和RTC寄存器，可通过以下方式：
+<ul>
+<li>调用
+HAL_RCCEx_PeriphCLKConfig()函数，其中PeriphClockSelection为RCC_PERIPHCLK_RTC，并选择RTCClockSelection
+(LSE, LSI 或 HSE)。</li>
+<li>使能备用域时钟。__HAL_RCC_BKP_CLK_ENABLE()</li>
+</ul></li>
+</ul>
+<h3 id="rtc和低功耗模式">RTC和低功耗模式</h3>
+<ul>
+<li>通过RTC复用函数可把MCU从低功耗模式中唤醒。</li>
+<li>RTC复用函数是RTC闹钟（闹钟A）和检测RTC入侵事件。这些复用函数可将系统从停止和待机低功耗模式下唤醒。</li>
+<li>系统还可以通过RTC闹钟从低功耗模式下唤醒，而无需依赖外部中断（自动唤醒模式）</li>
+</ul>
+<h3 id="rtc回调函数的注册">RTC回调函数的注册</h3>
+<p>当 USE_HAL_RTC_REGISTER_CALLBACKS为
+1时，允许用户注册或注销回调函数。HAL_RTC_RegisterCallback(),
+HAL_RTC_UnRegisterCallback()</p>
+<p>回调函数：</p>
+<ul>
+<li><p>AlarmAEventCallback : RTC Alarm A Event callback.</p></li>
+<li><p>Tamper1EventCallback : RTC Tamper 1 Event callback.</p></li>
+<li><p>MspInitCallback : RTC MspInit callback.</p></li>
+<li><p>MspDeInitCallback : RTC MspDeInit callback.</p></li>
+</ul>
+<p>默认情况下, RTC 初始化（HAL_RTC_Init()）后，当状态是
+HAL_RTC_STATE_RESET，所有的回调函数会被置为弱函数。</p>
+<p>只有在 HAL_RTC_STATE_READY 状态下，回调函数才能被注册或注销。</p>
+<p>当 USE_HAL_RTC_REGISTER_CALLBACKS
+为0或未定义时，所有的回调函数已注册的特性不能使用，且都被置为弱函数。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/stm32/" class="category-chain-item">stm32</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/rtc/">#rtc</a>
+      
+    </div>
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/08/06/stm32f1xx-hal-nand%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" title="stm32f1xx_hal_nand库的使用">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">stm32f1xx_hal_nand库的使用</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/08/06/stm32f1xx-hal-spi%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" title="stm32f1xx_hal_spi库的使用">
+                        <span class="hidden-mobile">stm32f1xx_hal_spi库的使用</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="twikoo"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/twikoo/1.6.8/twikoo.all.min.js', function() {
+        var options = Object.assign(
+          {"envId":"https://ENV","region":"ap-shanghai","path":"window.location.pathname"},
+          {
+            el: '#twikoo',
+            path: 'window.location.pathname',
+            onCommentLoaded: function() {
+              var imgSelector = '#twikoo .tk-content img:not(.tk-owo-emotion)';
+              Fluid.plugins.imageCaption(imgSelector);
+              Fluid.plugins.fancyBox(imgSelector);
+            }
+          }
+        )
+        twikoo.init(options)
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <p <i class="iconfont icon-copyright"></i> <span>2023 | KayougZhang</span> </p> <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

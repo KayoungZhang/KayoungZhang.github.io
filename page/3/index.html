@@ -225,15 +225,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/06/25/Qt%E5%B8%B8%E7%94%A8%E6%8E%A7%E4%BB%B6%E4%B9%8B%E6%A0%87%E7%AD%BEQLabel/" target="_self">
-          Qt常用控件之标签QLabel
+        <a href="/2023/08/05/stm32f1xx-hal-wwdg%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
+          stm32f1xx_hal_wwdg库的使用
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/06/25/Qt%E5%B8%B8%E7%94%A8%E6%8E%A7%E4%BB%B6%E4%B9%8B%E6%A0%87%E7%AD%BEQLabel/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/08/05/stm32f1xx-hal-wwdg%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
         <div>
-          QLabel属性和方法 QLabel用于显示文本或图像，它有很多属性和方法，常用的主要有：  获取和设置文本  String text() const; void setText(const QString &amp;text);  设置标签中内容的对齐方式  Qt::Alignment alignment() const; void setAlignment(Qt::Align
+          下面来看看 WWDG HAL库关于窗口看门狗的特性和使用方法。 WWDG外设库的一般特性 WWDG一旦使能，在超过规定的时间段就会产生系统复位，除非在计数器值达到0x3F之前，应用程序刷新计数器的值（T[6:0] 向下计数）。 例如：当计数器值从0x40下降到0x3F时，就会产生复位。  如果计数器值在计数器达到刷新窗口值之前被刷新，也会产生MCU复位。这意味着必须在限制的窗口中刷新计数
         </div>
       </a>
 
@@ -241,8 +241,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-06-25 21:43" pubdate>
-              2023-06-25
+            <time datetime="2023-08-05 13:12" pubdate>
+              2023-08-05
             </time>
           </div>
         
@@ -257,7 +257,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Qt/" class="category-chain-item">Qt</a>
+  <a href="/categories/stm32/" class="category-chain-item">stm32</a>
   
   
 
@@ -272,7 +272,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/Qt/">#Qt</a>
+              <a href="/tags/wwdg/">#wwdg</a>
             
           </div>
         
@@ -286,15 +286,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/06/25/Qt%E5%B8%B8%E7%94%A8%E6%8E%A7%E4%BB%B6%E4%B9%8B%E6%8C%89%E9%92%AEQPushButton/" target="_self">
-          Qt常用控件之按钮QPushButton
+        <a href="/2023/08/05/stm32f1xx-hal-usart%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
+          stm32f1xx_hal_usart库的使用
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/06/25/Qt%E5%B8%B8%E7%94%A8%E6%8E%A7%E4%BB%B6%E4%B9%8B%E6%8C%89%E9%92%AEQPushButton/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/08/05/stm32f1xx-hal-usart%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
         <div>
-          QPushButton 是 Qt 中的按钮类，属于最常用的控件，当点击按钮时，就可执行相应的操作。 可以在UI设计界面直接拖动push button来创建按钮，也可以通过代码进行new创建，如 : QPushButton *button = new QPushButton(&quot;&amp;Download&quot;, this); 以上创建了一个带有文字 Download 的按钮
+          下面来看看串口同步HAL库关于 USART使用方法。 USART外设库的使用  声明一个 USART_HandleTypeDef结构体句柄。如： USART_HandleTypeDef husart。 初始化USART底层配置。HAL_USART_MspInit()  使能串口 USARTx 时钟。 串口USARTx引脚的配置。  使能USART GPIO时钟。 配置 USA
         </div>
       </a>
 
@@ -302,8 +302,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-06-25 21:42" pubdate>
-              2023-06-25
+            <time datetime="2023-08-05 12:19" pubdate>
+              2023-08-05
             </time>
           </div>
         
@@ -318,7 +318,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Qt/" class="category-chain-item">Qt</a>
+  <a href="/categories/stm32/" class="category-chain-item">stm32</a>
   
   
 
@@ -333,7 +333,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/Qt/">#Qt</a>
+              <a href="/tags/usart/">#usart</a>
             
           </div>
         
@@ -347,15 +347,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/06/25/Qt%E5%B8%B8%E7%94%A8%E6%8E%A7%E4%BB%B6%E4%B9%8B%E7%AA%97%E5%8F%A3%E5%9F%BA%E7%B1%BB%20QWidget/" target="_self">
-          Qt常用控件之窗口基类 QWidget
+        <a href="/2023/08/05/stm32f1xx-hal-uart%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
+          stm32f1xx_hal_uart库的使用
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/06/25/Qt%E5%B8%B8%E7%94%A8%E6%8E%A7%E4%BB%B6%E4%B9%8B%E7%AA%97%E5%8F%A3%E5%9F%BA%E7%B1%BB%20QWidget/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/08/05/stm32f1xx-hal-uart%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
         <div>
-          QWidget 类是所有控件类的父类，Qt为此控件提供有很多属性和方法：  详细内容可查看帮助文档。 下面使用一个案例来展示 QWidget 中常用的方法： 新建一个基类为QWidget的工程，勾选 'Generate form'。  打开ui设计文件，添加几个Push Button，并进行如下设置：  运行，弹出如下窗口：  下面进行功能实现，其中添加图标需要进行如下操作，首
+          下面来看看 UART HAL库关于 UART使用方法。 UART外设库的使用  声明一个 UART_HandleTypeDef 结构体句柄。如： UART_HandleTypeDef huart。 初始化UART底层配置。HAL_UART_MspInit()  使能串口 USARTx 时钟。 串口USARTx引脚的配置。  使能UART GPIO时钟。 配置 UART TX、
         </div>
       </a>
 
@@ -363,8 +363,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-06-25 21:33" pubdate>
-              2023-06-25
+            <time datetime="2023-08-05 11:19" pubdate>
+              2023-08-05
             </time>
           </div>
         
@@ -379,7 +379,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Qt/" class="category-chain-item">Qt</a>
+  <a href="/categories/stm32/" class="category-chain-item">stm32</a>
   
   
 
@@ -394,7 +394,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/Qt/">#Qt</a>
+              <a href="/tags/uart/">#uart</a>
             
           </div>
         
@@ -408,15 +408,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/06/19/AI%E7%BB%98%E7%94%BB/" target="_self">
-          AI绘画
+        <a href="/2023/08/05/stm32f1xx-hal-dma%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
+          stm32f1xx_hal_dma库的使用
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/06/19/AI%E7%BB%98%E7%94%BB/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/08/05/stm32f1xx-hal-dma%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
         <div>
-          偶然看到网上一篇文章（https://stable-diffusion-art.com/qr-code/），觉得挺炫酷，因为看到文章内有具体的操作步骤，所以我也想尝试一下，然后利用周末的两天，认真地了解和操作了一番。 Stable Diffusion的简介 目前AI绘画最火的当属 Midjorney 和 Stable Diffusion，Midjourney没有开源，Stable Diff
+          下面来看看 DMA HAL库关于 DMA 使用方法。 DMA 外设库的使用  使能和配置外设连接到 DMA通道。 (除了内部 SRAM / FLASH 内存: 不用初始化。) 注意： 在内存到内存的传输模式中，不允许循环模式 。请阅读参考手册关于外设和DMA请求的内容。  对于给定的通道，配置以下参数 HAL_DMA_Init()：  通道请求 Channel request
         </div>
       </a>
 
@@ -424,8 +424,374 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-06-19 19:29" pubdate>
-              2023-06-19
+            <time datetime="2023-08-05 07:09" pubdate>
+              2023-08-05
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/stm32/" class="category-chain-item">stm32</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/dma/">#dma</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/08/04/stm32f1xx-hal-exti%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
+          stm32f1xx_hal_exti库的使用
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/08/04/stm32f1xx-hal-exti%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
+        <div>
+          下面来看看EXTI HAL库关于外部中断、事件的特性及使用方法。 EXTI外设特性  每个EXTI连接线都可以进行配置三种不同的模式：  中断 事件 中断事件  可配置的EXTI连接线可被配置三种不同的触发方式  上升沿触发 下降沿触发 上升下降沿触发  当设置为中断模式时，EXTI连接线有两个不同的中断挂起寄存器，用来区别发生了那种中断：  上升沿挂起中断 下
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-08-04 23:09" pubdate>
+              2023-08-04
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/stm32/" class="category-chain-item">stm32</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/exti/">#exti</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/08/04/stm32f1xx-hal-dac%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
+          stm32f1xx_hal_dac库的使用
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/08/04/stm32f1xx-hal-dac%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
+        <div>
+          下面来看看DAC HAL库关于DAC外设的特性及使用方法。 DAC外设特性  DAC 的通道  STM32F1 集成有两个12-bit 数字模拟转换器，这两个转换器可以独立使用，也可以同时使用（双模式）。  DAC通道1以DAC_OUT1 (PA4)作为输出或连接到片上外设(例如定时器)。 DAC通道2以DAC_OUT2 (PA5)作为输出或连接到片上外设(例如定时器)。
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-08-04 19:09" pubdate>
+              2023-08-04
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/stm32/" class="category-chain-item">stm32</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/dac/">#dac</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/08/03/stm32f1xx-hal-cortex%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
+          stm32f1xx_hal_cortex库的使用
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/08/03/stm32f1xx-hal-cortex%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
+        <div>
+          在HAL库中，关于内核控制外设，初始化和析构的相关配置在 stm32f1xx_hal_cortex.c 文件中，下面来具体看看它怎么使用。 配置NVIC interrupts (IRQ)中断  配置NVIC优先级分组。HAL_NVIC_SetPriorityGrouping()   当选择 NVIC_PRIORITYGROUP_0 时，则无抢占优先级，中断优先级只由子优先级管理
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-08-03 22:09" pubdate>
+              2023-08-03
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/stm32/" class="category-chain-item">stm32</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/cortex/">#cortex</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/08/03/stm32f1xx-hal-adc%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
+          stm32f1xx_hal_adc库的使用
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/08/03/stm32f1xx-hal-adc%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
+        <div>
+          同GPIO库一样，ST官方给出了ADC外设库的使用方法，下面具体看看ADC外设库中的步骤： 1. 配置ADC顶层参数  使能ADC接口  建议在 HAL_ADC_MspInit() 函数中配置ADC时钟 （STM32F1 ADC时钟频率最大14MHz）如：  RCC_PeriphCLKInitTypeDef PeriphClkInit; __ADC1_CLK_ENABLE();
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-08-03 21:03" pubdate>
+              2023-08-03
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/stm32/" class="category-chain-item">stm32</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/adc/">#adc</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/08/03/stm32f1xx-hal-gpio%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
+          stm32f1xx_hal_gpio库的使用
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/08/03/stm32f1xx-hal-gpio%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
+        <div>
+          怎么使用stm32库文件呢？在 *.c文件中, ST官方已经给出了使用方法，下面具体看看GPIO外设库中的特点和使用步骤： GPIO外设库的特点  GPIO外设库可独立配置模式：   输入模式 Input mode 模拟模式 Analog mode 输出模式 Output mode 复用功能模式 Alternate function mode 外部中断或事件模式 Extern
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-08-03 20:03" pubdate>
+              2023-08-03
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/stm32/" class="category-chain-item">stm32</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/gpio/">#gpio</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/07/26/%E4%B8%80%E6%AC%BE%E6%B5%8F%E8%A7%88%E5%99%A8%E7%BF%BB%E8%AF%91%E6%8F%92%E4%BB%B6/" target="_self">
+          一款浏览器翻译插件
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/07/26/%E4%B8%80%E6%AC%BE%E6%B5%8F%E8%A7%88%E5%99%A8%E7%BF%BB%E8%AF%91%E6%8F%92%E4%BB%B6/" target="_self">
+        <div>
+          平时查看资料，会接触到很多英文文档，偶尔一篇英语短文章，阅读起来不成问题，但一旦碰到了一篇很长的文章且通篇都是一些专业名词，此时就不太想看下去了。日前发现一款免费的浏览器翻译插件（沉浸式翻译），觉得挺实用的。 官网：https://immersivetranslate.com/ GitHub：https://github.com/immersive-translate/immersive-tr
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-07-26 19:23" pubdate>
+              2023-07-26
             </time>
           </div>
         
@@ -455,373 +821,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/AI/">#AI</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/06/15/Qt%E7%9A%84%E4%BF%A1%E5%8F%B7%E4%B8%8E%E6%A7%BD%E6%9C%BA%E5%88%B6/" target="_self">
-          Qt的信号与槽机制
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/06/15/Qt%E7%9A%84%E4%BF%A1%E5%8F%B7%E4%B8%8E%E6%A7%BD%E6%9C%BA%E5%88%B6/" target="_self">
-        <div>
-          Qt信号与槽简介 Qt对标准C++进行了扩展，引入了一些新的概念和功能，例如信号与槽机制，对象属性等。Qt中有一个预处理器，称为元对象编译器（Meta-Object Compiler，MOC），它会将Qt源程序在编译前先转换为标准C++兼容形式，再由C++标准编译器进行编译，所以，信号与槽机制中，必须添加宏： Q_OBJECT，这样MOC才能对信号与槽程序进行代码预处理。 信号与槽是Qt的
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-06-15 17:14" pubdate>
-              2023-06-15
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/Qt/" class="category-chain-item">Qt</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Qt/">#Qt</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/06/14/Qt-Creator%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
-          Qt Creator的使用
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/06/14/Qt-Creator%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
-        <div>
-          Qt Creator的设置 打开Qt Creator, 选择Tools -&gt; Options 进入设置界面：   Environment：可以设置相应的主题和语言环境及UI颜色。    Text Editor：可以进行相应的文本编辑设置。    Build &amp; Run：进行编译和运行的设置   新建Qt Widget项目  依次点击 File -&g
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-06-14 18:41" pubdate>
-              2023-06-14
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/Qt/" class="category-chain-item">Qt</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Qt/">#Qt</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/06/14/Qt%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E7%9A%84%E6%90%AD%E5%BB%BA/" target="_self">
-          Qt开发环境的搭建
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/06/14/Qt%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E7%9A%84%E6%90%AD%E5%BB%BA/" target="_self">
-        <div>
-          Qt简介 Qt 是一个跨平台的 C++开发库，主要用来开发图形用户界面（Graphical User Interface，简称 GUI）程序。Qt 是跨平台的，支持 Windows、Linux、macOS、Android、iOS、WinRT 等平台，将已编写好的 Qt 程序移植到这些平台，只需重新编译一次源代码即可。 Qt Creator的下载安装 Qt Creator是Qt集成开发
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-06-14 17:15" pubdate>
-              2023-06-14
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/Qt/" class="category-chain-item">Qt</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Qt/">#Qt</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/06/07/STM32%E6%9C%89%E7%BA%BF%E7%BD%91%E7%BB%9CEthernet/" target="_self">
-          STM32以太网通信
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/06/07/STM32%E6%9C%89%E7%BA%BF%E7%BD%91%E7%BB%9CEthernet/" target="_self">
-        <div>
-          OSI、TCP/IP 和 LwIP 简介 OSI（Open System Interconnect），即开放式系统互联， 一般都叫OSI参考模型。 TCP/IP（Transmission Control Protocol/Internet Protocol），传输控制协议/网际协议，又名网络通讯协议，是 Internet 最基本的协议、Internet 国际互联网络的基础，由网络层的 I
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-06-07 19:39" pubdate>
-              2023-06-07
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/stm32/" class="category-chain-item">stm32</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/stm32/">#stm32</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/06/06/STM32CubeMX%E4%B9%8BUSB/" target="_self">
-          STM32CubeMX之USB
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/06/06/STM32CubeMX%E4%B9%8BUSB/" target="_self">
-        <div>
-          USB简介 USB（Universal Serial BUS）通用串行总线，是一个外部总线标准。USB 接口支持设备的即插即用和热插拔功能。 标准 USB 共四根线组成,除 VCC/GND 外,另外为 D+,D-，这两根数据线采用的是差分电压的方式进行数据传输的。在 USB 主机上，D-和 D+都是接了 15K 的电阻到低的，所以在没有设备接入的时候，D+、D-均是低电平。而在 USB
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-06-06 21:47" pubdate>
-              2023-06-06
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/stm32/" class="category-chain-item">stm32</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/stm32/">#stm32</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/05/31/STM32CubeMX%E4%B9%8BFatfs%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" target="_self">
-          STM32CubeMX之FatFs文件系统
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/31/STM32CubeMX%E4%B9%8BFatfs%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" target="_self">
-        <div>
-          FatFs 文件系统 文件系统是为了存储和管理数据，而在存储介质中建立的一种组织结构，这些结构包括操作系统引导区、目录和文件。常见的 windows 下的文件系统格式包括 FAT32、NTFS、exFAT。在使用文件系统前，要先对存储介质进行格式化。 使用文件系统时，数据都以文件的形式存储。写入新文件时，先在目录中创建一个文件索引，它指示了文件存放的物理地址，再把数据存储到该地址中。当需要
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-05-31 13:22" pubdate>
-              2023-05-31
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/stm32/" class="category-chain-item">stm32</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/stm32/">#stm32</a>
+              <a href="/tags/%E5%B7%A5%E5%85%B7/">#工具</a>
             
           </div>
         
@@ -833,7 +833,7 @@
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/page/2/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/#board">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/#board">4</a><a class="page-number" href="/page/5/#board">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/#board">10</a><a class="extend next" rel="next" href="/page/4/#board"><i class="iconfont icon-arrowright"></i></a>
+      <a class="extend prev" rel="prev" href="/page/2/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/#board">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/#board">4</a><a class="page-number" href="/page/5/#board">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/#board">13</a><a class="extend next" rel="next" href="/page/4/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 
