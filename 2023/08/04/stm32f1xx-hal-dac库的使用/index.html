@@ -16,15 +16,15 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="下面来看看DAC HAL库关于DAC外设的特性及使用方法。 DAC外设特性  DAC 的通道  STM32F1 集成有两个12-bit 数字模拟转换器，这两个转换器可以独立使用，也可以同时使用（双模式）。  DAC通道1以DAC_OUT1 (PA4)作为输出或连接到片上外设(例如定时器)。 DAC通道2以DAC_OUT2 (PA5)作为输出或连接到片上外设(例如定时器)。">
+    <meta name="description" content="下面来看看DAC HAL库关于DAC外设的特性及使用方法。 DAC外设特性 1. DAC 的通道 STM32F1 集成有两个12-bit 数字模拟转换器，这两个转换器可以独立使用，也可以同时使用（双模式）。  DAC通道1以DAC_OUT1 (PA4)作为输出或连接到片上外设(例如定时器)。 DAC通道2以DAC_OUT2 (PA5)作为输出或连接到片上外设(例如定时器)。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="stm32f1xx_hal_dac库的使用">
 <meta property="og:url" content="http://example.com/2023/08/04/stm32f1xx-hal-dac%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="下面来看看DAC HAL库关于DAC外设的特性及使用方法。 DAC外设特性  DAC 的通道  STM32F1 集成有两个12-bit 数字模拟转换器，这两个转换器可以独立使用，也可以同时使用（双模式）。  DAC通道1以DAC_OUT1 (PA4)作为输出或连接到片上外设(例如定时器)。 DAC通道2以DAC_OUT2 (PA5)作为输出或连接到片上外设(例如定时器)。">
+<meta property="og:description" content="下面来看看DAC HAL库关于DAC外设的特性及使用方法。 DAC外设特性 1. DAC 的通道 STM32F1 集成有两个12-bit 数字模拟转换器，这两个转换器可以独立使用，也可以同时使用（双模式）。  DAC通道1以DAC_OUT1 (PA4)作为输出或连接到片上外设(例如定时器)。 DAC通道2以DAC_OUT2 (PA5)作为输出或连接到片上外设(例如定时器)。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-08-04T11:09:31.000Z">
-<meta property="article:modified_time" content="2023-08-07T05:07:43.020Z">
+<meta property="article:modified_time" content="2023-08-08T00:34:19.359Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="dac">
 <meta name="twitter:card" content="summary_large_image">
@@ -276,7 +276,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年8月7日 下午
+                    本文最后更新于：2023年8月8日 早上
                   
                 
               </p>
@@ -286,9 +286,7 @@
                 
                 <p>下面来看看DAC HAL库关于DAC外设的特性及使用方法。</p>
 <h3 id="dac外设特性">DAC外设特性</h3>
-<ol type="1">
-<li><strong>DAC 的通道</strong></li>
-</ol>
+<p><strong>1. DAC 的通道</strong></p>
 <p>STM32F1 集成有两个12-bit
 数字模拟转换器，这两个转换器可以独立使用，也可以同时使用（双模式）。</p>
 <ul>
@@ -297,9 +295,7 @@
 <li><p>DAC通道2以DAC_OUT2
 (PA5)作为输出或连接到片上外设(例如定时器)。</p></li>
 </ul>
-<ol start="2" type="1">
-<li><strong>DAC 的触发</strong></li>
-</ol>
+<p><strong>2. DAC 的触发</strong></p>
 <ul>
 <li><p>使用 <strong>DAC_TRIGGER_NONE</strong>
 可以不触发DAC转换，一旦写入DHRx寄存器，DAC_OUT1/DAC_OUT2可用。</p></li>
@@ -315,9 +311,7 @@
 </ul></li>
 <li><p>软触发：<strong>DAC_TRIGGER_SOFTWARE</strong></p></li>
 </ul>
-<ol start="3" type="1">
-<li><strong>DAC 缓冲模式特性</strong></li>
-</ol>
+<p><strong>3. DAC 缓冲模式特性</strong></p>
 <ul>
 <li>一个DAC通道有一个输出缓冲器，它能减少输出阻抗，可以直接驱动外部负载，而不用添加外部运算放大器。使能输出缓冲器：</li>
 </ul>
@@ -325,38 +319,28 @@
 <ul>
 <li>DAC输出阻抗值的详细信息请参考数据手册。</li>
 </ul>
-<ol start="4" type="1">
-<li><strong>GPIO 配置指南</strong></li>
-</ol>
+<p><strong>4. GPIO 配置指南</strong></p>
 <p>当一个DAC通道（如通道1：PA4）被使用，而另一个通道没有使用（如通道2：PA5配置为模拟模式，禁用）。通道1可能会以耦合方式干扰通道2，只要通道2一打开，就没有耦合效应。相邻通道耦合效应可以通过以下方式避免：</p>
 <ul>
 <li>当PA5不使用时，将其配置为输入上拉或下拉。</li>
 <li>当PA5打开之前，将其配置为模拟模式。</li>
 </ul>
-<ol start="5" type="1">
-<li><strong>DAC 发生波形特性</strong></li>
-</ol>
+<p><strong>5. DAC 发生波形特性</strong></p>
 <p>两个DAC通道可用来产生干扰波和三角波。对于双模式和特定信号的产生，请参考
 <code>stm32f1xx_hal_dac_ex.c</code> 。</p>
-<ol start="6" type="1">
-<li><strong>DAC数据格式</strong></li>
-</ol>
+<p><strong>6. DAC数据格式</strong></p>
 <ul>
 <li>8-bit 右对齐 DAC_ALIGN_8B_R</li>
 <li>12-bit 左对齐 DAC_ALIGN_12B_L</li>
 <li>12-bit 右对齐 DAC_ALIGN_12B_R</li>
 </ul>
-<ol start="7" type="1">
-<li><strong>DAC值转换为相应电压值</strong></li>
-</ol>
+<p><strong>7. DAC值转换为相应电压值</strong></p>
 <p>每个DAC通道引脚的电压值转换公式：</p>
 <p><strong>DAC_OUTx = VREF+ * DOR / 4096</strong></p>
 <p>其中，DOR是数据输出寄存器值，VREF+是输入参考电压（参考数据手册）。</p>
 <p>例如：假设 VREF+ = 3.3V, 要设置DAC_OUT1 为0.7V, 则 DAC_OUT1 = (3.3 *
 868) / 4095 = 0.7V</p>
-<ol start="8" type="1">
-<li><strong>DMA请求</strong></li>
-</ol>
+<p><strong>8. DMA请求</strong></p>
 <p>如果 DMA1
 请求使能（HAL_DAC_Start_DMA()），当外部触发产生时（非软件触发），就会产生DMA请求。DMA1请求的映射如下：</p>
 <ul>

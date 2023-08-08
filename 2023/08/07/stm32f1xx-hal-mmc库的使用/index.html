@@ -24,7 +24,7 @@
 <meta property="og:description" content="MultiMediaCard,简称MMC,它属于SD卡的一种，是一种一体化、可拆卸、多功能的内存卡,以下来看看HAL库关于MMC的使用方法。 MMC外设库的使用 这是一个通用分层的MMC存储器驱动，它使用HAL SDMMC 驱动函数来连接MMC和eMMC卡。 1. 初始化MMC底层。HAL_MMC_MspInit()  使能MMC接口时钟。__HAL_RCC_SDMMC_CLK_ENA">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-08-07T09:30:31.000Z">
-<meta property="article:modified_time" content="2023-08-07T11:56:52.191Z">
+<meta property="article:modified_time" content="2023-08-08T00:18:21.207Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="mmc">
 <meta name="twitter:card" content="summary_large_image">
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.5k 字
+          3.4k 字
         
       </span>
     
@@ -276,7 +276,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年8月7日 晚上
+                    本文最后更新于：2023年8月8日 早上
                   
                 
               </p>
@@ -395,12 +395,10 @@ Tx中断事件来检查中断传输过程。</p></li>
 HAL_MMC_UnRegisterCallback()</p>
 <p>回调函数：</p>
 <ul>
-<li>TxCpltCallback : callback when a transmission transfer is
-completed.</li>
-<li>RxCpltCallback : callback when a reception transfer is
-completed.</li>
-<li>ErrorCallback : callback when error occurs.</li>
-<li>AbortCpltCallback : callback when abort is completed.</li>
+<li>TxCpltCallback : 发送完成回调函数</li>
+<li>RxCpltCallback : 接收完成回调函数</li>
+<li>ErrorCallback : 发生错误回调函数</li>
+<li>AbortCpltCallback : 中止完成回调函数</li>
 <li>MspInitCallback : MMC 底层初始化回调函数</li>
 <li>MspDeInitCallback : MMC 底层析构回调函数</li>
 </ul>

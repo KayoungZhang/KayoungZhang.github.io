@@ -24,7 +24,7 @@
 <meta property="og:description" content="同GPIO库一样，ST官方给出了ADC外设库的使用方法，下面具体看看ADC外设库中的步骤： 1. 配置ADC顶层参数  使能ADC接口  建议在 HAL_ADC_MspInit() 函数中配置ADC时钟 （STM32F1 ADC时钟频率最大14MHz）如：  RCC_PeriphCLKInitTypeDef PeriphClkInit; __ADC1_CLK_ENABLE();">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-08-03T13:03:11.000Z">
-<meta property="article:modified_time" content="2023-08-03T23:50:34.450Z">
+<meta property="article:modified_time" content="2023-08-08T00:31:18.030Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="adc">
 <meta name="twitter:card" content="summary_large_image">
@@ -276,7 +276,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年8月4日 早上
+                    本文最后更新于：2023年8月8日 早上
                   
                 
               </p>
@@ -404,9 +404,9 @@ watchdog)</li>
 </ul></li>
 </ul>
 <h3 id="回调函数的注册">5. 回调函数的注册</h3>
-<ul>
-<li><p>当 <strong>USE_HAL_ADC_REGISTER_CALLBACKS</strong>
-设置为1时，允许用户配置回调函数。HAL_ADC_RegisterCallback()，回调ID：</p>
+<p>当 <strong>USE_HAL_ADC_REGISTER_CALLBACKS</strong>
+设置为1时，允许用户配置回调函数HAL_ADC_RegisterCallback()</p>
+<p>回调函数：</p>
 <ul>
 <li>ConvCpltCallback : ADC转换完成的回调</li>
 <li>ConvHalfCpltCallback : ADC转换DMA传输过半的回调</li>
@@ -416,8 +416,8 @@ watchdog)</li>
 <li>MspInitCallback : ADC Msp初始化的回调</li>
 <li>MspDeInitCallback : ADC Msp析构的回调</li>
 </ul>
-<p>此函数以HAL外设句柄和回调ID和指向用户回调函数的指针作为参数。</p></li>
-<li><p>函数 HAL_ADC_UnRegisterCallback()
+<p>此函数以HAL外设句柄和回调ID和指向用户回调函数的指针作为参数。</p>
+<p>函数 HAL_ADC_UnRegisterCallback()
 用来复位回调函数到默认的弱定义函数。</p>
 <ul>
 <li>ConvCpltCallback : ADC转换完成的回调</li>
@@ -427,20 +427,18 @@ watchdog)</li>
 <li>InjectedConvCpltCallback : ADC注入组转换完成的回调</li>
 <li>MspInitCallback : ADC Msp初始化的回调</li>
 <li>MspDeInitCallback : ADC Msp析构的回调</li>
-</ul></li>
-<li><p>默认情况下，ADC初始化后(HAL_ADC_Init()) ,当ADC的状态是
+</ul>
+<p>默认情况下，ADC初始化后(HAL_ADC_Init()) ,当ADC的状态是
 <strong>HAL_ADC_STATE_RESET</strong>
 时，所有的回调被设置到相应的弱函数。（MspInit 和
-MspDeInit除外，它们会被复位到传统弱函数）</p></li>
-<li><p>如果MspInit或MspDeInit不为空,
-无论ADC在哪种状态，HAL_ADC_Init()和HAL_ADC_DeInit()函数可保持和使用用户MspInit/MspDeInit回调函数(预先注册过)。</p></li>
-<li><p>只有ADC状态在
-HAL_ADC_STATE_READY时，回调函数才能注册或注销。</p></li>
-<li><p>在调用
-HAL_ADC_DeInit()或HAL_ADC_Init()之前，用户可以首先注册MspInit/MspDeInit用户回调函数</p></li>
-<li><p>当 <strong>USE_HAL_ADC_REGISTER_CALLBACKS</strong>
-设置为0或没有定义时，回调注册功能不可用，所有回调都被设置为相应的弱函数。</p></li>
-</ul>
+MspDeInit除外，它们会被复位到传统弱函数）</p>
+<p>如果MspInit或MspDeInit不为空,
+无论ADC在哪种状态，HAL_ADC_Init()和HAL_ADC_DeInit()函数可保持和使用用户MspInit/MspDeInit回调函数(预先注册过)。</p>
+<p>只有ADC状态在 HAL_ADC_STATE_READY时，回调函数才能注册或注销。</p>
+<p>在调用
+HAL_ADC_DeInit()或HAL_ADC_Init()之前，用户可以首先注册MspInit/MspDeInit用户回调函数</p>
+<p>当 <strong>USE_HAL_ADC_REGISTER_CALLBACKS</strong>
+设置为0或没有定义时，回调注册功能不可用，所有回调都被设置为相应的弱函数。</p>
 
                 
               </div>

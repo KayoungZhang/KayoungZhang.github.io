@@ -24,7 +24,7 @@
 <meta property="og:description" content="Real Time Clock，简称RTC，实时时钟，以下来看看HAL库关于RTC的使用方法。 RTC外设库的使用  使能RTC域。 配置RTC预分频系数(异步预分频器生成RTC 1Hz时基)。 HAL_RTC_Init() 配置时间和日期。  配置RTC日历(时间和日期)。HAL_RTC_SetTime()，HAL_RTC_SetDate() 读RTC日历。HAL_RTC_Ge">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-08-06T13:10:31.000Z">
-<meta property="article:modified_time" content="2023-08-07T14:39:01.246Z">
+<meta property="article:modified_time" content="2023-08-08T00:21:20.813Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="rtc">
 <meta name="twitter:card" content="summary_large_image">
@@ -276,7 +276,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年8月7日 晚上
+                    本文最后更新于：2023年8月8日 早上
                   
                 
               </p>
@@ -312,7 +312,7 @@ Tamper，配置Tamper电平。HAL_RTCEx_SetTamper()，HAL_RTCEx_SetTamper_IT()</
 <li>读RTC备份数据寄存器。HAL_RTCEx_BKUPRead()</li>
 </ul></li>
 </ol>
-<h3 id="警告-hal-rtc驱动限制条件">==警告: HAL RTC驱动限制条件==</h3>
+<h3 id="提示-hal-rtc驱动的限制">==提示: HAL RTC驱动的限制==</h3>
 <ul>
 <li>STM32F1系列芯片上的RTC版本是V1，F1系列芯片不支持V2版本（其它系列）的所有特性。</li>
 <li>对于V2版本，RTC主要的特性是通过硬件控制的。但在F1芯片，日期特性完全由软件控制。</li>
@@ -372,10 +372,10 @@ HAL_RCCEx_PeriphCLKConfig()函数，其中PeriphClockSelection为RCC_PERIPHCLK_R
 HAL_RTC_UnRegisterCallback()</p>
 <p>回调函数：</p>
 <ul>
-<li><p>AlarmAEventCallback : RTC Alarm A Event callback.</p></li>
-<li><p>Tamper1EventCallback : RTC Tamper 1 Event callback.</p></li>
-<li><p>MspInitCallback : RTC MspInit callback.</p></li>
-<li><p>MspDeInitCallback : RTC MspDeInit callback.</p></li>
+<li><p>AlarmAEventCallback : RTC闹钟A 事件回调函数</p></li>
+<li><p>Tamper1EventCallback : RTC入侵检测1事件回调函数</p></li>
+<li><p>MspInitCallback : RTC底层初始化回调函数</p></li>
+<li><p>MspDeInitCallback : RTC底层析构回调函数</p></li>
 </ul>
 <p>默认情况下, RTC 初始化（HAL_RTC_Init()）后，当状态是
 HAL_RTC_STATE_RESET，所有的回调函数会被置为弱函数。</p>

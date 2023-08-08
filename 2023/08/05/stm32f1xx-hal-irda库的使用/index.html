@@ -24,7 +24,7 @@
 <meta property="og:description" content="infrared data association, 红外通信技术，简称 IRDA，通过USART同步串口进行数据传输。HAL库中关于IRDA外设库的使用方法如下： IRDA外设库的使用  声明一个 IRDA_HandleTypeDef结构体句柄。如： IRDA_HandleTypeDef hirda。 初始化IRDA底层配置。HAL_IRDA_MspInit()  使能串口 US">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-08-05T14:19:31.000Z">
-<meta property="article:modified_time" content="2023-08-07T05:07:43.030Z">
+<meta property="article:modified_time" content="2023-08-08T00:27:17.356Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="irda">
 <meta name="twitter:card" content="summary_large_image">
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.3k 字
+          2.4k 字
         
       </span>
     
@@ -276,7 +276,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年8月7日 下午
+                    本文最后更新于：2023年8月8日 早上
                   
                 
               </p>
@@ -363,7 +363,7 @@ IRQ中断。（用于DMA非循环模式下的最后一个字节发送完成的�
 <h3 id="irda-hal常用宏定义列表">IRDA HAL常用宏定义列表</h3>
 <ul>
 <li>__HAL_IRDA_ENABLE: 使能IRDA</li>
-<li>___HAL_IRDA_DISABLE: 关闭IRDA</li>
+<li>__HAL_IRDA_DISABLE: 关闭IRDA</li>
 <li>__HAL_IRDA_GET_FLAG : 获取IRDA标志是否设置</li>
 <li>__HAL_IRDA_CLEAR_FLAG : 清除IRDA挂起标志</li>
 <li>__HAL_IRDA_ENABLE_IT: 使能IRDA中断</li>
@@ -377,16 +377,16 @@ IRQ中断。（用于DMA非循环模式下的最后一个字节发送完成的�
 </ol>
 <p>​ 回调函数ID：</p>
 <ul>
-<li><p>TxHalfCpltCallback : 发送过半</p></li>
-<li><p>TxCpltCallback : 发送完成</p></li>
-<li><p>RxHalfCpltCallback : 接收过半</p></li>
-<li><p>RxCpltCallback : 接收完成</p></li>
-<li><p>ErrorCallback : 发生错误</p></li>
-<li><p>AbortCpltCallback : 中止完成</p></li>
-<li><p>AbortTransmitCpltCallback : 中止发生完成</p></li>
-<li><p>AbortReceiveCpltCallback : 中止接收完成</p></li>
-<li><p>MspInitCallback : IRDA底层初始化</p></li>
-<li><p>MspDeInitCallback : IRDA 析构</p></li>
+<li><p>TxHalfCpltCallback : 发送过半回调函数</p></li>
+<li><p>TxCpltCallback : 发送完成回调函数</p></li>
+<li><p>RxHalfCpltCallback : 接收过半回调函数</p></li>
+<li><p>RxCpltCallback : 接收完成回调函数</p></li>
+<li><p>ErrorCallback : 发生错误回调函数</p></li>
+<li><p>AbortCpltCallback : 中止完成回调函数</p></li>
+<li><p>AbortTransmitCpltCallback : 中止发生完成回调函数</p></li>
+<li><p>AbortReceiveCpltCallback : 中止接收完成回调函数</p></li>
+<li><p>MspInitCallback : IRDA底层初始化回调函数</p></li>
+<li><p>MspDeInitCallback : IRDA析构回调函数</p></li>
 </ul>
 <ol start="2" type="1">
 <li>默认情况下，IRDA初始化之后，当它的状态是

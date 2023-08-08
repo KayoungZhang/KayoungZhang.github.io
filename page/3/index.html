@@ -538,7 +538,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2023/08/04/stm32f1xx-hal-dac%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
         <div>
-          下面来看看DAC HAL库关于DAC外设的特性及使用方法。 DAC外设特性  DAC 的通道  STM32F1 集成有两个12-bit 数字模拟转换器，这两个转换器可以独立使用，也可以同时使用（双模式）。  DAC通道1以DAC_OUT1 (PA4)作为输出或连接到片上外设(例如定时器)。 DAC通道2以DAC_OUT2 (PA5)作为输出或连接到片上外设(例如定时器)。
+          下面来看看DAC HAL库关于DAC外设的特性及使用方法。 DAC外设特性 1. DAC 的通道 STM32F1 集成有两个12-bit 数字模拟转换器，这两个转换器可以独立使用，也可以同时使用（双模式）。  DAC通道1以DAC_OUT1 (PA4)作为输出或连接到片上外设(例如定时器)。 DAC通道2以DAC_OUT2 (PA5)作为输出或连接到片上外设(例如定时器)。
         </div>
       </a>
 
@@ -599,7 +599,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2023/08/03/stm32f1xx-hal-cortex%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
         <div>
-          在HAL库中，关于内核控制外设，初始化和析构的相关配置在 stm32f1xx_hal_cortex.c 文件中，下面来具体看看它怎么使用。 配置NVIC interrupts (IRQ)中断  配置NVIC优先级分组。HAL_NVIC_SetPriorityGrouping()   当选择 NVIC_PRIORITYGROUP_0 时，则无抢占优先级，中断优先级只由子优先级管理
+          在HAL库中，关于内核控制外设，初始化和析构的相关配置在 stm32f1xx_hal_cortex.c 文件中，下面来具体看看它怎么使用。 配置NVIC interrupts (IRQ)中断  配置NVIC优先级分组。HAL_NVIC_SetPriorityGrouping()  当选择 NVIC_PRIORITYGROUP_0 时，则无抢占优先级，中断优先级只由子优先级管理 中
         </div>
       </a>
 
@@ -721,7 +721,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2023/08/03/stm32f1xx-hal-gpio%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
         <div>
-          怎么使用stm32库文件呢？在 *.c文件中, ST官方已经给出了使用方法，下面具体看看GPIO外设库中的特点和使用步骤： GPIO外设库的特点  GPIO外设库可独立配置模式：   输入模式 Input mode 模拟模式 Analog mode 输出模式 Output mode 复用功能模式 Alternate function mode 外部中断或事件模式 Extern
+          怎么使用stm32库文件呢？在 *.c文件中, ST官方已经给出了使用方法，下面具体看看GPIO外设库中的特点和使用步骤： GPIO外设库的特点  GPIO外设库可独立配置模式：  输入模式 Input mode 模拟模式 Analog mode 输出模式 Output mode 复用功能模式 Alternate function mode 外部中断或事件模式 External
         </div>
       </a>
 
