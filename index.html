@@ -225,6 +225,161 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2023/08/09/stm32-sct%E5%88%86%E6%95%A3%E5%8A%A0%E8%BD%BD%E6%96%87%E4%BB%B6%E8%AF%A6%E8%A7%A3/" target="_self">
+          stm32 sct分散加载文件详解
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/08/09/stm32-sct%E5%88%86%E6%95%A3%E5%8A%A0%E8%BD%BD%E6%96%87%E4%BB%B6%E8%AF%A6%E8%A7%A3/" target="_self">
+        <div>
+          
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-08-09 18:28" pubdate>
+              2023-08-09
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/08/09/stm32-map%E6%96%87%E4%BB%B6%E8%AF%A6%E8%A7%A3/" target="_self">
+          stm32 map文件详解
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/08/09/stm32-map%E6%96%87%E4%BB%B6%E8%AF%A6%E8%A7%A3/" target="_self">
+        <div>
+          MDK-ARM在编译时会生成很多类型的中间文件，最终通过这些中间文件生成可下载到MCU的hex文件。.map 文件就是其中编译器链接时生成的一个文件，主要包含了交叉链接信息。 通过 .map 文件，可以知晓工程中函数的大小，入口地址，变量、调用关系、FLASH 和 RAM 占用空间大小等信息，根据这些信息，可以对代码进行优化。 要生成 .map 文件，需要在keil软件中进行如下相应设置
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-08-09 18:25" pubdate>
+              2023-08-09
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/stm32/" class="category-chain-item">stm32</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/map/">#map</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/08/08/stm32%E5%90%AF%E5%8A%A8%E6%96%87%E4%BB%B6%E8%AF%A6%E8%A7%A3/" target="_self">
+          stm32启动文件详解
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/08/08/stm32%E5%90%AF%E5%8A%A8%E6%96%87%E4%BB%B6%E8%AF%A6%E8%A7%A3/" target="_self">
+        <div>
+          我们知道程序一般是从main函数开始运行的，但在main函数运行之前，程序已经做了一些准备工作，对于STM32F1芯片，这些准备工作是通过启动文件来完成的。下面来详细看看stm32库中的启动代码文件（STM32Cube_FW_F1_V1.8.532F1xx_stm32f103xe.s）。 启动文件是由汇编语言编写，是系统上电复位后第一个执行的程序。首先我们来看看启动文件使用的ARM汇编指令：
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-08-08 12:30" pubdate>
+              2023-08-08
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/stm32/" class="category-chain-item">stm32</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/startup/">#startup</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2023/08/07/stm32f1xx-hal-sd%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
           stm32f1xx_hal_sd库的使用
         </a>
@@ -639,189 +794,6 @@
             <i class="iconfont icon-tags"></i>
             
               <a href="/tags/spi/">#spi</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/08/06/stm32f1xx-hal-smartcard%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
-          stm32f1xx_hal_smartcard库的使用
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/08/06/stm32f1xx-hal-smartcard%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
-        <div>
-          Smart Card，智能卡，以下来看看HAL库关于SMARTCARD的使用方法。 SMARTCARD外设库的使用  声明一个 SMARTCARD_HandleTypeDef 结构体。 初始化SMARTCARD底层。HAL_SMARTCARD_MSMARTCARDnit()   使能SMARTCARDx关联到USARTx 的接口时钟。 配置SMARTCARD引脚  使能SMAR
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-08-06 20:32" pubdate>
-              2023-08-06
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/stm32/" class="category-chain-item">stm32</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/smartcard/">#smartcard</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/08/06/stm32f1xx-hal-tim%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
-          stm32f1xx_hal_tim库的使用
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/08/06/stm32f1xx-hal-tim%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
-        <div>
-          timer, 简称TIM，定时器是MCU控制中使用最广泛的外设，STM32中有多个TIM，下面来看看HAL库关于TIM的介绍和使用方法。 TIM外设库的一般特性  16位向上，向下，向上向下自动重装载计数器 16位可编程预分频系数，允许对计数器时钟进行 1 ~ 65536 的分频。 多达4各独立的通道：  输入捕获 Input Capture 输出比较 Output Compar
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-08-06 20:20" pubdate>
-              2023-08-06
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/stm32/" class="category-chain-item">stm32</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/tim/">#tim</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/08/06/stm32f1xx-hal-sram%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
-          stm32f1xx_hal_sram库的使用
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/08/06/stm32f1xx-hal-sram%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
-        <div>
-          下面来看看HAL库关于SRAM 内存的使用方法。 SRAM外设库的使用 这是一个通用的分层驱动，包含一套控制SRAM内存的API。它使用FSMC层函数与SRAM设备进行连接。要配置FSMC与SRAM/PSRAM的连接，应遵循以下顺序：  声明一个SRAM_HandleTypeDef类型结构体。如：SRAM_HandleTypeDef hsram;  对SRAM_HandleTypeD
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-08-06 19:20" pubdate>
-              2023-08-06
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/stm32/" class="category-chain-item">stm32</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/sram/">#sram</a>
             
           </div>
         
