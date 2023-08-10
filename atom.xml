@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2023-08-09T10:28:31.721Z</updated>
+  <updated>2023-08-10T11:32:50.678Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -21,19 +21,25 @@
     <link href="http://example.com/2023/08/09/stm32-sct%E5%88%86%E6%95%A3%E5%8A%A0%E8%BD%BD%E6%96%87%E4%BB%B6%E8%AF%A6%E8%A7%A3/"/>
     <id>http://example.com/2023/08/09/stm32-sct%E5%88%86%E6%95%A3%E5%8A%A0%E8%BD%BD%E6%96%87%E4%BB%B6%E8%AF%A6%E8%A7%A3/</id>
     <published>2023-08-09T10:28:31.000Z</published>
-    <updated>2023-08-09T10:28:31.721Z</updated>
+    <updated>2023-08-10T11:32:50.678Z</updated>
     
-    <content type="html"><![CDATA[]]></content>
+    <content type="html"><![CDATA[<p>keil软件在编译过程中会生成分散加载文件（Scatter-Loading DescriptionFile），它可以用来描述链接器生成映像文件时需要的信息，通过这些信息分配Code、RO-Data，RW-Data，ZI-Data 等数据的存放地址。</p><p>一个sct文件主要由一个<strong>加载区（loadregion）</strong>和多个<strong>执行区（executionregion）</strong>构成。</p><p>加载区是用来保存永久性数据（程序和只读变量）的区域；执行区是程序执行时，从加载区域将数据复制到相应执行区后才能被正确执行。</p><p>sct文件一般格式：</p><div class="code-wrapper"><pre><code class="hljs assembly">LR_IROM1 0x08000000 0x00080000  &#123;    ; load region size_region  ER_IROM1 0x08000000 0x00080000  &#123;  ; load address = execution address   *.o (RESET, +First)    *(InRoot$$Sections)    .ANY (+RO)   &#125;  RW_IRAM1 0x20000000 0x00010000  &#123;  ; RW data   .ANY (+RW +ZI)   &#125;&#125;</code></pre></div><p>下面分别通过三个方面详细了解一下其格式语法：</p><h4 id="加载区域语法">1. 加载区域语法</h4><div class="code-wrapper"><pre><code class="hljs assembly">加载区名(基地址|&quot;+&quot;偏移地址)[属性][大小]&#123;执行区操作+    ;+号表示可以有一个或者多个运行区&#125;</code></pre></div><p>属性列表：</p><ul><li>ABSOLUTE：绝对地址；</li><li>PI：与位置无关；</li><li>RELOC：可重定位；</li><li>OVERLAY：覆盖；</li><li>NOCOMPRESS：不能进行压缩。</li></ul><h4 id="执行区语法">2. 执行区语法</h4><div class="code-wrapper"><pre><code class="hljs assembly">执行区名(基地址|&quot;+&quot;偏移地址)[属性][大小|&quot; &quot;长度]&#123;输入段内容&#125;</code></pre></div><p>属性列表：</p><ul><li><p>ABSOLUTE：绝对地址；</p></li><li><p>PI：与位置无关；</p></li><li><p>RELOC：可重定位；</p></li><li><p>OVERLAY：覆盖；</p></li><li><p>FIXED：固定地址。</p></li><li><p>ALIGNalignment：将执行区的对齐约束从 4 增加到alignment。alignment 必须为 2 的正数幂。如果执行区具有base_address，则它必须为 alignment 对齐。如果执行区具有offset，则链接器将计算的区基址与 alignment 边界对齐；</p></li><li><p>EMPTY：在执行区中保留一个给定长度的空白内存块，通常供堆或堆栈使用。</p></li><li><p>ZEROPAD：零初始化的段作为零填充块写入 ELF文件，因此，运行时无需使用零进行填充；</p></li><li><p>PADVALUE：定义任何填充的值。如果指定PADVALUE，则必须为其赋值；</p></li><li><p>NOCOMPRESS：不能进行压缩；</p></li><li><p>UNINIT：未初始化的数据。</p></li></ul><h4 id="输入段内容语法">3. 输入段内容语法</h4><div class="code-wrapper"><pre><code class="hljs assembly">module_select_pattern [ &quot;(&quot; input_section_selector ( &quot;,&quot; input_section_selector )* &quot;)&quot; ](&quot;+&quot; input_section_attr | input_section_pattern | input_symbol_pattern)</code></pre></div><ul><li>module_select_pattern：目标文件滤波器，支持通配符“*”与“?”。字符不区分大小写。</li><li>input_section_selector: 模块选择器模式,有以下几种：<ul><li>包含段和目标文件的名称；</li><li>库成员名称（不带前导路径名）；</li><li>库的完整名称（包括路径名）。如果名称包含空格，则可以使用通配符简化。例如，使用*libname.lib匹配 C:dir.lib。</li></ul></li><li>nput_section_attr：属性选择器与输入段属性相匹配。每个input_section_attr的前面有“+”号。如果指定一个模式以匹配输入段名称，名称前面必须有一个“+”号。可以省略紧靠“+”号前面的任何逗号。选择器不区分大小写。可以识别以下选择器：<ul><li>RO-CODE，RO-DATA，RO（RO-CODE 和RO-DATA），CODE（RO-CODE）、CONST（RO-DATA），TEXT（RO）</li><li>RW-DATA，RW-CODE，RW（RW-CODE 和 RW-DATA），DATA（RW）</li><li>ZI，BSS（ZI）</li><li>ENTRY（即包含 ENTRY 点的段），FIRST，LAST</li></ul></li></ul><p>通过使用特殊模块选择器模式.ANY可以将输入段分配给执行区，而无需考虑其父模块。可以使用一个或多个.ANY模式以任意分配方式填充运行区。在大多数情况下，使用单个.ANY等效于使用*模块选择器。</p><p>由以上语法分析，查看具体实例，如下所示：</p><div class="code-wrapper"><pre><code class="hljs assembly">; IROM1加载区，地址：0x08000000，大小：0x00080000LR_IROM1 0x08000000 0x00080000  &#123;    ; load region size_region  ; ER_IROM1执行区，地址：0x08000000，大小：0x00080000  ER_IROM1 0x08000000 0x00080000    &#123;  ; load address = execution address   *.o (RESET, +First) ;将REST段最先放到本区，+First表示强制放到首地址   *(InRoot$$Sections) ;将ARM相关库放进来，InRoot$$Sections即ARM库的链接器标号，主要作用COPY RW区到RAM，然后再RW区后面创建ZI区。   .ANY (+RO) ;执行所有目标文件的只读属性数据  &#125;    ; RW_IRAM1执行区，地址：0x20000000，大小：0x00010000  RW_IRAM1 0x20000000 0x00010000    &#123;  ; RW data   .ANY (+RW +ZI) ;执行所有目标文件的可读可写属性及初始化为零的数据  &#125;&#125;</code></pre></div><p>以上就是sct分散加载文件的简要介绍，一般作为了解内存的分布情况，若想尝试修改区域数据存放的内存位置，可参考附件内周立功老师关于其具体使用的介绍。</p><p><ahref="https://gitee.com/kayoungzhang/my_codehub/raw/master/stm32/stm32%20sct%20file%20.zip">附件</a></p>]]></content>
     
     
       
       
-    <summary type="html">
-</summary>
+    <summary type="html">&lt;p&gt;keil软件在编译过程中会生成分散加载文件（Scatter-Loading Description
+File），它可以用来描述链接器生成映像文件时需要的信息，通过这些信息分配
+Code、RO-Data，RW-Data，ZI-Data 等数据的存放地址。&lt;/p&gt;
+&lt;p&gt;</summary>
       
     
     
     
+    <category term="stm32" scheme="http://example.com/categories/stm32/"/>
+    
+    
+    <category term="sct" scheme="http://example.com/tags/sct/"/>
     
   </entry>
   
