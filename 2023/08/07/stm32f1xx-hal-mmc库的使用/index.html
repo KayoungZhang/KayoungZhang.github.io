@@ -24,7 +24,7 @@
 <meta property="og:description" content="MultiMediaCard,简称MMC,它属于SD卡的一种，是一种一体化、可拆卸、多功能的内存卡,以下来看看HAL库关于MMC的使用方法。 MMC外设库的使用 这是一个通用分层的MMC存储器驱动，它使用HAL SDMMC 驱动函数来连接MMC和eMMC卡。 1. 初始化MMC底层。HAL_MMC_MspInit()  使能MMC接口时钟。__HAL_RCC_SDMMC_CLK_ENA">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-08-07T09:30:31.000Z">
-<meta property="article:modified_time" content="2023-08-08T00:18:21.207Z">
+<meta property="article:modified_time" content="2023-08-14T00:03:33.327Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="mmc">
 <meta name="twitter:card" content="summary_large_image">
@@ -276,7 +276,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年8月8日 早上
+                    本文最后更新于：2023年8月14日 早上
                   
                 
               </p>
@@ -399,8 +399,8 @@ HAL_MMC_UnRegisterCallback()</p>
 <li>RxCpltCallback : 接收完成回调函数</li>
 <li>ErrorCallback : 发生错误回调函数</li>
 <li>AbortCpltCallback : 中止完成回调函数</li>
-<li>MspInitCallback : MMC 底层初始化回调函数</li>
-<li>MspDeInitCallback : MMC 底层析构回调函数</li>
+<li>MspInitCallback : MMC 相关MCU初始化回调函数</li>
+<li>MspDeInitCallback : MMC 相关MCU去初始化回调函数</li>
 </ul>
 <p>默认情况下, MMC 初始化（HAL_MMC_Init()）后，当状态是
 HAL_MMC_STATE_RESET，所有的回调函数会被置为弱函数。</p>
@@ -480,23 +480,23 @@ HAL_MMC_STATE_RESET，所有的回调函数会被置为弱函数。</p>
   
     <article id="comments" lazyload>
       
-  <div id="twikoo"></div>
+  <div id="valine"></div>
   <script type="text/javascript">
-    Fluid.utils.loadComments('#comments', function() {
-      Fluid.utils.createScript('https://lib.baomitu.com/twikoo/1.6.8/twikoo.all.min.js', function() {
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
         var options = Object.assign(
-          {"envId":"https://ENV","region":"ap-shanghai","path":"window.location.pathname"},
+          {"appId":"vknpQgHbpd1oLUPUwwPbdY3B-gzGzoHsz","appKey":"1DCiNflrxTVqUxWR5T00HypH","path":"window.location.pathname","placeholder":"欢迎留言交流","avatar":"robohash","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":true,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
           {
-            el: '#twikoo',
-            path: 'window.location.pathname',
-            onCommentLoaded: function() {
-              var imgSelector = '#twikoo .tk-content img:not(.tk-owo-emotion)';
-              Fluid.plugins.imageCaption(imgSelector);
-              Fluid.plugins.fancyBox(imgSelector);
-            }
+            el: "#valine",
+            path: window.location.pathname
           }
         )
-        twikoo.init(options)
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
       });
     });
   </script>

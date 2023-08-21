@@ -24,7 +24,7 @@
 <meta property="og:description" content="Inter Integrated Circuit，简称I2C，下面来看看 I2C HAL库关于I2C的使用方法。 I2C外设库的使用  声明一个 I2C_HandleTypeDef 结构体,如：I2C_HandleTypeDef hi2c; 初始化I2C底层。HAL_I2C_MspInit()   使能I2Cx 接口时钟。 配置I2C引脚  使能I2C GPIO 时钟 配置">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-08-06T01:10:31.000Z">
-<meta property="article:modified_time" content="2023-08-07T05:07:43.020Z">
+<meta property="article:modified_time" content="2023-08-14T00:03:33.236Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="i2c">
 <meta name="twitter:card" content="summary_large_image">
@@ -233,7 +233,7 @@
         
         
         
-          19 分钟
+          20 分钟
         
       </span>
     
@@ -276,7 +276,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年8月7日 下午
+                    本文最后更新于：2023年8月14日 早上
                   
                 
               </p>
@@ -449,8 +449,8 @@ HAL_I2C_Slave_Seq_Receive_DMA()</p>
 <li><p>MemRxCpltCallback : 内存接收完成回调函数</p></li>
 <li><p>ErrorCallback : 错误回调函数</p></li>
 <li><p>AbortCpltCallback : 中止完成回调函数</p></li>
-<li><p>MspInitCallback : 底层初始化回调函数</p></li>
-<li><p>MspDeInitCallback : 底层析构回调函数</p></li>
+<li><p>MspInitCallback : I2C相关MCU初始化回调函数</p></li>
+<li><p>MspDeInitCallback : I2C相关MCU去初始化回调函数</p></li>
 </ul>
 <p>默认情况下, I2C 初始化（HAL_I2C_Init()）后，当状态是
 HAL_I2C_STATE_RESET，所有的回调函数会被置为弱函数。</p>
@@ -544,23 +544,23 @@ NoStretchMode = I2C_NOSTRETCH_DISABLE 。</p></li>
   
     <article id="comments" lazyload>
       
-  <div id="twikoo"></div>
+  <div id="valine"></div>
   <script type="text/javascript">
-    Fluid.utils.loadComments('#comments', function() {
-      Fluid.utils.createScript('https://lib.baomitu.com/twikoo/1.6.8/twikoo.all.min.js', function() {
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
         var options = Object.assign(
-          {"envId":"https://ENV","region":"ap-shanghai","path":"window.location.pathname"},
+          {"appId":"vknpQgHbpd1oLUPUwwPbdY3B-gzGzoHsz","appKey":"1DCiNflrxTVqUxWR5T00HypH","path":"window.location.pathname","placeholder":"欢迎留言交流","avatar":"robohash","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":true,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
           {
-            el: '#twikoo',
-            path: 'window.location.pathname',
-            onCommentLoaded: function() {
-              var imgSelector = '#twikoo .tk-content img:not(.tk-owo-emotion)';
-              Fluid.plugins.imageCaption(imgSelector);
-              Fluid.plugins.fancyBox(imgSelector);
-            }
+            el: "#valine",
+            path: window.location.pathname
           }
         )
-        twikoo.init(options)
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
       });
     });
   </script>

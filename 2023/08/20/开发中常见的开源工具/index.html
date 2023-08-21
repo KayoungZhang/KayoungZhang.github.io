@@ -1,0 +1,807 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="GNU   GNU是一个开源组织，同时也是一个100%自由软件的操作系统，包含了所有的官方GNU软件包，也包括非GNU自由软件。 GNU官网：https:&#x2F;&#x2F;www.gnu.org&#x2F;  GCC&#x2F;G++：GNU工具链中的编译器。 Make：GNU工具链中的构建生成器，搭配makefile文件使用。 GDB（GNU Debuger）：GNU 开源组织发布的一个强大的UNI">
+<meta property="og:type" content="article">
+<meta property="og:title" content="开发中常见的开源工具">
+<meta property="og:url" content="http://example.com/2023/08/20/%E5%BC%80%E5%8F%91%E4%B8%AD%E5%B8%B8%E8%A7%81%E7%9A%84%E5%BC%80%E6%BA%90%E5%B7%A5%E5%85%B7/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="GNU   GNU是一个开源组织，同时也是一个100%自由软件的操作系统，包含了所有的官方GNU软件包，也包括非GNU自由软件。 GNU官网：https:&#x2F;&#x2F;www.gnu.org&#x2F;  GCC&#x2F;G++：GNU工具链中的编译器。 Make：GNU工具链中的构建生成器，搭配makefile文件使用。 GDB（GNU Debuger）：GNU 开源组织发布的一个强大的UNI">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/gnu-100-b98545.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/6ac65d24163b5b6e0.jpeg">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/weq.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/%EF%BC%ADinGW-w64-long.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/RE1Mu3b.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/Cmake-logo-header.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/Qt-logo-neon-small.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/SCons-Bricks.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/tux.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230818231609048.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230818232211015.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/floating.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/logo_lvgl.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230819001230032.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/logo.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230821084024530.png">
+<meta property="article:published_time" content="2023-08-20T04:09:58.000Z">
+<meta property="article:modified_time" content="2023-08-21T01:24:24.091Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="开源">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/gnu-100-b98545.png">
+  
+  
+  
+  
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"✍","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":false},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":false,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+<meta name="referrer" content="no-referrer" />
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>My Tech Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/article.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.1)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="开发中常见的开源工具"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-08-20 12:09" pubdate>
+          2023年8月20日 中午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.7k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          10 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-12 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">开发中常见的开源工具</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：2023年8月21日 上午
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <p align="center">
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/gnu-100-b98545.png" srcset="/img/loading.gif" lazyload>
+<p align="center">
+<b style="font-size:25px">GNU</b>
+</p>
+</p>
+<p>GNU是一个开源组织，同时也是一个100%自由软件的操作系统，包含了所有的官方GNU软件包，也包括非GNU自由软件。</p>
+<p>GNU官网：https://www.gnu.org/</p>
+<ul>
+<li><p><strong>GCC/G++</strong>：GNU工具链中的编译器。</p></li>
+<li><p><strong><a
+target="_blank" rel="noopener" href="https://www.gnu.org/software/make/">Make</a></strong>：GNU工具链中的构建生成器，搭配makefile文件使用。</p></li>
+<li><p><strong><a target="_blank" rel="noopener" href="https://www.sourceware.org/gdb/">GDB（GNU
+Debuger）</a></strong>：GNU 开源组织发布的一个强大的UNIX
+下的程序调试工具。</p></li>
+</ul>
+<hr />
+<p align="center">
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/6ac65d24163b5b6e0.jpeg" srcset="/img/loading.gif" lazyload>
+<p align="center">
+<b style="font-size:25px">LLVM</b>
+</p>
+</p>
+<p>LLVM是编译器和工具链技术的集合。</p>
+<p>官网： https://clang.llvm.org/</p>
+<p><strong>clang/clang++</strong> ：LLVM工具链中C/C++/Objective-C
+编译器。</p>
+<hr />
+<p align="center">
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/weq.png" srcset="/img/loading.gif" lazyload>
+<p align="center">
+<b style="font-size:25px">Cygwin</b>
+</p>
+</p>
+<p>Cygwin是GNU编译器和大量开源工具的集合，能够在Windows系统上提供类似于Linux系统的功能。它提供了大量的POSIX
+API功能。</p>
+<p>官网：https://www.cygwin.com/index.html</p>
+<hr />
+<p align="center">
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/%EF%BC%ADinGW-w64-long.png" srcset="/img/loading.gif" lazyload>
+<p align="center">
+<b style="font-size:25px">MinGw</b>
+</p>
+</p>
+<p>MinGW(Minimalist GNU for
+Windows)是一个开源的基于GNU的编译器套件，允许你在Windows平台生成本地的Windows程序而不需要系统运行库(C
+Runtime library，静态库lib或动态库dll)。</p>
+<p>官网：https://www.mingw-w64.org/</p>
+<p><a
+target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/76613134?utm_source=QQ_article_bottom">MinGW-w64安装教程——著名C/C++编译器GCC的Windows版本</a></p>
+<hr />
+<p align="center">
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/RE1Mu3b.png" srcset="/img/loading.gif" lazyload>
+<p align="center">
+<b style="font-size:25px">MSVC</b>
+</p>
+</p>
+<p>MSVC(Microsoft Visual
+C/C++)是微软公司开发的Windows下编译器工具链，已经集成到Microsoft Visual
+Studio环境中。</p>
+<p>官网：https://learn.microsoft.com/zh-cn/cpp/build/projects-and-build-systems-cpp?view=msvc-170</p>
+<hr />
+<p align="center">
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/Cmake-logo-header.png" srcset="/img/loading.gif" lazyload>
+<p align="center">
+<b style="font-size:25px">CMake</b>
+</p>
+</p>
+<p>CMake(Cross platform
+make)是比Make更高一层的工具,搭配CmakeList.txt文件，产生标准的建构档，再依一般的建构方式进行项目构建。</p>
+<p>官网：https://cmake.org/</p>
+<hr />
+<p align="center">
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/Qt-logo-neon-small.png" srcset="/img/loading.gif" lazyload alt="img" style="zoom:33%;" />
+<p align="center">
+<b style="font-size:25px">qmake</b>
+</p>
+</p>
+<p>qmake 是QT工程的项目构建生成器。</p>
+<p>官网：https://www.qt.io/product/development-tools</p>
+<hr />
+<p align="center">
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/SCons-Bricks.png" srcset="/img/loading.gif" lazyload>
+<p align="center">
+<b style="font-size:25px">SCons</b>
+</p>
+</p>
+<p>SCons 是项目构建工具，使用 SConstruct 和 SConscript
+文件来替代复杂规则的makefile文件，像RT-thread系统构建中有使用。</p>
+<p>官网：https://www.scons.org/</p>
+<hr />
+<p align="center">
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/tux.png" srcset="/img/loading.gif" lazyload>
+<p align="center">
+<b style="font-size:25px">Linux</b>
+</p>
+</p>
+<ul>
+<li><p><strong>Linux Kernel</strong> ：Linux内核 ，Linux系统核心。</p>
+<p>官网：https://kernel.org/</p></li>
+<li><p><strong>U-Boot</strong>：Linux系统启动引导代码。全称 Universal
+Boot Loader。</p>
+<p>官网：https://u-boot.readthedocs.io/en/latest/</p>
+<p>源码网址：</p>
+<ul>
+<li>https://source.denx.de/u-boot/u-boot</li>
+<li>https://ftp.denx.de/pub/u-boot/ （或
+ftp://ftp.denx.de/pub/u-boot/）</li>
+</ul></li>
+<li><p><strong>BusyBox</strong>：BusyBox 是一个集成了众多最常用 linux
+命令和工具的精简工具箱。它提供了一个比较完善的环境，可用于构建轻量级的根文件系统。</p>
+<p>官网：https://busybox.net/</p>
+<p><a
+target="_blank" rel="noopener" href="http://www.taodudu.cc/news/show-318004.html?action=onClick">busybox详解</a></p></li>
+</ul>
+<hr />
+<p align="center">
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230818231609048.png" srcset="/img/loading.gif" lazyload alt="image-20230818231609048" style="zoom:50%;" />
+<p align="center">
+<b style="font-size:25px">OpenOCD</b>
+</p>
+</p>
+<p>OpenOCD(Open On-Chip
+Debugger)是一个开源片上调试器，用于嵌入式系统的开发和调试。</p>
+<p>官网：https://www.openocd.org/</p>
+<p>下载地址：https://sourceforge.net/projects/openocd/files/</p>
+<p>Windows下openocd：https://gnutoolchains.com/arm-eabi/openocd/</p>
+<hr />
+<p align="center">
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230818232211015.png" srcset="/img/loading.gif" lazyload alt="image-20230818232211015" style="zoom:67%;" />
+<p align="center">
+<b style="font-size:25px">FatFs</b>
+</p>
+</p>
+<p>FatFs 是用于小型嵌入式系统的通用 FAT/exFAT 文件系统开源项目。</p>
+<p>官网：http://elm-chan.org/fsw/ff/00index_e.html</p>
+<hr />
+<p align="center">
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/floating.png" srcset="/img/loading.gif" lazyload alt="Back to Savannah Homepage" style="zoom:80%;" />
+<p align="center">
+<b style="font-size:25px">lwIP</b>
+</p>
+</p>
+<p>lwIP(light weight IP)是一个开源的小型轻量级的 TCP/IP 协议栈。</p>
+<p>官网：http://savannah.nongnu.org/projects/lwip/</p>
+<hr />
+<p align="center">
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/logo_lvgl.png" srcset="/img/loading.gif" lazyload alt="logo" style="zoom: 67%;" />
+<p align="center">
+<b style="font-size:25px">LVGL</b>
+</p>
+</p>
+<p>LVGL(Light and Versatile Graphics Library
+),是一个开源的轻量级嵌入式图形库，可为任何 MCU、MPU 和显示类型创建漂亮的
+UI。</p>
+<p>官网：https://lvgl.io/</p>
+<p>源码：https://github.com/lvgl/lvgl/releases</p>
+<p>百问网LVGL：http://lvgl.100ask.net/8.2/index.html</p>
+<hr />
+<p align="center">
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230819001230032.png" srcset="/img/loading.gif" lazyload>
+<p align="center">
+<b style="font-size:25px">MQTT</b>
+</p>
+</p>
+<p>MQTT(Message Queuing Telemetry
+Transport,消息队列遥测传输协议)是一种基于发布/订阅(PUBLISH/SUBSCRIBE)模式的轻量级的物联网通信协议。</p>
+<p>官网：https://mqtt.org/</p>
+<hr />
+<p align="center">
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/logo.png" srcset="/img/loading.gif" lazyload>
+<p align="center">
+<b style="font-size:25px">OpenCV</b>
+</p>
+</p>
+<p>OpenCV是一个开源跨平台的计算机视觉库，被用于各种各样的计算机视觉应用程序中，包括人脸检测、目标识别、图像分割、机器人视觉、运动跟踪、手势识别等。OpenCV提供了许多用于图像处理和计算机视觉的功能，包括图像滤波、特征检测、特征匹配、图像分割、摄像机校准、三维重建等。它还提供了C++、Python和Java等编程语言的接口，方便用户在各种平台上进行开发。</p>
+<p>官网：https://opencv.org/</p>
+<hr />
+<p align="center">
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230821084024530.png" srcset="/img/loading.gif" lazyload>
+<p align="center">
+<b style="font-size:25px">CMSIS</b>
+</p>
+</p>
+<p><strong>CMSIS(Common Microcontroller Software Interface
+Standard)</strong> : ARM
+Cortex™通用微控制器软件接口标准，由ARM公司跟芯片软件厂商共同提出的，开源。它提供了一种内核与外设、实时操作系统和中间件接口的通用方法。参考：<a
+target="_blank" rel="noopener" href="https://blog.csdn.net/m0_54929728/article/details/128695058?spm=1001.2101.3001.6650.6&amp;utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-6-128695058-blog-126438165.235%5Ev38%5Epc_relevant_sort&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-6-128695058-blog-126438165.235%5Ev38%5Epc_relevant_sort&amp;utm_relevant_index=11">CMSIS到底是个什么东西</a></p>
+<p>官网：https://www.arm.com/technologies/cmsis</p>
+<p>CMSIS资源包含：</p>
+<ul>
+<li><a
+target="_blank" rel="noopener" href="http://arm-software.github.io/CMSIS_5/RTOS2/html/index.html">CMSIS-RTOS</a>
+：一个 API，能够使中间件和库组件实现一致的软件层</li>
+<li><a
+target="_blank" rel="noopener" href="http://arm-software.github.io/CMSIS_5/DSP/html/index.html">CMSIS-DSP</a>
+：DSP库是Arm针对各种Cortex-M处理器内核优化的DSP功能的丰富集合</li>
+<li><a
+target="_blank" rel="noopener" href="http://arm-software.github.io/CMSIS_5/Driver/html/index.html">CMSIS-Driver</a>：CMSIS驱动程序接口可用于许多微控制器系列</li>
+<li><a
+target="_blank" rel="noopener" href="http://arm-software.github.io/CMSIS_5/Pack/html/index.html">CMSIS-Pack</a>：定义了包含软件组件的软件包结构</li>
+<li><a
+target="_blank" rel="noopener" href="http://arm-software.github.io/CMSIS_5/SVD/html/index.html">CMSIS-SVD</a>：该文件允许查看具有当前寄存器状态的设备外设的详细视图</li>
+<li><a
+target="_blank" rel="noopener" href="http://arm-software.github.io/CMSIS_5/DAP/html/index.html">CMSIS-DAP</a>：它是
+Cortex 调试访问端口（DAP）的标准化接口</li>
+<li><a
+target="_blank" rel="noopener" href="http://arm-software.github.io/CMSIS_5/NN/html/index.html">CMSIS-NN</a>：这是高效神经网络内核的集合</li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Linux/" class="category-chain-item">Linux</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%BC%80%E6%BA%90/">#开源</a>
+      
+    </div>
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/08/18/%E7%BC%96%E8%AF%91%E5%B7%A5%E5%85%B7%E9%93%BE/" title="编译工具链">
+                        <span class="hidden-mobile">编译工具链</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"vknpQgHbpd1oLUPUwwPbdY3B-gzGzoHsz","appKey":"1DCiNflrxTVqUxWR5T00HypH","path":"window.location.pathname","placeholder":"欢迎留言交流","avatar":"robohash","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":true,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <p <i class="iconfont icon-copyright"></i> <span>2023 | KayougZhang</span> </p> <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

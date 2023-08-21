@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230706225516667.png">
 <meta property="article:published_time" content="2023-04-16T04:16:49.000Z">
-<meta property="article:modified_time" content="2023-07-06T14:56:28.929Z">
+<meta property="article:modified_time" content="2023-08-21T00:36:50.612Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230706225516667.png">
@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          4.4k 字
+          5.1k 字
         
       </span>
     
@@ -234,7 +234,7 @@
         
         
         
-          15 分钟
+          17 分钟
         
       </span>
     
@@ -277,7 +277,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年7月6日 晚上
+                    本文最后更新于：2023年8月21日 早上
                   
                 
               </p>
@@ -378,6 +378,36 @@ target="_blank" rel="noopener" href="https://twikoo.js.org/quick-start.html#zeab
   <span class="hljs-attr">envId</span>: <span class="hljs-attr">https</span>:<span class="hljs-comment">//ENV</span>
   <span class="hljs-attr">region</span>: ap-shanghai
   <span class="hljs-attr">path</span>: <span class="hljs-variable language_">window</span>.<span class="hljs-property">location</span>.<span class="hljs-property">pathname</span></code></pre></div>
+<p>如果选用<a target="_blank" rel="noopener" href="https://valine.js.org/">valine</a>，需要进入<a
+target="_blank" rel="noopener" href="https://leancloud.cn/dashboard/login.html#/signup">LeanCloud</a>，申请APP
+ID 和 APP Key，然后同上面一样在配置文件中进行如下设置：</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-attr">comments</span>:
+  <span class="hljs-attr">enable</span>: <span class="hljs-literal">true</span>
+    # 指定的插件，需要同时设置对应插件的必要参数
+    # <span class="hljs-title class_">The</span> specified plugin needs to set the necessary parameters at the same time
+    # <span class="hljs-title class_">Options</span>: utterances | disqus | gitalk | valine | waline | changyan | livere | remark42 | twikoo | cusdis | giscus
+    <span class="hljs-attr">type</span>: valine
+    
+# <span class="hljs-title class_">Valine</span>
+# 基于 <span class="hljs-title class_">LeanCloud</span>
+# <span class="hljs-title class_">Based</span> on <span class="hljs-title class_">LeanCloud</span>
+# <span class="hljs-title class_">See</span>: <span class="hljs-attr">https</span>:<span class="hljs-comment">//valine.js.org/</span>
+<span class="hljs-attr">valine</span>:
+  <span class="hljs-attr">appId</span>: <span class="hljs-string">&#x27;填入申请的appID&#x27;</span>
+  <span class="hljs-attr">appKey</span>: <span class="hljs-string">&#x27;填入申请的appKey&#x27;</span>
+  <span class="hljs-attr">path</span>: <span class="hljs-variable language_">window</span>.<span class="hljs-property">location</span>.<span class="hljs-property">pathname</span>
+  <span class="hljs-attr">placeholder</span>: <span class="hljs-string">&quot;欢迎留言交流&quot;</span>
+  <span class="hljs-attr">avatar</span>: <span class="hljs-string">&#x27;robohash&#x27;</span>
+  <span class="hljs-attr">meta</span>: [<span class="hljs-string">&#x27;nick&#x27;</span>, <span class="hljs-string">&#x27;mail&#x27;</span>, <span class="hljs-string">&#x27;link&#x27;</span>]
+  <span class="hljs-attr">requiredFields</span>: []
+  <span class="hljs-attr">pageSize</span>: <span class="hljs-number">10</span>
+  <span class="hljs-attr">lang</span>: <span class="hljs-string">&#x27;zh-CN&#x27;</span>
+  <span class="hljs-attr">highlight</span>: <span class="hljs-literal">false</span>
+  <span class="hljs-attr">recordIP</span>: <span class="hljs-literal">true</span>
+  <span class="hljs-attr">serverURLs</span>: <span class="hljs-string">&#x27;&#x27;</span>
+  <span class="hljs-attr">emojiCDN</span>:
+  <span class="hljs-attr">emojiMaps</span>:
+  <span class="hljs-attr">enableQQ</span>: <span class="hljs-literal">false</span></code></pre></div>
 <h4 id="更改about页图标">3.10 更改「about」页图标</h4>
 <p>在 <strong>about</strong> 配置栏中，删除名字和介绍的部分，在 <a
 target="_blank" rel="noopener" href="https://hexo.fluid-dev.com/docs/icon/">图标用法</a>中，选择需要添加的图标，然后进行设置，我添加了
@@ -527,23 +557,23 @@ target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/35988761">Hexo
   
     <article id="comments" lazyload>
       
-  <div id="twikoo"></div>
+  <div id="valine"></div>
   <script type="text/javascript">
-    Fluid.utils.loadComments('#comments', function() {
-      Fluid.utils.createScript('https://lib.baomitu.com/twikoo/1.6.8/twikoo.all.min.js', function() {
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
         var options = Object.assign(
-          {"envId":"https://ENV","region":"ap-shanghai","path":"window.location.pathname"},
+          {"appId":"vknpQgHbpd1oLUPUwwPbdY3B-gzGzoHsz","appKey":"1DCiNflrxTVqUxWR5T00HypH","path":"window.location.pathname","placeholder":"欢迎留言交流","avatar":"robohash","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":true,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
           {
-            el: '#twikoo',
-            path: 'window.location.pathname',
-            onCommentLoaded: function() {
-              var imgSelector = '#twikoo .tk-content img:not(.tk-owo-emotion)';
-              Fluid.plugins.imageCaption(imgSelector);
-              Fluid.plugins.fancyBox(imgSelector);
-            }
+            el: "#valine",
+            path: window.location.pathname
           }
         )
-        twikoo.init(options)
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
       });
     });
   </script>

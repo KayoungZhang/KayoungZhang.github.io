@@ -24,7 +24,7 @@
 <meta property="og:description" content="下面来看看 UART HAL库关于 UART使用方法。 UART外设库的使用  声明一个 UART_HandleTypeDef 结构体句柄。如： UART_HandleTypeDef huart。 初始化UART底层配置。HAL_UART_MspInit()  使能串口 USARTx 时钟。 串口USARTx引脚的配置。  使能UART GPIO时钟。 配置 UART TX、">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-08-05T03:19:31.000Z">
-<meta property="article:modified_time" content="2023-08-08T00:36:27.125Z">
+<meta property="article:modified_time" content="2023-08-14T00:03:33.537Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="uart">
 <meta name="twitter:card" content="summary_large_image">
@@ -276,7 +276,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年8月8日 早上
+                    本文最后更新于：2023年8月14日 早上
                   
                 
               </p>
@@ -340,8 +340,8 @@ HAL_UART_MspInit()。</p>
 <li><p>AbortCpltCallback : 中止完成回调函数</p></li>
 <li><p>AbortTransmitCpltCallback : 中止发生完成回调函数</p></li>
 <li><p>AbortReceiveCpltCallback : 中止接收完成回调函数</p></li>
-<li><p>MspInitCallback : UART底层初始化回调函数</p></li>
-<li><p>MspDeInitCallback : UART底层析构回调函数</p></li>
+<li><p>MspInitCallback : UART相关MCU初始化回调函数</p></li>
+<li><p>MspDeInitCallback : UART相关MCU去初始化回调函数</p></li>
 </ul>
 <p>对于指定的接收事件回调，使用回调函数：HAL_UART_RegisterRxEventCallback()
 , HAL_UART_UnRegisterRxEventCallback()</p>
@@ -471,23 +471,23 @@ HAL_UART_RxHalfCpltCallback()。</p>
   
     <article id="comments" lazyload>
       
-  <div id="twikoo"></div>
+  <div id="valine"></div>
   <script type="text/javascript">
-    Fluid.utils.loadComments('#comments', function() {
-      Fluid.utils.createScript('https://lib.baomitu.com/twikoo/1.6.8/twikoo.all.min.js', function() {
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
         var options = Object.assign(
-          {"envId":"https://ENV","region":"ap-shanghai","path":"window.location.pathname"},
+          {"appId":"vknpQgHbpd1oLUPUwwPbdY3B-gzGzoHsz","appKey":"1DCiNflrxTVqUxWR5T00HypH","path":"window.location.pathname","placeholder":"欢迎留言交流","avatar":"robohash","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":true,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
           {
-            el: '#twikoo',
-            path: 'window.location.pathname',
-            onCommentLoaded: function() {
-              var imgSelector = '#twikoo .tk-content img:not(.tk-owo-emotion)';
-              Fluid.plugins.imageCaption(imgSelector);
-              Fluid.plugins.fancyBox(imgSelector);
-            }
+            el: "#valine",
+            path: window.location.pathname
           }
         )
-        twikoo.init(options)
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
       });
     });
   </script>

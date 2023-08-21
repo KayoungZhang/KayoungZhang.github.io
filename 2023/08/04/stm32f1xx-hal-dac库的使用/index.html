@@ -24,7 +24,7 @@
 <meta property="og:description" content="下面来看看DAC HAL库关于DAC外设的特性及使用方法。 DAC外设特性 1. DAC 的通道 STM32F1 集成有两个12-bit 数字模拟转换器，这两个转换器可以独立使用，也可以同时使用（双模式）。  DAC通道1以DAC_OUT1 (PA4)作为输出或连接到片上外设(例如定时器)。 DAC通道2以DAC_OUT2 (PA5)作为输出或连接到片上外设(例如定时器)。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-08-04T11:09:31.000Z">
-<meta property="article:modified_time" content="2023-08-08T00:34:19.359Z">
+<meta property="article:modified_time" content="2023-08-14T00:03:33.214Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="dac">
 <meta name="twitter:card" content="summary_large_image">
@@ -276,7 +276,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年8月8日 早上
+                    本文最后更新于：2023年8月14日 早上
                   
                 
               </p>
@@ -385,16 +385,16 @@ HAL_DACEx_DMAUnderrunCallbackCh2()函数，用户可以在其中添加代码。�
 <p>使用 HAL_DAC_UnRegisterCallback()函数可以注销回调函数。</p>
 <p>DAC回调函数ID：</p>
 <ul>
-<li><p>ConvCpltCallbackCh1 : DAC通道1数据传输完成</p></li>
-<li><p>ConvHalfCpltCallbackCh1 : DAC通道1数据传输过半</p></li>
-<li><p>ErrorCallbackCh1 : DAC通道1数据传输错误</p></li>
-<li><p>DMAUnderrunCallbackCh1 : 通道1自检错误</p></li>
-<li><p>ConvCpltCallbackCh2 : DAC通道2数据传输完成</p></li>
-<li><p>ConvHalfCpltCallbackCh2 : DAC通道2数据传输过半</p></li>
-<li><p>ErrorCallbackCh2 : DAC通道2数据传输错误</p></li>
-<li><p>DMAUnderrunCallbackCh2 : 通道2自检错误</p></li>
-<li><p>MspInitCallback : DAC MspInit.</p></li>
-<li><p>MspDeInitCallback : DAC MspdeInit.</p></li>
+<li><p>ConvCpltCallbackCh1 : DAC通道1数据传输完成回调</p></li>
+<li><p>ConvHalfCpltCallbackCh1 : DAC通道1数据传输过半回调</p></li>
+<li><p>ErrorCallbackCh1 : DAC通道1数据传输错误回调</p></li>
+<li><p>DMAUnderrunCallbackCh1 : 通道1自检错误回调</p></li>
+<li><p>ConvCpltCallbackCh2 : DAC通道2数据传输完成回调</p></li>
+<li><p>ConvHalfCpltCallbackCh2 : DAC通道2数据传输过半回调</p></li>
+<li><p>ErrorCallbackCh2 : DAC通道2数据传输错误回调</p></li>
+<li><p>DMAUnderrunCallbackCh2 : 通道2自检错误回调</p></li>
+<li><p>MspInitCallback : DAC 相关MCU初始化回调</p></li>
+<li><p>MspDeInitCallback : DAC 相关MCU去初始化回调</p></li>
 </ul>
 <p><strong>4. DAC HAL驱动常用宏定义列表</strong></p>
 <ul>
@@ -480,23 +480,23 @@ specific feature: DMA underrun)</p></li>
   
     <article id="comments" lazyload>
       
-  <div id="twikoo"></div>
+  <div id="valine"></div>
   <script type="text/javascript">
-    Fluid.utils.loadComments('#comments', function() {
-      Fluid.utils.createScript('https://lib.baomitu.com/twikoo/1.6.8/twikoo.all.min.js', function() {
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
         var options = Object.assign(
-          {"envId":"https://ENV","region":"ap-shanghai","path":"window.location.pathname"},
+          {"appId":"vknpQgHbpd1oLUPUwwPbdY3B-gzGzoHsz","appKey":"1DCiNflrxTVqUxWR5T00HypH","path":"window.location.pathname","placeholder":"欢迎留言交流","avatar":"robohash","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":true,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
           {
-            el: '#twikoo',
-            path: 'window.location.pathname',
-            onCommentLoaded: function() {
-              var imgSelector = '#twikoo .tk-content img:not(.tk-owo-emotion)';
-              Fluid.plugins.imageCaption(imgSelector);
-              Fluid.plugins.fancyBox(imgSelector);
-            }
+            el: "#valine",
+            path: window.location.pathname
           }
         )
-        twikoo.init(options)
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
       });
     });
   </script>

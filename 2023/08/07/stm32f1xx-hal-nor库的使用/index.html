@@ -24,7 +24,7 @@
 <meta property="og:description" content="下面来看看HAL库关于Nor flash存储器的使用方法。 NOR存储器外设库的使用 此驱动是一个通用的分层驱动程序，包含一组用于控制NOR闪存的API。它使用FSMC层函数来连接NOR 闪存。  配置NOR flash 存储器的控制和时序参数。HAL_NOR_Init() 读取NOR flash 存储器制造商和设备ID。HAL_NOR_Read_ID() 读取的信息存储在函数调用的">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-08-07T04:15:11.000Z">
-<meta property="article:modified_time" content="2023-08-07T05:34:38.718Z">
+<meta property="article:modified_time" content="2023-08-14T00:03:33.347Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="nor">
 <meta name="twitter:card" content="summary_large_image">
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          989 字
+          997 字
         
       </span>
     
@@ -276,7 +276,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年8月7日 下午
+                    本文最后更新于：2023年8月14日 早上
                   
                 
               </p>
@@ -315,8 +315,8 @@ flash设备包含不同的操作和方法，应该单独实施。</p>
 HAL_NOR_UnRegisterCallback()</p>
 <p>回调函数：</p>
 <ul>
-<li>MspInitCallback : NOR 底层初始化回调函数</li>
-<li>MspDeInitCallback : NOR 底层析构回调函数</li>
+<li>MspInitCallback : NOR 相关MCU初始化回调函数</li>
+<li>MspDeInitCallback : NOR 相关MCU去初始化回调函数</li>
 </ul>
 <p>默认情况下, NOR 初始化（HAL_NOR_Init()）后，当状态是
 HAL_NOR_STATE_RESET，所有的回调函数会被置为弱函数。</p>
@@ -396,23 +396,23 @@ HAL_NOR_STATE_RESET，所有的回调函数会被置为弱函数。</p>
   
     <article id="comments" lazyload>
       
-  <div id="twikoo"></div>
+  <div id="valine"></div>
   <script type="text/javascript">
-    Fluid.utils.loadComments('#comments', function() {
-      Fluid.utils.createScript('https://lib.baomitu.com/twikoo/1.6.8/twikoo.all.min.js', function() {
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
         var options = Object.assign(
-          {"envId":"https://ENV","region":"ap-shanghai","path":"window.location.pathname"},
+          {"appId":"vknpQgHbpd1oLUPUwwPbdY3B-gzGzoHsz","appKey":"1DCiNflrxTVqUxWR5T00HypH","path":"window.location.pathname","placeholder":"欢迎留言交流","avatar":"robohash","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":true,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
           {
-            el: '#twikoo',
-            path: 'window.location.pathname',
-            onCommentLoaded: function() {
-              var imgSelector = '#twikoo .tk-content img:not(.tk-owo-emotion)';
-              Fluid.plugins.imageCaption(imgSelector);
-              Fluid.plugins.fancyBox(imgSelector);
-            }
+            el: "#valine",
+            path: window.location.pathname
           }
         )
-        twikoo.init(options)
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
       });
     });
   </script>

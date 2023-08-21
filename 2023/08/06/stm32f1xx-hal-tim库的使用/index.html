@@ -24,7 +24,7 @@
 <meta property="og:description" content="timer, 简称TIM，定时器是MCU控制中使用最广泛的外设，STM32中有多个TIM，下面来看看HAL库关于TIM的介绍和使用方法。 TIM外设库的一般特性  16位向上，向下，向上向下自动重装载计数器 16位可编程预分频系数，允许对计数器时钟进行 1 ~ 65536 的分频。 多达4各独立的通道：  输入捕获 Input Capture 输出比较 Output Compar">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-08-06T12:20:30.000Z">
-<meta property="article:modified_time" content="2023-08-07T05:07:43.030Z">
+<meta property="article:modified_time" content="2023-08-14T00:03:33.496Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="tim">
 <meta name="twitter:card" content="summary_large_image">
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.4k 字
+          3.5k 字
         
       </span>
     
@@ -276,7 +276,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年8月7日 下午
+                    本文最后更新于：2023年8月14日 早上
                   
                 
               </p>
@@ -370,19 +370,21 @@ HAL_TIM_DMABurst_ReadStart()</p></li>
 HAL_TIM_UnRegisterCallback()</p>
 <p>回调函数：</p>
 <ul>
-<li>Base_MspDeInitCallback : TIM 时基底层析构回调函数</li>
-<li>IC_MspInitCallback : TIM 输入捕获底层初始化回调函数</li>
-<li>IC_MspDeInitCallback : TIM 输入捕获底层析构回调函数</li>
-<li>OC_MspInitCallback : TIM 输出比较底层初始化回调函数</li>
-<li>OC_MspDeInitCallback : TIM 输出比较底层析构回调函数</li>
-<li>PWM_MspInitCallback : TIM PWM 底层初始化回调函数</li>
-<li>PWM_MspDeInitCallback : TIM PWM 底层析构回调函数</li>
-<li>OnePulse_MspInitCallback : TIM 单脉冲底层初始化回调函数</li>
-<li>OnePulse_MspDeInitCallback : TIM 单脉冲底层析构回调函数</li>
-<li>Encoder_MspInitCallback : TIM 编码器底层初始化回调函数</li>
-<li>Encoder_MspDeInitCallback : TIM 编码器底层析构回调函数</li>
-<li>HallSensor_MspInitCallback : TIM Hall Sensor 底层初始化回调函数</li>
-<li>HallSensor_MspDeInitCallback : TIM Hall Sensor 析构回调函数</li>
+<li>Base_MspDeInitCallback : TIM 时基相关MCU去初始化回调函数</li>
+<li>IC_MspInitCallback : TIM 输入捕获相关MCU初始化回调函数</li>
+<li>IC_MspDeInitCallback : TIM 输入捕获相关MCU去初始化回调函数</li>
+<li>OC_MspInitCallback : TIM 输出比较相关MCU初始化回调函数</li>
+<li>OC_MspDeInitCallback : TIM 输出比较相关MCU去初始化回调函数</li>
+<li>PWM_MspInitCallback : TIM PWM 相关MCU初始化回调函数</li>
+<li>PWM_MspDeInitCallback : TIM PWM 相关MCU去初始化回调函数</li>
+<li>OnePulse_MspInitCallback : TIM 单脉冲相关MCU初始化回调函数</li>
+<li>OnePulse_MspDeInitCallback : TIM 单脉冲相关MCU去初始化回调函数</li>
+<li>Encoder_MspInitCallback : TIM 编码器相关MCU初始化回调函数</li>
+<li>Encoder_MspDeInitCallback : TIM 编码器相关MCU去初始化回调函数</li>
+<li>HallSensor_MspInitCallback : TIM Hall Sensor
+相关MCU初始化回调函数</li>
+<li>HallSensor_MspDeInitCallback : TIM Hall Sensor
+相关MCU去初始化回调函数</li>
 <li>PeriodElapsedCallback : TIM 周期时间结束回调函数</li>
 <li>PeriodElapsedHalfCpltCallback : TIM 半周期时间结束回调函数</li>
 <li>TriggerCallback : TIM 触发回调函数</li>
@@ -475,23 +477,23 @@ HAL_TIM_STATE_RESET，所有的回调函数会被置为弱函数。</p>
   
     <article id="comments" lazyload>
       
-  <div id="twikoo"></div>
+  <div id="valine"></div>
   <script type="text/javascript">
-    Fluid.utils.loadComments('#comments', function() {
-      Fluid.utils.createScript('https://lib.baomitu.com/twikoo/1.6.8/twikoo.all.min.js', function() {
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
         var options = Object.assign(
-          {"envId":"https://ENV","region":"ap-shanghai","path":"window.location.pathname"},
+          {"appId":"vknpQgHbpd1oLUPUwwPbdY3B-gzGzoHsz","appKey":"1DCiNflrxTVqUxWR5T00HypH","path":"window.location.pathname","placeholder":"欢迎留言交流","avatar":"robohash","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":true,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
           {
-            el: '#twikoo',
-            path: 'window.location.pathname',
-            onCommentLoaded: function() {
-              var imgSelector = '#twikoo .tk-content img:not(.tk-owo-emotion)';
-              Fluid.plugins.imageCaption(imgSelector);
-              Fluid.plugins.fancyBox(imgSelector);
-            }
+            el: "#valine",
+            path: window.location.pathname
           }
         )
-        twikoo.init(options)
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
       });
     });
   </script>
