@@ -306,28 +306,20 @@
 <li>将外接的信号转化为稳定的高低电平。</li>
 </ul>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230526232932554.png" srcset="/img/loading.gif" lazyload alt="image-20230526232932554" style="zoom:80%;" /></p>
-<p>当输入 S_IN 为低电平时，三极管 Q1关断，三极管 Q2 基极为高电平，导致
-Q2 导通，输出端 S_OUT被拉低，实现两端都为低电平。</p>
-<p>当输入 S_IN 为高电平 (VDD_EXT) 时，三极管 Q1
-导通，三极管Q2关断，输出端 S_OUT 被 R4 拉高到
-VDD_MCU，实现两端都为高电平。</p>
-<p>❤️
-三极管电平转换电路，便宜实用，但是只能单向转化。而且不适用于波特率过高的应用（大概大于
-400Kbps 就不建议用了）。</p>
+<p>当输入 S_IN 为低电平时，三极管 Q1关断，三极管 Q2 基极为高电平，导致 Q2 导通，输出端 S_OUT被拉低，实现两端都为低电平。</p>
+<p>当输入 S_IN 为高电平 (VDD_EXT) 时，三极管 Q1 导通，三极管Q2关断，输出端 S_OUT 被 R4 拉高到 VDD_MCU，实现两端都为高电平。</p>
+<p>❤️ 三极管电平转换电路，便宜实用，但是只能单向转化。而且不适用于波特率过高的应用（大概大于 400Kbps 就不建议用了）。</p>
 <h3 id="mos管电平转换电路">MOS管电平转换电路</h3>
 <p>在使用I2C、SPI等接口做不同电压域通讯时，就需要用到双向的电平转换电路。</p>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230526233821002.png" srcset="/img/loading.gif" lazyload alt="image-20230526233821002" style="zoom:80%;" /></p>
 <p>取SDA数据线进行分析：</p>
-<p>当SDA1输出高电平时：MOS管Q1的Vgs =
-0，MOS管关闭，SDA2被电阻R3上拉到5V。</p>
-<p>当SDA1输出低电平时：MOS管Q1的Vgs =
-3.3V，大于导通电压，MOS管导通，SDA2通过MOS管被拉到低电平。</p>
+<p>当SDA1输出高电平时：MOS管Q1的Vgs = 0，MOS管关闭，SDA2被电阻R3上拉到5V。</p>
+<p>当SDA1输出低电平时：MOS管Q1的Vgs = 3.3V，大于导通电压，MOS管导通，SDA2通过MOS管被拉到低电平。</p>
 <p>当SDA2输出高电平时：MOS管Q1的Vgs不变，MOS维持关闭状态，SDA1被电阻R2上拉到3.3V。</p>
 <p>当SDA2输出低电平时：MOS管不导通，但是它有体二极管，MOS管里的体二极管把SDA1拉低到低电平，此时Vgs约等于3.3V，MOS管导通，进一步拉低了SDA1的电压。</p>
 <h3 id="电平转换芯片">电平转换芯片</h3>
 <p>在一些高速通讯的场合，就需要用到专用的电平转换芯片。芯片有很多种，单向电平转换、带方向控制的双向电平转换、自动双向电平转换等。如SN74LVC4245A、TXS0108EPWR。</p>
-<p>❤️
-成本相对前面较高，但是速度快，双向并且能够自动检测方向，高速低速场合都适用。</p>
+<p>❤️ 成本相对前面较高，但是速度快，双向并且能够自动检测方向，高速低速场合都适用。</p>
 <p>如果对成本不敏感，电平转换芯片是最稳定可靠的方式。</p>
 <h3 id="参考链接">参考链接</h3>
 <p>http://t.csdn.cn/9Tvhd</p>

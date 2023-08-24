@@ -16,12 +16,12 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="窗口看门狗简介 窗口看门狗（WWDG）通常被用来监测由外部干扰或不可预见的逻辑条件造成的应用程序背离正常的运行序列而产生的软件故障。递减计数器需要在一个有限的时间窗口中被刷新才不会产生MCU复位，否则就会产生RESET。WWDG 窗口看门狗时序图：   硬件设计 我们将通过USART1来打印调试信息，然后通过 LED1 提示复位状态。(LED1常亮则系统正常，LED1闪烁则系统一直复">
+    <meta name="description" content="窗口看门狗简介 窗口看门狗（WWDG）通常被用来监测由外部干扰或不可预见的逻辑条件造成的应用程序背离正常的运行序列而产生的软件故障。递减计数器需要在一个有限的时间窗口中被刷新才不会产生MCU复位，否则就会产生RESET。WWDG 窗口看门狗时序图：   硬件设计 我们将通过USART1来打印调试信息，然后通过 LED1 提示复位状态。(LED1常亮则系统正常，LED1闪烁则系统一直复位">
 <meta property="og:type" content="article">
 <meta property="og:title" content="STM32CubeMX之窗口看门狗">
 <meta property="og:url" content="http://example.com/2023/05/28/STM32CubeMX%E4%B9%8B%E7%AA%97%E5%8F%A3%E7%9C%8B%E9%97%A8%E7%8B%97/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="窗口看门狗简介 窗口看门狗（WWDG）通常被用来监测由外部干扰或不可预见的逻辑条件造成的应用程序背离正常的运行序列而产生的软件故障。递减计数器需要在一个有限的时间窗口中被刷新才不会产生MCU复位，否则就会产生RESET。WWDG 窗口看门狗时序图：   硬件设计 我们将通过USART1来打印调试信息，然后通过 LED1 提示复位状态。(LED1常亮则系统正常，LED1闪烁则系统一直复">
+<meta property="og:description" content="窗口看门狗简介 窗口看门狗（WWDG）通常被用来监测由外部干扰或不可预见的逻辑条件造成的应用程序背离正常的运行序列而产生的软件故障。递减计数器需要在一个有限的时间窗口中被刷新才不会产生MCU复位，否则就会产生RESET。WWDG 窗口看门狗时序图：   硬件设计 我们将通过USART1来打印调试信息，然后通过 LED1 提示复位状态。(LED1常亮则系统正常，LED1闪烁则系统一直复位">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230528174707824.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230528174924225.png">
@@ -298,8 +298,7 @@
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230528174707824.png" srcset="/img/loading.gif" lazyload alt="image-20230528174707824" style="zoom:80%;" /></p>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230528174924225.png" srcset="/img/loading.gif" lazyload alt="image-20230528174924225" style="zoom:80%;" /></p>
 <h3 id="硬件设计">硬件设计</h3>
-<p>我们将通过USART1来打印调试信息，然后通过 LED1
-提示复位状态。(LED1常亮则系统正常，LED1闪烁则系统一直复位)</p>
+<p>我们将通过USART1来打印调试信息，然后通过 LED1 提示复位状态。(LED1常亮则系统正常，LED1闪烁则系统一直复位)</p>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230527231125164.png" srcset="/img/loading.gif" lazyload alt="image-20230527231125164" style="zoom:80%;" /></p>
 <h3 id="软件设计">软件设计</h3>
 <h4 id="stm32cubemx设置">STM32CubeMX设置</h4>
@@ -311,18 +310,12 @@
 </ul>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230528170246253.png" srcset="/img/loading.gif" lazyload alt="image-20230528170246253" style="zoom:67%;" /></p>
 <ul>
-<li><p>激活WWDG，Timeout = 4096 x Prescaler x (上窗口值 - 下窗口值
-)/36MHz</p>
-<p>WWDG挂载在APB1上，时钟为36MHz，计数器预分频值设为8，窗口寄存器设为W[6:0]
-= 0x5A，递减计数器刷新值设置为T[6:0] = 0x7F；根据公式算出超时时间为
-（4096 * 8）*（0x7F-0x3F）/ 36MHz =
-58.3ms；使能EWI中断，在NVIC设置中开启窗口看门狗中断</p></li>
+<li><p>激活WWDG，Timeout = 4096 x Prescaler x (上窗口值 - 下窗口值 )/36MHz</p>
+<p>WWDG挂载在APB1上，时钟为36MHz，计数器预分频值设为8，窗口寄存器设为W[6:0] = 0x5A，递减计数器刷新值设置为T[6:0] = 0x7F；根据公式算出超时时间为 （4096 * 8）*（0x7F-0x3F）/ 36MHz = 58.3ms；使能EWI中断，在NVIC设置中开启窗口看门狗中断</p></li>
 </ul>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230528175822680.png" srcset="/img/loading.gif" lazyload alt="image-20230528175822680" style="zoom:67%;" /></p>
 <ul>
-<li>输入工程名，选择工程路径（不要有中文），选择MDK-ARM
-V5；勾选Generated peripheral initialization as a pair of ‘.c/.h’ files
-per peripheral ；点击GENERATE CODE，生成工程代码</li>
+<li>输入工程名，选择工程路径（不要有中文），选择MDK-ARM V5；勾选Generated peripheral initialization as a pair of ‘.c/.h’ files per peripheral ；点击GENERATE CODE，生成工程代码</li>
 </ul>
 <h4 id="mdk-arm编程">MDK-ARM编程</h4>
 <ul>
@@ -341,16 +334,14 @@ per peripheral ；点击GENERATE CODE，生成工程代码</li>
   &#125;
 &#125;</code></pre></div>
 <ul>
-<li>在<strong>stm32f1xx_hal_wwdg.c</strong>文件中找到弱符号早期唤醒中断函数原型，并在wwdg.c中自定义该回调函数
-<code>__weak void HAL_WWDG_EarlyWakeupCallback(WWDG_HandleTypeDef *hwwdg)</code></li>
+<li>在<strong>stm32f1xx_hal_wwdg.c</strong>文件中找到弱符号早期唤醒中断函数原型，并在wwdg.c中自定义该回调函数 <code>__weak void HAL_WWDG_EarlyWakeupCallback(WWDG_HandleTypeDef *hwwdg)</code></li>
 </ul>
 <div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-type">void</span> <span class="hljs-title function_">HAL_WWDG_EarlyWakeupCallback</span><span class="hljs-params">(WWDG_HandleTypeDef *hwwdg)</span>
 &#123;
 	HAL_WWDG_Refresh(hwwdg);	<span class="hljs-comment">//在早期唤醒中断函数中喂狗</span>
 &#125;</code></pre></div>
 <ul>
-<li>在uart.c文件中添加fputc重定义函数，并添加头文件<code>&lt;stdio.h&gt;</code>，勾选keil软件<strong>Use
-MicroLIB</strong>选项。</li>
+<li>在uart.c文件中添加fputc重定义函数，并添加头文件<code>&lt;stdio.h&gt;</code>，勾选keil软件<strong>Use MicroLIB</strong>选项。</li>
 <li>在main函数中编写代码：</li>
 </ul>
 <div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">/* USER CODE BEGIN 2 */</span>
@@ -379,8 +370,7 @@ MX_WWDG_Init();
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230528191522516.png" srcset="/img/loading.gif" lazyload alt="image-20230528191522516" style="zoom:67%;" /></p>
 <p>如果注释掉早期唤醒中断函数中的喂狗函数，则LED1闪烁且串口输出，需要<strong>注意</strong>的是，<code>MX_WWDG_Init()</code>函数需要放到LED闪烁函数之后，否则程序一直在复位，根本执行不到后面的部分：</p>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230528192419226.png" srcset="/img/loading.gif" lazyload alt="image-20230528192419226" style="zoom:67%;" /></p>
-<p>工程文件Gitee：<a
-target="_blank" rel="noopener" href="https://gitee.com/kayoungzhang/my_codehub/raw/master/stm32/wwdg.zip">wwdg</a></p>
+<p>工程文件Gitee：<a target="_blank" rel="noopener" href="https://gitee.com/kayoungzhang/my_codehub/raw/master/stm32/wwdg.zip">wwdg</a></p>
 
                 
               </div>

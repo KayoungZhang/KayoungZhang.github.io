@@ -16,12 +16,12 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="infrared data association, 红外通信技术，简称 IRDA，通过USART同步串口进行数据传输。HAL库中关于IRDA外设库的使用方法如下： IRDA外设库的使用  声明一个 IRDA_HandleTypeDef结构体句柄。如： IRDA_HandleTypeDef hirda。 初始化IRDA底层配置。HAL_IRDA_MspInit()  使能串口 US">
+    <meta name="description" content="infrared data association, 红外通信技术，简称 IRDA，通过USART同步串口进行数据传输。HAL库中关于IRDA外设库的使用方法如下： IRDA外设库的使用  声明一个 IRDA_HandleTypeDef结构体句柄。如： IRDA_HandleTypeDef hirda。 初始化IRDA底层配置。HAL_IRDA_MspInit()  使能串口 USAR">
 <meta property="og:type" content="article">
 <meta property="og:title" content="stm32f1xx_hal_irda库的使用">
 <meta property="og:url" content="http://example.com/2023/08/05/stm32f1xx-hal-irda%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="infrared data association, 红外通信技术，简称 IRDA，通过USART同步串口进行数据传输。HAL库中关于IRDA外设库的使用方法如下： IRDA外设库的使用  声明一个 IRDA_HandleTypeDef结构体句柄。如： IRDA_HandleTypeDef hirda。 初始化IRDA底层配置。HAL_IRDA_MspInit()  使能串口 US">
+<meta property="og:description" content="infrared data association, 红外通信技术，简称 IRDA，通过USART同步串口进行数据传输。HAL库中关于IRDA外设库的使用方法如下： IRDA外设库的使用  声明一个 IRDA_HandleTypeDef结构体句柄。如： IRDA_HandleTypeDef hirda。 初始化IRDA底层配置。HAL_IRDA_MspInit()  使能串口 USAR">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-08-05T14:19:31.000Z">
 <meta property="article:modified_time" content="2023-08-14T00:03:33.317Z">
@@ -284,12 +284,10 @@
             
               <div class="markdown-body">
                 
-                <p>infrared data association, 红外通信技术，简称
-IRDA，通过USART同步串口进行数据传输。HAL库中关于IRDA外设库的使用方法如下：</p>
+                <p>infrared data association, 红外通信技术，简称 IRDA，通过USART同步串口进行数据传输。HAL库中关于IRDA外设库的使用方法如下：</p>
 <h3 id="irda外设库的使用">IRDA外设库的使用</h3>
 <ol type="1">
-<li>声明一个 IRDA_HandleTypeDef结构体句柄。如： IRDA_HandleTypeDef
-hirda。</li>
+<li>声明一个 IRDA_HandleTypeDef结构体句柄。如： IRDA_HandleTypeDef hirda。</li>
 <li>初始化IRDA底层配置。HAL_IRDA_MspInit()
 <ul>
 <li>使能串口 USARTx 时钟。</li>
@@ -298,8 +296,7 @@ hirda。</li>
 <li>使能IRDA GPIO时钟。</li>
 <li>配置 IRDA 引脚为复用功能，上拉。</li>
 </ul></li>
-<li>如果需要使用中断，则配置NVIC。HAL_IRDA_Transmit_IT()
-，HAL_IRDA_Receive_IT()
+<li>如果需要使用中断，则配置NVIC。HAL_IRDA_Transmit_IT() ，HAL_IRDA_Receive_IT()
 <ul>
 <li>配置串口 USARTx 中断优先级</li>
 <li>使能NVIC USART IRQ中断。</li>
@@ -311,17 +308,14 @@ hirda。</li>
 <li>配置刚声明的DMA结构体中所需要的Tx/Rx参数。</li>
 <li>配置DMA Tx/Rx 通道。</li>
 <li>将DMA句柄和串口Tx/Rx句柄进行关联。</li>
-<li>当DMA
-Tx/Rx通道数据传输完成产生中断时，则配置NVIC的优先级并使能。</li>
-<li>配置USART中断优先级并使能NVIC USART
-IRQ中断。（用于DMA非循环模式下的最后一个字节发送完成的检测）</li>
+<li>当DMA Tx/Rx通道数据传输完成产生中断时，则配置NVIC的优先级并使能。</li>
+<li>配置USART中断优先级并使能NVIC USART IRQ中断。（用于DMA非循环模式下的最后一个字节发送完成的检测）</li>
 </ul></li>
 </ul></li>
 <li>在串口hirda初始化结构体中配置串口的波特率、字节长度，停止位，奇偶校验位，硬件流控和模式（接收/发送）。</li>
 <li>初始化IRDA寄存器。HAL_IRDA_Init()</li>
 </ol>
-<p>指定的IRDA中断(传输完成中断，接收非空中断和错误中断）可使用宏定义控制。__HAL_IRDA_ENABLE_IT()
-, __HAL_IRDA_DISABLE_IT()</p>
+<p>指定的IRDA中断(传输完成中断，接收非空中断和错误中断）可使用宏定义控制。__HAL_IRDA_ENABLE_IT() , __HAL_IRDA_DISABLE_IT()</p>
 <p>HAL_IRDA_Init()底层硬件初始化都会调用 HAL_IRDA_MspInit()。</p>
 <h3 id="irda的操作模式">IRDA的操作模式</h3>
 <ul>
@@ -333,28 +327,20 @@ IRQ中断。（用于DMA非循环模式下的最后一个字节发送完成的�
 <li>中断模式IO的操作
 <ul>
 <li>非阻塞模式发送一定数量的数据。HAL_IRDA_Transmit_IT()</li>
-<li>传输完成，执行HAL_IRDA_TxCpltCallback()
-回调函数，用户自行添加代码。</li>
+<li>传输完成，执行HAL_IRDA_TxCpltCallback() 回调函数，用户自行添加代码。</li>
 <li>非阻塞模式接收一定数量的数据。HAL_IRDA_Receive_IT()</li>
-<li>接收完成，执行HAL_IRDA_RxCpltCallback()
-回调函数，用户自行添加代码。</li>
-<li>当传输出错时，执行HAL_IRDA_ErrorCallback()
-回调函数，用户自行添加代码。</li>
+<li>接收完成，执行HAL_IRDA_RxCpltCallback() 回调函数，用户自行添加代码。</li>
+<li>当传输出错时，执行HAL_IRDA_ErrorCallback() 回调函数，用户自行添加代码。</li>
 </ul></li>
 <li>DMA模式IO的操作
 <ul>
 <li>非阻塞DMA模式发送一定数量的数据。HAL_IRDA_Transmit_DMA()</li>
-<li>传输过半，执行 HAL_IRDA_TxHalfCpltCallback()
-回调函数，用户自行添加代码。</li>
-<li>传输完成，执行 HAL_IRDA_TxCpltCallback()
-回调函数，用户自行添加代码。</li>
+<li>传输过半，执行 HAL_IRDA_TxHalfCpltCallback() 回调函数，用户自行添加代码。</li>
+<li>传输完成，执行 HAL_IRDA_TxCpltCallback() 回调函数，用户自行添加代码。</li>
 <li>非阻塞DMA模式接收一定数量的数据。HAL_IRDA_Receive_DMA()</li>
-<li>接收过半，执行HAL_IRDA_RxHalfCpltCallback()
-回调函数，用户自行添加代码。</li>
-<li>接收完成，执行HAL_IRDA_RxCpltCallback()
-回调函数，用户自行添加代码。</li>
-<li>当传输出错时，执行HAL_IRDA_ErrorCallback()
-回调函数，用户自行添加代码。</li>
+<li>接收过半，执行HAL_IRDA_RxHalfCpltCallback() 回调函数，用户自行添加代码。</li>
+<li>接收完成，执行HAL_IRDA_RxCpltCallback() 回调函数，用户自行添加代码。</li>
+<li>当传输出错时，执行HAL_IRDA_ErrorCallback() 回调函数，用户自行添加代码。</li>
 <li>DMA传输暂停。 HAL_IRDA_DMAPause()</li>
 <li>重新开始串口DMA传输。HAL_IRDA_DMAResume()</li>
 <li>停止串口DMA传输。HAL_IRDA_DMAStop()</li>
@@ -372,8 +358,7 @@ IRQ中断。（用于DMA非循环模式下的最后一个字节发送完成的�
 </ul>
 <h3 id="回调函数的注册">回调函数的注册</h3>
 <ol type="1">
-<li>USE_HAL_IRDA_REGISTER_CALLBACKS
-设置为1，用户就可以使用回调函数了。回调函数的注册和注销函数分别是：HAL_IRDA_RegisterCallback()、HAL_IRDA_UnRegisterCallback()</li>
+<li>USE_HAL_IRDA_REGISTER_CALLBACKS 设置为1，用户就可以使用回调函数了。回调函数的注册和注销函数分别是：HAL_IRDA_RegisterCallback()、HAL_IRDA_UnRegisterCallback()</li>
 </ol>
 <p>​ 回调函数ID：</p>
 <ul>
@@ -389,10 +374,7 @@ IRQ中断。（用于DMA非循环模式下的最后一个字节发送完成的�
 <li><p>MspDeInitCallback : IRDA相关MCU去初始化回调函数</p></li>
 </ul>
 <ol start="2" type="1">
-<li>默认情况下，IRDA初始化之后，当它的状态是
-<strong>HAL_IRDA_STATE_RESET</strong>
-，所有的回调函数被设置为相应的弱函数。如：HAL_IRDA_TxCpltCallback(),
-HAL_IRDA_RxHalfCpltCallback()。</li>
+<li>默认情况下，IRDA初始化之后，当它的状态是 <strong>HAL_IRDA_STATE_RESET</strong> ，所有的回调函数被设置为相应的弱函数。如：HAL_IRDA_TxCpltCallback(), HAL_IRDA_RxHalfCpltCallback()。</li>
 <li>只有在IRDA状态HAL_IRDA_STATE_READY 时，回调函数才能注册或注销。</li>
 <li>当USE_HAL_IRDA_REGISTER_CALLBACKS设置为0，注册的回调函数特性就不能使用，回调函数就当作一个弱函数使用。</li>
 </ol>

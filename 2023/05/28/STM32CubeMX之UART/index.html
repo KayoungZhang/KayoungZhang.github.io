@@ -16,14 +16,17 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="串口简介 STM32F103ZET6 最多可提供 5 路串口，有分数波特率发生器、支持同步单线通信和半双工单线通讯、支持 LIN、支持调制解调器操作、智能卡协议和 IrDA SIR ENDEC 规范、具有 DMA等。 我们通常使用的是异步通信，异步通信规定传输的数据格式由起始位（start bit）、数据位（data bit）、奇偶校验位（parity bit）和停止位（stop b">
+    <meta name="description" content="串口简介 STM32F103ZET6 最多可提供 5 路串口，有分数波特率发生器、支持同步单线通信和半双工单线通讯、支持 LIN、支持调制解调器操作、智能卡协议和 IrDA SIR ENDEC 规范、具有 DMA等。 我们通常使用的是异步通信，异步通信规定传输的数据格式由起始位（start bit）、数据位（data bit）、奇偶校验位（parity bit）和停止位（stop bit）组成">
 <meta property="og:type" content="article">
 <meta property="og:title" content="STM32CubeMX之UART">
 <meta property="og:url" content="http://example.com/2023/05/28/STM32CubeMX%E4%B9%8BUART/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="串口简介 STM32F103ZET6 最多可提供 5 路串口，有分数波特率发生器、支持同步单线通信和半双工单线通讯、支持 LIN、支持调制解调器操作、智能卡协议和 IrDA SIR ENDEC 规范、具有 DMA等。 我们通常使用的是异步通信，异步通信规定传输的数据格式由起始位（start bit）、数据位（data bit）、奇偶校验位（parity bit）和停止位（stop b">
+<meta property="og:description" content="串口简介 STM32F103ZET6 最多可提供 5 路串口，有分数波特率发生器、支持同步单线通信和半双工单线通讯、支持 LIN、支持调制解调器操作、智能卡协议和 IrDA SIR ENDEC 规范、具有 DMA等。 我们通常使用的是异步通信，异步通信规定传输的数据格式由起始位（start bit）、数据位（data bit）、奇偶校验位（parity bit）和停止位（stop bit）组成">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230528133425092.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230528134337560.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230528134456998.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230528134749373.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230528140811005.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230528141728742.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230528144050587.png">
@@ -291,24 +294,15 @@
               <div class="markdown-body">
                 
                 <h3 id="串口简介">串口简介</h3>
-<p>STM32F103ZET6 最多可提供 5
-路串口，有分数波特率发生器、支持同步单线通信和半双工单线通讯、支持
-LIN、支持调制解调器操作、智能卡协议和 IrDA SIR ENDEC 规范、具有
-DMA等。</p>
-<p>我们通常使用的是异步通信，异步通信规定传输的数据格式由起始位（start
-bit）、数据位（data bit）、奇偶校验位（parity bit）和停止位（stop
-bit）组成。在进行传输之前，双方一定要使用相同的波特率，波特率就是每秒钟传输的数据位数。串口通讯有HAL
-库轮询，中断，DMA 三种通信模式：</p>
+<p>STM32F103ZET6 最多可提供 5 路串口，有分数波特率发生器、支持同步单线通信和半双工单线通讯、支持 LIN、支持调制解调器操作、智能卡协议和 IrDA SIR ENDEC 规范、具有 DMA等。</p>
+<p>我们通常使用的是异步通信，异步通信规定传输的数据格式由起始位（start bit）、数据位（data bit）、奇偶校验位（parity bit）和停止位（stop bit）组成。在进行传输之前，双方一定要使用相同的波特率，波特率就是每秒钟传输的数据位数。串口通讯有HAL 库轮询，中断，DMA 三种通信模式：</p>
 <ul>
 <li><strong>轮询方式</strong>：CPU不断查询IO设备，如设备有请求则加以处理。例如CPU不断查询串口是否传输完成，如传输超过则返回超时错误。轮询方式会占用CPU处理时间，效率较低。</li>
 <li><strong>中断控制方式</strong>：当I/O操作完成时，输入输出设备控制器通过中断请求线向处理器发出中断信号，处理器收到中断信号之后，转到中断处理程序，对数据传送工作进行相应的处理。</li>
 <li><strong>直接内存存取技术（DMA）方式</strong>：所谓直接传送，即在内存与IO设备间传送一个数据块的过程中，不需要CPU的任何中间干涉，只需要CPU在过程开始时向设备发出“传送块数据”的命令，然后通过中断来得知过程是否结束和下次操作是否准备就绪。</li>
 </ul>
 <h3 id="硬件设计">硬件设计</h3>
-<p>战舰开发板板载了 1 个 USB和 2 个 RS232
-串口。通过CH340芯片把串口1与PC的USB口进行连接，实现串口传输。我们将利用串口
-1
-不停的打印信息到电脑上，同时接收从串口发过来的数据，把发送过来的数据直接送回给电脑。</p>
+<p>战舰开发板板载了 1 个 USB和 2 个 RS232 串口。通过CH340芯片把串口1与PC的USB口进行连接，实现串口传输。我们将利用串口 1 不停的打印信息到电脑上，同时接收从串口发过来的数据，把发送过来的数据直接送回给电脑。</p>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230528133425092.png" srcset="/img/loading.gif" lazyload alt="image-20230528133425092" style="zoom:80%;" /></p>
 <h3 id="软件设计">软件设计</h3>
 <h4 id="stm32cubemx设置">STM32CubeMX设置</h4>
@@ -317,33 +311,22 @@ bit）组成。在进行传输之前，双方一定要使用相同的波特率�
 <li>USART1选择为异步通讯方式，波特率设置为115200Bits/s，传输数据长度为8Bit，无奇偶校验，1位停止位</li>
 </ul>
 <figure>
-<img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230528134337560.png" srcset="/img/loading.gif" lazyload
-alt="image-20230528134337560" />
-<figcaption aria-hidden="true">image-20230528134337560</figcaption>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230528134337560.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20230528134337560</figcaption>
 </figure>
 <ul>
 <li>若使用中断方式，还需要开启串口中断</li>
 </ul>
 <figure>
-<img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230528134456998.png" srcset="/img/loading.gif" lazyload
-alt="image-20230528134456998" />
-<figcaption aria-hidden="true">image-20230528134456998</figcaption>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230528134456998.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20230528134456998</figcaption>
 </figure>
 <ul>
 <li>若使用直接内存存取（DMA）方式，除以上步骤外（串口中断要开启，否则程序只能发送一次数据，且不能判断DMA传输是否完成，USART一直处于busy状态）还需要设置DMA传输方向、通道、优先级、数据长度以及指针递增与否</li>
 </ul>
 <figure>
-<img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230528134749373.png" srcset="/img/loading.gif" lazyload
-alt="image-20230528134749373" />
-<figcaption aria-hidden="true">image-20230528134749373</figcaption>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230528134749373.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20230528134749373</figcaption>
 </figure>
 <ul>
-<li>输入工程名，选择工程路径（不要有中文），选择MDK-ARM
-V5；勾选Generated periphera initialization as a pair of ‘.c/.h’ files
-per IP ；点击GENERATE CODE，生成工程代码</li>
+<li>输入工程名，选择工程路径（不要有中文），选择MDK-ARM V5；勾选Generated periphera initialization as a pair of ‘.c/.h’ files per IP ；点击GENERATE CODE，生成工程代码</li>
 </ul>
 <h4 id="mdk-arm软件编程">MDK-ARM软件编程</h4>
 <p>在生成的usart.c文件中，软件已经帮我们实现了UART1和GPIO的初始化操作，以下只看轮询方式初始化函数。</p>
@@ -459,9 +442,7 @@ per IP ；点击GENERATE CODE，生成工程代码</li>
 <ul>
 <li>中断方式</li>
 </ul>
-<p>在
-<strong>stm32f1xx_hal_uart.c</strong>文件中找到弱符号中断接收完成回调函数原型，并在usart.c中自定义该回调函数
-<code>__weak void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)</code></p>
+<p>在 <strong>stm32f1xx_hal_uart.c</strong>文件中找到弱符号中断接收完成回调函数原型，并在usart.c中自定义该回调函数 <code>__weak void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)</code></p>
 <div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-keyword">extern</span> <span class="hljs-type">uint8_t</span> RxMsg[<span class="hljs-number">20</span>];
 <span class="hljs-type">void</span> <span class="hljs-title function_">HAL_UART_RxCpltCallback</span><span class="hljs-params">(UART_HandleTypeDef *huart)</span>
 &#123;
@@ -502,9 +483,7 @@ HAL_UART_Receive_IT(&amp;huart1,RxMsg,<span class="hljs-number">10</span>); <spa
     <span class="hljs-comment">/* USER CODE BEGIN 3 */</span>
 &#125;
 <span class="hljs-comment">/* USER CODE END 3 */</span></code></pre></div>
-<p>另外需要<strong>注意</strong>,
-软件会将DMA初始化函数放到uart初始化函数后面，这样无法实现DMA寄存器设置，无法实现功能。必须将MX_DMA_Init函数放在UART
-DMA配置之前调用。</p>
+<p>另外需要<strong>注意</strong>, 软件会将DMA初始化函数放到uart初始化函数后面，这样无法实现DMA寄存器设置，无法实现功能。必须将MX_DMA_Init函数放在UART DMA配置之前调用。</p>
 <div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">/* Initialize all configured peripherals */</span>
 MX_DMA_Init();
 MX_GPIO_Init();
@@ -513,8 +492,7 @@ MX_USART1_UART_Init();
 <span class="hljs-comment">/* USER CODE BEGIN 2 */</span></code></pre></div>
 <p>实验现象：</p>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230528150421728.png" srcset="/img/loading.gif" lazyload alt="image-20230528150421728" style="zoom:80%;" /></p>
-<p>工程文件Gitee：<a
-target="_blank" rel="noopener" href="https://gitee.com/kayoungzhang/my_codehub/raw/master/stm32/uart.zip">uart</a></p>
+<p>工程文件Gitee：<a target="_blank" rel="noopener" href="https://gitee.com/kayoungzhang/my_codehub/raw/master/stm32/uart.zip">uart</a></p>
 
                 
               </div>

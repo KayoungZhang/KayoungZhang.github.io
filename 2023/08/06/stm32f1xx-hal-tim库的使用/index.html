@@ -16,12 +16,12 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="timer, 简称TIM，定时器是MCU控制中使用最广泛的外设，STM32中有多个TIM，下面来看看HAL库关于TIM的介绍和使用方法。 TIM外设库的一般特性  16位向上，向下，向上向下自动重装载计数器 16位可编程预分频系数，允许对计数器时钟进行 1 ~ 65536 的分频。 多达4各独立的通道：  输入捕获 Input Capture 输出比较 Output Compar">
+    <meta name="description" content="timer, 简称TIM，定时器是MCU控制中使用最广泛的外设，STM32中有多个TIM，下面来看看HAL库关于TIM的介绍和使用方法。 TIM外设库的一般特性  16位向上，向下，向上向下自动重装载计数器 16位可编程预分频系数，允许对计数器时钟进行 1 ~ 65536 的分频。 多达4各独立的通道：  输入捕获 Input Capture 输出比较 Output Compare">
 <meta property="og:type" content="article">
 <meta property="og:title" content="stm32f1xx_hal_tim库的使用">
 <meta property="og:url" content="http://example.com/2023/08/06/stm32f1xx-hal-tim%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="timer, 简称TIM，定时器是MCU控制中使用最广泛的外设，STM32中有多个TIM，下面来看看HAL库关于TIM的介绍和使用方法。 TIM外设库的一般特性  16位向上，向下，向上向下自动重装载计数器 16位可编程预分频系数，允许对计数器时钟进行 1 ~ 65536 的分频。 多达4各独立的通道：  输入捕获 Input Capture 输出比较 Output Compar">
+<meta property="og:description" content="timer, 简称TIM，定时器是MCU控制中使用最广泛的外设，STM32中有多个TIM，下面来看看HAL库关于TIM的介绍和使用方法。 TIM外设库的一般特性  16位向上，向下，向上向下自动重装载计数器 16位可编程预分频系数，允许对计数器时钟进行 1 ~ 65536 的分频。 多达4各独立的通道：  输入捕获 Input Capture 输出比较 Output Compare">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-08-06T12:20:30.000Z">
 <meta property="article:modified_time" content="2023-08-14T00:03:33.496Z">
@@ -284,8 +284,7 @@
             
               <div class="markdown-body">
                 
-                <p>timer,
-简称TIM，定时器是MCU控制中使用最广泛的外设，STM32中有多个TIM，下面来看看HAL库关于TIM的介绍和使用方法。</p>
+                <p>timer, 简称TIM，定时器是MCU控制中使用最广泛的外设，STM32中有多个TIM，下面来看看HAL库关于TIM的介绍和使用方法。</p>
 <h3 id="tim外设库的一般特性">TIM外设库的一般特性</h3>
 <ul>
 <li>16位向上，向下，向上向下自动重装载计数器</li>
@@ -323,51 +322,31 @@
 <li><p>在所需的功能模式下配置TIM：</p>
 <ul>
 <li><p>使用定时器产生时基（time base）。HAL_TIM_Base_Init()</p></li>
-<li><p>使用定时器产生输出比较信号。 HAL_TIM_OC_Init() ,
-HAL_TIM_OC_ConfigChannel()</p></li>
-<li><p>使用定时器产生PWM信号。HAL_TIM_PWM_Init() ,
-HAL_TIM_PWM_ConfigChannel()</p></li>
-<li><p>使用定时器测量外部信号。HAL_TIM_IC_Init() ,
-HAL_TIM_IC_ConfigChannel()</p></li>
-<li><p>单脉冲模式下使用定时器。HAL_TIM_OnePulse_Init() ,
-HAL_TIM_OnePulse_ConfigChannel()</p></li>
+<li><p>使用定时器产生输出比较信号。 HAL_TIM_OC_Init() , HAL_TIM_OC_ConfigChannel()</p></li>
+<li><p>使用定时器产生PWM信号。HAL_TIM_PWM_Init() , HAL_TIM_PWM_ConfigChannel()</p></li>
+<li><p>使用定时器测量外部信号。HAL_TIM_IC_Init() , HAL_TIM_IC_ConfigChannel()</p></li>
+<li><p>单脉冲模式下使用定时器。HAL_TIM_OnePulse_Init() , HAL_TIM_OnePulse_ConfigChannel()</p></li>
 <li><p>使用定时器编码接口。HAL_TIM_Encoder_Init()</p></li>
-<li><p>使用定时器 Hall
-Sensor接口，如果有需要中断和DMA请求，则配置通信事件。HAL_TIMEx_HallSensor_Init()
-， HAL_TIMEx_ConfigCommutEvent()</p>
-<p><strong>注意</strong>：一个定时器用于与Hall
-sensor接口连接，另一个定时器用于通信事件。</p></li>
+<li><p>使用定时器 Hall Sensor接口，如果有需要中断和DMA请求，则配置通信事件。HAL_TIMEx_HallSensor_Init() ， HAL_TIMEx_ConfigCommutEvent()</p>
+<p><strong>注意</strong>：一个定时器用于与Hall sensor接口连接，另一个定时器用于通信事件。</p></li>
 </ul></li>
 <li><p>根据功能特性开启TIM外设：</p>
 <ul>
-<li>Time Base : HAL_TIM_Base_Start(), HAL_TIM_Base_Start_DMA(),
-HAL_TIM_Base_Start_IT()</li>
-<li>Input Capture : HAL_TIM_IC_Start(), HAL_TIM_IC_Start_DMA(),
-HAL_TIM_IC_Start_IT()</li>
-<li>Output Compare : HAL_TIM_OC_Start(), HAL_TIM_OC_Start_DMA(),
-HAL_TIM_OC_Start_IT()</li>
-<li>PWM generation : HAL_TIM_PWM_Start(), HAL_TIM_PWM_Start_DMA(),
-HAL_TIM_PWM_Start_IT()</li>
-<li>One-pulse mode output : HAL_TIM_OnePulse_Start(),
-HAL_TIM_OnePulse_Start_IT()</li>
-<li>Encoder mode output : HAL_TIM_Encoder_Start(),
-HAL_TIM_Encoder_Start_DMA(), HAL_TIM_Encoder_Start_IT()</li>
-<li>Complementary Output Compare : HAL_TIMEx_OCN_Start(),
-HAL_TIMEx_OCN_Start_DMA(), HAL_TIMEx_OCN_Start_IT()</li>
-<li>Complementary PWM generation : HAL_TIMEx_PWMN_Start(),
-HAL_TIMEx_PWMN_Start_DMA(), HAL_TIMEx_PWMN_Start_IT()</li>
-<li>Complementary One-pulse mode output : HAL_TIMEx_OnePulseN_Start(),
-HAL_TIMEx_OnePulseN_Start_IT()</li>
-<li>Hall Sensor output : HAL_TIMEx_HallSensor_Start(),
-HAL_TIMEx_HallSensor_Start_DMA(), HAL_TIMEx_HallSensor_Start_IT().</li>
+<li>Time Base : HAL_TIM_Base_Start(), HAL_TIM_Base_Start_DMA(), HAL_TIM_Base_Start_IT()</li>
+<li>Input Capture : HAL_TIM_IC_Start(), HAL_TIM_IC_Start_DMA(), HAL_TIM_IC_Start_IT()</li>
+<li>Output Compare : HAL_TIM_OC_Start(), HAL_TIM_OC_Start_DMA(), HAL_TIM_OC_Start_IT()</li>
+<li>PWM generation : HAL_TIM_PWM_Start(), HAL_TIM_PWM_Start_DMA(), HAL_TIM_PWM_Start_IT()</li>
+<li>One-pulse mode output : HAL_TIM_OnePulse_Start(), HAL_TIM_OnePulse_Start_IT()</li>
+<li>Encoder mode output : HAL_TIM_Encoder_Start(), HAL_TIM_Encoder_Start_DMA(), HAL_TIM_Encoder_Start_IT()</li>
+<li>Complementary Output Compare : HAL_TIMEx_OCN_Start(), HAL_TIMEx_OCN_Start_DMA(), HAL_TIMEx_OCN_Start_IT()</li>
+<li>Complementary PWM generation : HAL_TIMEx_PWMN_Start(), HAL_TIMEx_PWMN_Start_DMA(), HAL_TIMEx_PWMN_Start_IT()</li>
+<li>Complementary One-pulse mode output : HAL_TIMEx_OnePulseN_Start(), HAL_TIMEx_OnePulseN_Start_IT()</li>
+<li>Hall Sensor output : HAL_TIMEx_HallSensor_Start(), HAL_TIMEx_HallSensor_Start_DMA(), HAL_TIMEx_HallSensor_Start_IT().</li>
 </ul></li>
-<li><p>管理控制DMA Busrt功能。HAL_TIM_DMABurst_WriteStart()，
-HAL_TIM_DMABurst_ReadStart()</p></li>
+<li><p>管理控制DMA Busrt功能。HAL_TIM_DMABurst_WriteStart()， HAL_TIM_DMABurst_ReadStart()</p></li>
 </ol>
 <h3 id="tim回调函数的注册">TIM回调函数的注册</h3>
-<p>当 USE_HAL_TIM_REGISTER_CALLBACKS为
-1时，允许用户注册或注销回调函数。HAL_TIM_RegisterCallback(),
-HAL_TIM_UnRegisterCallback()</p>
+<p>当 USE_HAL_TIM_REGISTER_CALLBACKS为 1时，允许用户注册或注销回调函数。HAL_TIM_RegisterCallback(), HAL_TIM_UnRegisterCallback()</p>
 <p>回调函数：</p>
 <ul>
 <li>Base_MspDeInitCallback : TIM 时基相关MCU去初始化回调函数</li>
@@ -381,10 +360,8 @@ HAL_TIM_UnRegisterCallback()</p>
 <li>OnePulse_MspDeInitCallback : TIM 单脉冲相关MCU去初始化回调函数</li>
 <li>Encoder_MspInitCallback : TIM 编码器相关MCU初始化回调函数</li>
 <li>Encoder_MspDeInitCallback : TIM 编码器相关MCU去初始化回调函数</li>
-<li>HallSensor_MspInitCallback : TIM Hall Sensor
-相关MCU初始化回调函数</li>
-<li>HallSensor_MspDeInitCallback : TIM Hall Sensor
-相关MCU去初始化回调函数</li>
+<li>HallSensor_MspInitCallback : TIM Hall Sensor 相关MCU初始化回调函数</li>
+<li>HallSensor_MspDeInitCallback : TIM Hall Sensor 相关MCU去初始化回调函数</li>
 <li>PeriodElapsedCallback : TIM 周期时间结束回调函数</li>
 <li>PeriodElapsedHalfCpltCallback : TIM 半周期时间结束回调函数</li>
 <li>TriggerCallback : TIM 触发回调函数</li>
@@ -399,11 +376,9 @@ HAL_TIM_UnRegisterCallback()</p>
 <li>CommutationHalfCpltCallback : TIM 半通信回调函数</li>
 <li>BreakCallback : TIM 打断回调函数</li>
 </ul>
-<p>默认情况下, TIM初始化（HAL_TIM_Init()）后，当状态是
-HAL_TIM_STATE_RESET，所有的回调函数会被置为弱函数。</p>
+<p>默认情况下, TIM初始化（HAL_TIM_Init()）后，当状态是 HAL_TIM_STATE_RESET，所有的回调函数会被置为弱函数。</p>
 <p>只有在 HAL_TIM_STATE_READY 状态下，回调函数才能被注册或注销。</p>
-<p>当 USE_HAL_TIM_REGISTER_CALLBACKS
-为0或未定义时，所有的回调函数已注册的特性不能使用，且都被置为弱函数。</p>
+<p>当 USE_HAL_TIM_REGISTER_CALLBACKS 为0或未定义时，所有的回调函数已注册的特性不能使用，且都被置为弱函数。</p>
 
                 
               </div>

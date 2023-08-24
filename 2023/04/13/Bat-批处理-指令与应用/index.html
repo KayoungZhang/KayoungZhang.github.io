@@ -16,12 +16,12 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Windows下批处理指令在工作生活中有很大的应用，可实现自动化处理某些任务。打开window中的命令行窗口，输入相应命令加上&#x2F;? 可以查看各命令的详细使用方法（如 dir &#x2F;? ），下面介绍一些常用的指令：  基本指令 rem 这是一条注释语句 ---&gt;命令行注释，可以回显 :: 这是一条注释语句 ---&gt;命令行注释，不可回显 pause ---&gt;暂停批处理文件的">
+    <meta name="description" content="Windows下批处理指令在工作生活中有很大的应用，可实现自动化处理某些任务。打开window中的命令行窗口，输入相应命令加上&#x2F;? 可以查看各命令的详细使用方法（如 dir &#x2F;? ），下面介绍一些常用的指令：  基本指令 rem 这是一条注释语句 ---&gt;命令行注释，可以回显 :: 这是一条注释语句 ---&gt;命令行注释，不可回显 pause ---&gt;暂停批处理文件的执行">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Bat(批处理)指令与应用">
 <meta property="og:url" content="http://example.com/2023/04/13/Bat-%E6%89%B9%E5%A4%84%E7%90%86-%E6%8C%87%E4%BB%A4%E4%B8%8E%E5%BA%94%E7%94%A8/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Windows下批处理指令在工作生活中有很大的应用，可实现自动化处理某些任务。打开window中的命令行窗口，输入相应命令加上&#x2F;? 可以查看各命令的详细使用方法（如 dir &#x2F;? ），下面介绍一些常用的指令：  基本指令 rem 这是一条注释语句 ---&gt;命令行注释，可以回显 :: 这是一条注释语句 ---&gt;命令行注释，不可回显 pause ---&gt;暂停批处理文件的">
+<meta property="og:description" content="Windows下批处理指令在工作生活中有很大的应用，可实现自动化处理某些任务。打开window中的命令行窗口，输入相应命令加上&#x2F;? 可以查看各命令的详细使用方法（如 dir &#x2F;? ），下面介绍一些常用的指令：  基本指令 rem 这是一条注释语句 ---&gt;命令行注释，可以回显 :: 这是一条注释语句 ---&gt;命令行注释，不可回显 pause ---&gt;暂停批处理文件的执行">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-04-13T09:16:19.000Z">
 <meta property="article:modified_time" content="2023-04-25T06:34:20.247Z">
@@ -284,46 +284,33 @@
             
               <div class="markdown-body">
                 
-                <p>Windows下批处理指令在工作生活中有很大的应用，可实现自动化处理某些任务。打开window中的命令行窗口，输入相应命令加上/?
-可以查看各命令的详细使用方法（如 <strong>dir /?</strong>
-），下面介绍一些常用的指令：</p>
+                <p>Windows下批处理指令在工作生活中有很大的应用，可实现自动化处理某些任务。打开window中的命令行窗口，输入相应命令加上/? 可以查看各命令的详细使用方法（如 <strong>dir /?</strong> ），下面介绍一些常用的指令：</p>
 <hr />
 <h4 id="基本指令">基本指令</h4>
 <p><code>rem 这是一条注释语句</code> ---&gt;命令行注释，可以回显</p>
 <p><code>:: 这是一条注释语句</code> ---&gt;命令行注释，不可回显</p>
-<p><code>pause</code> ---&gt;暂停批处理文件的执行，命令行提示
-<strong>请按任意键继续</strong></p>
-<p><code>@echo off</code>
----&gt;关闭回显，一般批处理文件第一行都是这句</p>
+<p><code>pause</code> ---&gt;暂停批处理文件的执行，命令行提示 <strong>请按任意键继续</strong></p>
+<p><code>@echo off</code> ---&gt;关闭回显，一般批处理文件第一行都是这句</p>
 <p><code>echo off</code> ---&gt;从下一行开始关闭回显</p>
 <p><code>echo on</code> ---&gt;从下一行开始打开回显</p>
 <p><code>ehco.</code> ---&gt;换行</p>
-<p><code>echo Y | rd /s E:\mybat</code> ---&gt;删除文件提示
-<strong>Y</strong></p>
-<p><code>echo hello word &gt; E:\newfile.txt</code>
----&gt;创建文件并向文件写内容</p>
-<p><code>echo hello word &gt;&gt; E:\newfile.txt</code>
----&gt;向文件追加内容</p>
+<p><code>echo Y | rd /s E:\mybat</code> ---&gt;删除文件提示 <strong>Y</strong></p>
+<p><code>echo hello word &gt; E:\newfile.txt</code> ---&gt;创建文件并向文件写内容</p>
+<p><code>echo hello word &gt;&gt; E:\newfile.txt</code> ---&gt;向文件追加内容</p>
 <p><code>cls</code> ---&gt;清屏</p>
 <p><code>title 这是一个标题</code> ---&gt;设置窗口标题</p>
-<p><code>color 0A</code> ---&gt;设置窗口颜色，颜色的设置具体用法查看
-<strong>color /?</strong></p>
+<p><code>color 0A</code> ---&gt;设置窗口颜色，颜色的设置具体用法查看 <strong>color /?</strong></p>
 <p><code>dir</code> ---&gt;显示当前目录下文件</p>
 <p><code>cd 路径</code> ---&gt;切换路径</p>
-<p><code>call test1.bat</code>
----&gt;在同一个命令窗口调用另一个批处理文件</p>
-<p><code>start e:\test.txt</code>
----&gt;打开命令行并执行一个新的程序</p>
-<p><code>del /q/a/f d:\temp\*.*</code>
----&gt;删除指定文件，参数的具体用法查看 <strong>del /?</strong></p>
+<p><code>call test1.bat</code> ---&gt;在同一个命令窗口调用另一个批处理文件</p>
+<p><code>start e:\test.txt</code> ---&gt;打开命令行并执行一个新的程序</p>
+<p><code>del /q/a/f d:\temp\*.*</code> ---&gt;删除指定文件，参数的具体用法查看 <strong>del /?</strong></p>
 <p><code>rd /s/q d:\temp</code> ---&gt;删除文件夹及子文件夹</p>
 <p><code>md mybat</code> ---&gt;创建文件夹</p>
-<p><code>copy C:\mybat.txt D:\</code>
----&gt;复制文件，不能复制文件夹</p>
+<p><code>copy C:\mybat.txt D:\</code> ---&gt;复制文件，不能复制文件夹</p>
 <p><code>ren d:\temp tmp</code> ---&gt;重命名文件</p>
 <p><code>move mybat\1.txt myfile\</code> ---&gt;移动文件</p>
-<p><code>find "abc" mybat\4.txt</code>
----&gt;在文件中查找字符，参数的具体用法查看 <strong>find /?</strong></p>
+<p><code>find "abc" mybat\4.txt</code> ---&gt;在文件中查找字符，参数的具体用法查看 <strong>find /?</strong></p>
 <p><code>type c:\boot.ini</code> ---&gt;显示文件内容</p>
 <p><code>date</code> ---&gt;显示系统日期</p>
 <p><code>time</code> ---&gt;显示系统时间</p>
@@ -331,23 +318,18 @@
 <p><code>goto label</code> ---&gt;跳转到指定标签</p>
 <p><code>tree d:\</code> ---&gt;显示目录结构</p>
 <p><code>ping www.baidu.com</code> ---&gt;测试网络连接量</p>
-<p><code>del a.txt &amp;&amp; echo OK</code>
----&gt;顺序执行多条命令，当碰到执行出错的命令后将不执行后面的命令</p>
-<p><code>del a.txt || echo error</code>
----&gt;顺序执行多条命令，当碰到执行正确的命令后将不执行后面的命令</p>
-<p><code>dir *.* /s/a | find /c ".exe"</code> --&gt;管道命令表示先执行
-dir 命令，对其输出的结果执行后面的 find 命令</p>
+<p><code>del a.txt &amp;&amp; echo OK</code> ---&gt;顺序执行多条命令，当碰到执行出错的命令后将不执行后面的命令</p>
+<p><code>del a.txt || echo error</code> ---&gt;顺序执行多条命令，当碰到执行正确的命令后将不执行后面的命令</p>
+<p><code>dir *.* /s/a | find /c ".exe"</code> --&gt;管道命令表示先执行 dir 命令，对其输出的结果执行后面的 find 命令</p>
 <hr />
 <h4 id="高级指令">高级指令</h4>
-<p><strong><code>if</code> 判断命令</strong>,具体查看 <strong>if
-/?</strong></p>
+<p><strong><code>if</code> 判断命令</strong>,具体查看 <strong>if /?</strong></p>
 <div class="code-wrapper"><pre><code class="hljs bash"><span class="hljs-keyword">if</span> not exist d:\test.bat (
     <span class="hljs-built_in">echo</span> @<span class="hljs-built_in">echo</span> off&gt;d:\test.bat
 ) <span class="hljs-keyword">else</span> (
     del d:\test.bat
 ) ::如果d盘不存在test.bat文件，则在d盘创建test.bat文件，并写入 @<span class="hljs-built_in">echo</span> off，如果存在则删除此文件</code></pre></div>
-<p><strong><code>for</code> 循环命令</strong>，具体查看 <strong>for
-/?</strong></p>
+<p><strong><code>for</code> 循环命令</strong>，具体查看 <strong>for /?</strong></p>
 <div class="code-wrapper"><pre><code class="hljs bash"><span class="hljs-keyword">for</span> %%i <span class="hljs-keyword">in</span> (d:\*.*) <span class="hljs-keyword">do</span> <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;%%i&quot;</span>  ::找出D盘下所有文件
 <span class="hljs-keyword">for</span> %%i <span class="hljs-keyword">in</span> (*.txt) <span class="hljs-keyword">do</span> find <span class="hljs-string">&quot;abc&quot;</span> %%i   ::对当前目录里所有的txt文件执行 find 命令
 <span class="hljs-keyword">for</span> /r d:\mp3 %%i <span class="hljs-keyword">in</span> (*.mp3) <span class="hljs-keyword">do</span> <span class="hljs-built_in">echo</span> %%i&gt;&gt;d:\mp3.txt   ::把 d:\mp3 及其子目录里的mp3文件的文件名都存到 d:\mp3.txt 里去
@@ -359,8 +341,7 @@ dir 命令，对其输出的结果执行后面的 find 命令</p>
 ::参数说明： <span class="hljs-string">&quot;&quot;</span> ---&gt;用于执行计算机空白符
 ::参数说明： -c ---&gt;设置启动命令参数，各个参数间用&amp;&amp;分隔
 ::参数说明： ;bash结尾符 ---&gt;防止git-bash窗口关闭</code></pre></div>
-<p><strong><code>set</code> 设置变量</strong>，具体查看 <strong>set
-/?</strong></p>
+<p><strong><code>set</code> 设置变量</strong>，具体查看 <strong>set /?</strong></p>
 <ol type="1">
 <li>set接收用户输入数据</li>
 </ol>
@@ -476,10 +457,7 @@ MsgBox的button参数取值如下：
 第四组值 (0, 4096) 则决定消息框的样式。
 在将这些数字相加以生成 buttons 参数值时，只能从每组值中取用一个数字。</code></pre></div>
 <h4 id="参考链接">参考链接</h4>
-<p><a
-target="_blank" rel="noopener" href="https://www.jb51.net/article/245233.htm">bat脚本常用命令及亲测示例代码超详细讲解</a>
-<a
-target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43331089/article/details/124222342">Bat文件的创建及其命令大全</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.jb51.net/article/245233.htm">bat脚本常用命令及亲测示例代码超详细讲解</a> <a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43331089/article/details/124222342">Bat文件的创建及其命令大全</a></p>
 
                 
               </div>

@@ -16,12 +16,12 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="这一篇主要看普通信号线的layout注意事项：  走线不要出现直角锐角     走线不要超过焊盘宽度，应以焊盘同宽出线，可出完焊盘后立即加粗    尽量减少环路      7个地焊盘只有两个地孔，最多最多三个焊盘一个过孔    所有层中间间距拉开一点，加到15mil~20mil    走线不要压到电源内缩层    2023052010202">
+    <meta name="description" content="这一篇主要看普通信号线的layout注意事项：  走线不要出现直角锐角     走线不要超过焊盘宽度，应以焊盘同宽出线，可出完焊盘后立即加粗    尽量减少环路      7个地焊盘只有两个地孔，最多最多三个焊盘一个过孔    所有层中间间距拉开一点，加到15mil~20mil    走线不要压到电源内缩层   202305201020202">
 <meta property="og:type" content="article">
 <meta property="og:title" content="pcb设计之普通信号线layout注意事项">
 <meta property="og:url" content="http://example.com/2023/05/20/pcb%E8%AE%BE%E8%AE%A1%E4%B9%8B%E6%99%AE%E9%80%9A%E4%BF%A1%E5%8F%B7%E7%BA%BFlayout%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="这一篇主要看普通信号线的layout注意事项：  走线不要出现直角锐角     走线不要超过焊盘宽度，应以焊盘同宽出线，可出完焊盘后立即加粗    尽量减少环路      7个地焊盘只有两个地孔，最多最多三个焊盘一个过孔    所有层中间间距拉开一点，加到15mil~20mil    走线不要压到电源内缩层    2023052010202">
+<meta property="og:description" content="这一篇主要看普通信号线的layout注意事项：  走线不要出现直角锐角     走线不要超过焊盘宽度，应以焊盘同宽出线，可出完焊盘后立即加粗    尽量减少环路      7个地焊盘只有两个地孔，最多最多三个焊盘一个过孔    所有层中间间距拉开一点，加到15mil~20mil    走线不要压到电源内缩层   202305201020202">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230520215258665.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230520215440544.png">
@@ -31,8 +31,10 @@
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230520222742879.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230520102020202.jpg">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230520215958770.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/20230520102020203.jpg">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230520102541420.jpg">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230520220316490.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230520220340784.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230520220556496.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20220520220712824.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20220520221701707.png">
@@ -71,11 +73,14 @@
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20210520233730194.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20210520233755149.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20210521101637502.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20210521101821828.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20210521102020202.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20210521102222760.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20210521102541420.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20210521102851161.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/Imge-16846362511801.jpg">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-16846364276462.jpg">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-16846364395533.jpg">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20210521103714413.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20210521103853551.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20210521103923788.png">
@@ -369,10 +374,7 @@
 <li><strong>走线不要压到电源内缩层</strong></li>
 </ul>
 <figure>
-<img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/20230520102020203.jpg" srcset="/img/loading.gif" lazyload
-alt="20230520102020203" />
-<figcaption aria-hidden="true">20230520102020203</figcaption>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/20230520102020203.jpg" srcset="/img/loading.gif" lazyload alt="" /><figcaption>20230520102020203</figcaption>
 </figure>
 <ul>
 <li><strong>走线优化，拉直。</strong></li>
@@ -383,10 +385,7 @@ alt="20230520102020203" />
 </ul>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230520220316490.png" srcset="/img/loading.gif" lazyload alt="image-20230520220316490" style="zoom:80%;" /></p>
 <figure>
-<img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230520220340784.png" srcset="/img/loading.gif" lazyload
-alt="image-20230520220340784" />
-<figcaption aria-hidden="true">image-20230520220340784</figcaption>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230520220340784.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20230520220340784</figcaption>
 </figure>
 <ul>
 <li><strong>电源处有多少过孔，地焊盘周边也打同样数量过孔，便于回流</strong></li>
@@ -498,8 +497,7 @@ alt="image-20230520220340784" />
 </ul>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20210520233133110.png" srcset="/img/loading.gif" lazyload alt="image-20210520233133110" style="zoom:80%;" /></p>
 <ul>
-<li><strong>丝印文字常用字宽与字高比例：4/25mil 5/30mil 6/45mil
-,丝印不要放到阻焊层上</strong></li>
+<li><strong>丝印文字常用字宽与字高比例：4/25mil 5/30mil 6/45mil ,丝印不要放到阻焊层上</strong></li>
 </ul>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20210520233730194.png" srcset="/img/loading.gif" lazyload alt="image-20210520233730194"  /></p>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20210520233755149.png" srcset="/img/loading.gif" lazyload alt="image-20210520233755149" style="zoom:80%;" /></p>
@@ -511,10 +509,7 @@ alt="image-20230520220340784" />
 <li><strong>FM天线部分下面不要走线，且要包地处理</strong></li>
 </ul>
 <figure>
-<img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20210521101821828.png" srcset="/img/loading.gif" lazyload
-alt="image-20210521101821828" />
-<figcaption aria-hidden="true">image-20210521101821828</figcaption>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20210521101821828.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20210521101821828</figcaption>
 </figure>
 <ul>
 <li><strong>WIFI模块下面要挖空处理</strong></li>
@@ -540,16 +535,10 @@ alt="image-20210521101821828" />
 <li><strong>时钟信号不要离干扰源太近，距离普通信号线要大于20mil，最好做包地处理</strong></li>
 </ul>
 <figure>
-<img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-16846364276462.jpg" srcset="/img/loading.gif" lazyload
-alt="image-16846364276462" />
-<figcaption aria-hidden="true">image-16846364276462</figcaption>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-16846364276462.jpg" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-16846364276462</figcaption>
 </figure>
 <figure>
-<img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-16846364395533.jpg" srcset="/img/loading.gif" lazyload
-alt="image-16846364395533" />
-<figcaption aria-hidden="true">image-16846364395533</figcaption>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-16846364395533.jpg" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-16846364395533</figcaption>
 </figure>
 <ul>
 <li><strong>MIC属于模拟信号，要类差分走线，包地处理</strong></li>

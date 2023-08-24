@@ -16,12 +16,12 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="PWM 简介 脉冲宽度调制（PWM,Pulse Width Modulation）简称脉宽调制，是利用微处理器的数字输出来对模拟电路进行控制的一种非常有效的技术。PWM 输出就是对外输出脉宽（即占空比）可调的方波信号，信号频率由自动重装寄存器 ARR 的值决定，占空比由比较寄存器 CCR 的值决定。 PWM 模式分为两种：mode1 和 mode2，它们的区别如下：     P">
+    <meta name="description" content="PWM 简介 脉冲宽度调制（PWM,Pulse Width Modulation）简称脉宽调制，是利用微处理器的数字输出来对模拟电路进行控制的一种非常有效的技术。PWM 输出就是对外输出脉宽（即占空比）可调的方波信号，信号频率由自动重装寄存器 ARR 的值决定，占空比由比较寄存器 CCR 的值决定。 PWM 模式分为两种：mode1 和 mode2，它们的区别如下：    PWM模式">
 <meta property="og:type" content="article">
 <meta property="og:title" content="STM32CubeMX之PWM输出">
 <meta property="og:url" content="http://example.com/2023/05/28/STM32CubeMX%E4%B9%8BPWM%E8%BE%93%E5%87%BA/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="PWM 简介 脉冲宽度调制（PWM,Pulse Width Modulation）简称脉宽调制，是利用微处理器的数字输出来对模拟电路进行控制的一种非常有效的技术。PWM 输出就是对外输出脉宽（即占空比）可调的方波信号，信号频率由自动重装寄存器 ARR 的值决定，占空比由比较寄存器 CCR 的值决定。 PWM 模式分为两种：mode1 和 mode2，它们的区别如下：     P">
+<meta property="og:description" content="PWM 简介 脉冲宽度调制（PWM,Pulse Width Modulation）简称脉宽调制，是利用微处理器的数字输出来对模拟电路进行控制的一种非常有效的技术。PWM 输出就是对外输出脉宽（即占空比）可调的方波信号，信号频率由自动重装寄存器 ARR 的值决定，占空比由比较寄存器 CCR 的值决定。 PWM 模式分为两种：mode1 和 mode2，它们的区别如下：    PWM模式">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230529112644749.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230527231125164.png">
@@ -291,13 +291,9 @@
               <div class="markdown-body">
                 
                 <h3 id="pwm-简介">PWM 简介</h3>
-<p>脉冲宽度调制（PWM,Pulse Width
-Modulation）简称脉宽调制，是利用微处理器的数字输出来对模拟电路进行控制的一种非常有效的技术。PWM
-输出就是对外输出脉宽（即占空比）可调的方波信号，信号频率由自动重装寄存器
-ARR 的值决定，占空比由比较寄存器 CCR 的值决定。</p>
+<p>脉冲宽度调制（PWM,Pulse Width Modulation）简称脉宽调制，是利用微处理器的数字输出来对模拟电路进行控制的一种非常有效的技术。PWM 输出就是对外输出脉宽（即占空比）可调的方波信号，信号频率由自动重装寄存器 ARR 的值决定，占空比由比较寄存器 CCR 的值决定。</p>
 <p>PWM 模式分为两种：mode1 和 mode2，它们的区别如下：</p>
 <table>
-
 <thead>
 <tr class="header">
 <th>PWM模式</th>
@@ -331,12 +327,9 @@ ARR 的值决定，占空比由比较寄存器 CCR 的值决定。</p>
 <p>以PWM mode 1递增计数方式为例：</p>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230529112644749.png" srcset="/img/loading.gif" lazyload alt="image-20230529112644749" style="zoom:80%;" /></p>
 <ul>
-<li>当计数器 CNT &lt; 比较捕获寄存器 CCRx，PWM 参考信号 OCxREF
-输出高电平。</li>
-<li>当计数器 CNT &gt;= 比较捕获寄存器 CCRx， PWM 参考信号 OCxREF
-输出低电平。</li>
-<li>当比较捕获寄存器 CCRx &gt; 自动重载寄存器 ARR，OCxREF 保持为
-1。</li>
+<li>当计数器 CNT &lt; 比较捕获寄存器 CCRx，PWM 参考信号 OCxREF 输出高电平。</li>
+<li>当计数器 CNT &gt;= 比较捕获寄存器 CCRx， PWM 参考信号 OCxREF 输出低电平。</li>
+<li>当比较捕获寄存器 CCRx &gt; 自动重载寄存器 ARR，OCxREF 保持为 1。</li>
 <li>当比较捕获寄存器 CCRx = 0，则 OCxRef 保持为 0。</li>
 </ul>
 <h3 id="硬件设计">硬件设计</h3>
@@ -347,19 +340,14 @@ ARR 的值决定，占空比由比较寄存器 CCR 的值决定。</p>
 <h4 id="stm32cubemx设置">STM32CubeMX设置</h4>
 <ul>
 <li>RCC设置外接HSE，时钟设置为72MHz；</li>
-<li>TIM3的时钟挂载在APB1上，因为APB1 Prescacler设置为2，所以
-TIM3时钟为36x2=72MHz；</li>
+<li>TIM3的时钟挂载在APB1上，因为APB1 Prescacler设置为2，所以 TIM3时钟为36x2=72MHz；</li>
 </ul>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230528200120931.png" srcset="/img/loading.gif" lazyload alt="image-20230528200120931" style="zoom:67%;" /></p>
 <ul>
 <li><p>激活TIM3定时器，**Timeout = (Prescaler-1)*(Period-1)/72MHz**</p>
-<p>时钟源选择为内部时钟，设置通道2为PWM模式，选中PB5的TIM3_CH2完成重映射，预分频系数设置为72-1，向上计数，自动重装载值设为500-1，则计时器时钟频率为1MHz，计时器周期为1us，PWM周期为
-500 * 1 = 500us，PWM频率为1/500us =
-2KHz，PWM模式选择PWM1，Pulse默认为0，PWM极性设置为低电平（由于LED低电平点亮）</p>
+<p>时钟源选择为内部时钟，设置通道2为PWM模式，选中PB5的TIM3_CH2完成重映射，预分频系数设置为72-1，向上计数，自动重装载值设为500-1，则计时器时钟频率为1MHz，计时器周期为1us，PWM周期为 500 * 1 = 500us，PWM频率为1/500us = 2KHz，PWM模式选择PWM1，Pulse默认为0，PWM极性设置为低电平（由于LED低电平点亮）</p>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230528213741747.png" srcset="/img/loading.gif" lazyload alt="image-20230528213741747" style="zoom:80%;" /></p></li>
-<li><p>输入工程名，选择工程路径（不要有中文），选择MDK-ARM
-V5；勾选Generated peripheral initialization as a pair of ‘.c/.h’ files
-per peripheral ；点击GENERATE CODE，生成工程代码</p></li>
+<li><p>输入工程名，选择工程路径（不要有中文），选择MDK-ARM V5；勾选Generated peripheral initialization as a pair of ‘.c/.h’ files per peripheral ；点击GENERATE CODE，生成工程代码</p></li>
 </ul>
 <h4 id="mdk-arm编程">MDK-ARM编程</h4>
 <ul>
@@ -494,8 +482,7 @@ per peripheral ；点击GENERATE CODE，生成工程代码</p></li>
 <ul>
 <li>编译后下载到开发板，可以看到LED0由暗变亮，再由亮变暗，呈现呼吸灯的效果。</li>
 </ul>
-<p>工程文件Gitee：<a
-target="_blank" rel="noopener" href="https://gitee.com/kayoungzhang/my_codehub/raw/master/stm32/pwm_out.zip">pwm_output</a></p>
+<p>工程文件Gitee：<a target="_blank" rel="noopener" href="https://gitee.com/kayoungzhang/my_codehub/raw/master/stm32/pwm_out.zip">pwm_output</a></p>
 
                 
               </div>

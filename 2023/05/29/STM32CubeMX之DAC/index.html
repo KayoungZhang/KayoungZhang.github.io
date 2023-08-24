@@ -16,12 +16,12 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="DAC（digital to analog converter）即数模转换器，它可以将数字信号转换为模拟信号.在常见的数字信号系统中，大部分传感器信号被转化成电压信号，而ADC把电压模拟信号转换成易于计算机存储、处理的数字编码，由计算机处理完成后，再由DAC输出电压模拟信号来驱动某些执行器件，使人类易于感知。如音频信号的采集和还原就是这样的一个过程。 STM32F1的DAC模块是12位电压输出">
+    <meta name="description" content="DAC（digital to analog converter）即数模转换器，它可以将数字信号转换为模拟信号.在常见的数字信号系统中，大部分传感器信号被转化成电压信号，而ADC把电压模拟信号转换成易于计算机存储、处理的数字编码，由计算机处理完成后，再由DAC输出电压模拟信号来驱动某些执行器件，使人类易于感知。如音频信号的采集和还原就是这样的一个过程。 STM32F1的DAC模块是12位电压输出型">
 <meta property="og:type" content="article">
 <meta property="og:title" content="STM32CubeMX之DAC">
 <meta property="og:url" content="http://example.com/2023/05/29/STM32CubeMX%E4%B9%8BDAC/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="DAC（digital to analog converter）即数模转换器，它可以将数字信号转换为模拟信号.在常见的数字信号系统中，大部分传感器信号被转化成电压信号，而ADC把电压模拟信号转换成易于计算机存储、处理的数字编码，由计算机处理完成后，再由DAC输出电压模拟信号来驱动某些执行器件，使人类易于感知。如音频信号的采集和还原就是这样的一个过程。 STM32F1的DAC模块是12位电压输出">
+<meta property="og:description" content="DAC（digital to analog converter）即数模转换器，它可以将数字信号转换为模拟信号.在常见的数字信号系统中，大部分传感器信号被转化成电压信号，而ADC把电压模拟信号转换成易于计算机存储、处理的数字编码，由计算机处理完成后，再由DAC输出电压模拟信号来驱动某些执行器件，使人类易于感知。如音频信号的采集和还原就是这样的一个过程。 STM32F1的DAC模块是12位电压输出型">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230530105255132.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230530105432369.png">
@@ -293,16 +293,14 @@
             
               <div class="markdown-body">
                 
-                <p>DAC（digital to analog
-converter）即数模转换器，它可以将数字信号转换为模拟信号.在常见的数字信号系统中，大部分传感器信号被转化成电压信号，而ADC把电压模拟信号转换成易于计算机存储、处理的数字编码，由计算机处理完成后，再由DAC输出电压模拟信号来驱动某些执行器件，使人类易于感知。如音频信号的采集和还原就是这样的一个过程。</p>
+                <p>DAC（digital to analog converter）即数模转换器，它可以将数字信号转换为模拟信号.在常见的数字信号系统中，大部分传感器信号被转化成电压信号，而ADC把电压模拟信号转换成易于计算机存储、处理的数字编码，由计算机处理完成后，再由DAC输出电压模拟信号来驱动某些执行器件，使人类易于感知。如音频信号的采集和还原就是这样的一个过程。</p>
 <p>STM32F1的DAC模块是12位电压输出型DAC。可以配置为8位或12位模式，在12位模式下，数据可以设置为左对齐或右对齐。它有2个输出通道，2个通道可以独立地进行转换。</p>
 <p>DAC通道框图如下：</p>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230530105255132.png" srcset="/img/loading.gif" lazyload alt="image-20230530105255132" style="zoom:80%;" /></p>
 <p><strong>DAC的转换公式</strong>：<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230530105432369.png" srcset="/img/loading.gif" lazyload alt="image-20230530105432369" style="zoom:80%;" /></p>
 <p>DOR：DAC数据输出寄存器值；</p>
 <h3 id="硬件设计">硬件设计</h3>
-<p>本实验通过 DAC 通道1
-输出模拟电压，用KEY1用来增加DAC输入值，WK_UP用来减少DAC输入值，然后使用USART1将输出的电压值打印出来</p>
+<p>本实验通过 DAC 通道1 输出模拟电压，用KEY1用来增加DAC输入值，WK_UP用来减少DAC输入值，然后使用USART1将输出的电压值打印出来</p>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230530111127269.png" srcset="/img/loading.gif" lazyload alt="image-20230530111127269" style="zoom:80%;" /></p>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230528101819341.png" srcset="/img/loading.gif" lazyload alt="image-20230528101819341" style="zoom:80%;" /></p>
 <h3 id="软件设计">软件设计</h3>
@@ -318,19 +316,15 @@ converter）即数模转换器，它可以将数字信号转换为模拟信号.�
 </ul>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230601132917195.png" srcset="/img/loading.gif" lazyload alt="image-20230601132917195" style="zoom:80%;" /></p>
 <ul>
-<li>输入工程名，选择工程路径（不要有中文），选择MDK-ARM V5；勾选Generate
-peripheral initialization as a pair of ‘.c/.h’ files per
-peripheral；点击GENERATE CODE，生成工程代码</li>
+<li>输入工程名，选择工程路径（不要有中文），选择MDK-ARM V5；勾选Generate peripheral initialization as a pair of ‘.c/.h’ files per peripheral；点击GENERATE CODE，生成工程代码</li>
 </ul>
 <h4 id="mdk-arm编程">MDK-ARM编程</h4>
 <ul>
-<li>因为使用到按键功能，所以移植之前用到的按键输入工程中Key文件,记得添加头文件和路径（#include
-"key.h"）。</li>
+<li>因为使用到按键功能，所以移植之前用到的按键输入工程中Key文件,记得添加头文件和路径（#include "key.h"）。</li>
 </ul>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230601175003752.png" srcset="/img/loading.gif" lazyload alt="image-20230601175003752" style="zoom:80%;" /></p>
 <ul>
-<li>在uart.c文件中添加fputc重定义函数，并添加头文件<code>&lt;stdio.h&gt;</code>，勾选keil软件<strong>Use
-MicroLIB</strong>选项。</li>
+<li>在uart.c文件中添加fputc重定义函数，并添加头文件<code>&lt;stdio.h&gt;</code>，勾选keil软件<strong>Use MicroLIB</strong>选项。</li>
 <li>在main.c文件下编写DAC测试代码</li>
 </ul>
 <div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">/* USER CODE BEGIN 1 */</span>
@@ -377,8 +371,7 @@ HAL_DAC_Start(&amp;hdac,DAC_CHANNEL_1);	<span class="hljs-comment">//开启DAC�
 <li>编译无误后下载到开发板，打印出DAC通道1的DAC值和电压值，按下按键，DAC值和电压值发生变化。</li>
 </ul>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230601202614101.png" srcset="/img/loading.gif" lazyload alt="image-20230601202614101" style="zoom:80%;" /></p>
-<p>工程文件Gitee： <a
-target="_blank" rel="noopener" href="https://gitee.com/kayoungzhang/my_codehub/raw/master/stm32/dac.zip">dac</a></p>
+<p>工程文件Gitee： <a target="_blank" rel="noopener" href="https://gitee.com/kayoungzhang/my_codehub/raw/master/stm32/dac.zip">dac</a></p>
 
                 
               </div>

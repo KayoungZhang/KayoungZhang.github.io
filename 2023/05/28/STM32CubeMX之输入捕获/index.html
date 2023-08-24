@@ -16,16 +16,20 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="输入捕获简介 输入捕获一般应用在两个方面，一是信号脉宽&#x2F;频率的测量，二是 PWM 的输入测量。  脉宽&#x2F;频率测量:   可以看到只需要一个捕获通道就可以根据捕获值的差值计算脉宽和频率。 捕获过程中，两次边沿捕获之间会产生N次定时器溢出，所以: 脉宽 &#x3D; (N*ARR + (value2-value1))*CNT计数周期; 频率 &#x3D; CNT计数周期&#x2F;(N*ARR + (value">
+    <meta name="description" content="输入捕获简介 输入捕获一般应用在两个方面，一是信号脉宽&#x2F;频率的测量，二是 PWM 的输入测量。  脉宽&#x2F;频率测量:   可以看到只需要一个捕获通道就可以根据捕获值的差值计算脉宽和频率。 捕获过程中，两次边沿捕获之间会产生N次定时器溢出，所以: 脉宽 &#x3D; (N*ARR + (value2-value1))*CNT计数周期; 频率 &#x3D; CNT计数周期&#x2F;(N*ARR + (value3">
 <meta property="og:type" content="article">
 <meta property="og:title" content="STM32CubeMX之输入捕获">
 <meta property="og:url" content="http://example.com/2023/05/28/STM32CubeMX%E4%B9%8B%E8%BE%93%E5%85%A5%E6%8D%95%E8%8E%B7/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="输入捕获简介 输入捕获一般应用在两个方面，一是信号脉宽&#x2F;频率的测量，二是 PWM 的输入测量。  脉宽&#x2F;频率测量:   可以看到只需要一个捕获通道就可以根据捕获值的差值计算脉宽和频率。 捕获过程中，两次边沿捕获之间会产生N次定时器溢出，所以: 脉宽 &#x3D; (N*ARR + (value2-value1))*CNT计数周期; 频率 &#x3D; CNT计数周期&#x2F;(N*ARR + (value">
+<meta property="og:description" content="输入捕获简介 输入捕获一般应用在两个方面，一是信号脉宽&#x2F;频率的测量，二是 PWM 的输入测量。  脉宽&#x2F;频率测量:   可以看到只需要一个捕获通道就可以根据捕获值的差值计算脉宽和频率。 捕获过程中，两次边沿捕获之间会产生N次定时器溢出，所以: 脉宽 &#x3D; (N*ARR + (value2-value1))*CNT计数周期; 频率 &#x3D; CNT计数周期&#x2F;(N*ARR + (value3">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230529124032810.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230529111153732.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/30915046b8743181980a17e715c3a8b7.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230528101819341.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230529134108484.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230529133718902.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230530233211951.png">
 <meta property="article:published_time" content="2023-05-28T14:00:00.000Z">
 <meta property="article:modified_time" content="2023-05-30T23:56:09.025Z">
 <meta property="article:author" content="John Doe">
@@ -289,8 +293,7 @@
               <div class="markdown-body">
                 
                 <h3 id="输入捕获简介">输入捕获简介</h3>
-<p>输入捕获一般应用在两个方面，一是信号脉宽/频率的测量，二是 PWM
-的输入测量。</p>
+<p>输入捕获一般应用在两个方面，一是信号脉宽/频率的测量，二是 PWM 的输入测量。</p>
 <ul>
 <li>脉宽/频率测量:</li>
 </ul>
@@ -305,13 +308,9 @@
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230529111153732.png" srcset="/img/loading.gif" lazyload alt="image-20230529111153732" style="zoom: 80%;" /></p>
 <p>如图PWM输入测量需要两个捕获通道。</p>
 <h3 id="硬件设计">硬件设计</h3>
-<p>通过 <strong>WK_UP</strong>
-按键将PA0输入高电平，然后捕获TIM5_CH1（PA0）上的高电平脉宽，并从串口打印高电平脉宽。</p>
+<p>通过 <strong>WK_UP</strong> 按键将PA0输入高电平，然后捕获TIM5_CH1（PA0）上的高电平脉宽，并从串口打印高电平脉宽。</p>
 <figure>
-<img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/30915046b8743181980a17e715c3a8b7.png" srcset="/img/loading.gif" lazyload
-alt="img" />
-<figcaption aria-hidden="true">img</figcaption>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/30915046b8743181980a17e715c3a8b7.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>img</figcaption>
 </figure>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230528101819341.png" srcset="/img/loading.gif" lazyload alt="image-20230528101819341" style="zoom:80%;" /></p>
 <h3 id="软件设计">软件设计</h3>
@@ -319,28 +318,19 @@ alt="img" />
 <ul>
 <li>RCC设置外接HSE，时钟设置为72M</li>
 <li>USART1选择为异步通讯方式，波特率设置为115200Bits/s，传输数据长度为8Bit，无奇偶校验，1位停止位</li>
-<li>选择TIM5，设置定时器时钟源为内部时钟源、设置通道1为输入捕获模式（PA0自动被选中），NVIC设置中激活定时器中断，预分频系数设置为72-1，向上计数，自动重装载值设为0xFFFF，则计时器时钟频率为1MHz，计时器周期为1us，定时器溢出周期为
-65535 * 1 = 65535us</li>
+<li>选择TIM5，设置定时器时钟源为内部时钟源、设置通道1为输入捕获模式（PA0自动被选中），NVIC设置中激活定时器中断，预分频系数设置为72-1，向上计数，自动重装载值设为0xFFFF，则计时器时钟频率为1MHz，计时器周期为1us，定时器溢出周期为 65535 * 1 = 65535us</li>
 </ul>
 <figure>
-<img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230529134108484.png" srcset="/img/loading.gif" lazyload
-alt="image-20230529134108484" />
-<figcaption aria-hidden="true">image-20230529134108484</figcaption>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230529134108484.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20230529134108484</figcaption>
 </figure>
 <ul>
 <li>在GPIO设置里将PA0下拉保证没有信号输入的时候电平稳定.</li>
 </ul>
 <figure>
-<img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230529133718902.png" srcset="/img/loading.gif" lazyload
-alt="image-20230529133718902" />
-<figcaption aria-hidden="true">image-20230529133718902</figcaption>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230529133718902.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20230529133718902</figcaption>
 </figure>
 <ul>
-<li>输入工程名，选择工程路径（不要有中文），选择MDK-ARM
-V5；勾选Generated peripheral initialization as a pair of ‘.c/.h’ files
-per peripheral；点击GENERATE CODE，生成工程代码</li>
+<li>输入工程名，选择工程路径（不要有中文），选择MDK-ARM V5；勾选Generated peripheral initialization as a pair of ‘.c/.h’ files per peripheral；点击GENERATE CODE，生成工程代码</li>
 </ul>
 <h4 id="mdk-arm编程">MDK-ARM编程</h4>
 <ul>
@@ -388,8 +378,7 @@ per peripheral；点击GENERATE CODE，生成工程代码</li>
 &#125;
 <span class="hljs-comment">/* USER CODE END 1 */</span></code></pre></div>
 <ul>
-<li><p>在uart.c文件中添加fputc重定义函数，并添加头文件<code>&lt;stdio.h&gt;</code>，勾选keil软件<strong>Use
-MicroLIB</strong>选项。</p></li>
+<li><p>在uart.c文件中添加fputc重定义函数，并添加头文件<code>&lt;stdio.h&gt;</code>，勾选keil软件<strong>Use MicroLIB</strong>选项。</p></li>
 <li><p>在main.c文件中编写高电平持续时间处理代码</p></li>
 </ul>
 <div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span>
@@ -446,13 +435,9 @@ MicroLIB</strong>选项。</p></li>
 <li>编译无误后下载到开发板，按下KEY_UP后，串口会打印出相应的高电平持续时间</li>
 </ul>
 <figure>
-<img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230530233211951.png" srcset="/img/loading.gif" lazyload
-alt="image-20230530233211951" />
-<figcaption aria-hidden="true">image-20230530233211951</figcaption>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230530233211951.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20230530233211951</figcaption>
 </figure>
-<p>工程文件Gitee：<a
-target="_blank" rel="noopener" href="https://gitee.com/kayoungzhang/my_codehub/raw/master/stm32/input_capture.zip">input_capture</a></p>
+<p>工程文件Gitee：<a target="_blank" rel="noopener" href="https://gitee.com/kayoungzhang/my_codehub/raw/master/stm32/input_capture.zip">input_capture</a></p>
 <p>参考链接：http://t.csdn.cn/nf7yk</p>
 
                 

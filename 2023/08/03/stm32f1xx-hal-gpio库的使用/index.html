@@ -16,12 +16,12 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="怎么使用stm32库文件呢？在 *.c文件中, ST官方已经给出了使用方法，下面具体看看GPIO外设库中的特点和使用步骤： GPIO外设库的特点  GPIO外设库可独立配置模式：  输入模式 Input mode 模拟模式 Analog mode 输出模式 Output mode 复用功能模式 Alternate function mode 外部中断或事件模式 External">
+    <meta name="description" content="怎么使用stm32库文件呢？在 *.c文件中, ST官方已经给出了使用方法，下面具体看看GPIO外设库中的特点和使用步骤： GPIO外设库的特点  GPIO外设库可独立配置模式：  输入模式 Input mode 模拟模式 Analog mode 输出模式 Output mode 复用功能模式 Alternate function mode 外部中断或事件模式 External">
 <meta property="og:type" content="article">
 <meta property="og:title" content="stm32f1xx_hal_gpio库的使用">
 <meta property="og:url" content="http://example.com/2023/08/03/stm32f1xx-hal-gpio%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="怎么使用stm32库文件呢？在 *.c文件中, ST官方已经给出了使用方法，下面具体看看GPIO外设库中的特点和使用步骤： GPIO外设库的特点  GPIO外设库可独立配置模式：  输入模式 Input mode 模拟模式 Analog mode 输出模式 Output mode 复用功能模式 Alternate function mode 外部中断或事件模式 External">
+<meta property="og:description" content="怎么使用stm32库文件呢？在 *.c文件中, ST官方已经给出了使用方法，下面具体看看GPIO外设库中的特点和使用步骤： GPIO外设库的特点  GPIO外设库可独立配置模式：  输入模式 Input mode 模拟模式 Analog mode 输出模式 Output mode 复用功能模式 Alternate function mode 外部中断或事件模式 External">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-08-03T12:03:11.000Z">
 <meta property="article:modified_time" content="2023-08-08T00:28:53.680Z">
@@ -284,8 +284,7 @@
             
               <div class="markdown-body">
                 
-                <p>怎么使用stm32库文件呢？在 <code>*.c</code>文件中,
-ST官方已经给出了使用方法，下面具体看看GPIO外设库中的特点和使用步骤：</p>
+                <p>怎么使用stm32库文件呢？在 <code>*.c</code>文件中, ST官方已经给出了使用方法，下面具体看看GPIO外设库中的特点和使用步骤：</p>
 <h3 id="gpio外设库的特点">GPIO外设库的特点</h3>
 <ol type="1">
 <li><p>GPIO外设库可独立配置模式：</p>
@@ -294,14 +293,12 @@ ST官方已经给出了使用方法，下面具体看看GPIO外设库中的特�
 <li><p><strong>模拟模式 Analog mode</strong></p></li>
 <li><p><strong>输出模式 Output mode</strong></p></li>
 <li><p><strong>复用功能模式 Alternate function mode</strong></p></li>
-<li><p><strong>外部中断或事件模式 External interrupt/event
-lines</strong></p></li>
+<li><p><strong>外部中断或事件模式 External interrupt/event lines</strong></p></li>
 </ul></li>
 <li><p>复位期间和之后，复用功能和外部中断线没有被激活，I/O端口被配置为输入浮空模式。</p></li>
 <li><p>所有的GPIO引脚内部都有弱上拉和下拉电阻，可选择激活或不激活。</p></li>
 <li><p>在输出或复用模式，每一个I/O端口可配置为开漏或推挽模式，根据VDD电压值可选择I/O速度。</p></li>
-<li><p>所有的端口都有外部中断和事件的功能，当使用外部中断线时，端口必须配置为输入模式，所有的可用GPIO引脚连接到16个外部中断、事件线（EXTI0
-~ EXTI15）。</p></li>
+<li><p>所有的端口都有外部中断和事件的功能，当使用外部中断线时，端口必须配置为输入模式，所有的可用GPIO引脚连接到16个外部中断、事件线（EXTI0 ~ EXTI15）。</p></li>
 <li><p>对于互联型MCU，外部中断、事件控制器包含多达20个边沿检测器，其它类型MCU，也有19个边沿检测器，这些检测器用于产生中断、事件请求。每条输入线都能进行独立配置选择类型（事件或中断），相应的触发条件（上升沿、下降沿、上升下降沿）。每条线也可以独立屏蔽，挂起寄存器来维持中断请求线的状态。</p></li>
 </ol>
 <h3 id="gpio外设库的使用步骤">GPIO外设库的使用步骤</h3>
@@ -315,8 +312,7 @@ lines</strong></p></li>
 <li><p>当引脚用于ADC或DAC时，配置IO端口模式为模拟模式。</p></li>
 <li><p>当外部中断、事件时，配置IO端口模式为中断或事件模式，同时触发条件选择上升沿或下降沿或上升下降沿。</p></li>
 </ul></li>
-<li><p>当外部中断、事件时，配置NVIC
-IRQ映射到EXTI线的优先级，并使能。HAL_NVIC_SetPriority()，HAL_NVIC_EnableIRQ()</p></li>
+<li><p>当外部中断、事件时，配置NVIC IRQ映射到EXTI线的优先级，并使能。HAL_NVIC_SetPriority()，HAL_NVIC_EnableIRQ()</p></li>
 <li><p>获取在输入模式下引脚的电平。HAL_GPIO_ReadPin()</p></li>
 <li><p>设置或复位输出模式下引脚的电平。HAL_GPIO_WritePin()/HAL_GPIO_TogglePin()</p></li>
 <li><p>锁定引脚配置直到下一次复位。HAL_GPIO_LockPin()</p></li>

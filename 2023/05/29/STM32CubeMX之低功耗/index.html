@@ -16,12 +16,12 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="STM32F10xxx有三种低功耗模式:  睡眠模式(Sleep mode)（CM3 内核停止，外设包括核心外设如NVIC，SysTick等仍然运行，功耗最高） 停止模式(Stop mode)（所有时钟都停止，功耗中等） 待机模式(Standby mode)（1.8V 内核电源关闭，功耗最低）  此外，在运行模式下，为了降低功耗，可以通过降低系统时钟和关闭APB和AHB总线上未使">
+    <meta name="description" content="STM32F10xxx有三种低功耗模式:  睡眠模式(Sleep mode)（CM3 内核停止，外设包括核心外设如NVIC，SysTick等仍然运行，功耗最高） 停止模式(Stop mode)（所有时钟都停止，功耗中等） 待机模式(Standby mode)（1.8V 内核电源关闭，功耗最低）  此外，在运行模式下，为了降低功耗，可以通过降低系统时钟和关闭APB和AHB总线上未使用外设">
 <meta property="og:type" content="article">
 <meta property="og:title" content="STM32CubeMX之低功耗">
 <meta property="og:url" content="http://example.com/2023/05/29/STM32CubeMX%E4%B9%8B%E4%BD%8E%E5%8A%9F%E8%80%97/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="STM32F10xxx有三种低功耗模式:  睡眠模式(Sleep mode)（CM3 内核停止，外设包括核心外设如NVIC，SysTick等仍然运行，功耗最高） 停止模式(Stop mode)（所有时钟都停止，功耗中等） 待机模式(Standby mode)（1.8V 内核电源关闭，功耗最低）  此外，在运行模式下，为了降低功耗，可以通过降低系统时钟和关闭APB和AHB总线上未使">
+<meta property="og:description" content="STM32F10xxx有三种低功耗模式:  睡眠模式(Sleep mode)（CM3 内核停止，外设包括核心外设如NVIC，SysTick等仍然运行，功耗最高） 停止模式(Stop mode)（所有时钟都停止，功耗中等） 待机模式(Standby mode)（1.8V 内核电源关闭，功耗最低）  此外，在运行模式下，为了降低功耗，可以通过降低系统时钟和关闭APB和AHB总线上未使用外设">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230529164036755.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230528162340882.png">
@@ -290,20 +290,16 @@
                 
                 <p>STM32F10xxx有三种低功耗模式:</p>
 <ul>
-<li><strong>睡眠模式(Sleep mode)</strong>（CM3
-内核停止，外设包括核心外设如NVIC，SysTick等仍然运行，功耗最高）</li>
-<li><strong>停止模式(Stop
-mode)</strong>（所有时钟都停止，功耗中等）</li>
-<li><strong>待机模式(Standby mode)</strong>（1.8V
-内核电源关闭，功耗最低）</li>
+<li><strong>睡眠模式(Sleep mode)</strong>（CM3 内核停止，外设包括核心外设如NVIC，SysTick等仍然运行，功耗最高）</li>
+<li><strong>停止模式(Stop mode)</strong>（所有时钟都停止，功耗中等）</li>
+<li><strong>待机模式(Standby mode)</strong>（1.8V 内核电源关闭，功耗最低）</li>
 </ul>
 <p>此外，在运行模式下，为了降低功耗，可以通过降低系统时钟和关闭APB和AHB总线上未使用外设的时钟。</p>
 <p>三种低功耗模式的区别如下：</p>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230529164036755.png" srcset="/img/loading.gif" lazyload alt="image-20230529164036755" style="zoom:80%;" /></p>
 <p>这一章实验主要针对待机模式进行介绍，该模式实在CM3深睡眠模式时关闭电压调节器，整个1.8V供电区域被断电，HSI/HSE振荡器也被断电，SRAM和寄存器内容丢失，仅备份的寄存器和待机电路维持供电。</p>
 <h3 id="硬件设计">硬件设计</h3>
-<p>使用了 KEY_UP 按键用于唤醒和进入待机模式，然后通过
-LED0来指示程序是否在运行。灯闪烁表示系统正常运行，灯熄灭表示进入待机模式。</p>
+<p>使用了 KEY_UP 按键用于唤醒和进入待机模式，然后通过 LED0来指示程序是否在运行。灯闪烁表示系统正常运行，灯熄灭表示进入待机模式。</p>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230528162340882.png" srcset="/img/loading.gif" lazyload alt="image-20230528162340882" style="zoom:80%;" /></p>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230528102557291.png" srcset="/img/loading.gif" lazyload alt="image-20230528102557291" style="zoom: 67%;" /></p>
 <h3 id="软件设计">软件设计</h3>
@@ -312,9 +308,7 @@ LED0来指示程序是否在运行。灯闪烁表示系统正常运行，灯熄�
 <li>RCC设置外接HSE，时钟设置为72M</li>
 <li>PB5设置为GPIO推挽输出模式、上拉、高速、默认输出电平为高电平</li>
 <li>PA0设置为GPIO输入模式，下拉</li>
-<li>输入工程名，选择工程路径（不要有中文），选择MDK-ARM
-V5；勾选Generated peripheral initialization as a pair of ‘.c/.h’ files
-per peripheral；点击GENERATE CODE，生成工程代码</li>
+<li>输入工程名，选择工程路径（不要有中文），选择MDK-ARM V5；勾选Generated peripheral initialization as a pair of ‘.c/.h’ files per peripheral；点击GENERATE CODE，生成工程代码</li>
 </ul>
 <h4 id="mdk-arm编程">MDK-ARM编程</h4>
 <ul>
@@ -361,8 +355,7 @@ per peripheral；点击GENERATE CODE，生成工程代码</li>
 <ul>
 <li>编译无误后下载到开发板，可以看到系统运行时LED0会闪烁三次，然后进入待机模式，此时LED0熄灭。当按下KEY_UP按键或复位按键时，待机模式被唤醒，系统重新运行.</li>
 </ul>
-<p>工程文件Gitee：<a
-target="_blank" rel="noopener" href="https://gitee.com/kayoungzhang/my_codehub/raw/master/stm32/low_power.zip">low_power</a></p>
+<p>工程文件Gitee：<a target="_blank" rel="noopener" href="https://gitee.com/kayoungzhang/my_codehub/raw/master/stm32/low_power.zip">low_power</a></p>
 
                 
               </div>

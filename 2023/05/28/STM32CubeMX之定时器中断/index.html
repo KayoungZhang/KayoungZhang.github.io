@@ -16,12 +16,12 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="定时器中断简介 STM32 的定时器功能十分强大，有 TIME1 和 TIME8 等高级定时器，也有 TIME2~TIME5 等通用定时器，还有 TIME6 和TIME7 等基本定时器。这一章主要介绍通用定时器，是一个通过可编程预分频器（PSC）驱动的 16 位自动装载计数器（CNT）构成。STM32 的通用定时器可以被用于：测量输入信号的脉冲长度(输入捕获)或者产生输出波形(输出比较和">
+    <meta name="description" content="定时器中断简介 STM32 的定时器功能十分强大，有 TIME1 和 TIME8 等高级定时器，也有 TIME2~TIME5 等通用定时器，还有 TIME6 和TIME7 等基本定时器。这一章主要介绍通用定时器，是一个通过可编程预分频器（PSC）驱动的 16 位自动装载计数器（CNT）构成。STM32 的通用定时器可以被用于：测量输入信号的脉冲长度(输入捕获)或者产生输出波形(输出比较和 PWM">
 <meta property="og:type" content="article">
 <meta property="og:title" content="STM32CubeMX之定时器中断">
 <meta property="og:url" content="http://example.com/2023/05/28/STM32CubeMX%E4%B9%8B%E5%AE%9A%E6%97%B6%E5%99%A8%E4%B8%AD%E6%96%AD/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="定时器中断简介 STM32 的定时器功能十分强大，有 TIME1 和 TIME8 等高级定时器，也有 TIME2~TIME5 等通用定时器，还有 TIME6 和TIME7 等基本定时器。这一章主要介绍通用定时器，是一个通过可编程预分频器（PSC）驱动的 16 位自动装载计数器（CNT）构成。STM32 的通用定时器可以被用于：测量输入信号的脉冲长度(输入捕获)或者产生输出波形(输出比较和">
+<meta property="og:description" content="定时器中断简介 STM32 的定时器功能十分强大，有 TIME1 和 TIME8 等高级定时器，也有 TIME2~TIME5 等通用定时器，还有 TIME6 和TIME7 等基本定时器。这一章主要介绍通用定时器，是一个通过可编程预分频器（PSC）驱动的 16 位自动装载计数器（CNT）构成。STM32 的通用定时器可以被用于：测量输入信号的脉冲长度(输入捕获)或者产生输出波形(输出比较和 PWM">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230528194943205.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230527231125164.png">
@@ -290,35 +290,25 @@
               <div class="markdown-body">
                 
                 <h3 id="定时器中断简介">定时器中断简介</h3>
-<p>STM32 的定时器功能十分强大，有 TIME1 和 TIME8 等高级定时器，也有
-TIME2~TIME5 等通用定时器，还有 TIME6 和TIME7
-等基本定时器。这一章主要介绍通用定时器，是一个通过可编程预分频器（PSC）驱动的
-16 位自动装载计数器（CNT）构成。STM32
-的通用定时器可以被用于：测量输入信号的脉冲长度(输入捕获)或者产生输出波形(输出比较和
-PWM)等。</p>
+<p>STM32 的定时器功能十分强大，有 TIME1 和 TIME8 等高级定时器，也有 TIME2~TIME5 等通用定时器，还有 TIME6 和TIME7 等基本定时器。这一章主要介绍通用定时器，是一个通过可编程预分频器（PSC）驱动的 16 位自动装载计数器（CNT）构成。STM32 的通用定时器可以被用于：测量输入信号的脉冲长度(输入捕获)或者产生输出波形(输出比较和 PWM)等。</p>
 <p>通用定时器功能框图：</p>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230528194943205.png" srcset="/img/loading.gif" lazyload alt="image-20230528194943205" style="zoom:67%;" /></p>
 <h3 id="硬件设计">硬件设计</h3>
-<p>通过 TIM3 的中断来控制 LED1 的亮灭。TIM3
-属于MCU内部资源，只需要软件设置即可正常工作。</p>
+<p>通过 TIM3 的中断来控制 LED1 的亮灭。TIM3 属于MCU内部资源，只需要软件设置即可正常工作。</p>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230527231125164.png" srcset="/img/loading.gif" lazyload alt="image-20230527231125164" style="zoom:80%;" /></p>
 <h3 id="软件设计">软件设计</h3>
 <h4 id="stm32cubemx设置">STM32CubeMX设置</h4>
 <ul>
 <li>RCC设置外接HSE，时钟设置为72MHz；</li>
-<li>TIM3的时钟挂载在APB1上，因为APB1 Prescacler设置为2，所以
-TIM3时钟为36x2=72MHz；</li>
+<li>TIM3的时钟挂载在APB1上，因为APB1 Prescacler设置为2，所以 TIM3时钟为36x2=72MHz；</li>
 </ul>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230528200120931.png" srcset="/img/loading.gif" lazyload alt="image-20230528200120931" style="zoom:67%;" /></p>
 <ul>
 <li><p>PE5设置为GPIO推挽输出模式、上拉、高速、默认输出电平为高电平；</p></li>
 <li><p>激活TIM3定时器，**Timeout = (Prescaler-1)*(Period-1)/72MHz**</p>
-<p>时钟源选择为内部时钟，PSC预分频设置为7200-1，向上计数，自动重装载值(ARR)设置为10000-1，在NVIC设置中激活TIM3定时器中断；根据公式可算出：计数器时钟CK_CNT
-= 72M/7200 = 10000Hz，计时器中断时间为 ARR/10000 = 1s</p>
+<p>时钟源选择为内部时钟，PSC预分频设置为7200-1，向上计数，自动重装载值(ARR)设置为10000-1，在NVIC设置中激活TIM3定时器中断；根据公式可算出：计数器时钟CK_CNT = 72M/7200 = 10000Hz，计时器中断时间为 ARR/10000 = 1s</p>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230528200912377.png" srcset="/img/loading.gif" lazyload alt="image-20230528200912377" style="zoom: 67%;" /></p></li>
-<li><p>输入工程名，选择工程路径（不要有中文），选择MDK-ARM
-V5；勾选Generated peripheral initialization as a pair of ‘.c/.h’ files
-per peripheral ；点击GENERATE CODE，生成工程代码</p></li>
+<li><p>输入工程名，选择工程路径（不要有中文），选择MDK-ARM V5；勾选Generated peripheral initialization as a pair of ‘.c/.h’ files per peripheral ；点击GENERATE CODE，生成工程代码</p></li>
 </ul>
 <h4 id="mdk-arm编程">MDK-ARM编程</h4>
 <ul>
@@ -352,8 +342,7 @@ per peripheral ；点击GENERATE CODE，生成工程代码</p></li>
   &#125;
 &#125;</code></pre></div>
 <ul>
-<li>找到弱符号周期运行回调函数原型，并在tim.c中自定义该回调函数
-<code>__weak void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)</code></li>
+<li>找到弱符号周期运行回调函数原型，并在tim.c中自定义该回调函数 <code>__weak void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)</code></li>
 </ul>
 <div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-type">void</span> <span class="hljs-title function_">HAL_TIM_PeriodElapsedCallback</span><span class="hljs-params">(TIM_HandleTypeDef *htim)</span>
 &#123;
@@ -369,8 +358,7 @@ per peripheral ；点击GENERATE CODE，生成工程代码</p></li>
 HAL_TIM_Base_Start_IT(&amp;htim3); <span class="hljs-comment">//启动TIM3</span>
 <span class="hljs-comment">/* USER CODE END 2 */</span></code></pre></div>
 <p>编译下载到开发板，可以看到LED1每1s状态翻转一次，达到预期效果。</p>
-<p>工程文件Gitee: <a
-target="_blank" rel="noopener" href="https://gitee.com/kayoungzhang/my_codehub/raw/master/stm32/tim3.zip">tim3</a></p>
+<p>工程文件Gitee: <a target="_blank" rel="noopener" href="https://gitee.com/kayoungzhang/my_codehub/raw/master/stm32/tim3.zip">tim3</a></p>
 
                 
               </div>

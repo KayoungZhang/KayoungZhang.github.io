@@ -16,12 +16,12 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Integrated Interchip Sound，简称I2S，是关于音频相关的驱动，下面来看看HAL库关于I2S的使用方法。 I2S外设库的使用  声明一个 I2S_HandleTypeDef 结构体,如：I2S_HandleTypeDef hi2s; 初始化I2S底层。HAL_I2S_MspInit()   使能SPIx 接口时钟。 配置I2S引脚  使能I2S GPI">
+    <meta name="description" content="Integrated Interchip Sound，简称I2S，是关于音频相关的驱动，下面来看看HAL库关于I2S的使用方法。 I2S外设库的使用  声明一个 I2S_HandleTypeDef 结构体,如：I2S_HandleTypeDef hi2s; 初始化I2S底层。HAL_I2S_MspInit()   使能SPIx 接口时钟。 配置I2S引脚  使能I2S GPIO">
 <meta property="og:type" content="article">
 <meta property="og:title" content="stm32f1xx_hal_i2s库的使用">
 <meta property="og:url" content="http://example.com/2023/08/06/stm32f1xx-hal-i2s%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Integrated Interchip Sound，简称I2S，是关于音频相关的驱动，下面来看看HAL库关于I2S的使用方法。 I2S外设库的使用  声明一个 I2S_HandleTypeDef 结构体,如：I2S_HandleTypeDef hi2s; 初始化I2S底层。HAL_I2S_MspInit()   使能SPIx 接口时钟。 配置I2S引脚  使能I2S GPI">
+<meta property="og:description" content="Integrated Interchip Sound，简称I2S，是关于音频相关的驱动，下面来看看HAL库关于I2S的使用方法。 I2S外设库的使用  声明一个 I2S_HandleTypeDef 结构体,如：I2S_HandleTypeDef hi2s; 初始化I2S底层。HAL_I2S_MspInit()   使能SPIx 接口时钟。 配置I2S引脚  使能I2S GPIO">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-08-06T05:50:31.000Z">
 <meta property="article:modified_time" content="2023-08-14T00:03:33.260Z">
@@ -284,8 +284,7 @@
             
               <div class="markdown-body">
                 
-                <p>Integrated Interchip
-Sound，简称I2S，是关于音频相关的驱动，下面来看看HAL库关于I2S的使用方法。</p>
+                <p>Integrated Interchip Sound，简称I2S，是关于音频相关的驱动，下面来看看HAL库关于I2S的使用方法。</p>
 <h3 id="i2s外设库的使用">I2S外设库的使用</h3>
 <ol type="1">
 <li>声明一个 I2S_HandleTypeDef 结构体,如：I2S_HandleTypeDef hi2s;</li>
@@ -298,14 +297,12 @@ Sound，简称I2S，是关于音频相关的驱动，下面来看看HAL库关于
 <li>使能I2S GPIO 时钟</li>
 <li>配置I2S引脚为复用上拉模式</li>
 </ul></li>
-<li>如果使用到中断，则配置NVIC。HAL_I2S_Transmit_IT() 和
-HAL_I2S_Receive_IT()
+<li>如果使用到中断，则配置NVIC。HAL_I2S_Transmit_IT() 和 HAL_I2S_Receive_IT()
 <ul>
 <li>配置I2Sx 中断优先级</li>
 <li>使能NVIC I2S IRQ</li>
 </ul></li>
-<li>如果使用到DMA，则配置DMA。HAL_I2S_Transmit_DMA() 和
-HAL_I2S_Receive_DMA()
+<li>如果使用到DMA，则配置DMA。HAL_I2S_Transmit_DMA() 和 HAL_I2S_Receive_DMA()
 <ul>
 <li>为发送或接收通道声明一个DMA_HandleTypeDef 结构体。</li>
 <li>使能DMAx接口时钟。</li>
@@ -317,11 +314,8 @@ HAL_I2S_Receive_DMA()
 </ul>
 <ol start="3" type="1">
 <li>配置hi2s初始化结构体中各参数。</li>
-<li>I2S中断模式（发送完成中断，接收非空中断，错误中断）下发送和接收过程中，使用宏定义
-__HAL_I2S_ENABLE_IT() 和 __HAL_I2S_DISABLE_IT()来控制。</li>
-<li>I2SxCLK 时钟源是系统时钟（由HSI、HSE或PLL提供，产生 AHB
-时钟源）。对于互联型芯片，为了获得最大的精确度，I2SxCLK
-时钟源可以由SYSCLK 时钟或 PLL3 VCO (2 x PLL3CLK)时钟提供。</li>
+<li>I2S中断模式（发送完成中断，接收非空中断，错误中断）下发送和接收过程中，使用宏定义 __HAL_I2S_ENABLE_IT() 和 __HAL_I2S_DISABLE_IT()来控制。</li>
+<li>I2SxCLK 时钟源是系统时钟（由HSI、HSE或PLL提供，产生 AHB 时钟源）。对于互联型芯片，为了获得最大的精确度，I2SxCLK 时钟源可以由SYSCLK 时钟或 PLL3 VCO (2 x PLL3CLK)时钟提供。</li>
 </ol>
 <h3 id="i2s-io操作的三种模式">I2S IO操作的三种模式：</h3>
 <ul>
@@ -352,9 +346,7 @@ __HAL_I2S_ENABLE_IT() 和 __HAL_I2S_DISABLE_IT()来控制。</li>
 <li><p>暂停DMA传输。HAL_I2S_DMAPause()</p></li>
 <li><p>恢复DMA传输。HAL_I2S_DMAResume()</p></li>
 <li><p>停止DMA传输。HAL_I2S_DMAStop()</p>
-<p>在从模式下，如果HAL_I2S_DMAStop()用来停止通信，当主机继续传输数据时，HAL_I2S_ERROR_BUSY_LINE_RX就会产生错误。当
-__HAL_I2S_FLUSH_RX_DR
-宏用来刷新数据寄存器中的剩余值时，要避免在下次传输时使用DeInit/Init进程。</p></li>
+<p>在从模式下，如果HAL_I2S_DMAStop()用来停止通信，当主机继续传输数据时，HAL_I2S_ERROR_BUSY_LINE_RX就会产生错误。当 __HAL_I2S_FLUSH_RX_DR 宏用来刷新数据寄存器中的剩余值时，要避免在下次传输时使用DeInit/Init进程。</p></li>
 </ul></li>
 </ul>
 <h3 id="i2s-hal常用宏定义">I2S HAL常用宏定义</h3>
@@ -367,9 +359,7 @@ __HAL_I2S_FLUSH_RX_DR
 <li>__HAL_I2S_FLUSH_RX_DR: 读取数据寄存器的值来刷新接收的数据</li>
 </ul>
 <h3 id="i2s回调函数的注册">I2S回调函数的注册</h3>
-<p>当 USE_HAL_I2S_REGISTER_CALLBACKS为
-1时，允许用户注册或注销回调函数。HAL_I2S_RegisterCallback(),
-HAL_I2S_UnRegisterCallback()</p>
+<p>当 USE_HAL_I2S_REGISTER_CALLBACKS为 1时，允许用户注册或注销回调函数。HAL_I2S_RegisterCallback(), HAL_I2S_UnRegisterCallback()</p>
 <p>回调函数：</p>
 <ul>
 <li>TxCpltCallback : I2S 发送完成回调函数</li>
@@ -380,14 +370,11 @@ HAL_I2S_UnRegisterCallback()</p>
 <li>MspInitCallback : I2S 相关MCU初始化回调函数</li>
 <li>MspDeInitCallback : I2S 相关MCU去初始化回调函数</li>
 </ul>
-<p>默认情况下, I2S 初始化（HAL_I2S_Init()）后，当状态是
-HAL_I2S_STATE_RESET，所有的回调函数会被置为弱函数。</p>
+<p>默认情况下, I2S 初始化（HAL_I2S_Init()）后，当状态是 HAL_I2S_STATE_RESET，所有的回调函数会被置为弱函数。</p>
 <p>只有在 HAL_I2S_STATE_READY 状态下，回调函数才能被注册或注销。</p>
-<p>当 USE_HAL_I2S_REGISTER_CALLBACKS
-为0或未定义时，所有的回调函数已注册的特性不能使用，且都被置为弱函数。</p>
+<p>当 USE_HAL_I2S_REGISTER_CALLBACKS 为0或未定义时，所有的回调函数已注册的特性不能使用，且都被置为弱函数。</p>
 <h3 id="i2s勘误">I2S勘误</h3>
-<p>主机模式时，I2S仅支持无数据扩展的16位模式，和使用PCM长同步模式（PCM
-long synchronization mode）。</p>
+<p>主机模式时，I2S仅支持无数据扩展的16位模式，和使用PCM长同步模式（PCM long synchronization mode）。</p>
 
                 
               </div>

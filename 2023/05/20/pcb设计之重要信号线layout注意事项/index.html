@@ -16,20 +16,23 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="这一篇主要看看pcb设计中重要信号线的layout注意事项：  差分信号线尽量在一起同一层走线     差分间距无法满足20mil，最好进行包地    image-20230521104926751 - 副本   usb按90欧姆差分阻抗进行走线，等长处理    usb打孔换层应在旁边放置地过孔回流    网口按100欧姆差分阻抗走线，等长处理">
+    <meta name="description" content="这一篇主要看看pcb设计中重要信号线的layout注意事项：  差分信号线尽量在一起同一层走线     差分间距无法满足20mil，最好进行包地   image-20230521104926751 - 副本   usb按90欧姆差分阻抗进行走线，等长处理    usb打孔换层应在旁边放置地过孔回流    网口按100欧姆差分阻抗走线，等长处理">
 <meta property="og:type" content="article">
 <meta property="og:title" content="pcb设计之重要信号线layout注意事项">
 <meta property="og:url" content="http://example.com/2023/05/20/pcb%E8%AE%BE%E8%AE%A1%E4%B9%8B%E9%87%8D%E8%A6%81%E4%BF%A1%E5%8F%B7%E7%BA%BFlayout%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="这一篇主要看看pcb设计中重要信号线的layout注意事项：  差分信号线尽量在一起同一层走线     差分间距无法满足20mil，最好进行包地    image-20230521104926751 - 副本   usb按90欧姆差分阻抗进行走线，等长处理    usb打孔换层应在旁边放置地过孔回流    网口按100欧姆差分阻抗走线，等长处理">
+<meta property="og:description" content="这一篇主要看看pcb设计中重要信号线的layout注意事项：  差分信号线尽量在一起同一层走线     差分间距无法满足20mil，最好进行包地   image-20230521104926751 - 副本   usb按90欧姆差分阻抗进行走线，等长处理    usb打孔换层应在旁边放置地过孔回流    网口按100欧姆差分阻抗走线，等长处理">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230521104356728.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230521104659980.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230521104926751%20-%20%E5%89%AF%E6%9C%AC.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230520105039307.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230521105612441%20-%20%E5%89%AF%E6%9C%AC.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230521105139287%20-%20%E5%89%AF%E6%9C%AC.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230521105447526%20-%20%E5%89%AF%E6%9C%AC.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230521105746352%20-%20%E5%89%AF%E6%9C%AC.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/wps1%20-%20%E5%89%AF%E6%9C%AC.jpg">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/wps2%20-%20%E5%89%AF%E6%9C%AC.jpg">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230521110154465%20-%20%E5%89%AF%E6%9C%AC.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230521110323383%20-%20%E5%89%AF%E6%9C%AC.png">
 <meta property="article:published_time" content="2023-05-20T09:46:27.000Z">
@@ -304,11 +307,7 @@
 <li><strong>差分间距无法满足20mil，最好进行包地</strong></li>
 </ul>
 <figure>
-<img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230521104926751%20-%20%E5%89%AF%E6%9C%AC.png" srcset="/img/loading.gif" lazyload
-alt="image-20230521104926751 - 副本" />
-<figcaption aria-hidden="true">image-20230521104926751 -
-副本</figcaption>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230521104926751%20-%20%E5%89%AF%E6%9C%AC.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20230521104926751 - 副本</figcaption>
 </figure>
 <ul>
 <li><strong>usb按90欧姆差分阻抗进行走线，等长处理</strong></li>
@@ -333,10 +332,8 @@ alt="image-20230521104926751 - 副本" />
 <ul>
 <li><strong>DDR所有的走线都应该在ddr的电源分割区域内，且分割区域不能有其他信号线</strong></li>
 </ul>
-<p><img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/wps1%20-%20%E5%89%AF%E6%9C%AC.jpg" srcset="/img/loading.gif" lazyload /></p>
-<p><img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/wps2%20-%20%E5%89%AF%E6%9C%AC.jpg" srcset="/img/loading.gif" lazyload /></p>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/wps1%20-%20%E5%89%AF%E6%9C%AC.jpg" srcset="/img/loading.gif" lazyload /></p>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/wps2%20-%20%E5%89%AF%E6%9C%AC.jpg" srcset="/img/loading.gif" lazyload /></p>
 <ul>
 <li><strong>DDR走线要保证同组同层，不要表层一部分，内层一部分</strong></li>
 </ul>

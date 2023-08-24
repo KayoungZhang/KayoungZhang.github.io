@@ -16,12 +16,12 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="下面来看看HAL库关于SRAM 内存的使用方法。 SRAM外设库的使用 这是一个通用的分层驱动，包含一套控制SRAM内存的API。它使用FSMC层函数与SRAM设备进行连接。要配置FSMC与SRAM&#x2F;PSRAM的连接，应遵循以下顺序：  声明一个SRAM_HandleTypeDef类型结构体。如：SRAM_HandleTypeDef hsram;  对SRAM_HandleTypeD">
+    <meta name="description" content="下面来看看HAL库关于SRAM 内存的使用方法。 SRAM外设库的使用 这是一个通用的分层驱动，包含一套控制SRAM内存的API。它使用FSMC层函数与SRAM设备进行连接。要配置FSMC与SRAM&#x2F;PSRAM的连接，应遵循以下顺序：  声明一个SRAM_HandleTypeDef类型结构体。如：SRAM_HandleTypeDef hsram;  对SRAM_HandleTypeDe">
 <meta property="og:type" content="article">
 <meta property="og:title" content="stm32f1xx_hal_sram库的使用">
 <meta property="og:url" content="http://example.com/2023/08/06/stm32f1xx-hal-sram%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="下面来看看HAL库关于SRAM 内存的使用方法。 SRAM外设库的使用 这是一个通用的分层驱动，包含一套控制SRAM内存的API。它使用FSMC层函数与SRAM设备进行连接。要配置FSMC与SRAM&#x2F;PSRAM的连接，应遵循以下顺序：  声明一个SRAM_HandleTypeDef类型结构体。如：SRAM_HandleTypeDef hsram;  对SRAM_HandleTypeD">
+<meta property="og:description" content="下面来看看HAL库关于SRAM 内存的使用方法。 SRAM外设库的使用 这是一个通用的分层驱动，包含一套控制SRAM内存的API。它使用FSMC层函数与SRAM设备进行连接。要配置FSMC与SRAM&#x2F;PSRAM的连接，应遵循以下顺序：  声明一个SRAM_HandleTypeDef类型结构体。如：SRAM_HandleTypeDef hsram;  对SRAM_HandleTypeDe">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-08-06T11:20:30.000Z">
 <meta property="article:modified_time" content="2023-08-14T00:03:33.439Z">
@@ -288,27 +288,20 @@
 <h3 id="sram外设库的使用">SRAM外设库的使用</h3>
 <p>这是一个通用的分层驱动，包含一套控制SRAM内存的API。它使用FSMC层函数与SRAM设备进行连接。要配置FSMC与SRAM/PSRAM的连接，应遵循以下顺序：</p>
 <ol type="1">
-<li><p>声明一个SRAM_HandleTypeDef类型结构体。如：SRAM_HandleTypeDef
-hsram;</p>
+<li><p>声明一个SRAM_HandleTypeDef类型结构体。如：SRAM_HandleTypeDef hsram;</p>
 <ul>
 <li>对SRAM_HandleTypeDef 句柄中“Init”中成员赋值。</li>
-<li>对SRAM_HandleTypeDef
-句柄中“Instance”填入预先定义的NOR或SRAM设备基地址寄存器实例。</li>
-<li>对SRAM_HandleTypeDef
-句柄中“Extended”填入预先定义的NOR或SRAM扩展模式基地址寄存器实例。</li>
+<li>对SRAM_HandleTypeDef 句柄中“Instance”填入预先定义的NOR或SRAM设备基地址寄存器实例。</li>
+<li>对SRAM_HandleTypeDef 句柄中“Extended”填入预先定义的NOR或SRAM扩展模式基地址寄存器实例。</li>
 </ul></li>
-<li><p>为正常模式和扩展模式声明两个 FSMC_NORSRAM_TimingTypeDef
-类型结构体，并进行赋值。如：</p>
-<p>​ FSMC_NORSRAM_TimingTypeDef Timing ， FSMC_NORSRAM_TimingTypeDef
-ExTiming;</p></li>
+<li><p>为正常模式和扩展模式声明两个 FSMC_NORSRAM_TimingTypeDef 类型结构体，并进行赋值。如：</p>
+<p>​ FSMC_NORSRAM_TimingTypeDef Timing ， FSMC_NORSRAM_TimingTypeDef ExTiming;</p></li>
 <li><p>初始化 SRAM 控制器。HAL_SRAM_Init()</p>
 <ul>
 <li>配置底层硬件。HAL_SRAM_MspInit()</li>
 <li>使用 FSMC NORSRAM 接口配置控制寄存器。FSMC_NORSRAM_Init()</li>
-<li>使用 FSMC NORSRAM
-接口配置时序寄存器。FSMC_NORSRAM_Timing_Init()</li>
-<li>使用 FSMC NORSRAM
-接口配置扩展模式时序寄存器。FSMC_NORSRAM_Extended_Timing_Init()</li>
+<li>使用 FSMC NORSRAM 接口配置时序寄存器。FSMC_NORSRAM_Timing_Init()</li>
+<li>使用 FSMC NORSRAM 接口配置扩展模式时序寄存器。FSMC_NORSRAM_Extended_Timing_Init()</li>
 <li>使能SRAM设备。__FSMC_NORSRAM_ENABLE()</li>
 </ul></li>
 <li><p>在这个阶段，你就可以执行内存与NOR/SRAM Bank之间的读、写操作。</p>
@@ -316,24 +309,19 @@ ExTiming;</p></li>
 <li>轮询模式下的读写：HAL_SRAM_Read()/HAL_SRAM_Write()</li>
 <li>DMA模式下的读写：HAL_SRAM_Read_DMA()/HAL_SRAM_Write_DMA()</li>
 </ul></li>
-<li><p>你也可以通过调用HAL_SRAM_WriteOperation_Enable() /
-HAL_SRAM_WriteOperation_Disable() 函数来控制SRAM设备的写操作。</p></li>
+<li><p>你也可以通过调用HAL_SRAM_WriteOperation_Enable() / HAL_SRAM_WriteOperation_Disable() 函数来控制SRAM设备的写操作。</p></li>
 <li><p>你可以持续监测SRAM设备的状态。HAL_SRAM_GetState()</p></li>
 </ol>
 <h3 id="sram回调函数的注册">SRAM回调函数的注册</h3>
-<p>当 USE_HAL_SRAM_REGISTER_CALLBACKS为
-1时，允许用户注册或注销回调函数。HAL_SRAM_RegisterCallback(),
-HAL_SRAM_UnRegisterCallback()</p>
+<p>当 USE_HAL_SRAM_REGISTER_CALLBACKS为 1时，允许用户注册或注销回调函数。HAL_SRAM_RegisterCallback(), HAL_SRAM_UnRegisterCallback()</p>
 <p>回调函数：</p>
 <ul>
 <li>MspInitCallback : SRAM 相关MCU初始化回调函数</li>
 <li>MspDeInitCallback : SRAM 相关MCU去初始化回调函数</li>
 </ul>
-<p>默认情况下, SRAM 初始化（HAL_SRAM_Init()）后，当状态是
-HAL_SRAM_STATE_RESET，所有的回调函数会被置为弱函数。</p>
+<p>默认情况下, SRAM 初始化（HAL_SRAM_Init()）后，当状态是 HAL_SRAM_STATE_RESET，所有的回调函数会被置为弱函数。</p>
 <p>只有在 HAL_SRAM_STATE_READY 状态下，回调函数才能被注册或注销。</p>
-<p>当 USE_HAL_SRAM_REGISTER_CALLBACKS
-为0或未定义时，所有的回调函数已注册的特性不能使用，且都被置为弱函数。</p>
+<p>当 USE_HAL_SRAM_REGISTER_CALLBACKS 为0或未定义时，所有的回调函数已注册的特性不能使用，且都被置为弱函数。</p>
 
                 
               </div>

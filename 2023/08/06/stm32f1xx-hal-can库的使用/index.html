@@ -16,12 +16,12 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Controller Area Network，简称CAN，控制器局域网，是一种用于实现设备间通信的网络技术，广泛应用于汽车、工业自动化等领域。以下来看看HAL库关于CAN的使用方法。 CAN外设库的使用  初始化CAN底层。HAL_CAN_MspInit()  使能CAN接口时钟。__HAL_RCC_CANx_CLK_ENABLE() 配置CAN引脚  使能CAN GPIO 时">
+    <meta name="description" content="Controller Area Network，简称CAN，控制器局域网，是一种用于实现设备间通信的网络技术，广泛应用于汽车、工业自动化等领域。以下来看看HAL库关于CAN的使用方法。 CAN外设库的使用  初始化CAN底层。HAL_CAN_MspInit()  使能CAN接口时钟。__HAL_RCC_CANx_CLK_ENABLE() 配置CAN引脚  使能CAN GPIO 时钟">
 <meta property="og:type" content="article">
 <meta property="og:title" content="stm32f1xx_hal_can库的使用">
 <meta property="og:url" content="http://example.com/2023/08/06/stm32f1xx-hal-can%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Controller Area Network，简称CAN，控制器局域网，是一种用于实现设备间通信的网络技术，广泛应用于汽车、工业自动化等领域。以下来看看HAL库关于CAN的使用方法。 CAN外设库的使用  初始化CAN底层。HAL_CAN_MspInit()  使能CAN接口时钟。__HAL_RCC_CANx_CLK_ENABLE() 配置CAN引脚  使能CAN GPIO 时">
+<meta property="og:description" content="Controller Area Network，简称CAN，控制器局域网，是一种用于实现设备间通信的网络技术，广泛应用于汽车、工业自动化等领域。以下来看看HAL库关于CAN的使用方法。 CAN外设库的使用  初始化CAN底层。HAL_CAN_MspInit()  使能CAN接口时钟。__HAL_RCC_CANx_CLK_ENABLE() 配置CAN引脚  使能CAN GPIO 时钟">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-08-06T07:50:31.000Z">
 <meta property="article:modified_time" content="2023-08-14T00:03:33.204Z">
@@ -284,8 +284,7 @@
             
               <div class="markdown-body">
                 
-                <p>Controller Area
-Network，简称CAN，控制器局域网，是一种用于实现设备间通信的网络技术，广泛应用于汽车、工业自动化等领域。以下来看看HAL库关于CAN的使用方法。</p>
+                <p>Controller Area Network，简称CAN，控制器局域网，是一种用于实现设备间通信的网络技术，广泛应用于汽车、工业自动化等领域。以下来看看HAL库关于CAN的使用方法。</p>
 <h3 id="can外设库的使用">CAN外设库的使用</h3>
 <ol type="1">
 <li><p>初始化CAN底层。HAL_CAN_MspInit()</p>
@@ -316,9 +315,7 @@ Network，简称CAN，控制器局域网，是一种用于实现设备间通信�
 <li>检查发送邮箱信息是否挂起。HAL_CAN_IsTxMessagePending()</li>
 <li>当使能时间触发通信模式时，获取发送信息的时间戳。HAL_CAN_GetTxTimestamp()</li>
 </ul></li>
-<li><p>当CAN Rx FIFOs
-接收到一条信息时，可使用HAL_CAN_GetRxMessage()函数获取信息。HAL_CAN_GetRxFifoFillLevel()函数允许知道Rx
-FIFO接收到多少信息。</p></li>
+<li><p>当CAN Rx FIFOs 接收到一条信息时，可使用HAL_CAN_GetRxMessage()函数获取信息。HAL_CAN_GetRxFifoFillLevel()函数允许知道Rx FIFO接收到多少信息。</p></li>
 <li><p>停止CAN模组。HAL_CAN_Stop()</p></li>
 <li><p>CAN的析构函数：HAL_CAN_DeInit()</p></li>
 </ol>
@@ -337,21 +334,15 @@ FIFO接收到多少信息。</p></li>
 </ul>
 <h3 id="can-中断模式操作">CAN 中断模式操作</h3>
 <ul>
-<li>使用
-HAL_CAN_ActivateNotification()函数激活通知提示，然后通过HAL_CAN_xxxCallback()回调函数来控制，使用同样的APIs：
-HAL_CAN_GetRxMessage() 和 HAL_CAN_AddTxMessage()</li>
+<li>使用 HAL_CAN_ActivateNotification()函数激活通知提示，然后通过HAL_CAN_xxxCallback()回调函数来控制，使用同样的APIs： HAL_CAN_GetRxMessage() 和 HAL_CAN_AddTxMessage()</li>
 <li>可使用 HAL_CAN_DeactivateNotification()函数使通知提示失效。</li>
-<li>需要特别留心 <strong>CAN_IT_RX_FIFO0_MSG_PENDING</strong> 和
-<strong>CAN_IT_RX_FIFO1_MSG_PENDING</strong> 的通知提示，它们会触发
-HAL_CAN_RxFIFO0MsgPendingCallback() 和
-HAL_CAN_RxFIFO1MsgPendingCallback() 回调函数。这里有两种做法：
+<li>需要特别留心 <strong>CAN_IT_RX_FIFO0_MSG_PENDING</strong> 和 <strong>CAN_IT_RX_FIFO1_MSG_PENDING</strong> 的通知提示，它们会触发 HAL_CAN_RxFIFO0MsgPendingCallback() 和 HAL_CAN_RxFIFO1MsgPendingCallback() 回调函数。这里有两种做法：
 <ul>
 <li><ol type="1">
 <li>在回调函数中直接获取接收的信息。HAL_CAN_GetRxMessage()</li>
 </ol></li>
 <li><ol start="2" type="1">
-<li>在回调函数中让通知提示失效，而不获取接收的信息。之后使用
-HAL_CAN_GetRxMessage()函数获取接收的信息，一旦读取接收的信息，通知提示就会被再次激活。</li>
+<li>在回调函数中让通知提示失效，而不获取接收的信息。之后使用 HAL_CAN_GetRxMessage()函数获取接收的信息，一旦读取接收的信息，通知提示就会被再次激活。</li>
 </ol></li>
 </ul></li>
 </ul>
@@ -360,22 +351,16 @@ HAL_CAN_GetRxMessage()函数获取接收的信息，一旦读取接收的信息�
 <li><p>CAN 外设可进入睡眠模式（低功耗）。HAL_CAN_RequestSleep()</p>
 <p>只要当前CAN完成发送或接收过程就能进入睡眠模式。</p></li>
 <li><p>当进入睡眠模式时，可激活一个通知用来提示。</p></li>
-<li><p>HAL_CAN_IsSleepActive()函数可用来检查CAN是否进入睡眠模式。<strong>注意</strong>：只要发送了睡眠模式请求（还没进入睡眠模式），CAN的状态（用
-HAL_CAN_GetState()函数获取）是
-HAL_CAN_STATE_SLEEP_PENDING，当睡眠模式生效，它的状态就是
-HAL_CAN_STATE_SLEEP_ACTIVE</p></li>
+<li><p>HAL_CAN_IsSleepActive()函数可用来检查CAN是否进入睡眠模式。<strong>注意</strong>：只要发送了睡眠模式请求（还没进入睡眠模式），CAN的状态（用 HAL_CAN_GetState()函数获取）是 HAL_CAN_STATE_SLEEP_PENDING，当睡眠模式生效，它的状态就是 HAL_CAN_STATE_SLEEP_ACTIVE</p></li>
 <li><p>从睡眠模式中唤醒有两种方式：</p>
 <ul>
 <li><p>使用函数： HAL_CAN_WakeUp()</p>
 <p>当从此函数返回，就会退出睡眠模式（返回状态是 HAL_OK）。</p></li>
-<li><p>如果激活自动唤醒模式，当CAN外设检测到Rx
-CAN数据帧的开启。</p></li>
+<li><p>如果激活自动唤醒模式，当CAN外设检测到Rx CAN数据帧的开启。</p></li>
 </ul></li>
 </ul>
 <h3 id="can回调函数的注册">CAN回调函数的注册</h3>
-<p>当 USE_HAL_CAN_REGISTER_CALLBACKS为
-1时，允许用户注册或注销回调函数。HAL_CAN_RegisterCallback(),
-HAL_CAN_UnRegisterCallback()</p>
+<p>当 USE_HAL_CAN_REGISTER_CALLBACKS为 1时，允许用户注册或注销回调函数。HAL_CAN_RegisterCallback(), HAL_CAN_UnRegisterCallback()</p>
 <p>回调函数：</p>
 <ul>
 <li>TxMailbox0CompleteCallback : 邮箱0发送完成回调函数</li>
@@ -394,11 +379,9 @@ HAL_CAN_UnRegisterCallback()</p>
 <li>MspInitCallback : CAN 相关MCU初始化回调函数</li>
 <li>MspDeInitCallback : CAN 相关MCU去初始化回调函数</li>
 </ul>
-<p>默认情况下, CAN 初始化（HAL_CAN_Init()）后，当状态是
-HAL_CAN_STATE_RESET，所有的回调函数会被置为弱函数。</p>
+<p>默认情况下, CAN 初始化（HAL_CAN_Init()）后，当状态是 HAL_CAN_STATE_RESET，所有的回调函数会被置为弱函数。</p>
 <p>只有在 HAL_CAN_STATE_READY 状态下，回调函数才能被注册或注销。</p>
-<p>当 USE_HAL_CAN_REGISTER_CALLBACKS
-为0或未定义时，所有的回调函数已注册的特性不能使用，且都被置为弱函数。</p>
+<p>当 USE_HAL_CAN_REGISTER_CALLBACKS 为0或未定义时，所有的回调函数已注册的特性不能使用，且都被置为弱函数。</p>
 
                 
               </div>

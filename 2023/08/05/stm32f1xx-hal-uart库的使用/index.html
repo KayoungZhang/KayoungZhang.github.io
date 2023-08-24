@@ -16,12 +16,12 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="下面来看看 UART HAL库关于 UART使用方法。 UART外设库的使用  声明一个 UART_HandleTypeDef 结构体句柄。如： UART_HandleTypeDef huart。 初始化UART底层配置。HAL_UART_MspInit()  使能串口 USARTx 时钟。 串口USARTx引脚的配置。  使能UART GPIO时钟。 配置 UART TX、">
+    <meta name="description" content="下面来看看 UART HAL库关于 UART使用方法。 UART外设库的使用  声明一个 UART_HandleTypeDef 结构体句柄。如： UART_HandleTypeDef huart。 初始化UART底层配置。HAL_UART_MspInit()  使能串口 USARTx 时钟。 串口USARTx引脚的配置。  使能UART GPIO时钟。 配置 UART TX、R">
 <meta property="og:type" content="article">
 <meta property="og:title" content="stm32f1xx_hal_uart库的使用">
 <meta property="og:url" content="http://example.com/2023/08/05/stm32f1xx-hal-uart%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="下面来看看 UART HAL库关于 UART使用方法。 UART外设库的使用  声明一个 UART_HandleTypeDef 结构体句柄。如： UART_HandleTypeDef huart。 初始化UART底层配置。HAL_UART_MspInit()  使能串口 USARTx 时钟。 串口USARTx引脚的配置。  使能UART GPIO时钟。 配置 UART TX、">
+<meta property="og:description" content="下面来看看 UART HAL库关于 UART使用方法。 UART外设库的使用  声明一个 UART_HandleTypeDef 结构体句柄。如： UART_HandleTypeDef huart。 初始化UART底层配置。HAL_UART_MspInit()  使能串口 USARTx 时钟。 串口USARTx引脚的配置。  使能UART GPIO时钟。 配置 UART TX、R">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-08-05T03:19:31.000Z">
 <meta property="article:modified_time" content="2023-08-14T00:03:33.537Z">
@@ -287,8 +287,7 @@
                 <p>下面来看看 UART HAL库关于 UART使用方法。</p>
 <h3 id="uart外设库的使用">UART外设库的使用</h3>
 <ol type="1">
-<li>声明一个 UART_HandleTypeDef 结构体句柄。如： UART_HandleTypeDef
-huart。</li>
+<li>声明一个 UART_HandleTypeDef 结构体句柄。如： UART_HandleTypeDef huart。</li>
 <li>初始化UART底层配置。HAL_UART_MspInit()
 <ul>
 <li>使能串口 USARTx 时钟。</li>
@@ -297,8 +296,7 @@ huart。</li>
 <li>使能UART GPIO时钟。</li>
 <li>配置 UART TX、RX引脚为复用功能，上拉。</li>
 </ul></li>
-<li>如果需要使用中断，则配置NVIC。HAL_UART_Transmit_IT()
-，HAL_UART_Receive_IT()
+<li>如果需要使用中断，则配置NVIC。HAL_UART_Transmit_IT() ，HAL_UART_Receive_IT()
 <ul>
 <li>配置串口 USARTx 中断优先级</li>
 <li>使能NVIC USART IRQ中断。</li>
@@ -310,26 +308,20 @@ huart。</li>
 <li>配置刚声明的DMA结构体中所需要的Tx/Rx参数。</li>
 <li>配置DMA Tx/Rx 通道。</li>
 <li>将DMA句柄和串口Tx/Rx句柄进行关联。</li>
-<li>当DMA
-Tx/Rx通道数据传输完成产生中断时，则配置NVIC的优先级并使能。</li>
-<li>配置USART中断优先级并使能NVIC USART
-IRQ中断。（用于DMA非循环模式下的最后一个字节发送完成的检测）</li>
+<li>当DMA Tx/Rx通道数据传输完成产生中断时，则配置NVIC的优先级并使能。</li>
+<li>配置USART中断优先级并使能NVIC USART IRQ中断。（用于DMA非循环模式下的最后一个字节发送完成的检测）</li>
 </ul></li>
 </ul></li>
-<li>在串口huart
-初始化结构体中配置串口的波特率、字节长度，停止位，奇偶校验位，硬件流控和模式（接收/发送）。</li>
+<li>在串口huart 初始化结构体中配置串口的波特率、字节长度，停止位，奇偶校验位，硬件流控和模式（接收/发送）。</li>
 <li>对于串口异步模式，初始化串口寄存器。HAL_UART_Init()</li>
 <li>对于串口半双工模式，初始化串口寄存器。HAL_HalfDuplex_Init()</li>
 <li>对于串口LIN模式，初始化串口寄存器。HAL_LIN_Init()</li>
 <li>对于多处理器模式，初始化串口寄存器。HAL_MultiProcessor_Init()</li>
 </ol>
-<p>指定的串口中断(传输完成中断，接收非空中断和错误中断）可使用宏定义控制。__HAL_UART_ENABLE_IT()
-, __HAL_UART_DISABLE_IT()</p>
-<p>HAL_UART_Init()和HAL_HalfDuplex_Init()等底层硬件初始化都会调用
-HAL_UART_MspInit()。</p>
+<p>指定的串口中断(传输完成中断，接收非空中断和错误中断）可使用宏定义控制。__HAL_UART_ENABLE_IT() , __HAL_UART_DISABLE_IT()</p>
+<p>HAL_UART_Init()和HAL_HalfDuplex_Init()等底层硬件初始化都会调用 HAL_UART_MspInit()。</p>
 <h3 id="回调函数的注册">回调函数的注册</h3>
-<p>USE_HAL_UART_REGISTER_CALLBACKS
-设置为1，用户就可以使用回调函数了。回调函数的注册和注销函数分别是：HAL_UART_RegisterCallback()、HAL_UART_UnRegisterCallback()</p>
+<p>USE_HAL_UART_REGISTER_CALLBACKS 设置为1，用户就可以使用回调函数了。回调函数的注册和注销函数分别是：HAL_UART_RegisterCallback()、HAL_UART_UnRegisterCallback()</p>
 <p>回调函数：</p>
 <ul>
 <li><p>TxHalfCpltCallback : 发送过半回调函数</p></li>
@@ -343,12 +335,8 @@ HAL_UART_MspInit()。</p>
 <li><p>MspInitCallback : UART相关MCU初始化回调函数</p></li>
 <li><p>MspDeInitCallback : UART相关MCU去初始化回调函数</p></li>
 </ul>
-<p>对于指定的接收事件回调，使用回调函数：HAL_UART_RegisterRxEventCallback()
-, HAL_UART_UnRegisterRxEventCallback()</p>
-<p>默认情况下，串口初始化之后，当串口状态是
-<strong>HAL_UART_STATE_RESET</strong>
-，所有的回调函数被设置为相应的弱函数。如：HAL_UART_TxCpltCallback(),
-HAL_UART_RxHalfCpltCallback()。</p>
+<p>对于指定的接收事件回调，使用回调函数：HAL_UART_RegisterRxEventCallback() , HAL_UART_UnRegisterRxEventCallback()</p>
+<p>默认情况下，串口初始化之后，当串口状态是 <strong>HAL_UART_STATE_RESET</strong> ，所有的回调函数被设置为相应的弱函数。如：HAL_UART_TxCpltCallback(), HAL_UART_RxHalfCpltCallback()。</p>
 <p>只有在串口状态HAL_UART_STATE_READY 时，回调函数才能注册或注销。</p>
 <p>当USE_HAL_UART_REGISTER_CALLBACKS设置为0，注册的回调函数特性就不能使用，回调函数就当作一个弱函数使用。</p>
 <h3 id="uart的操作模式">UART的操作模式</h3>
@@ -361,28 +349,20 @@ HAL_UART_RxHalfCpltCallback()。</p>
 <li>中断模式IO的操作
 <ul>
 <li>非阻塞模式发送一定数量的数据。HAL_UART_Transmit_IT()</li>
-<li>传输完成，执行HAL_UART_TxCpltCallback()
-回调函数，用户自行添加代码。</li>
+<li>传输完成，执行HAL_UART_TxCpltCallback() 回调函数，用户自行添加代码。</li>
 <li>非阻塞模式接收一定数量的数据。HAL_UART_Receive_IT()</li>
-<li>接收完成，执行HAL_UART_RxCpltCallback()
-回调函数，用户自行添加代码。</li>
-<li>当传输出错时，执行HAL_UART_ErrorCallback()
-回调函数，用户自行添加代码。</li>
+<li>接收完成，执行HAL_UART_RxCpltCallback() 回调函数，用户自行添加代码。</li>
+<li>当传输出错时，执行HAL_UART_ErrorCallback() 回调函数，用户自行添加代码。</li>
 </ul></li>
 <li>DMA模式IO的操作
 <ul>
 <li>非阻塞DMA模式发送一定数量的数据。HAL_UART_Transmit_DMA()</li>
-<li>传输过半，执行 HAL_UART_TxHalfCpltCallback()
-回调函数，用户自行添加代码。</li>
-<li>传输完成，执行 HAL_UART_TxCpltCallback ()
-回调函数，用户自行添加代码。</li>
+<li>传输过半，执行 HAL_UART_TxHalfCpltCallback() 回调函数，用户自行添加代码。</li>
+<li>传输完成，执行 HAL_UART_TxCpltCallback () 回调函数，用户自行添加代码。</li>
 <li>非阻塞DMA模式接收一定数量的数据。HAL_UART_Receive_DMA()</li>
-<li>接收过半，执行HAL_UART_RxHalfCpltCallback()
-回调函数，用户自行添加代码。</li>
-<li>接收完成，执行HAL_UART_RxCpltCallback()
-回调函数，用户自行添加代码。</li>
-<li>当传输出错时，执行HAL_UART_ErrorCallback()
-回调函数，用户自行添加代码。</li>
+<li>接收过半，执行HAL_UART_RxHalfCpltCallback() 回调函数，用户自行添加代码。</li>
+<li>接收完成，执行HAL_UART_RxCpltCallback() 回调函数，用户自行添加代码。</li>
+<li>当传输出错时，执行HAL_UART_ErrorCallback() 回调函数，用户自行添加代码。</li>
 <li>DMA传输暂停。 HAL_UART_DMAPause()</li>
 <li>重新开始串口DMA传输。HAL_UART_DMAResume()</li>
 <li>停止串口DMA传输。HAL_UART_DMAStop()</li>

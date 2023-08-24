@@ -16,12 +16,12 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="FatFs 文件系统 文件系统是为了存储和管理数据，而在存储介质中建立的一种组织结构，这些结构包括操作系统引导区、目录和文件。常见的 windows 下的文件系统格式包括 FAT32、NTFS、exFAT。在使用文件系统前，要先对存储介质进行格式化。 使用文件系统时，数据都以文件的形式存储。写入新文件时，先在目录中创建一个文件索引，它指示了文件存放的物理地址，再把数据存储到该地址中。当需要">
+    <meta name="description" content="FatFs 文件系统 文件系统是为了存储和管理数据，而在存储介质中建立的一种组织结构，这些结构包括操作系统引导区、目录和文件。常见的 windows 下的文件系统格式包括 FAT32、NTFS、exFAT。在使用文件系统前，要先对存储介质进行格式化。 使用文件系统时，数据都以文件的形式存储。写入新文件时，先在目录中创建一个文件索引，它指示了文件存放的物理地址，再把数据存储到该地址中。当需要读取">
 <meta property="og:type" content="article">
 <meta property="og:title" content="STM32CubeMX之FatFs文件系统">
 <meta property="og:url" content="http://example.com/2023/05/31/STM32CubeMX%E4%B9%8BFatfs%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="FatFs 文件系统 文件系统是为了存储和管理数据，而在存储介质中建立的一种组织结构，这些结构包括操作系统引导区、目录和文件。常见的 windows 下的文件系统格式包括 FAT32、NTFS、exFAT。在使用文件系统前，要先对存储介质进行格式化。 使用文件系统时，数据都以文件的形式存储。写入新文件时，先在目录中创建一个文件索引，它指示了文件存放的物理地址，再把数据存储到该地址中。当需要">
+<meta property="og:description" content="FatFs 文件系统 文件系统是为了存储和管理数据，而在存储介质中建立的一种组织结构，这些结构包括操作系统引导区、目录和文件。常见的 windows 下的文件系统格式包括 FAT32、NTFS、exFAT。在使用文件系统前，要先对存储介质进行格式化。 使用文件系统时，数据都以文件的形式存储。写入新文件时，先在目录中创建一个文件索引，它指示了文件存放的物理地址，再把数据存储到该地址中。当需要读取">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531201529949.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531202042461.png">
@@ -294,22 +294,14 @@
               <div class="markdown-body">
                 
                 <h3 id="fatfs-文件系统">FatFs 文件系统</h3>
-<p>文件系统是为了存储和管理数据，而在存储介质中建立的一种组织结构，这些结构包括操作系统引导区、目录和文件。常见的
-windows 下的文件系统格式包括
-FAT32、NTFS、exFAT。在使用文件系统前，要先对存储介质进行格式化。</p>
+<p>文件系统是为了存储和管理数据，而在存储介质中建立的一种组织结构，这些结构包括操作系统引导区、目录和文件。常见的 windows 下的文件系统格式包括 FAT32、NTFS、exFAT。在使用文件系统前，要先对存储介质进行格式化。</p>
 <p>使用文件系统时，数据都以文件的形式存储。写入新文件时，先在目录中创建一个文件索引，它指示了文件存放的物理地址，再把数据存储到该地址中。当需要读取数据时，可以从目录中找到该文件的索引，进而在相应的地址中读取出数据。</p>
-<p>FatFs 就是一个完全免费开源，面向小型嵌入式系统的一种通用的 FAT
-文件系统。它完全是由 ANSI C 语言编写并且完全独立于底层的 I/O
-介质。因此它可以很容易地不加修改地移植到其他的处理器当中，如
-8051、PIC、AVR、SH、Z80、H8、ARM 等。FatFs 支持 FAT12、FAT16、FAT32
-等格式。</p>
+<p>FatFs 就是一个完全免费开源，面向小型嵌入式系统的一种通用的 FAT 文件系统。它完全是由 ANSI C 语言编写并且完全独立于底层的 I/O 介质。因此它可以很容易地不加修改地移植到其他的处理器当中，如 8051、PIC、AVR、SH、Z80、H8、ARM 等。FatFs 支持 FAT12、FAT16、FAT32 等格式。</p>
 <p>FatFs 文件系统官网：http://elm-chan.org/fsw/ff/00index_e.html</p>
 <p>FatFs 模块的层次结构如下图示：</p>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531201529949.png" srcset="/img/loading.gif" lazyload alt="image-20230531201529949" style="zoom:80%;" /></p>
-<p>一般只需要编写最底层驱动代码，它包括存储媒介读／写接口（disk
-I/O）和供给文件创建修改时间的实时时钟等。</p>
-<p>FatFs
-源码相关文件如下表示，移植时，一般只需要修改2个文件（即<strong>ffconf.h</strong>和<strong>diskio.c</strong>）</p>
+<p>一般只需要编写最底层驱动代码，它包括存储媒介读／写接口（disk I/O）和供给文件创建修改时间的实时时钟等。</p>
+<p>FatFs 源码相关文件如下表示，移植时，一般只需要修改2个文件（即<strong>ffconf.h</strong>和<strong>diskio.c</strong>）</p>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531202042461.png" srcset="/img/loading.gif" lazyload alt="image-20230531202042461" style="zoom:80%;" /></p>
 <h3 id="硬件设计">硬件设计</h3>
 <p>使用FatFs 文件系统对SD卡进行相关操作，并使用串口1来打印调试信息。</p>
@@ -332,9 +324,7 @@ I/O）和供给文件创建修改时间的实时时钟等。</p>
 </ul>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531220058287.png" srcset="/img/loading.gif" lazyload alt="image-20230531220058287" style="zoom:80%;" /></p>
 <ul>
-<li>输入工程名，选择工程路径（不要有中文），选择MDK-ARM V5；勾选Generate
-peripheral initialization as a pair of ‘.c/.h’ files per
-peripheral；点击GENERATE CODE，生成工程代码</li>
+<li>输入工程名，选择工程路径（不要有中文），选择MDK-ARM V5；勾选Generate peripheral initialization as a pair of ‘.c/.h’ files per peripheral；点击GENERATE CODE，生成工程代码</li>
 </ul>
 <h4 id="mdk-arm编程">MDK-ARM编程</h4>
 <ul>
@@ -446,15 +436,13 @@ peripheral；点击GENERATE CODE，生成工程代码</li>
   f_mount(<span class="hljs-literal">NULL</span>, SDPath, <span class="hljs-number">1</span>);<span class="hljs-comment">/* 不再使用文件系统，取消挂载文件系统 */</span>
 &#125;</code></pre></div>
 <ul>
-<li>在uart.c文件中添加fputc重定义函数，并添加头文件<code>&lt;stdio.h&gt;</code>，勾选keil软件<strong>Use
-MicroLIB</strong>选项。</li>
+<li>在uart.c文件中添加fputc重定义函数，并添加头文件<code>&lt;stdio.h&gt;</code>，勾选keil软件<strong>Use MicroLIB</strong>选项。</li>
 <li>编译无误下载到开发板后，串口打印出如下信息：</li>
 </ul>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230605205919074.png" srcset="/img/loading.gif" lazyload alt="image-20230605205919074" style="zoom:80%;" /></p>
 <p>将SD卡插入PC后，可以看到SD卡里建立了2个文件：Sensor.txt和STM32cubemx.txt，打开文件后可以看到写入的数据</p>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230605210046746.png" srcset="/img/loading.gif" lazyload alt="image-20230605210046746" style="zoom: 67%;" /></p>
-<p>工程代码Gitee：<a
-target="_blank" rel="noopener" href="https://gitee.com/kayoungzhang/my_codehub/raw/master/stm32/fatfs_sd.zip">fatfs</a></p>
+<p>工程代码Gitee：<a target="_blank" rel="noopener" href="https://gitee.com/kayoungzhang/my_codehub/raw/master/stm32/fatfs_sd.zip">fatfs</a></p>
 
                 
               </div>

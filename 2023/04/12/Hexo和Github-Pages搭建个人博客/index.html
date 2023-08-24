@@ -16,12 +16,12 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1. 前言  目前网上有很多第三方博客类型，像博客园，CSDN，简书，知乎等。也可以自己搭建个人技术博客，这里以Hexo+Github Pages为例搭建个人博客。Hexo是一个简单、快速、强大的基于 Node.js的静态博客发布工具，支持Markdown格式，有众多优秀插件和主题。Github Pages 是 Github 提供的一种免费的静态网页托管服务，可以用来托管博客、项目官网">
+    <meta name="description" content="1. 前言  目前网上有很多第三方博客类型，像博客园，CSDN，简书，知乎等。也可以自己搭建个人技术博客，这里以Hexo+Github Pages为例搭建个人博客。Hexo是一个简单、快速、强大的基于 Node.js的静态博客发布工具，支持Markdown格式，有众多优秀插件和主题。Github Pages 是 Github 提供的一种免费的静态网页托管服务，可以用来托管博客、项目官网等静态网">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hexo和Github Pages搭建个人博客">
 <meta property="og:url" content="http://example.com/2023/04/12/Hexo%E5%92%8CGithub-Pages%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="1. 前言  目前网上有很多第三方博客类型，像博客园，CSDN，简书，知乎等。也可以自己搭建个人技术博客，这里以Hexo+Github Pages为例搭建个人博客。Hexo是一个简单、快速、强大的基于 Node.js的静态博客发布工具，支持Markdown格式，有众多优秀插件和主题。Github Pages 是 Github 提供的一种免费的静态网页托管服务，可以用来托管博客、项目官网">
+<meta property="og:description" content="1. 前言  目前网上有很多第三方博客类型，像博客园，CSDN，简书，知乎等。也可以自己搭建个人技术博客，这里以Hexo+Github Pages为例搭建个人博客。Hexo是一个简单、快速、强大的基于 Node.js的静态博客发布工具，支持Markdown格式，有众多优秀插件和主题。Github Pages 是 Github 提供的一种免费的静态网页托管服务，可以用来托管博客、项目官网等静态网">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230412203324937.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230412203447726.png">
@@ -29,6 +29,7 @@
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230412203930192.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230412204212914.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230412204326064.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230413074402552.png">
 <meta property="article:published_time" content="2023-04-12T11:57:46.000Z">
 <meta property="article:modified_time" content="2023-05-04T14:42:39.129Z">
 <meta property="article:author" content="John Doe">
@@ -293,59 +294,37 @@
                 
                 <h3 id="前言">1. 前言</h3>
 <hr />
-<p>目前网上有很多第三方博客类型，像博客园，CSDN，简书，知乎等。也可以自己搭建个人技术博客，这里以Hexo+Github
-Pages为例搭建个人博客。Hexo是一个简单、快速、强大的基于
-Node.js的静态博客发布工具，支持Markdown格式，有众多优秀插件和主题。Github
-Pages 是 Github
-提供的一种免费的静态网页托管服务，可以用来托管博客、项目官网等静态网页。搭建步骤如下：</p>
+<p>目前网上有很多第三方博客类型，像博客园，CSDN，简书，知乎等。也可以自己搭建个人技术博客，这里以Hexo+Github Pages为例搭建个人博客。Hexo是一个简单、快速、强大的基于 Node.js的静态博客发布工具，支持Markdown格式，有众多优秀插件和主题。Github Pages 是 Github 提供的一种免费的静态网页托管服务，可以用来托管博客、项目官网等静态网页。搭建步骤如下：</p>
 <h3 id="开发环境">2. 开发环境</h3>
 <hr />
-<p>需要安装开发环境<a target="_blank" rel="noopener" href="https://nodejs.org/zh-cn">Node.js</a>和<a
-target="_blank" rel="noopener" href="https://git-scm.com/downloads">git</a></p>
-<h4
-id="section"><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230412203324937.png" srcset="/img/loading.gif" lazyload alt="image-20230412203324937" style="zoom: 67%;" /></h4>
-<h4
-id="section-1"><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230412203447726.png" srcset="/img/loading.gif" lazyload alt="image-20230412203447726" style="zoom: 67%;" /></h4>
-<p>安装完成后，在桌面右键选择 <code>Git Bash Here</code>
-，命令窗口打开后，分别输入<code>git --version</code>,
-<code>node -v</code>, <code>npm -v</code>,
-如果弹出对应的版本号，则说明安装正确，否则，需要查找原因。
-<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230412203622210.png" srcset="/img/loading.gif" lazyload alt="image-20230412203622210" style="zoom:67%;" /></p>
+<p>需要安装开发环境<a target="_blank" rel="noopener" href="https://nodejs.org/zh-cn">Node.js</a>和<a target="_blank" rel="noopener" href="https://git-scm.com/downloads">git</a></p>
+<h4 id="section"><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230412203324937.png" srcset="/img/loading.gif" lazyload alt="image-20230412203324937" style="zoom: 67%;" /></h4>
+<h4 id="section-1"><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230412203447726.png" srcset="/img/loading.gif" lazyload alt="image-20230412203447726" style="zoom: 67%;" /></h4>
+<p>安装完成后，在桌面右键选择 <code>Git Bash Here</code> ，命令窗口打开后，分别输入<code>git --version</code>, <code>node -v</code>, <code>npm -v</code>, 如果弹出对应的版本号，则说明安装正确，否则，需要查找原因。 <img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230412203622210.png" srcset="/img/loading.gif" lazyload alt="image-20230412203622210" style="zoom:67%;" /></p>
 <h3 id="安装-hexo">3. 安装 Hexo</h3>
 <hr />
-<p>在你的电脑上创建一个博客文件夹，如：<code>F:\Blog</code>,
-进入此文件夹，右键打开<code>Git Bash Here</code>,依次输入</p>
+<p>在你的电脑上创建一个博客文件夹，如：<code>F:\Blog</code>, 进入此文件夹，右键打开<code>Git Bash Here</code>,依次输入</p>
 <div class="code-wrapper"><pre><code class="hljs yaml"><span class="hljs-string">npm</span> <span class="hljs-string">install</span> <span class="hljs-string">hexo-cli</span> <span class="hljs-string">-g</span>  <span class="hljs-comment"># 安装hexo</span>
 <span class="hljs-string">hexo</span> <span class="hljs-string">init</span>                <span class="hljs-comment"># 初始化，安装所需包</span>
 <span class="hljs-string">npm</span> <span class="hljs-string">install</span>              <span class="hljs-comment"># 新版本的Hexo在初始化时就安装好了依赖包</span>
 <span class="hljs-string">hexo</span> <span class="hljs-string">g</span>                   <span class="hljs-comment"># 生成</span>
 <span class="hljs-string">hexo</span> <span class="hljs-string">s</span>                   <span class="hljs-comment"># 启动本地服务</span></code></pre></div>
-<p>打开浏览器访问 <code>http://localhost:4000</code>
-即可看到博客网页内容。第一次初始化的时候hexo已经帮我们写了一篇名为 Hello
-World 的文章。</p>
+<p>打开浏览器访问 <code>http://localhost:4000</code> 即可看到博客网页内容。第一次初始化的时候hexo已经帮我们写了一篇名为 Hello World 的文章。</p>
 <h3 id="配置ssh-key">4. 配置SSH key</h3>
 <hr />
 <p>ssh key用来解决本地和服务器的连接访问github权限问题。</p>
 <h4 id="本地生成密钥对">4.1 本地生成密钥对</h4>
-<p>在git bash命令行中执行 <code>cd ~/.ssh</code>, 如果弹出
-<code>No such file or directory</code>,说明你是第一次使用git。需要生成ssh
-key,否则说明你已经配置了SSH key，不需要再次操作。 在命令行中执行 ：</p>
+<p>在git bash命令行中执行 <code>cd ~/.ssh</code>, 如果弹出 <code>No such file or directory</code>,说明你是第一次使用git。需要生成ssh key,否则说明你已经配置了SSH key，不需要再次操作。 在命令行中执行 ：</p>
 <div class="code-wrapper"><pre><code class="hljs c">git config --global user.name <span class="hljs-string">&quot;填入你的github用户名&quot;</span>
 git config --global user.email <span class="hljs-string">&quot;填入你的email地址&quot;</span>
 ssh-keygen -t rsa -C <span class="hljs-string">&quot;填入你的email地址&quot;</span></code></pre></div>
 <p>连续三次回车，最终会在用户目录下生成文件，在用户目录下（C:）找到<code>.ssh\id_rsa.pub</code>文件，用记事本打开并复制里面的所有内容。</p>
 <h4 id="添加公钥到github">4.2 添加公钥到Github</h4>
-<p>打开你的github主页，进入Settings -&gt; SSH and GPG keys -&gt; New SSH
-key：
-<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230412203930192.png" srcset="/img/loading.gif" lazyload alt="image-20230412203930192" style="zoom:67%;" /></p>
-<p>添加完成后，还需要确认并添加主机到本机SSH可信列表，在 git bash中输入
-<code>ssh -T git@github.com</code> ,若返回
-<code>Hi xxx! You've successfully authenticated, but GitHub does not provide shell access.</code>则证明添加成功。</p>
-<h3 id="创建github远程仓库并与本地blog仓库关联">5.
-创建github远程仓库，并与本地blog仓库关联</h3>
+<p>打开你的github主页，进入Settings -&gt; SSH and GPG keys -&gt; New SSH key： <img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230412203930192.png" srcset="/img/loading.gif" lazyload alt="image-20230412203930192" style="zoom:67%;" /></p>
+<p>添加完成后，还需要确认并添加主机到本机SSH可信列表，在 git bash中输入 <code>ssh -T git@github.com</code> ,若返回 <code>Hi xxx! You've successfully authenticated, but GitHub does not provide shell access.</code>则证明添加成功。</p>
+<h3 id="创建github远程仓库并与本地blog仓库关联">5. 创建github远程仓库，并与本地blog仓库关联</h3>
 <hr />
-<p>进入你的github主页，创建一个新的仓库，因为Github
-仅能使用一个同名仓库的代码托管一个静态站点，所以Repository名字必须是<strong>你的Github名.github.io</strong>，比如我的是<code>KayoungZhang.github.io</code></p>
+<p>进入你的github主页，创建一个新的仓库，因为Github 仅能使用一个同名仓库的代码托管一个静态站点，所以Repository名字必须是<strong>你的Github名.github.io</strong>，比如我的是<code>KayoungZhang.github.io</code></p>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230412204212914.png" srcset="/img/loading.gif" lazyload alt="image-20230412204212914" style="zoom: 67%;" /></p>
 <p>打开本地blog仓库中配置文件 **_config.yml**，在末尾添加：</p>
 <div class="code-wrapper"><pre><code class="hljs yaml"><span class="hljs-attr">deploy:</span>
@@ -354,12 +333,10 @@ key：
 	<span class="hljs-comment">#上一步的Github仓库地址，项目主页点SSH再复制url，不要采用http形式的url</span>
 	<span class="hljs-attr">branch:</span> <span class="hljs-string">main</span>
 	<span class="hljs-comment">#填写远程仓库的分支名，新版本默认是main分支，老版本是master分支</span></code></pre></div>
-<p>在blog文件夹中打开git bash命令行，安装hexo
-部署插件，然后进行部署。</p>
+<p>在blog文件夹中打开git bash命令行，安装hexo 部署插件，然后进行部署。</p>
 <div class="code-wrapper"><pre><code class="hljs yaml"><span class="hljs-string">npm</span> <span class="hljs-string">install</span> <span class="hljs-string">hexo-deployer-git</span> <span class="hljs-string">--save</span>
 <span class="hljs-string">hexo</span> <span class="hljs-string">d</span></code></pre></div>
-<p>在浏览器中输入网址： <strong>你的用户名.github.io</strong>
-，即可查看到网页。一般来说如果出现莫名的问题，按照以下步骤来解决。</p>
+<p>在浏览器中输入网址： <strong>你的用户名.github.io</strong> ，即可查看到网页。一般来说如果出现莫名的问题，按照以下步骤来解决。</p>
 <div class="code-wrapper"><pre><code class="hljs yaml"><span class="hljs-string">删除本地blog仓库中.deploy_git文件夹</span>
 <span class="hljs-string">git</span> <span class="hljs-string">bash中执行命令</span> 
 <span class="hljs-string">hexo</span> <span class="hljs-string">clean</span>
@@ -368,39 +345,22 @@ key：
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230412204326064.png" srcset="/img/loading.gif" lazyload alt="image-20230412204326064" style="zoom: 50%;" /></p>
 <h3 id="写博客">6. 写博客</h3>
 <hr />
-<p>在本地blog仓库中，打开<code>git bash</code>，执行命令
-<code>hexo new 'my-first-blog'</code>(my-first-blog是文件名)，hexo会帮我们在<code>source/_posts</code>下生成<strong>my-first-blog.md</strong>文件，打开文件，hexo自动添加了一些说明的文件头，后面只需要自己添加文章内容即可。写完后，执行以下命令完成网页上传部署，一般情况下编辑文章中的图片在网页上会无法正常显示，需要图床，将图片上传到网上，同时在主题目录下<strong>head.jade</strong>文件中添加<code>&lt;meta name="referrer" content="no-referrer" /&gt;</code>，具体操作和原因，参看博客
-<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/102594554">PicGo +
-Gitee(码云)实现markdown图床</a>，<a
-target="_blank" rel="noopener" href="https://www.cnblogs.com/selier/archive/2018/09/01/9570650.html">Hexo使用细节及各种问题</a></p>
+<p>在本地blog仓库中，打开<code>git bash</code>，执行命令 <code>hexo new 'my-first-blog'</code>(my-first-blog是文件名)，hexo会帮我们在<code>source/_posts</code>下生成<strong>my-first-blog.md</strong>文件，打开文件，hexo自动添加了一些说明的文件头，后面只需要自己添加文章内容即可。写完后，执行以下命令完成网页上传部署，一般情况下编辑文章中的图片在网页上会无法正常显示，需要图床，将图片上传到网上，同时在主题目录下<strong>head.jade</strong>文件中添加<code>&lt;meta name="referrer" content="no-referrer" /&gt;</code>，具体操作和原因，参看博客 <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/102594554">PicGo + Gitee(码云)实现markdown图床</a>，<a target="_blank" rel="noopener" href="https://www.cnblogs.com/selier/archive/2018/09/01/9570650.html">Hexo使用细节及各种问题</a></p>
 <div class="code-wrapper"><pre><code class="hljs yaml"><span class="hljs-string">hexo</span> <span class="hljs-string">clean</span>
 <span class="hljs-string">hexo</span> <span class="hljs-string">g</span> <span class="hljs-string">-d</span></code></pre></div>
 <h3 id="个性化你的博客">7. 个性化你的博客</h3>
 <hr />
 <h4 id="更换主题">7.1 更换主题</h4>
-<p>默认主题不好看，可以进入 <a
-target="_blank" rel="noopener" href="https://hexo.io/themes/">hexo主题官网</a>
-选择自己喜欢的主题，进行更改。这里以 <strong>beautiful-hexo</strong>
-主题为例。进入本地blog文件夹中，右键打开 <code>Git Bash Here</code>,
-根据选择主题的 <strong>README.md</strong>文件执行相应命令:</p>
+<p>默认主题不好看，可以进入 <a target="_blank" rel="noopener" href="https://hexo.io/themes/">hexo主题官网</a> 选择自己喜欢的主题，进行更改。这里以 <strong>beautiful-hexo</strong> 主题为例。进入本地blog文件夹中，右键打开 <code>Git Bash Here</code>, 根据选择主题的 <strong>README.md</strong>文件执行相应命令:</p>
 <div class="code-wrapper"><pre><code class="hljs yaml"><span class="hljs-string">npm</span> <span class="hljs-string">install</span> <span class="hljs-string">--save</span> <span class="hljs-string">hexo-generator-archive</span> <span class="hljs-string">hexo-renderer-jade</span> <span class="hljs-string">hexo-generator-tag</span> <span class="hljs-string">hexo-generator-feed</span> <span class="hljs-string">hexo-generator-sitemap</span> <span class="hljs-string">hexo-browsersync</span> 
 
 <span class="hljs-string">git</span> <span class="hljs-string">clone</span> <span class="hljs-string">--depth</span> <span class="hljs-number">1</span> <span class="hljs-string">https://github.com/twoyao/beautiful-hexo.git</span> <span class="hljs-string">themes/beautiful-hexo</span></code></pre></div>
-<p>在blog文件夹中找到配置文件 **_config.yml** ,使用记事本打开，找到
-<strong>theme: landscape</strong> , 将 <strong>landscape</strong>改为
-<strong>beautiful-hexo</strong>,保存后，执行命令
-<code>hexo clean</code>, 清理一下public的内容，然后执行
-<code>hexo g</code>来重新生成, 最后打开本地服务器，执行
-<code>hexo s</code> ,打开浏览器就会看到新的主题界面。</p>
+<p>在blog文件夹中找到配置文件 **_config.yml** ,使用记事本打开，找到 <strong>theme: landscape</strong> , 将 <strong>landscape</strong>改为 <strong>beautiful-hexo</strong>,保存后，执行命令 <code>hexo clean</code>, 清理一下public的内容，然后执行 <code>hexo g</code>来重新生成, 最后打开本地服务器，执行 <code>hexo s</code> ,打开浏览器就会看到新的主题界面。</p>
 <figure>
-<img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230413074402552.png" srcset="/img/loading.gif" lazyload
-alt="image-20230413074402552" />
-<figcaption aria-hidden="true">image-20230413074402552</figcaption>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230413074402552.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20230413074402552</figcaption>
 </figure>
 <h4 id="主题配置">7.2 主题配置</h4>
-<p>打开<strong>主题目录</strong>下的配置文件
-**_config.yml**，可以进行自修改，不使用的功能进行注释（语句前添加#）</p>
+<p>打开<strong>主题目录</strong>下的配置文件 **_config.yml**，可以进行自修改，不使用的功能进行注释（语句前添加#）</p>
 <div class="code-wrapper"><pre><code class="hljs yaml"><span class="hljs-attr">header:</span>
    <span class="hljs-attr">title:</span> <span class="hljs-string">&quot;Beautiful Hexo&quot;</span>
    <span class="hljs-attr">motto:</span> <span class="hljs-string">不积跬步无以至千里，不积小流无以成江海</span>
@@ -454,8 +414,7 @@ alt="image-20230413074402552" />
 <span class="hljs-attr">tags:</span>
 <span class="hljs-attr">categories:</span>	
 <span class="hljs-meta">---</span></code></pre></div>
-<p>这样以后创建文档，它就会自动在文档开头添加标识，你只需要在相应标识下添加分类和标签（以<code>-</code>+空格开头）即可，注意：hexo
-一篇文章只能属于一个分类，不会产生两个分类，而是把分类嵌套。如下：</p>
+<p>这样以后创建文档，它就会自动在文档开头添加标识，你只需要在相应标识下添加分类和标签（以<code>-</code>+空格开头）即可，注意：hexo 一篇文章只能属于一个分类，不会产生两个分类，而是把分类嵌套。如下：</p>
 <div class="code-wrapper"><pre><code class="hljs yaml"><span class="hljs-attr">title:</span> <span class="hljs-string">Hexo和Github</span> <span class="hljs-string">Pages搭建个人博客</span>
 <span class="hljs-attr">date:</span> <span class="hljs-number">2023-04-12 18:57:46</span>
 <span class="hljs-attr">tags:</span>
@@ -466,36 +425,29 @@ alt="image-20230413074402552" />
 <p>进入本地blog仓库，打开<code>git bash</code>，通过不同的命令，创建相应的内容。</p>
 <h5 id="创建文章">7.4.1 创建文章</h5>
 <div class="code-wrapper"><pre><code class="hljs yaml"><span class="hljs-string">hexo</span> <span class="hljs-string">new</span> <span class="hljs-string">&quot;填入你的文章名&quot;</span></code></pre></div>
-<p>在<code>source/_posts</code>
-目录下就会生成创建的文档，打开进行写作即可。</p>
+<p>在<code>source/_posts</code> 目录下就会生成创建的文档，打开进行写作即可。</p>
 <h5 id="创建标签">7.4.2 创建标签</h5>
 <div class="code-wrapper"><pre><code class="hljs yaml"><span class="hljs-string">hexo</span> <span class="hljs-string">new</span> <span class="hljs-string">page</span> <span class="hljs-string">tags</span></code></pre></div>
-<p>在<strong>source/tags/</strong>目录下会生成<strong>index.md</strong>文档，打开此文档，添加
-<code>layout: "tags"</code>到文档中保存退出，如：</p>
+<p>在<strong>source/tags/</strong>目录下会生成<strong>index.md</strong>文档，打开此文档，添加 <code>layout: "tags"</code>到文档中保存退出，如：</p>
 <div class="code-wrapper"><pre><code class="hljs yaml"><span class="hljs-meta">---</span>
 <span class="hljs-attr">title:</span> <span class="hljs-string">tags</span>
 <span class="hljs-attr">date:</span> <span class="hljs-number">2023-04-12 11:12:33</span>
 <span class="hljs-attr">layout:</span> <span class="hljs-string">&quot;tags&quot;</span>
 <span class="hljs-meta">---</span></code></pre></div>
-<p>要想在主页显示标签栏，需要进入主题配置文件
-<code>_config.yml</code>，添加标签栏</p>
+<p>要想在主页显示标签栏，需要进入主题配置文件 <code>_config.yml</code>，添加标签栏</p>
 <div class="code-wrapper"><pre><code class="hljs yaml"><span class="hljs-attr">navbar-links:</span>
 	<span class="hljs-string">...</span>
 	<span class="hljs-attr">Tags:</span> <span class="hljs-string">/tags</span></code></pre></div>
-<p>点击首页的 “tags”
-可以看到该标签页下的所有文章。当然，只有文章中添加了tag属性的才会被收录到首页的
-“标签” 中。</p>
+<p>点击首页的 “tags” 可以看到该标签页下的所有文章。当然，只有文章中添加了tag属性的才会被收录到首页的 “标签” 中。</p>
 <h5 id="创建分类">7.4.3 创建分类</h5>
 <div class="code-wrapper"><pre><code class="hljs yaml"><span class="hljs-string">hexo</span> <span class="hljs-string">new</span> <span class="hljs-string">page</span> <span class="hljs-string">categories</span></code></pre></div>
-<p>在<strong>source/categories</strong>目录下生成的<strong>index.md</strong>文档，打开文档，添加
-<code>layout: "categories"</code>到内容中,保存退出，如：</p>
+<p>在<strong>source/categories</strong>目录下生成的<strong>index.md</strong>文档，打开文档，添加 <code>layout: "categories"</code>到内容中,保存退出，如：</p>
 <div class="code-wrapper"><pre><code class="hljs yaml"><span class="hljs-meta">---</span>
 <span class="hljs-attr">title:</span> <span class="hljs-string">categories</span>
 <span class="hljs-attr">date:</span> <span class="hljs-number">2023-04-12 19:05:47</span>
 <span class="hljs-attr">layout:</span> <span class="hljs-string">&quot;categories&quot;</span>
 <span class="hljs-meta">---</span></code></pre></div>
-<p>同理，要想在主页显示分类栏，需要进入主题配置文件
-<code>_config.yml</code>，添加分类栏：</p>
+<p>同理，要想在主页显示分类栏，需要进入主题配置文件 <code>_config.yml</code>，添加分类栏：</p>
 <div class="code-wrapper"><pre><code class="hljs yaml"><span class="hljs-attr">navbar-links:</span>
   <span class="hljs-string">...</span>
   <span class="hljs-attr">Categories:</span> <span class="hljs-string">/categories</span></code></pre></div>
@@ -522,32 +474,18 @@ alt="image-20230413074402552" />
                                     <span class="hljs-string">a.post-title(href=url_for(post.path))=</span> <span class="hljs-string">post.title</span>
                             <span class="hljs-bullet">-</span> &#125;<span class="hljs-string">)</span>
                 <span class="hljs-bullet">-</span> &#125;<span class="hljs-string">)</span></code></pre></div>
-<p>点击首页的 “categories” 可以看到该分类下的所有文章。 参考博客：<a
-target="_blank" rel="noopener" href="https://www.baidu.com/link?url=jNXzClJm8Ve2gFpOPz9vyfQiMfkrP7icKAOSfJyszHlh2vGqYoCZ9YDXU5T1aZj86pjyFXrf4lrjp6Mwj80qSa&amp;wd=&amp;eqid=f4337b38000dc2e90000000664376496">使用Hexo创建文章、标签和分类</a></p>
-<h3 id="hexo博客同时发布到github和gitee">8.
-Hexo博客同时发布到github和gitee</h3>
+<p>点击首页的 “categories” 可以看到该分类下的所有文章。 参考博客：<a target="_blank" rel="noopener" href="https://www.baidu.com/link?url=jNXzClJm8Ve2gFpOPz9vyfQiMfkrP7icKAOSfJyszHlh2vGqYoCZ9YDXU5T1aZj86pjyFXrf4lrjp6Mwj80qSa&amp;wd=&amp;eqid=f4337b38000dc2e90000000664376496">使用Hexo创建文章、标签和分类</a></p>
+<h3 id="hexo博客同时发布到github和gitee">8. Hexo博客同时发布到github和gitee</h3>
 <hr />
-<p>因为github服务器在国外，所以打开网页比较慢，国内的gitee
-pages具有同样的部署功能，打开网页就会更快一些，所以可以将hexo博客同步到gitee上，它的部署发布与github差不多，就是每次更新完博客后，gitee部署时需要进入Pages页面进行手动更新，不再过多赘述，具体参照这篇博客：<a
-target="_blank" rel="noopener" href="https://blog.csdn.net/qq_23858785/article/details/123104823">hexo博客同时发布到github和gitee</a></p>
-<p>本地博客文件同时上传到github和gitee：<a
-target="_blank" rel="noopener" href="https://blog.csdn.net/yilovexing/article/details/107226141">如何将一个项目同时提交到GitHub和Gitee(码云)两个仓库</a></p>
+<p>因为github服务器在国外，所以打开网页比较慢，国内的gitee pages具有同样的部署功能，打开网页就会更快一些，所以可以将hexo博客同步到gitee上，它的部署发布与github差不多，就是每次更新完博客后，gitee部署时需要进入Pages页面进行手动更新，不再过多赘述，具体参照这篇博客：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_23858785/article/details/123104823">hexo博客同时发布到github和gitee</a></p>
+<p>本地博客文件同时上传到github和gitee：<a target="_blank" rel="noopener" href="https://blog.csdn.net/yilovexing/article/details/107226141">如何将一个项目同时提交到GitHub和Gitee(码云)两个仓库</a></p>
 <h3 id="多台设备同步更新hexo博客">9. 多台设备同步更新Hexo博客</h3>
 <hr />
-<p>真正的原始Hexo博客内容在我们的电脑本地，上传到网页上的内容是public文件夹里面的静态内容，有的时候写文章需要在不同的电脑上操作，这样就需要博客项目在不同设备间的迁移与同步，具体操作参照博客：
-<a
-target="_blank" rel="noopener" href="https://blog.csdn.net/K1052176873/article/details/122879462">Hexo在多台电脑上提交和更新</a>
-<a
-target="_blank" rel="noopener" href="https://blog.csdn.net/qq_30105599/article/details/118302086">多台电脑同步更新Hexo博客</a></p>
-<p>以上是备份本地博客内容到云端仓库，所以所有人都能看到你的源文件，如果不想让人看到你的源文件，只需在云端仓库新建一个仓库，再与本地博客仓库关联起来即可。之后在不同的设备上，git
-clone这个云端新仓库，然后按照正常方式操作即可。</p>
+<p>真正的原始Hexo博客内容在我们的电脑本地，上传到网页上的内容是public文件夹里面的静态内容，有的时候写文章需要在不同的电脑上操作，这样就需要博客项目在不同设备间的迁移与同步，具体操作参照博客： <a target="_blank" rel="noopener" href="https://blog.csdn.net/K1052176873/article/details/122879462">Hexo在多台电脑上提交和更新</a> <a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_30105599/article/details/118302086">多台电脑同步更新Hexo博客</a></p>
+<p>以上是备份本地博客内容到云端仓库，所以所有人都能看到你的源文件，如果不想让人看到你的源文件，只需在云端仓库新建一个仓库，再与本地博客仓库关联起来即可。之后在不同的设备上，git clone这个云端新仓库，然后按照正常方式操作即可。</p>
 <h3 id="参考链接">参考链接</h3>
 <hr />
-<p><a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">Hexo官方文档</a> <a
-target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000017986794">超详细Hexo+Github
-Page搭建技术博客教程</a> <a
-target="_blank" rel="noopener" href="https://lovenight.github.io/2015/11/10/Hexo-3-1-1-静态博客搭建指南/?">Hexo
-3.1.1静态博客搭建指南</a></p>
+<p><a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">Hexo官方文档</a> <a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000017986794">超详细Hexo+Github Page搭建技术博客教程</a> <a target="_blank" rel="noopener" href="https://lovenight.github.io/2015/11/10/Hexo-3-1-1-静态博客搭建指南/?">Hexo 3.1.1静态博客搭建指南</a></p>
 
                 
               </div>

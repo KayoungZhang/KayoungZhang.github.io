@@ -16,13 +16,14 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="在ST公司推出HAL库之前，开发SMT32一般使用的是标准库，但后来为了便于移植程序，官方不再更新STM32标准库，而大力推崇HAL库，伴随HAL库的兴起，ST推出了STM32CubeMX开发工具，它是STM32芯片图形化配置工具， 允许用户使用图形化向导生成C 初始化代码，极大限度内减少了工程师的工作量，转而把工作重点放在项目逻辑层、应用层的实现。另外，ST也同时推出一整套IDE软件STM3">
+    <meta name="description" content="在ST公司推出HAL库之前，开发SMT32一般使用的是标准库，但后来为了便于移植程序，官方不再更新STM32标准库，而大力推崇HAL库，伴随HAL库的兴起，ST推出了STM32CubeMX开发工具，它是STM32芯片图形化配置工具， 允许用户使用图形化向导生成C 初始化代码，极大限度内减少了工程师的工作量，转而把工作重点放在项目逻辑层、应用层的实现。另外，ST也同时推出一整套IDE软件STM32C">
 <meta property="og:type" content="article">
 <meta property="og:title" content="STM32CubeMX之开发环境的搭建">
 <meta property="og:url" content="http://example.com/2023/05/27/STM32CubeMX%E4%B9%8B%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E7%9A%84%E6%90%AD%E5%BB%BA/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="在ST公司推出HAL库之前，开发SMT32一般使用的是标准库，但后来为了便于移植程序，官方不再更新STM32标准库，而大力推崇HAL库，伴随HAL库的兴起，ST推出了STM32CubeMX开发工具，它是STM32芯片图形化配置工具， 允许用户使用图形化向导生成C 初始化代码，极大限度内减少了工程师的工作量，转而把工作重点放在项目逻辑层、应用层的实现。另外，ST也同时推出一整套IDE软件STM3">
+<meta property="og:description" content="在ST公司推出HAL库之前，开发SMT32一般使用的是标准库，但后来为了便于移植程序，官方不再更新STM32标准库，而大力推崇HAL库，伴随HAL库的兴起，ST推出了STM32CubeMX开发工具，它是STM32芯片图形化配置工具， 允许用户使用图形化向导生成C 初始化代码，极大限度内减少了工程师的工作量，转而把工作重点放在项目逻辑层、应用层的实现。另外，ST也同时推出一整套IDE软件STM32C">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230527210314137.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230527210938403.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230527212452472.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230527211706175.png">
@@ -34,13 +35,17 @@
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230527214726370.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230527215030571.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230527215605956.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230527215826116.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230527220345421.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230530093411899.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230527221407553.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230527222104592.png">
 <meta property="article:published_time" content="2023-05-27T12:39:20.000Z">
 <meta property="article:modified_time" content="2023-05-30T01:34:59.843Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="stm32">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230527210938403.png">
+<meta name="twitter:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230527210314137.png">
   
   
   
@@ -297,33 +302,20 @@
             
               <div class="markdown-body">
                 
-                <p>在ST公司推出HAL库之前，开发SMT32一般使用的是标准库，但后来为了便于移植程序，官方不再更新STM32标准库，而大力推崇HAL库，伴随HAL库的兴起，ST推出了STM32CubeMX开发工具，它是STM32芯片图形化配置工具，
-允许用户使用图形化向导生成C
-初始化代码，极大限度内减少了工程师的工作量，转而把工作重点放在项目逻辑层、应用层的实现。另外，ST也同时推出一整套IDE软件STM32CubeIDE
-，本章不做过多介绍。</p>
-<p>HAL 的全称是：<strong>Hardware Abstraction Layer
-(硬件抽象层)</strong>，HAL
-位于操作系统内核与硬件电路之间的接口层，其目的在于将硬件抽象化。它是一个由
-ST公司基于硬件抽象层而设计的软件函数包，由程序、数据结构、宏等组成，包括了微控制器所有外设的性能特征。此外HAL函数库包括每一个外设的驱动描述和应用实例，为开发者访问底层硬件提供了一个中间
-API，所以说通过使用 HAL
-库，工程师不需要花过多精力去深入掌握底层硬件细节，就可以应用STM32的每个外设，实现快速二次开发的目的。</p>
+                <p>在ST公司推出HAL库之前，开发SMT32一般使用的是标准库，但后来为了便于移植程序，官方不再更新STM32标准库，而大力推崇HAL库，伴随HAL库的兴起，ST推出了STM32CubeMX开发工具，它是STM32芯片图形化配置工具， 允许用户使用图形化向导生成C 初始化代码，极大限度内减少了工程师的工作量，转而把工作重点放在项目逻辑层、应用层的实现。另外，ST也同时推出一整套IDE软件STM32CubeIDE ，本章不做过多介绍。</p>
+<p>HAL 的全称是：<strong>Hardware Abstraction Layer (硬件抽象层)</strong>，HAL 位于操作系统内核与硬件电路之间的接口层，其目的在于将硬件抽象化。它是一个由 ST公司基于硬件抽象层而设计的软件函数包，由程序、数据结构、宏等组成，包括了微控制器所有外设的性能特征。此外HAL函数库包括每一个外设的驱动描述和应用实例，为开发者访问底层硬件提供了一个中间 API，所以说通过使用 HAL 库，工程师不需要花过多精力去深入掌握底层硬件细节，就可以应用STM32的每个外设，实现快速二次开发的目的。</p>
 <h3 id="smt32开发环境的搭建">SMT32开发环境的搭建</h3>
 <p><strong>友情提醒：全程下载安装过程中尽量不要使用中文目录，防止个别异常情况发生。</strong></p>
 <h4 id="一keil-mdk-arm软件的安装">一、Keil MDK-ARM软件的安装</h4>
 <ol type="1">
-<li>获取Keil MDK-ARM软件：<a
-target="_blank" rel="noopener" href="https://developer.arm.com/Tools%20and%20Software/Keil%20MDK">官网</a></li>
+<li>获取Keil MDK-ARM软件：<a target="_blank" rel="noopener" href="https://developer.arm.com/Tools%20and%20Software/Keil%20MDK">官网</a></li>
 </ol>
 <figure>
-<img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230527210314137.png" srcset="/img/loading.gif" lazyload
-alt="image-20230527210314137" />
-<figcaption aria-hidden="true">image-20230527210314137</figcaption>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230527210314137.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20230527210314137</figcaption>
 </figure>
 <p>可以安装社区版，免费正版使用一年，需要进行注册才能下载，为了学习可以在网上查找其他方式进行安装。</p>
 <ol start="2" type="1">
-<li>获取STM32芯片设备安装包：<a
-target="_blank" rel="noopener" href="https://www.keil.arm.com/devices/?q=&amp;vendor=stmicroelectronics&amp;core=Cortex-M3&amp;sort_by=">官网</a></li>
+<li>获取STM32芯片设备安装包：<a target="_blank" rel="noopener" href="https://www.keil.arm.com/devices/?q=&amp;vendor=stmicroelectronics&amp;core=Cortex-M3&amp;sort_by=">官网</a></li>
 </ol>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230527210938403.png" srcset="/img/loading.gif" lazyload alt="image-20230527210938403"  /></p>
 <p>选择对应的厂商和内核版本，进行相应下载即可。</p>
@@ -335,17 +327,14 @@ target="_blank" rel="noopener" href="https://www.keil.arm.com/devices/?q=&amp;ve
 <ul>
 <li>JRE（Java Runtime Environment）：JAVA运行环境。</li>
 <li>STM32CubeMX软件：生成初始化代码的地方。</li>
-<li>HAL库
-PACK包：F0、F1、F3、H7等Cortex内核，都需要对应的PACK包安装。</li>
+<li>HAL库 PACK包：F0、F1、F3、H7等Cortex内核，都需要对应的PACK包安装。</li>
 </ul>
 <ol type="1">
-<li>安装JRE：JRE官网下载链接：
-https://www.java.com/en/download/manual.jsp</li>
+<li>安装JRE：JRE官网下载链接： https://www.java.com/en/download/manual.jsp</li>
 </ol>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230527212452472.png" srcset="/img/loading.gif" lazyload alt="image-20230527212452472" style="zoom:80%;" /></p>
 <ol start="2" type="1">
-<li>获取STM32CubeMX：<a
-target="_blank" rel="noopener" href="https://www.st.com/en/development-tools/stm32cubemx.html">官网</a></li>
+<li>获取STM32CubeMX：<a target="_blank" rel="noopener" href="https://www.st.com/en/development-tools/stm32cubemx.html">官网</a></li>
 </ol>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230527211706175.png" srcset="/img/loading.gif" lazyload alt="image-20230527211706175"  /></p>
 <ol start="3" type="1">
@@ -357,8 +346,7 @@ target="_blank" rel="noopener" href="https://www.st.com/en/development-tools/stm
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230527213020674.png" srcset="/img/loading.gif" lazyload alt="image-20230527213020674" style="zoom: 67%;" /></p>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230527213741351.png" srcset="/img/loading.gif" lazyload alt="image-20230527213741351" style="zoom: 80%;" /></p>
 <ul>
-<li>下载离线PACK包，然后通过STM32CubeMX软件进行安装：<a
-target="_blank" rel="noopener" href="https://www.st.com/en/development-tools/stm32cubemx.html#tools-software">官网</a></li>
+<li>下载离线PACK包，然后通过STM32CubeMX软件进行安装：<a target="_blank" rel="noopener" href="https://www.st.com/en/development-tools/stm32cubemx.html#tools-software">官网</a></li>
 </ul>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230527214001528.png" srcset="/img/loading.gif" lazyload alt="image-20230527214001528" style="zoom: 67%;" /></p>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230527213852127.png" srcset="/img/loading.gif" lazyload alt="image-20230527213852127" style="zoom:80%;" /></p>
@@ -368,8 +356,7 @@ target="_blank" rel="noopener" href="https://www.st.com/en/development-tools/stm
 </ul>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230527214446420.png" srcset="/img/loading.gif" lazyload alt="image-20230527214446420"  /></p>
 <ul>
-<li>RCC设置，选择HSE（外部高速时钟）为Crystal/Ceramic
-Resonator（晶振/陶瓷谐振器）</li>
+<li>RCC设置，选择HSE（外部高速时钟）为Crystal/Ceramic Resonator（晶振/陶瓷谐振器）</li>
 </ul>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230527214726370.png" srcset="/img/loading.gif" lazyload alt="image-20230527214726370"  /></p>
 <ul>
@@ -381,36 +368,23 @@ Resonator（晶振/陶瓷谐振器）</li>
 </ul>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230527215605956.png" srcset="/img/loading.gif" lazyload alt="image-20230527215605956"  /></p>
 <figure>
-<img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230527215826116.png" srcset="/img/loading.gif" lazyload
-alt="image-20230527215826116" />
-<figcaption aria-hidden="true">image-20230527215826116</figcaption>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230527215826116.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20230527215826116</figcaption>
 </figure>
 <ul>
 <li>工程设置并生成Keil工程</li>
 </ul>
 <figure>
-<img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230527220345421.png" srcset="/img/loading.gif" lazyload
-alt="image-20230527220345421" />
-<figcaption aria-hidden="true">image-20230527220345421</figcaption>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230527220345421.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20230527220345421</figcaption>
 </figure>
 <figure>
-<img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230530093411899.png" srcset="/img/loading.gif" lazyload
-alt="image-20230530093411899" />
-<figcaption aria-hidden="true">image-20230530093411899</figcaption>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230530093411899.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20230530093411899</figcaption>
 </figure>
 <ul>
-<li>点击Open
-Project，打开keil工程，至此就配置好了工程外设初始化；在gpio.c文件中可以看到PA0/PA1管脚的初始化函数；至此用户可以根据自已的需求编写应用程序</li>
+<li>点击Open Project，打开keil工程，至此就配置好了工程外设初始化；在gpio.c文件中可以看到PA0/PA1管脚的初始化函数；至此用户可以根据自已的需求编写应用程序</li>
 </ul>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230527221407553.png" srcset="/img/loading.gif" lazyload alt="image-20230527221407553" style="zoom: 80%;" /></p>
 <figure>
-<img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230527222104592.png" srcset="/img/loading.gif" lazyload
-alt="image-20230527222104592" />
-<figcaption aria-hidden="true">image-20230527222104592</figcaption>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230527222104592.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20230527222104592</figcaption>
 </figure>
 <h4 id="参考链接">参考链接：</h4>
 <p><a target="_blank" rel="noopener" href="http://t.csdn.cn/dnLul">STM32CubeMX系列</a></p>

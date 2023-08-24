@@ -233,7 +233,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2023/08/20/%E5%B8%B8%E8%A7%81%E7%9A%84%E5%BC%80%E5%8F%91%E6%A6%82%E5%BF%B5%E5%8F%8A%E5%BC%80%E6%BA%90%E8%B5%84%E6%BA%90/" target="_self">
         <div>
-          GNU   GNU是一个开源组织，同时也是一个100%自由软件的操作系统，包含了所有的官方GNU软件包，也包括非GNU自由软件。 GNU官网：https://www.gnu.org/  GCC/G++：GNU工具链中的编译器。 Make：GNU工具链中的构建生成器，搭配makefile文件使用。 GDB（GNU Debuger）：GNU 开源组织发布的一个强大的UNI
+          GNU   GNU是一个开源组织，同时也是一个100%自由软件的操作系统，包含了所有的官方GNU软件包，也包括非GNU自由软件。 GNU官网：https://www.gnu.org/  GCC/G++：GNU工具链中的编译器。 Make：GNU工具链中的构建生成器，搭配makefile文件使用。 GDB（GNU Debuger）：GNU 开源组织发布的一个强大的UNIX
         </div>
       </a>
 
@@ -355,7 +355,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2023/08/13/%E5%86%85%E5%AD%98%E7%9A%84%E5%88%86%E5%8C%BA-%E6%A0%88%E5%8C%BA%E3%80%81%E5%A0%86%E5%8C%BA%E3%80%81%E5%85%A8%E5%B1%80%E5%8C%BA%E3%80%81%E5%B8%B8%E9%87%8F%E5%8C%BA%E5%92%8C%E4%BB%A3%E7%A0%81%E5%8C%BA/" target="_self">
         <div>
-          内存分区简介 内存一般分为四个区域：堆区、栈区、全局区（静态区）、代码区。而编译程序占用的内存分为以下五个部分：堆区、栈区、全局区（静态区）、常量区、代码区 。 C、C++程序在编译链接后生成的映像（image）中，将只包含 代码段(.Text)、只读数据段(.rodata) 和 读写数据段(.data) 。在程序运行之前，将生成 未初始化数据段(.bss)，在程序的运行时还将动态生成
+          内存分区简介 内存一般分为四个区域：堆区、栈区、全局区（静态区）、代码区。而编译程序占用的内存分为以下五个部分：堆区、栈区、全局区（静态区）、常量区、代码区 。 C、C++程序在编译链接后生成的映像（image）中，将只包含 代码段(.Text)、只读数据段(.rodata) 和 读写数据段(.data) 。在程序运行之前，将生成 未初始化数据段(.bss)，在程序的运行时还将动态生成 堆(H
         </div>
       </a>
 
@@ -416,7 +416,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2023/08/13/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%93%E6%9E%84/" target="_self">
         <div>
-          计算机的五个基本组成部分：运算器、控制器、存储器、输入设备、输出设备 。 计算机常见的两种结构，哈佛结构（Harvard Architecture）和 冯·诺依曼结构（Von Neumann Architecture）：  从这两种结构图上可以看出，它们的主要区别是内存存在方式的不同。 哈佛结构 哈佛结构是一种将程序指令储存和数据储存分开的存储器结构。每个存储器独立编址，使用两条独
+          计算机的五个基本组成部分：运算器、控制器、存储器、输入设备、输出设备 。 计算机常见的两种结构，哈佛结构（Harvard Architecture）和 冯·诺依曼结构（Von Neumann Architecture）：  从这两种结构图上可以看出，它们的主要区别是内存存在方式的不同。 哈佛结构 哈佛结构是一种将程序指令储存和数据储存分开的存储器结构。每个存储器独立编址，使用两条独立的总
         </div>
       </a>
 
@@ -470,7 +470,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2023/08/09/stm32-sct%E5%88%86%E6%95%A3%E5%8A%A0%E8%BD%BD%E6%96%87%E4%BB%B6%E8%AF%A6%E8%A7%A3/" target="_self">
         <div>
-          keil软件在编译过程中会生成分散加载文件（Scatter-Loading Description File），它可以用来描述链接器生成映像文件时需要的信息，通过这些信息分配 Code、RO-Data，RW-Data，ZI-Data 等数据的存放地址。 一个sct文件主要由一个加载区（load region）和多个执行区（execution region）构成。 加载区是用来保存永久性
+          keil软件在编译过程中会生成分散加载文件（Scatter-Loading Description File），它可以用来描述链接器生成映像文件时需要的信息，通过这些信息分配 Code、RO-Data，RW-Data，ZI-Data 等数据的存放地址。 一个sct文件主要由一个加载区（load region）和多个执行区（execution region）构成。 加载区是用来保存永久性数据（程
         </div>
       </a>
 
@@ -531,7 +531,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2023/08/09/stm32-map%E6%96%87%E4%BB%B6%E8%AF%A6%E8%A7%A3/" target="_self">
         <div>
-          MDK-ARM在编译时会生成很多类型的中间文件，最终通过这些中间文件生成可下载到MCU的hex文件。.map 文件就是其中编译器链接时生成的一个文件，主要包含了交叉链接信息。 通过 .map 文件，可以知晓工程中函数的大小，入口地址，变量、调用关系、FLASH 和 RAM 占用空间大小等信息，根据这些信息，可以对代码进行优化。 要生成 .map 文件，需要在keil软件中进行如下相应设置
+          MDK-ARM在编译时会生成很多类型的中间文件，最终通过这些中间文件生成可下载到MCU的hex文件。.map 文件就是其中编译器链接时生成的一个文件，主要包含了交叉链接信息。 通过 .map 文件，可以知晓工程中函数的大小，入口地址，变量、调用关系、FLASH 和 RAM 占用空间大小等信息，根据这些信息，可以对代码进行优化。 要生成 .map 文件，需要在keil软件中进行如下相应设置。
         </div>
       </a>
 
@@ -653,7 +653,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2023/08/07/stm32f1xx-hal-sd%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
         <div>
-          Secure Digital,简称SD,SD内存卡是一种使用非常广泛的存储设备，以下来看看HAL库关于SD卡的使用方法。 SD外设库的使用 这是一个通用分层的SDIO存储驱动，它使用HAL SDIO驱动函数来连接SD内存卡。 1. 初始化SDIO底层。HAL_SD_MspInit()  使能SDIO接口时钟。__HAL_RCC_SDIO_CLK_ENABLE() 配置SDIO引脚
+          Secure Digital,简称SD,SD内存卡是一种使用非常广泛的存储设备，以下来看看HAL库关于SD卡的使用方法。 SD外设库的使用 这是一个通用分层的SDIO存储驱动，它使用HAL SDIO驱动函数来连接SD内存卡。 1. 初始化SDIO底层。HAL_SD_MspInit()  使能SDIO接口时钟。__HAL_RCC_SDIO_CLK_ENABLE() 配置SDIO引脚
         </div>
       </a>
 
@@ -714,7 +714,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2023/08/07/stm32f1xx-hal-mmc%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
         <div>
-          MultiMediaCard,简称MMC,它属于SD卡的一种，是一种一体化、可拆卸、多功能的内存卡,以下来看看HAL库关于MMC的使用方法。 MMC外设库的使用 这是一个通用分层的MMC存储器驱动，它使用HAL SDMMC 驱动函数来连接MMC和eMMC卡。 1. 初始化MMC底层。HAL_MMC_MspInit()  使能MMC接口时钟。__HAL_RCC_SDMMC_CLK_ENA
+          MultiMediaCard,简称MMC,它属于SD卡的一种，是一种一体化、可拆卸、多功能的内存卡,以下来看看HAL库关于MMC的使用方法。 MMC外设库的使用 这是一个通用分层的MMC存储器驱动，它使用HAL SDMMC 驱动函数来连接MMC和eMMC卡。 1. 初始化MMC底层。HAL_MMC_MspInit()  使能MMC接口时钟。__HAL_RCC_SDMMC_CLK_ENAB
         </div>
       </a>
 
@@ -775,7 +775,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2023/08/07/stm32f1xx-hal-nor%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
         <div>
-          下面来看看HAL库关于Nor flash存储器的使用方法。 NOR存储器外设库的使用 此驱动是一个通用的分层驱动程序，包含一组用于控制NOR闪存的API。它使用FSMC层函数来连接NOR 闪存。  配置NOR flash 存储器的控制和时序参数。HAL_NOR_Init() 读取NOR flash 存储器制造商和设备ID。HAL_NOR_Read_ID() 读取的信息存储在函数调用的
+          下面来看看HAL库关于Nor flash存储器的使用方法。 NOR存储器外设库的使用 此驱动是一个通用的分层驱动程序，包含一组用于控制NOR闪存的API。它使用FSMC层函数来连接NOR 闪存。  配置NOR flash 存储器的控制和时序参数。HAL_NOR_Init() 读取NOR flash 存储器制造商和设备ID。HAL_NOR_Read_ID() 读取的信息存储在函数调用的N
         </div>
       </a>
 

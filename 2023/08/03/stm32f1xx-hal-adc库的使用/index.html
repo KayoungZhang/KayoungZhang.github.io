@@ -16,12 +16,12 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="同GPIO库一样，ST官方给出了ADC外设库的使用方法，下面具体看看ADC外设库中的步骤： 1. 配置ADC顶层参数  使能ADC接口  建议在 HAL_ADC_MspInit() 函数中配置ADC时钟 （STM32F1 ADC时钟频率最大14MHz）如：  RCC_PeriphCLKInitTypeDef PeriphClkInit; __ADC1_CLK_ENABLE();">
+    <meta name="description" content="同GPIO库一样，ST官方给出了ADC外设库的使用方法，下面具体看看ADC外设库中的步骤： 1. 配置ADC顶层参数  使能ADC接口  建议在 HAL_ADC_MspInit() 函数中配置ADC时钟 （STM32F1 ADC时钟频率最大14MHz）如：  RCC_PeriphCLKInitTypeDef PeriphClkInit; __ADC1_CLK_ENABLE();">
 <meta property="og:type" content="article">
 <meta property="og:title" content="stm32f1xx_hal_adc库的使用">
 <meta property="og:url" content="http://example.com/2023/08/03/stm32f1xx-hal-adc%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="同GPIO库一样，ST官方给出了ADC外设库的使用方法，下面具体看看ADC外设库中的步骤： 1. 配置ADC顶层参数  使能ADC接口  建议在 HAL_ADC_MspInit() 函数中配置ADC时钟 （STM32F1 ADC时钟频率最大14MHz）如：  RCC_PeriphCLKInitTypeDef PeriphClkInit; __ADC1_CLK_ENABLE();">
+<meta property="og:description" content="同GPIO库一样，ST官方给出了ADC外设库的使用方法，下面具体看看ADC外设库中的步骤： 1. 配置ADC顶层参数  使能ADC接口  建议在 HAL_ADC_MspInit() 函数中配置ADC时钟 （STM32F1 ADC时钟频率最大14MHz）如：  RCC_PeriphCLKInitTypeDef PeriphClkInit; __ADC1_CLK_ENABLE();">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-08-03T13:03:11.000Z">
 <meta property="article:modified_time" content="2023-08-14T00:03:33.194Z">
@@ -289,8 +289,7 @@
 <ul>
 <li><strong>使能ADC接口</strong>
 <ul>
-<li>建议在 HAL_ADC_MspInit() 函数中配置ADC时钟 （<strong>STM32F1
-ADC时钟频率最大14MHz</strong>）如：
+<li>建议在 HAL_ADC_MspInit() 函数中配置ADC时钟 （<strong>STM32F1 ADC时钟频率最大14MHz</strong>）如：
 <ul>
 <li>RCC_PeriphCLKInitTypeDef PeriphClkInit;</li>
 <li>__ADC1_CLK_ENABLE();</li>
@@ -302,8 +301,7 @@ ADC时钟频率最大14MHz</strong>）如：
 <li><strong>配置ADC管脚</strong>
 <ul>
 <li>使能ADC GPIOs。__HAL_RCC_GPIOx_CLK_ENABLE()</li>
-<li>在GPIO初始化函数中配置ADC管脚为 <strong>analog mode</strong>。
-HAL_GPIO_Init()</li>
+<li>在GPIO初始化函数中配置ADC管脚为 <strong>analog mode</strong>。 HAL_GPIO_Init()</li>
 </ul></li>
 <li><strong>当使用ADC中断时：</strong>
 <ul>
@@ -317,48 +315,37 @@ HAL_GPIO_Init()</li>
 <li>将ADC中断处理函数HAL_ADC_IRQHandler()插入到相应的DMA中断向量DMAx_Channelx_IRQHandler()的函数中。</li>
 </ul></li>
 </ul>
-<h3 id="配置adc常规组或注入组groups-regularinjected通道等参数">2.
-配置ADC常规组或注入组(groups regular/injected)，通道等参数</h3>
+<h3 id="配置adc常规组或注入组groups-regularinjected通道等参数">2. 配置ADC常规组或注入组(groups regular/injected)，通道等参数</h3>
 <ul>
-<li>配置ADC参数 (分辨率, 数据对齐方式等) 和 常规组或注入组参数
-(转换触发, 序列等)。HAL_ADC_Init()</li>
-<li>配置常规组通道参数(通道号, 通道排列顺序等)
-。HAL_ADC_ConfigChannel()</li>
-<li>当使用注入组时，配置注入组各参数。
-HAL_ADCEx_InjectedConfigChannel()</li>
-<li>当使用模拟看门狗时，配置其参数(监控的通道, 阈值等)。
-HAL_ADC_AnalogWDGConfig()</li>
+<li>配置ADC参数 (分辨率, 数据对齐方式等) 和 常规组或注入组参数 (转换触发, 序列等)。HAL_ADC_Init()</li>
+<li>配置常规组通道参数(通道号, 通道排列顺序等) 。HAL_ADC_ConfigChannel()</li>
+<li>当使用注入组时，配置注入组各参数。 HAL_ADCEx_InjectedConfigChannel()</li>
+<li>当使用模拟看门狗时，配置其参数(监控的通道, 阈值等)。 HAL_ADC_AnalogWDGConfig()</li>
 <li>当使用多个ADC时，配置多模式参数。HAL_ADCEx_MultiModeConfigChannel()</li>
 </ul>
 <h3 id="执行adc转换">3. 执行ADC转换</h3>
 <ul>
 <li>当需要提高转换精度时，执行ADC自动校准函数：HAL_ADCEx_Calibration_Start()。</li>
-<li>ADC可在三种模式下转换:
-<strong>轮询（polling）,中断（interruption）和 DMA</strong>
+<li>ADC可在三种模式下转换: <strong>轮询（polling）,中断（interruption）和 DMA</strong>
 <ul>
 <li><strong>轮询转换</strong>
 <ul>
 <li>激活ADC外设，开启转换。HAL_ADC_Start()</li>
-<li>等待转换完成。HAL_ADC_PollForConversion() 或
-HAL_ADCEx_InjectedPollForConversion()(注入组)</li>
-<li>得到转换结果。HAL_ADC_GetValue() 或
-HAL_ADCEx_InjectedGetValue()(注入组)</li>
+<li>等待转换完成。HAL_ADC_PollForConversion() 或 HAL_ADCEx_InjectedPollForConversion()(注入组)</li>
+<li>得到转换结果。HAL_ADC_GetValue() 或 HAL_ADCEx_InjectedGetValue()(注入组)</li>
 <li>停止转换并关闭ADC外设。HAL_ADC_Stop()</li>
 </ul></li>
 <li><strong>中断转换</strong>
 <ul>
 <li>激活ADC外设，开启转换。HAL_ADC_Start_IT()</li>
-<li>等待转换完成并进入回调函数。HAL_ADC_ConvCpltCallback() 或
-HAL_ADCEx_InjectedConvCpltCallback()(注入组)</li>
-<li>得到转换结果。HAL_ADC_GetValue() 或
-HAL_ADCEx_InjectedGetValue()(注入组)</li>
+<li>等待转换完成并进入回调函数。HAL_ADC_ConvCpltCallback() 或 HAL_ADCEx_InjectedConvCpltCallback()(注入组)</li>
+<li>得到转换结果。HAL_ADC_GetValue() 或 HAL_ADCEx_InjectedGetValue()(注入组)</li>
 <li>停止转换并关闭ADC外设。HAL_ADC_Stop_IT()</li>
 </ul></li>
 <li><strong>DMA转换</strong>
 <ul>
 <li>激活ADC外设，开启转换。 HAL_ADC_Start_DMA()</li>
-<li>等待转换完成并进入回调函数。HAL_ADC_ConvCpltCallback()
-或HAL_ADC_ConvHalfCpltCallback()。</li>
+<li>等待转换完成并进入回调函数。HAL_ADC_ConvCpltCallback() 或HAL_ADC_ConvHalfCpltCallback()。</li>
 <li>转换结果由DMA自动转换到目标地址。</li>
 <li>停止转换并关闭ADC外设。HAL_ADC_Stop_DMA()</li>
 </ul></li>
@@ -366,8 +353,7 @@ HAL_ADCEx_InjectedGetValue()(注入组)</li>
 <ul>
 <li>激活ADC外设从设备，开启转换。HAL_ADC_Start()</li>
 <li>激活ADC外设主设备，开启转换。HAL_ADCEx_MultiModeStart_DMA()</li>
-<li>等待转换完成并进入回调函数。HAL_ADC_ConvCpltCallback()
-或HAL_ADC_ConvHalfCpltCallback()</li>
+<li>等待转换完成并进入回调函数。HAL_ADC_ConvCpltCallback() 或HAL_ADC_ConvHalfCpltCallback()</li>
 <li>转换结果由DMA自动转换到目标地址。</li>
 <li>停止转换并关闭ADC外设主设备。HAL_ADCEx_MultiModeStop_DMA()</li>
 <li>停止转换并关闭ADC外设从设备。HAL_ADC_Stop_IT()</li>
@@ -376,15 +362,13 @@ HAL_ADCEx_InjectedGetValue()(注入组)</li>
 <li>回调函数必须在用户程序中实现
 <ul>
 <li>HAL_ADC_ErrorCallback()</li>
-<li>HAL_ADC_LevelOutOfWindowCallback() (callback of analog
-watchdog)</li>
+<li>HAL_ADC_LevelOutOfWindowCallback() (callback of analog watchdog)</li>
 <li>HAL_ADC_ConvCpltCallback()</li>
 <li>HAL_ADC_ConvHalfCpltCallback()</li>
 <li>HAL_ADCEx_InjectedConvCpltCallback()</li>
 </ul></li>
 </ul>
-<h3 id="adc的去初始化deinitialization">4.
-ADC的去初始化(Deinitialization)</h3>
+<h3 id="adc的去初始化deinitialization">4. ADC的去初始化(Deinitialization)</h3>
 <ul>
 <li>关闭ADC外设接口
 <ul>
@@ -405,8 +389,7 @@ ADC的去初始化(Deinitialization)</h3>
 </ul></li>
 </ul>
 <h3 id="回调函数的注册">5. 回调函数的注册</h3>
-<p>当 <strong>USE_HAL_ADC_REGISTER_CALLBACKS</strong>
-设置为1时，允许用户配置回调函数HAL_ADC_RegisterCallback()</p>
+<p>当 <strong>USE_HAL_ADC_REGISTER_CALLBACKS</strong> 设置为1时，允许用户配置回调函数HAL_ADC_RegisterCallback()</p>
 <p>回调函数：</p>
 <ul>
 <li>ConvCpltCallback : ADC转换完成的回调</li>
@@ -418,8 +401,7 @@ ADC的去初始化(Deinitialization)</h3>
 <li>MspDeInitCallback : ADC 相关MCU去初始化回调</li>
 </ul>
 <p>此函数以HAL外设句柄和回调ID和指向用户回调函数的指针作为参数。</p>
-<p>函数 HAL_ADC_UnRegisterCallback()
-用来复位回调函数到默认的弱定义函数。</p>
+<p>函数 HAL_ADC_UnRegisterCallback() 用来复位回调函数到默认的弱定义函数。</p>
 <ul>
 <li>ConvCpltCallback : ADC转换完成的回调</li>
 <li>ConvHalfCpltCallback : ADC转换DMA传输过半的回调</li>
@@ -429,17 +411,11 @@ ADC的去初始化(Deinitialization)</h3>
 <li>MspInitCallback : ADC 相关MCU初始化回调</li>
 <li>MspDeInitCallback : ADC 相关MCU去初始化回调</li>
 </ul>
-<p>默认情况下，ADC初始化后(HAL_ADC_Init()) ,当ADC的状态是
-<strong>HAL_ADC_STATE_RESET</strong>
-时，所有的回调被设置到相应的弱函数。（MspInit 和
-MspDeInit除外，它们会被复位到传统弱函数）</p>
-<p>如果MspInit或MspDeInit不为空,
-无论ADC在哪种状态，HAL_ADC_Init()和HAL_ADC_DeInit()函数可保持和使用用户MspInit/MspDeInit回调函数(预先注册过)。</p>
+<p>默认情况下，ADC初始化后(HAL_ADC_Init()) ,当ADC的状态是 <strong>HAL_ADC_STATE_RESET</strong> 时，所有的回调被设置到相应的弱函数。（MspInit 和 MspDeInit除外，它们会被复位到传统弱函数）</p>
+<p>如果MspInit或MspDeInit不为空, 无论ADC在哪种状态，HAL_ADC_Init()和HAL_ADC_DeInit()函数可保持和使用用户MspInit/MspDeInit回调函数(预先注册过)。</p>
 <p>只有ADC状态在 HAL_ADC_STATE_READY时，回调函数才能注册或注销。</p>
-<p>在调用
-HAL_ADC_DeInit()或HAL_ADC_Init()之前，用户可以首先注册MspInit/MspDeInit用户回调函数</p>
-<p>当 <strong>USE_HAL_ADC_REGISTER_CALLBACKS</strong>
-设置为0或没有定义时，回调注册功能不可用，所有回调都被设置为相应的弱函数。</p>
+<p>在调用 HAL_ADC_DeInit()或HAL_ADC_Init()之前，用户可以首先注册MspInit/MspDeInit用户回调函数</p>
+<p>当 <strong>USE_HAL_ADC_REGISTER_CALLBACKS</strong> 设置为0或没有定义时，回调注册功能不可用，所有回调都被设置为相应的弱函数。</p>
 
                 
               </div>

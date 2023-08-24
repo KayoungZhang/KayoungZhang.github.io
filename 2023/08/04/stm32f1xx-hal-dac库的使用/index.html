@@ -16,12 +16,12 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="下面来看看DAC HAL库关于DAC外设的特性及使用方法。 DAC外设特性 1. DAC 的通道 STM32F1 集成有两个12-bit 数字模拟转换器，这两个转换器可以独立使用，也可以同时使用（双模式）。  DAC通道1以DAC_OUT1 (PA4)作为输出或连接到片上外设(例如定时器)。 DAC通道2以DAC_OUT2 (PA5)作为输出或连接到片上外设(例如定时器)。">
+    <meta name="description" content="下面来看看DAC HAL库关于DAC外设的特性及使用方法。 DAC外设特性 1. DAC 的通道 STM32F1 集成有两个12-bit 数字模拟转换器，这两个转换器可以独立使用，也可以同时使用（双模式）。  DAC通道1以DAC_OUT1 (PA4)作为输出或连接到片上外设(例如定时器)。 DAC通道2以DAC_OUT2 (PA5)作为输出或连接到片上外设(例如定时器)。  2.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="stm32f1xx_hal_dac库的使用">
 <meta property="og:url" content="http://example.com/2023/08/04/stm32f1xx-hal-dac%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="下面来看看DAC HAL库关于DAC外设的特性及使用方法。 DAC外设特性 1. DAC 的通道 STM32F1 集成有两个12-bit 数字模拟转换器，这两个转换器可以独立使用，也可以同时使用（双模式）。  DAC通道1以DAC_OUT1 (PA4)作为输出或连接到片上外设(例如定时器)。 DAC通道2以DAC_OUT2 (PA5)作为输出或连接到片上外设(例如定时器)。">
+<meta property="og:description" content="下面来看看DAC HAL库关于DAC外设的特性及使用方法。 DAC外设特性 1. DAC 的通道 STM32F1 集成有两个12-bit 数字模拟转换器，这两个转换器可以独立使用，也可以同时使用（双模式）。  DAC通道1以DAC_OUT1 (PA4)作为输出或连接到片上外设(例如定时器)。 DAC通道2以DAC_OUT2 (PA5)作为输出或连接到片上外设(例如定时器)。  2.">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-08-04T11:09:31.000Z">
 <meta property="article:modified_time" content="2023-08-14T00:03:33.214Z">
@@ -287,22 +287,17 @@
                 <p>下面来看看DAC HAL库关于DAC外设的特性及使用方法。</p>
 <h3 id="dac外设特性">DAC外设特性</h3>
 <p><strong>1. DAC 的通道</strong></p>
-<p>STM32F1 集成有两个12-bit
-数字模拟转换器，这两个转换器可以独立使用，也可以同时使用（双模式）。</p>
+<p>STM32F1 集成有两个12-bit 数字模拟转换器，这两个转换器可以独立使用，也可以同时使用（双模式）。</p>
 <ul>
-<li><p>DAC通道1以DAC_OUT1
-(PA4)作为输出或连接到片上外设(例如定时器)。</p></li>
-<li><p>DAC通道2以DAC_OUT2
-(PA5)作为输出或连接到片上外设(例如定时器)。</p></li>
+<li><p>DAC通道1以DAC_OUT1 (PA4)作为输出或连接到片上外设(例如定时器)。</p></li>
+<li><p>DAC通道2以DAC_OUT2 (PA5)作为输出或连接到片上外设(例如定时器)。</p></li>
 </ul>
 <p><strong>2. DAC 的触发</strong></p>
 <ul>
-<li><p>使用 <strong>DAC_TRIGGER_NONE</strong>
-可以不触发DAC转换，一旦写入DHRx寄存器，DAC_OUT1/DAC_OUT2可用。</p></li>
+<li><p>使用 <strong>DAC_TRIGGER_NONE</strong> 可以不触发DAC转换，一旦写入DHRx寄存器，DAC_OUT1/DAC_OUT2可用。</p></li>
 <li><p>DAC转换触发方式：</p>
 <ul>
-<li><p>外部事件:
-<strong>DAC_TRIGGER_EXT_IT9</strong>。GPIOx_PIN_9需要配置为输入模式。</p></li>
+<li><p>外部事件: <strong>DAC_TRIGGER_EXT_IT9</strong>。GPIOx_PIN_9需要配置为输入模式。</p></li>
 <li><p>定时器触发输出: TIM2, TIM4, TIM6, TIM7</p>
 <p>STM32F10x 互联型和 STM32F100x : TIM3</p>
 <p>STM32F10x 高容量和 超大容量: TIM8</p>
@@ -326,8 +321,7 @@
 <li>当PA5打开之前，将其配置为模拟模式。</li>
 </ul>
 <p><strong>5. DAC 发生波形特性</strong></p>
-<p>两个DAC通道可用来产生干扰波和三角波。对于双模式和特定信号的产生，请参考
-<code>stm32f1xx_hal_dac_ex.c</code> 。</p>
+<p>两个DAC通道可用来产生干扰波和三角波。对于双模式和特定信号的产生，请参考 <code>stm32f1xx_hal_dac_ex.c</code> 。</p>
 <p><strong>6. DAC数据格式</strong></p>
 <ul>
 <li>8-bit 右对齐 DAC_ALIGN_8B_R</li>
@@ -338,16 +332,12 @@
 <p>每个DAC通道引脚的电压值转换公式：</p>
 <p><strong>DAC_OUTx = VREF+ * DOR / 4096</strong></p>
 <p>其中，DOR是数据输出寄存器值，VREF+是输入参考电压（参考数据手册）。</p>
-<p>例如：假设 VREF+ = 3.3V, 要设置DAC_OUT1 为0.7V, 则 DAC_OUT1 = (3.3 *
-868) / 4095 = 0.7V</p>
+<p>例如：假设 VREF+ = 3.3V, 要设置DAC_OUT1 为0.7V, 则 DAC_OUT1 = (3.3 * 868) / 4095 = 0.7V</p>
 <p><strong>8. DMA请求</strong></p>
-<p>如果 DMA1
-请求使能（HAL_DAC_Start_DMA()），当外部触发产生时（非软件触发），就会产生DMA请求。DMA1请求的映射如下：</p>
+<p>如果 DMA1 请求使能（HAL_DAC_Start_DMA()），当外部触发产生时（非软件触发），就会产生DMA请求。DMA1请求的映射如下：</p>
 <ul>
-<li>STM32F100x 低容量，中容量，高容量 ，拥有DAC DMA重映射，DAC
-通道1映射到DMA1的通道3。</li>
-<li>STM32F100x 高容量没有DAC DMA重映射和其它 STM32F1 ，DAC
-通道2映射到DMA2的通道3。</li>
+<li>STM32F100x 低容量，中容量，高容量 ，拥有DAC DMA重映射，DAC 通道1映射到DMA1的通道3。</li>
+<li>STM32F100x 高容量没有DAC DMA重映射和其它 STM32F1 ，DAC 通道2映射到DMA2的通道3。</li>
 </ul>
 <h3 id="dac库的使用">DAC库的使用</h3>
 <ul>
@@ -366,22 +356,17 @@
 <ul>
 <li><p>开启DAC外设。HAL_DAC_Start_DMA()</p>
 <p>这个阶段用户指定在每个转换后传输的数据长度，第一个触发会开始转换之前使用函数（HAL_DAC_SetValue()）设置的值。</p></li>
-<li><p>数据传输过半时，会执行 HAL_DAC_ConvHalfCpltCallbackCh1() 或
-HAL_DACEx_ConvHalfCpltCallbackCh2()函数，用户可以在其中添加代码。</p></li>
-<li><p>数据传输完成时，会执行 HAL_DAC_ConvCpltCallbackCh1() 或
-HAL_DACEx_ConvHalfCpltCallbackCh2()函数，用户可以在其中添加代码。</p></li>
-<li><p>当传输出错时，会执行 HAL_DAC_ErrorCallbackCh1()
-函数，用户可以在其中添加代码。</p></li>
+<li><p>数据传输过半时，会执行 HAL_DAC_ConvHalfCpltCallbackCh1() 或 HAL_DACEx_ConvHalfCpltCallbackCh2()函数，用户可以在其中添加代码。</p></li>
+<li><p>数据传输完成时，会执行 HAL_DAC_ConvCpltCallbackCh1() 或 HAL_DACEx_ConvHalfCpltCallbackCh2()函数，用户可以在其中添加代码。</p></li>
+<li><p>当传输出错时，会执行 HAL_DAC_ErrorCallbackCh1() 函数，用户可以在其中添加代码。</p></li>
 <li><p>对于STM32F100x 特定特性: DMA自检（DMA underrun）</p></li>
 </ul>
-<p>当DMA 自检时，会执行 HAL_DAC_DMAUnderrunCallbackCh1() 或
-HAL_DACEx_DMAUnderrunCallbackCh2()函数，用户可以在其中添加代码。并在HAL_DAC_ErrorCallbackCh1()函数中添加自己的代码。</p>
+<p>当DMA 自检时，会执行 HAL_DAC_DMAUnderrunCallbackCh1() 或 HAL_DACEx_DMAUnderrunCallbackCh2()函数，用户可以在其中添加代码。并在HAL_DAC_ErrorCallbackCh1()函数中添加自己的代码。</p>
 <ul>
 <li>停止DAC外设。HAL_DAC_Stop_DMA()</li>
 </ul>
 <p><strong>3. 注册回调函数</strong></p>
-<p>当 USE_HAL_DAC_REGISTER_CALLBACKS
-设置为1时，则允许用户配置回调函数。HAL_DAC_RegisterCallback()</p>
+<p>当 USE_HAL_DAC_REGISTER_CALLBACKS 设置为1时，则允许用户配置回调函数。HAL_DAC_RegisterCallback()</p>
 <p>使用 HAL_DAC_UnRegisterCallback()函数可以注销回调函数。</p>
 <p>DAC回调函数ID：</p>
 <ul>
@@ -398,14 +383,10 @@ HAL_DACEx_DMAUnderrunCallbackCh2()函数，用户可以在其中添加代码。�
 </ul>
 <p><strong>4. DAC HAL驱动常用宏定义列表</strong></p>
 <ul>
-<li><p>__HAL_DAC_ENABLE : 使能DAC外设 (For STM32F100x devices with
-specific feature: DMA underrun)</p></li>
-<li><p>__HAL_DAC_DISABLE : 禁止DAC外设 (For STM32F100x devices with
-specific feature: DMA underrun)</p></li>
-<li><p>__HAL_DAC_CLEAR_FLAG: 清除DAC挂起标志 (For STM32F100x devices
-with specific feature: DMA underrun)</p></li>
-<li><p>__HAL_DAC_GET_FLAG: 获取DAC标志状态 (For STM32F100x devices with
-specific feature: DMA underrun)</p></li>
+<li><p>__HAL_DAC_ENABLE : 使能DAC外设 (For STM32F100x devices with specific feature: DMA underrun)</p></li>
+<li><p>__HAL_DAC_DISABLE : 禁止DAC外设 (For STM32F100x devices with specific feature: DMA underrun)</p></li>
+<li><p>__HAL_DAC_CLEAR_FLAG: 清除DAC挂起标志 (For STM32F100x devices with specific feature: DMA underrun)</p></li>
+<li><p>__HAL_DAC_GET_FLAG: 获取DAC标志状态 (For STM32F100x devices with specific feature: DMA underrun)</p></li>
 </ul>
 
                 

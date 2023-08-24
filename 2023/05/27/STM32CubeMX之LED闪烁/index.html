@@ -16,13 +16,14 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="下面结合正点原子战舰开发板，对多个外设介绍，并编程实验。 开发板使用的MCU是STM32F103ZET6，进入ST官网，下载其相关资料。STM32F103ZE   image-20230527225335619  GPIO口简介 每个GPIO端口有两个32位配置寄存器（GPIOx_CRL和GPIOx_CRH），两个32位数据寄存器（GPIOx_IDR和GPIOx_ODR），一个32位">
+    <meta name="description" content="下面结合正点原子战舰开发板，对多个外设介绍，并编程实验。 开发板使用的MCU是STM32F103ZET6，进入ST官网，下载其相关资料。STM32F103ZE  image-20230527225335619  GPIO口简介 每个GPIO端口有两个32位配置寄存器（GPIOx_CRL和GPIOx_CRH），两个32位数据寄存器（GPIOx_IDR和GPIOx_ODR），一个32位置位">
 <meta property="og:type" content="article">
 <meta property="og:title" content="STM32CubeMX之LED闪烁">
 <meta property="og:url" content="http://example.com/2023/05/27/STM32CubeMX%E4%B9%8BLED%E9%97%AA%E7%83%81/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="下面结合正点原子战舰开发板，对多个外设介绍，并编程实验。 开发板使用的MCU是STM32F103ZET6，进入ST官网，下载其相关资料。STM32F103ZE   image-20230527225335619  GPIO口简介 每个GPIO端口有两个32位配置寄存器（GPIOx_CRL和GPIOx_CRH），两个32位数据寄存器（GPIOx_IDR和GPIOx_ODR），一个32位">
+<meta property="og:description" content="下面结合正点原子战舰开发板，对多个外设介绍，并编程实验。 开发板使用的MCU是STM32F103ZET6，进入ST官网，下载其相关资料。STM32F103ZE  image-20230527225335619  GPIO口简介 每个GPIO端口有两个32位配置寄存器（GPIOx_CRL和GPIOx_CRH），两个32位数据寄存器（GPIOx_IDR和GPIOx_ODR），一个32位置位">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230527225335619.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230527225635350.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230527231125164.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230527232409961.png">
@@ -33,7 +34,7 @@
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="stm32">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230527225635350.png">
+<meta name="twitter:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230527225335619.png">
   
   
   
@@ -291,17 +292,12 @@
               <div class="markdown-body">
                 
                 <p>下面结合正点原子战舰开发板，对多个外设介绍，并编程实验。</p>
-<p>开发板使用的MCU是STM32F103ZET6，进入ST官网，下载其相关资料。<a
-target="_blank" rel="noopener" href="https://www.st.com/en/microcontrollers-microprocessors/stm32f103ze.html#documentation">STM32F103ZE</a></p>
+<p>开发板使用的MCU是STM32F103ZET6，进入ST官网，下载其相关资料。<a target="_blank" rel="noopener" href="https://www.st.com/en/microcontrollers-microprocessors/stm32f103ze.html#documentation">STM32F103ZE</a></p>
 <figure>
-<img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230527225335619.png" srcset="/img/loading.gif" lazyload
-alt="image-20230527225335619" />
-<figcaption aria-hidden="true">image-20230527225335619</figcaption>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230527225335619.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20230527225335619</figcaption>
 </figure>
 <h3 id="gpio口简介">GPIO口简介</h3>
-<p>每个GPIO端口有两个32位配置寄存器（GPIOx_CRL和GPIOx_CRH），两个32位数据寄存器（GPIOx_IDR和GPIOx_ODR），一个32位置位/复位寄存器（GPIOx_BSRR），一个16位复位寄存器（GPIOx_BRR）和一个32位锁定寄存器（GPIOx_LCKR）。
-在HAL库中，GPIO端口的每个位可以由软件分别配置成多种模式：</p>
+<p>每个GPIO端口有两个32位配置寄存器（GPIOx_CRL和GPIOx_CRH），两个32位数据寄存器（GPIOx_IDR和GPIOx_ODR），一个32位置位/复位寄存器（GPIOx_BSRR），一个16位复位寄存器（GPIOx_BRR）和一个32位锁定寄存器（GPIOx_LCKR）。 在HAL库中，GPIO端口的每个位可以由软件分别配置成多种模式：</p>
 <ul>
 <li>浮空输入模式</li>
 <li>开漏输出模式</li>
@@ -326,9 +322,7 @@ alt="image-20230527225335619" />
 </ul>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230527232409961.png" srcset="/img/loading.gif" lazyload alt="image-20230527232409961"  /></p>
 <ul>
-<li>输入工程名，选择工程路径（不要有中文），选择MDK-ARM
-V5；勾选Generated periphera initialization as a pair of ‘.c/.h’ files
-per IP ；点击GENERATE CODE，生成工程代码</li>
+<li>输入工程名，选择工程路径（不要有中文），选择MDK-ARM V5；勾选Generated periphera initialization as a pair of ‘.c/.h’ files per IP ；点击GENERATE CODE，生成工程代码</li>
 </ul>
 <h4 id="keil工程代码的编写">2.keil工程代码的编写</h4>
 <ul>
@@ -366,12 +360,9 @@ per IP ；点击GENERATE CODE，生成工程代码</li>
 
 &#125;</code></pre></div>
 <ul>
-<li>我们只需要在main.c函数中编写LED闪烁程序即可（<strong>注意编写的程序应该在相应的USER
-CODE范围内，否则再次使用CubeMX修改配置时，USER
-CODE范围之外的程序会被清除</strong>）</li>
+<li>我们只需要在main.c函数中编写LED闪烁程序即可（<strong>注意编写的程序应该在相应的USER CODE范围内，否则再次使用CubeMX修改配置时，USER CODE范围之外的程序会被清除</strong>）</li>
 </ul>
-<p>在<strong>stm32f1xx_hal_gpio.h</strong>库文件中,
-找到可以改变引脚电平的API函数</p>
+<p>在<strong>stm32f1xx_hal_gpio.h</strong>库文件中, 找到可以改变引脚电平的API函数</p>
 <div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-type">void</span> <span class="hljs-title function_">HAL_GPIO_WritePin</span><span class="hljs-params">(GPIO_TypeDef *GPIOx, <span class="hljs-type">uint16_t</span> GPIO_Pin, GPIO_PinState PinState)</span>;
 <span class="hljs-type">void</span> <span class="hljs-title function_">HAL_GPIO_TogglePin</span><span class="hljs-params">(GPIO_TypeDef *GPIOx, <span class="hljs-type">uint16_t</span> GPIO_Pin)</span>;</code></pre></div>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230527234410653.png" srcset="/img/loading.gif" lazyload alt="image-20230527234410653" style="zoom:80%;" /></p>
@@ -380,8 +371,7 @@ CODE范围之外的程序会被清除</strong>）</li>
 </ul>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230527235236622.png" srcset="/img/loading.gif" lazyload alt="image-20230527235236622" style="zoom:80%;" /></p>
 <p>可以看到两个LED不停的闪烁。</p>
-<p>工程文件Gitee：<a
-target="_blank" rel="noopener" href="https://gitee.com/kayoungzhang/my_codehub/raw/master/stm32/led.zip">LED</a></p>
+<p>工程文件Gitee：<a target="_blank" rel="noopener" href="https://gitee.com/kayoungzhang/my_codehub/raw/master/stm32/led.zip">LED</a></p>
 
                 
               </div>

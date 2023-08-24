@@ -16,16 +16,18 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="EXTI介绍 STM32F103 的外部中断&#x2F;事件控制器支持 19个外部中断&#x2F;事件请求（互联网型产品支持20个）。每个中断设有状态位，每个中断&#x2F;事件都有独立的触发和屏蔽设置。 STM32F103的19个外部中断为：  EXTI线0~15：对应外部IO口的输入中断 EXTI线16：连接到PVD输出 EXTI线17：连接到RTC闹钟事件 EXTI线18：连接到USB唤醒事件 EXTI">
+    <meta name="description" content="EXTI介绍 STM32F103 的外部中断&#x2F;事件控制器支持 19个外部中断&#x2F;事件请求（互联网型产品支持20个）。每个中断设有状态位，每个中断&#x2F;事件都有独立的触发和屏蔽设置。 STM32F103的19个外部中断为：  EXTI线0~15：对应外部IO口的输入中断 EXTI线16：连接到PVD输出 EXTI线17：连接到RTC闹钟事件 EXTI线18：连接到USB唤醒事件 EXTI线">
 <meta property="og:type" content="article">
 <meta property="og:title" content="STM32CubeMX之EXTI">
 <meta property="og:url" content="http://example.com/2023/05/28/STM32CubeMX%E4%B9%8BEXTI/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="EXTI介绍 STM32F103 的外部中断&#x2F;事件控制器支持 19个外部中断&#x2F;事件请求（互联网型产品支持20个）。每个中断设有状态位，每个中断&#x2F;事件都有独立的触发和屏蔽设置。 STM32F103的19个外部中断为：  EXTI线0~15：对应外部IO口的输入中断 EXTI线16：连接到PVD输出 EXTI线17：连接到RTC闹钟事件 EXTI线18：连接到USB唤醒事件 EXTI">
+<meta property="og:description" content="EXTI介绍 STM32F103 的外部中断&#x2F;事件控制器支持 19个外部中断&#x2F;事件请求（互联网型产品支持20个）。每个中断设有状态位，每个中断&#x2F;事件都有独立的触发和屏蔽设置。 STM32F103的19个外部中断为：  EXTI线0~15：对应外部IO口的输入中断 EXTI线16：连接到PVD输出 EXTI线17：连接到RTC闹钟事件 EXTI线18：连接到USB唤醒事件 EXTI线">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230528115852770.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230528101819341.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230528102842722.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230528122534347.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230528123030801.png">
 <meta property="article:published_time" content="2023-05-28T03:51:37.000Z">
 <meta property="article:modified_time" content="2023-05-30T01:37:13.895Z">
 <meta property="article:author" content="John Doe">
@@ -289,8 +291,7 @@
               <div class="markdown-body">
                 
                 <h3 id="exti介绍">EXTI介绍</h3>
-<p>STM32F103 的外部中断/事件控制器支持
-19个外部中断/事件请求（互联网型产品支持20个）。每个中断设有状态位，每个中断/事件都有独立的触发和屏蔽设置。</p>
+<p>STM32F103 的外部中断/事件控制器支持 19个外部中断/事件请求（互联网型产品支持20个）。每个中断设有状态位，每个中断/事件都有独立的触发和屏蔽设置。</p>
 <p>STM32F103的19个外部中断为：</p>
 <ul>
 <li>EXTI线0~15：对应外部IO口的输入中断</li>
@@ -304,22 +305,16 @@
 <h3 id="硬件设计">硬件设计</h3>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230528101819341.png" srcset="/img/loading.gif" lazyload alt="image-20230528101819341" style="zoom:80%;" /></p>
 <figure>
-<img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230528102842722.png" srcset="/img/loading.gif" lazyload
-alt="image-20230528102842722" />
-<figcaption aria-hidden="true">image-20230528102842722</figcaption>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230528102842722.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20230528102842722</figcaption>
 </figure>
-<p>这一章主要是通过外部中断的方式，用开发板上的4
-个按钮（KEY_UP、KEY0、KEY1 和 KEY2）来控制板上的 2 个 LED（DS0 和
-DS1）和蜂鸣器。</p>
+<p>这一章主要是通过外部中断的方式，用开发板上的4 个按钮（KEY_UP、KEY0、KEY1 和 KEY2）来控制板上的 2 个 LED（DS0 和 DS1）和蜂鸣器。</p>
 <ul>
 <li>KEY_UP 控制蜂鸣器，按一次叫，再按一次停；</li>
 <li>KEY2 控制 DS0，按一次亮，再按一次灭；</li>
 <li>KEY1 控制 DS1，效果同 KEY2；</li>
 <li>KEY0 则同时控制 DS0 和 DS1，按一次，他们的状态就翻转一次。</li>
 </ul>
-<p><strong>注意</strong>：KEY0、KEY1 和 KEY2
-外部没有上下拉电阻，所以需要在MCU内部设置上下拉。</p>
+<p><strong>注意</strong>：KEY0、KEY1 和 KEY2 外部没有上下拉电阻，所以需要在MCU内部设置上下拉。</p>
 <h3 id="软件设计">软件设计</h3>
 <h4 id="stm32cubemx配置">STM32CubeMx配置</h4>
 <ul>
@@ -331,19 +326,13 @@ DS1）和蜂鸣器。</p>
 </ul>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230528122534347.png" srcset="/img/loading.gif" lazyload alt="image-20230528122534347"  /></p>
 <ul>
-<li>在NVIC(嵌套向量中断控制器)中，勾选EXIT Line0/2/3/4
-interrupt，使能PA0和PE2/3/4中断。右边两个选项设置抢占优先级和响应优先级</li>
+<li>在NVIC(嵌套向量中断控制器)中，勾选EXIT Line0/2/3/4 interrupt，使能PA0和PE2/3/4中断。右边两个选项设置抢占优先级和响应优先级</li>
 </ul>
 <figure>
-<img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230528123030801.png" srcset="/img/loading.gif" lazyload
-alt="image-20230528123030801" />
-<figcaption aria-hidden="true">image-20230528123030801</figcaption>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230528123030801.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20230528123030801</figcaption>
 </figure>
 <ul>
-<li>输入工程名，选择工程路径（不要有中文），选择MDK-ARM
-V5；勾选Generated periphera initialization as a pair of ‘.c/.h’ files
-per IP ；点击GENERATE CODE，生成工程代码</li>
+<li>输入工程名，选择工程路径（不要有中文），选择MDK-ARM V5；勾选Generated periphera initialization as a pair of ‘.c/.h’ files per IP ；点击GENERATE CODE，生成工程代码</li>
 </ul>
 <h4 id="mdk-arm编程">MDK-ARM编程</h4>
 <ul>
@@ -408,9 +397,7 @@ per IP ；点击GENERATE CODE，生成工程代码</li>
   HAL_NVIC_EnableIRQ(EXTI4_IRQn);
 
 &#125;</code></pre></div>
-<p>在<strong>stm32f1xx_hal_gpio.c</strong>文件中找到GPIO
-EXTI弱符号中断回调函数原型，并在gpio.c中自定义该回调函数
-<code>__weak void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)</code></p>
+<p>在<strong>stm32f1xx_hal_gpio.c</strong>文件中找到GPIO EXTI弱符号中断回调函数原型，并在gpio.c中自定义该回调函数 <code>__weak void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)</code></p>
 <div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">/* USER CODE BEGIN 2 */</span>
 <span class="hljs-type">void</span> <span class="hljs-title function_">HAL_GPIO_EXTI_Callback</span><span class="hljs-params">(<span class="hljs-type">uint16_t</span> GPIO_Pin)</span>
 &#123;
@@ -440,8 +427,7 @@ EXTI弱符号中断回调函数原型，并在gpio.c中自定义该回调函数
 
 <span class="hljs-comment">/* USER CODE END 2 */</span></code></pre></div>
 <p>main.c函数不需要添加任何代码，编译下载，跟按键输入一章同样的现象，获得预期目标。</p>
-<p>工程文件Gitee：<a
-target="_blank" rel="noopener" href="https://gitee.com/kayoungzhang/my_codehub/raw/master/stm32/exti.zip">exti</a></p>
+<p>工程文件Gitee：<a target="_blank" rel="noopener" href="https://gitee.com/kayoungzhang/my_codehub/raw/master/stm32/exti.zip">exti</a></p>
 
                 
               </div>

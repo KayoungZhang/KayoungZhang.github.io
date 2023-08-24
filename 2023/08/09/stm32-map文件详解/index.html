@@ -16,12 +16,12 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="MDK-ARM在编译时会生成很多类型的中间文件，最终通过这些中间文件生成可下载到MCU的hex文件。.map 文件就是其中编译器链接时生成的一个文件，主要包含了交叉链接信息。 通过 .map 文件，可以知晓工程中函数的大小，入口地址，变量、调用关系、FLASH 和 RAM 占用空间大小等信息，根据这些信息，可以对代码进行优化。 要生成 .map 文件，需要在keil软件中进行如下相应设置">
+    <meta name="description" content="MDK-ARM在编译时会生成很多类型的中间文件，最终通过这些中间文件生成可下载到MCU的hex文件。.map 文件就是其中编译器链接时生成的一个文件，主要包含了交叉链接信息。 通过 .map 文件，可以知晓工程中函数的大小，入口地址，变量、调用关系、FLASH 和 RAM 占用空间大小等信息，根据这些信息，可以对代码进行优化。 要生成 .map 文件，需要在keil软件中进行如下相应设置。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="stm32 map文件详解">
 <meta property="og:url" content="http://example.com/2023/08/09/stm32-map%E6%96%87%E4%BB%B6%E8%AF%A6%E8%A7%A3/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="MDK-ARM在编译时会生成很多类型的中间文件，最终通过这些中间文件生成可下载到MCU的hex文件。.map 文件就是其中编译器链接时生成的一个文件，主要包含了交叉链接信息。 通过 .map 文件，可以知晓工程中函数的大小，入口地址，变量、调用关系、FLASH 和 RAM 占用空间大小等信息，根据这些信息，可以对代码进行优化。 要生成 .map 文件，需要在keil软件中进行如下相应设置">
+<meta property="og:description" content="MDK-ARM在编译时会生成很多类型的中间文件，最终通过这些中间文件生成可下载到MCU的hex文件。.map 文件就是其中编译器链接时生成的一个文件，主要包含了交叉链接信息。 通过 .map 文件，可以知晓工程中函数的大小，入口地址，变量、调用关系、FLASH 和 RAM 占用空间大小等信息，根据这些信息，可以对代码进行优化。 要生成 .map 文件，需要在keil软件中进行如下相应设置。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230809191148933.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230809213411201.png">
@@ -287,22 +287,16 @@
             
               <div class="markdown-body">
                 
-                <p>MDK-ARM在编译时会生成很多类型的中间文件，最终通过这些中间文件生成可下载到MCU的hex文件。.map
-文件就是其中编译器链接时生成的一个文件，主要包含了交叉链接信息。</p>
-<p>通过 .map
-文件，可以知晓工程中函数的大小，入口地址，变量、调用关系、FLASH 和 RAM
-占用空间大小等信息，根据这些信息，可以对代码进行优化。</p>
+                <p>MDK-ARM在编译时会生成很多类型的中间文件，最终通过这些中间文件生成可下载到MCU的hex文件。.map 文件就是其中编译器链接时生成的一个文件，主要包含了交叉链接信息。</p>
+<p>通过 .map 文件，可以知晓工程中函数的大小，入口地址，变量、调用关系、FLASH 和 RAM 占用空间大小等信息，根据这些信息，可以对代码进行优化。</p>
 <p>要生成 .map 文件，需要在keil软件中进行如下相应设置。</p>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230809191148933.png" srcset="/img/loading.gif" lazyload alt="image-20230809191148933" style="zoom: 80%;" /></p>
 <p>为了更好的分析 map 文件，需要了解一些基础概念：</p>
 <ul>
 <li>Section：描述映像文件的代码或数据块，我们简称程序段</li>
-<li>RO：包括只读数据（RO data）和代码（RO code）两部分内容，占用 FLASH
-空间</li>
-<li>RW：包含可读写数据（RW data，有初值，且不为 0），占用
-FLASH（存储初值）和 RAM（读写操作）</li>
-<li>ZI：Zero initialized 的缩写，包含初始化为 0 的数据（ZI data），占用
-RAM 空间。</li>
+<li>RO：包括只读数据（RO data）和代码（RO code）两部分内容，占用 FLASH 空间</li>
+<li>RW：包含可读写数据（RW data，有初值，且不为 0），占用 FLASH（存储初值）和 RAM（读写操作）</li>
+<li>ZI：Zero initialized 的缩写，包含初始化为 0 的数据（ZI data），占用 RAM 空间。</li>
 <li>.text：相当于 RO code</li>
 <li>.constdata：相当于 RO data</li>
 <li>.bss：相当于 ZI data</li>
@@ -311,18 +305,14 @@ RAM 空间。</li>
 <p>使用notepad打开map文件，会发现map文件主要有 5 个组成部分：</p>
 <ul>
 <li><strong>程序段交叉引用关系（Section Cross References）</strong></li>
-<li><strong>删除映像未使用的程序段（Removing Unused input sections from
-the image）</strong></li>
+<li><strong>删除映像未使用的程序段（Removing Unused input sections from the image）</strong></li>
 <li><strong>映像符号表（Image Symbol Table）</strong></li>
 <li><strong>映像内存分布图（Memory Map of the image）</strong></li>
 <li><strong>映像组件大小（Image component sizes）</strong></li>
 </ul>
 <p>下面分别进行介绍：</p>
-<h4
-id="程序段交叉引用关系section-cross-references">1.程序段交叉引用关系（Section
-Cross References）</h4>
-<p>这部分内容描述了各个文件（.c/.s
-等）之间函数（程序段）的调用关系。</p>
+<h4 id="程序段交叉引用关系section-cross-references">1.程序段交叉引用关系（Section Cross References）</h4>
+<p>这部分内容描述了各个文件（.c/.s 等）之间函数（程序段）的调用关系。</p>
 <div class="code-wrapper"><pre><code class="hljs gams"><span class="hljs-comment">/*</span>
 <span class="hljs-comment"> * 1.程序段交叉引用关系</span>
 <span class="hljs-comment"> * .o文件是.c源文件生成的中间文件，括号内是文件或函数入口地址，每句末尾表示被调用的函数或内容</span>
@@ -356,9 +346,7 @@ Section Cross References
     entry9a.o(.ARM.Collect<span class="hljs-symbol">$</span><span class="hljs-symbol">$</span><span class="hljs-symbol">$</span><span class="hljs-symbol">$</span><span class="hljs-number">0000000</span>B) refers to main.o(i.main) <span class="hljs-keyword">for</span> main
     entry9b.o(.ARM.Collect<span class="hljs-symbol">$</span><span class="hljs-symbol">$</span><span class="hljs-symbol">$</span><span class="hljs-symbol">$</span><span class="hljs-number">0000000</span>C) refers to main.o(i.main) <span class="hljs-keyword">for</span> main
     init.o(.text) refers to entry5.o(.ARM.Collect<span class="hljs-symbol">$</span><span class="hljs-symbol">$</span><span class="hljs-symbol">$</span><span class="hljs-symbol">$</span><span class="hljs-number">00000004</span>) <span class="hljs-keyword">for</span> __main_after_scatterload</code></pre></div>
-<h4
-id="删除映像未使用的程序段removing-unused-input-sections-from-the-image">2.删除映像未使用的程序段（Removing
-Unused input sections from the image）</h4>
+<h4 id="删除映像未使用的程序段removing-unused-input-sections-from-the-image">2.删除映像未使用的程序段（Removing Unused input sections from the image）</h4>
 <p>这部分内容描述了工程中由于未被调用而被删除的冗余程序段（函数/数据）。</p>
 <div class="code-wrapper"><pre><code class="hljs scss"><span class="hljs-comment">/*</span>
 <span class="hljs-comment"> * 2. 删除映像未使用的程序段</span>
@@ -384,11 +372,8 @@ Removing Unused <span class="hljs-selector-tag">input</span> sections from the i
 
 <span class="hljs-number">226</span> unused <span class="hljs-selector-tag">section</span>(s) (total <span class="hljs-number">11022</span> bytes) removed from the image.
 </code></pre></div>
-<h4 id="映像符号表image-symbol-table">3.映像符号表（Image Symbol
-Table）</h4>
-<p>映像符号表（Image Symbol
-Table）描述了被引用的各个符号（程序段/数据）在存储器中的存储地址、类型、大小等信息。映像符号表分为两类：本地符号（Local
-Symbols）和全局符号（Global Symbols）。</p>
+<h4 id="映像符号表image-symbol-table">3.映像符号表（Image Symbol Table）</h4>
+<p>映像符号表（Image Symbol Table）描述了被引用的各个符号（程序段/数据）在存储器中的存储地址、类型、大小等信息。映像符号表分为两类：本地符号（Local Symbols）和全局符号（Global Symbols）。</p>
 <div class="code-wrapper"><pre><code class="hljs stylus"><span class="hljs-comment">/*</span>
 <span class="hljs-comment"> * 3. 映像符号表</span>
 <span class="hljs-comment"> * 映像符号包括Local Symbols（本地符号）和Global Symbols（全局符号）</span>
@@ -436,12 +421,8 @@ Image Symbol Table
     hdma_usart1_rx                           <span class="hljs-number">0</span>x20000088   Data          <span class="hljs-number">68</span>  usart<span class="hljs-selector-class">.o</span>(.bss)
     hdma_usart1_tx                           <span class="hljs-number">0</span>x200000cc   Data          <span class="hljs-number">68</span>  usart<span class="hljs-selector-class">.o</span>(.bss)
     __initial_sp                             <span class="hljs-number">0</span>x20000510   Data           <span class="hljs-number">0</span>  startup_stm32f103xe<span class="hljs-selector-class">.o</span>(STACK)</code></pre></div>
-<h4 id="映像内存分布图memory-map-of-the-image">4.映像内存分布图（Memory
-Map of the image）</h4>
-<p>映像文件分为加载域（Load Region）和运行域（Execution
-Region），一个加载域必须有至少一个运行域（可以有多个运行域），而一个程序又可以有多个加载域。加载域为映像程序的实际存储区域，而运行域则是
-MCU
-上电后的运行状态。加载域和运行域的简化关系（这里仅表示一个加载域的情况）</p>
+<h4 id="映像内存分布图memory-map-of-the-image">4.映像内存分布图（Memory Map of the image）</h4>
+<p>映像文件分为加载域（Load Region）和运行域（Execution Region），一个加载域必须有至少一个运行域（可以有多个运行域），而一个程序又可以有多个加载域。加载域为映像程序的实际存储区域，而运行域则是 MCU 上电后的运行状态。加载域和运行域的简化关系（这里仅表示一个加载域的情况）</p>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230809213411201.png" srcset="/img/loading.gif" lazyload alt="image-20230809213411201" style="zoom:80%;" /></p>
 <div class="code-wrapper"><pre><code class="hljs dns">/*
  * <span class="hljs-number">4</span>. 映像内存分布图
@@ -483,10 +464,8 @@ Memory Map of the image
     <span class="hljs-number">0x20000034</span>   <span class="hljs-number">0</span>x0000000c   Data   RW          <span class="hljs-number">860</span>    .data               stm32f1xx_hal.o
     <span class="hljs-number">0x20000040</span>   <span class="hljs-number">0</span>x<span class="hljs-number">000000d0</span>   Zero   RW          <span class="hljs-number">200</span>    .bss                usart.o
     <span class="hljs-number">0x20000110</span>   <span class="hljs-number">0x00000400</span>   Zero   RW            <span class="hljs-number">1</span>    STACK               startup_stm32f103xe.o</code></pre></div>
-<h4 id="映像组件大小image-component-sizes">5.映像组件大小（Image
-component sizes）</h4>
-<p>各文件编译后所占代码空间的大小，keil
-IDE编译后输出框显示的文件占用空间大小与此部分一致。</p>
+<h4 id="映像组件大小image-component-sizes">5.映像组件大小（Image component sizes）</h4>
+<p>各文件编译后所占代码空间的大小，keil IDE编译后输出框显示的文件占用空间大小与此部分一致。</p>
 <div class="code-wrapper"><pre><code class="hljs tap">/*
  * 5. 映像组件大小
  * 文件编译后所占代码空间的大小。
@@ -565,12 +544,8 @@ Image component sizes
 <span class="language-yaml">    <span class="hljs-string">Total</span> <span class="hljs-string">ROM</span> <span class="hljs-string">Size</span> <span class="hljs-string">(Code</span> <span class="hljs-string">+</span> <span class="hljs-string">RO</span> <span class="hljs-string">Data</span> <span class="hljs-string">+</span> <span class="hljs-string">RW</span> <span class="hljs-string">Data)</span>       <span class="hljs-number">6088</span> <span class="hljs-string">(</span>   <span class="hljs-number">5.</span><span class="hljs-string">95kB)</span></span>
 <span class="language-yaml"></span>
 <span class="language-yaml"><span class="hljs-string">==============================================================================</span></span></code></pre></div>
-<p>Code是代码区，RO-data 代表常量区，RW-data
-代表已初始化的全局变量和静态变量，属于静态区（全局区），ZI-data
-代表未初始化但被编译器初始化为0的全局变量和静态变量，属于静态区（全局区）。</p>
-<p><a
-target="_blank" rel="noopener" href="https://gitee.com/kayoungzhang/my_codehub/raw/master/stm32/stm32_map_file.zip">hal
-uart map文件与正点原子详解附件</a></p>
+<p>Code是代码区，RO-data 代表常量区，RW-data 代表已初始化的全局变量和静态变量，属于静态区（全局区），ZI-data 代表未初始化但被编译器初始化为0的全局变量和静态变量，属于静态区（全局区）。</p>
+<p><a target="_blank" rel="noopener" href="https://gitee.com/kayoungzhang/my_codehub/raw/master/stm32/stm32_map_file.zip">hal uart map文件与正点原子详解附件</a></p>
 
                 
               </div>

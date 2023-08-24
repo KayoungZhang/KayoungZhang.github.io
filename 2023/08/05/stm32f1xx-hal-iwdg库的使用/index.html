@@ -16,12 +16,12 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="下面来看看 IWDG HAL库关于 独立看门狗的特性和使用方法。 IWDG外设库的一般特性  独立看门狗可以通过软件或硬件开启。 (通过可选字节（option byte）进行配置) 独立看门狗时钟时LSI提供（Low-Speed Internal clock），即使没有主时钟，它也能维持运行。 一旦独立看门狗开启，LSI 时钟就会被强制打开，这两者就不会关闭。计数值从复位值（0xF">
+    <meta name="description" content="下面来看看 IWDG HAL库关于 独立看门狗的特性和使用方法。 IWDG外设库的一般特性  独立看门狗可以通过软件或硬件开启。 (通过可选字节（option byte）进行配置) 独立看门狗时钟时LSI提供（Low-Speed Internal clock），即使没有主时钟，它也能维持运行。 一旦独立看门狗开启，LSI 时钟就会被强制打开，这两者就不会关闭。计数值从复位值（0xFFF）">
 <meta property="og:type" content="article">
 <meta property="og:title" content="stm32f1xx_hal_iwdg库的使用">
 <meta property="og:url" content="http://example.com/2023/08/05/stm32f1xx-hal-iwdg%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="下面来看看 IWDG HAL库关于 独立看门狗的特性和使用方法。 IWDG外设库的一般特性  独立看门狗可以通过软件或硬件开启。 (通过可选字节（option byte）进行配置) 独立看门狗时钟时LSI提供（Low-Speed Internal clock），即使没有主时钟，它也能维持运行。 一旦独立看门狗开启，LSI 时钟就会被强制打开，这两者就不会关闭。计数值从复位值（0xF">
+<meta property="og:description" content="下面来看看 IWDG HAL库关于 独立看门狗的特性和使用方法。 IWDG外设库的一般特性  独立看门狗可以通过软件或硬件开启。 (通过可选字节（option byte）进行配置) 独立看门狗时钟时LSI提供（Low-Speed Internal clock），即使没有主时钟，它也能维持运行。 一旦独立看门狗开启，LSI 时钟就会被强制打开，这两者就不会关闭。计数值从复位值（0xFFF）">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-08-05T05:12:31.000Z">
 <meta property="article:modified_time" content="2023-08-07T05:07:43.030Z">
@@ -287,27 +287,16 @@
                 <p>下面来看看 IWDG HAL库关于 独立看门狗的特性和使用方法。</p>
 <h3 id="iwdg外设库的一般特性">IWDG外设库的一般特性</h3>
 <ul>
-<li><p>独立看门狗可以通过软件或硬件开启。 (通过可选字节（option
-byte）进行配置)</p></li>
-<li><p>独立看门狗时钟时LSI提供（Low-Speed Internal
-clock），即使没有主时钟，它也能维持运行。</p></li>
-<li><p>一旦独立看门狗开启，LSI
-时钟就会被强制打开，这两者就不会关闭。计数值从复位值（0xFFF）向下计数，当计数到0，就会产生复位信号（IWDG复位）。</p></li>
-<li><p>每当键值（key value）<strong>0x0000 AAAA</strong> 写入到IWDG_KR
-寄存器，IWDG_RLR 值就会被重装载到计数器中，以阻止看门狗复位。</p></li>
-<li><p>IWDG工作在 VDD电压域，在 停止（STOP） 和 待机（
-STANDBY）模式下也能正常工作（IWDG复位能够把CPU从待机中唤醒）。RCC_CSR寄存器中复位标志用来提示独立看门狗发生了复位。</p></li>
-<li><p>Debug模式：当微控制器进入debug模式（核心停止），IWDG计数器要么继续正常工作，要么停止，取决于DBG模块
-DBG_IWDG_STOP 位，可通过宏定义配置：__HAL_DBGMCU_FREEZE_IWDG() 和
-__HAL_DBGMCU_UNFREEZE_IWDG()</p></li>
-<li><p>最小、最大的超时时间 <span class="citation"
-data-cites="32KHz">@32KHz</span> (LSI): 125us、32.7s</p>
-<p>独立看门狗的超时时间可能会因为LSI时钟频率变化而发生变化。STM32F1xx芯片可以测量LSI时钟频率（LSI时钟内部连接到
-TIM5_CH4输入捕获引脚）。测量值可用于IWDG超时时间，它具有可接受的精度。</p></li>
+<li><p>独立看门狗可以通过软件或硬件开启。 (通过可选字节（option byte）进行配置)</p></li>
+<li><p>独立看门狗时钟时LSI提供（Low-Speed Internal clock），即使没有主时钟，它也能维持运行。</p></li>
+<li><p>一旦独立看门狗开启，LSI 时钟就会被强制打开，这两者就不会关闭。计数值从复位值（0xFFF）向下计数，当计数到0，就会产生复位信号（IWDG复位）。</p></li>
+<li><p>每当键值（key value）<strong>0x0000 AAAA</strong> 写入到IWDG_KR 寄存器，IWDG_RLR 值就会被重装载到计数器中，以阻止看门狗复位。</p></li>
+<li><p>IWDG工作在 VDD电压域，在 停止（STOP） 和 待机（ STANDBY）模式下也能正常工作（IWDG复位能够把CPU从待机中唤醒）。RCC_CSR寄存器中复位标志用来提示独立看门狗发生了复位。</p></li>
+<li><p>Debug模式：当微控制器进入debug模式（核心停止），IWDG计数器要么继续正常工作，要么停止，取决于DBG模块 DBG_IWDG_STOP 位，可通过宏定义配置：__HAL_DBGMCU_FREEZE_IWDG() 和 __HAL_DBGMCU_UNFREEZE_IWDG()</p></li>
+<li><p>最小、最大的超时时间 <span class="citation" data-cites="32KHz">@32KHz</span> (LSI): 125us、32.7s</p>
+<p>独立看门狗的超时时间可能会因为LSI时钟频率变化而发生变化。STM32F1xx芯片可以测量LSI时钟频率（LSI时钟内部连接到 TIM5_CH4输入捕获引脚）。测量值可用于IWDG超时时间，它具有可接受的精度。</p></li>
 <li><p>默认的超时时间（IWDG_SR 状态寄存器进行更新）：</p>
-<p>LSI_VALUE常量通过名义上的LSI时钟频率来决定，这个频率如上所述，会发生变化，所以默认的超时时间（通过
-HAL_IWDG_DEFAULT_TIMEOUT定义）可能会变得很短，也可能会变得很长，这种情况下，默认的超时时间用户可以通过重定义LSI_VALUE
-常量来进行微调。（比如：如上以测量的LSI时钟频率为基准）</p></li>
+<p>LSI_VALUE常量通过名义上的LSI时钟频率来决定，这个频率如上所述，会发生变化，所以默认的超时时间（通过 HAL_IWDG_DEFAULT_TIMEOUT定义）可能会变得很短，也可能会变得很长，这种情况下，默认的超时时间用户可以通过重定义LSI_VALUE 常量来进行微调。（比如：如上以测量的LSI时钟频率为基准）</p></li>
 </ul>
 <h3 id="iwdg外设库的使用">IWDG外设库的使用</h3>
 <ol type="1">
@@ -315,8 +304,7 @@ HAL_IWDG_DEFAULT_TIMEOUT定义）可能会变得很短，也可能会变得很�
 <ul>
 <li>在IWDG_KEY寄存器中写入开启的键值来使能IWDG，LSI时钟被强制打开，IWDG计数器开始向下计数。</li>
 <li>写使能配置寄存器： IWDG_PR 和 IWDG_RLR 。</li>
-<li>配置IWDG
-预分频系数和计数重装载值。每次看门狗重装载时，此值就会被装载到IWDG的计数器中，然后IWDG从这个值开始向下计数。</li>
+<li>配置IWDG 预分频系数和计数重装载值。每次看门狗重装载时，此值就会被装载到IWDG的计数器中，然后IWDG从这个值开始向下计数。</li>
 <li>等待状态标志被重置。</li>
 </ul></li>
 <li>应用程序必须在正常运行期间定期刷新IWDG计数器，以防止MCU复位。HAL_IWDG_Refresh()</li>
@@ -324,8 +312,7 @@ HAL_IWDG_DEFAULT_TIMEOUT定义）可能会变得很短，也可能会变得很�
 <h3 id="iwdg-hal常用宏定义">IWDG HAL常用宏定义</h3>
 <ul>
 <li>__HAL_IWDG_START: 使能IWDG外设</li>
-<li>__HAL_IWDG_RELOAD_COUNTER:
-把重装载寄存器中的值重装载到IWDG计数器</li>
+<li>__HAL_IWDG_RELOAD_COUNTER: 把重装载寄存器中的值重装载到IWDG计数器</li>
 </ul>
 
                 

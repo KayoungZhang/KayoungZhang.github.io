@@ -16,16 +16,17 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="ADC简介 ADC（analog to digital converter）即模数转换器，它可以将模拟量信号转换为数字信号，按照转换原理主要分为逐次逼近型、双积分型、电压频率转换型三种。 STM32 的 ADC 是 12 位逐次逼近型的模拟数字转换器。它有 18 个通道，可测量 16 个外部和 2 个内部信号源。各通道的 A&#x2F;D 转换模式有单次、连续、扫描或间断模式。ADC 的转换结果">
+    <meta name="description" content="ADC简介 ADC（analog to digital converter）即模数转换器，它可以将模拟量信号转换为数字信号，按照转换原理主要分为逐次逼近型、双积分型、电压频率转换型三种。 STM32 的 ADC 是 12 位逐次逼近型的模拟数字转换器。它有 18 个通道，可测量 16 个外部和 2 个内部信号源。各通道的 A&#x2F;D 转换模式有单次、连续、扫描或间断模式。ADC 的转换结果可以以左">
 <meta property="og:type" content="article">
 <meta property="og:title" content="STM32CubeMX之ADC">
 <meta property="og:url" content="http://example.com/2023/05/29/STM32CubeMX%E4%B9%8BADC/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="ADC简介 ADC（analog to digital converter）即模数转换器，它可以将模拟量信号转换为数字信号，按照转换原理主要分为逐次逼近型、双积分型、电压频率转换型三种。 STM32 的 ADC 是 12 位逐次逼近型的模拟数字转换器。它有 18 个通道，可测量 16 个外部和 2 个内部信号源。各通道的 A&#x2F;D 转换模式有单次、连续、扫描或间断模式。ADC 的转换结果">
+<meta property="og:description" content="ADC简介 ADC（analog to digital converter）即模数转换器，它可以将模拟量信号转换为数字信号，按照转换原理主要分为逐次逼近型、双积分型、电压频率转换型三种。 STM32 的 ADC 是 12 位逐次逼近型的模拟数字转换器。它有 18 个通道，可测量 16 个外部和 2 个内部信号源。各通道的 A&#x2F;D 转换模式有单次、连续、扫描或间断模式。ADC 的转换结果可以以左">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230530083701000.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230530084243966.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230530090516872.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230530090558085.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531225347273.png">
 <meta property="article:published_time" content="2023-05-29T13:14:04.000Z">
 <meta property="article:modified_time" content="2023-06-01T01:32:51.249Z">
@@ -290,17 +291,11 @@
               <div class="markdown-body">
                 
                 <h3 id="adc简介">ADC简介</h3>
-<p>ADC（analog to digital
-converter）即模数转换器，它可以将模拟量信号转换为数字信号，按照转换原理主要分为逐次逼近型、双积分型、电压频率转换型三种。</p>
-<p>STM32 的 ADC 是 12 位逐次逼近型的模拟数字转换器。它有 18
-个通道，可测量 16 个外部和 2 个内部信号源。各通道的 A/D
-转换模式有单次、连续、扫描或间断模式。ADC
-的转换结果可以以左对齐或右对齐方式存储在 16
-位数据寄存器中。ADC时钟挂载在APB2上，最大14MHz。</p>
+<p>ADC（analog to digital converter）即模数转换器，它可以将模拟量信号转换为数字信号，按照转换原理主要分为逐次逼近型、双积分型、电压频率转换型三种。</p>
+<p>STM32 的 ADC 是 12 位逐次逼近型的模拟数字转换器。它有 18 个通道，可测量 16 个外部和 2 个内部信号源。各通道的 A/D 转换模式有单次、连续、扫描或间断模式。ADC 的转换结果可以以左对齐或右对齐方式存储在 16 位数据寄存器中。ADC时钟挂载在APB2上，最大14MHz。</p>
 <p>单个ADC功能框图：</p>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230530083701000.png" srcset="/img/loading.gif" lazyload alt="image-20230530083701000" style="zoom:80%;" /></p>
-<p>STM32 将 ADC 的转换分为 2 个通道组：规则通道组和注入通道组。STM32 其
-ADC 的规则通道组最多包含 16 个转换，而注入通道组最多包含 4 个通道。</p>
+<p>STM32 将 ADC 的转换分为 2 个通道组：规则通道组和注入通道组。STM32 其 ADC 的规则通道组最多包含 16 个转换，而注入通道组最多包含 4 个通道。</p>
 <p>ADC 的转换时间可以由以下公式计算：Time = 采样时间 + 12.5个周期；</p>
 <p>ADC能3种产生相应中断：规则转换与注入转换结束、模拟看门狗事件、DMA请求；</p>
 <h3 id="硬件设计">硬件设计</h3>
@@ -310,28 +305,21 @@ ADC 的规则通道组最多包含 16 个转换，而注入通道组最多包含
 <h4 id="stm32cubemx设置">STM32CubeMX设置</h4>
 <ul>
 <li>USART1选择为异步通讯方式，波特率设置为115200Bits/s，传输数据长度为8Bit，无奇偶校验，1位停止位</li>
-<li>激活ADC1通道1，设置右对齐，关闭扫描、连续及间断模式，使能regular
-conversion，设置软件触发、设置采样时间1.5个周期</li>
+<li>激活ADC1通道1，设置右对齐，关闭扫描、连续及间断模式，使能regular conversion，设置软件触发、设置采样时间1.5个周期</li>
 </ul>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230530090516872.png" srcset="/img/loading.gif" lazyload alt="image-20230530090516872" style="zoom:80%;" /></p>
 <ul>
 <li>RCC设置外接HSE，时钟设置为72M，ADC预分频因子设置为6，ADC_CLK为12MHz</li>
 </ul>
 <figure>
-<img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230530090558085.png" srcset="/img/loading.gif" lazyload
-alt="image-20230530090558085" />
-<figcaption aria-hidden="true">image-20230530090558085</figcaption>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230530090558085.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20230530090558085</figcaption>
 </figure>
 <ul>
-<li>输入工程名，选择工程路径（不要有中文），选择MDK-ARM
-V5；勾选Generated peripheral initialization as a pair of ‘.c/.h’ files
-per periapheral；点击GENERATE CODE，生成工程代码</li>
+<li>输入工程名，选择工程路径（不要有中文），选择MDK-ARM V5；勾选Generated peripheral initialization as a pair of ‘.c/.h’ files per periapheral；点击GENERATE CODE，生成工程代码</li>
 </ul>
 <h4 id="mdk-arm编程">MDK-ARM编程</h4>
 <ul>
-<li>在主函数while循环中添加如下测试程序，ADC1是12位转换精度，因此电压分辨率为：3.3/(2^12)
-= 3.3/4096</li>
+<li>在主函数while循环中添加如下测试程序，ADC1是12位转换精度，因此电压分辨率为：3.3/(2^12) = 3.3/4096</li>
 </ul>
 <div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">/* USER CODE BEGIN 1 */</span>
 <span class="hljs-type">uint16_t</span> ad_value = <span class="hljs-number">0</span>;
@@ -349,13 +337,11 @@ per periapheral；点击GENERATE CODE，生成工程代码</li>
     HAL_Delay(<span class="hljs-number">1000</span>);
 &#125;</code></pre></div>
 <ul>
-<li>在uart.c文件中添加fputc重定义函数，并添加头文件<code>&lt;stdio.h&gt;</code>，勾选keil软件<strong>Use
-MicroLIB</strong>选项。</li>
+<li>在uart.c文件中添加fputc重定义函数，并添加头文件<code>&lt;stdio.h&gt;</code>，勾选keil软件<strong>Use MicroLIB</strong>选项。</li>
 <li>编译无误后下载到开发板，通过接口接入不同的电压（0~3.3），获取的AD转换值和电压值将变化，并通过串口打印出来</li>
 </ul>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531225347273.png" srcset="/img/loading.gif" lazyload alt="image-20230531225347273" style="zoom:80%;" /></p>
-<p>工程文件Gitee：<a
-target="_blank" rel="noopener" href="https://gitee.com/kayoungzhang/my_codehub/raw/master/stm32/adc.zip">adc</a></p>
+<p>工程文件Gitee：<a target="_blank" rel="noopener" href="https://gitee.com/kayoungzhang/my_codehub/raw/master/stm32/adc.zip">adc</a></p>
 
                 
               </div>

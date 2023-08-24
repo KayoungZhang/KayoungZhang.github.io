@@ -16,12 +16,12 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="PID控制的概念  PID 控制的整体框图：  PID是 Proportion Integration Differentiation 的缩写，由比例项（Proportion ），积分项（Integration ），微分项（Differentiation） 三个部分组成，具体形式就是下面的公式： \[ U(t) &#x3D; Kp \{ err(t) + \frac{1}{Ti}*\int">
+    <meta name="description" content="PID控制的概念  PID 控制的整体框图：  PID是 Proportion Integration Differentiation 的缩写，由比例项（Proportion ），积分项（Integration ），微分项（Differentiation） 三个部分组成，具体形式就是下面的公式： \[ U(t) &#x3D; Kp \{ err(t) + \frac{1}{Ti}*\int_0^t">
 <meta property="og:type" content="article">
 <meta property="og:title" content="PID理论及程序实现">
 <meta property="og:url" content="http://example.com/2023/04/24/PID%E7%90%86%E8%AE%BA%E5%8F%8A%E7%A8%8B%E5%BA%8F%E5%AE%9E%E7%8E%B0/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="PID控制的概念  PID 控制的整体框图：  PID是 Proportion Integration Differentiation 的缩写，由比例项（Proportion ），积分项（Integration ），微分项（Differentiation） 三个部分组成，具体形式就是下面的公式： \[ U(t) &#x3D; Kp \{ err(t) + \frac{1}{Ti}*\int">
+<meta property="og:description" content="PID控制的概念  PID 控制的整体框图：  PID是 Proportion Integration Differentiation 的缩写，由比例项（Proportion ），积分项（Integration ），微分项（Differentiation） 三个部分组成，具体形式就是下面的公式： \[ U(t) &#x3D; Kp \{ err(t) + \frac{1}{Ti}*\int_0^t">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230424111806125.png">
 <meta property="article:published_time" content="2023-04-24T07:24:16.000Z">
@@ -290,40 +290,21 @@
 <hr />
 <p>PID 控制的整体框图：</p>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230424111806125.png" srcset="/img/loading.gif" lazyload alt="image-20230424111806125" style="zoom:80%;" /></p>
-<p>PID是 <strong>P</strong>roportion <strong>I</strong>ntegration
-<strong>D</strong>ifferentiation 的缩写，由<strong>比例项（Proportion
-）</strong>，<strong>积分项（Integration
-）</strong>，<strong>微分项（Differentiation）</strong>
-三个部分组成，具体形式就是下面的公式： <span class="math display">\[
-U(t) = Kp \{ err(t) + \frac{1}{Ti}*\int_0^t err(t)dt +
-Td*\frac{derr(t)}{dt} \}
-\]</span> 其中： <strong>U(t)</strong>
-是调节器的输出信号，<strong>err(t)</strong> 是当前值和目标值的偏差，
-<strong>Kp</strong> 是比例增益， <strong>Ti</strong> 是积分时间，
-<strong>Td</strong> 是微分时间。</p>
-<p>PID控制其实就是对偏差的控制过程；如果偏差为 0,
-则比例环节不起作用，只有存在偏差时，比例环节才起作用；积分环节主要是用来消除静差，所谓静差，就是系统稳定后输出值和设定值之间的差值，积分环节实际上就是偏差累计的过程，把累计的误差加到原有系统上以抵消系统造成的静差；而微分信号则反应了偏差信号的变化规律，也可以说是变化趋势，根据偏差信号的变化趋势来进行超前调节，从而增加了系统的预知性。</p>
-<p><strong>比例项</strong>：某时刻误差值,代表着现在,表明现在预设值与实际的偏差。
-<strong>积分项</strong>：所有时刻误差和,代表着过去，是过去Ti时间内的偏差积累，可以减少震荡。
-<strong>微分项</strong>：某时刻误差变化率,代表着未来，可以超前预测并提出控制。</p>
+<p>PID是 <strong>P</strong>roportion <strong>I</strong>ntegration <strong>D</strong>ifferentiation 的缩写，由<strong>比例项（Proportion ）</strong>，<strong>积分项（Integration ）</strong>，<strong>微分项（Differentiation）</strong> 三个部分组成，具体形式就是下面的公式： <span class="math display">\[
+U(t) = Kp \{ err(t) + \frac{1}{Ti}*\int_0^t err(t)dt + Td*\frac{derr(t)}{dt} \}
+\]</span> 其中： <strong>U(t)</strong> 是调节器的输出信号，<strong>err(t)</strong> 是当前值和目标值的偏差， <strong>Kp</strong> 是比例增益， <strong>Ti</strong> 是积分时间， <strong>Td</strong> 是微分时间。</p>
+<p>PID控制其实就是对偏差的控制过程；如果偏差为 0, 则比例环节不起作用，只有存在偏差时，比例环节才起作用；积分环节主要是用来消除静差，所谓静差，就是系统稳定后输出值和设定值之间的差值，积分环节实际上就是偏差累计的过程，把累计的误差加到原有系统上以抵消系统造成的静差；而微分信号则反应了偏差信号的变化规律，也可以说是变化趋势，根据偏差信号的变化趋势来进行超前调节，从而增加了系统的预知性。</p>
+<p><strong>比例项</strong>：某时刻误差值,代表着现在,表明现在预设值与实际的偏差。 <strong>积分项</strong>：所有时刻误差和,代表着过去，是过去Ti时间内的偏差积累，可以减少震荡。 <strong>微分项</strong>：某时刻误差变化率,代表着未来，可以超前预测并提出控制。</p>
 <h3 id="pid的离散化公式">PID的离散化公式</h3>
 <hr />
-<p>在数字系统中进行PID算法控制，需要对上述公式进行离散化，然后才好进行程序设计，从而得到：
-<span class="math display">\[
-U(k) = Kp*e(k) + \frac{Kp*T}{Ti}\sum_{n=0}^k e(n)+
-\frac{Kp*Td}{T}(e(k)-e(k-1))
-\]</span> 其中：<strong>e(k)</strong> 是当前值和目标值的偏差，
-<strong>Kp</strong> 是比例增益， <strong>T</strong>
-是控制周期，<strong>Ti</strong> 是积分时间， <strong>Td</strong>
-是微分时间。</p>
+<p>在数字系统中进行PID算法控制，需要对上述公式进行离散化，然后才好进行程序设计，从而得到： <span class="math display">\[
+U(k) = Kp*e(k) + \frac{Kp*T}{Ti}\sum_{n=0}^k e(n)+ \frac{Kp*Td}{T}(e(k)-e(k-1))
+\]</span> 其中：<strong>e(k)</strong> 是当前值和目标值的偏差， <strong>Kp</strong> 是比例增益， <strong>T</strong> 是控制周期，<strong>Ti</strong> 是积分时间， <strong>Td</strong> 是微分时间。</p>
 <p>为了方便起见，将这些系数进行统一: <span class="math display">\[
-比例系数Kp= Kp;\ 积分系数Ki = \frac{Kp*T}{Ti};\ 微分系数Kd =
-\frac{Kp*Td}{T}
-\]</span> 则得到 <strong>位置式PID</strong> 公式： <span
-class="math display">\[
+比例系数Kp= Kp;\ 积分系数Ki = \frac{Kp*T}{Ti};\ 微分系数Kd = \frac{Kp*Td}{T}
+\]</span> 则得到 <strong>位置式PID</strong> 公式： <span class="math display">\[
 U(k) = Kp*e(k) + Ki\sum_{n=0}^k e(n)+ Kd*(e(k)-e(k-1))
-\]</span> 因为 <code>△U(k) = U(k) - U(k-1)</code>，这样得到
-<strong>增量式PID</strong> 公式： <span class="math display">\[
+\]</span> 因为 <code>△U(k) = U(k) - U(k-1)</code>，这样得到 <strong>增量式PID</strong> 公式： <span class="math display">\[
 △U(k) = Kp*(e(k)-e(k-1)) + Ki*e(k) + Kd*(e(k)-2*e(k-1)+e(k-2))
 \]</span></p>
 <p><span class="math display">\[
@@ -418,29 +399,17 @@ U(k) = △U(k)+U(k-1)
 &#125;</code></pre></div>
 <h3 id="pid调试">PID调试</h3>
 <hr />
-<p>借助<a
-target="_blank" rel="noopener" href="https://serialplot.ozderya.net/downloads/serialplot-0.12.0-win32.exe">SerialPlot工具</a>使用printf函数将目标值和实时值图形显示处理，调节不同的Kp，Ki和Kd，可以很方便的进行调试。</p>
+<p>借助<a target="_blank" rel="noopener" href="https://serialplot.ozderya.net/downloads/serialplot-0.12.0-win32.exe">SerialPlot工具</a>使用printf函数将目标值和实时值图形显示处理，调节不同的Kp，Ki和Kd，可以很方便的进行调试。</p>
 <h4 id="位置式pid调节">位置式PID调节</h4>
 <p>位置型PID的参数整定过程一般是，先整定KP，然后整定KI，最后整定KD；</p>
-<p>参数整定找最佳，从小到大顺序查 先是比例后积分，最后再把微分加
-曲线振荡很频繁，比例度盘要放大(Kp减小)
-曲线漂浮绕大湾，比例度盘往小扳(Kp增大)
-曲线偏离回复慢，积分时间往下降(Ki增大)
-曲线波动周期长，积分时间再加长(Ki减小)
-曲线振荡频率快，先把微分降下来(Kd增大)
-动差大来波动慢。微分时间应加长(Kd减小) 理想曲线两个波，前高后低4比1
-一看二调多分析，调节质量不会低</p>
+<p>参数整定找最佳，从小到大顺序查 先是比例后积分，最后再把微分加 曲线振荡很频繁，比例度盘要放大(Kp减小) 曲线漂浮绕大湾，比例度盘往小扳(Kp增大) 曲线偏离回复慢，积分时间往下降(Ki增大) 曲线波动周期长，积分时间再加长(Ki减小) 曲线振荡频率快，先把微分降下来(Kd增大) 动差大来波动慢。微分时间应加长(Kd减小) 理想曲线两个波，前高后低4比1 一看二调多分析，调节质量不会低</p>
 <h4 id="增量式pid调节">增量式pid调节</h4>
 <p>增量型PID应该先整定Ki，然后整定Kd，最后整定Kp。这一点需要特别注意，弄错顺序的话会发现整定规律完全不适用的。<strong>网上大多数资料把增量式跟位置式混为一谈</strong></p>
 <h3 id="参考链接">参考链接</h3>
-<p><a
-target="_blank" rel="noopener" href="https://blog.csdn.net/qq_25352981/article/details/81007075?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522168231970816800192213769%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=168231970816800192213769&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-2-81007075-null-null.142%5Ev86%5Ekoosearch_v1,239%5Ev2%5Einsert_chatgpt&amp;utm_term=pid&amp;spm=1018.2226.3001.4187">一文读懂PID控制算法（抛弃公式，从原理上真正理解PID控制）</a></p>
-<p><a
-target="_blank" rel="noopener" href="https://blog.csdn.net/skythinker616/article/details/123019829?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522168231970816800192213769%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=168231970816800192213769&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-1-123019829-null-null.142%5Ev86%5Ekoosearch_v1,239%5Ev2%5Einsert_chatgpt&amp;utm_term=pid&amp;spm=1018.2226.3001.4187">PID超详细教程——PID原理+串级PID+C代码+在线仿真调参</a></p>
-<p><a
-target="_blank" rel="noopener" href="https://blog.csdn.net/qq_45396672/article/details/118057838?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522168231970816800192213769%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=168231970816800192213769&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_click~default-8-118057838-null-null.142%5Ev86%5Ekoosearch_v1,239%5Ev2%5Einsert_chatgpt&amp;utm_term=pid&amp;spm=1018.2226.3001.4187">图文详解PID调参</a></p>
-<p><a
-target="_blank" rel="noopener" href="https://blog.csdn.net/u010312937/article/details/53363831">PID控制算法的C语言实现</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_25352981/article/details/81007075?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522168231970816800192213769%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=168231970816800192213769&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-2-81007075-null-null.142%5Ev86%5Ekoosearch_v1,239%5Ev2%5Einsert_chatgpt&amp;utm_term=pid&amp;spm=1018.2226.3001.4187">一文读懂PID控制算法（抛弃公式，从原理上真正理解PID控制）</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/skythinker616/article/details/123019829?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522168231970816800192213769%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=168231970816800192213769&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-1-123019829-null-null.142%5Ev86%5Ekoosearch_v1,239%5Ev2%5Einsert_chatgpt&amp;utm_term=pid&amp;spm=1018.2226.3001.4187">PID超详细教程——PID原理+串级PID+C代码+在线仿真调参</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_45396672/article/details/118057838?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522168231970816800192213769%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=168231970816800192213769&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_click~default-8-118057838-null-null.142%5Ev86%5Ekoosearch_v1,239%5Ev2%5Einsert_chatgpt&amp;utm_term=pid&amp;spm=1018.2226.3001.4187">图文详解PID调参</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/u010312937/article/details/53363831">PID控制算法的C语言实现</a></p>
 
                 
               </div>

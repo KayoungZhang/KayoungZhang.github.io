@@ -16,12 +16,12 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Host Controller Driver 和 Peripheral Controller Driver，分别简称HCD，PCD，它们是USB外设控制器相关驱动，下面来看看HAL库关于HCD和PCD的使用方法介绍。 HCD外设库的使用  声明一个 HCD_HandleTypeDef 类型结构体。如：HCD_HandleTypeDef hhcd; 对hhcd结构体的各参数进行赋值。">
+    <meta name="description" content="Host Controller Driver 和 Peripheral Controller Driver，分别简称HCD，PCD，它们是USB外设控制器相关驱动，下面来看看HAL库关于HCD和PCD的使用方法介绍。 HCD外设库的使用  声明一个 HCD_HandleTypeDef 类型结构体。如：HCD_HandleTypeDef hhcd; 对hhcd结构体的各参数进行赋值。 初始">
 <meta property="og:type" content="article">
 <meta property="og:title" content="stm32f1xx_hal_hcd库和pcd的使用">
 <meta property="og:url" content="http://example.com/2023/08/06/stm32f1xx-hal-hcd%E5%BA%93%E5%92%8Cpcd%E7%9A%84%E4%BD%BF%E7%94%A8/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Host Controller Driver 和 Peripheral Controller Driver，分别简称HCD，PCD，它们是USB外设控制器相关驱动，下面来看看HAL库关于HCD和PCD的使用方法介绍。 HCD外设库的使用  声明一个 HCD_HandleTypeDef 类型结构体。如：HCD_HandleTypeDef hhcd; 对hhcd结构体的各参数进行赋值。">
+<meta property="og:description" content="Host Controller Driver 和 Peripheral Controller Driver，分别简称HCD，PCD，它们是USB外设控制器相关驱动，下面来看看HAL库关于HCD和PCD的使用方法介绍。 HCD外设库的使用  声明一个 HCD_HandleTypeDef 类型结构体。如：HCD_HandleTypeDef hhcd; 对hhcd结构体的各参数进行赋值。 初始">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-08-06T10:30:31.000Z">
 <meta property="article:modified_time" content="2023-08-07T14:49:16.982Z">
@@ -285,12 +285,10 @@
             
               <div class="markdown-body">
                 
-                <p>Host Controller Driver 和 Peripheral Controller
-Driver，分别简称HCD，PCD，它们是USB外设控制器相关驱动，下面来看看HAL库关于HCD和PCD的使用方法介绍。</p>
+                <p>Host Controller Driver 和 Peripheral Controller Driver，分别简称HCD，PCD，它们是USB外设控制器相关驱动，下面来看看HAL库关于HCD和PCD的使用方法介绍。</p>
 <h3 id="hcd外设库的使用">HCD外设库的使用</h3>
 <ol type="1">
-<li>声明一个 HCD_HandleTypeDef 类型结构体。如：HCD_HandleTypeDef
-hhcd;</li>
+<li>声明一个 HCD_HandleTypeDef 类型结构体。如：HCD_HandleTypeDef hhcd;</li>
 <li>对hhcd结构体的各参数进行赋值。</li>
 <li>初始化 HCD外设。HAL_HCD_Init();</li>
 <li>初始化HCD底层。HAL_HCD_MspInit();
@@ -305,8 +303,7 @@ hhcd;</li>
 </ol>
 <h3 id="pcd外设库的使用">PCD外设库的使用</h3>
 <ol type="1">
-<li>声明一个 PCD_HandleTypeDef 类型结构体。如：PCD_HandleTypeDef
-hpcd;</li>
+<li>声明一个 PCD_HandleTypeDef 类型结构体。如：PCD_HandleTypeDef hpcd;</li>
 <li>对hpcd结构体的各参数进行赋值。</li>
 <li>初始化 PCD外设。HAL_PCD_Init();</li>
 <li>初始化PCD底层。HAL_PCD_MspInit();

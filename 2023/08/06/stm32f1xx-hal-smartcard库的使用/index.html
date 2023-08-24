@@ -297,8 +297,7 @@
 <li>使能SMARTCARD GPIO 时钟</li>
 <li>配置SMARTCARD引脚为复用上拉模式</li>
 </ul></li>
-<li>如果使用到中断（HAL_SMARTCARD_Transmit_IT()，HAL_SMARTCARD_Receive_IT()
-），则配置NVIC。
+<li>如果使用到中断（HAL_SMARTCARD_Transmit_IT()，HAL_SMARTCARD_Receive_IT() ），则配置NVIC。
 <ul>
 <li>配置USARTx中断优先级</li>
 <li>使能NVIC USART IRQ</li>
@@ -317,9 +316,7 @@
 <li>配置SMARTCARD初始化结构体中各参数。</li>
 <li>调用 HAL_SMARTCARD_Init() 函数初始化 SMARTCARD寄存器。</li>
 </ol>
-<p>在发送和接收过程中，使用宏定义 __HAL_SMARTCARD_ENABLE_IT() 和
-__HAL_SMARTCARD_DISABLE_IT() 来管理SMARTCARD
-的中断(发送完成中断，接收非空中断，错误中断)。</p>
+<p>在发送和接收过程中，使用宏定义 __HAL_SMARTCARD_ENABLE_IT() 和 __HAL_SMARTCARD_DISABLE_IT() 来管理SMARTCARD 的中断(发送完成中断，接收非空中断，错误中断)。</p>
 <h3 id="smartcard轮询模式io操作">SMARTCARD轮询模式IO操作</h3>
 <ul>
 <li>阻塞方式下，发送一定数量的数据。HAL_SMARTCARD_Transmit()</li>
@@ -351,9 +348,7 @@ __HAL_SMARTCARD_DISABLE_IT() 来管理SMARTCARD
 <li><p>__HAL_SMARTCARD_DISABLE_IT: 禁止 SMARTCARD 中断</p></li>
 </ul>
 <h3 id="smartcard回调函数的注册">SMARTCARD回调函数的注册</h3>
-<p>当 USE_HAL_SMARTCARD_REGISTER_CALLBACKS为
-1时，允许用户注册或注销回调函数。HAL_SMARTCARD_RegisterCallback(),
-HAL_SMARTCARD_UnRegisterCallback()</p>
+<p>当 USE_HAL_SMARTCARD_REGISTER_CALLBACKS为 1时，允许用户注册或注销回调函数。HAL_SMARTCARD_RegisterCallback(), HAL_SMARTCARD_UnRegisterCallback()</p>
 <p>回调函数：</p>
 <ul>
 <li><p>TxCpltCallback : 发送完成回调函数</p></li>
@@ -365,12 +360,9 @@ HAL_SMARTCARD_UnRegisterCallback()</p>
 <li><p>MspInitCallback : SMARTCARD 相关MCU初始化回调函数</p></li>
 <li><p>MspDeInitCallback : SMARTCARD 相关MCU去初始化回调函数</p></li>
 </ul>
-<p>默认情况下, SMARTCARD 初始化（HAL_SMARTCARD_Init()）后，当状态是
-HAL_SMARTCARD_STATE_RESET，所有的回调函数会被置为弱函数。</p>
-<p>只有在 HAL_SMARTCARD_STATE_READY
-状态下，回调函数才能被注册或注销。</p>
-<p>当 USE_HAL_SMARTCARD_REGISTER_CALLBACKS
-为0或未定义时，所有的回调函数已注册的特性不能使用，且都被置为弱函数。</p>
+<p>默认情况下, SMARTCARD 初始化（HAL_SMARTCARD_Init()）后，当状态是 HAL_SMARTCARD_STATE_RESET，所有的回调函数会被置为弱函数。</p>
+<p>只有在 HAL_SMARTCARD_STATE_READY 状态下，回调函数才能被注册或注销。</p>
+<p>当 USE_HAL_SMARTCARD_REGISTER_CALLBACKS 为0或未定义时，所有的回调函数已注册的特性不能使用，且都被置为弱函数。</p>
 
                 
               </div>

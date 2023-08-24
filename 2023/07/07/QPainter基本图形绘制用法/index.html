@@ -16,13 +16,15 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="QPainter概念 QPainter 是用于执行绘图操作的类，它可以绘制简单的点、线，也可以绘制饼图、文本、图像等复杂的形状。 QPainter 一般在绘图事件 paintEvent() 中进行绘制，当窗口需要改变或者重新绘制时，当使用 repaint()和 update() 后，就会自动调用成员函数 paintEvent()。 QPainter 的用法，简单的几个步骤:  1">
+    <meta name="description" content="QPainter概念 QPainter 是用于执行绘图操作的类，它可以绘制简单的点、线，也可以绘制饼图、文本、图像等复杂的形状。 QPainter 一般在绘图事件 paintEvent() 中进行绘制，当窗口需要改变或者重新绘制时，当使用 repaint()和 update() 后，就会自动调用成员函数 paintEvent()。 QPainter 的用法，简单的几个步骤:  1.构造一">
 <meta property="og:type" content="article">
 <meta property="og:title" content="QPainter基本图形绘制用法">
 <meta property="og:url" content="http://example.com/2023/07/07/QPainter%E5%9F%BA%E6%9C%AC%E5%9B%BE%E5%BD%A2%E7%BB%98%E5%88%B6%E7%94%A8%E6%B3%95/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="QPainter概念 QPainter 是用于执行绘图操作的类，它可以绘制简单的点、线，也可以绘制饼图、文本、图像等复杂的形状。 QPainter 一般在绘图事件 paintEvent() 中进行绘制，当窗口需要改变或者重新绘制时，当使用 repaint()和 update() 后，就会自动调用成员函数 paintEvent()。 QPainter 的用法，简单的几个步骤:  1">
+<meta property="og:description" content="QPainter概念 QPainter 是用于执行绘图操作的类，它可以绘制简单的点、线，也可以绘制饼图、文本、图像等复杂的形状。 QPainter 一般在绘图事件 paintEvent() 中进行绘制，当窗口需要改变或者重新绘制时，当使用 repaint()和 update() 后，就会自动调用成员函数 paintEvent()。 QPainter 的用法，简单的几个步骤:  1.构造一">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230707150523540.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230707151808304.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230707153153942.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/20230707155314.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230707155800251.png">
@@ -35,7 +37,7 @@
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="Qt">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230707153153942.png">
+<meta name="twitter:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230707150523540.png">
   
   
   
@@ -293,12 +295,8 @@
               <div class="markdown-body">
                 
                 <h2 id="qpainter概念">QPainter概念</h2>
-<p>QPainter
-是用于执行绘图操作的类，它可以绘制简单的点、线，也可以绘制饼图、文本、图像等复杂的形状。</p>
-<p>QPainter 一般在绘图事件 <strong>paintEvent()</strong>
-中进行绘制，当窗口需要改变或者重新绘制时，当使用
-<strong>repaint()</strong>和 <strong>update()</strong>
-后，就会自动调用成员函数 <strong>paintEvent()</strong>。</p>
+<p>QPainter 是用于执行绘图操作的类，它可以绘制简单的点、线，也可以绘制饼图、文本、图像等复杂的形状。</p>
+<p>QPainter 一般在绘图事件 <strong>paintEvent()</strong> 中进行绘制，当窗口需要改变或者重新绘制时，当使用 <strong>repaint()</strong>和 <strong>update()</strong> 后，就会自动调用成员函数 <strong>paintEvent()</strong>。</p>
 <p>QPainter 的用法，简单的几个步骤:</p>
 <ul>
 <li><p>1.构造一个 <strong>QPainter</strong> 对象</p></li>
@@ -311,8 +309,7 @@
 <li><strong>font()</strong>用于绘制文本的字体。</li>
 <li><strong>brush()</strong>定义用于填充形状的颜色或图案。</li>
 <li><strong>pen()</strong>定义用于绘制的线条或边框，也可定义线条颜色。</li>
-<li><strong>viewport()、window()、worldTransform()</strong>
-构成了painter的坐标转换系统。</li>
+<li><strong>viewport()、window()、worldTransform()</strong> 构成了painter的坐标转换系统。</li>
 </ul>
 <h2 id="qpainter绘图">Qpainter绘图</h2>
 <p>QPainter提供了绘制大多数基本图形的函数，如drawPoint()、drawLine()、drawRect()等，所有这些函数都有多个整数和浮点版本（推荐使用浮点数版本）。下面对常用的绘图功能进行说明：</p>
@@ -331,10 +328,7 @@
     painter.drawPoints(points, <span class="hljs-number">3</span>);
 &#125;</code></pre></div>
 <figure>
-<img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230707150523540.png" srcset="/img/loading.gif" lazyload
-alt="image-20230707150523540" />
-<figcaption aria-hidden="true">image-20230707150523540</figcaption>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230707150523540.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20230707150523540</figcaption>
 </figure>
 <ul>
 <li><strong>绘制线</strong></li>
@@ -360,10 +354,7 @@ alt="image-20230707150523540" />
     painter.drawLines(vectorLine);
 &#125;</code></pre></div>
 <figure>
-<img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230707151808304.png" srcset="/img/loading.gif" lazyload
-alt="image-20230707151808304" />
-<figcaption aria-hidden="true">image-20230707151808304</figcaption>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230707151808304.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20230707151808304</figcaption>
 </figure>
 <ul>
 <li><strong>绘制矩形</strong></li>
@@ -384,8 +375,7 @@ alt="image-20230707151808304" />
 <ul>
 <li><strong>绘制圆弧</strong></li>
 </ul>
-<p>0°在时钟三点的位置，圆弧是逆时针转动，起始角度和跨度角度都必须是度数的1/16，如：整个圆的角度就是
-**16*360**.</p>
+<p>0°在时钟三点的位置，圆弧是逆时针转动，起始角度和跨度角度都必须是度数的1/16，如：整个圆的角度就是 **16*360**.</p>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/20230707155314.png" srcset="/img/loading.gif" lazyload alt="20230707155314" style="zoom: 67%;" /></p>
 <div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-type">void</span> <span class="hljs-title function_">Widget::paintEvent</span><span class="hljs-params">(QPaintEvent *event)</span>
 &#123;
@@ -468,8 +458,7 @@ alt="image-20230707151808304" />
     painter.drawImage(<span class="hljs-number">160</span>, <span class="hljs-number">0</span>, image);
 &#125;</code></pre></div>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230707163819634.png" srcset="/img/loading.gif" lazyload alt="image-20230707163819634" style="zoom:67%;" /></p>
-<p>工程文件：<a
-target="_blank" rel="noopener" href="https://gitee.com/kayoungzhang/my_codehub/raw/master/Qt/painter.zip">painter</a></p>
+<p>工程文件：<a target="_blank" rel="noopener" href="https://gitee.com/kayoungzhang/my_codehub/raw/master/Qt/painter.zip">painter</a></p>
 <p>参考链接：</p>
 <p>http://t.csdn.cn/Q72tA</p>
 <p>http://t.csdn.cn/acIsw</p>

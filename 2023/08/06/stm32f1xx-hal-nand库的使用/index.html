@@ -297,33 +297,25 @@
 <li>HAL_NAND_Read_Page_16b()/HAL_NAND_Read_SpareArea_16b()</li>
 <li>HAL_NAND_Write_Page_16b()/HAL_NAND_Write_SpareArea_16b()</li>
 </ul>
-<p>这些函数使用用户在 NAND_DeviceConfigTypeDef
-结构体中预定义的设备信息(块、页面大小等)，结构体中包含读写地址信息。</p></li>
+<p>这些函数使用用户在 NAND_DeviceConfigTypeDef 结构体中预定义的设备信息(块、页面大小等)，结构体中包含读写地址信息。</p></li>
 <li><p>执行NAND flash复位操作。HAL_NAND_Reset()</p></li>
 <li><p>执行NAND flash块擦除操作。HAL_NAND_Erase_Block()</p>
 <p>块擦除信息作为参数传入Nand_Address_Typedef结构体。</p></li>
 <li><p>读取NAND flash的状态操作。HAL_NAND_Read_Status()</p></li>
-<li><p>分别通过调用 HAL_NAND_ECC_Enable() /
-HAL_NAND_ECC_Disable()函数来使能/禁止 ECC码更正特性，或通过
-HAL_NAND_GetECC() 函数获取 ECC更正码，从而控制NAND 设备。</p></li>
+<li><p>分别通过调用 HAL_NAND_ECC_Enable() / HAL_NAND_ECC_Disable()函数来使能/禁止 ECC码更正特性，或通过 HAL_NAND_GetECC() 函数获取 ECC更正码，从而控制NAND 设备。</p></li>
 <li><p>监测NAND设备状态。 HAL_NAND_GetState()</p></li>
 </ol>
-<p>此驱动是一套通用的用于控制普通NAND flash操作APIs。如果NAND
-flash设备包含不同的操作和方法，应该单独实施。</p>
+<p>此驱动是一套通用的用于控制普通NAND flash操作APIs。如果NAND flash设备包含不同的操作和方法，应该单独实施。</p>
 <h3 id="nand回调函数的注册">NAND回调函数的注册</h3>
-<p>当 USE_HAL_NAND_REGISTER_CALLBACKS为
-1时，允许用户注册或注销回调函数。HAL_NAND_RegisterCallback(),
-HAL_NAND_UnRegisterCallback()</p>
+<p>当 USE_HAL_NAND_REGISTER_CALLBACKS为 1时，允许用户注册或注销回调函数。HAL_NAND_RegisterCallback(), HAL_NAND_UnRegisterCallback()</p>
 <p>回调函数：</p>
 <ul>
 <li>MspInitCallback : NAND 相关MCU初始化回调函数</li>
 <li>MspDeInitCallback : NAND 相关MCU去初始化回调函数</li>
 </ul>
-<p>默认情况下, NAND 初始化（HAL_NAND_Init()）后，当状态是
-HAL_NAND_STATE_RESET，所有的回调函数会被置为弱函数。</p>
+<p>默认情况下, NAND 初始化（HAL_NAND_Init()）后，当状态是 HAL_NAND_STATE_RESET，所有的回调函数会被置为弱函数。</p>
 <p>只有在 HAL_NAND_STATE_READY 状态下，回调函数才能被注册或注销。</p>
-<p>当 USE_HAL_NAND_REGISTER_CALLBACKS
-为0或未定义时，所有的回调函数已注册的特性不能使用，且都被置为弱函数。</p>
+<p>当 USE_HAL_NAND_REGISTER_CALLBACKS 为0或未定义时，所有的回调函数已注册的特性不能使用，且都被置为弱函数。</p>
 
                 
               </div>

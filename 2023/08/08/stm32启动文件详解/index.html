@@ -23,11 +23,13 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="我们知道程序一般是从main函数开始运行的，但在main函数运行之前，程序已经做了一些准备工作，对于STM32F1芯片，这些准备工作是通过启动文件来完成的。下面来详细看看stm32库中的启动代码文件（STM32Cube_FW_F1_V1.8.532F1xx_stm32f103xe.s）。 启动文件是由汇编语言编写，是系统上电复位后第一个执行的程序。首先我们来看看启动文件使用的ARM汇编指令：">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230809173349258.png">
 <meta property="article:published_time" content="2023-08-08T04:30:03.000Z">
 <meta property="article:modified_time" content="2023-08-09T10:00:07.283Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="startup">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230809173349258.png">
   
   
   
@@ -287,10 +289,7 @@
                 <p>我们知道程序一般是从<code>main</code>函数开始运行的，但在<code>main</code>函数运行之前，程序已经做了一些准备工作，对于STM32F1芯片，这些准备工作是通过启动文件来完成的。下面来详细看看stm32库中的启动代码文件（STM32Cube_FW_F1_V1.8.532F1xx_stm32f103xe.s）。</p>
 <p>启动文件是由汇编语言编写，是系统上电复位后第一个执行的程序。首先我们来看看启动文件使用的ARM汇编指令：</p>
 <figure>
-<img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230809173349258.png" srcset="/img/loading.gif" lazyload
-alt="image-20230809173349258" />
-<figcaption aria-hidden="true">image-20230809173349258</figcaption>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230809173349258.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20230809173349258</figcaption>
 </figure>
 <p>整个启动文件主要做了以下操作：</p>
 <ul>
@@ -299,8 +298,7 @@ alt="image-20230809173349258" />
 <li><strong>设置堆栈大小</strong></li>
 <li><strong>初始化中断向量表</strong></li>
 <li><strong>调用 SystemInit() 函数初始化系统时钟</strong></li>
-<li>**跳转到C库中的 __main
-函数初始化用户堆栈（最终调用main()函数）**</li>
+<li>**跳转到C库中的 __main 函数初始化用户堆栈（最终调用main()函数）**</li>
 </ul>
 <div class="code-wrapper"><pre><code class="hljs assembly">;1-栈 ######
 ;开辟栈的大小为 0X00000400（1K字节），名字为 STACK， NOINIT 即不初始化，可读可写， 8（2^3）字节对齐。
@@ -627,8 +625,7 @@ __user_initial_stackheap
                  BX      LR
 
                  ALIGN</code></pre></div>
-<p><a
-target="_blank" rel="noopener" href="https://gitee.com/kayoungzhang/my_codehub/raw/master/stm32/startup_stm32f103xe.zip">启动文件与正点原子详解附件</a></p>
+<p><a target="_blank" rel="noopener" href="https://gitee.com/kayoungzhang/my_codehub/raw/master/stm32/startup_stm32f103xe.zip">启动文件与正点原子详解附件</a></p>
 <p>参考链接：</p>
 <p>https://www.elecfans.com/news/1802838.html</p>
 

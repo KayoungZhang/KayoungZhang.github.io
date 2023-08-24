@@ -16,12 +16,12 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="stc单片机存储器结构的主要特点是 程序存储器 和 数据存储器 是各自独立编址的。单片机内部在物理和逻辑上有三个独立的地址空间：flash ROM(内部集成EEPROM)，片内基本RAM(256字节)和片内扩展RAM(1024字节)。 程序存储器flash ROM： 程序存储器用于存放用户程序、数据和表格等信息。内部集成了的EEPROM是与程序空间是分开的，利用ISP&#x2F;IAP技术可将内部">
+    <meta name="description" content="stc单片机存储器结构的主要特点是 程序存储器 和 数据存储器 是各自独立编址的。单片机内部在物理和逻辑上有三个独立的地址空间：flash ROM(内部集成EEPROM)，片内基本RAM(256字节)和片内扩展RAM(1024字节)。 程序存储器flash ROM： 程序存储器用于存放用户程序、数据和表格等信息。内部集成了的EEPROM是与程序空间是分开的，利用ISP&#x2F;IAP技术可将内部Dat">
 <meta property="og:type" content="article">
 <meta property="og:title" content="stc单片机存储器">
 <meta property="og:url" content="http://example.com/2023/04/23/stc%E5%8D%95%E7%89%87%E6%9C%BA%E5%AD%98%E5%82%A8%E5%99%A8/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="stc单片机存储器结构的主要特点是 程序存储器 和 数据存储器 是各自独立编址的。单片机内部在物理和逻辑上有三个独立的地址空间：flash ROM(内部集成EEPROM)，片内基本RAM(256字节)和片内扩展RAM(1024字节)。 程序存储器flash ROM： 程序存储器用于存放用户程序、数据和表格等信息。内部集成了的EEPROM是与程序空间是分开的，利用ISP&#x2F;IAP技术可将内部">
+<meta property="og:description" content="stc单片机存储器结构的主要特点是 程序存储器 和 数据存储器 是各自独立编址的。单片机内部在物理和逻辑上有三个独立的地址空间：flash ROM(内部集成EEPROM)，片内基本RAM(256字节)和片内扩展RAM(1024字节)。 程序存储器flash ROM： 程序存储器用于存放用户程序、数据和表格等信息。内部集成了的EEPROM是与程序空间是分开的，利用ISP&#x2F;IAP技术可将内部Dat">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230423212147712.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230423212429407.png">
@@ -291,13 +291,9 @@
             
               <div class="markdown-body">
                 
-                <p>stc单片机存储器结构的主要特点是 <strong>程序存储器</strong> 和
-<strong>数据存储器</strong>
-是各自独立编址的。单片机内部在物理和逻辑上有三个独立的地址空间：flash
-ROM(内部集成EEPROM)，片内基本RAM(256字节)和片内扩展RAM(1024字节)。</p>
+                <p>stc单片机存储器结构的主要特点是 <strong>程序存储器</strong> 和 <strong>数据存储器</strong> 是各自独立编址的。单片机内部在物理和逻辑上有三个独立的地址空间：flash ROM(内部集成EEPROM)，片内基本RAM(256字节)和片内扩展RAM(1024字节)。</p>
 <h3 id="程序存储器flash-rom">程序存储器flash ROM：</h3>
-<p>程序存储器用于存放用户程序、数据和表格等信息。内部集成了的EEPROM是与程序空间是分开的，利用ISP/IAP技术可将内部Data
-Flash当EEPROM。</p>
+<p>程序存储器用于存放用户程序、数据和表格等信息。内部集成了的EEPROM是与程序空间是分开的，利用ISP/IAP技术可将内部Data Flash当EEPROM。</p>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230423212147712.png" srcset="/img/loading.gif" lazyload alt="image-20230423212147712" style="zoom:67%;" /></p>
 <h3 id="片内基本ram">片内基本RAM：</h3>
 <p>片内基本RAM分低128字节和高128字节。</p>
@@ -306,8 +302,7 @@ Flash当EEPROM。</p>
 <p>高128字节RAM与特殊功能寄存器区貌似共用相同的地址范围，都使用80H~FFH,地址空间虽然貌似重叠，但物理上是独立的，使用时通过不同的寻址方式加以区分。高128字节RAM只能间接寻址，特殊功能寄存器区只可直接寻址。</p>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230423212649092.png" srcset="/img/loading.gif" lazyload alt="image-20230423212649092" style="zoom: 80%;" /></p>
 <h3 id="片内扩展ram">片内扩展RAM：</h3>
-<p>在C语言中，可使用 <strong>xdata</strong> 声明扩展RAM变量存储类型，如
-<code>unsigned  char  xdata  i=0;</code>。默认情况下，选择的是片内扩展RAM，当需要访问片外RAM时，EXTRAM必须为1.</p>
+<p>在C语言中，可使用 <strong>xdata</strong> 声明扩展RAM变量存储类型，如 <code>unsigned  char  xdata  i=0;</code>。默认情况下，选择的是片内扩展RAM，当需要访问片外RAM时，EXTRAM必须为1.</p>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230423213425262.png" srcset="/img/loading.gif" lazyload alt="image-20230423213425262" style="zoom:67%;" /></p>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230423213920633.png" srcset="/img/loading.gif" lazyload alt="image-20230423213920633" style="zoom: 80%;" /></p>
 

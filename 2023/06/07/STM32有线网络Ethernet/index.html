@@ -16,18 +16,23 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="OSI、TCP&#x2F;IP 和 LwIP 简介 OSI（Open System Interconnect），即开放式系统互联， 一般都叫OSI参考模型。 TCP&#x2F;IP（Transmission Control Protocol&#x2F;Internet Protocol），传输控制协议&#x2F;网际协议，又名网络通讯协议，是 Internet 最基本的协议、Internet 国际互联网络的基础，由网络层的 I">
+    <meta name="description" content="OSI、TCP&#x2F;IP 和 LwIP 简介 OSI（Open System Interconnect），即开放式系统互联， 一般都叫OSI参考模型。 TCP&#x2F;IP（Transmission Control Protocol&#x2F;Internet Protocol），传输控制协议&#x2F;网际协议，又名网络通讯协议，是 Internet 最基本的协议、Internet 国际互联网络的基础，由网络层的 IP 协">
 <meta property="og:type" content="article">
 <meta property="og:title" content="STM32以太网通信">
 <meta property="og:url" content="http://example.com/2023/06/07/STM32%E6%9C%89%E7%BA%BF%E7%BD%91%E7%BB%9CEthernet/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="OSI、TCP&#x2F;IP 和 LwIP 简介 OSI（Open System Interconnect），即开放式系统互联， 一般都叫OSI参考模型。 TCP&#x2F;IP（Transmission Control Protocol&#x2F;Internet Protocol），传输控制协议&#x2F;网际协议，又名网络通讯协议，是 Internet 最基本的协议、Internet 国际互联网络的基础，由网络层的 I">
+<meta property="og:description" content="OSI、TCP&#x2F;IP 和 LwIP 简介 OSI（Open System Interconnect），即开放式系统互联， 一般都叫OSI参考模型。 TCP&#x2F;IP（Transmission Control Protocol&#x2F;Internet Protocol），传输控制协议&#x2F;网际协议，又名网络通讯协议，是 Internet 最基本的协议、Internet 国际互联网络的基础，由网络层的 IP 协">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230606202025717.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230512193517675.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230512192817057.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230512192748527.png">
 <meta property="article:published_time" content="2023-06-07T11:39:13.000Z">
 <meta property="article:modified_time" content="2023-06-12T12:08:29.933Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="stm32">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230606202025717.png">
   
   
   
@@ -285,66 +290,42 @@
               <div class="markdown-body">
                 
                 <h3 id="ositcpip-和-lwip-简介">OSI、TCP/IP 和 LwIP 简介</h3>
-<p><strong>OSI</strong>（Open System Interconnect），即开放式系统互联，
-一般都叫OSI参考模型。</p>
-<p><strong>TCP/IP</strong>（Transmission Control Protocol/Internet
-Protocol），传输控制协议/网际协议，又名网络通讯协议，是 Internet
-最基本的协议、Internet 国际互联网络的基础，由网络层的 IP 协议和传输层的
-TCP 协议组成。TCP/IP
-定义了电子设备如何连入因特网，以及数据如何在它们之间传输的标准。</p>
-<p><strong>LwIP</strong>（Light weight IP），一种开源轻量级的 IP
-协议,占用内存少，它只需十几 KB 的 RAM 和 40K 左右的 ROM
-就可以运行。其网址：http://savannah.nongnu.org/projects/lwip/。</p>
-<p><strong>MAC</strong> （Medium Access
-Control），简称媒体访问控制，数据链路层的芯片称之为MAC控制器。</p>
-<p><strong>PHY</strong>（Physical），端口物理层，物理层的芯片称之为PHY，是IEEE
-802.3规定的一个标准模块。IEEE定义了0~15这16个寄存器的功能，16~31这16个寄存器由厂商自行实现。</p>
+<p><strong>OSI</strong>（Open System Interconnect），即开放式系统互联， 一般都叫OSI参考模型。</p>
+<p><strong>TCP/IP</strong>（Transmission Control Protocol/Internet Protocol），传输控制协议/网际协议，又名网络通讯协议，是 Internet 最基本的协议、Internet 国际互联网络的基础，由网络层的 IP 协议和传输层的 TCP 协议组成。TCP/IP 定义了电子设备如何连入因特网，以及数据如何在它们之间传输的标准。</p>
+<p><strong>LwIP</strong>（Light weight IP），一种开源轻量级的 IP 协议,占用内存少，它只需十几 KB 的 RAM 和 40K 左右的 ROM 就可以运行。其网址：http://savannah.nongnu.org/projects/lwip/。</p>
+<p><strong>MAC</strong> （Medium Access Control），简称媒体访问控制，数据链路层的芯片称之为MAC控制器。</p>
+<p><strong>PHY</strong>（Physical），端口物理层，物理层的芯片称之为PHY，是IEEE 802.3规定的一个标准模块。IEEE定义了0~15这16个寄存器的功能，16~31这16个寄存器由厂商自行实现。</p>
 <h3 id="网络模型">网络模型</h3>
 <figure>
-<img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230606202025717.png" srcset="/img/loading.gif" lazyload
-alt="image-20230606202025717" />
-<figcaption aria-hidden="true">image-20230606202025717</figcaption>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230606202025717.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20230606202025717</figcaption>
 </figure>
 <h3 id="通信实现">通信实现</h3>
 <p>实现以太网通信硬件电路一般情况是SOC+MAC+PHY+网络变压器+RJ45，如下图：</p>
 <figure>
-<img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230512193517675.png" srcset="/img/loading.gif" lazyload
-alt="image-20230512193517675" />
-<figcaption aria-hidden="true">image-20230512193517675</figcaption>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230512193517675.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20230512193517675</figcaption>
 </figure>
 <p>通信硬件主要部分：MAC和PHY。对于内置MAC的SOC，其外部必须搭配一个PHY芯片。内部没有MAC的SOC芯片，就需要使用外置的MAC+PHY一体芯片了。具体实现有以下几种方式：</p>
 <ul>
 <li><strong>SOC（集成MAC层），外接一个PHY芯片（比如DM9162，LAN8720等），网络变压器和RJ45，总计4个器件，需单片机需处理TCP/IP协议栈。</strong></li>
 </ul>
 <figure>
-<img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230512192817057.png" srcset="/img/loading.gif" lazyload
-alt="image-20230512192817057" />
-<figcaption aria-hidden="true">image-20230512192817057</figcaption>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230512192817057.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20230512192817057</figcaption>
 </figure>
 <ul>
 <li><p><strong>SOC，外加一个MAC和PHY集成一体芯片（包含MAC和PHY，比如DM9000、ENC28J60等），外加RJ45（集成网络变压器），总计3个电子器件，需单片机处理TCP/IP协议栈</strong>。</p></li>
 <li><p><strong>SOC，外加一个MAC和PHY集成一体芯片（包含MAC+PHY+TCP/IP协议栈，如W5500,CH9121,CH395等），外加RJ45（集成网络变压器），总计3个电子器件，无需详细了解TCP/IP协议栈，开发方便。</strong></p></li>
 </ul>
 <figure>
-<img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230512192748527.png" srcset="/img/loading.gif" lazyload
-alt="image-20230512192748527" />
-<figcaption aria-hidden="true">image-20230512192748527</figcaption>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230512192748527.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20230512192748527</figcaption>
 </figure>
 <ul>
 <li><strong>SOC，加一个MAC芯片和一个PHY芯片，外加RJ45（集成网络变压器），总共4个器件。需单片机需处理TCP/IP协议栈。此方式使用较少。</strong></li>
 </ul>
 <p>其中：</p>
 <p>MII/RMII接口用来传输网络数据，MIDO接口用来读写PHY的内部寄存器。</p>
-<p><strong>MII</strong>(Media Independent
-Interface)，介质独立接口，它是IEEE-802.3定义的以太网标准接口，用于以太网MAC连接PHY芯片。</p>
-<p><strong>RMII</strong>(Reduced Media Independent
-Interface)，精简的介质独立接口。</p>
-<p><strong>MDIO</strong>(Management Data
-Input/Output)，管理数据输入输出接口，是一个两线串行接口，一根MDIO数据线，一根MDC时钟线。可以通过MDIO和MDC这两根线访问PHY芯片的任意一个寄存器。</p>
+<p><strong>MII</strong>(Media Independent Interface)，介质独立接口，它是IEEE-802.3定义的以太网标准接口，用于以太网MAC连接PHY芯片。</p>
+<p><strong>RMII</strong>(Reduced Media Independent Interface)，精简的介质独立接口。</p>
+<p><strong>MDIO</strong>(Management Data Input/Output)，管理数据输入输出接口，是一个两线串行接口，一根MDIO数据线，一根MDC时钟线。可以通过MDIO和MDC这两根线访问PHY芯片的任意一个寄存器。</p>
 <p>网络变压器用于隔离以及滤波等，现在很多RJ45座子内部已经集成了网络变压器，比如最常用的HR911105A就是内置网络变压器的RJ45座。RJ45座子上一般有两个灯，绿灯亮表示网络正常，黄色闪烁说明正在进行网络通信。PHY芯片会有两个引脚来控制这两个灯。</p>
 <h4 id="参考链接">参考链接：</h4>
 <p>https://www.jianshu.com/p/bb363a41afcf</p>

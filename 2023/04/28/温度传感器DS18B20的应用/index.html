@@ -16,13 +16,14 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="DS18B20温度传感器在日常应用中，使用比较广泛，以下简单介绍一下： 特点：  单总线传输（1-Wire interface） 供电范围： 3.0V ~ 5.5V 测量温度范围：-55°C ~ +125°C 精度：-10°C ~ +85°C（±0.5°C） 分辨率： 9 ~ 12 bits 每一个 DS1820 有唯一的系列号，因此多个 DS1820 可以存在于同一条单线总线上">
+    <meta name="description" content="DS18B20温度传感器在日常应用中，使用比较广泛，以下简单介绍一下： 特点：  单总线传输（1-Wire interface） 供电范围： 3.0V ~ 5.5V 测量温度范围：-55°C ~ +125°C 精度：-10°C ~ +85°C（±0.5°C） 分辨率： 9 ~ 12 bits 每一个 DS1820 有唯一的系列号，因此多个 DS1820 可以存在于同一条单线总线上。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="温度传感器DS18B20的应用">
 <meta property="og:url" content="http://example.com/2023/04/28/%E6%B8%A9%E5%BA%A6%E4%BC%A0%E6%84%9F%E5%99%A8DS18B20%E7%9A%84%E5%BA%94%E7%94%A8/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="DS18B20温度传感器在日常应用中，使用比较广泛，以下简单介绍一下： 特点：  单总线传输（1-Wire interface） 供电范围： 3.0V ~ 5.5V 测量温度范围：-55°C ~ +125°C 精度：-10°C ~ +85°C（±0.5°C） 分辨率： 9 ~ 12 bits 每一个 DS1820 有唯一的系列号，因此多个 DS1820 可以存在于同一条单线总线上">
+<meta property="og:description" content="DS18B20温度传感器在日常应用中，使用比较广泛，以下简单介绍一下： 特点：  单总线传输（1-Wire interface） 供电范围： 3.0V ~ 5.5V 测量温度范围：-55°C ~ +125°C 精度：-10°C ~ +85°C（±0.5°C） 分辨率： 9 ~ 12 bits 每一个 DS1820 有唯一的系列号，因此多个 DS1820 可以存在于同一条单线总线上。">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230428152810011.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230428144010335.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230428144206875.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230428144418569.png">
@@ -31,7 +32,7 @@
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="温度传感器">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230428144010335.png">
+<meta name="twitter:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230428152810011.png">
   
   
   
@@ -296,21 +297,16 @@
 <li>测量温度范围：-55°C ~ +125°C</li>
 <li>精度：-10°C ~ +85°C（±0.5°C）</li>
 <li>分辨率： 9 ~ 12 bits</li>
-<li>每一个 DS1820 有唯一的系列号，因此多个 DS1820
-可以存在于同一条单线总线上。</li>
+<li>每一个 DS1820 有唯一的系列号，因此多个 DS1820 可以存在于同一条单线总线上。</li>
 </ul>
 <h3 id="存储器图">存储器图</h3>
 <figure>
-<img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230428152810011.png" srcset="/img/loading.gif" lazyload
-alt="image-20230428152810011" />
-<figcaption aria-hidden="true">image-20230428152810011</figcaption>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230428152810011.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20230428152810011</figcaption>
 </figure>
 <h3 id="单总线接口访问ds1820的协议">单总线接口访问DS1820的协议</h3>
 <p>1.初始化 2.进行ROM功能操作 3.进行RAM功能操作 4.传输数据</p>
 <h3 id="rom功能指令">ROM功能指令</h3>
 <table>
-
 <thead>
 <tr class="header">
 <th>ROM指令</th>
@@ -348,7 +344,6 @@ alt="image-20230428152810011" />
 </table>
 <h3 id="ram功能指令">RAM功能指令</h3>
 <table>
-
 <thead>
 <tr class="header">
 <th>RAM命令</th>
@@ -569,8 +564,7 @@ alt="image-20230428152810011" />
 	<span class="hljs-keyword">return</span> ftemp;<span class="hljs-comment">//负数是以其补码形式存储的，所以此函数可以表示负温度</span>
 &#125;</code></pre></div>
 <p>注意事项：</p>
-<p>单总线传输过程中，有严格的延时时序要求，对于不同的MCU，延时时间会跟此程序不一致，需要根据其时序图进行相应的调整。此程序已上传Gitee：<a
-target="_blank" rel="noopener" href="https://gitee.com/kayoungzhang/my_codehub.git">ds18b20</a></p>
+<p>单总线传输过程中，有严格的延时时序要求，对于不同的MCU，延时时间会跟此程序不一致，需要根据其时序图进行相应的调整。此程序已上传Gitee：<a target="_blank" rel="noopener" href="https://gitee.com/kayoungzhang/my_codehub.git">ds18b20</a></p>
 
                 
               </div>

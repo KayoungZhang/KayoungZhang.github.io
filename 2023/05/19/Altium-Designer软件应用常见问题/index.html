@@ -16,14 +16,15 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="使用Altium Designer时，有时候会碰到一些不常见的问题，以下总结几个，后续发现了问题，再增加。  高版本AD无法寻找系统设置项  解决方法： 高版本在软件右上角有个设置图标即是设置项或 Tools -&gt; Preferences.  在低版本AD，PCB中拖动元件，元件不显示。  解决方法：  Preferences -&gt; PCB Editor -&amp;">
+    <meta name="description" content="使用Altium Designer时，有时候会碰到一些不常见的问题，以下总结几个，后续发现了问题，再增加。  高版本AD无法寻找系统设置项  解决方法： 高版本在软件右上角有个设置图标即是设置项或 Tools -&gt; Preferences.  在低版本AD，PCB中拖动元件，元件不显示。  解决方法：  Preferences -&gt; PCB Editor -&amp;gt">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Altium Designer软件应用常见问题">
 <meta property="og:url" content="http://example.com/2023/05/19/Altium-Designer%E8%BD%AF%E4%BB%B6%E5%BA%94%E7%94%A8%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="使用Altium Designer时，有时候会碰到一些不常见的问题，以下总结几个，后续发现了问题，再增加。  高版本AD无法寻找系统设置项  解决方法： 高版本在软件右上角有个设置图标即是设置项或 Tools -&gt; Preferences.  在低版本AD，PCB中拖动元件，元件不显示。  解决方法：  Preferences -&gt; PCB Editor -&amp;">
+<meta property="og:description" content="使用Altium Designer时，有时候会碰到一些不常见的问题，以下总结几个，后续发现了问题，再增加。  高版本AD无法寻找系统设置项  解决方法： 高版本在软件右上角有个设置图标即是设置项或 Tools -&gt; Preferences.  在低版本AD，PCB中拖动元件，元件不显示。  解决方法：  Preferences -&gt; PCB Editor -&amp;gt">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230519231617128.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230519230324234.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230519231723071.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230519232255161.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230519234223510.png">
@@ -289,46 +290,36 @@
             
               <div class="markdown-body">
                 
-                <p>使用Altium
-Designer时，有时候会碰到一些不常见的问题，以下总结几个，后续发现了问题，再增加。</p>
+                <p>使用Altium Designer时，有时候会碰到一些不常见的问题，以下总结几个，后续发现了问题，再增加。</p>
 <ul>
 <li><strong>高版本AD无法寻找系统设置项</strong></li>
 </ul>
 <p>解决方法：</p>
-<p>高版本在软件右上角有个设置图标即是设置项或 Tools -&gt;
-Preferences.</p>
+<p>高版本在软件右上角有个设置图标即是设置项或 Tools -&gt; Preferences.</p>
 <ul>
 <li><strong>在低版本AD，PCB中拖动元件，元件不显示。</strong></li>
 </ul>
 <p>解决方法：</p>
 <ol type="1">
-<li>Preferences -&gt; PCB Editor -&gt; Display -&gt; 去掉Use Alpha
-Blending对勾。</li>
-<li>Preferences -&gt; PCB Editor -&gt; Display -&gt; 选中Use DirectX if
-possible。</li>
+<li>Preferences -&gt; PCB Editor -&gt; Display -&gt; 去掉Use Alpha Blending对勾。</li>
+<li>Preferences -&gt; PCB Editor -&gt; Display -&gt; 选中Use DirectX if possible。</li>
 </ol>
 <ul>
 <li><strong>在PCB中元器件随时绿色报错，影响视觉。</strong></li>
 </ul>
 <p>解决方法：</p>
 <ol type="1">
-<li>Tools -&gt; Design Rule Check -&gt;
-除了Electrical，其他项对勾都去掉。</li>
-<li>Design-&gt;Rules -&gt; Electrical Clearance -&gt; 设置Minimum
-clearance 5mil.</li>
+<li>Tools -&gt; Design Rule Check -&gt; 除了Electrical，其他项对勾都去掉。</li>
+<li>Design-&gt;Rules -&gt; Electrical Clearance -&gt; 设置Minimum clearance 5mil.</li>
 <li>快捷键T -&gt; M，复位报错。</li>
 </ol>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230519231617128.png" srcset="/img/loading.gif" lazyload alt="image-20230519231617128" style="zoom:80%;" /></p>
 <ul>
-<li><strong>原理图导入PCB中，总是有元件无法导入，可能是footprint的unique
-ID相同。</strong></li>
+<li><strong>原理图导入PCB中，总是有元件无法导入，可能是footprint的unique ID相同。</strong></li>
 </ul>
 <p>解决方法：复位零件ID。</p>
 <figure>
-<img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230519230324234.png" srcset="/img/loading.gif" lazyload
-alt="image-20230519230324234" />
-<figcaption aria-hidden="true">image-20230519230324234</figcaption>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230519230324234.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20230519230324234</figcaption>
 </figure>
 <ul>
 <li><strong>低版本AD中，原理图导出pdf文件，中文字体不显示/乱码</strong></li>

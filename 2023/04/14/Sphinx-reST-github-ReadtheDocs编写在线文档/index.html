@@ -16,17 +16,19 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="使用标记语言(Markup Language)写文档是当前比较流行的文档编写方式，目前标记语言主要有两种，Markdown和reStructuredText（简称reST)。很多开源项目的文档就是用Sphinx+reST做的，上传到github和ReadtheDocs，通过浏览器就可以直接查看带有格式的文档了。结合网上多个教程，总结了以下创建教程。 1. 安装软件包   安装 pytho">
+    <meta name="description" content="使用标记语言(Markup Language)写文档是当前比较流行的文档编写方式，目前标记语言主要有两种，Markdown和reStructuredText（简称reST)。很多开源项目的文档就是用Sphinx+reST做的，上传到github和ReadtheDocs，通过浏览器就可以直接查看带有格式的文档了。结合网上多个教程，总结了以下创建教程。 1. 安装软件包   安装 python">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Sphinx + reST + github + ReadtheDocs编写在线文档">
 <meta property="og:url" content="http://example.com/2023/04/14/Sphinx-reST-github-ReadtheDocs%E7%BC%96%E5%86%99%E5%9C%A8%E7%BA%BF%E6%96%87%E6%A1%A3/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="使用标记语言(Markup Language)写文档是当前比较流行的文档编写方式，目前标记语言主要有两种，Markdown和reStructuredText（简称reST)。很多开源项目的文档就是用Sphinx+reST做的，上传到github和ReadtheDocs，通过浏览器就可以直接查看带有格式的文档了。结合网上多个教程，总结了以下创建教程。 1. 安装软件包   安装 pytho">
+<meta property="og:description" content="使用标记语言(Markup Language)写文档是当前比较流行的文档编写方式，目前标记语言主要有两种，Markdown和reStructuredText（简称reST)。很多开源项目的文档就是用Sphinx+reST做的，上传到github和ReadtheDocs，通过浏览器就可以直接查看带有格式的文档了。结合网上多个教程，总结了以下创建教程。 1. 安装软件包   安装 python">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230414133802554.png">
 <meta property="article:published_time" content="2023-04-14T04:27:09.000Z">
 <meta property="article:modified_time" content="2023-04-25T06:26:07.260Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230414133802554.png">
   
   
   
@@ -283,35 +285,18 @@
             
               <div class="markdown-body">
                 
-                <p>使用标记语言(Markup
-Language)写文档是当前比较流行的文档编写方式，目前标记语言主要有两种，Markdown和reStructuredText（简称reST)。很多开源项目的文档就是用Sphinx+reST做的，上传到github和ReadtheDocs，通过浏览器就可以直接查看带有格式的文档了。结合网上多个教程，总结了以下创建教程。</p>
+                <p>使用标记语言(Markup Language)写文档是当前比较流行的文档编写方式，目前标记语言主要有两种，Markdown和reStructuredText（简称reST)。很多开源项目的文档就是用Sphinx+reST做的，上传到github和ReadtheDocs，通过浏览器就可以直接查看带有格式的文档了。结合网上多个教程，总结了以下创建教程。</p>
 <h3 id="安装软件包">1. 安装软件包</h3>
 <hr />
 <ul>
-<li>安装 <a
-target="_blank" rel="noopener" href="https://www.python.org/">python3</a>,并添加bin目录到环境变量中。</li>
-<li>安装 <a target="_blank" rel="noopener" href="https://git-scm.com/download">git
-软件</a>，并添加bin目录到环境变量中。</li>
-<li>通过pip工具安装 <a
-target="_blank" rel="noopener" href="https://www.sphinx-doc.org/en/master/index.html">sphinx工具</a>,
-<code>pip install -U Sphinx</code> 或
-<code>pip install -i https://pypi.tuna.tsinghua.edu.cn/simple sphinx</code></li>
-<li>安装 <a
-target="_blank" rel="noopener" href="https://www.sphinx-doc.org/en/master/usage/theming.html#builtin-themes">Sphinx
-Themes</a>, 这里选择 <a target="_blank" rel="noopener" href="https://sphinx-themes.org/">第三方主题</a>
-“Read the Docs”,
-<code>pip install sphinx sphinx-autobuild sphinx_rtd_theme</code> 或
-<code>pip install -i https://pypi.tuna.tsinghua.edu.cn/simple sphinx sphinx-autobuild sphinx_rtd_theme</code></li>
+<li>安装 <a target="_blank" rel="noopener" href="https://www.python.org/">python3</a>,并添加bin目录到环境变量中。</li>
+<li>安装 <a target="_blank" rel="noopener" href="https://git-scm.com/download">git 软件</a>，并添加bin目录到环境变量中。</li>
+<li>通过pip工具安装 <a target="_blank" rel="noopener" href="https://www.sphinx-doc.org/en/master/index.html">sphinx工具</a>, <code>pip install -U Sphinx</code> 或 <code>pip install -i https://pypi.tuna.tsinghua.edu.cn/simple sphinx</code></li>
+<li>安装 <a target="_blank" rel="noopener" href="https://www.sphinx-doc.org/en/master/usage/theming.html#builtin-themes">Sphinx Themes</a>, 这里选择 <a target="_blank" rel="noopener" href="https://sphinx-themes.org/">第三方主题</a> “Read the Docs”, <code>pip install sphinx sphinx-autobuild sphinx_rtd_theme</code> 或 <code>pip install -i https://pypi.tuna.tsinghua.edu.cn/simple sphinx sphinx-autobuild sphinx_rtd_theme</code></li>
 </ul>
 <h3 id="建立项目">2. 建立项目</h3>
 <hr />
-<p>新建文件夹，这里命名为 <strong>doc_demo</strong> ,进入文件夹，按住
-<strong>shift键</strong> ，点击鼠标右键，选择
-<strong>在此处打开命令窗口</strong> ，弹出cmd命令行，运行
-sphinx-quickstart，根据需要命令行中的提示输入创建信息。这里我建立了一个
-<strong>doc</strong>的Project，版本是 <strong>1.0</strong>， 作者名为
-<strong>kayoungzhang</strong>，语言为 <strong>zh_CN</strong>
-,将source与build目录分开。</p>
+<p>新建文件夹，这里命名为 <strong>doc_demo</strong> ,进入文件夹，按住 <strong>shift键</strong> ，点击鼠标右键，选择 <strong>在此处打开命令窗口</strong> ，弹出cmd命令行，运行 sphinx-quickstart，根据需要命令行中的提示输入创建信息。这里我建立了一个 <strong>doc</strong>的Project，版本是 <strong>1.0</strong>， 作者名为 <strong>kayoungzhang</strong>，语言为 <strong>zh_CN</strong> ,将source与build目录分开。</p>
 <div class="code-wrapper"><pre><code class="hljs livecodeserver">Microsoft Windows [版本 <span class="hljs-number">6.1</span><span class="hljs-number">.7601</span>]
 	版权所有 (c) <span class="hljs-number">2009</span> Microsoft Corporation。保留所有权利。
 
@@ -366,8 +351,7 @@ sphinx-quickstart，根据需要命令行中的提示输入创建信息。这里
 <h3 id="conf.py配置">3. conf.py配置</h3>
 <hr />
 <h4 id="更换主题">3.1 更换主题</h4>
-<p>使用记事本打开文件 <strong>conf.py</strong>，找到
-<strong>theme</strong> 主题，屏蔽旧主题，更换新的主题。</p>
+<p>使用记事本打开文件 <strong>conf.py</strong>，找到 <strong>theme</strong> 主题，屏蔽旧主题，更换新的主题。</p>
 <div class="code-wrapper"><pre><code class="hljs clean"># html_theme = <span class="hljs-string">&#x27;alabaster&#x27;</span>
 <span class="hljs-keyword">import</span> sphinx_rtd_theme
 html_theme = <span class="hljs-string">&quot;sphinx_rtd_theme&quot;</span></code></pre></div>
@@ -377,8 +361,7 @@ html_theme = <span class="hljs-string">&quot;sphinx_rtd_theme&quot;</span></code
 <h4 id="不显示源文件链接">3.3 不显示源文件链接</h4>
 <div class="code-wrapper"><pre><code class="hljs ini"><span class="hljs-attr">html_show_sourcelink</span> = <span class="hljs-literal">False</span></code></pre></div>
 <h4 id="支持markdown编辑及表格">3.4 支持markdown编辑及表格</h4>
-<p>首先需要安装插件
-<strong>myst-parser，recommonmark，sphinx-markdown_tables</strong>:</p>
+<p>首先需要安装插件 <strong>myst-parser，recommonmark，sphinx-markdown_tables</strong>:</p>
 <div class="code-wrapper"><pre><code class="hljs cmake">pip <span class="hljs-keyword">install</span> myst-parser
 pip <span class="hljs-keyword">install</span> recommonmark
 pip <span class="hljs-keyword">install</span> sphinx-markdown_tables</code></pre></div>
@@ -393,16 +376,10 @@ source_parsers = &#123;
 source_suffix = [<span class="hljs-string">&#x27;.rst&#x27;</span>, <span class="hljs-string">&#x27;.md&#x27;</span>]</code></pre></div>
 <h3 id="创建rst文件">4. 创建rst文件</h3>
 <hr />
-<p>当需要创建自己的文档时，就在 <strong>source</strong>
-文件夹中创建，这里创建 <strong>sphinx.rst</strong> 和
-<strong>vscode.rst</strong> 文档，同时新建文件夹
-<strong>docxtorst</strong> ，并在其中创建 <strong>docxtorst.rst</strong>
-文档。在这三个文档中添加标题和内容。</p>
+<p>当需要创建自己的文档时，就在 <strong>source</strong> 文件夹中创建，这里创建 <strong>sphinx.rst</strong> 和 <strong>vscode.rst</strong> 文档，同时新建文件夹 <strong>docxtorst</strong> ，并在其中创建 <strong>docxtorst.rst</strong> 文档。在这三个文档中添加标题和内容。</p>
 <h3 id="设置toctree">5. 设置toctree</h3>
 <hr />
-<p>使用记事本打开 <strong>source</strong> 目录下的
-<strong>index.rst</strong>
-文件，根据刚才创建的文档和位置，填写以下内容：</p>
+<p>使用记事本打开 <strong>source</strong> 目录下的 <strong>index.rst</strong> 文件，根据刚才创建的文档和位置，填写以下内容：</p>
 <div class="code-wrapper"><pre><code class="hljs elixir">.. toctree::
    <span class="hljs-symbol">:maxdepth</span>: <span class="hljs-number">2</span>
    <span class="hljs-symbol">:caption</span>: <span class="hljs-title class_">Table</span> of <span class="hljs-title class_">Contents</span>
@@ -457,22 +434,12 @@ build succeeded.
 The HTML pages are in build\html.</code></pre></div>
 <p>在build文件夹的html文件夹下, 打开html文件即可看到具体的网页实现：</p>
 <figure>
-<img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230414133802554.png" srcset="/img/loading.gif" lazyload
-alt="image-20230414133802554" />
-<figcaption aria-hidden="true">image-20230414133802554</figcaption>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230414133802554.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20230414133802554</figcaption>
 </figure>
 <h3 id="github或gitee托管">7. github或gitee托管</h3>
 <hr />
-<p>以上的操作，只能在本地的浏览器查看文档，若想让所有人都能看到，需要部署到
-<strong>ReadtheDocs</strong>
-，在部署之前，要把代码托管到代码托管平台，这里选用github，也可以选gitee，国内访问使用速度快。</p>
-<p>先到 <strong>github</strong> 上建立一个公开的仓库，如我建立一个名为
-<strong>doc</strong> 的仓库,然后在本地仓库中创建一个
-<strong>.gitignore</strong>
-文件，它的作用是将本地一些文件不上传到远程仓库，这里将
-<code>build/</code>填入此其中，最后打开 <strong>git
-bash</strong>，将本地仓库上传到远端：</p>
+<p>以上的操作，只能在本地的浏览器查看文档，若想让所有人都能看到，需要部署到 <strong>ReadtheDocs</strong> ，在部署之前，要把代码托管到代码托管平台，这里选用github，也可以选gitee，国内访问使用速度快。</p>
+<p>先到 <strong>github</strong> 上建立一个公开的仓库，如我建立一个名为 <strong>doc</strong> 的仓库,然后在本地仓库中创建一个 <strong>.gitignore</strong> 文件，它的作用是将本地一些文件不上传到远程仓库，这里将 <code>build/</code>填入此其中，最后打开 <strong>git bash</strong>，将本地仓库上传到远端：</p>
 <div class="code-wrapper"><pre><code class="hljs mipsasm">git init
 git <span class="hljs-keyword">add </span>-A
 git commit -m <span class="hljs-string">&quot;first commit&quot;</span>
@@ -480,14 +447,7 @@ git remote <span class="hljs-keyword">add </span><span class="hljs-keyword">orig
 git push -u <span class="hljs-keyword">origin </span>master</code></pre></div>
 <h3 id="readthedocs托管">8. ReadtheDocs托管</h3>
 <hr />
-<p>在 <a target="_blank" rel="noopener" href="https://readthedocs.org/">ReadtheDocs</a> 上注册一个账号,
-登陆后点击
-“<strong>Import</strong>”，给该文档项目填写一个名字比如：<strong>doc</strong>,
-添加你在GitHub上面的工程 <strong>HTTPS链接</strong>, 选择仓库类型为
-<strong>Git</strong>, 其他项目根据自己的需要填写,点击
-<strong>Create</strong>，创建完后会自动激活Webhooks，不用再去GitHub设置，从此只要你往这个仓库push内容，readthedoc上面的文档就会自动更新。可参考
-<a
-target="_blank" rel="noopener" href="https://github.com/rtfd/readthedocs.org">ReadtheDocs官方文档</a>。</p>
+<p>在 <a target="_blank" rel="noopener" href="https://readthedocs.org/">ReadtheDocs</a> 上注册一个账号, 登陆后点击 “<strong>Import</strong>”，给该文档项目填写一个名字比如：<strong>doc</strong>, 添加你在GitHub上面的工程 <strong>HTTPS链接</strong>, 选择仓库类型为 <strong>Git</strong>, 其他项目根据自己的需要填写,点击 <strong>Create</strong>，创建完后会自动激活Webhooks，不用再去GitHub设置，从此只要你往这个仓库push内容，readthedoc上面的文档就会自动更新。可参考 <a target="_blank" rel="noopener" href="https://github.com/rtfd/readthedocs.org">ReadtheDocs官方文档</a>。</p>
 
                 
               </div>

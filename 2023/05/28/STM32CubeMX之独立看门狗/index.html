@@ -16,12 +16,12 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="独立看门狗简介 STM32F1内部自带了 2 个看门狗：独立看门狗（IWDG）和窗口看门狗（WWDG)。这一章主要来看看独立看门狗，从功能上说它在程序发生意外（程序进入死循环或跑飞）的时候，能重新回复到系统刚上电状态。 独立看门狗由内部专门的 40Khz 低速RC 时钟驱动，即使主时钟发生故障，它也仍然有效。但它是在 30~60Khz 之间的一个可变化的时钟，只是我们在估算的时候，以 4">
+    <meta name="description" content="独立看门狗简介 STM32F1内部自带了 2 个看门狗：独立看门狗（IWDG）和窗口看门狗（WWDG)。这一章主要来看看独立看门狗，从功能上说它在程序发生意外（程序进入死循环或跑飞）的时候，能重新回复到系统刚上电状态。 独立看门狗由内部专门的 40Khz 低速RC 时钟驱动，即使主时钟发生故障，它也仍然有效。但它是在 30~60Khz 之间的一个可变化的时钟，只是我们在估算的时候，以 40Kh">
 <meta property="og:type" content="article">
 <meta property="og:title" content="STM32CubeMX之独立看门狗">
 <meta property="og:url" content="http://example.com/2023/05/28/STM32CubeMX%E4%B9%8B%E7%8B%AC%E7%AB%8B%E7%9C%8B%E9%97%A8%E7%8B%97/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="独立看门狗简介 STM32F1内部自带了 2 个看门狗：独立看门狗（IWDG）和窗口看门狗（WWDG)。这一章主要来看看独立看门狗，从功能上说它在程序发生意外（程序进入死循环或跑飞）的时候，能重新回复到系统刚上电状态。 独立看门狗由内部专门的 40Khz 低速RC 时钟驱动，即使主时钟发生故障，它也仍然有效。但它是在 30~60Khz 之间的一个可变化的时钟，只是我们在估算的时候，以 4">
+<meta property="og:description" content="独立看门狗简介 STM32F1内部自带了 2 个看门狗：独立看门狗（IWDG）和窗口看门狗（WWDG)。这一章主要来看看独立看门狗，从功能上说它在程序发生意外（程序进入死循环或跑飞）的时候，能重新回复到系统刚上电状态。 独立看门狗由内部专门的 40Khz 低速RC 时钟驱动，即使主时钟发生故障，它也仍然有效。但它是在 30~60Khz 之间的一个可变化的时钟，只是我们在估算的时候，以 40Kh">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230528161307256.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230528161857687.png">
@@ -293,20 +293,15 @@
               <div class="markdown-body">
                 
                 <h3 id="独立看门狗简介">独立看门狗简介</h3>
-<p>STM32F1内部自带了 2
-个看门狗：独立看门狗（IWDG）和窗口看门狗（WWDG)。这一章主要来看看独立看门狗，从功能上说它在程序发生意外（程序进入死循环或跑飞）的时候，能重新回复到系统刚上电状态。</p>
-<p>独立看门狗由内部专门的 40Khz 低速RC
-时钟驱动，即使主时钟发生故障，它也仍然有效。但它是在 30~60Khz
-之间的一个可变化的时钟，只是我们在估算的时候，以 40Khz
-的频率来计算，时钟有些偏差，都是可以接受的。</p>
+<p>STM32F1内部自带了 2 个看门狗：独立看门狗（IWDG）和窗口看门狗（WWDG)。这一章主要来看看独立看门狗，从功能上说它在程序发生意外（程序进入死循环或跑飞）的时候，能重新回复到系统刚上电状态。</p>
+<p>独立看门狗由内部专门的 40Khz 低速RC 时钟驱动，即使主时钟发生故障，它也仍然有效。但它是在 30~60Khz 之间的一个可变化的时钟，只是我们在估算的时候，以 40Khz 的频率来计算，时钟有些偏差，都是可以接受的。</p>
 <p>实际上独立看门口狗是一个递减计数器，当计时器的值减到0时，IWDG会产生一个复位信号，系统复位重新启动。为避免产生看门狗复位，则需在计数器减到0之前重载计数器,即“喂狗”。</p>
 <p>独立看门狗功能框图：</p>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230528161307256.png" srcset="/img/loading.gif" lazyload alt="image-20230528161307256" style="zoom:80%;" /></p>
 <p>独立看门狗超时时间（40KHz的输入时钟LSI）：</p>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230528161857687.png" srcset="/img/loading.gif" lazyload alt="image-20230528161857687" style="zoom:80%;" /></p>
 <h3 id="硬件设计">硬件设计</h3>
-<p>我们将通过USART1来打印调试信息，然后通过 LED0
-提示复位状态。(LED0常亮则系统正常，LED0闪烁则系统一直复位)</p>
+<p>我们将通过USART1来打印调试信息，然后通过 LED0 提示复位状态。(LED0常亮则系统正常，LED0闪烁则系统一直复位)</p>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230527231125164.png" srcset="/img/loading.gif" lazyload alt="image-20230527231125164" style="zoom:80%;" /></p>
 <h3 id="软件设计">软件设计</h3>
 <h4 id="stm32cubemx设置">STM32CubeMX设置</h4>
@@ -319,15 +314,11 @@
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230528170246253.png" srcset="/img/loading.gif" lazyload alt="image-20230528170246253" style="zoom:67%;" /></p>
 <ul>
 <li><p>激活IWDG，Timeout = (Prescaler*ReloadValue/40)ms;</p>
-<p>IWDG的时钟为40kHz,此时设置计数器时钟为32分频，则分频后的时钟频率为1.25KHz（时钟周期为1s/1250
-= 0.8ms），递减基础器重载值（down-counter reload
-value）配置为1000，即800ms不刷新IWDG，则系统复位。</p></li>
+<p>IWDG的时钟为40kHz,此时设置计数器时钟为32分频，则分频后的时钟频率为1.25KHz（时钟周期为1s/1250 = 0.8ms），递减基础器重载值（down-counter reload value）配置为1000，即800ms不刷新IWDG，则系统复位。</p></li>
 </ul>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230528164949027.png" srcset="/img/loading.gif" lazyload alt="image-20230528164949027" style="zoom: 67%;" /></p>
 <ul>
-<li>输入工程名，选择工程路径（不要有中文），选择MDK-ARM
-V5；勾选Generated peripheral initialization as a pair of ‘.c/.h’ files
-per peripheral ；点击GENERATE CODE，生成工程代码</li>
+<li>输入工程名，选择工程路径（不要有中文），选择MDK-ARM V5；勾选Generated peripheral initialization as a pair of ‘.c/.h’ files per peripheral ；点击GENERATE CODE，生成工程代码</li>
 </ul>
 <h4 id="mdk-arm编程">MDK-ARM编程</h4>
 <ul>
@@ -344,8 +335,7 @@ per peripheral ；点击GENERATE CODE，生成工程代码</li>
   &#125;
 &#125;</code></pre></div>
 <ul>
-<li>在uart.c文件中添加fputc重定义函数，并添加头文件<code>&lt;stdio.h&gt;</code>，勾选keil软件<strong>Use
-MicroLIB</strong>选项。</li>
+<li>在uart.c文件中添加fputc重定义函数，并添加头文件<code>&lt;stdio.h&gt;</code>，勾选keil软件<strong>Use MicroLIB</strong>选项。</li>
 <li>在main函数中编写代码:</li>
 </ul>
 <div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">/* USER CODE BEGIN 2 */</span>
@@ -374,8 +364,7 @@ HAL_GPIO_WritePin(LED0_GPIO_Port, LED0_Pin, GPIO_PIN_RESET);<span class="hljs-co
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230528171626961.png" srcset="/img/loading.gif" lazyload alt="image-20230528171626961" style="zoom:67%;" /></p>
 <p>如果注释掉while循环里的喂狗动作，则LED0闪烁且串口输出：</p>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230528173055722.png" srcset="/img/loading.gif" lazyload alt="image-20230528173055722" style="zoom:67%;" /></p>
-<p>工程文件Gitee：<a
-target="_blank" rel="noopener" href="https://gitee.com/kayoungzhang/my_codehub/raw/master/stm32/iwdg.zip">iwdg</a></p>
+<p>工程文件Gitee：<a target="_blank" rel="noopener" href="https://gitee.com/kayoungzhang/my_codehub/raw/master/stm32/iwdg.zip">iwdg</a></p>
 
                 
               </div>

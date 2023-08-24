@@ -233,7 +233,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2023/05/29/STM32CubeMX%E4%B9%8BDAC/" target="_self">
         <div>
-          DAC（digital to analog converter）即数模转换器，它可以将数字信号转换为模拟信号.在常见的数字信号系统中，大部分传感器信号被转化成电压信号，而ADC把电压模拟信号转换成易于计算机存储、处理的数字编码，由计算机处理完成后，再由DAC输出电压模拟信号来驱动某些执行器件，使人类易于感知。如音频信号的采集和还原就是这样的一个过程。 STM32F1的DAC模块是12位电压输出
+          DAC（digital to analog converter）即数模转换器，它可以将数字信号转换为模拟信号.在常见的数字信号系统中，大部分传感器信号被转化成电压信号，而ADC把电压模拟信号转换成易于计算机存储、处理的数字编码，由计算机处理完成后，再由DAC输出电压模拟信号来驱动某些执行器件，使人类易于感知。如音频信号的采集和还原就是这样的一个过程。 STM32F1的DAC模块是12位电压输出型
         </div>
       </a>
 
@@ -294,7 +294,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2023/05/29/STM32CubeMX%E4%B9%8BADC/" target="_self">
         <div>
-          ADC简介 ADC（analog to digital converter）即模数转换器，它可以将模拟量信号转换为数字信号，按照转换原理主要分为逐次逼近型、双积分型、电压频率转换型三种。 STM32 的 ADC 是 12 位逐次逼近型的模拟数字转换器。它有 18 个通道，可测量 16 个外部和 2 个内部信号源。各通道的 A/D 转换模式有单次、连续、扫描或间断模式。ADC 的转换结果
+          ADC简介 ADC（analog to digital converter）即模数转换器，它可以将模拟量信号转换为数字信号，按照转换原理主要分为逐次逼近型、双积分型、电压频率转换型三种。 STM32 的 ADC 是 12 位逐次逼近型的模拟数字转换器。它有 18 个通道，可测量 16 个外部和 2 个内部信号源。各通道的 A/D 转换模式有单次、连续、扫描或间断模式。ADC 的转换结果可以以左
         </div>
       </a>
 
@@ -416,7 +416,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2023/05/29/STM32CubeMX%E4%B9%8B%E4%BD%8E%E5%8A%9F%E8%80%97/" target="_self">
         <div>
-          STM32F10xxx有三种低功耗模式:  睡眠模式(Sleep mode)（CM3 内核停止，外设包括核心外设如NVIC，SysTick等仍然运行，功耗最高） 停止模式(Stop mode)（所有时钟都停止，功耗中等） 待机模式(Standby mode)（1.8V 内核电源关闭，功耗最低）  此外，在运行模式下，为了降低功耗，可以通过降低系统时钟和关闭APB和AHB总线上未使
+          STM32F10xxx有三种低功耗模式:  睡眠模式(Sleep mode)（CM3 内核停止，外设包括核心外设如NVIC，SysTick等仍然运行，功耗最高） 停止模式(Stop mode)（所有时钟都停止，功耗中等） 待机模式(Standby mode)（1.8V 内核电源关闭，功耗最低）  此外，在运行模式下，为了降低功耗，可以通过降低系统时钟和关闭APB和AHB总线上未使用外设
         </div>
       </a>
 
@@ -477,7 +477,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2023/05/28/STM32CubeMX%E4%B9%8B%E8%BE%93%E5%85%A5%E6%8D%95%E8%8E%B7/" target="_self">
         <div>
-          输入捕获简介 输入捕获一般应用在两个方面，一是信号脉宽/频率的测量，二是 PWM 的输入测量。  脉宽/频率测量:   可以看到只需要一个捕获通道就可以根据捕获值的差值计算脉宽和频率。 捕获过程中，两次边沿捕获之间会产生N次定时器溢出，所以: 脉宽 = (N*ARR + (value2-value1))*CNT计数周期; 频率 = CNT计数周期/(N*ARR + (value
+          输入捕获简介 输入捕获一般应用在两个方面，一是信号脉宽/频率的测量，二是 PWM 的输入测量。  脉宽/频率测量:   可以看到只需要一个捕获通道就可以根据捕获值的差值计算脉宽和频率。 捕获过程中，两次边沿捕获之间会产生N次定时器溢出，所以: 脉宽 = (N*ARR + (value2-value1))*CNT计数周期; 频率 = CNT计数周期/(N*ARR + (value3
         </div>
       </a>
 
@@ -538,7 +538,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2023/05/28/STM32CubeMX%E4%B9%8BPWM%E8%BE%93%E5%87%BA/" target="_self">
         <div>
-          PWM 简介 脉冲宽度调制（PWM,Pulse Width Modulation）简称脉宽调制，是利用微处理器的数字输出来对模拟电路进行控制的一种非常有效的技术。PWM 输出就是对外输出脉宽（即占空比）可调的方波信号，信号频率由自动重装寄存器 ARR 的值决定，占空比由比较寄存器 CCR 的值决定。 PWM 模式分为两种：mode1 和 mode2，它们的区别如下：     P
+          PWM 简介 脉冲宽度调制（PWM,Pulse Width Modulation）简称脉宽调制，是利用微处理器的数字输出来对模拟电路进行控制的一种非常有效的技术。PWM 输出就是对外输出脉宽（即占空比）可调的方波信号，信号频率由自动重装寄存器 ARR 的值决定，占空比由比较寄存器 CCR 的值决定。 PWM 模式分为两种：mode1 和 mode2，它们的区别如下：    PWM模式
         </div>
       </a>
 
@@ -599,7 +599,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2023/05/28/STM32CubeMX%E4%B9%8B%E7%AA%97%E5%8F%A3%E7%9C%8B%E9%97%A8%E7%8B%97/" target="_self">
         <div>
-          窗口看门狗简介 窗口看门狗（WWDG）通常被用来监测由外部干扰或不可预见的逻辑条件造成的应用程序背离正常的运行序列而产生的软件故障。递减计数器需要在一个有限的时间窗口中被刷新才不会产生MCU复位，否则就会产生RESET。WWDG 窗口看门狗时序图：   硬件设计 我们将通过USART1来打印调试信息，然后通过 LED1 提示复位状态。(LED1常亮则系统正常，LED1闪烁则系统一直复
+          窗口看门狗简介 窗口看门狗（WWDG）通常被用来监测由外部干扰或不可预见的逻辑条件造成的应用程序背离正常的运行序列而产生的软件故障。递减计数器需要在一个有限的时间窗口中被刷新才不会产生MCU复位，否则就会产生RESET。WWDG 窗口看门狗时序图：   硬件设计 我们将通过USART1来打印调试信息，然后通过 LED1 提示复位状态。(LED1常亮则系统正常，LED1闪烁则系统一直复位
         </div>
       </a>
 
@@ -660,7 +660,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2023/05/28/STM32CubeMX%E4%B9%8B%E7%8B%AC%E7%AB%8B%E7%9C%8B%E9%97%A8%E7%8B%97/" target="_self">
         <div>
-          独立看门狗简介 STM32F1内部自带了 2 个看门狗：独立看门狗（IWDG）和窗口看门狗（WWDG)。这一章主要来看看独立看门狗，从功能上说它在程序发生意外（程序进入死循环或跑飞）的时候，能重新回复到系统刚上电状态。 独立看门狗由内部专门的 40Khz 低速RC 时钟驱动，即使主时钟发生故障，它也仍然有效。但它是在 30~60Khz 之间的一个可变化的时钟，只是我们在估算的时候，以 4
+          独立看门狗简介 STM32F1内部自带了 2 个看门狗：独立看门狗（IWDG）和窗口看门狗（WWDG)。这一章主要来看看独立看门狗，从功能上说它在程序发生意外（程序进入死循环或跑飞）的时候，能重新回复到系统刚上电状态。 独立看门狗由内部专门的 40Khz 低速RC 时钟驱动，即使主时钟发生故障，它也仍然有效。但它是在 30~60Khz 之间的一个可变化的时钟，只是我们在估算的时候，以 40Kh
         </div>
       </a>
 
@@ -721,7 +721,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2023/05/28/STM32CubeMX%E4%B9%8B%E5%AE%9A%E6%97%B6%E5%99%A8%E4%B8%AD%E6%96%AD/" target="_self">
         <div>
-          定时器中断简介 STM32 的定时器功能十分强大，有 TIME1 和 TIME8 等高级定时器，也有 TIME2~TIME5 等通用定时器，还有 TIME6 和TIME7 等基本定时器。这一章主要介绍通用定时器，是一个通过可编程预分频器（PSC）驱动的 16 位自动装载计数器（CNT）构成。STM32 的通用定时器可以被用于：测量输入信号的脉冲长度(输入捕获)或者产生输出波形(输出比较和
+          定时器中断简介 STM32 的定时器功能十分强大，有 TIME1 和 TIME8 等高级定时器，也有 TIME2~TIME5 等通用定时器，还有 TIME6 和TIME7 等基本定时器。这一章主要介绍通用定时器，是一个通过可编程预分频器（PSC）驱动的 16 位自动装载计数器（CNT）构成。STM32 的通用定时器可以被用于：测量输入信号的脉冲长度(输入捕获)或者产生输出波形(输出比较和 PWM
         </div>
       </a>
 
@@ -782,7 +782,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2023/05/28/STM32CubeMX%E4%B9%8BUART/" target="_self">
         <div>
-          串口简介 STM32F103ZET6 最多可提供 5 路串口，有分数波特率发生器、支持同步单线通信和半双工单线通讯、支持 LIN、支持调制解调器操作、智能卡协议和 IrDA SIR ENDEC 规范、具有 DMA等。 我们通常使用的是异步通信，异步通信规定传输的数据格式由起始位（start bit）、数据位（data bit）、奇偶校验位（parity bit）和停止位（stop b
+          串口简介 STM32F103ZET6 最多可提供 5 路串口，有分数波特率发生器、支持同步单线通信和半双工单线通讯、支持 LIN、支持调制解调器操作、智能卡协议和 IrDA SIR ENDEC 规范、具有 DMA等。 我们通常使用的是异步通信，异步通信规定传输的数据格式由起始位（start bit）、数据位（data bit）、奇偶校验位（parity bit）和停止位（stop bit）组成
         </div>
       </a>
 

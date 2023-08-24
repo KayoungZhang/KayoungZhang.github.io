@@ -16,12 +16,12 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="下面来看看 DMA HAL库关于 DMA 使用方法。 DMA 外设库的使用  使能和配置外设连接到 DMA通道。 (除了内部 SRAM &#x2F; FLASH 内存: 不用初始化。) 注意： 在内存到内存的传输模式中，不允许循环模式 。请阅读参考手册关于外设和DMA请求的内容。  对于给定的通道，配置以下参数 HAL_DMA_Init()：  通道请求 Channel request">
+    <meta name="description" content="下面来看看 DMA HAL库关于 DMA 使用方法。 DMA 外设库的使用  使能和配置外设连接到 DMA通道。 (除了内部 SRAM &#x2F; FLASH 内存: 不用初始化。) 注意： 在内存到内存的传输模式中，不允许循环模式 。请阅读参考手册关于外设和DMA请求的内容。  对于给定的通道，配置以下参数 HAL_DMA_Init()：  通道请求 Channel request 传输">
 <meta property="og:type" content="article">
 <meta property="og:title" content="stm32f1xx_hal_dma库的使用">
 <meta property="og:url" content="http://example.com/2023/08/05/stm32f1xx-hal-dma%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="下面来看看 DMA HAL库关于 DMA 使用方法。 DMA 外设库的使用  使能和配置外设连接到 DMA通道。 (除了内部 SRAM &#x2F; FLASH 内存: 不用初始化。) 注意： 在内存到内存的传输模式中，不允许循环模式 。请阅读参考手册关于外设和DMA请求的内容。  对于给定的通道，配置以下参数 HAL_DMA_Init()：  通道请求 Channel request">
+<meta property="og:description" content="下面来看看 DMA HAL库关于 DMA 使用方法。 DMA 外设库的使用  使能和配置外设连接到 DMA通道。 (除了内部 SRAM &#x2F; FLASH 内存: 不用初始化。) 注意： 在内存到内存的传输模式中，不允许循环模式 。请阅读参考手册关于外设和DMA请求的内容。  对于给定的通道，配置以下参数 HAL_DMA_Init()：  通道请求 Channel request 传输">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-08-04T23:09:31.000Z">
 <meta property="article:modified_time" content="2023-08-07T05:07:43.020Z">
@@ -287,10 +287,7 @@
                 <p>下面来看看 DMA HAL库关于 DMA 使用方法。</p>
 <h3 id="dma-外设库的使用">DMA 外设库的使用</h3>
 <ul>
-<li>使能和配置外设连接到 DMA通道。 (除了内部 SRAM / FLASH 内存:
-不用初始化。) <strong>注意</strong>：
-在内存到内存的传输模式中，不允许循环模式
-。请阅读参考手册关于外设和DMA请求的内容。
+<li>使能和配置外设连接到 DMA通道。 (除了内部 SRAM / FLASH 内存: 不用初始化。) <strong>注意</strong>： 在内存到内存的传输模式中，不允许循环模式 。请阅读参考手册关于外设和DMA请求的内容。
 <ol type="1">
 <li>对于给定的通道，配置以下参数 HAL_DMA_Init()：
 <ul>
@@ -313,11 +310,9 @@
 <ul>
 <li>配置DMA中断优先级。HAL_NVIC_SetPriority()</li>
 <li>使能DMA IRQ中断。HAL_NVIC_EnableIRQ()</li>
-<li>配置完源地址和目标地址以及数据长度后，开启DMA中断模式下的数据传输。
-HAL_DMA_Start_IT()</li>
+<li>配置完源地址和目标地址以及数据长度后，开启DMA中断模式下的数据传输。 HAL_DMA_Start_IT()</li>
 <li>调用DMA中断函数。HAL_DMA_IRQHandler() ，DMA_IRQHandler()</li>
-<li>数据传输完成，执行回调函数。HAL_DMA_IRQHandler() ，XferCpltCallback
-，XferErrorCallback ...</li>
+<li>数据传输完成，执行回调函数。HAL_DMA_IRQHandler() ，XferCpltCallback ，XferErrorCallback ...</li>
 </ul></li>
 <li>DMA HAL库常用宏定义列表
 <ul>

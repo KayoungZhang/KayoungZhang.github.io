@@ -233,7 +233,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2023/04/28/%E6%B8%A9%E5%BA%A6%E4%BC%A0%E6%84%9F%E5%99%A8DS18B20%E7%9A%84%E5%BA%94%E7%94%A8/" target="_self">
         <div>
-          DS18B20温度传感器在日常应用中，使用比较广泛，以下简单介绍一下： 特点：  单总线传输（1-Wire interface） 供电范围： 3.0V ~ 5.5V 测量温度范围：-55°C ~ +125°C 精度：-10°C ~ +85°C（±0.5°C） 分辨率： 9 ~ 12 bits 每一个 DS1820 有唯一的系列号，因此多个 DS1820 可以存在于同一条单线总线上
+          DS18B20温度传感器在日常应用中，使用比较广泛，以下简单介绍一下： 特点：  单总线传输（1-Wire interface） 供电范围： 3.0V ~ 5.5V 测量温度范围：-55°C ~ +125°C 精度：-10°C ~ +85°C（±0.5°C） 分辨率： 9 ~ 12 bits 每一个 DS1820 有唯一的系列号，因此多个 DS1820 可以存在于同一条单线总线上。
         </div>
       </a>
 
@@ -294,7 +294,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2023/04/27/%E4%BC%A0%E6%84%9F%E5%99%A8%E7%9A%84%E4%B8%89%E7%A7%8D%E5%B8%B8%E7%94%A8%E7%AE%97%E6%B3%95%E5%A4%84%E7%90%86/" target="_self">
         <div>
-          加权平滑：平滑和均衡传感器数据，减小偶然数据突变的影响。 抽取突变：去除静态和缓慢变化的数据背景，强调瞬间变化。 简单移动平均线：保留数据流最近的K个数据，取平均值。   加权平滑，使用算法如下： 新值 = 旧值(1 - a) + X  a；其中a为设置的权值，X为最新数据，程序实现如下： #define filter_coe 0.00001  //滤波系数 小于1 stati
+          加权平滑：平滑和均衡传感器数据，减小偶然数据突变的影响。 抽取突变：去除静态和缓慢变化的数据背景，强调瞬间变化。 简单移动平均线：保留数据流最近的K个数据，取平均值。   加权平滑，使用算法如下： 新值 = 旧值(1 - a) + X  a；其中a为设置的权值，X为最新数据，程序实现如下： #define filter_coe 0.00001  //滤波系数 小于1 static
         </div>
       </a>
 
@@ -355,7 +355,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2023/04/27/STC%E8%8A%AF%E7%89%87%E5%86%85%E9%83%A8EEPROM%E7%9A%84%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" target="_self">
         <div>
-          STC单片机内部集成了的EEPROM是与程序空间是分开的，利用ISP/IAP技术可将内部Data Flash当EEPROM，擦写次数在10万次以上。以下根据datasheet简单介绍一下单片机内部EEPROM的编程方式。 IAP及EEPROM特殊功能寄存器介绍  ISP/IAP数据寄存器IAP_DATA ISP/IAP地址寄存器IAP_ADDRH和IAP_ADDRL ISP/IAP命令
+          STC单片机内部集成了的EEPROM是与程序空间是分开的，利用ISP/IAP技术可将内部Data Flash当EEPROM，擦写次数在10万次以上。以下根据datasheet简单介绍一下单片机内部EEPROM的编程方式。 IAP及EEPROM特殊功能寄存器介绍  ISP/IAP数据寄存器IAP_DATA ISP/IAP地址寄存器IAP_ADDRH和IAP_ADDRL ISP/IAP命令寄
         </div>
       </a>
 
@@ -538,7 +538,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2023/04/24/PID%E7%90%86%E8%AE%BA%E5%8F%8A%E7%A8%8B%E5%BA%8F%E5%AE%9E%E7%8E%B0/" target="_self">
         <div>
-          PID控制的概念  PID 控制的整体框图：  PID是 Proportion Integration Differentiation 的缩写，由比例项（Proportion ），积分项（Integration ），微分项（Differentiation） 三个部分组成，具体形式就是下面的公式： \[ U(t) = Kp \{ err(t) + \frac{1}{Ti}*\int
+          PID控制的概念  PID 控制的整体框图：  PID是 Proportion Integration Differentiation 的缩写，由比例项（Proportion ），积分项（Integration ），微分项（Differentiation） 三个部分组成，具体形式就是下面的公式： \[ U(t) = Kp \{ err(t) + \frac{1}{Ti}*\int_0^t
         </div>
       </a>
 
@@ -660,7 +660,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2023/04/23/stc%E5%8D%95%E7%89%87%E6%9C%BA%E5%AD%98%E5%82%A8%E5%99%A8/" target="_self">
         <div>
-          stc单片机存储器结构的主要特点是 程序存储器 和 数据存储器 是各自独立编址的。单片机内部在物理和逻辑上有三个独立的地址空间：flash ROM(内部集成EEPROM)，片内基本RAM(256字节)和片内扩展RAM(1024字节)。 程序存储器flash ROM： 程序存储器用于存放用户程序、数据和表格等信息。内部集成了的EEPROM是与程序空间是分开的，利用ISP/IAP技术可将内部
+          stc单片机存储器结构的主要特点是 程序存储器 和 数据存储器 是各自独立编址的。单片机内部在物理和逻辑上有三个独立的地址空间：flash ROM(内部集成EEPROM)，片内基本RAM(256字节)和片内扩展RAM(1024字节)。 程序存储器flash ROM： 程序存储器用于存放用户程序、数据和表格等信息。内部集成了的EEPROM是与程序空间是分开的，利用ISP/IAP技术可将内部Dat
         </div>
       </a>
 
@@ -784,7 +784,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2023/04/21/Linux-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E6%B1%87%E6%80%BB/" target="_self">
         <div>
-          Linux开发过程中会经常接触到各种命令，常用的命令它们大致分为： 文件管理、文档编辑、磁盘管理、系统设备管理、网络通讯、权限管理、其它  在详细介绍各种常用命令之前，先了解一下Linux命令行默认显示的部分[root@localhost ~]#：  root是当前登录的用户 localhost是主机名字 ~ 表示当前所在的目录(家目录)， / 表示根目录 # 是用户标识，表示管
+          Linux开发过程中会经常接触到各种命令，常用的命令它们大致分为： 文件管理、文档编辑、磁盘管理、系统设备管理、网络通讯、权限管理、其它  在详细介绍各种常用命令之前，先了解一下Linux命令行默认显示的部分[root@localhost ~]#：  root是当前登录的用户 localhost是主机名字 ~ 表示当前所在的目录(家目录)， / 表示根目录 # 是用户标识，表示管理
         </div>
       </a>
 

@@ -16,12 +16,12 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="外部SRAM(XM8A51216)简介 STM32F103ZET6芯片自带 64K字节的SRAM，对一般应用已经足够了，但在一些对内存要求高的场合，就需要添加外部SRAM了，开发板上带有一颗 1M 字节（512K x 16bit）容量的 SRAM 芯片：IS62WV51216BLL； 其逻辑功能框图：  芯片操作控制表：  硬件设计   实验使用 FSMC BANK1 的第">
+    <meta name="description" content="外部SRAM(XM8A51216)简介 STM32F103ZET6芯片自带 64K字节的SRAM，对一般应用已经足够了，但在一些对内存要求高的场合，就需要添加外部SRAM了，开发板上带有一颗 1M 字节（512K x 16bit）容量的 SRAM 芯片：IS62WV51216BLL； 其逻辑功能框图：  芯片操作控制表：  硬件设计   实验使用 FSMC BANK1 的第3区来">
 <meta property="og:type" content="article">
 <meta property="og:title" content="STM32CubeMX之外部SRAM">
 <meta property="og:url" content="http://example.com/2023/05/31/STM32CubeMX%E4%B9%8B%E5%A4%96%E9%83%A8SRAM/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="外部SRAM(XM8A51216)简介 STM32F103ZET6芯片自带 64K字节的SRAM，对一般应用已经足够了，但在一些对内存要求高的场合，就需要添加外部SRAM了，开发板上带有一颗 1M 字节（512K x 16bit）容量的 SRAM 芯片：IS62WV51216BLL； 其逻辑功能框图：  芯片操作控制表：  硬件设计   实验使用 FSMC BANK1 的第">
+<meta property="og:description" content="外部SRAM(XM8A51216)简介 STM32F103ZET6芯片自带 64K字节的SRAM，对一般应用已经足够了，但在一些对内存要求高的场合，就需要添加外部SRAM了，开发板上带有一颗 1M 字节（512K x 16bit）容量的 SRAM 芯片：IS62WV51216BLL； 其逻辑功能框图：  芯片操作控制表：  硬件设计   实验使用 FSMC BANK1 的第3区来">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230604164952473.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531153007310.png">
@@ -293,9 +293,7 @@
               <div class="markdown-body">
                 
                 <h3 id="外部sramxm8a51216简介">外部SRAM(XM8A51216)简介</h3>
-<p>STM32F103ZET6芯片自带
-64K字节的SRAM，对一般应用已经足够了，但在一些对内存要求高的场合，就需要添加外部SRAM了，开发板上带有一颗
-1M 字节（512K x 16bit）容量的 SRAM 芯片：IS62WV51216BLL；</p>
+<p>STM32F103ZET6芯片自带 64K字节的SRAM，对一般应用已经足够了，但在一些对内存要求高的场合，就需要添加外部SRAM了，开发板上带有一颗 1M 字节（512K x 16bit）容量的 SRAM 芯片：IS62WV51216BLL；</p>
 <p>其逻辑功能框图：</p>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230604164952473.png" srcset="/img/loading.gif" lazyload alt="image-20230604164952473" style="zoom:80%;" /></p>
 <p>芯片操作控制表：</p>
@@ -303,16 +301,13 @@
 <h3 id="硬件设计">硬件设计</h3>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531134019640.png" srcset="/img/loading.gif" lazyload alt="image-20230531134019640" style="zoom:80%;" /></p>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531083826527.png" srcset="/img/loading.gif" lazyload alt="image-20230531083826527" style="zoom:80%;" /></p>
-<p>实验使用 FSMC BANK1
-的第<strong>3</strong>区来控制IS62WV51216BLL，将外部 SRAM 容量大小显示在
-LCD 上延时一段时间，显示预存在外部 SRAM 的数据。</p>
+<p>实验使用 FSMC BANK1 的第<strong>3</strong>区来控制IS62WV51216BLL，将外部 SRAM 容量大小显示在 LCD 上延时一段时间，显示预存在外部 SRAM 的数据。</p>
 <h3 id="软件设计">软件设计</h3>
 <h4 id="stm32cubemx设置">STM32CubeMX设置</h4>
 <ul>
 <li>RCC设置外接HSE，时钟设置为72M</li>
 <li>USART1选择为异步通讯方式，波特率设置为115200Bits/s，传输数据长度为8Bit，无奇偶校验，1位停止位</li>
-<li>激活FSMC，选中Bank1，片选为NE3（即Bank1的第3区），存储器类型选为SRAM，数据宽度设为16位,勾选
-Byte enable。</li>
+<li>激活FSMC，选中Bank1，片选为NE3（即Bank1的第3区），存储器类型选为SRAM，数据宽度设为16位,勾选 Byte enable。</li>
 </ul>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531161352775.png" srcset="/img/loading.gif" lazyload alt="image-20230531161352775" style="zoom:80%;" /></p>
 <ul>
@@ -320,9 +315,7 @@ Byte enable。</li>
 </ul>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531162647366.png" srcset="/img/loading.gif" lazyload alt="image-20230531162647366" style="zoom:80%;" /></p>
 <ul>
-<li>输入工程名，选择工程路径（不要有中文），选择MDK-ARM
-V5；勾选Generated peripheral initialization as a pair of ‘.c/.h’ files
-per peripheral；点击GENERATE CODE，生成工程代码</li>
+<li>输入工程名，选择工程路径（不要有中文），选择MDK-ARM V5；勾选Generated peripheral initialization as a pair of ‘.c/.h’ files per peripheral；点击GENERATE CODE，生成工程代码</li>
 </ul>
 <h4 id="mdk-arm编程">MDK-ARM编程</h4>
 <ul>
@@ -361,8 +354,7 @@ per peripheral；点击GENERATE CODE，生成工程代码</li>
 	&#125;
 &#125;</code></pre></div>
 <ul>
-<li>在uart.c文件中添加fputc重定义函数，并添加头文件<code>&lt;stdio.h&gt;</code>，勾选keil软件<strong>Use
-MicroLIB</strong>选项。</li>
+<li>在uart.c文件中添加fputc重定义函数，并添加头文件<code>&lt;stdio.h&gt;</code>，勾选keil软件<strong>Use MicroLIB</strong>选项。</li>
 <li>在main.c文件下编写SRAM测试代码</li>
 </ul>
 <div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">/* USER CODE BEGIN 0 */</span>
@@ -411,8 +403,7 @@ fsmc_sram_test();<span class="hljs-comment">//打印SRAM大小</span>
 <li>编译无误下载到开发板后，串口助手打印出外部SRAM大小：</li>
 </ul>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230604181111942.png" srcset="/img/loading.gif" lazyload alt="image-20230604181111942" style="zoom:80%;" /></p>
-<p>工程文件Gitee：<a
-target="_blank" rel="noopener" href="https://gitee.com/kayoungzhang/my_codehub/raw/master/stm32/sram.zip">sram</a></p>
+<p>工程文件Gitee：<a target="_blank" rel="noopener" href="https://gitee.com/kayoungzhang/my_codehub/raw/master/stm32/sram.zip">sram</a></p>
 
                 
               </div>

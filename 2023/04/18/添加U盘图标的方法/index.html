@@ -16,17 +16,19 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="有时候我们想让U盘插到电脑上显示一个漂亮的图标，这样看起来就比较美观，其实，它的实现方式很简单，只需要进行几步设置，就可以打造出一个个性化的U盘出场方式，以下简单说明一下：  准备一个漂亮的U盘 ico 格式的图标，借助图片处理工具将像素大小设置为 256像素x256像素，同时将图标命名为 u_disk.ico 使用记事本创建一个文件，重命名为 autorun.inf,进入文件，写入">
+    <meta name="description" content="有时候我们想让U盘插到电脑上显示一个漂亮的图标，这样看起来就比较美观，其实，它的实现方式很简单，只需要进行几步设置，就可以打造出一个个性化的U盘出场方式，以下简单说明一下：  准备一个漂亮的U盘 ico 格式的图标，借助图片处理工具将像素大小设置为 256像素x256像素，同时将图标命名为 u_disk.ico 使用记事本创建一个文件，重命名为 autorun.inf,进入文件，写入以下内容">
 <meta property="og:type" content="article">
 <meta property="og:title" content="添加U盘图标的方法">
 <meta property="og:url" content="http://example.com/2023/04/18/%E6%B7%BB%E5%8A%A0U%E7%9B%98%E5%9B%BE%E6%A0%87%E7%9A%84%E6%96%B9%E6%B3%95/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="有时候我们想让U盘插到电脑上显示一个漂亮的图标，这样看起来就比较美观，其实，它的实现方式很简单，只需要进行几步设置，就可以打造出一个个性化的U盘出场方式，以下简单说明一下：  准备一个漂亮的U盘 ico 格式的图标，借助图片处理工具将像素大小设置为 256像素x256像素，同时将图标命名为 u_disk.ico 使用记事本创建一个文件，重命名为 autorun.inf,进入文件，写入">
+<meta property="og:description" content="有时候我们想让U盘插到电脑上显示一个漂亮的图标，这样看起来就比较美观，其实，它的实现方式很简单，只需要进行几步设置，就可以打造出一个个性化的U盘出场方式，以下简单说明一下：  准备一个漂亮的U盘 ico 格式的图标，借助图片处理工具将像素大小设置为 256像素x256像素，同时将图标命名为 u_disk.ico 使用记事本创建一个文件，重命名为 autorun.inf,进入文件，写入以下内容">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230418080723296.png">
 <meta property="article:published_time" content="2023-04-17T23:46:09.000Z">
 <meta property="article:modified_time" content="2023-04-18T00:08:37.962Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230418080723296.png">
   
   
   
@@ -285,12 +287,8 @@
                 
                 <p>有时候我们想让U盘插到电脑上显示一个漂亮的图标，这样看起来就比较美观，其实，它的实现方式很简单，只需要进行几步设置，就可以打造出一个个性化的U盘出场方式，以下简单说明一下：</p>
 <ol type="1">
-<li>准备一个漂亮的U盘 <strong>ico</strong>
-格式的图标，借助图片处理工具将像素大小设置为
-<strong>256像素x256像素</strong>，同时将图标命名为
-<code>u_disk.ico</code></li>
-<li>使用记事本创建一个文件，重命名为
-<strong>autorun.inf</strong>,进入文件，写入以下内容：</li>
+<li>准备一个漂亮的U盘 <strong>ico</strong> 格式的图标，借助图片处理工具将像素大小设置为 <strong>256像素x256像素</strong>，同时将图标命名为 <code>u_disk.ico</code></li>
+<li>使用记事本创建一个文件，重命名为 <strong>autorun.inf</strong>,进入文件，写入以下内容：</li>
 </ol>
 <div class="code-wrapper"><pre><code class="hljs bash">[autorun]  
 icon=u_disk.ico,0
@@ -298,18 +296,11 @@ label=Kayoung</code></pre></div>
 <p><code>label</code> 显示的是U盘的名字。</p>
 <ol start="3" type="1">
 <li>将这两个文件同时拷贝到U盘中，并各自右键打开文件的属性，设置为隐藏模式。</li>
-<li>依次打开 <strong>工具</strong> -&gt; <strong>文件夹选项</strong>
--&gt; <strong>查看</strong> -&gt; <strong>隐藏文件和文件夹</strong>
--&gt; <code>勾选</code>
-<strong>不显示隐藏的文件、文件夹或驱动器</strong>, 然后点击
-<strong>确定</strong>，这样，U盘中的两个文件就被隐藏了。</li>
+<li>依次打开 <strong>工具</strong> -&gt; <strong>文件夹选项</strong> -&gt; <strong>查看</strong> -&gt; <strong>隐藏文件和文件夹</strong> -&gt; <code>勾选</code> <strong>不显示隐藏的文件、文件夹或驱动器</strong>, 然后点击 <strong>确定</strong>，这样，U盘中的两个文件就被隐藏了。</li>
 </ol>
 <p>效果图：</p>
 <figure>
-<img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230418080723296.png" srcset="/img/loading.gif" lazyload
-alt="image-20230418080723296" />
-<figcaption aria-hidden="true">image-20230418080723296</figcaption>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230418080723296.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20230418080723296</figcaption>
 </figure>
 
                 

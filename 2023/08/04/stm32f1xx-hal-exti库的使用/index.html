@@ -304,8 +304,7 @@
 <li>上升沿挂起中断</li>
 <li>下降沿挂起中断</li>
 </ul></li>
-<li>EXTI0 ~ EXTI15 连接线连接到GPIO0 ~
-GPIO15引脚，GPIO端口可通过多路选择器进行选择。</li>
+<li>EXTI0 ~ EXTI15 连接线连接到GPIO0 ~ GPIO15引脚，GPIO端口可通过多路选择器进行选择。</li>
 </ul>
 <h3 id="exti外设库的使用">EXTI外设库的使用</h3>
 <ul>
@@ -313,10 +312,8 @@ GPIO15引脚，GPIO端口可通过多路选择器进行选择。</li>
 <ol type="1">
 <li>选择中断线。 EXTI_ConfigTypeDef 结构体中的 Line。</li>
 <li>配置中断、事件模式。EXTI_ConfigTypeDef 结构体中的Mode。</li>
-<li>对于可配置的连接线，配置触发方式。EXTI_ConfigTypeDef
-结构体中的Trigger。</li>
-<li>对于EXTI连接线连接到GPIO，选择GPIO端口。GPIO_InitTypeDef
-结构体中GPIOSel。</li>
+<li>对于可配置的连接线，配置触发方式。EXTI_ConfigTypeDef 结构体中的Trigger。</li>
+<li>对于EXTI连接线连接到GPIO，选择GPIO端口。GPIO_InitTypeDef 结构体中GPIOSel。</li>
 </ol></li>
 <li>获取当前EXTI配置线。 HAL_EXTI_GetConfigLine()
 <ol type="1">

@@ -338,17 +338,13 @@
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230505184339517.png" srcset="/img/loading.gif" lazyload alt="image-20230505184339517" style="zoom: 67%;" /></p>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230505185956240.png" srcset="/img/loading.gif" lazyload alt="image-20230505185956240" style="zoom:67%;" /></p>
 <h2 id="bcd码">BCD码</h2>
-<p>BCD码（Binary Coded
-Decimal‎），用4位二进制数来表示1位十进制数，所以4位二进制表示的数字最大到
-<strong>9</strong> 。例：0001 0011表示13，1000 0101表示85，0001
-1010不合法。在十六进制中的体现：0x13表示13，0x85表示85，0x1A不合法</p>
+<p>BCD码（Binary Coded Decimal‎），用4位二进制数来表示1位十进制数，所以4位二进制表示的数字最大到 <strong>9</strong> 。例：0001 0011表示13，1000 0101表示85，0001 1010不合法。在十六进制中的体现：0x13表示13，0x85表示85，0x1A不合法</p>
 <p><code>BCD码转十进制：DEC=BCD/16*10+BCD%16; （2位BCD）</code></p>
 <p><code>十进制转BCD码：BCD=DEC/10*16+DEC%10; （2位BCD）</code></p>
 <p>DS1302写数据时需要将十进制数据转为BCD码的形式，读数据时需要将BCD码转为十进制数据形式。</p>
 <h2 id="通信时序">通信时序</h2>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230505194024970.png" srcset="/img/loading.gif" lazyload alt="image-20230505194024970" style="zoom:67%;" /></p>
-<p><strong>注意：</strong>
-读时序时，发送完命令字的MSB位后，马上就读出数据，所以每个脉冲提前半拍。</p>
+<p><strong>注意：</strong> 读时序时，发送完命令字的MSB位后，马上就读出数据，所以每个脉冲提前半拍。</p>
 <h3 id="程序实现">程序实现</h3>
 <div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">ifndef</span> DS1302_H</span>
 <span class="hljs-meta">#<span class="hljs-keyword">define</span> DS1302_H</span>
@@ -579,8 +575,7 @@ Decimal‎），用4位二进制数来表示1位十进制数，所以4位二进�
 &#125;</code></pre></div>
 <p>效果图：</p>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230508203331455.png" srcset="/img/loading.gif" lazyload alt="image-20230508203331455" style="zoom:80%;" /></p>
-<p>工程代码：<a
-target="_blank" rel="noopener" href="https://gitee.com/kayoungzhang/my_codehub.git">ds1302</a></p>
+<p>工程代码：<a target="_blank" rel="noopener" href="https://gitee.com/kayoungzhang/my_codehub.git">ds1302</a></p>
 <h3 id="参考链接">参考链接</h3>
 <p>https://wendy.blog.csdn.net/article/details/124249444</p>
 

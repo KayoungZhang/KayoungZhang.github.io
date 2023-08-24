@@ -16,12 +16,12 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="STC单片机内部集成了的EEPROM是与程序空间是分开的，利用ISP&#x2F;IAP技术可将内部Data Flash当EEPROM，擦写次数在10万次以上。以下根据datasheet简单介绍一下单片机内部EEPROM的编程方式。 IAP及EEPROM特殊功能寄存器介绍  ISP&#x2F;IAP数据寄存器IAP_DATA ISP&#x2F;IAP地址寄存器IAP_ADDRH和IAP_ADDRL ISP&#x2F;IAP命令">
+    <meta name="description" content="STC单片机内部集成了的EEPROM是与程序空间是分开的，利用ISP&#x2F;IAP技术可将内部Data Flash当EEPROM，擦写次数在10万次以上。以下根据datasheet简单介绍一下单片机内部EEPROM的编程方式。 IAP及EEPROM特殊功能寄存器介绍  ISP&#x2F;IAP数据寄存器IAP_DATA ISP&#x2F;IAP地址寄存器IAP_ADDRH和IAP_ADDRL ISP&#x2F;IAP命令寄">
 <meta property="og:type" content="article">
 <meta property="og:title" content="STC芯片内部EEPROM的程序设计">
 <meta property="og:url" content="http://example.com/2023/04/27/STC%E8%8A%AF%E7%89%87%E5%86%85%E9%83%A8EEPROM%E7%9A%84%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="STC单片机内部集成了的EEPROM是与程序空间是分开的，利用ISP&#x2F;IAP技术可将内部Data Flash当EEPROM，擦写次数在10万次以上。以下根据datasheet简单介绍一下单片机内部EEPROM的编程方式。 IAP及EEPROM特殊功能寄存器介绍  ISP&#x2F;IAP数据寄存器IAP_DATA ISP&#x2F;IAP地址寄存器IAP_ADDRH和IAP_ADDRL ISP&#x2F;IAP命令">
+<meta property="og:description" content="STC单片机内部集成了的EEPROM是与程序空间是分开的，利用ISP&#x2F;IAP技术可将内部Data Flash当EEPROM，擦写次数在10万次以上。以下根据datasheet简单介绍一下单片机内部EEPROM的编程方式。 IAP及EEPROM特殊功能寄存器介绍  ISP&#x2F;IAP数据寄存器IAP_DATA ISP&#x2F;IAP地址寄存器IAP_ADDRH和IAP_ADDRL ISP&#x2F;IAP命令寄">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-04-27T09:15:17.000Z">
 <meta property="article:modified_time" content="2023-05-11T10:10:43.747Z">
@@ -284,10 +284,8 @@
             
               <div class="markdown-body">
                 
-                <p>STC单片机内部集成了的EEPROM是与程序空间是分开的，利用ISP/IAP技术可将内部Data
-Flash当EEPROM，擦写次数在10万次以上。以下根据datasheet简单介绍一下单片机内部EEPROM的编程方式。</p>
-<h3
-id="iap及eeprom特殊功能寄存器介绍">IAP及EEPROM特殊功能寄存器介绍</h3>
+                <p>STC单片机内部集成了的EEPROM是与程序空间是分开的，利用ISP/IAP技术可将内部Data Flash当EEPROM，擦写次数在10万次以上。以下根据datasheet简单介绍一下单片机内部EEPROM的编程方式。</p>
+<h3 id="iap及eeprom特殊功能寄存器介绍">IAP及EEPROM特殊功能寄存器介绍</h3>
 <ul>
 <li>ISP/IAP数据寄存器IAP_DATA</li>
 <li>ISP/IAP地址寄存器IAP_ADDRH和IAP_ADDRL</li>
@@ -296,10 +294,8 @@ id="iap及eeprom特殊功能寄存器介绍">IAP及EEPROM特殊功能寄存器�
 <li>ISP/IAP控制寄存器IAP_CONTR</li>
 </ul>
 <h3 id="注意事项">注意事项</h3>
-<p>1.<strong>写数据</strong>：如果该字节不是0xFF，则须先将整个扇区擦除，因为只有扇区擦除才可以将
-<strong>0</strong> 变为 <strong>1</strong> 。</p>
-<p>2.<strong>扇区擦除</strong>：将扇区内各字节变为 <strong>0xFF</strong>
-。</p>
+<p>1.<strong>写数据</strong>：如果该字节不是0xFF，则须先将整个扇区擦除，因为只有扇区擦除才可以将 <strong>0</strong> 变为 <strong>1</strong> 。</p>
+<p>2.<strong>扇区擦除</strong>：将扇区内各字节变为 <strong>0xFF</strong> 。</p>
 <p>3.同一次修改的数据放在同一扇区中，不是同一次修改的数据放在另外的扇区。</p>
 <p>4.IAP指令完成后，地址不会自动增减，需要手动处理。</p>
 <h3 id="eeprom程序实现">EEPROM程序实现</h3>
@@ -480,8 +476,7 @@ id="iap及eeprom特殊功能寄存器介绍">IAP及EEPROM特殊功能寄存器�
 		iap_wr_byte(IAP_ADDR_SECTOR_0 + <span class="hljs-number">2</span>*i+<span class="hljs-number">1</span>, &amp;tmp_h);
 	&#125;
 &#125;</code></pre></div>
-<p>程序附件 <a
-target="_blank" rel="noopener" href="https://gitee.com/kayoungzhang/my_codehub.git">iap_eeprom</a></p>
+<p>程序附件 <a target="_blank" rel="noopener" href="https://gitee.com/kayoungzhang/my_codehub.git">iap_eeprom</a></p>
 
                 
               </div>

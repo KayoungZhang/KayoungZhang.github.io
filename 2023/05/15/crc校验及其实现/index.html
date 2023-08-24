@@ -16,12 +16,12 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="在通信领域传输数据时，为了避免接收到错误的数据，一般会对源数据和接收到的数据进行特定的校验处理，如果一致，则说明传输正确，否则传输发生了错误。常用的校验算法有奇偶校验、校验和、CRC等，这里主要看看CRC校验。 CRC简介 循环冗余校验（Cyclic Redundancy Check， CRC），它是利用除法及余数的原理来作错误侦测的，对数据进行多项式计算，并将得到的结果附在帧的后面，接收设">
+    <meta name="description" content="在通信领域传输数据时，为了避免接收到错误的数据，一般会对源数据和接收到的数据进行特定的校验处理，如果一致，则说明传输正确，否则传输发生了错误。常用的校验算法有奇偶校验、校验和、CRC等，这里主要看看CRC校验。 CRC简介 循环冗余校验（Cyclic Redundancy Check， CRC），它是利用除法及余数的原理来作错误侦测的，对数据进行多项式计算，并将得到的结果附在帧的后面，接收设备">
 <meta property="og:type" content="article">
 <meta property="og:title" content="crc校验及其实现">
 <meta property="og:url" content="http://example.com/2023/05/15/crc%E6%A0%A1%E9%AA%8C%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="在通信领域传输数据时，为了避免接收到错误的数据，一般会对源数据和接收到的数据进行特定的校验处理，如果一致，则说明传输正确，否则传输发生了错误。常用的校验算法有奇偶校验、校验和、CRC等，这里主要看看CRC校验。 CRC简介 循环冗余校验（Cyclic Redundancy Check， CRC），它是利用除法及余数的原理来作错误侦测的，对数据进行多项式计算，并将得到的结果附在帧的后面，接收设">
+<meta property="og:description" content="在通信领域传输数据时，为了避免接收到错误的数据，一般会对源数据和接收到的数据进行特定的校验处理，如果一致，则说明传输正确，否则传输发生了错误。常用的校验算法有奇偶校验、校验和、CRC等，这里主要看看CRC校验。 CRC简介 循环冗余校验（Cyclic Redundancy Check， CRC），它是利用除法及余数的原理来作错误侦测的，对数据进行多项式计算，并将得到的结果附在帧的后面，接收设备">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230515215944403.png">
 <meta property="article:published_time" content="2023-05-15T13:33:18.000Z">
@@ -288,22 +288,17 @@
                 
                 <p>在通信领域传输数据时，为了避免接收到错误的数据，一般会对源数据和接收到的数据进行特定的校验处理，如果一致，则说明传输正确，否则传输发生了错误。常用的校验算法有奇偶校验、校验和、CRC等，这里主要看看CRC校验。</p>
 <h3 id="crc简介">CRC简介</h3>
-<p>循环冗余校验（Cyclic Redundancy Check，
-CRC），它是利用除法及余数的原理来作错误侦测的，对数据进行多项式计算，并将得到的结果附在帧的后面，接收设备也执行类似的算法，以保证数据传输的正确性和完整性。具体原理参考：</p>
-<p><a
-target="_blank" rel="noopener" href="https://www.cnblogs.com/liushui-sky/p/9962123.html">CRC码计算及校验原理的最通俗诠释</a></p>
+<p>循环冗余校验（Cyclic Redundancy Check， CRC），它是利用除法及余数的原理来作错误侦测的，对数据进行多项式计算，并将得到的结果附在帧的后面，接收设备也执行类似的算法，以保证数据传输的正确性和完整性。具体原理参考：</p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/liushui-sky/p/9962123.html">CRC码计算及校验原理的最通俗诠释</a></p>
 <h3 id="crc参数模型">CRC参数模型</h3>
 <p>一个完整的CRC参数模型应该包含以下信息：WIDTH，POLY，INIT，REFIN，REFOUT，XOROUT。</p>
 <ul>
 <li>NAME：参数模型名称。</li>
 <li>WIDTH：宽度，即生成的CRC数据位宽，如CRC-8，生成的CRC为8位</li>
-<li>POLY：十六进制多项式，省略最高位1，如 x8 + x2 + x + 1，二进制为1
-0000 0111，省略最高位1，转换为十六进制为0x07。</li>
+<li>POLY：十六进制多项式，省略最高位1，如 x8 + x2 + x + 1，二进制为1 0000 0111，省略最高位1，转换为十六进制为0x07。</li>
 <li>INIT：CRC初始值，和WIDTH位宽一致。</li>
-<li>REFIN：true或false，在进行计算之前，原始数据是否翻转，如原始数据：0x34
-= 0011 0100，如果REFIN为true，进行翻转之后为0010 1100 = 0x2c</li>
-<li>REFOUT：true或false，运算完成之后，得到的CRC值是否进行翻转，如计算得到的CRC值：0x97
-= 1001 0111，如果REFOUT为true，进行翻转之后为11101001 = 0xE9。</li>
+<li>REFIN：true或false，在进行计算之前，原始数据是否翻转，如原始数据：0x34 = 0011 0100，如果REFIN为true，进行翻转之后为0010 1100 = 0x2c</li>
+<li>REFOUT：true或false，运算完成之后，得到的CRC值是否进行翻转，如计算得到的CRC值：0x97 = 1001 0111，如果REFOUT为true，进行翻转之后为11101001 = 0xE9。</li>
 <li>XOROUT：计算结果与此参数进行异或运算后得到最终的CRC值，和WIDTH位宽一致。</li>
 </ul>
 <p>通常如果只给了一个多项式，其他的没有说明则：INIT=0x00，REFIN=false，REFOUT=false，XOROUT=0x00。</p>
@@ -321,19 +316,16 @@ target="_blank" rel="noopener" href="https://www.cnblogs.com/liushui-sky/p/99621
 <p>CRC的程序实现，网上有很多比较完备的开源CRC计算库，可以直接使用，没有必要重复造轮子。</p>
 <ul>
 <li>https://github.com/whik/crc-lib-c</li>
-<li><a target="_blank" rel="noopener" href="https://www.libcrc.org/">LibCRC – Open Source CRC Library
-in C</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.libcrc.org/">LibCRC – Open Source CRC Library in C</a></li>
 </ul>
 <h3 id="crc计算工具">CRC计算工具</h3>
 <ul>
-<li><a
-target="_blank" rel="noopener" href="http://www.geshe.com/zh-cn/products/gtoolbox">格西CRC计算器</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.geshe.com/zh-cn/products/gtoolbox">格西CRC计算器</a></li>
 <li>http://www.ip33.com/crc.html</li>
 <li>https://www.lammertbies.nl/comm/info/crc-calculation</li>
 </ul>
 <h3 id="参考链接">参考链接</h3>
-<p><a
-target="_blank" rel="noopener" href="http://www.wangchaochao.top/2020/09/20/Principle-and-implementation-of-CRC/">CRC校验原理及其实现</a></p>
+<p><a target="_blank" rel="noopener" href="http://www.wangchaochao.top/2020/09/20/Principle-and-implementation-of-CRC/">CRC校验原理及其实现</a></p>
 
                 
               </div>

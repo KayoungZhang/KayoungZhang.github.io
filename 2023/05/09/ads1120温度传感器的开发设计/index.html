@@ -24,8 +24,14 @@
 <meta property="og:description" content="前面介绍了ds18b20单总线测量温度，一般应用在环境温度的测量，但开发过程中，针对高低温，宽范围的温度测量，此时用到最多的传感器一般是热电阻(RTDs)和热电偶，如PT100系列热电阻，K-type热电偶。在电路上通过放大器将测量的小信号放大输出，就可以得到测量的温度数据，当然比较简单的做法是使用集成芯片进行处理，像MAX6675，ADS1120，ADS1220等等，之前项目我选用的是ads11">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230511191841945.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230511202038516.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230511194947821.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230511203153776.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230511203020170.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230511192136721.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230511192406483.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230511200919371.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230511201148501.png">
 <meta property="article:published_time" content="2023-05-09T13:52:01.000Z">
 <meta property="article:modified_time" content="2023-05-11T13:07:06.064Z">
 <meta property="article:author" content="John Doe">
@@ -306,52 +312,26 @@
 <h3 id="功能框图">功能框图</h3>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230511191841945.png" srcset="/img/loading.gif" lazyload alt="image-20230511191841945"  /></p>
 <h3 id="pga共模电压要求">PGA共模电压要求</h3>
-<p>为了始终处于 PGA
-的线性工作范围内，输入信号必须满足以下要求。可参考datasheet具体实例。</p>
+<p>为了始终处于 PGA 的线性工作范围内，输入信号必须满足以下要求。可参考datasheet具体实例。</p>
 <figure>
-<img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230511202038516.png" srcset="/img/loading.gif" lazyload
-alt="image-20230511202038516" />
-<figcaption aria-hidden="true">image-20230511202038516</figcaption>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230511202038516.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20230511202038516</figcaption>
 </figure>
 <h3 id="电压基准">电压基准</h3>
-<p>该器件集成了 <strong>2.048V</strong>
-低漂移电压基准。提供两对差分基准输入（REFP0/REFN0 和 REFP1/REFN1）。
-基准源通过配置寄存器的两位 (VREF[1:0])
-进行选择。默认选择内部基准。上电后、退出掉电模式或由外部基准源切换至内部基准后，内部基准电压在
-25µs 内即可完全稳定。</p>
-<p>差分基准输入支持自由选择共模基准电压。REFP0 和 REFN0
-为专用基准输入，而 REFP1 和 REFN1 分别与输入 AIN0 和 AIN3
-共享。所有基准输入均在内部进行缓冲，以提高输入阻抗。因此，使用外部基准时，通常无需额外使用基准缓冲器。</p>
+<p>该器件集成了 <strong>2.048V</strong> 低漂移电压基准。提供两对差分基准输入（REFP0/REFN0 和 REFP1/REFN1）。 基准源通过配置寄存器的两位 (VREF[1:0]) 进行选择。默认选择内部基准。上电后、退出掉电模式或由外部基准源切换至内部基准后，内部基准电压在 25µs 内即可完全稳定。</p>
+<p>差分基准输入支持自由选择共模基准电压。REFP0 和 REFN0 为专用基准输入，而 REFP1 和 REFN1 分别与输入 AIN0 和 AIN3 共享。所有基准输入均在内部进行缓冲，以提高输入阻抗。因此，使用外部基准时，通常无需额外使用基准缓冲器。</p>
 <p>在多数情况下，转换结果与基准源稳定性成正比。转换结果将反映电压基准的所有噪声和漂移。</p>
 <h3 id="激励电流源">激励电流源</h3>
-<p>该器件为 RTD 应用提供两个匹配的可编程激励电流源
-(IDAC)。使用配置寄存器的相应位 (IDAC[2:0])
-可通过编程方式将电流源输出电流设定为
-10μA、50μA、100μA、250μA、500μA、1000μA 或
-1500μA。每个电流源均可与所有模拟输入 (AINx) 及所有专用基准输入（REFP0 和
-REFN0）相连。两电流源还可与同一引脚相连。IDAC
-的路由通过配置寄存器的位（I1MUX[2:0]，I2MUX[2:0]）进行配置。</p>
+<p>该器件为 RTD 应用提供两个匹配的可编程激励电流源 (IDAC)。使用配置寄存器的相应位 (IDAC[2:0]) 可通过编程方式将电流源输出电流设定为 10μA、50μA、100μA、250μA、500μA、1000μA 或 1500μA。每个电流源均可与所有模拟输入 (AINx) 及所有专用基准输入（REFP0 和 REFN0）相连。两电流源还可与同一引脚相连。IDAC 的路由通过配置寄存器的位（I1MUX[2:0]，I2MUX[2:0]）进行配置。</p>
 <h3 id="电路设计">电路设计</h3>
 <p>参考芯片datasheet的应用电路，我采用如下兼容设计，可自由切换外接热电偶和3线制PT100。</p>
 <figure>
-<img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230511194947821.png" srcset="/img/loading.gif" lazyload
-alt="image-20230511194947821" />
-<figcaption aria-hidden="true">image-20230511194947821</figcaption>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230511194947821.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20230511194947821</figcaption>
 </figure>
 <h3 id="pcb设计">PCB设计</h3>
-<p>主要是模拟和数字地的隔离，电源引脚必须通过低 ESR
-陶瓷电容旁路至接地。旁路电容的最佳位置应尽可能靠近电源引脚。采用差分连接的模拟输入之间必须放置差分电容。适用于差分测量的最佳输入组合包括：AIN0、AIN1
-和 AIN2、AIN3，必须选择高品质差分电容。C0G (NPO)
-电容属性稳定且具备低噪声特性，这是最适用的陶瓷贴片电容。对热电偶输入连接周围的覆铜区域进行热隔离，以构建热性能稳定的冷端。</p>
+<p>主要是模拟和数字地的隔离，电源引脚必须通过低 ESR 陶瓷电容旁路至接地。旁路电容的最佳位置应尽可能靠近电源引脚。采用差分连接的模拟输入之间必须放置差分电容。适用于差分测量的最佳输入组合包括：AIN0、AIN1 和 AIN2、AIN3，必须选择高品质差分电容。C0G (NPO) 电容属性稳定且具备低噪声特性，这是最适用的陶瓷贴片电容。对热电偶输入连接周围的覆铜区域进行热隔离，以构建热性能稳定的冷端。</p>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230511203153776.png" srcset="/img/loading.gif" lazyload alt="image-20230511203153776" style="zoom: 80%;" /></p>
 <h3 id="温度传感器">温度传感器</h3>
-<p>ADS1120 集成了一个精密温度传感器。通过将配置寄存器的 TS 位置 1
-可使能温度传感器模式。。温度数据以 <strong>14</strong> 位结果呈现，与 24
-位转换结果左对齐。负数以二进制补码形式表示。数字代码转换温度公式：如果
-MSB 为 0，将十进制代码乘以 0.03125°C 即可获得结果。如果 MSB =
-1，则将结果减 1 后对所有位取补码。之后将结果乘以 –0.03125°C。</p>
+<p>ADS1120 集成了一个精密温度传感器。通过将配置寄存器的 TS 位置 1 可使能温度传感器模式。。温度数据以 <strong>14</strong> 位结果呈现，与 24 位转换结果左对齐。负数以二进制补码形式表示。数字代码转换温度公式：如果 MSB 为 0，将十进制代码乘以 0.03125°C 即可获得结果。如果 MSB = 1，则将结果减 1 后对所有位取补码。之后将结果乘以 –0.03125°C。</p>
 <p>示例：器件回读 0960h: 0960h 的 MSB = 0。</p>
 <p>0960h · 0.03125°C = 2400 · 0.03125°C = 75°C</p>
 <p>示例：器件回读 3CE0h: 3CE0h 的 MSB = 1。</p>
@@ -359,19 +339,13 @@ MSB 为 0，将十进制代码乘以 0.03125°C 即可获得结果。如果 MSB 
 <p>0320h · (–0.03125°C) = 800 · (–0.03125°C) = –25°C</p>
 <h3 id="数据格式">数据格式</h3>
 <figure>
-<img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230511203020170.png" srcset="/img/loading.gif" lazyload
-alt="image-20230511203020170" />
-<figcaption aria-hidden="true">image-20230511203020170</figcaption>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230511203020170.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20230511203020170</figcaption>
 </figure>
 <h3 id="指令">指令</h3>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230511192136721.png" srcset="/img/loading.gif" lazyload alt="image-20230511192136721"  /></p>
 <h3 id="寄存器">寄存器</h3>
 <figure>
-<img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230511192406483.png" srcset="/img/loading.gif" lazyload
-alt="image-20230511192406483" />
-<figcaption aria-hidden="true">image-20230511192406483</figcaption>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230511192406483.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20230511192406483</figcaption>
 </figure>
 <h3 id="程序实现">程序实现</h3>
 <p>程序中只实现了基本的温度测量功能，可根据需求添加其他功能，另外，芯片的配置函数根据电路的不同也需要进行相应修改。</p>
@@ -892,23 +866,15 @@ sbit ADS1120_CLK = P1^<span class="hljs-number">7</span>;
 <p>效果：</p>
 <p>内部温度传感器测量效果：</p>
 <figure>
-<img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230511200919371.png" srcset="/img/loading.gif" lazyload
-alt="image-20230511200919371" />
-<figcaption aria-hidden="true">image-20230511200919371</figcaption>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230511200919371.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20230511200919371</figcaption>
 </figure>
 <p>外接PT100传感器测量的温度效果：</p>
 <figure>
-<img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230511201148501.png" srcset="/img/loading.gif" lazyload
-alt="image-20230511201148501" />
-<figcaption aria-hidden="true">image-20230511201148501</figcaption>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230511201148501.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20230511201148501</figcaption>
 </figure>
 <p>工程代码：https://gitee.com/kayoungzhang/my_codehub/raw/master/ads1120/ads1120.zip</p>
 <h3 id="参考链接">参考链接</h3>
-<p><a
-target="_blank" rel="noopener" href="https://www.ti.com/product/ADS1120?keyMatch=ADS1120&amp;tisearch=search-everything&amp;usecase=GPN#hardware-development">ads1120
-datasheet</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.ti.com/product/ADS1120?keyMatch=ADS1120&amp;tisearch=search-everything&amp;usecase=GPN#hardware-development">ads1120 datasheet</a></p>
 <p>https://www.ti.com/lit/zip/sbac227</p>
 
                 

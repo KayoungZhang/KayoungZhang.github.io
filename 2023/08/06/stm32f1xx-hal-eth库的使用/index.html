@@ -16,12 +16,12 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Ethernet，简称ETH，以太网，以下来看看HAL库关于ETH的使用方法。 ETH外设库的使用  声明一个ETH_HandleTypeDef 类型结构体，如：ETH_HandleTypeDef heth; 对初始化结构体heth中参数进行赋值。 初始化ETH。Call HAL_ETH_Init() 初始化ETH底层。HAL_ETH_MspInit()  使能ETH接口时钟。_">
+    <meta name="description" content="Ethernet，简称ETH，以太网，以下来看看HAL库关于ETH的使用方法。 ETH外设库的使用  声明一个ETH_HandleTypeDef 类型结构体，如：ETH_HandleTypeDef heth; 对初始化结构体heth中参数进行赋值。 初始化ETH。Call HAL_ETH_Init() 初始化ETH底层。HAL_ETH_MspInit()  使能ETH接口时钟。__">
 <meta property="og:type" content="article">
 <meta property="og:title" content="stm32f1xx_hal_eth库的使用">
 <meta property="og:url" content="http://example.com/2023/08/06/stm32f1xx-hal-eth%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Ethernet，简称ETH，以太网，以下来看看HAL库关于ETH的使用方法。 ETH外设库的使用  声明一个ETH_HandleTypeDef 类型结构体，如：ETH_HandleTypeDef heth; 对初始化结构体heth中参数进行赋值。 初始化ETH。Call HAL_ETH_Init() 初始化ETH底层。HAL_ETH_MspInit()  使能ETH接口时钟。_">
+<meta property="og:description" content="Ethernet，简称ETH，以太网，以下来看看HAL库关于ETH的使用方法。 ETH外设库的使用  声明一个ETH_HandleTypeDef 类型结构体，如：ETH_HandleTypeDef heth; 对初始化结构体heth中参数进行赋值。 初始化ETH。Call HAL_ETH_Init() 初始化ETH底层。HAL_ETH_MspInit()  使能ETH接口时钟。__">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-08-06T09:30:31.000Z">
 <meta property="article:modified_time" content="2023-08-14T00:03:33.214Z">
@@ -287,20 +287,17 @@
                 <p>Ethernet，简称ETH，以太网，以下来看看HAL库关于ETH的使用方法。</p>
 <h3 id="eth外设库的使用">ETH外设库的使用</h3>
 <ol type="1">
-<li><p>声明一个ETH_HandleTypeDef 类型结构体，如：ETH_HandleTypeDef
-heth;</p></li>
+<li><p>声明一个ETH_HandleTypeDef 类型结构体，如：ETH_HandleTypeDef heth;</p></li>
 <li><p>对初始化结构体heth中参数进行赋值。</p></li>
 <li><p>初始化ETH。Call HAL_ETH_Init()</p></li>
 <li><p>初始化ETH底层。HAL_ETH_MspInit()</p>
 <ul>
-<li><p>使能ETH接口时钟。<code>__HAL_RCC_ETHMAC_CLK_ENABLE()</code>
-，<code>__HAL_RCC_ETHMACTX_CLK_ENABLE()</code>，<code>__HAL_RCC_ETHMACRX_CLK_ENABLE()</code></p></li>
+<li><p>使能ETH接口时钟。<code>__HAL_RCC_ETHMAC_CLK_ENABLE()</code> ，<code>__HAL_RCC_ETHMACTX_CLK_ENABLE()</code>，<code>__HAL_RCC_ETHMACRX_CLK_ENABLE()</code></p></li>
 <li><p>初始化相关GPIO时钟。</p></li>
 <li><p>配置ETH引脚为输出</p></li>
 <li><p>配置ETH NVIC中断（中断模式）</p></li>
 </ul></li>
-<li><p>以链模式（chain mode ）初始化ETH
-DMA描述符并指向已分配的缓冲区：</p></li>
+<li><p>以链模式（chain mode ）初始化ETH DMA描述符并指向已分配的缓冲区：</p></li>
 </ol>
 <ul>
 <li>发送过程：HAL_ETH_DMATxDescListInit()</li>
@@ -308,14 +305,9 @@ DMA描述符并指向已分配的缓冲区：</p></li>
 </ul>
 <ol start="6" type="1">
 <li><p>使能MAC并进行DMA发送和接收。HAL_ETH_Start()</p></li>
-<li><p>准备好 ETH DMA 发送描述符，助力于ETH DMA传输数据帧到 MAC TX
-FIFO。HAL_ETH_TransmitFrame()</p></li>
-<li><p>轮询接收ETH
-DMA接收描述符中的数据帧，并获取数据帧参数。HAL_ETH_GetReceivedFrame()
-(在无限循环中调用)</p></li>
-<li><p>当ETH
-接收中断发生时，获取一帧接收数据。HAL_ETH_GetReceivedFrame_IT()
-(仅在中断模式中调用)</p></li>
+<li><p>准备好 ETH DMA 发送描述符，助力于ETH DMA传输数据帧到 MAC TX FIFO。HAL_ETH_TransmitFrame()</p></li>
+<li><p>轮询接收ETH DMA接收描述符中的数据帧，并获取数据帧参数。HAL_ETH_GetReceivedFrame() (在无限循环中调用)</p></li>
+<li><p>当ETH 接收中断发生时，获取一帧接收数据。HAL_ETH_GetReceivedFrame_IT() (仅在中断模式中调用)</p></li>
 <li><p>与外部PHY通信:</p>
 <ul>
 <li>从PHY中读取指定寄存器。HAL_ETH_ReadPHYRegister();</li>
@@ -326,12 +318,9 @@ DMA接收描述符中的数据帧，并获取数据帧参数。HAL_ETH_GetReceiv
 <li><p>当 ETH 外设初始化后配置DMA 。HAL_ETH_ConfigDMA()</p>
 <p>所有的DMA参数都应该赋值。</p></li>
 </ol>
-<p><strong>注意</strong>：本驱动不支持PTP 协议和DMA描述符环状模式（DMA
-descriptors ring mode）。</p>
+<p><strong>注意</strong>：本驱动不支持PTP 协议和DMA描述符环状模式（DMA descriptors ring mode）。</p>
 <h3 id="eth回调函数的注册">ETH回调函数的注册</h3>
-<p>当 USE_HAL_ETH_REGISTER_CALLBACKS为
-1时，允许用户注册或注销回调函数。HAL_ETH_RegisterCallback(),
-HAL_ETH_UnRegisterCallback()</p>
+<p>当 USE_HAL_ETH_REGISTER_CALLBACKS为 1时，允许用户注册或注销回调函数。HAL_ETH_RegisterCallback(), HAL_ETH_UnRegisterCallback()</p>
 <p>回调函数：</p>
 <ul>
 <li>TxCpltCallback : 发送完成回调函数</li>
@@ -340,11 +329,9 @@ HAL_ETH_UnRegisterCallback()</p>
 <li>MspInitCallback : ETH相关MCU初始化回调函数</li>
 <li>MspDeInitCallback: ETH相关MCU去初始化回调函数</li>
 </ul>
-<p>默认情况下, ETH 初始化（HAL_ETH_Init()）后，当状态是
-HAL_ETH_STATE_RESET，所有的回调函数会被置为弱函数。</p>
+<p>默认情况下, ETH 初始化（HAL_ETH_Init()）后，当状态是 HAL_ETH_STATE_RESET，所有的回调函数会被置为弱函数。</p>
 <p>只有在 HAL_ETH_STATE_READY 状态下，回调函数才能被注册或注销。</p>
-<p>当 USE_HAL_ETH_REGISTER_CALLBACKS
-为0或未定义时，所有的回调函数已注册的特性不能使用，且都被置为弱函数。</p>
+<p>当 USE_HAL_ETH_REGISTER_CALLBACKS 为0或未定义时，所有的回调函数已注册的特性不能使用，且都被置为弱函数。</p>
 
                 
               </div>

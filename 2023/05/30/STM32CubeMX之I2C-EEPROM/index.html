@@ -16,13 +16,16 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="I2C 简介 I2C（Inter-Integrated Circuit）总线是由PHILIPS公司开发的由数据线SDA和时钟线SCL构成的两线式串行总线，用于连接微控制器及其外围I2C设备。 在物理层结构框图上：   img  它有如下特点：  在一个 I2C 通讯总线中，可连接多个 I2C 设备，支持多个通讯主机及多个通讯从机。每个连接到总线的设备都有一个独立的地址，主机利">
+    <meta name="description" content="I2C 简介 I2C（Inter-Integrated Circuit）总线是由PHILIPS公司开发的由数据线SDA和时钟线SCL构成的两线式串行总线，用于连接微控制器及其外围I2C设备。 在物理层结构框图上：  img  它有如下特点：  在一个 I2C 通讯总线中，可连接多个 I2C 设备，支持多个通讯主机及多个通讯从机。每个连接到总线的设备都有一个独立的地址，主机利用这个地">
 <meta property="og:type" content="article">
 <meta property="og:title" content="STM32CubeMX之I2C_EEPROM">
 <meta property="og:url" content="http://example.com/2023/05/30/STM32CubeMX%E4%B9%8BI2C-EEPROM/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="I2C 简介 I2C（Inter-Integrated Circuit）总线是由PHILIPS公司开发的由数据线SDA和时钟线SCL构成的两线式串行总线，用于连接微控制器及其外围I2C设备。 在物理层结构框图上：   img  它有如下特点：  在一个 I2C 通讯总线中，可连接多个 I2C 设备，支持多个通讯主机及多个通讯从机。每个连接到总线的设备都有一个独立的地址，主机利">
+<meta property="og:description" content="I2C 简介 I2C（Inter-Integrated Circuit）总线是由PHILIPS公司开发的由数据线SDA和时钟线SCL构成的两线式串行总线，用于连接微控制器及其外围I2C设备。 在物理层结构框图上：  img  它有如下特点：  在一个 I2C 通讯总线中，可连接多个 I2C 设备，支持多个通讯主机及多个通讯从机。每个连接到总线的设备都有一个独立的地址，主机利用这个地">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/9f8e02deafc832aa7db61065c5a469b8f2d0f1d4.png@831w_276h_progressive.webp">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/1487d890ccbbd39731bc795c2c18b007b6f09e6f.png@831w_236h_progressive.webp">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230530124753089.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230530122039619.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230601204436710.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230601220435162.png">
@@ -31,7 +34,7 @@
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="stm32">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230530122039619.png">
+<meta name="twitter:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/9f8e02deafc832aa7db61065c5a469b8f2d0f1d4.png@831w_276h_progressive.webp">
   
   
   
@@ -289,33 +292,22 @@
               <div class="markdown-body">
                 
                 <h3 id="i2c-简介">I2C 简介</h3>
-<p>I2C（Inter-Integrated
-Circuit）总线是由PHILIPS公司开发的由数据线SDA和时钟线SCL构成的两线式串行总线，用于连接微控制器及其外围I2C设备。</p>
+<p>I2C（Inter-Integrated Circuit）总线是由PHILIPS公司开发的由数据线SDA和时钟线SCL构成的两线式串行总线，用于连接微控制器及其外围I2C设备。</p>
 <p>在物理层结构框图上：</p>
 <figure>
-<img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/9f8e02deafc832aa7db61065c5a469b8f2d0f1d4.png@831w_276h_progressive.webp" srcset="/img/loading.gif" lazyload
-alt="img" />
-<figcaption aria-hidden="true">img</figcaption>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/9f8e02deafc832aa7db61065c5a469b8f2d0f1d4.png@831w_276h_progressive.webp" srcset="/img/loading.gif" lazyload alt="" /><figcaption>img</figcaption>
 </figure>
 <p>它有如下特点：</p>
 <ul>
-<li><p>在一个 I2C 通讯总线中，可连接多个 I2C
-设备，支持多个通讯主机及多个通讯从机。每个连接到总线的设备都有一个独立的地址，主机利用这个地址进行不同设备之间的访问；</p></li>
-<li><p>总线通过上拉电阻接到电源。当 I2C
-设备空闲时，会输出高阻态，而当所有设备都空闲，都输出高阻态时，由上拉电阻把总线拉成高电平。</p></li>
+<li><p>在一个 I2C 通讯总线中，可连接多个 I2C 设备，支持多个通讯主机及多个通讯从机。每个连接到总线的设备都有一个独立的地址，主机利用这个地址进行不同设备之间的访问；</p></li>
+<li><p>总线通过上拉电阻接到电源。当 I2C 设备空闲时，会输出高阻态，而当所有设备都空闲，都输出高阻态时，由上拉电阻把总线拉成高电平。</p></li>
 <li><p>多个主机同时使用总线时，为了防止数据冲突，会利用仲裁方式决定由哪个设备占用总线。</p></li>
-<li><p>有三种传输模式，标准模式（100kbit/s）、快速模式（400kbit/s）、高速模式（3.4Mbit/s
-多数I2C设备不支持）</p></li>
-<li><p>连接到相同总线的 I2C 设备数量受到总线的最大电容 400pF
-限制。</p></li>
+<li><p>有三种传输模式，标准模式（100kbit/s）、快速模式（400kbit/s）、高速模式（3.4Mbit/s 多数I2C设备不支持）</p></li>
+<li><p>连接到相同总线的 I2C 设备数量受到总线的最大电容 400pF 限制。</p></li>
 </ul>
 <p>在I2C协议层上：</p>
 <figure>
-<img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/1487d890ccbbd39731bc795c2c18b007b6f09e6f.png@831w_236h_progressive.webp" srcset="/img/loading.gif" lazyload
-alt="img" />
-<figcaption aria-hidden="true">img</figcaption>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/1487d890ccbbd39731bc795c2c18b007b6f09e6f.png@831w_236h_progressive.webp" srcset="/img/loading.gif" lazyload alt="" /><figcaption>img</figcaption>
 </figure>
 <p>I2C总线在传送数据的过程中共有三种类型信号：</p>
 <ul>
@@ -325,14 +317,10 @@ alt="img" />
 </ul>
 <p>I2C总线寻址按照从机地址可分为7位和10位（寻址字节）寻址两种，D7~D1位组成从机的地址，D0位是数据传送方向（0表示主机向从机写数据/1表示主机由从机读数据）</p>
 <h3 id="eeprom简介">EEPROM简介</h3>
-<p>EEPROM
-芯片具有掉电后存储内容不丢失的功能，所以一般用来存储参数数据，比较常用的AT24C02芯片，内部含有256个字节，具有I2C通讯接口。</p>
+<p>EEPROM 芯片具有掉电后存储内容不丢失的功能，所以一般用来存储参数数据，比较常用的AT24C02芯片，内部含有256个字节，具有I2C通讯接口。</p>
 <p>AT24C02芯片的器件地址为7位，高4位固定为1010，低3位有上表中的A0/A1/A2引脚的电平决定，还有一位（最低位R/W）用来选择读写方向。</p>
 <figure>
-<img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230530124753089.png" srcset="/img/loading.gif" lazyload
-alt="image-20230530124753089" />
-<figcaption aria-hidden="true">image-20230530124753089</figcaption>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230530124753089.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20230530124753089</figcaption>
 </figure>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230530122039619.png" srcset="/img/loading.gif" lazyload alt="image-20230530122039619" style="zoom:80%;" /></p>
 <p>通过向AT24C02写入特定的数据，然后断电从其中读取数据，通过串口1打印出来。</p>
@@ -346,15 +334,12 @@ alt="image-20230530124753089" />
 </ul>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230601204436710.png" srcset="/img/loading.gif" lazyload alt="image-20230601204436710" style="zoom:80%;" /></p>
 <ul>
-<li>输入工程名，选择工程路径（不要有中文），选择MDK-ARM V5；勾选Generate
-peripheral initialization as a pair of ‘.c/.h’ files per
-peripheral；点击GENERATE CODE，生成工程代码</li>
+<li>输入工程名，选择工程路径（不要有中文），选择MDK-ARM V5；勾选Generate peripheral initialization as a pair of ‘.c/.h’ files per peripheral；点击GENERATE CODE，生成工程代码</li>
 </ul>
 <h4 id="mdk-arm编程">MDK-ARM编程</h4>
 <ul>
 <li><p>在i2c.c文件下可以看到I2C1初始化函数;</p></li>
-<li><p>在uart.c文件中添加fputc重定义函数，并添加头文件<code>&lt;stdio.h&gt;</code>，勾选keil软件<strong>Use
-MicroLIB</strong>选项。</p></li>
+<li><p>在uart.c文件中添加fputc重定义函数，并添加头文件<code>&lt;stdio.h&gt;</code>，勾选keil软件<strong>Use MicroLIB</strong>选项。</p></li>
 <li><p>添加AT24C02驱动文件24cxx.c和24cxx.h,并添加头文件和头文件路径，主要代码如下：</p></li>
 </ul>
 <div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">/**</span>
@@ -492,8 +477,7 @@ MicroLIB</strong>选项。</p></li>
 <li>编译无误下载到开发板后，同时串口助手打印出相应信息</li>
 </ul>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230601220435162.png" srcset="/img/loading.gif" lazyload alt="image-20230601220435162" style="zoom:80%;" /></p>
-<p>工程文件Gitee：<a
-target="_blank" rel="noopener" href="https://gitee.com/kayoungzhang/my_codehub/raw/master/stm32/i2c_eeprom.zip">i2c_eeprom</a></p>
+<p>工程文件Gitee：<a target="_blank" rel="noopener" href="https://gitee.com/kayoungzhang/my_codehub/raw/master/stm32/i2c_eeprom.zip">i2c_eeprom</a></p>
 
                 
               </div>

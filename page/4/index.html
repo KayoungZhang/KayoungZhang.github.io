@@ -233,7 +233,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2023/08/05/stm32f1xx-hal-dma%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
         <div>
-          下面来看看 DMA HAL库关于 DMA 使用方法。 DMA 外设库的使用  使能和配置外设连接到 DMA通道。 (除了内部 SRAM / FLASH 内存: 不用初始化。) 注意： 在内存到内存的传输模式中，不允许循环模式 。请阅读参考手册关于外设和DMA请求的内容。  对于给定的通道，配置以下参数 HAL_DMA_Init()：  通道请求 Channel request
+          下面来看看 DMA HAL库关于 DMA 使用方法。 DMA 外设库的使用  使能和配置外设连接到 DMA通道。 (除了内部 SRAM / FLASH 内存: 不用初始化。) 注意： 在内存到内存的传输模式中，不允许循环模式 。请阅读参考手册关于外设和DMA请求的内容。  对于给定的通道，配置以下参数 HAL_DMA_Init()：  通道请求 Channel request 传输
         </div>
       </a>
 
@@ -355,7 +355,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2023/08/04/stm32f1xx-hal-dac%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
         <div>
-          下面来看看DAC HAL库关于DAC外设的特性及使用方法。 DAC外设特性 1. DAC 的通道 STM32F1 集成有两个12-bit 数字模拟转换器，这两个转换器可以独立使用，也可以同时使用（双模式）。  DAC通道1以DAC_OUT1 (PA4)作为输出或连接到片上外设(例如定时器)。 DAC通道2以DAC_OUT2 (PA5)作为输出或连接到片上外设(例如定时器)。
+          下面来看看DAC HAL库关于DAC外设的特性及使用方法。 DAC外设特性 1. DAC 的通道 STM32F1 集成有两个12-bit 数字模拟转换器，这两个转换器可以独立使用，也可以同时使用（双模式）。  DAC通道1以DAC_OUT1 (PA4)作为输出或连接到片上外设(例如定时器)。 DAC通道2以DAC_OUT2 (PA5)作为输出或连接到片上外设(例如定时器)。  2.
         </div>
       </a>
 
@@ -416,7 +416,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2023/08/03/stm32f1xx-hal-cortex%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
         <div>
-          在HAL库中，关于内核控制外设，初始化和析构的相关配置在 stm32f1xx_hal_cortex.c 文件中，下面来具体看看它怎么使用。 配置NVIC interrupts (IRQ)中断  配置NVIC优先级分组。HAL_NVIC_SetPriorityGrouping()  当选择 NVIC_PRIORITYGROUP_0 时，则无抢占优先级，中断优先级只由子优先级管理 中
+          在HAL库中，关于内核控制外设，初始化和析构的相关配置在 stm32f1xx_hal_cortex.c 文件中，下面来具体看看它怎么使用。 配置NVIC interrupts (IRQ)中断  配置NVIC优先级分组。HAL_NVIC_SetPriorityGrouping()  当选择 NVIC_PRIORITYGROUP_0 时，则无抢占优先级，中断优先级只由子优先级管理 中断最高
         </div>
       </a>
 
@@ -477,7 +477,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2023/08/03/stm32f1xx-hal-adc%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
         <div>
-          同GPIO库一样，ST官方给出了ADC外设库的使用方法，下面具体看看ADC外设库中的步骤： 1. 配置ADC顶层参数  使能ADC接口  建议在 HAL_ADC_MspInit() 函数中配置ADC时钟 （STM32F1 ADC时钟频率最大14MHz）如：  RCC_PeriphCLKInitTypeDef PeriphClkInit; __ADC1_CLK_ENABLE();
+          同GPIO库一样，ST官方给出了ADC外设库的使用方法，下面具体看看ADC外设库中的步骤： 1. 配置ADC顶层参数  使能ADC接口  建议在 HAL_ADC_MspInit() 函数中配置ADC时钟 （STM32F1 ADC时钟频率最大14MHz）如：  RCC_PeriphCLKInitTypeDef PeriphClkInit; __ADC1_CLK_ENABLE();
         </div>
       </a>
 
@@ -538,7 +538,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2023/08/03/stm32f1xx-hal-gpio%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
         <div>
-          怎么使用stm32库文件呢？在 *.c文件中, ST官方已经给出了使用方法，下面具体看看GPIO外设库中的特点和使用步骤： GPIO外设库的特点  GPIO外设库可独立配置模式：  输入模式 Input mode 模拟模式 Analog mode 输出模式 Output mode 复用功能模式 Alternate function mode 外部中断或事件模式 External
+          怎么使用stm32库文件呢？在 *.c文件中, ST官方已经给出了使用方法，下面具体看看GPIO外设库中的特点和使用步骤： GPIO外设库的特点  GPIO外设库可独立配置模式：  输入模式 Input mode 模拟模式 Analog mode 输出模式 Output mode 复用功能模式 Alternate function mode 外部中断或事件模式 External
         </div>
       </a>
 
@@ -660,7 +660,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2023/07/17/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E5%86%99C%E8%AF%AD%E8%A8%80%E9%93%BE%E8%A1%A8/" target="_self">
         <div>
-          链表的概念 链表（Linked List）是一种物理存储结构上非连续、非顺序的存储结构，数据元素（节点）的逻辑顺序是通过链表中的指针链接次序实现的 。 相比数组这种在定义即分配一段连续且固定空间大小的数据结构，链表可以根据需要动态分配离散的内存空间，解决了数组插入或删除元素需要移动大量元素的弊端，不过它的缺点就是需要牺牲更大的内存空间。一般链表在操作系统里面应用比较广泛。 链表的结构
+          链表的概念 链表（Linked List）是一种物理存储结构上非连续、非顺序的存储结构，数据元素（节点）的逻辑顺序是通过链表中的指针链接次序实现的 。 相比数组这种在定义即分配一段连续且固定空间大小的数据结构，链表可以根据需要动态分配离散的内存空间，解决了数组插入或删除元素需要移动大量元素的弊端，不过它的缺点就是需要牺牲更大的内存空间。一般链表在操作系统里面应用比较广泛。 链表的结构 链表
         </div>
       </a>
 
@@ -782,7 +782,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2023/07/15/Blender%E5%9F%BA%E7%A1%80/" target="_self">
         <div>
-          看到有些视频讲解时使用到了动画演示，比较生动形象，这种方式更有助于我们理解所讲解的知识内容，简单的了解了一下，它们是通过一些专业的软件进行设计的，以下要介绍的Blender软件就是其中的一款。 Blender简介  Blender是一个体积小巧，但完整集成的自由开源3D创作套件，提供了大量的基础工具，包括 建模 、 渲染 、 动画 &amp; 绑定 、 视频编辑 、 视觉效果 、
+          看到有些视频讲解时使用到了动画演示，比较生动形象，这种方式更有助于我们理解所讲解的知识内容，简单的了解了一下，它们是通过一些专业的软件进行设计的，以下要介绍的Blender软件就是其中的一款。 Blender简介  Blender是一个体积小巧，但完整集成的自由开源3D创作套件，提供了大量的基础工具，包括 建模 、 渲染 、 动画 &amp; 绑定 、 视频编辑 、 视觉效果 、 合成 、
         </div>
       </a>
 

@@ -16,13 +16,15 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="SPI 简介 SPI全称Serial Peripheral Interface，即串行外围设备接口。它是Motorola首先在其MC68HCXX系列处理器上定义的。SPI是一种高速的、全双工、同步通讯总线。 标准的SPI需要四根信号线： SS（Slave Select）：从设备选择，也称片选，master通过拉低slave的片选信号选择slave SCK（Serial Clock）：">
+    <meta name="description" content="SPI 简介 SPI全称Serial Peripheral Interface，即串行外围设备接口。它是Motorola首先在其MC68HCXX系列处理器上定义的。SPI是一种高速的、全双工、同步通讯总线。 标准的SPI需要四根信号线： SS（Slave Select）：从设备选择，也称片选，master通过拉低slave的片选信号选择slave SCK（Serial Clock）：传输时钟">
 <meta property="og:type" content="article">
 <meta property="og:title" content="STM32CubeMX之SPI_Flash">
 <meta property="og:url" content="http://example.com/2023/05/30/STM32CubeMX%E4%B9%8BSPI-Flash/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="SPI 简介 SPI全称Serial Peripheral Interface，即串行外围设备接口。它是Motorola首先在其MC68HCXX系列处理器上定义的。SPI是一种高速的、全双工、同步通讯总线。 标准的SPI需要四根信号线： SS（Slave Select）：从设备选择，也称片选，master通过拉低slave的片选信号选择slave SCK（Serial Clock）：">
+<meta property="og:description" content="SPI 简介 SPI全称Serial Peripheral Interface，即串行外围设备接口。它是Motorola首先在其MC68HCXX系列处理器上定义的。SPI是一种高速的、全双工、同步通讯总线。 标准的SPI需要四根信号线： SS（Slave Select）：从设备选择，也称片选，master通过拉低slave的片选信号选择slave SCK（Serial Clock）：传输时钟">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/2294744-20220112223510175-1577265499.jpg">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/2294744-20220112223510132-1684027745.jpg">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230530135814179.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230530132423592.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230530141712311.png">
@@ -35,7 +37,7 @@
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="stm32">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230530135814179.png">
+<meta name="twitter:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/2294744-20220112223510175-1577265499.jpg">
   
   
   
@@ -293,30 +295,16 @@
               <div class="markdown-body">
                 
                 <h3 id="spi-简介">SPI 简介</h3>
-<p>SPI全称Serial Peripheral
-Interface，即串行外围设备接口。它是Motorola首先在其MC68HCXX系列处理器上定义的。SPI是一种高速的、全双工、同步通讯总线。</p>
+<p>SPI全称Serial Peripheral Interface，即串行外围设备接口。它是Motorola首先在其MC68HCXX系列处理器上定义的。SPI是一种高速的、全双工、同步通讯总线。</p>
 <p>标准的SPI需要四根信号线：</p>
-<p><strong>SS（Slave
-Select）</strong>：从设备选择，也称片选，master通过拉低slave的片选信号选择slave
-<strong>SCK（Serial
-Clock）</strong>：传输时钟的信号线，时钟信号由master产生，类似于I2C的SCL
-<strong>MOSI（Master Out Slave
-In）</strong>：master输出，slave输入，由master向slave发送数据的通道
-<strong>MISO（Master In Slave
-Out）</strong>：master输入，slave输出，由slave向master发送数据的通道</p>
+<p><strong>SS（Slave Select）</strong>：从设备选择，也称片选，master通过拉低slave的片选信号选择slave <strong>SCK（Serial Clock）</strong>：传输时钟的信号线，时钟信号由master产生，类似于I2C的SCL <strong>MOSI（Master Out Slave In）</strong>：master输出，slave输入，由master向slave发送数据的通道 <strong>MISO（Master In Slave Out）</strong>：master输入，slave输出，由slave向master发送数据的通道</p>
 <p>通常一个master主设备可以连接多个slave从设备，同一时刻只有一个slave可以与master通信，通过片选信号来进行区别，还有一种类似菊花链的连接方式，可自行了解。</p>
 <figure>
-<img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/2294744-20220112223510175-1577265499.jpg" srcset="/img/loading.gif" lazyload
-alt="SPI多从机示意图" />
-<figcaption aria-hidden="true">SPI多从机示意图</figcaption>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/2294744-20220112223510175-1577265499.jpg" srcset="/img/loading.gif" lazyload alt="" /><figcaption>SPI多从机示意图</figcaption>
 </figure>
 <p>SPI的工作基于移位寄存器，工作过程就像一个环形传送带，由master逐位将数据放在传送带上，并驱动传送带将数据传送到slave，同时slave也会同步地逐位将数据传送给master。简单的理解:可以认为是数据交换，外设的写操作和读操作时同步完成的，如果只进行写操作，主设备只需要忽略接收到的字节，如果主设备要进行读操作，就必须发送一个空字节来引发从设备的传输。</p>
 <figure>
-<img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/2294744-20220112223510132-1684027745.jpg" srcset="/img/loading.gif" lazyload
-alt="SPI移位原理" />
-<figcaption aria-hidden="true">SPI移位原理</figcaption>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/2294744-20220112223510132-1684027745.jpg" srcset="/img/loading.gif" lazyload alt="" /><figcaption>SPI移位原理</figcaption>
 </figure>
 <p>SPI总线根据时钟极性（CPOL）和时钟相位（CPHA）的配置不同，可以有四种工作方式：</p>
 <ul>
@@ -339,16 +327,14 @@ alt="SPI移位原理" />
 <p>STM32内部集成有 SPI 控制器，其内部框图：</p>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230530132423592.png" srcset="/img/loading.gif" lazyload alt="image-20230530132423592" style="zoom:80%;" /></p>
 <h3 id="w25qxx芯片简介">W25QXX芯片简介</h3>
-<p>外部flash使用比较多的是华邦公司推出的W25QXX系列spi
-flash芯片，开发板上使用的flash是W25Q128。</p>
+<p>外部flash使用比较多的是华邦公司推出的W25QXX系列spi flash芯片，开发板上使用的flash是W25Q128。</p>
 <p>它的容量为128M-bit（16M字节），它分为256个块(Block)（块大小为64KB），每个块又分为16个扇区(Sector)（扇区大小为4KB），最小擦除单位为一个扇区即4KB，因此在选择芯片的时候必须要有4K以上的SRAM（可以开辟4K的缓冲区）。</p>
 <p>W25Q128 flash框图：</p>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230530141712311.png" srcset="/img/loading.gif" lazyload alt="image-20230530141712311"  /></p>
 <p>其常用指令如下：</p>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230530141512789.png" srcset="/img/loading.gif" lazyload alt="image-20230530141512789"  /></p>
 <h3 id="硬件设计">硬件设计</h3>
-<p>我们将使用 STM32 的 SPI2 来读取外部 SPI FLASH
-芯片（W25Q128），向flash写入数据，然后读出来，并使用串口打印出来。</p>
+<p>我们将使用 STM32 的 SPI2 来读取外部 SPI FLASH 芯片（W25Q128），向flash写入数据，然后读出来，并使用串口打印出来。</p>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230530142337023.png" srcset="/img/loading.gif" lazyload alt="image-20230530142337023" style="zoom:80%;" /></p>
 <h3 id="软件设计">软件设计</h3>
 <h4 id="stm32cubemx设置">STM32CubeMX设置</h4>
@@ -360,15 +346,12 @@ flash芯片，开发板上使用的flash是W25Q128。</p>
 </ul>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230530145350108.png" srcset="/img/loading.gif" lazyload alt="image-20230530145350108" style="zoom:80%;" /></p>
 <ul>
-<li>输入工程名，选择工程路径（不要有中文），选择MDK-ARM V5；勾选Generate
-peripheral initialization as a pair of ‘.c/.h’ files per
-peripheral；点击GENERATE CODE，生成工程代码</li>
+<li>输入工程名，选择工程路径（不要有中文），选择MDK-ARM V5；勾选Generate peripheral initialization as a pair of ‘.c/.h’ files per peripheral；点击GENERATE CODE，生成工程代码</li>
 </ul>
 <h4 id="mdk-arm编程">MDK-ARM编程</h4>
 <ul>
 <li><p>在spi.c文件下可以看到SPI2的初始化函数，片选管脚的初始化在gpio.c中。</p></li>
-<li><p>在uart.c文件中添加fputc重定义函数，并添加头文件<code>&lt;stdio.h&gt;</code>，勾选keil软件<strong>Use
-MicroLIB</strong>选项。</p></li>
+<li><p>在uart.c文件中添加fputc重定义函数，并添加头文件<code>&lt;stdio.h&gt;</code>，勾选keil软件<strong>Use MicroLIB</strong>选项。</p></li>
 <li><p>在工程中创建w25qxx文件夹，并编写flash驱动文件：w25qxx.c和w25qxx.h,注意添加头文件及路径，部分重要的函数如下：</p></li>
 </ul>
 <div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">/**</span>
@@ -579,8 +562,7 @@ w25qxx_write(wData, <span class="hljs-number">0</span>, <span class="hljs-number
 <li>编译无误下载到开发板后，串口助手每隔1秒打印读取的数据信息。</li>
 </ul>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230602214324217.png" srcset="/img/loading.gif" lazyload alt="image-20230602214324217" style="zoom:80%;" /></p>
-<p>工程文件Gitee： <a
-target="_blank" rel="noopener" href="https://gitee.com/kayoungzhang/my_codehub/raw/master/stm32/spi_flash.zip">spi_flash</a></p>
+<p>工程文件Gitee： <a target="_blank" rel="noopener" href="https://gitee.com/kayoungzhang/my_codehub/raw/master/stm32/spi_flash.zip">spi_flash</a></p>
 
                 
               </div>

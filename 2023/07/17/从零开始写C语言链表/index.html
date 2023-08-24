@@ -16,18 +16,27 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="链表的概念 链表（Linked List）是一种物理存储结构上非连续、非顺序的存储结构，数据元素（节点）的逻辑顺序是通过链表中的指针链接次序实现的 。 相比数组这种在定义即分配一段连续且固定空间大小的数据结构，链表可以根据需要动态分配离散的内存空间，解决了数组插入或删除元素需要移动大量元素的弊端，不过它的缺点就是需要牺牲更大的内存空间。一般链表在操作系统里面应用比较广泛。 链表的结构">
+    <meta name="description" content="链表的概念 链表（Linked List）是一种物理存储结构上非连续、非顺序的存储结构，数据元素（节点）的逻辑顺序是通过链表中的指针链接次序实现的 。 相比数组这种在定义即分配一段连续且固定空间大小的数据结构，链表可以根据需要动态分配离散的内存空间，解决了数组插入或删除元素需要移动大量元素的弊端，不过它的缺点就是需要牺牲更大的内存空间。一般链表在操作系统里面应用比较广泛。 链表的结构 链表">
 <meta property="og:type" content="article">
 <meta property="og:title" content="从零开始写C语言链表">
 <meta property="og:url" content="http://example.com/2023/07/17/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E5%86%99C%E8%AF%AD%E8%A8%80%E9%93%BE%E8%A1%A8/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="链表的概念 链表（Linked List）是一种物理存储结构上非连续、非顺序的存储结构，数据元素（节点）的逻辑顺序是通过链表中的指针链接次序实现的 。 相比数组这种在定义即分配一段连续且固定空间大小的数据结构，链表可以根据需要动态分配离散的内存空间，解决了数组插入或删除元素需要移动大量元素的弊端，不过它的缺点就是需要牺牲更大的内存空间。一般链表在操作系统里面应用比较广泛。 链表的结构">
+<meta property="og:description" content="链表的概念 链表（Linked List）是一种物理存储结构上非连续、非顺序的存储结构，数据元素（节点）的逻辑顺序是通过链表中的指针链接次序实现的 。 相比数组这种在定义即分配一段连续且固定空间大小的数据结构，链表可以根据需要动态分配离散的内存空间，解决了数组插入或删除元素需要移动大量元素的弊端，不过它的缺点就是需要牺牲更大的内存空间。一般链表在操作系统里面应用比较广泛。 链表的结构 链表">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230720131138188.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230720131246792.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230720214051358.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230720213847180.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230720201354416.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230720201433074.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230720220211252.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230720221311648.png">
 <meta property="article:published_time" content="2023-07-17T13:11:13.000Z">
 <meta property="article:modified_time" content="2023-07-27T14:44:50.553Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="链表">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230720131138188.png">
   
   
   
@@ -285,23 +294,17 @@
               <div class="markdown-body">
                 
                 <h2 id="链表的概念">链表的概念</h2>
-<p><strong>链表（Linked
-List）</strong>是一种物理存储结构上非连续、非顺序的存储结构，数据元素（<strong>节点</strong>）的逻辑顺序是通过链表中的指针链接次序实现的
-。</p>
+<p><strong>链表（Linked List）</strong>是一种物理存储结构上非连续、非顺序的存储结构，数据元素（<strong>节点</strong>）的逻辑顺序是通过链表中的指针链接次序实现的 。</p>
 <p>相比数组这种在定义即分配一段连续且固定空间大小的数据结构，链表可以根据需要动态分配离散的内存空间，解决了数组插入或删除元素需要移动大量元素的弊端，不过它的缺点就是需要牺牲更大的内存空间。一般链表在操作系统里面应用比较广泛。</p>
 <h2 id="链表的结构">链表的结构</h2>
-<p>链表由一系列 <strong>节点（node）</strong>
-组成，每个节点包括两个部分：</p>
+<p>链表由一系列 <strong>节点（node）</strong> 组成，每个节点包括两个部分：</p>
 <ul>
 <li>数据元素的 <strong>数据域</strong></li>
 <li>下一个节点的 <strong>指针域</strong></li>
 </ul>
 <p>先来认识一个完整的简单链表，如下图所示：</p>
 <figure>
-<img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230720131138188.png" srcset="/img/loading.gif" lazyload
-alt="image-20230720131138188" />
-<figcaption aria-hidden="true">image-20230720131138188</figcaption>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230720131138188.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20230720131138188</figcaption>
 </figure>
 <ul>
 <li><strong>头指针</strong>：一个普通的指针，用于指明链表的位置，永远指向链表第一个节点的位置；</li>
@@ -314,28 +317,19 @@ alt="image-20230720131138188" />
 <li><strong>单向链表</strong></li>
 </ul>
 <figure>
-<img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230720131246792.png" srcset="/img/loading.gif" lazyload
-alt="image-20230720131246792" />
-<figcaption aria-hidden="true">image-20230720131246792</figcaption>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230720131246792.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20230720131246792</figcaption>
 </figure>
 <ul>
 <li><strong>双向链表</strong></li>
 </ul>
 <figure>
-<img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230720214051358.png" srcset="/img/loading.gif" lazyload
-alt="image-20230720214051358" />
-<figcaption aria-hidden="true">image-20230720214051358</figcaption>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230720214051358.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20230720214051358</figcaption>
 </figure>
 <ul>
 <li><strong>环形链表</strong></li>
 </ul>
 <figure>
-<img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230720213847180.png" srcset="/img/loading.gif" lazyload
-alt="image-20230720213847180" />
-<figcaption aria-hidden="true">image-20230720213847180</figcaption>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230720213847180.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20230720213847180</figcaption>
 </figure>
 <h2 id="单向链表的操作">单向链表的操作</h2>
 <p>以上直观了解了链表的实现方式，那么怎么来创建和操作一个链表呢？首先看单向链表，我们需要定义它的数据结构，具体实现代码为：</p>
@@ -364,8 +358,7 @@ alt="image-20230720213847180" />
 	node-&gt;next = <span class="hljs-literal">NULL</span>;  <span class="hljs-comment">//4、将链表的指针域指向空</span>
 	<span class="hljs-keyword">return</span> node;
 &#125;</code></pre></div>
-<h4
-id="遍历单向链表遍历修改查找"><strong>遍历单向链表（遍历，修改，查找）</strong></h4>
+<h4 id="遍历单向链表遍历修改查找"><strong>遍历单向链表（遍历，修改，查找）</strong></h4>
 <p>进行遍历，修改，查找的思路极其简单，只需要建立一个指向链表L的节点，然后沿着链表L逐个向后搜索即可。</p>
 <div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">//打印链表数据</span>
 <span class="hljs-type">void</span> <span class="hljs-title function_">linkedlist_print</span><span class="hljs-params">(<span class="hljs-type">node_t</span>* pH)</span>
@@ -415,10 +408,7 @@ id="遍历单向链表遍历修改查找"><strong>遍历单向链表（遍历，
 <li>尾部插入</li>
 </ul>
 <figure>
-<img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230720201354416.png" srcset="/img/loading.gif" lazyload
-alt="image-20230720201354416" />
-<figcaption aria-hidden="true">image-20230720201354416</figcaption>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230720201354416.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20230720201354416</figcaption>
 </figure>
 <p>不管是哪种方式，链表插入节点操作主要分为查找到第i个位置，将该位置的next指针修改为指向新插入的节点，而新插入的节点next指针指向(i+1)个位置的节点。其操作方式可以设置一个临时节点，利用循环找到第i个位置，再进行插入。</p>
 <div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">/* 链表的头部插入 */</span> 
@@ -455,10 +445,7 @@ alt="image-20230720201354416" />
 <h4 id="单向链表删除操作"><strong>单向链表删除操作</strong></h4>
 <p>删除元素要建立一个前驱节点和一个当前节点，当找到了我们需要删除的数据时，直接使用前驱节点跳过要删除的节点指向要删除节点的后一个节点，再将原有的节点通过free函数释放掉。</p>
 <figure>
-<img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230720201433074.png" srcset="/img/loading.gif" lazyload
-alt="image-20230720201433074" />
-<figcaption aria-hidden="true">image-20230720201433074</figcaption>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230720201433074.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20230720201433074</figcaption>
 </figure>
 <div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">//单链表的删除，在链表中删除值为val的元素</span>
 <span class="hljs-type">node_t</span>* <span class="hljs-title function_">linkedlist_remove</span><span class="hljs-params">(<span class="hljs-type">node_t</span>* L,<span class="hljs-type">int</span> val)</span> &#123;
@@ -526,10 +513,7 @@ alt="image-20230720201433074" />
 <h4 id="双向链表的插入操作">双向链表的插入操作</h4>
 <p>对于双向链表的插入操作，也有三种形式：头部插入、中部插入和尾部插入。操作方式大同小异，首先创建一个独立的节点，将其的pre指针指向所需插入位置的前一个节点，同时，其所需插入的前一个节点的next指针修改指向为该新的节点，同理，该新的节点的next指针指向原本的下一个节点，而修改下一个节点的pre指针指向创建的新节点，如下图所示：</p>
 <figure>
-<img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230720220211252.png" srcset="/img/loading.gif" lazyload
-alt="image-20230720220211252" />
-<figcaption aria-hidden="true">image-20230720220211252</figcaption>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230720220211252.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20230720220211252</figcaption>
 </figure>
 <div class="code-wrapper"><pre><code class="hljs c">line* <span class="hljs-title function_">insertLine</span><span class="hljs-params">(line* head,<span class="hljs-type">int</span> data,<span class="hljs-type">int</span> add)</span>&#123;
     <span class="hljs-comment">//三个参数分别为：进行此操作的双链表，插入的数据，插入的位置</span>
@@ -565,10 +549,7 @@ alt="image-20230720220211252" />
 <h4 id="双向链表的删除操作">双向链表的删除操作</h4>
 <p>删除操作的过程是：首先将需要删除节点的前一个节点的next指针指向自己的下一个节点，同时将下一个节点的pre指针修改指向为自己的上一个节点，然后删除节点，释放空间。</p>
 <figure>
-<img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230720221311648.png" srcset="/img/loading.gif" lazyload
-alt="image-20230720221311648" />
-<figcaption aria-hidden="true">image-20230720221311648</figcaption>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230720221311648.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20230720221311648</figcaption>
 </figure>
 <div class="code-wrapper"><pre><code class="hljs c">line* <span class="hljs-title function_">deleteLine</span><span class="hljs-params">(line* head, <span class="hljs-type">int</span> data)</span>&#123;
     <span class="hljs-comment">//输入的参数分别为进行此操作的双链表，需要删除的数据</span>
@@ -590,14 +571,12 @@ alt="image-20230720221311648" />
     <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Error:没有找到该元素，没有产生删除\n&quot;</span>);
     <span class="hljs-keyword">return</span> head;
 &#125;</code></pre></div>
-<p>附件：<a
-target="_blank" rel="noopener" href="https://gitee.com/kayoungzhang/my_codehub/blob/master/Data%20Structures%20and%20Algorithms/linkedlist.drawio">链表图形编辑源图</a></p>
+<p>附件：<a target="_blank" rel="noopener" href="https://gitee.com/kayoungzhang/my_codehub/blob/master/Data%20Structures%20and%20Algorithms/linkedlist.drawio">链表图形编辑源图</a></p>
 <h4 id="参考链接">参考链接：</h4>
 <p>https://zhuanlan.zhihu.com/p/85504177</p>
 <p>https://www.dotcpp.com/course/ds-link/</p>
 <p>http://data.biancheng.net/view/166.html</p>
-<p><a
-target="_blank" rel="noopener" href="https://huaweicloud.csdn.net/63a56658b878a545459463d4.html?spm=1001.2101.3001.6650.1&amp;utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Eactivity-1-125701955-blog-123446098.235%5Ev38%5Epc_relevant_anti_t3&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Eactivity-1-125701955-blog-123446098.235%5Ev38%5Epc_relevant_anti_t3&amp;utm_relevant_index=2">链表基础知识详解（非常详细简单易懂）</a></p>
+<p><a target="_blank" rel="noopener" href="https://huaweicloud.csdn.net/63a56658b878a545459463d4.html?spm=1001.2101.3001.6650.1&amp;utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Eactivity-1-125701955-blog-123446098.235%5Ev38%5Epc_relevant_anti_t3&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Eactivity-1-125701955-blog-123446098.235%5Ev38%5Epc_relevant_anti_t3&amp;utm_relevant_index=2">链表基础知识详解（非常详细简单易懂）</a></p>
 
                 
               </div>

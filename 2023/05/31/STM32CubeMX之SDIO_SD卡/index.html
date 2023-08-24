@@ -16,19 +16,22 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="SD卡介绍 SD卡（Secure Digital Memory Card）即：安全数码卡。 根据容量大小，有下面几种分类：  关于SD卡其他介绍，可参考 SD卡通识篇 SD卡物理结构：   image-20230531182505470     SD卡寄存器 描述     CID（Card identification number） SD卡唯一识别码">
+    <meta name="description" content="SD卡介绍 SD卡（Secure Digital Memory Card）即：安全数码卡。 根据容量大小，有下面几种分类：  关于SD卡其他介绍，可参考 SD卡通识篇 SD卡物理结构：  image-20230531182505470     SD卡寄存器 描述     CID（Card identification number） SD卡唯一识别码">
 <meta property="og:type" content="article">
 <meta property="og:title" content="STM32CubeMX之SDIO_SD卡">
 <meta property="og:url" content="http://example.com/2023/05/31/STM32CubeMX%E4%B9%8BSDIO_SD%E5%8D%A1/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="SD卡介绍 SD卡（Secure Digital Memory Card）即：安全数码卡。 根据容量大小，有下面几种分类：  关于SD卡其他介绍，可参考 SD卡通识篇 SD卡物理结构：   image-20230531182505470     SD卡寄存器 描述     CID（Card identification number） SD卡唯一识别码">
+<meta property="og:description" content="SD卡介绍 SD卡（Secure Digital Memory Card）即：安全数码卡。 根据容量大小，有下面几种分类：  关于SD卡其他介绍，可参考 SD卡通识篇 SD卡物理结构：  image-20230531182505470     SD卡寄存器 描述     CID（Card identification number） SD卡唯一识别码">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531172428049.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531182505470.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531190032444.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531192743598.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531193038925.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531193736005.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531195623706.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531195739768.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230602185047037.png">
 <meta property="article:published_time" content="2023-05-31T05:22:11.000Z">
 <meta property="article:modified_time" content="2023-06-06T00:12:18.398Z">
 <meta property="article:author" content="John Doe">
@@ -295,14 +298,10 @@
 <p>SD卡（Secure Digital Memory Card）即：安全数码卡。</p>
 <p>根据容量大小，有下面几种分类：</p>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531172428049.png" srcset="/img/loading.gif" lazyload alt="image-20230531172428049" style="zoom:80%;" /></p>
-<p>关于SD卡其他介绍，可参考 <a
-target="_blank" rel="noopener" href="https://www.baidu.com/link?url=sXgupcfG8fflzEDeeUlhH7psACkhlMJWwL8aFDGca27sSn-LNEp_vK-jAyAPEjvk&amp;wd=&amp;eqid=c46ac4b50003b4c30000000664771096">SD卡通识篇</a></p>
+<p>关于SD卡其他介绍，可参考 <a target="_blank" rel="noopener" href="https://www.baidu.com/link?url=sXgupcfG8fflzEDeeUlhH7psACkhlMJWwL8aFDGca27sSn-LNEp_vK-jAyAPEjvk&amp;wd=&amp;eqid=c46ac4b50003b4c30000000664771096">SD卡通识篇</a></p>
 <p>SD卡物理结构：</p>
 <figure>
-<img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531182505470.png" srcset="/img/loading.gif" lazyload
-alt="image-20230531182505470" />
-<figcaption aria-hidden="true">image-20230531182505470</figcaption>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531182505470.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20230531182505470</figcaption>
 </figure>
 <table>
 <thead>
@@ -348,23 +347,16 @@ alt="image-20230531182505470" />
 </table>
 <p>SD卡初始化流程：</p>
 <figure>
-<img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531190032444.png" srcset="/img/loading.gif" lazyload
-alt="image-20230531190032444" />
-<figcaption aria-hidden="true">image-20230531190032444</figcaption>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531190032444.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20230531190032444</figcaption>
 </figure>
 <h3 id="sdio-简介">SDIO 简介</h3>
-<p>SDIO ，全称： Secure Digital Input and
-Output，即安全数字输入输出接口。STM32的SDIO控制器支持多媒体卡（MMC卡）、SD存储卡、SD
-I/O卡和CE-ATA设备。</p>
+<p>SDIO ，全称： Secure Digital Input and Output，即安全数字输入输出接口。STM32的SDIO控制器支持多媒体卡（MMC卡）、SD存储卡、SD I/O卡和CE-ATA设备。</p>
 <p>SDIO框图：</p>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531192743598.png" srcset="/img/loading.gif" lazyload alt="image-20230531192743598" style="zoom:80%;" /></p>
 <p>其中，SDIO 适配器</p>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531193038925.png" srcset="/img/loading.gif" lazyload alt="image-20230531193038925" style="zoom:80%;" /></p>
 <h3 id="硬件设计">硬件设计</h3>
-<p>插上SD卡，开机的初始化 SD 卡，如果 SD
-卡初始化完成，则串口1打印初始化成功，没初始化成功，则打印初始化失败。然后打印SD卡相关信息，最后写入和读取
-SD 卡扇区 0 的数据，通过串口1发送到电脑。</p>
+<p>插上SD卡，开机的初始化 SD 卡，如果 SD 卡初始化完成，则串口1打印初始化成功，没初始化成功，则打印初始化失败。然后打印SD卡相关信息，最后写入和读取 SD 卡扇区 0 的数据，通过串口1发送到电脑。</p>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531193736005.png" srcset="/img/loading.gif" lazyload alt="image-20230531193736005" style="zoom:80%;" /></p>
 <h3 id="软件设计">软件设计</h3>
 <h4 id="stm32cubemx设置">STM32CubeMX设置</h4>
@@ -379,9 +371,7 @@ SD 卡扇区 0 的数据，通过串口1发送到电脑。</p>
 </ul>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531195739768.png" srcset="/img/loading.gif" lazyload alt="image-20230531195739768" style="zoom:80%;" /></p>
 <ul>
-<li>输入工程名，选择工程路径（不要有中文），选择MDK-ARM V5；勾选Generate
-peripheral initialization as a pair of ‘.c/.h’ files per
-peripheral；点击 GENERATE CODE，生成工程代码。</li>
+<li>输入工程名，选择工程路径（不要有中文），选择MDK-ARM V5；勾选Generate peripheral initialization as a pair of ‘.c/.h’ files per peripheral；点击 GENERATE CODE，生成工程代码。</li>
 </ul>
 <h4 id="mdk-arm编程">MDK-ARM编程</h4>
 <ul>
@@ -424,8 +414,7 @@ peripheral；点击 GENERATE CODE，生成工程代码。</li>
 &#125;
 <span class="hljs-comment">/* USER CODE END 1 */</span></code></pre></div>
 <ul>
-<li>在uart.c文件中添加fputc重定义函数，并添加头文件<code>&lt;stdio.h&gt;</code>，勾选keil软件<strong>Use
-MicroLIB</strong>选项。</li>
+<li>在uart.c文件中添加fputc重定义函数，并添加头文件<code>&lt;stdio.h&gt;</code>，勾选keil软件<strong>Use MicroLIB</strong>选项。</li>
 <li>在main.c文件中编写SD卡读写测试代码</li>
 </ul>
 <div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">/* USER CODE BEGIN Includes */</span>
@@ -492,13 +481,9 @@ Show_SDMMC_Info();
 <li>编译无误下载到开发板后，插入SD卡，打开串口助手，显示SD卡信息及其他数据</li>
 </ul>
 <figure>
-<img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230602185047037.png" srcset="/img/loading.gif" lazyload
-alt="image-20230602185047037" />
-<figcaption aria-hidden="true">image-20230602185047037</figcaption>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230602185047037.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20230602185047037</figcaption>
 </figure>
-<p>工程文件Gitee：<a
-target="_blank" rel="noopener" href="https://gitee.com/kayoungzhang/my_codehub/raw/master/stm32/sdio.zip">sdio</a></p>
+<p>工程文件Gitee：<a target="_blank" rel="noopener" href="https://gitee.com/kayoungzhang/my_codehub/raw/master/stm32/sdio.zip">sdio</a></p>
 <h3 id="参考链接">参考链接：</h3>
 <p>https://www.sdcard.org/downloads/pls/</p>
 

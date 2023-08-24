@@ -33,10 +33,15 @@
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614192942055.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614193215345.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614193358548.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614194650370.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614195710035.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614201322669.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614201800354.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614201932984.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614202600194.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614203121788.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614204728719.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614205216379.png">
 <meta property="article:published_time" content="2023-06-14T10:41:05.000Z">
 <meta property="article:modified_time" content="2023-06-14T13:09:51.222Z">
 <meta property="article:author" content="John Doe">
@@ -316,13 +321,11 @@
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614190635317.png" srcset="/img/loading.gif" lazyload alt="image-20230614190635317" style="zoom:80%;" /></p>
 <h3 id="新建qt-widget项目">新建Qt Widget项目</h3>
 <ul>
-<li>依次点击 File -&gt; New File or Project,选择Qt Widget
-Application</li>
+<li>依次点击 File -&gt; New File or Project,选择Qt Widget Application</li>
 </ul>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614191012944.png" srcset="/img/loading.gif" lazyload alt="image-20230614191012944" style="zoom:80%;" /></p>
 <ul>
-<li>填写工程名和选择存储路径，选择 qmake 编译，用 qmake 生成 Makefile
-用于项目的编译。</li>
+<li>填写工程名和选择存储路径，选择 qmake 编译，用 qmake 生成 Makefile 用于项目的编译。</li>
 </ul>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614191554835.png" srcset="/img/loading.gif" lazyload alt="image-20230614191554835" style="zoom:80%;" /></p>
 <ul>
@@ -346,10 +349,7 @@ Application</li>
 <li>demo.pro: 项目管理文件。</li>
 </ul>
 <figure>
-<img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614194650370.png" srcset="/img/loading.gif" lazyload
-alt="image-20230614194650370" />
-<figcaption aria-hidden="true">image-20230614194650370</figcaption>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614194650370.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20230614194650370</figcaption>
 </figure>
 <p>还可以在其中设置应用程序其他信息：</p>
 <div class="code-wrapper"><pre><code class="hljs bash"><span class="hljs-comment">#程序版本</span>
@@ -370,34 +370,19 @@ RC_LANG = 0x0800</code></pre></div>
 <ul>
 <li><p>Header 分组，存放的是项目内所有的头文件*.h。</p></li>
 <li><p>Source 分组，存放的是项目内的所有C++源码文件*.cpp。</p></li>
-<li><p>Forms
-分组，存放项目内所有界面文件*.ui。双击ui文件就可以进入图形设计界面，返回时则点击左边Edit图标。</p></li>
+<li><p>Forms 分组，存放项目内所有界面文件*.ui。双击ui文件就可以进入图形设计界面，返回时则点击左边Edit图标。</p></li>
 </ul>
 <figure>
-<img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614195710035.png" srcset="/img/loading.gif" lazyload
-alt="image-20230614195710035" />
-<figcaption aria-hidden="true">image-20230614195710035</figcaption>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614195710035.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20230614195710035</figcaption>
 </figure>
-<p>在控件区，拖拽一个<strong>Label</strong>组件到中间的设计区，编辑文字内容为：“<strong>Hello，Qt！</strong>”，选择此
-<strong>Lable</strong> 然后在其属性区，找到 <strong>geometry</strong>
-,将 <strong>Width</strong> 改为 <strong>80</strong>，
-<strong>Height</strong> 改为 <strong>30</strong>，然后找到
-<strong>font</strong>，将 <strong>Point Size</strong>设置为
-<strong>12</strong>，勾选 <strong>Bold</strong>。</p>
+<p>在控件区，拖拽一个<strong>Label</strong>组件到中间的设计区，编辑文字内容为：“<strong>Hello，Qt！</strong>”，选择此 <strong>Lable</strong> 然后在其属性区，找到 <strong>geometry</strong> ,将 <strong>Width</strong> 改为 <strong>80</strong>， <strong>Height</strong> 改为 <strong>30</strong>，然后找到 <strong>font</strong>，将 <strong>Point Size</strong>设置为 <strong>12</strong>，勾选 <strong>Bold</strong>。</p>
 <figure>
-<img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614201322669.png" srcset="/img/loading.gif" lazyload
-alt="image-20230614201322669" />
-<figcaption aria-hidden="true">image-20230614201322669</figcaption>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614201322669.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20230614201322669</figcaption>
 </figure>
 <h3 id="项目的编译和运行">项目的编译和运行</h3>
 <p>单击左窗口的 <strong>Projects</strong> 图标，查看编译工具。</p>
 <figure>
-<img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614201800354.png" srcset="/img/loading.gif" lazyload
-alt="image-20230614201800354" />
-<figcaption aria-hidden="true">image-20230614201800354</figcaption>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614201800354.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20230614201800354</figcaption>
 </figure>
 <p>然后点击左下角编译运行：</p>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614201932984.png" srcset="/img/loading.gif" lazyload alt="image-20230614201932984" style="zoom:80%;" /></p>
@@ -405,31 +390,23 @@ alt="image-20230614201800354" />
 <h3 id="项目的发布">项目的发布</h3>
 <p>当项目全部完成后，就可以进行打包发行了。</p>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614202600194.png" srcset="/img/loading.gif" lazyload alt="image-20230614202600194" style="zoom:80%;" /></p>
-<p>选择<strong>Release</strong>后，编译运行完，打开项目工程目录，找到编译后的exe文件，双击运行，会发现运行不了，是因为缺少dll动态链接库。可以将Qt的bin目录添加到电脑系统的Path环境变量中，为了保证在其他电脑上也可以正常运行，需要找到相应的dll文件，Qt提供了一个
-<strong>windeployqt</strong>
-工具，可以自动创建可部署的文件夹，具体操作如下：</p>
+<p>选择<strong>Release</strong>后，编译运行完，打开项目工程目录，找到编译后的exe文件，双击运行，会发现运行不了，是因为缺少dll动态链接库。可以将Qt的bin目录添加到电脑系统的Path环境变量中，为了保证在其他电脑上也可以正常运行，需要找到相应的dll文件，Qt提供了一个 <strong>windeployqt</strong> 工具，可以自动创建可部署的文件夹，具体操作如下：</p>
 <ol type="1">
 <li>将生成的exe文件复制到一个空的文件夹中。</li>
 </ol>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614203121788.png" srcset="/img/loading.gif" lazyload alt="image-20230614203121788" style="zoom:80%;" /></p>
 <ol start="2" type="1">
-<li>打开Qt的Min
-GW命令行，进入刚才的文件夹，然后输入命令：<strong>windeployqt</strong>后面跟程序名。</li>
+<li>打开Qt的Min GW命令行，进入刚才的文件夹，然后输入命令：<strong>windeployqt</strong>后面跟程序名。</li>
 </ol>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614204728719.png" srcset="/img/loading.gif" lazyload alt="image-20230614204728719" style="zoom:80%;" /></p>
 <ol start="3" type="1">
 <li>可以将部分不需要的内容删除，如下所示：</li>
 </ol>
 <figure>
-<img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614205216379.png" srcset="/img/loading.gif" lazyload
-alt="image-20230614205216379" />
-<figcaption aria-hidden="true">image-20230614205216379</figcaption>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230614205216379.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20230614205216379</figcaption>
 </figure>
 <ol start="4" type="1">
-<li><p>将精简后的程序压缩即可在其他同平台电脑运行了,也可以使用工具
-“单文件制作封装工具(Enigma Virtual
-Box)”将其打包成独立版程序。如果需要整理成一个安装程序，就需要专用工具进行打包处理，一般用到的工具有：</p>
+<li><p>将精简后的程序压缩即可在其他同平台电脑运行了,也可以使用工具 “单文件制作封装工具(Enigma Virtual Box)”将其打包成独立版程序。如果需要整理成一个安装程序，就需要专用工具进行打包处理，一般用到的工具有：</p>
 <ul>
 <li>HM NIS Edit（https://hmne.sourceforge.net/）</li>
 <li>NSIS</li>
@@ -437,9 +414,7 @@ Box)”将其打包成独立版程序。如果需要整理成一个安装程序�
 </ul>
 <p>后面再做详细介绍。</p></li>
 </ol>
-<p>工程文件：<a
-target="_blank" rel="noopener" href="https://gitee.com/kayoungzhang/my_codehub/raw/master/Qt/demo.zip">Qt
-demo</a></p>
+<p>工程文件：<a target="_blank" rel="noopener" href="https://gitee.com/kayoungzhang/my_codehub/raw/master/Qt/demo.zip">Qt demo</a></p>
 
                 
               </div>

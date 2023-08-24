@@ -16,12 +16,12 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="MultiMediaCard,简称MMC,它属于SD卡的一种，是一种一体化、可拆卸、多功能的内存卡,以下来看看HAL库关于MMC的使用方法。 MMC外设库的使用 这是一个通用分层的MMC存储器驱动，它使用HAL SDMMC 驱动函数来连接MMC和eMMC卡。 1. 初始化MMC底层。HAL_MMC_MspInit()  使能MMC接口时钟。__HAL_RCC_SDMMC_CLK_ENA">
+    <meta name="description" content="MultiMediaCard,简称MMC,它属于SD卡的一种，是一种一体化、可拆卸、多功能的内存卡,以下来看看HAL库关于MMC的使用方法。 MMC外设库的使用 这是一个通用分层的MMC存储器驱动，它使用HAL SDMMC 驱动函数来连接MMC和eMMC卡。 1. 初始化MMC底层。HAL_MMC_MspInit()  使能MMC接口时钟。__HAL_RCC_SDMMC_CLK_ENAB">
 <meta property="og:type" content="article">
 <meta property="og:title" content="stm32f1xx_hal_mmc库的使用">
 <meta property="og:url" content="http://example.com/2023/08/07/stm32f1xx-hal-mmc%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="MultiMediaCard,简称MMC,它属于SD卡的一种，是一种一体化、可拆卸、多功能的内存卡,以下来看看HAL库关于MMC的使用方法。 MMC外设库的使用 这是一个通用分层的MMC存储器驱动，它使用HAL SDMMC 驱动函数来连接MMC和eMMC卡。 1. 初始化MMC底层。HAL_MMC_MspInit()  使能MMC接口时钟。__HAL_RCC_SDMMC_CLK_ENA">
+<meta property="og:description" content="MultiMediaCard,简称MMC,它属于SD卡的一种，是一种一体化、可拆卸、多功能的内存卡,以下来看看HAL库关于MMC的使用方法。 MMC外设库的使用 这是一个通用分层的MMC存储器驱动，它使用HAL SDMMC 驱动函数来连接MMC和eMMC卡。 1. 初始化MMC底层。HAL_MMC_MspInit()  使能MMC接口时钟。__HAL_RCC_SDMMC_CLK_ENAB">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-08-07T09:30:31.000Z">
 <meta property="article:modified_time" content="2023-08-14T00:03:33.327Z">
@@ -286,8 +286,7 @@
                 
                 <p>MultiMediaCard,简称MMC,它属于SD卡的一种，是一种一体化、可拆卸、多功能的内存卡,以下来看看HAL库关于MMC的使用方法。</p>
 <h3 id="mmc外设库的使用">MMC外设库的使用</h3>
-<p>这是一个通用分层的MMC存储器驱动，它使用HAL SDMMC
-驱动函数来连接MMC和eMMC卡。</p>
+<p>这是一个通用分层的MMC存储器驱动，它使用HAL SDMMC 驱动函数来连接MMC和eMMC卡。</p>
 <p><strong>1. 初始化MMC底层。HAL_MMC_MspInit()</strong></p>
 <ul>
 <li>使能MMC接口时钟。__HAL_RCC_SDMMC_CLK_ENABLE()</li>
@@ -296,8 +295,7 @@
 <li>使能MMC GPIO 时钟。__HAL_RCC_GPIOx_CLK_ENABLE()</li>
 <li>配置MMC引脚为复用上拉模式。HAL_GPIO_Init()</li>
 </ul></li>
-<li>如果使用到DMA，则配置DMA。HAL_MMC_ReadBlocks_DMA() ，
-HAL_MMC_WriteBlocks_DMA()
+<li>如果使用到DMA，则配置DMA。HAL_MMC_ReadBlocks_DMA() ， HAL_MMC_WriteBlocks_DMA()
 <ul>
 <li>使能 DMAx 接口时钟。__HAL_RCC_DMAx_CLK_ENABLE()</li>
 <li>配置DMA。HAL_DMA_Init()</li>
@@ -306,29 +304,23 @@ HAL_MMC_WriteBlocks_DMA()
 <ul>
 <li>配置SDMMC和DMA中断优先级，DMA优先级高于SDMMC。HAL_NVIC_SetPriority()</li>
 <li>使能NVIC DMA和SDMMC IRQ。HAL_NVIC_EnableIRQ()</li>
-<li>通信过程中使用宏定义管理SDMMC中断。<code>__HAL_MMC_ENABLE_IT()</code>
-， <code>__HAL_MMC_DISABLE_IT()</code></li>
-<li>使用宏定义控制SDMMC 中断挂起位。<code>__HAL_MMC_GET_IT()</code>
-，<code>__HAL_MMC_CLEAR_IT()</code></li>
+<li>通信过程中使用宏定义管理SDMMC中断。<code>__HAL_MMC_ENABLE_IT()</code> ， <code>__HAL_MMC_DISABLE_IT()</code></li>
+<li>使用宏定义控制SDMMC 中断挂起位。<code>__HAL_MMC_GET_IT()</code> ，<code>__HAL_MMC_CLEAR_IT()</code></li>
 </ul></li>
 <li>如果使用到中断，则配置NVIC。HAL_MMC_ReadBlocks_IT()，HAL_MMC_WriteBlocks_IT()
 <ul>
 <li>配置SDMMC中断优先级。HAL_NVIC_SetPriority()</li>
 <li>使能NVIC SDMMC IRQ。HAL_NVIC_EnableIRQ()</li>
-<li>通信过程中使用宏定义管理SDMMC中断。<code>__HAL_MMC_ENABLE_IT()</code>
-， <code>__HAL_MMC_DISABLE_IT()</code></li>
-<li>使用宏定义控制SDMMC 中断挂起位。<code>__HAL_MMC_GET_IT()</code>
-，<code>__HAL_MMC_CLEAR_IT()</code></li>
+<li>通信过程中使用宏定义管理SDMMC中断。<code>__HAL_MMC_ENABLE_IT()</code> ， <code>__HAL_MMC_DISABLE_IT()</code></li>
+<li>使用宏定义控制SDMMC 中断挂起位。<code>__HAL_MMC_GET_IT()</code> ，<code>__HAL_MMC_CLEAR_IT()</code></li>
 </ul></li>
 </ul>
 <p><strong>2. MMC的初始化和配置</strong></p>
-<p>使用HAL_MMC_Init()函数来初始化SDMMC，并进入睡眠状态（已准备好数据传输）。MMC卡初始化后，就可以执行MMC
-读、写、擦除操作。</p>
+<p>使用HAL_MMC_Init()函数来初始化SDMMC，并进入睡眠状态（已准备好数据传输）。MMC卡初始化后，就可以执行MMC 读、写、擦除操作。</p>
 <ul>
 <li><p>使用默认配置初始化SDMMC外设接口。默认频率：400KHz。</p>
 <p>MMC频率：SDMMC_CK = SDMMCCLK / (ClockDiv + 2)；</p>
-<p>初始化时，根据MMC标准，确保SDMMC_CK频率不要超过400KHz，通过SDMMC底层函数
-SDMMC_Init()和SDMMC_PowerState_ON()完成初始化阶段。</p></li>
+<p>初始化时，根据MMC标准，确保SDMMC_CK频率不要超过400KHz，通过SDMMC底层函数 SDMMC_Init()和SDMMC_PowerState_ON()完成初始化阶段。</p></li>
 <li><p>初始化MMC卡。HAL_MMC_InitCard()</p>
 <p>这个函数用于初始化和识别MMC及检查MMC卡的类型（标准容量或高容量），此初始化流程与MMC标准兼容。这个函数也可以在插拔时重新初始化MMC卡。</p></li>
 <li><p>配置MMC卡数据传输频率，默认传输频率是24MHz，可以调整“ClockDiv”来改变传输频率，在传输模式下，根据MMC标准，要确保频率不要超过25MHz，在高速模式时则不要超过50MHz。为了使传输频率高于24MHz，必须要将SDMMC外设置于旁路模式，阅读相关参考手册获取更多细节。</p></li>
@@ -338,36 +330,20 @@ SDMMC_Init()和SDMMC_PowerState_ON()完成初始化阶段。</p></li>
 <p><strong>3. MMC的读操作</strong></p>
 <ul>
 <li><p>轮询模式下读取MMC卡。HAL_MMC_ReadBlocks()</p>
-<p>此函数仅支持512字节块长度（块大小必须是512字节），通过调整
-"NumberOfBlocks"参数就可以进行单个block的读操作或多个block的读操作。之后为确保正确地完成传输，可通过
-HAL_MMC_GetCardState()函数来检查MMC的状态。</p></li>
+<p>此函数仅支持512字节块长度（块大小必须是512字节），通过调整 "NumberOfBlocks"参数就可以进行单个block的读操作或多个block的读操作。之后为确保正确地完成传输，可通过 HAL_MMC_GetCardState()函数来检查MMC的状态。</p></li>
 <li><p>DMA模式下读取MMC卡。HAL_MMC_ReadBlocks_DMA()</p>
-<p>此函数仅支持512字节块长度（块大小必须是512字节），通过调整
-"NumberOfBlocks"参数就可以进行单个block的读操作或多个block的读操作。之后为确保正确地完成传输，可通过
-HAL_MMC_GetCardState()函数来检查MMC的状态，通过MMC
-Rx中断事件来检查DMA的传输过程。</p></li>
+<p>此函数仅支持512字节块长度（块大小必须是512字节），通过调整 "NumberOfBlocks"参数就可以进行单个block的读操作或多个block的读操作。之后为确保正确地完成传输，可通过 HAL_MMC_GetCardState()函数来检查MMC的状态，通过MMC Rx中断事件来检查DMA的传输过程。</p></li>
 <li><p>中断模式下读取MMC卡。HAL_MMC_ReadBlocks_IT()</p>
-<p>此函数仅支持512字节块长度，通过调整
-"NumberOfBlocks"参数就可以进行单个block的读操作或多个block的读操作。之后为确保正确地完成传输，可通过
-HAL_MMC_GetCardState()函数来检查MMC的状态，通过MMC
-Rx中断事件来检查中断传输过程。</p></li>
+<p>此函数仅支持512字节块长度，通过调整 "NumberOfBlocks"参数就可以进行单个block的读操作或多个block的读操作。之后为确保正确地完成传输，可通过 HAL_MMC_GetCardState()函数来检查MMC的状态，通过MMC Rx中断事件来检查中断传输过程。</p></li>
 </ul>
 <p><strong>4. MMC的写操作</strong></p>
 <ul>
 <li><p>轮询模式下向MMC卡写操作。HAL_MMC_WriteBlocks()</p>
-<p>此函数仅支持512字节块长度（块大小必须是512字节），通过调整
-"NumberOfBlocks"参数就可以进行单个block的写操作或多个block的写操作。之后为确保正确地完成传输，可通过
-HAL_MMC_GetCardState()函数来检查MMC的状态。</p></li>
+<p>此函数仅支持512字节块长度（块大小必须是512字节），通过调整 "NumberOfBlocks"参数就可以进行单个block的写操作或多个block的写操作。之后为确保正确地完成传输，可通过 HAL_MMC_GetCardState()函数来检查MMC的状态。</p></li>
 <li><p>DMA模式下向MMC卡写操作。HAL_MMC_WriteBlocks_DMA()</p>
-<p>此函数仅支持512字节块长度（块大小必须是512字节），通过调整
-"NumberOfBlocks"参数就可以进行单个block的写操作或多个block的写操作。之后为确保正确地完成传输，可通过
-HAL_MMC_GetCardState()函数来检查MMC的状态，通过MMC
-Tx中断事件来检查DMA的传输过程。</p></li>
+<p>此函数仅支持512字节块长度（块大小必须是512字节），通过调整 "NumberOfBlocks"参数就可以进行单个block的写操作或多个block的写操作。之后为确保正确地完成传输，可通过 HAL_MMC_GetCardState()函数来检查MMC的状态，通过MMC Tx中断事件来检查DMA的传输过程。</p></li>
 <li><p>中断模式下向MMC卡写操作。HAL_MMC_WriteBlocks_IT()</p>
-<p>此函数仅支持512字节块长度，通过调整
-"NumberOfBlocks"参数就可以进行单个block的写操作或多个block的写操作。之后为确保正确地完成传输，可通过
-HAL_MMC_GetCardState()函数来检查MMC的状态，通过MMC
-Tx中断事件来检查中断传输过程。</p></li>
+<p>此函数仅支持512字节块长度，通过调整 "NumberOfBlocks"参数就可以进行单个block的写操作或多个block的写操作。之后为确保正确地完成传输，可通过 HAL_MMC_GetCardState()函数来检查MMC的状态，通过MMC Tx中断事件来检查中断传输过程。</p></li>
 </ul>
 <p><strong>5. 获取MMC卡信息及CSD寄存器和CID寄存器参数</strong></p>
 <ul>
@@ -390,9 +366,7 @@ Tx中断事件来检查中断传输过程。</p></li>
 <li><p>__HAL_MMC_CLEAR_FLAG: 清除 MMC 的挂起标志</p></li>
 </ul>
 <h3 id="mmc回调函数的注册">MMC回调函数的注册</h3>
-<p>当 USE_HAL_MMC_REGISTER_CALLBACKS为
-1时，允许用户注册或注销回调函数。HAL_MMC_RegisterCallback(),
-HAL_MMC_UnRegisterCallback()</p>
+<p>当 USE_HAL_MMC_REGISTER_CALLBACKS为 1时，允许用户注册或注销回调函数。HAL_MMC_RegisterCallback(), HAL_MMC_UnRegisterCallback()</p>
 <p>回调函数：</p>
 <ul>
 <li>TxCpltCallback : 发送完成回调函数</li>
@@ -402,11 +376,9 @@ HAL_MMC_UnRegisterCallback()</p>
 <li>MspInitCallback : MMC 相关MCU初始化回调函数</li>
 <li>MspDeInitCallback : MMC 相关MCU去初始化回调函数</li>
 </ul>
-<p>默认情况下, MMC 初始化（HAL_MMC_Init()）后，当状态是
-HAL_MMC_STATE_RESET，所有的回调函数会被置为弱函数。</p>
+<p>默认情况下, MMC 初始化（HAL_MMC_Init()）后，当状态是 HAL_MMC_STATE_RESET，所有的回调函数会被置为弱函数。</p>
 <p>只有在 HAL_MMC_STATE_READY 状态下，回调函数才能被注册或注销。</p>
-<p>当 USE_HAL_MMC_REGISTER_CALLBACKS
-为0或未定义时，所有的回调函数已注册的特性不能使用，且都被置为弱函数。</p>
+<p>当 USE_HAL_MMC_REGISTER_CALLBACKS 为0或未定义时，所有的回调函数已注册的特性不能使用，且都被置为弱函数。</p>
 
                 
               </div>

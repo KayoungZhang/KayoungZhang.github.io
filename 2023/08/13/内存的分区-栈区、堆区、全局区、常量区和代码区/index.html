@@ -16,18 +16,20 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="内存分区简介 内存一般分为四个区域：堆区、栈区、全局区（静态区）、代码区。而编译程序占用的内存分为以下五个部分：堆区、栈区、全局区（静态区）、常量区、代码区 。 C、C++程序在编译链接后生成的映像（image）中，将只包含 代码段(.Text)、只读数据段(.rodata) 和 读写数据段(.data) 。在程序运行之前，将生成 未初始化数据段(.bss)，在程序的运行时还将动态生成">
+    <meta name="description" content="内存分区简介 内存一般分为四个区域：堆区、栈区、全局区（静态区）、代码区。而编译程序占用的内存分为以下五个部分：堆区、栈区、全局区（静态区）、常量区、代码区 。 C、C++程序在编译链接后生成的映像（image）中，将只包含 代码段(.Text)、只读数据段(.rodata) 和 读写数据段(.data) 。在程序运行之前，将生成 未初始化数据段(.bss)，在程序的运行时还将动态生成 堆(H">
 <meta property="og:type" content="article">
 <meta property="og:title" content="内存的分区(栈区、堆区、全局区、常量区和代码区)">
 <meta property="og:url" content="http://example.com/2023/08/13/%E5%86%85%E5%AD%98%E7%9A%84%E5%88%86%E5%8C%BA-%E6%A0%88%E5%8C%BA%E3%80%81%E5%A0%86%E5%8C%BA%E3%80%81%E5%85%A8%E5%B1%80%E5%8C%BA%E3%80%81%E5%B8%B8%E9%87%8F%E5%8C%BA%E5%92%8C%E4%BB%A3%E7%A0%81%E5%8C%BA/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="内存分区简介 内存一般分为四个区域：堆区、栈区、全局区（静态区）、代码区。而编译程序占用的内存分为以下五个部分：堆区、栈区、全局区（静态区）、常量区、代码区 。 C、C++程序在编译链接后生成的映像（image）中，将只包含 代码段(.Text)、只读数据段(.rodata) 和 读写数据段(.data) 。在程序运行之前，将生成 未初始化数据段(.bss)，在程序的运行时还将动态生成">
+<meta property="og:description" content="内存分区简介 内存一般分为四个区域：堆区、栈区、全局区（静态区）、代码区。而编译程序占用的内存分为以下五个部分：堆区、栈区、全局区（静态区）、常量区、代码区 。 C、C++程序在编译链接后生成的映像（image）中，将只包含 代码段(.Text)、只读数据段(.rodata) 和 读写数据段(.data) 。在程序运行之前，将生成 未初始化数据段(.bss)，在程序的运行时还将动态生成 堆(H">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230821192124971.png">
 <meta property="article:published_time" content="2023-08-13T14:30:12.000Z">
 <meta property="article:modified_time" content="2023-08-21T14:57:51.662Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="内存">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230821192124971.png">
   
   
   
@@ -285,18 +287,10 @@
               <div class="markdown-body">
                 
                 <h2 id="内存分区简介">内存分区简介</h2>
-<p>内存一般分为四个区域：<strong>堆区、栈区、全局区（静态区）、代码区</strong>。而编译程序占用的内存分为以下五个部分：<strong>堆区、栈区、全局区（静态区）、常量区、代码区</strong>
-。</p>
-<p>C、C++程序在编译链接后生成的映像（image）中，将只包含
-<strong>代码段(.Text)</strong>、<strong>只读数据段(.rodata)</strong> 和
-<strong>读写数据段(.data)</strong> 。在程序运行之前，将生成
-<strong>未初始化数据段(.bss)</strong>，在程序的运行时还将动态生成
-<strong>堆(Heap)区域</strong> 和 <strong>栈(Stack)区域</strong> 。</p>
+<p>内存一般分为四个区域：<strong>堆区、栈区、全局区（静态区）、代码区</strong>。而编译程序占用的内存分为以下五个部分：<strong>堆区、栈区、全局区（静态区）、常量区、代码区</strong> 。</p>
+<p>C、C++程序在编译链接后生成的映像（image）中，将只包含 <strong>代码段(.Text)</strong>、<strong>只读数据段(.rodata)</strong> 和 <strong>读写数据段(.data)</strong> 。在程序运行之前，将生成 <strong>未初始化数据段(.bss)</strong>，在程序的运行时还将动态生成 <strong>堆(Heap)区域</strong> 和 <strong>栈(Stack)区域</strong> 。</p>
 <figure>
-<img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230821192124971.png" srcset="/img/loading.gif" lazyload
-alt="image-20230821192124971" />
-<figcaption aria-hidden="true">image-20230821192124971</figcaption>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230821192124971.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20230821192124971</figcaption>
 </figure>
 <h2 id="内存各分区功能">内存各分区功能</h2>
 <ul>
@@ -314,10 +308,7 @@ alt="image-20230821192124971" />
 <li><p><strong>全局区(静态区)（Read and Write）</strong></p>
 <ul>
 <li><strong>.data段</strong>：存放初始化的全局变量和静态(static)变量。编译期间其大小及数据被确定，这些变量<strong>需要占用内存空间</strong>。</li>
-<li><strong>.bss段(Block Started by
-Symbol)</strong>：存放未初始化的全局变量和静态(static)变量。程序运行之前被内核初始化为
-0
-或者空（NULL）。这些变量<strong>在程序运行之前不占内存空间</strong>。</li>
+<li><strong>.bss段(Block Started by Symbol)</strong>：存放未初始化的全局变量和静态(static)变量。程序运行之前被内核初始化为 0 或者空（NULL）。这些变量<strong>在程序运行之前不占内存空间</strong>。</li>
 </ul></li>
 <li><p><strong>常量区（Read Only）</strong></p>
 <ul>
@@ -346,10 +337,8 @@ Symbol)</strong>：存放未初始化的全局变量和静态(static)变量。�
 	<span class="hljs-built_in">strcpy</span>(p1, <span class="hljs-string">&quot;123456&quot;</span>);<span class="hljs-comment">//123456\0在常量区，编译器可能会将它与p3所指向的&quot;123456&quot;优化成一个地方。</span>
 &#125;</code></pre></div>
 <p><strong>参考:</strong></p>
-<p><a
-target="_blank" rel="noopener" href="https://blog.csdn.net/u014470361/article/details/79297601?csdn_share_tail=%7B%22type%22%3A%22blog%22%2C%22rType%22%3A%22article%22%2C%22rId%22%3A%2279297601%22%2C%22source%22%3A%22zky0830%22%7D&amp;fromshare=blogdetail">什么是代码区、常量区、静态区（全局区）、堆区、栈区？</a></p>
-<p><a
-target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44364057/article/details/126541545">五大内存分区</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/u014470361/article/details/79297601?csdn_share_tail=%7B%22type%22%3A%22blog%22%2C%22rType%22%3A%22article%22%2C%22rId%22%3A%2279297601%22%2C%22source%22%3A%22zky0830%22%7D&amp;fromshare=blogdetail">什么是代码区、常量区、静态区（全局区）、堆区、栈区？</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44364057/article/details/126541545">五大内存分区</a></p>
 
                 
               </div>

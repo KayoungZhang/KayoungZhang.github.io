@@ -23,11 +23,16 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="在编写程序后，一般需要进行编译处理，生成可执行的程序文件，才能下载到芯片中运行，在IDE集成开发环境中，编译的过程都是由其内部的编译工具链进行处理。但在Linux开发过程中，一般需要自己进行编译器的配置等操作，下面简单了解下编译工具链的相关知识。 编译工具链简介 编译程序是一个由多个步骤组成的过程，每个步骤都需要使用不同的工具进行处理。这些工具紧密协作，前一个工具的输出会成为后一个工具的输入，">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/gnu-100-b98545-16923412898262.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/6ac54669f4b30cb07094375cbd65d24163b5b6e0.jpeg">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230818145258689.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230818131408554.png">
 <meta property="article:published_time" content="2023-08-18T06:40:47.000Z">
 <meta property="article:modified_time" content="2023-08-18T06:54:23.796Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="编译">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/gnu-100-b98545-16923412898262.png">
   
   
   
@@ -291,40 +296,21 @@
 <p>针对不同的应用平台和芯片架构，编译工具链种类有很多，有免费开源授权版和付费授权版。</p>
 <p><strong>免费版工具链</strong> 主要有两大主流：</p>
 <ul>
-<li><p><img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/gnu-100-b98545-16923412898262.png" srcset="/img/loading.gif" lazyload
-alt="gnu-100-b98545" /> <a target="_blank" rel="noopener" href="https://www.gnu.org/">GNU
-Toolchain</a></p></li>
-<li><p><img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/6ac54669f4b30cb07094375cbd65d24163b5b6e0.jpeg" srcset="/img/loading.gif" lazyload
-alt="6ac54669f4b30cb07094375cbd65d24163b5b6e0" /> <a
-target="_blank" rel="noopener" href="https://llvm.org/">LLVM Toolchain</a></p></li>
+<li><p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/gnu-100-b98545-16923412898262.png" srcset="/img/loading.gif" lazyload alt="gnu-100-b98545" /> <a target="_blank" rel="noopener" href="https://www.gnu.org/">GNU Toolchain</a></p></li>
+<li><p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/6ac54669f4b30cb07094375cbd65d24163b5b6e0.jpeg" srcset="/img/loading.gif" lazyload alt="6ac54669f4b30cb07094375cbd65d24163b5b6e0" /> <a target="_blank" rel="noopener" href="https://llvm.org/">LLVM Toolchain</a></p></li>
 </ul>
 <p>对于开源的这两大工具链，主要是ARM和Linaro开发社区提供：</p>
-<p><img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230818145258689.png" srcset="/img/loading.gif" lazyload
-alt="image-20230818145258689" /> <a
-target="_blank" rel="noopener" href="https://developer.arm.com/Tools%20and%20Software/GNU%20Toolchain">arm
-Developer</a></p>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230818145258689.png" srcset="/img/loading.gif" lazyload alt="image-20230818145258689" /> <a target="_blank" rel="noopener" href="https://developer.arm.com/Tools%20and%20Software/GNU%20Toolchain">arm Developer</a></p>
 <p>arm主要提供GNU工具链。</p>
-<p><img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230818131408554.png" srcset="/img/loading.gif" lazyload
-alt="image-20230818131408554" /> <a
-target="_blank" rel="noopener" href="https://www.linaro.org/">Linaro</a></p>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230818131408554.png" srcset="/img/loading.gif" lazyload alt="image-20230818131408554" /> <a target="_blank" rel="noopener" href="https://www.linaro.org/">Linaro</a></p>
 <p>Linaro两种都有提供。</p>
-<p><strong>收费版工具链</strong>
-主要是一些大公司开发的专用工具链，必须购买获取授权，才能使用，像ARM原厂提供的armcc、IAR
-EWARM，微软的MSVC等等。</p>
+<p><strong>收费版工具链</strong> 主要是一些大公司开发的专用工具链，必须购买获取授权，才能使用，像ARM原厂提供的armcc、IAR EWARM，微软的MSVC等等。</p>
 <h2 id="编译工具链一般命名规则">编译工具链一般命名规则</h2>
-<p>编译工具链的命名规则为： <strong>arch [-vendor] [-os]
-[-(gnu)eabi]</strong></p>
+<p>编译工具链的命名规则为： <strong>arch [-vendor] [-os] [-(gnu)eabi]</strong></p>
 <p><strong>arch</strong> - 芯片体系架构，如arm，mips，aarch64等。</p>
-<p><strong>vendor</strong> -
-工具链提供商，可以是none、unknow或者省略。</p>
+<p><strong>vendor</strong> - 工具链提供商，可以是none、unknow或者省略。</p>
 <p><strong>os</strong> - 目标操作系统，这个字段一般是linux或者none。</p>
-<p><strong>eabi</strong> - 嵌入式应用二进制接口（Embedded Application
-Binary
-Interface)，它指定了文件格式、数据类型、寄存器使用、堆积组织优化和在一个嵌入式软件中的参数的标准约定。</p>
+<p><strong>eabi</strong> - 嵌入式应用二进制接口（Embedded Application Binary Interface)，它指定了文件格式、数据类型、寄存器使用、堆积组织优化和在一个嵌入式软件中的参数的标准约定。</p>
 <p>如：</p>
 <p>arm-none-eabi</p>
 <p>aarch64-none-linux-gnu</p>
@@ -332,46 +318,28 @@ Interface)，它指定了文件格式、数据类型、寄存器使用、堆积�
 <h2 id="gnu编译工具链">GNU编译工具链</h2>
 <h4 id="arm-gnu-toolchain">Arm GNU Toolchain</h4>
 <p>下载地址：https://developer.arm.com/Tools%20and%20Software/GNU%20Toolchain</p>
-<p>由ARM公司开发用于Arm架构的GNU开源编译工具链（称作“Arm GNU
-Toolchain”），可以让合作伙伴，开发人员和社区能够使用新功能，这些功能来自最新Arm架构和GCC，Binutils，glibc，Newlib和GDB的开源项目。</p>
+<p>由ARM公司开发用于Arm架构的GNU开源编译工具链（称作“Arm GNU Toolchain”），可以让合作伙伴，开发人员和社区能够使用新功能，这些功能来自最新Arm架构和GCC，Binutils，glibc，Newlib和GDB的开源项目。</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://gcc.gnu.org/"><strong>GNU C/C++ Compiler
-(GCC)</strong></a> ： 编译工具，把源程序编译为可执行文件。</li>
-<li><a
-target="_blank" rel="noopener" href="https://www.gnu.org/software/binutils/"><strong>Binutils</strong></a>
-：一组二进制工具程序集合。</li>
-<li><a
-target="_blank" rel="noopener" href="https://www.sourceware.org/gdb/"><strong>GDB</strong></a>：GNU本地调试器，可以用来调试C、C++和其他语言编写的程序。<br />
+<li><a target="_blank" rel="noopener" href="https://gcc.gnu.org/"><strong>GNU C/C++ Compiler (GCC)</strong></a> ： 编译工具，把源程序编译为可执行文件。</li>
+<li><a target="_blank" rel="noopener" href="https://www.gnu.org/software/binutils/"><strong>Binutils</strong></a> ：一组二进制工具程序集合。</li>
+<li><a target="_blank" rel="noopener" href="https://www.sourceware.org/gdb/"><strong>GDB</strong></a>：GNU本地调试器，可以用来调试C、C++和其他语言编写的程序。<br />
 </li>
-<li><a
-target="_blank" rel="noopener" href="https://sourceware.org/newlib/"><strong>Newlib</strong></a>：C库</li>
-<li><a
-target="_blank" rel="noopener" href="https://www.gnu.org/software/libc/libc.html"><strong>Glibc</strong></a>：C库</li>
+<li><a target="_blank" rel="noopener" href="https://sourceware.org/newlib/"><strong>Newlib</strong></a>：C库</li>
+<li><a target="_blank" rel="noopener" href="https://www.gnu.org/software/libc/libc.html"><strong>Glibc</strong></a>：C库</li>
 </ul>
-<p><strong>注意</strong>：
-Arm发布的旧版GNU工具链有两种：一种针对A系列芯片，另一种是针对M系列和R系列芯片(<a
-target="_blank" rel="noopener" href="https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/gnu-a/downloads">GNU
-Toolchain for A-profile processors</a> 和 <a
-target="_blank" rel="noopener" href="https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/gnu-rm/downloads">GNU
-Arm Embedded Toolchain</a>)。现在已经合二为一。</p>
+<p><strong>注意</strong>： Arm发布的旧版GNU工具链有两种：一种针对A系列芯片，另一种是针对M系列和R系列芯片(<a target="_blank" rel="noopener" href="https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/gnu-a/downloads">GNU Toolchain for A-profile processors</a> 和 <a target="_blank" rel="noopener" href="https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/gnu-rm/downloads">GNU Arm Embedded Toolchain</a>)。现在已经合二为一。</p>
 <h3 id="gnu-toolchain">GNU Toolchain</h3>
 <p>其他开源组织开发的GNU编译工具链</p>
 <p>https://gnutoolchains.com/download/</p>
 <h3 id="llvm-toolchain">LLVM Toolchain</h3>
 <p>下载地址：https://github.com/llvm/llvm-project/releases/</p>
-<p>LLVM项目是一个模块化和可重用的编译器和工具链技术的集合。LLVM
-核心库提供了一个独立的代码优化器，且支持大多数流行的CPU的代码生成。</p>
+<p>LLVM项目是一个模块化和可重用的编译器和工具链技术的集合。LLVM 核心库提供了一个独立的代码优化器，且支持大多数流行的CPU的代码生成。</p>
 <ul>
-<li><strong><a target="_blank" rel="noopener" href="https://clang.llvm.org/">Clang
-compiler</a></strong>：LLVM工具链中的编译器。</li>
-<li><a target="_blank" rel="noopener" href="https://lldb.llvm.org/"><strong>LLDB
-debugger</strong></a>：本机调试器。</li>
-<li><strong><a target="_blank" rel="noopener" href="https://libcxx.llvm.org/">libc++</a></strong>
-:C++标准库</li>
-<li><a target="_blank" rel="noopener" href="https://compiler-rt.llvm.org/"><strong>Compiler-RT runtime
-libraries</strong></a>：编译运行库</li>
-<li><strong><a target="_blank" rel="noopener" href="https://lld.llvm.org/">LLD
-linker</a></strong>：链接器</li>
+<li><strong><a target="_blank" rel="noopener" href="https://clang.llvm.org/">Clang compiler</a></strong>：LLVM工具链中的编译器。</li>
+<li><a target="_blank" rel="noopener" href="https://lldb.llvm.org/"><strong>LLDB debugger</strong></a>：本机调试器。</li>
+<li><strong><a target="_blank" rel="noopener" href="https://libcxx.llvm.org/">libc++</a></strong> :C++标准库</li>
+<li><a target="_blank" rel="noopener" href="https://compiler-rt.llvm.org/"><strong>Compiler-RT runtime libraries</strong></a>：编译运行库</li>
+<li><strong><a target="_blank" rel="noopener" href="https://lld.llvm.org/">LLD linker</a></strong>：链接器</li>
 </ul>
 <p>以上是关于编译器的一些介绍，如果不是做编译器底层开发的话，不建议深入学习，毕竟还是有点复杂，对于我们一般开发者而言，了解它的一般原理，知道在哪下载，怎么使用，这些已足够了。</p>
 

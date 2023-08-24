@@ -16,18 +16,21 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="在stm32开发过程中，会经常考虑到各个外设部分在内存中分配情况，其中就牵扯到内存的计算问题，下面简单了解一下，以下是stm32 f1系列的memory分配情况。   memory map    memory address计算  可以看出，芯片厂商在分配外设内存区域时，起止地址都是有规律可循的，图上已经标识，所以，通过它的内存起止地址，就可以很方便快速知道某个外设部分的内存分">
+    <meta name="description" content="在stm32开发过程中，会经常考虑到各个外设部分在内存中分配情况，其中就牵扯到内存的计算问题，下面简单了解一下，以下是stm32 f1系列的memory分配情况。  memory map   memory address计算  可以看出，芯片厂商在分配外设内存区域时，起止地址都是有规律可循的，图上已经标识，所以，通过它的内存起止地址，就可以很方便快速知道某个外设部分的内存分配大小。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="stm32 memory的转换计算">
 <meta property="og:url" content="http://example.com/2023/04/20/stm32-memory%E7%9A%84%E8%BD%AC%E6%8D%A2%E8%AE%A1%E7%AE%97/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="在stm32开发过程中，会经常考虑到各个外设部分在内存中分配情况，其中就牵扯到内存的计算问题，下面简单了解一下，以下是stm32 f1系列的memory分配情况。   memory map    memory address计算  可以看出，芯片厂商在分配外设内存区域时，起止地址都是有规律可循的，图上已经标识，所以，通过它的内存起止地址，就可以很方便快速知道某个外设部分的内存分">
+<meta property="og:description" content="在stm32开发过程中，会经常考虑到各个外设部分在内存中分配情况，其中就牵扯到内存的计算问题，下面简单了解一下，以下是stm32 f1系列的memory分配情况。  memory map   memory address计算  可以看出，芯片厂商在分配外设内存区域时，起止地址都是有规律可循的，图上已经标识，所以，通过它的内存起止地址，就可以很方便快速知道某个外设部分的内存分配大小。">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/memory%20map.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/memory%20address%E8%AE%A1%E7%AE%97.jpg">
 <meta property="article:published_time" content="2023-04-20T10:41:07.000Z">
 <meta property="article:modified_time" content="2023-04-20T10:53:56.067Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="内存计算">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/memory%20map.png">
   
   
   
@@ -284,19 +287,12 @@
             
               <div class="markdown-body">
                 
-                <p>在stm32开发过程中，会经常考虑到各个外设部分在内存中分配情况，其中就牵扯到内存的计算问题，下面简单了解一下，以下是stm32
-f1系列的memory分配情况。</p>
+                <p>在stm32开发过程中，会经常考虑到各个外设部分在内存中分配情况，其中就牵扯到内存的计算问题，下面简单了解一下，以下是stm32 f1系列的memory分配情况。</p>
 <figure>
-<img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/memory%20map.png" srcset="/img/loading.gif" lazyload
-alt="memory map" />
-<figcaption aria-hidden="true">memory map</figcaption>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/memory%20map.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>memory map</figcaption>
 </figure>
 <figure>
-<img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/memory%20address%E8%AE%A1%E7%AE%97.jpg" srcset="/img/loading.gif" lazyload
-alt="memory address计算" />
-<figcaption aria-hidden="true">memory address计算</figcaption>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/memory%20address%E8%AE%A1%E7%AE%97.jpg" srcset="/img/loading.gif" lazyload alt="" /><figcaption>memory address计算</figcaption>
 </figure>
 <p>可以看出，芯片厂商在分配外设内存区域时，起止地址都是有规律可循的，图上已经标识，所以，通过它的内存起止地址，就可以很方便快速知道某个外设部分的内存分配大小。</p>
 

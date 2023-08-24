@@ -24,7 +24,9 @@
 <meta property="og:description" content="STM32的实时时钟RTC是一个独立的定时器,RTC模块和时钟配置系统（RCC_BDCR寄存器）是在后背区域，即在系统复位或从待机模式唤醒后RTC的设置和事件维持不变。但是在系统复位后，会自动禁止访问后备寄存器和RTC，以防止对后备区域（BKP）的意外操作。所以在要设置时间之前，要先取消备份区域写保护。 RTC的功能框图如下：  RTC由两个主要部分组成：第一部分（APB1接口）用来和APB">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230529212612816.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230529222921310.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230529223151558.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531223357869.png">
 <meta property="article:published_time" content="2023-05-29T13:11:52.000Z">
 <meta property="article:modified_time" content="2023-06-01T00:17:40.925Z">
 <meta property="article:author" content="John Doe">
@@ -292,30 +294,23 @@
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230529212612816.png" srcset="/img/loading.gif" lazyload alt="image-20230529212612816" style="zoom:80%;" /></p>
 <p>RTC由两个主要部分组成：第一部分（APB1接口）用来和APB1总线相连；另一部分（RTC核心）由一组可编程计数器组成，分为两个主要模块，第一个模块是RTC的预分频模块，可编程产生1秒的RTC时间基准TR_CLK，第二个模块是一个32位的可编程计数器（RTC_CNT），可被初始化为当前的系统时间。</p>
 <h3 id="硬件设计">硬件设计</h3>
-<p>RTC 属于 STM32F1
-内部资源，本实验通过RTC的秒中断来持续输出时间通过串口1打印出来，并通过设置闹钟中断实现一个闹钟提醒。</p>
+<p>RTC 属于 STM32F1 内部资源，本实验通过RTC的秒中断来持续输出时间通过串口1打印出来，并通过设置闹钟中断实现一个闹钟提醒。</p>
 <h3 id="软件设计">软件设计</h3>
 <h4 id="stm32cubemx设置">STM32CubeMX设置</h4>
 <ul>
 <li><p>RCC设置中开启外部高速晶振（HSE）以及外部低速晶振（LSE）；</p></li>
 <li><p>USART1选择为异步通讯方式，波特率设置为115200Bits/s，传输数据长度为8Bit，无奇偶校验，1位停止位</p></li>
-<li><p>激活时钟源，激活日历，选择RTC
-Output，设置初始日期和时间，在NVIC中使能RTC全局中断。</p></li>
+<li><p>激活时钟源，激活日历，选择RTC Output，设置初始日期和时间，在NVIC中使能RTC全局中断。</p></li>
 </ul>
 <figure>
-<img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230529222921310.png" srcset="/img/loading.gif" lazyload
-alt="image-20230529222921310" />
-<figcaption aria-hidden="true">image-20230529222921310</figcaption>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230529222921310.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20230529222921310</figcaption>
 </figure>
 <ul>
 <li>时钟树设置HCLK为72MHz，RTC时钟为32.768KHz</li>
 </ul>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230529223151558.png" srcset="/img/loading.gif" lazyload alt="image-20230529223151558" style="zoom:80%;" /></p>
 <ul>
-<li>输入工程名，选择工程路径（不要有中文），选择MDK-ARM
-V5；勾选Generated peripheral initialization as a pair of ‘.c/.h’ files
-per peripheral；点击GENERATE CODE，生成工程代码</li>
+<li>输入工程名，选择工程路径（不要有中文），选择MDK-ARM V5；勾选Generated peripheral initialization as a pair of ‘.c/.h’ files per peripheral；点击GENERATE CODE，生成工程代码</li>
 </ul>
 <h4 id="mdk-arm编程">MDK-ARM编程</h4>
 <ul>
@@ -336,8 +331,7 @@ RTC_TimeTypeDef GetTime;
 &#125;
 <span class="hljs-comment">/* USER CODE END 1 */</span></code></pre></div>
 <ul>
-<li><p>在uart.c文件中添加fputc重定义函数，并添加头文件<code>&lt;stdio.h&gt;</code>，勾选keil软件<strong>Use
-MicroLIB</strong>选项。</p></li>
+<li><p>在uart.c文件中添加fputc重定义函数，并添加头文件<code>&lt;stdio.h&gt;</code>，勾选keil软件<strong>Use MicroLIB</strong>选项。</p></li>
 <li><p>在main.c文件中编写闹钟设置相关代码并开启相关中断</p></li>
 </ul>
 <div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">/* USER CODE BEGIN 2 */</span>
@@ -347,13 +341,9 @@ __HAL_RTC_SECOND_ENABLE_IT(&amp;hrtc,RTC_IT_SEC); <span class="hljs-comment">//�
 <li>编译无误后下载到开发板，串口助手每1s会打印出相应的日期和时间。</li>
 </ul>
 <figure>
-<img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531223357869.png" srcset="/img/loading.gif" lazyload
-alt="image-20230531223357869" />
-<figcaption aria-hidden="true">image-20230531223357869</figcaption>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531223357869.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20230531223357869</figcaption>
 </figure>
-<p>工程文件Gitee：<a
-target="_blank" rel="noopener" href="https://gitee.com/kayoungzhang/my_codehub/raw/master/stm32/rtc.zip">rtc</a></p>
+<p>工程文件Gitee：<a target="_blank" rel="noopener" href="https://gitee.com/kayoungzhang/my_codehub/raw/master/stm32/rtc.zip">rtc</a></p>
 
                 
               </div>

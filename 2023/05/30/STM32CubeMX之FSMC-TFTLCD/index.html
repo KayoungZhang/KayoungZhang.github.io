@@ -16,18 +16,19 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="TFTLCD简介 TFT-LCD（thin film transistor-liquid crystal display）即薄膜晶体管液晶显示器。液晶显示屏的每一个像素上都设置有一个薄膜晶体管（TFT），每个像素都可以通过点脉冲直接控制。 常用的通信模式有6800模式和8080模式，本例程使用8080并口模式（简称80并口），8080接口有5条基本的控制线和多条数据线（8&#x2F;9&#x2F;16&#x2F;18位）">
+    <meta name="description" content="TFTLCD简介 TFT-LCD（thin film transistor-liquid crystal display）即薄膜晶体管液晶显示器。液晶显示屏的每一个像素上都设置有一个薄膜晶体管（TFT），每个像素都可以通过点脉冲直接控制。 常用的通信模式有6800模式和8080模式，本例程使用8080并口模式（简称80并口），8080接口有5条基本的控制线和多条数据线（8&#x2F;9&#x2F;16&#x2F;18位）：">
 <meta property="og:type" content="article">
 <meta property="og:title" content="STM32CubeMX之FSMC_TFTLCD">
 <meta property="og:url" content="http://example.com/2023/05/30/STM32CubeMX%E4%B9%8BFSMC-TFTLCD/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="TFTLCD简介 TFT-LCD（thin film transistor-liquid crystal display）即薄膜晶体管液晶显示器。液晶显示屏的每一个像素上都设置有一个薄膜晶体管（TFT），每个像素都可以通过点脉冲直接控制。 常用的通信模式有6800模式和8080模式，本例程使用8080并口模式（简称80并口），8080接口有5条基本的控制线和多条数据线（8&#x2F;9&#x2F;16&#x2F;18位）">
+<meta property="og:description" content="TFTLCD简介 TFT-LCD（thin film transistor-liquid crystal display）即薄膜晶体管液晶显示器。液晶显示屏的每一个像素上都设置有一个薄膜晶体管（TFT），每个像素都可以通过点脉冲直接控制。 常用的通信模式有6800模式和8080模式，本例程使用8080并口模式（简称80并口），8080接口有5条基本的控制线和多条数据线（8&#x2F;9&#x2F;16&#x2F;18位）：">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531102629121.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230606082242026.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230606082317721.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230606082349293.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230606082521224.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531103103667.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531103242060.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230530152947731.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230530155325449.png">
@@ -307,8 +308,7 @@
               <div class="markdown-body">
                 
                 <h3 id="tftlcd简介">TFTLCD简介</h3>
-<p>TFT-LCD（thin film transistor-liquid crystal
-display）即薄膜晶体管液晶显示器。液晶显示屏的每一个像素上都设置有一个薄膜晶体管（TFT），每个像素都可以通过点脉冲直接控制。</p>
+<p>TFT-LCD（thin film transistor-liquid crystal display）即薄膜晶体管液晶显示器。液晶显示屏的每一个像素上都设置有一个薄膜晶体管（TFT），每个像素都可以通过点脉冲直接控制。</p>
 <p>常用的通信模式有6800模式和8080模式，本例程使用8080并口模式（简称80并口），8080接口有5条基本的控制线和多条数据线（8/9/16/18位）：</p>
 <ul>
 <li><p>CS：TFTLCD 片选信号。</p></li>
@@ -327,10 +327,7 @@ display）即薄膜晶体管液晶显示器。液晶显示屏的每一个像素�
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230606082521224.png" srcset="/img/loading.gif" lazyload alt="image-20230606082521224" style="zoom:80%;" /></p>
 <p><strong>8080时序图：</strong></p>
 <figure>
-<img
-src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531103103667.png" srcset="/img/loading.gif" lazyload
-alt="image-20230531103103667" />
-<figcaption aria-hidden="true">image-20230531103103667</figcaption>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531103103667.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20230531103103667</figcaption>
 </figure>
 <p>一般 TFTLCD 模块的使用流程：</p>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531103242060.png" srcset="/img/loading.gif" lazyload alt="image-20230531103242060" style="zoom:80%;" /></p>
@@ -338,26 +335,19 @@ alt="image-20230531103103667" />
 <p>例如点操作流程：</p>
 <ul>
 <li>画点：设置坐标 → 写 GRAM 指令 → 写入颜色数据 → LCD 上显示颜色；</li>
-<li>读点：设置坐标 → 读 GRAM 指令 → 读取颜色数据 →
-获取到对应点的颜色；</li>
+<li>读点：设置坐标 → 读 GRAM 指令 → 读取颜色数据 → 获取到对应点的颜色；</li>
 </ul>
 <p>设置TFT液晶显示通常需要以下几个步骤：</p>
 <ul>
-<li><p>设置STM32F1与TFTLCD模块连接的IO口，将与TFTLCD模块相连的IO口进行初始化，以便驱动LCD，ILI9341
-的 8080 通讯接口时序可以由 STM32 普通 I/O
-接口进行模拟，但这样效率太低，STM32 提供了一种特别的控制方法——使用 FSMC
-接口实现 8080接口时序。</p></li>
+<li><p>设置STM32F1与TFTLCD模块连接的IO口，将与TFTLCD模块相连的IO口进行初始化，以便驱动LCD，ILI9341 的 8080 通讯接口时序可以由 STM32 普通 I/O 接口进行模拟，但这样效率太低，STM32 提供了一种特别的控制方法——使用 FSMC 接口实现 8080接口时序。</p></li>
 <li><p>初始化TFTLCD模块，向LCD控制器写入一系列的设置值（比如RGB格式、LCD显示方向、伽马校准等），这部分代码一般LCD厂商会提供，初始化之后LCD才可以正常使用。</p></li>
 <li><p>通过函数将字符和数字显示到TFTLCD模块上，点操作只是一个点的处理，因此需要设计一个函数来多次使用这个步骤以实现字符和数字的显示。</p></li>
 </ul>
 <h3 id="fsmc-简介">FSMC 简介</h3>
-<p>FSMC（Flexible Static Memory
-Controller即灵活的静态存储控制器）是STM32系列采用的一种新型存储器扩展技术，能够连接同步、异步存储器和16位PC存储卡，STM32通过FSMC可以与SRAM、ROM、PSRAM、NOR
-Flash和NAND Flash等存储器的引脚直接相连。</p>
+<p>FSMC（Flexible Static Memory Controller即灵活的静态存储控制器）是STM32系列采用的一种新型存储器扩展技术，能够连接同步、异步存储器和16位PC存储卡，STM32通过FSMC可以与SRAM、ROM、PSRAM、NOR Flash和NAND Flash等存储器的引脚直接相连。</p>
 <h4 id="stm32f1的fsmc内部框图">STM32F1的FSMC内部框图</h4>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230530152947731.png" srcset="/img/loading.gif" lazyload alt="image-20230530152947731" style="zoom:80%;" /></p>
-<p>从上图我们可以看出，STM32 的 FSMC 将外部设备分为 3 类：NOR/PSRAM
-设备、NAND设备、PC卡设备。他们共用地址、数据总线等信号，具有不同的片选(NE[4:1])以区分不同的设备。</p>
+<p>从上图我们可以看出，STM32 的 FSMC 将外部设备分为 3 类：NOR/PSRAM 设备、NAND设备、PC卡设备。他们共用地址、数据总线等信号，具有不同的片选(NE[4:1])以区分不同的设备。</p>
 <h4 id="fsmc-存储器划分">FSMC 存储器划分</h4>
 <p>FSMC 将外部存储器划分固定大小为 256M 字节的四个存储块,如下所示：</p>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230530155325449.png" srcset="/img/loading.gif" lazyload alt="image-20230530155325449" style="zoom:80%;" /></p>
@@ -386,8 +376,7 @@ Flash和NAND Flash等存储器的引脚直接相连。</p>
 <li><p>NAND Flash和PC Card只有一种异步传输时序模式：</p></li>
 </ul>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531095320326.png" srcset="/img/loading.gif" lazyload alt="image-20230531095320326" style="zoom:80%;" /></p>
-<p>本实验中使用的TFTLCD采用Mode A模式连接到STM32 FSMC上，其Mode
-A读写时序如下：</p>
+<p>本实验中使用的TFTLCD采用Mode A模式连接到STM32 FSMC上，其Mode A读写时序如下：</p>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531100226860.png" srcset="/img/loading.gif" lazyload alt="image-20230531100226860" style="zoom:80%;" /></p>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531100246088.png" srcset="/img/loading.gif" lazyload alt="image-20230531100246088" style="zoom:80%;" /></p>
 <h3 id="硬件设计">硬件设计</h3>
@@ -398,8 +387,7 @@ A读写时序如下：</p>
 <ul>
 <li>RCC设置外接HSE，时钟设置为72M</li>
 <li>设置PB0为GPIO输出模式，上拉，高速，默认低电平。（背光控制信号）</li>
-<li>选择FSMC，选中Bank1，片选为NE4（即Bank1的第4区），存储器类型选为LCD
-Interface，LCD寄存器选择（RS）设置为A10，数据宽度设为16位</li>
+<li>选择FSMC，选中Bank1，片选为NE4（即Bank1的第4区），存储器类型选为LCD Interface，LCD寄存器选择（RS）设置为A10，数据宽度设为16位</li>
 </ul>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531114601180.png" srcset="/img/loading.gif" lazyload alt="image-20230531114601180" style="zoom:80%;" /></p>
 <ul>
@@ -407,9 +395,7 @@ Interface，LCD寄存器选择（RS）设置为A10，数据宽度设为16位</li
 </ul>
 <p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230531115913269.png" srcset="/img/loading.gif" lazyload alt="image-20230531115913269" style="zoom:80%;" /></p>
 <ul>
-<li>输入工程名，选择工程路径（不要有中文），选择MDK-ARM
-V5；勾选Generated peripheral initialization as a pair of ‘.c/.h’ files
-per peripheral；点击GENERATE CODE，生成工程代码</li>
+<li>输入工程名，选择工程路径（不要有中文），选择MDK-ARM V5；勾选Generated peripheral initialization as a pair of ‘.c/.h’ files per peripheral；点击GENERATE CODE，生成工程代码</li>
 </ul>
 <h4 id="mdk-arm编程">MDK-ARM编程</h4>
 <ul>
@@ -874,10 +860,8 @@ lcd_init();                                         <span class="hljs-comment">/
 <ul>
 <li>编译无误下载到开发板后，LCD屏循环显示相应的文字</li>
 </ul>
-<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230604142633939.png" srcset="/img/loading.gif" lazyload alt="image-20230604142633939" style="zoom: 50%;" />
-<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230604142703634.png" srcset="/img/loading.gif" lazyload alt="image-20230604142703634" style="zoom: 50%;" /></p>
-<p>工程文件Gitee：<a
-target="_blank" rel="noopener" href="https://gitee.com/kayoungzhang/my_codehub/raw/master/stm32/tftlcd.zip">tftlcd</a></p>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230604142633939.png" srcset="/img/loading.gif" lazyload alt="image-20230604142633939" style="zoom: 50%;" /> <img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230604142703634.png" srcset="/img/loading.gif" lazyload alt="image-20230604142703634" style="zoom: 50%;" /></p>
+<p>工程文件Gitee：<a target="_blank" rel="noopener" href="https://gitee.com/kayoungzhang/my_codehub/raw/master/stm32/tftlcd.zip">tftlcd</a></p>
 
                 
               </div>
