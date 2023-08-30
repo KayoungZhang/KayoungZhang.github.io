@@ -1,0 +1,918 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="JSON (JavaScript Object Notation) 是一种轻量级的数据交换格式。它采用完全独立于编程语言的文本格式来存储和表示数据，语法简洁、层次结构清晰，易于人阅读和编写，同时也易于机器解析和生成，有效的提升了网络传输效率。 JSON 构建结构 JSON 构建结构主要有两种：  名称&#x2F;值的集合。在不同的编程语言中，体现方式分别有 对象、记录、结构体、字典、哈希表、键值列表">
+<meta property="og:type" content="article">
+<meta property="og:title" content="cJSON使用教程">
+<meta property="og:url" content="http://example.com/2023/08/29/cJSON%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="JSON (JavaScript Object Notation) 是一种轻量级的数据交换格式。它采用完全独立于编程语言的文本格式来存储和表示数据，语法简洁、层次结构清晰，易于人阅读和编写，同时也易于机器解析和生成，有效的提升了网络传输效率。 JSON 构建结构 JSON 构建结构主要有两种：  名称&#x2F;值的集合。在不同的编程语言中，体现方式分别有 对象、记录、结构体、字典、哈希表、键值列表">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230830083025553.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230830103105877.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230830132151235.png">
+<meta property="article:published_time" content="2023-08-29T07:52:37.000Z">
+<meta property="article:modified_time" content="2023-08-30T06:39:32.727Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="JSON">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230830083025553.png">
+  
+  
+  
+  
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"✍","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":false},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":false,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+<meta name="referrer" content="no-referrer" />
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>My Tech Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/article.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.1)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="cJSON使用教程"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-08-29 15:52" pubdate>
+          2023年8月29日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          8.9k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          30 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-12 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">cJSON使用教程</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：2023年8月30日 下午
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <p><strong>JSON</strong> (JavaScript Object Notation) 是一种轻量级的数据交换格式。它采用完全独立于编程语言的文本格式来存储和表示数据，语法简洁、层次结构清晰，易于人阅读和编写，同时也易于机器解析和生成，有效的提升了网络传输效率。</p>
+<h2 id="json-构建结构">JSON 构建结构</h2>
+<p>JSON 构建结构主要有两种：</p>
+<ul>
+<li><strong>名称/值的集合。</strong>在不同的编程语言中，体现方式分别有 对象、记录、结构体、字典、哈希表、键值列表或关联数组。(object, record, struct, dictionary, hash table, keyed list, associative array)</li>
+<li><strong>有序的数据列表。</strong>在大多数编程语言中，体现方式主要是数组、向量、列表或序列。(array, vector, list, sequence)</li>
+</ul>
+<h2 id="json-语法">JSON 语法</h2>
+<ul>
+<li>数据以 <strong>name：value</strong> (名称:值) 的形式存在，名称和值之间使用"<code>:</code>"分隔</li>
+<li>每个数据由逗号 <strong><code>,</code></strong> 分隔</li>
+<li>大括号 <strong><code>&#123;&#125;</code></strong> 内部保存对象，允许嵌套使用</li>
+<li>中括号 <strong><code>[]</code></strong> 内部保存数组，数组可以包含多个对象</li>
+</ul>
+<p>JSON值类型有：</p>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">/* cJSON Types: */</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> cJSON_False 0</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> cJSON_True 1</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> cJSON_NULL 2</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> cJSON_Number 3</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> cJSON_String 4</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> cJSON_Array 5</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> cJSON_Object 6</span></code></pre></div>
+<p>示例如下：</p>
+<div class="code-wrapper"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span>
+    <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;JSON中国&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;url&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;http://www.json.org.cn&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;page&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">88</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;isNonProfit&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;address&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span>
+        <span class="hljs-attr">&quot;street&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;浙大路38号.&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;city&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;浙江杭州&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;country&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;中国&quot;</span>
+    <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;links&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+        <span class="hljs-punctuation">&#123;</span>
+            <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Google&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;url&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;http://www.google.com&quot;</span>
+        <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-punctuation">&#123;</span>
+            <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Baidu&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;url&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;http://www.baidu.com&quot;</span>
+        <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-punctuation">&#123;</span>
+            <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;SoSo&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;url&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;http://www.SoSo.com&quot;</span>
+        <span class="hljs-punctuation">&#125;</span>
+    <span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">&#125;</span></code></pre></div>
+<h2 id="cjson">cJSON</h2>
+<p>cJSON是一个基于C的JSON解析库，这个库非常简短，提供有很多有用的API，支持JSON的解析和创建，移植时只需包含<code>cJSON.h</code>和<code>cJSON.c</code> 这两个文件，然后包含头文件即可调用其API函数。</p>
+<p>cJSON项目托管在Github上，地址：<a target="_blank" rel="noopener" href="https://github.com/DaveGamble/cJSON">https://github.com/DaveGamble/cJSON</a></p>
+<h2 id="使用cjson库创建json数据">使用cJSON库创建JSON数据</h2>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;cJSON.h&quot;</span></span>
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span>
+&#123;
+    cJSON* cjson_test = <span class="hljs-literal">NULL</span>;
+    cJSON* cjson_address = <span class="hljs-literal">NULL</span>;
+    cJSON* cjson_skill = <span class="hljs-literal">NULL</span>;
+    <span class="hljs-type">char</span>* str = <span class="hljs-literal">NULL</span>;
+
+    <span class="hljs-comment">/* 创建一个JSON数据对象(链表头结点) */</span>
+    cjson_test = cJSON_CreateObject();
+
+    <span class="hljs-comment">/* 添加一条字符串类型的JSON数据(添加一个链表节点) */</span>
+    cJSON_AddStringToObject(cjson_test, <span class="hljs-string">&quot;name&quot;</span>, <span class="hljs-string">&quot;cjson&quot;</span>);
+
+    <span class="hljs-comment">/* 添加一条整数类型的JSON数据(添加一个链表节点) */</span>
+    cJSON_AddNumberToObject(cjson_test, <span class="hljs-string">&quot;age&quot;</span>, <span class="hljs-number">10</span>);
+
+    <span class="hljs-comment">/* 添加一条浮点类型的JSON数据(添加一个链表节点) */</span>
+    cJSON_AddNumberToObject(cjson_test, <span class="hljs-string">&quot;weight&quot;</span>, <span class="hljs-number">20.3</span>);
+
+    <span class="hljs-comment">/* 添加一个嵌套的JSON数据（添加一个链表节点） */</span>
+    cjson_address = cJSON_CreateObject();
+    cJSON_AddStringToObject(cjson_address, <span class="hljs-string">&quot;country&quot;</span>, <span class="hljs-string">&quot;China&quot;</span>);
+    cJSON_AddNumberToObject(cjson_address, <span class="hljs-string">&quot;zip-code&quot;</span>, <span class="hljs-number">111111</span>);
+    cJSON_AddItemToObject(cjson_test, <span class="hljs-string">&quot;address&quot;</span>, cjson_address);
+
+    <span class="hljs-comment">/* 添加一个数组类型的JSON数据(添加一个链表节点) */</span>
+    cjson_skill = cJSON_CreateArray();
+    cJSON_AddItemToArray(cjson_skill, cJSON_CreateString(<span class="hljs-string">&quot;C&quot;</span>));
+    cJSON_AddItemToArray(cjson_skill, cJSON_CreateString(<span class="hljs-string">&quot;Java&quot;</span>));
+    cJSON_AddItemToArray(cjson_skill, cJSON_CreateString(<span class="hljs-string">&quot;Python&quot;</span>));
+    cJSON_AddItemToObject(cjson_test, <span class="hljs-string">&quot;skill&quot;</span>, cjson_skill);
+
+    <span class="hljs-comment">/* 添加一个值为 False 的布尔类型的JSON数据(添加一个链表节点) */</span>
+    cJSON_AddFalseToObject(cjson_test, <span class="hljs-string">&quot;student&quot;</span>);
+
+    <span class="hljs-comment">/* 打印JSON对象(整条链表)的所有数据 */</span>
+    str = cJSON_Print(cjson_test);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%s\n&quot;</span>, str);
+	
+	<span class="hljs-comment">/* 释放内存 */</span>
+	cJSON_Delete(cjson_test);
+	cJSON_Delete(cjson_address);
+	cJSON_Delete(cjson_skill);
+	
+  <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+&#125;</code></pre></div>
+<p>运行结果：</p>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230830083025553.png" srcset="/img/loading.gif" lazyload alt="image-20230830083025553" style="zoom:80%;" /></p>
+<h2 id="使用cjson库来解析json数据">使用cJSON库来解析JSON数据</h2>
+<p>用于测试JSON数据，我们先用一个char型的字符串来保存，由于JSON对象的name和value都需要使用引号（数值或逻辑型value除外），所以 <strong>在遇到引号时，要加反斜杠<code>\</code>来转义</strong>。</p>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;cJSON.h&quot;</span></span>
+
+<span class="hljs-type">char</span> *message =                               
+<span class="hljs-string">&quot;&#123;\&quot;name\&quot;: \&quot;cjson\&quot;,                      \</span>
+<span class="hljs-string">	\&quot;age\&quot;:  10,                             \</span>
+<span class="hljs-string">	\&quot;weight\&quot;:       20.300000,              \</span>
+<span class="hljs-string">	\&quot;address\&quot;:      &#123;                       \</span>
+<span class="hljs-string">			\&quot;country\&quot;:      \&quot;China\&quot;,      \</span>
+<span class="hljs-string">			\&quot;zip-code\&quot;:     111111          \</span>
+<span class="hljs-string">	&#125;,                                        \</span>
+<span class="hljs-string">	\&quot;skill\&quot;:        [\&quot;C\&quot;, \&quot;Java\&quot;, \&quot;Python\&quot;],  \</span>
+<span class="hljs-string">	\&quot;student\&quot;:      false                   \</span>
+<span class="hljs-string">&#125;&quot;</span>;
+
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span>
+&#123;
+  cJSON* cjson_test = <span class="hljs-literal">NULL</span>;
+  cJSON* cjson_name = <span class="hljs-literal">NULL</span>;
+  cJSON* cjson_age = <span class="hljs-literal">NULL</span>;
+  cJSON* cjson_weight = <span class="hljs-literal">NULL</span>;
+  cJSON* cjson_address = <span class="hljs-literal">NULL</span>;
+  cJSON* cjson_address_country = <span class="hljs-literal">NULL</span>;
+  cJSON* cjson_address_zipcode = <span class="hljs-literal">NULL</span>;
+  cJSON* cjson_skill = <span class="hljs-literal">NULL</span>;
+  cJSON* cjson_student = <span class="hljs-literal">NULL</span>;
+  <span class="hljs-type">int</span>    skill_array_size = <span class="hljs-number">0</span>, i = <span class="hljs-number">0</span>;
+  cJSON* cjson_skill_item = <span class="hljs-literal">NULL</span>;
+
+  <span class="hljs-comment">/* 解析整段JSON数据 */</span>
+  cjson_test = cJSON_Parse(message);
+  <span class="hljs-keyword">if</span>(cjson_test == <span class="hljs-literal">NULL</span>)
+  &#123;
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;parse fail.\n&quot;</span>);
+    <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;
+  &#125;
+
+  <span class="hljs-comment">/* 依次根据名称提取JSON数据（键值对） */</span>
+  cjson_name = cJSON_GetObjectItem(cjson_test, <span class="hljs-string">&quot;name&quot;</span>);
+  cjson_age = cJSON_GetObjectItem(cjson_test, <span class="hljs-string">&quot;age&quot;</span>);
+  cjson_weight = cJSON_GetObjectItem(cjson_test, <span class="hljs-string">&quot;weight&quot;</span>);
+
+  <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;name: %s\n&quot;</span>, cjson_name-&gt;valuestring);
+  <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;age:%d\n&quot;</span>, cjson_age-&gt;valueint);
+  <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;weight:%.1f\n&quot;</span>, cjson_weight-&gt;valuedouble);
+
+  <span class="hljs-comment">/* 解析嵌套JSON数据 */</span>
+  cjson_address = cJSON_GetObjectItem(cjson_test, <span class="hljs-string">&quot;address&quot;</span>);
+  cjson_address_country = cJSON_GetObjectItem(cjson_address, <span class="hljs-string">&quot;country&quot;</span>);
+  cjson_address_zipcode = cJSON_GetObjectItem(cjson_address, <span class="hljs-string">&quot;zip-code&quot;</span>);
+  <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;address-country:%s\naddress-zipcode:%d\n&quot;</span>, cjson_address_country-&gt;valuestring, cjson_address_zipcode-&gt;valueint);
+
+  <span class="hljs-comment">/* 解析数组 */</span>
+  cjson_skill = cJSON_GetObjectItem(cjson_test, <span class="hljs-string">&quot;skill&quot;</span>);
+  skill_array_size = cJSON_GetArraySize(cjson_skill);
+
+  <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;skill:[&quot;</span>);
+  <span class="hljs-keyword">for</span>(i = <span class="hljs-number">0</span>; i &lt; skill_array_size; i++)
+  &#123;
+    cjson_skill_item = cJSON_GetArrayItem(cjson_skill, i);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%s,&quot;</span>, cjson_skill_item-&gt;valuestring);
+  &#125;
+  <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;\b]\n&quot;</span>);
+
+  <span class="hljs-comment">/* 解析布尔型数据 */</span>
+  cjson_student = cJSON_GetObjectItem(cjson_test, <span class="hljs-string">&quot;student&quot;</span>);
+  <span class="hljs-keyword">if</span>(cjson_student-&gt;valueint == <span class="hljs-number">0</span>)
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;student: false\n&quot;</span>);
+  <span class="hljs-keyword">else</span>
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;student:error\n&quot;</span>);
+
+  <span class="hljs-comment">/* 释放内存 */</span>
+  cJSON_Delete(cjson_test);
+  cJSON_Delete(cjson_name);
+  cJSON_Delete(cjson_age);
+  cJSON_Delete(cjson_weight);
+  cJSON_Delete(cjson_address);
+  cJSON_Delete(cjson_address_country);
+  cJSON_Delete(cjson_address_zipcode);
+  cJSON_Delete(cjson_skill);
+  cJSON_Delete(cjson_student);
+
+  <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+&#125;</code></pre></div>
+<p>运行结果：</p>
+<figure>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230830103105877.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20230830103105877</figcaption>
+</figure>
+<p>上面是针对JSON数据量较少的情况，通过一个字符串来保存，然后进行解析的方式。但实际使用中，JSON数据的内容较为庞大，<strong>一般都是使用文件的形式来保存JSON数据</strong>。</p>
+<p>下面准备一个原始数据，如下面的json.txt：</p>
+<div class="code-wrapper"><pre><code class="hljs c">&#123;
+    <span class="hljs-string">&quot;url&quot;</span>: <span class="hljs-string">&quot;http://www.json.org.cn&quot;</span>,
+    <span class="hljs-string">&quot;page&quot;</span>: <span class="hljs-number">88</span>,
+    <span class="hljs-string">&quot;address&quot;</span>: &#123;
+        <span class="hljs-string">&quot;street&quot;</span>: <span class="hljs-string">&quot;浙大路38号.&quot;</span>,
+        <span class="hljs-string">&quot;city&quot;</span>: <span class="hljs-string">&quot;浙江杭州&quot;</span>,
+        <span class="hljs-string">&quot;country&quot;</span>: <span class="hljs-string">&quot;中国&quot;</span>
+    &#125;,
+    <span class="hljs-string">&quot;links&quot;</span>: [
+        &#123;
+            <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Google&quot;</span>,
+            <span class="hljs-string">&quot;url&quot;</span>: <span class="hljs-string">&quot;http://www.google.com&quot;</span>
+        &#125;,
+        &#123;
+            <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Baidu&quot;</span>,
+            <span class="hljs-string">&quot;url&quot;</span>: <span class="hljs-string">&quot;http://www.baidu.com&quot;</span>
+        &#125;,
+        &#123;
+            <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;SoSo&quot;</span>,
+            <span class="hljs-string">&quot;url&quot;</span>: <span class="hljs-string">&quot;http://www.SoSo.com&quot;</span>
+        &#125;
+    ]
+&#125;</code></pre></div>
+<p>解析这种JSON文件，使用要使用 <code>fopen()</code> 来打开这个文件,还要使用<code>fseek()</code>和<code>ftell()</code>来计算文件的大小，目的是用于后面的分配内存时指定大小。然后使用<code>fread()</code>将文件读入分配的内存中,接着使用<code>cJSON_Parse()</code> 将JSON数据解析为 <code>cJSON</code> 型的对象,然后就可以同上面的一样使用cJSON库中提供的各种函数API来操作这个对象了。</p>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdlib.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;memory.h&gt;</span> <span class="hljs-comment">//memset</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;cJSON.h&quot;</span></span>
+
+<span class="hljs-type">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span>
+&#123;
+	<span class="hljs-type">int</span> fileSize; <span class="hljs-comment">//文件大小</span>
+	<span class="hljs-type">char</span> *buf; <span class="hljs-comment">//分配内存buf</span>
+	<span class="hljs-type">int</span> ret = <span class="hljs-number">0</span>, i = <span class="hljs-number">0</span>, len = <span class="hljs-number">0</span>;<span class="hljs-comment">//数组长度</span>
+	
+    <span class="hljs-comment">/* 打开JSON文件 */</span> 
+    FILE *fp = fopen(<span class="hljs-string">&quot;json.txt&quot;</span>, <span class="hljs-string">&quot;r&quot;</span>);
+    <span class="hljs-keyword">if</span>(fp == <span class="hljs-literal">NULL</span>)
+        <span class="hljs-keyword">return</span>;
+
+    <span class="hljs-comment">/* 计算文件大小 */</span> 
+    fseek(fp, <span class="hljs-number">0</span>, SEEK_END);<span class="hljs-comment">/* 定位文件指针到文件尾 */</span> 
+    fileSize = ftell(fp);<span class="hljs-comment">/* 获取文件指针偏移量，即文件大小 */</span> 
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;fileSize: %d Byte\r\n&quot;</span>, fileSize);
+	fseek(fp, <span class="hljs-number">0</span>, SEEK_SET);<span class="hljs-comment">/* 再将文件指针移到文件开头 */</span> 
+
+    <span class="hljs-comment">/* 根据文件大小分配内存，并读取文件到内存 */</span> 
+    buf = (<span class="hljs-type">char</span> *)<span class="hljs-built_in">malloc</span>(fileSize * <span class="hljs-keyword">sizeof</span>(<span class="hljs-type">char</span>));
+    <span class="hljs-built_in">memset</span>(buf, <span class="hljs-number">0</span>, fileSize);
+    ret = fread(buf, fileSize, <span class="hljs-keyword">sizeof</span>(<span class="hljs-type">char</span>), fp);
+    <span class="hljs-keyword">if</span>(ret == <span class="hljs-number">-1</span>)
+    &#123;
+        fclose(fp);
+        <span class="hljs-keyword">return</span>;
+    &#125;
+    fclose(fp);
+
+    <span class="hljs-comment">/* 把该字符串数据转成JSON数据 */</span> 
+    cJSON *srcJsonData = cJSON_Parse(buf);
+    <span class="hljs-keyword">if</span>(srcJsonData == <span class="hljs-literal">NULL</span>)
+    &#123;
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;err\r\n&quot;</span>);
+        <span class="hljs-keyword">return</span>;
+    &#125;
+	<span class="hljs-built_in">free</span>(buf);
+
+    <span class="hljs-comment">/* 解析JSON数据并输出显示 */</span>
+    <span class="hljs-comment">/*根据key值(url)获取对应的value*/</span>
+    cJSON *json_url = cJSON_GetObjectItem(srcJsonData, <span class="hljs-string">&quot;url&quot;</span>);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;website: %s\r\n&quot;</span>, cJSON_Print(json_url));
+
+	<span class="hljs-comment">/*根据key值(page)获取对应的value*/</span>
+    cJSON *json_page = cJSON_GetObjectItem(srcJsonData, <span class="hljs-string">&quot;page&quot;</span>);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;page: %d\r\n&quot;</span>, json_page-&gt;valueint);
+
+	<span class="hljs-comment">/* 根据嵌套的key值(address)获取对应的value */</span>
+	cJSON *json_address = cJSON_GetObjectItem(srcJsonData, <span class="hljs-string">&quot;address&quot;</span>);
+	cJSON *json_street = cJSON_GetObjectItem(json_address, <span class="hljs-string">&quot;street&quot;</span>);
+	cJSON *json_city = cJSON_GetObjectItem(json_address, <span class="hljs-string">&quot;city&quot;</span>);
+	cJSON *json_country = cJSON_GetObjectItem(json_address, <span class="hljs-string">&quot;country&quot;</span>);
+
+	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;address-street: %s; address-city: %s; address-country: %s\r\n&quot;</span>, cJSON_Print(json_street), \
+	      cJSON_Print(json_city), cJSON_Print(json_country));
+		  
+    <span class="hljs-comment">// /* 根据数组key值(links)获取对应的value */</span>
+    cJSON* json_links = cJSON_GetObjectItem(srcJsonData, <span class="hljs-string">&quot;links&quot;</span>);
+    len = cJSON_GetArraySize(json_links); <span class="hljs-comment">/* 获取该数组的大小 */</span>
+
+    <span class="hljs-keyword">for</span>(i = <span class="hljs-number">0</span>; i &lt; len; i++)
+    &#123;
+        <span class="hljs-comment">/* 先获取每一条信息 */</span>
+        cJSON *tmpValue = cJSON_GetArrayItem(json_links, i);
+
+        <span class="hljs-comment">/* 再获取每条信息中的具体内容 */</span> 
+        cJSON *nameValue = cJSON_GetObjectItem(tmpValue,<span class="hljs-string">&quot;name&quot;</span>);
+		cJSON *urlValue = cJSON_GetObjectItem(tmpValue,<span class="hljs-string">&quot;url&quot;</span>);
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;[%d] %s \t %s \t %s\r\n&quot;</span>, i+<span class="hljs-number">1</span>, nameValue-&gt;valuestring, urlValue-&gt;valuestring);
+    &#125;
+	
+	<span class="hljs-comment">/* 释放内存 */</span>
+	cJSON_Delete(json_url);
+	cJSON_Delete(json_page);
+	cJSON_Delete(json_address);
+	cJSON_Delete(json_street);
+	cJSON_Delete(json_city);
+	cJSON_Delete(json_country);
+	cJSON_Delete(json_links);
+  cJSON_Delete(srcJsonData);
+&#125;</code></pre></div>
+<p>运行结果：</p>
+<figure>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230830132151235.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20230830132151235</figcaption>
+</figure>
+<h2 id="cjson使用过程中的内存问题">cJSON使用过程中的内存问题</h2>
+<p>cJSON在使用过程中<strong>大量的使用<code>malloc</code>从堆中分配内存的，所以用完之后，应及时释放内存 <code>(void) cJSON_Delete(cJSON *item)</code></strong>。</p>
+<p>另外，cJSON中还可以通过 <strong>cJSON_Hooks</strong> ，自定义malloc函数和free函数。</p>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">cJSON_Hooks</span> &#123;</span>
+      <span class="hljs-type">void</span> *(*malloc_fn)(<span class="hljs-type">size_t</span> sz);
+      <span class="hljs-type">void</span> (*free_fn)(<span class="hljs-type">void</span> *ptr);
+&#125; cJSON_Hooks;
+
+<span class="hljs-type">void</span> <span class="hljs-title function_">cJSON_InitHooks</span><span class="hljs-params">(cJSON_Hooks* hooks)</span>
+&#123;
+    <span class="hljs-keyword">if</span> (!hooks) &#123; <span class="hljs-comment">/* Reset hooks */</span>
+        cJSON_malloc = <span class="hljs-built_in">malloc</span>;
+        cJSON_free = <span class="hljs-built_in">free</span>;
+        <span class="hljs-keyword">return</span>;
+    &#125;
+
+	cJSON_malloc = (hooks-&gt;malloc_fn)?hooks-&gt;malloc_fn:<span class="hljs-built_in">malloc</span>;
+	cJSON_free	 = (hooks-&gt;free_fn)?hooks-&gt;free_fn:<span class="hljs-built_in">free</span>;
+&#125;</code></pre></div>
+<p>工程文件已上传Gitee：<a target="_blank" rel="noopener" href="https://gitee.com/kayoungzhang/my_codehub/raw/master/cjson/cjson_demo.zip">cjson_demo</a></p>
+<p><strong>链接：</strong></p>
+<p><strong>JSON在线工具：</strong><a target="_blank" rel="noopener" href="http://www.json.org.cn/tools/JSONEditorOnline2.0/index.htm">http://www.json.org.cn/tools/JSONEditorOnline2.0/index.htm</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Mculover666/article/details/103796256">https://blog.csdn.net/Mculover666/article/details/103796256</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/" class="category-chain-item">编程基础</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/JSON/">#JSON</a>
+      
+    </div>
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/08/28/%E5%9B%BD%E5%86%85%E5%BC%80%E6%BA%90%E9%95%9C%E5%83%8F%E7%AB%99%E6%B1%87%E6%80%BB/" title="国内开源镜像站汇总">
+                        <span class="hidden-mobile">国内开源镜像站汇总</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"vknpQgHbpd1oLUPUwwPbdY3B-gzGzoHsz","appKey":"1DCiNflrxTVqUxWR5T00HypH","path":"window.location.pathname","placeholder":"欢迎留言交流","avatar":"robohash","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":true,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <p <i class="iconfont icon-copyright"></i> <span>2023 | KayougZhang</span> </p> <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
