@@ -1,0 +1,731 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="OLED（Organic Light-Emitting Diode）,有机发光二极体，属于一种电流型的有机发光器件，当电流流动时就会自行发光。因其简单，使用方便，所以在开发过程中会经常使用到这种显示器件。 市面上有很多OLED显示模块，根据控制显示的驱动芯片的不同，有不同的连接接口，一般大体会有四种：  6800并行接口 8080并行接口 4线SPI串行接口 I2C接口  下面主要">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于OLED字模取模方式的选择">
+<meta property="og:url" content="http://example.com/2023/09/02/%E5%85%B3%E4%BA%8EOLED%E5%AD%97%E6%A8%A1%E5%8F%96%E6%A8%A1%E6%96%B9%E5%BC%8F%E7%9A%84%E9%80%89%E6%8B%A9/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="OLED（Organic Light-Emitting Diode）,有机发光二极体，属于一种电流型的有机发光器件，当电流流动时就会自行发光。因其简单，使用方便，所以在开发过程中会经常使用到这种显示器件。 市面上有很多OLED显示模块，根据控制显示的驱动芯片的不同，有不同的连接接口，一般大体会有四种：  6800并行接口 8080并行接口 4线SPI串行接口 I2C接口  下面主要">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230902141405518.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230902152256627.png">
+<meta property="article:published_time" content="2023-09-02T05:30:21.000Z">
+<meta property="article:modified_time" content="2023-09-04T02:44:10.554Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="OLED">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230902141405518.png">
+  
+  
+  
+  
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"✍","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":false},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":false,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+<meta name="referrer" content="no-referrer" />
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>My Tech Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/article.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.1)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="关于OLED字模取模方式的选择"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-09-02 13:30" pubdate>
+          2023年9月2日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          7.6k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          26 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-12 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">关于OLED字模取模方式的选择</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：2023年9月4日 上午
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <p>OLED（Organic Light-Emitting Diode）,有机发光二极体，属于一种电流型的有机发光器件，当电流流动时就会自行发光。因其简单，使用方便，所以在开发过程中会经常使用到这种显示器件。</p>
+<p>市面上有很多OLED显示模块，根据控制显示的驱动芯片的不同，有不同的连接接口，一般大体会有四种：</p>
+<ul>
+<li><strong>6800并行接口</strong></li>
+<li><strong>8080并行接口</strong></li>
+<li><strong>4线SPI串行接口</strong></li>
+<li><strong>I2C接口</strong></li>
+</ul>
+<p>下面主要是来看看OLED在显示中文信息时，需要注意的事项：</p>
+<p>显示中文信息需要用到字模工具，如：<a target="_blank" rel="noopener" href="https://gitee.com/kayoungzhang/my_codehub/blob/master/tools/PCtoLCD2018.zip">PCtoLCD</a> ，当然，还有其它的一些字模工具，功能都差不多。</p>
+<p>PCtoLCD字符模式的配置（16*16汉字）与使用方式如图：</p>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230902141405518.png" srcset="/img/loading.gif" lazyload alt="image-20230902141405518" style="zoom:80%;" /></p>
+<p>将生成的数据放到一个二维数组中，可以将这个二维数组保存到一个头文件中，使用时，包含这个头文件即可。如：</p>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">ifndef</span> OLEDFONT_H</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> OLEDFONT_H 	   </span>
+
+<span class="hljs-type">char</span> <span class="hljs-type">const</span> SHOW[][<span class="hljs-number">32</span>]=&#123;
+    &#123;<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0xF0</span>,<span class="hljs-number">0x10</span>,<span class="hljs-number">0x10</span>,<span class="hljs-number">0x10</span>,<span class="hljs-number">0x10</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0x10</span>,<span class="hljs-number">0x10</span>,<span class="hljs-number">0x10</span>,<span class="hljs-number">0x10</span>,<span class="hljs-number">0xF0</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>&#125;,
+    &#123;<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x0F</span>,<span class="hljs-number">0x04</span>,<span class="hljs-number">0x04</span>,<span class="hljs-number">0x04</span>,<span class="hljs-number">0x04</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0x04</span>,<span class="hljs-number">0x04</span>,<span class="hljs-number">0x04</span>,<span class="hljs-number">0x04</span>,<span class="hljs-number">0x0F</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>&#125;,<span class="hljs-comment">/*&quot;中&quot;,0*/</span>
+    <span class="hljs-comment">/* (16 X 16 , 宋体 )*/</span>
+
+    &#123;<span class="hljs-number">0x00</span>,<span class="hljs-number">0xFE</span>,<span class="hljs-number">0x02</span>,<span class="hljs-number">0x12</span>,<span class="hljs-number">0x92</span>,<span class="hljs-number">0x92</span>,<span class="hljs-number">0x92</span>,<span class="hljs-number">0xF2</span>,<span class="hljs-number">0x92</span>,<span class="hljs-number">0x92</span>,<span class="hljs-number">0x92</span>,<span class="hljs-number">0x12</span>,<span class="hljs-number">0x02</span>,<span class="hljs-number">0xFE</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>&#125;,
+    &#123;<span class="hljs-number">0x00</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0x40</span>,<span class="hljs-number">0x48</span>,<span class="hljs-number">0x48</span>,<span class="hljs-number">0x48</span>,<span class="hljs-number">0x48</span>,<span class="hljs-number">0x4F</span>,<span class="hljs-number">0x48</span>,<span class="hljs-number">0x4A</span>,<span class="hljs-number">0x4C</span>,<span class="hljs-number">0x48</span>,<span class="hljs-number">0x40</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>&#125;,<span class="hljs-comment">/*&quot;国&quot;,1*/</span>
+    <span class="hljs-comment">/* (16 X 16 , 宋体 )*/</span>
+
+    &#123;<span class="hljs-number">0x40</span>,<span class="hljs-number">0x40</span>,<span class="hljs-number">0x42</span>,<span class="hljs-number">0x44</span>,<span class="hljs-number">0x58</span>,<span class="hljs-number">0xC0</span>,<span class="hljs-number">0x40</span>,<span class="hljs-number">0x7F</span>,<span class="hljs-number">0x40</span>,<span class="hljs-number">0xC0</span>,<span class="hljs-number">0x50</span>,<span class="hljs-number">0x48</span>,<span class="hljs-number">0x46</span>,<span class="hljs-number">0x40</span>,<span class="hljs-number">0x40</span>,<span class="hljs-number">0x00</span>&#125;,
+    &#123;<span class="hljs-number">0x80</span>,<span class="hljs-number">0x80</span>,<span class="hljs-number">0x40</span>,<span class="hljs-number">0x20</span>,<span class="hljs-number">0x18</span>,<span class="hljs-number">0x07</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x3F</span>,<span class="hljs-number">0x40</span>,<span class="hljs-number">0x40</span>,<span class="hljs-number">0x40</span>,<span class="hljs-number">0x40</span>,<span class="hljs-number">0x78</span>,<span class="hljs-number">0x00</span>&#125;,<span class="hljs-comment">/*&quot;光&quot;,2*/</span>
+    <span class="hljs-comment">/* (16 X 16 , 宋体 )*/</span>
+
+    &#123;<span class="hljs-number">0x00</span>,<span class="hljs-number">0x10</span>,<span class="hljs-number">0x88</span>,<span class="hljs-number">0x84</span>,<span class="hljs-number">0x43</span>,<span class="hljs-number">0x20</span>,<span class="hljs-number">0x10</span>,<span class="hljs-number">0x0C</span>,<span class="hljs-number">0x10</span>,<span class="hljs-number">0x20</span>,<span class="hljs-number">0x41</span>,<span class="hljs-number">0x82</span>,<span class="hljs-number">0x84</span>,<span class="hljs-number">0x08</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>&#125;,
+    &#123;<span class="hljs-number">0x01</span>,<span class="hljs-number">0x01</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0xFE</span>,<span class="hljs-number">0x42</span>,<span class="hljs-number">0x42</span>,<span class="hljs-number">0x42</span>,<span class="hljs-number">0x42</span>,<span class="hljs-number">0x42</span>,<span class="hljs-number">0x42</span>,<span class="hljs-number">0x42</span>,<span class="hljs-number">0xFE</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x01</span>,<span class="hljs-number">0x01</span>,<span class="hljs-number">0x00</span>&#125;,<span class="hljs-comment">/*&quot;谷&quot;,3*/</span>
+    <span class="hljs-comment">/* (16 X 16 , 宋体 )*/</span>
+&#125;;
+
+
+<span class="hljs-meta">#<span class="hljs-keyword">endif</span>  <span class="hljs-comment">/* OLEDFONT_H */</span></span></code></pre></div>
+<p>这里看一下它的取模方式，各种取模方式的演示，可查看软件上自带的演示示例。这四种方式各自的特点如下：</p>
+<ul>
+<li><p><strong>逐列式</strong></p>
+<ul>
+<li>从第一列开始向下每取8个点作为一个字节，如果最后不足8个点就补满8位。取模顺序是从低到高，即第一个点作为最低位。</li>
+<li>不需要进行数据重组，取模软件取出数据直接运用。</li>
+<li>写完一字节数据就需要重新设置一次地址，写一个16x16汉字，需要经历32次地址设置 ： 每一列数据需要设置2次，共16列。</li>
+</ul></li>
+<li><p><strong>逐行式</strong></p>
+<ul>
+<li><p>从第一行开始向右每取8个点作为一个字节，如果最后不足8个点就补满8位。取模顺序是从低到高 ，即第一个点作为最低位。</p></li>
+<li><p>需要进行数据重组，取模软件取出的数值无法直接运用。</p></li>
+<li><p>写1个字节数据需要对8个数据进行Bit位数值的提取和重组操作，写完16字节数据需要重新设置一次地址，写一个16x16汉字，需要经历2次地址设置 ： 汉字上半部分的页地址和汉字下半部分的页地址分别设置一次。</p></li>
+</ul></li>
+<li><p><strong>列行式</strong></p>
+<ul>
+<li>从第一列开始向下取8个点作为一个字节，然后从第二列开始向下取8个点作为第二个字节...依此类推。如果最后不足8个点就补满8位。取模顺序是从低到高，即第一个点作为最低位。</li>
+<li>不需要进行数据重组，取模软件取出数据直接运用。</li>
+<li>写完16字节数据需要重新设置一次地址，写一个16x16汉字，需要经历2次地址变换： 汉字上半部分的页地址和汉字下半部分的页地址分别设置一次。（注意这里和逐行式的做法本质上是一样的，只是在于数据是否可以直接运用）</li>
+</ul></li>
+<li><p><strong>行列式</strong></p>
+<ul>
+<li>从第一行开始向右取8个点作为一个字节，然后从第二行开始向右取8个点作为第二个字节...依此类推。如果最后不足8个点就补满8位。取模顺序是从低到高，即第一个点作为最位。</li>
+<li>需要进行数据重组，取模软件取出的数值无法直接运用。</li>
+<li>写1个字节数据需要对8个数据进行Bit位数值的提取和重组操作，写完8个字节数据就需要重新设置一次地址，写一个16x16汉字，需要经历4次地址设置：汉字分为左上部分、左下部分、右上部分、右下部分，共需要设置4次地址</li>
+</ul></li>
+</ul>
+<p>通过对比，可以发现：</p>
+<ul>
+<li>从数据处理方面看，不进行数据重组，其书写速度上可以更快，因此逐列式和列行式更有优势。</li>
+<li>从地址设置方面看，尽量少的程序设置地址，而尽量多的利用硬件自身的列地址自增的性质，这样速度更快，因此逐行式=列行式&gt;行列式&gt;逐列式。</li>
+</ul>
+<p>所以， 对于显示16x16汉字，列行式是最为突出的算法，不仅直接利用数据无需重组，而且尽量多的利用了其硬件特性，是最好的选择。</p>
+<p>PCtoLCD图形模式的配置（128*64图片）与使用方式如图：</p>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230902152256627.png" srcset="/img/loading.gif" lazyload alt="image-20230902152256627" style="zoom:67%;" /></p>
+<p>同上一样，将生成的数据放到一个数组中，将这个数组保存到一个头文件中，使用时，包含这个头文件即可。</p>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-type">char</span> <span class="hljs-type">const</span> pic[] = &#123;
+    <span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x20</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0xC0</span>,<span class="hljs-number">0xE4</span>,<span class="hljs-number">0xF8</span>,<span class="hljs-number">0xFC</span>,<span class="hljs-number">0xFE</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,
+    <span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFE</span>,<span class="hljs-number">0xFC</span>,<span class="hljs-number">0xF8</span>,<span class="hljs-number">0xF2</span>,<span class="hljs-number">0xC0</span>,<span class="hljs-number">0x80</span>,<span class="hljs-number">0x40</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,
+    <span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x80</span>,<span class="hljs-number">0xE0</span>,<span class="hljs-number">0xE0</span>,<span class="hljs-number">0xF2</span>,<span class="hljs-number">0xF0</span>,<span class="hljs-number">0xF8</span>,<span class="hljs-number">0xF8</span>,
+    <span class="hljs-number">0xF8</span>,<span class="hljs-number">0xF0</span>,<span class="hljs-number">0xF0</span>,<span class="hljs-number">0xF0</span>,<span class="hljs-number">0xE0</span>,<span class="hljs-number">0xC0</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x80</span>,<span class="hljs-number">0x80</span>,<span class="hljs-number">0x80</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x40</span>,<span class="hljs-number">0x00</span>,
+    <span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0xC0</span>,<span class="hljs-number">0xE0</span>,<span class="hljs-number">0xE0</span>,<span class="hljs-number">0xE0</span>,
+    <span class="hljs-number">0xE0</span>,<span class="hljs-number">0xE0</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0xC0</span>,<span class="hljs-number">0xE0</span>,<span class="hljs-number">0xE0</span>,<span class="hljs-number">0xE0</span>,<span class="hljs-number">0xE0</span>,<span class="hljs-number">0xE0</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,
+    <span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,
+    <span class="hljs-number">0xE0</span>,<span class="hljs-number">0xE0</span>,<span class="hljs-number">0xE0</span>,<span class="hljs-number">0xE0</span>,<span class="hljs-number">0xE0</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,
+    <span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0xE0</span>,<span class="hljs-number">0xFC</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0x3F</span>,<span class="hljs-number">0x7F</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,
+    <span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0x7F</span>,<span class="hljs-number">0x3F</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFC</span>,<span class="hljs-number">0xF0</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,
+    <span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0xE0</span>,<span class="hljs-number">0xFC</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,
+    <span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0x3F</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0xFE</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xF8</span>,<span class="hljs-number">0x00</span>,
+    <span class="hljs-number">0x00</span>,<span class="hljs-number">0x08</span>,<span class="hljs-number">0xF0</span>,<span class="hljs-number">0xF0</span>,<span class="hljs-number">0xF0</span>,<span class="hljs-number">0xF0</span>,<span class="hljs-number">0xF0</span>,<span class="hljs-number">0xE0</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,
+    <span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,
+    <span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,
+    <span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,
+    <span class="hljs-number">0x00</span>,<span class="hljs-number">0xC0</span>,<span class="hljs-number">0xFE</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x04</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x05</span>,<span class="hljs-number">0x09</span>,<span class="hljs-number">0x01</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,
+    <span class="hljs-number">0x01</span>,<span class="hljs-number">0x01</span>,<span class="hljs-number">0x01</span>,<span class="hljs-number">0x09</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x61</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xF0</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,
+    <span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0xFC</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0x1F</span>,<span class="hljs-number">0x03</span>,<span class="hljs-number">0x05</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,
+    <span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x01</span>,<span class="hljs-number">0x04</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x08</span>,<span class="hljs-number">0x87</span>,<span class="hljs-number">0x8F</span>,<span class="hljs-number">0x9F</span>,<span class="hljs-number">0x9F</span>,<span class="hljs-number">0x87</span>,<span class="hljs-number">0x81</span>,<span class="hljs-number">0x00</span>,
+    <span class="hljs-number">0x00</span>,<span class="hljs-number">0x80</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0x80</span>,<span class="hljs-number">0x80</span>,<span class="hljs-number">0x80</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,
+    <span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x80</span>,
+    <span class="hljs-number">0x80</span>,<span class="hljs-number">0x80</span>,<span class="hljs-number">0x80</span>,<span class="hljs-number">0x80</span>,<span class="hljs-number">0x80</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x80</span>,<span class="hljs-number">0x80</span>,<span class="hljs-number">0x80</span>,<span class="hljs-number">0x80</span>,<span class="hljs-number">0x80</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,
+    <span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0x3F</span>,<span class="hljs-number">0x80</span>,<span class="hljs-number">0xC0</span>,<span class="hljs-number">0xC0</span>,<span class="hljs-number">0xC0</span>,<span class="hljs-number">0xC0</span>,<span class="hljs-number">0xD0</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,
+    <span class="hljs-number">0x00</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,
+    <span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x07</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xE0</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,
+    <span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0x3F</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0xF0</span>,<span class="hljs-number">0xF0</span>,
+    <span class="hljs-number">0xF0</span>,<span class="hljs-number">0xF0</span>,<span class="hljs-number">0xF0</span>,<span class="hljs-number">0xF0</span>,<span class="hljs-number">0xF0</span>,<span class="hljs-number">0xF0</span>,<span class="hljs-number">0xF0</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0x01</span>,<span class="hljs-number">0xFE</span>,
+    <span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,
+    <span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFC</span>,<span class="hljs-number">0xFC</span>,<span class="hljs-number">0xFC</span>,<span class="hljs-number">0xFC</span>,<span class="hljs-number">0xFC</span>,<span class="hljs-number">0xFC</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0xFF</span>,
+    <span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,
+    <span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFE</span>,<span class="hljs-number">0xF0</span>,<span class="hljs-number">0x00</span>,
+    <span class="hljs-number">0x00</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,
+    <span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0xF0</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0x1F</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,
+    <span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xF8</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x7F</span>,<span class="hljs-number">0x7F</span>,
+    <span class="hljs-number">0x7F</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFE</span>,<span class="hljs-number">0x01</span>,
+    <span class="hljs-number">0x01</span>,<span class="hljs-number">0x01</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFD</span>,<span class="hljs-number">0x01</span>,<span class="hljs-number">0x01</span>,<span class="hljs-number">0x01</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,
+    <span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0x1F</span>,<span class="hljs-number">0x1F</span>,<span class="hljs-number">0x1F</span>,<span class="hljs-number">0x1F</span>,<span class="hljs-number">0x1F</span>,<span class="hljs-number">0x1F</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0xFF</span>,
+    <span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,
+    <span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0x01</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x0F</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0x00</span>,
+    <span class="hljs-number">0x00</span>,<span class="hljs-number">0x07</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xBF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xF8</span>,<span class="hljs-number">0xE0</span>,<span class="hljs-number">0xC8</span>,<span class="hljs-number">0xC0</span>,<span class="hljs-number">0x80</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,
+    <span class="hljs-number">0x00</span>,<span class="hljs-number">0x80</span>,<span class="hljs-number">0xC0</span>,<span class="hljs-number">0xC0</span>,<span class="hljs-number">0xE2</span>,<span class="hljs-number">0xF0</span>,<span class="hljs-number">0xFC</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0x1F</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,
+    <span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x7F</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xE0</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,
+    <span class="hljs-number">0x00</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0x00</span>,
+    <span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,
+    <span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0xFF</span>,
+    <span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,
+    <span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0x01</span>,
+    <span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x41</span>,<span class="hljs-number">0x0F</span>,<span class="hljs-number">0x7F</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xE7</span>,<span class="hljs-number">0xBF</span>,<span class="hljs-number">0x3F</span>,<span class="hljs-number">0x7F</span>,<span class="hljs-number">0xBF</span>,<span class="hljs-number">0x41</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,
+    <span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0x1F</span>,<span class="hljs-number">0x43</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,
+    <span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x0F</span>,<span class="hljs-number">0x7F</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFE</span>,<span class="hljs-number">0xFE</span>,<span class="hljs-number">0xFC</span>,
+    <span class="hljs-number">0xFE</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0x00</span>,
+    <span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x7F</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xF8</span>,<span class="hljs-number">0xF8</span>,<span class="hljs-number">0xF8</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,
+    <span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x3F</span>,
+    <span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xF8</span>,<span class="hljs-number">0xF8</span>,<span class="hljs-number">0xF8</span>,<span class="hljs-number">0xFC</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,
+    <span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFC</span>,<span class="hljs-number">0xF8</span>,<span class="hljs-number">0xF8</span>,<span class="hljs-number">0xF8</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0x7F</span>,<span class="hljs-number">0x00</span>,
+    <span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x08</span>,<span class="hljs-number">0x09</span>,<span class="hljs-number">0x07</span>,<span class="hljs-number">0x1F</span>,<span class="hljs-number">0x3F</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,
+    <span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0x7F</span>,<span class="hljs-number">0x1F</span>,<span class="hljs-number">0x0F</span>,<span class="hljs-number">0x03</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,
+    <span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x01</span>,<span class="hljs-number">0x03</span>,<span class="hljs-number">0x07</span>,<span class="hljs-number">0x0F</span>,<span class="hljs-number">0x1F</span>,<span class="hljs-number">0x1F</span>,<span class="hljs-number">0x1F</span>,<span class="hljs-number">0x3F</span>,
+    <span class="hljs-number">0x3F</span>,<span class="hljs-number">0x1F</span>,<span class="hljs-number">0x1F</span>,<span class="hljs-number">0x1F</span>,<span class="hljs-number">0x0F</span>,<span class="hljs-number">0x07</span>,<span class="hljs-number">0x13</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x0F</span>,<span class="hljs-number">0x1F</span>,<span class="hljs-number">0x0F</span>,<span class="hljs-number">0x1F</span>,<span class="hljs-number">0x1F</span>,<span class="hljs-number">0x06</span>,<span class="hljs-number">0x00</span>,
+    <span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x03</span>,<span class="hljs-number">0x0F</span>,<span class="hljs-number">0x1F</span>,<span class="hljs-number">0x1F</span>,<span class="hljs-number">0x1F</span>,<span class="hljs-number">0x1F</span>,<span class="hljs-number">0x1F</span>,<span class="hljs-number">0x1F</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x0F</span>,<span class="hljs-number">0x1F</span>,<span class="hljs-number">0x1F</span>,<span class="hljs-number">0x1F</span>,
+    <span class="hljs-number">0x1F</span>,<span class="hljs-number">0x1F</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x0F</span>,<span class="hljs-number">0x1F</span>,<span class="hljs-number">0x0F</span>,<span class="hljs-number">0x1F</span>,<span class="hljs-number">0x1F</span>,<span class="hljs-number">0x0F</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,
+    <span class="hljs-number">0x03</span>,<span class="hljs-number">0x0F</span>,<span class="hljs-number">0x1F</span>,<span class="hljs-number">0x1F</span>,<span class="hljs-number">0x1F</span>,<span class="hljs-number">0x3F</span>,<span class="hljs-number">0x1F</span>,<span class="hljs-number">0x1F</span>,<span class="hljs-number">0x0F</span>,<span class="hljs-number">0x07</span>,<span class="hljs-number">0x1F</span>,<span class="hljs-number">0x1F</span>,<span class="hljs-number">0x1F</span>,<span class="hljs-number">0x1F</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,
+    <span class="hljs-number">0x0F</span>,<span class="hljs-number">0x1F</span>,<span class="hljs-number">0x1F</span>,<span class="hljs-number">0x1F</span>,<span class="hljs-number">0x07</span>,<span class="hljs-number">0x0F</span>,<span class="hljs-number">0x1F</span>,<span class="hljs-number">0x1F</span>,<span class="hljs-number">0x1F</span>,<span class="hljs-number">0x3F</span>,<span class="hljs-number">0x1F</span>,<span class="hljs-number">0x1F</span>,<span class="hljs-number">0x07</span>,<span class="hljs-number">0x03</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>
+&#125;</code></pre></div>
+<p><strong>链接：</strong></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/yagnruinihao/article/details/47133455">https://blog.csdn.net/yagnruinihao/article/details/47133455</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/dragonet-Z/p/14689345.html">https://www.cnblogs.com/dragonet-Z/p/14689345.html</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/" class="category-chain-item">编程基础</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/OLED/">#OLED</a>
+      
+    </div>
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/09/04/Modbus%E9%80%9A%E8%AE%AF%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/" title="Modbus通讯协议详解">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Modbus通讯协议详解</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/08/29/cJSON%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/" title="cJSON使用教程">
+                        <span class="hidden-mobile">cJSON使用教程</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"vknpQgHbpd1oLUPUwwPbdY3B-gzGzoHsz","appKey":"1DCiNflrxTVqUxWR5T00HypH","path":"window.location.pathname","placeholder":"欢迎留言交流","avatar":"robohash","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":true,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <p <i class="iconfont icon-copyright"></i> <span>2023 | KayougZhang</span> </p> <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

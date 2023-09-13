@@ -1,0 +1,674 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Modbus协议简介 Modbus协议是一种通用的工业通讯总线协议，跟I2C、SPI总线类似，通讯的服务器端和客户端都在同一条总线上。 Modbus协议最初是Modicon公司（现在的施耐德电气 Schneider Electric）于1979年为使用可编程逻辑控制器（PLC）通信而开发的，现在已成为工业领域通信协议的业界标准。 Modbus官网：https:&#x2F;&#x2F;modbus.org&#x2F; 本">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Modbus通讯协议详解">
+<meta property="og:url" content="http://example.com/2023/09/04/Modbus%E9%80%9A%E8%AE%AF%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Modbus协议简介 Modbus协议是一种通用的工业通讯总线协议，跟I2C、SPI总线类似，通讯的服务器端和客户端都在同一条总线上。 Modbus协议最初是Modicon公司（现在的施耐德电气 Schneider Electric）于1979年为使用可编程逻辑控制器（PLC）通信而开发的，现在已成为工业领域通信协议的业界标准。 Modbus官网：https:&#x2F;&#x2F;modbus.org&#x2F; 本">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230904153822090.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230904155252355.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230904155609179.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230904185445076.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230904164451733.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230904181240364.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230904182100762.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230904182705385.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230904184016458.png">
+<meta property="article:published_time" content="2023-09-04T02:44:48.000Z">
+<meta property="article:modified_time" content="2023-09-06T14:37:48.858Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Modbus">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230904153822090.png">
+  
+  
+  
+  
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"✍","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":false},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":false,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+<meta name="referrer" content="no-referrer" />
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>My Tech Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/article.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.1)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Modbus通讯协议详解"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-09-04 10:44" pubdate>
+          2023年9月4日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.9k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          7 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-12 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Modbus通讯协议详解</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：2023年9月6日 晚上
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="modbus协议简介">Modbus协议简介</h1>
+<p>Modbus协议是一种通用的工业通讯总线协议，跟I2C、SPI总线类似，通讯的服务器端和客户端都在同一条总线上。</p>
+<p>Modbus协议最初是Modicon公司（现在的施耐德电气 Schneider Electric）于1979年为使用可编程逻辑控制器（PLC）通信而开发的，现在已成为工业领域通信协议的业界标准。</p>
+<p>Modbus官网：<a target="_blank" rel="noopener" href="https://modbus.org/">https://modbus.org/</a></p>
+<p>本文主要以modbus官方文档（<a target="_blank" rel="noopener" href="https://modbus.org/specs.php">Modbus Specifications and Implementation Guides</a>）进行说明。</p>
+<h1 id="modbus协议传输方式">Modbus协议传输方式</h1>
+<p>Modbus协议主要有以下几种传输方式：</p>
+<ul>
+<li><p><strong>基于串口的Modbus-RTU</strong></p>
+<p>采用二进制表现形式以及紧凑数据结构，通信效率较高，应用比较广泛，在工业现场一般都是采用Modbus RTU协议。</p>
+<p>RTU协议中的指令由地址码(一个字节），功能码（一个字节），起始地址（两个字节），数据（N个字节），校验码（两个字节）五个部分组成，其中数据又由数据长度（两个字节，表示的是寄存器个数，假定内容为M）和数据正文（M乘以2个字节）组成，而RTU协议是采用3.5个字节的空闲时间作为指令的起始和结束，一般而言，只有当从机返回数据或者主机写操作的时候，才会有数据正文，而其他时候比如主机读操作指令的时候，没有数据正文，只需要数据长度即可。</p></li>
+<li><p><strong>基于串口的Modbus-ASCII</strong></p>
+<p>采用ASCII码传输，并且利用特殊字符作为其字节的开始与结束标识，其传输效率要远远低于Modbus RTU协议，一般只有在通信数据量较小的情况下才使用Modbus ASCII通信。</p></li>
+<li><p><strong>基于以太网的Modbus-TCP</strong></p>
+<p>是在RTU协议上加一个MBAP报文头，由于TCP是基于可靠连接的服务，所以就不需要CRC校验了。</p></li>
+</ul>
+<h1 id="modbus协议数据帧">Modbus协议数据帧</h1>
+<p>Modbus协议帧比较简洁，如下所示：</p>
+<figure>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230904153822090.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20230904153822090</figcaption>
+</figure>
+<p>一帧Modbus数据由客户端构建，开启数据传输（无错误发生）：</p>
+<figure>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230904155252355.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20230904155252355</figcaption>
+</figure>
+<p>当服务器检测到异常，则会发出异常码和异常功能码：</p>
+<figure>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230904155609179.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20230904155609179</figcaption>
+</figure>
+<h1 id="modbus数据编码和数据模型">Modbus数据编码和数据模型</h1>
+<p>Modbus协议中采用的是 <strong>大端模式</strong> ，所以传输多字节地址和数据时，要先发送高位字节，如数据：<strong>0x1234</strong> ，要先发送高位字节 <strong>0x12</strong>，然后发送低位字节 <strong>0x34</strong> 。</p>
+<p>Modbus协议规定，进行读写操作的数据类型主要分为以下4种：</p>
+<figure>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230904185445076.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20230904185445076</figcaption>
+</figure>
+<h1 id="功能码的分类与定义">功能码的分类与定义</h1>
+<p>Modbus功能码主要有公共功能码(如：1~65 或 73~100 或 111~127)和自定义功能码（如：66~72 或 101~110）。</p>
+<p>主要来看看公共功能码：</p>
+<figure>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230904164451733.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20230904164451733</figcaption>
+</figure>
+<p>因为PLC主要控制的是继电器触点，所以在PLC上还会经常对线圈（Coils）进行读写。</p>
+<p>最常用的功能码：</p>
+<ul>
+<li><p><strong>03 (0x03) - 读保持寄存器</strong></p>
+<figure>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230904181240364.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20230904181240364</figcaption>
+</figure></li>
+<li><p><strong>04 (0x04) - 读输入寄存器</strong></p>
+<figure>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230904182100762.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20230904182100762</figcaption>
+</figure></li>
+<li><p><strong>06 (0x06) - 写单个寄存器</strong></p>
+<figure>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230904182705385.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20230904182705385</figcaption>
+</figure></li>
+<li><p><strong>16 (0x10) - 写多个寄存器</strong></p>
+<figure>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230904184016458.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20230904184016458</figcaption>
+</figure></li>
+</ul>
+<p>可以看出，不同的功能码，对应的请求和响应不太一样，但一般 <strong>功能码占用1Byte，地址占用2Bytes，寄存器数量占用2Bytes，寄存器值占用2Bytes，数据字节数占用1Byte</strong>。另外，在实际应用中，还有设备地址占用1Byte，CRC校验占用2Bytes。如在Modbus RTU传输中：</p>
+<ul>
+<li><strong>03 (0x03) - 读保持寄存器</strong></li>
+</ul>
+<p><strong>请求</strong>：1byte设备地址 + 1byte功能代码 + 2bytes寄存器起始地址 + 2bytes寄存器数量 + 2bytes CRC校验</p>
+<p><strong>响应</strong>：1byte设备地址 + 1byte功能代码 + 1byte数据字节数 + 2N bytes寄存器数据 + 2bytes CRC校验</p>
+<ul>
+<li><strong>06 (0x06) - 写单个寄存器</strong></li>
+</ul>
+<p><strong>请求</strong>：1byte设备地址 + 1byte功能代码 + 2bytes寄存器起始地址 + 2bytes数据 + 2bytes CRC校验</p>
+<p><strong>响应</strong>：1byte设备地址 + 1byte功能代码 + 2bytes寄存器起始地址 + 2bytes数据 + 2bytes CRC校验</p>
+<h1 id="modbus协议应用">Modbus协议应用</h1>
+<p><a target="_blank" rel="noopener" href="https://www.modbus.cn/11740.html">格力中央空调多联机 Modbus 通讯协议 | Modbus物联网云平台</a></p>
+<p>Modbus官网有个外链驱动库：<a target="_blank" rel="noopener" href="https://libmodbus.org/">libmodbus驱动库</a> ，在应用中可以直接移植到程序中，而不用自己重复的编写驱动。具体移植过程可参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/whik1194/article/details/119010616?spm=1001.2014.3001.5501">Modbus驱动库—libmodbus驱动库的使用_whik1194的博客-CSDN博客</a>）</p>
+<p><strong>链接：</strong></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/38920259">Modbus RTU/TCP协议解析 - 知乎 (zhihu.com)</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/" class="category-chain-item">编程基础</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Modbus/">#Modbus</a>
+      
+    </div>
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/09/07/C%E8%AF%AD%E8%A8%80%E4%B8%AD%E5%87%A0%E4%B8%AA%E9%87%8D%E8%A6%81%E7%9A%84%E5%85%B3%E9%94%AE%E5%AD%97/" title="C语言中几个重要的关键字">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">C语言中几个重要的关键字</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/09/02/%E5%85%B3%E4%BA%8EOLED%E5%AD%97%E6%A8%A1%E5%8F%96%E6%A8%A1%E6%96%B9%E5%BC%8F%E7%9A%84%E9%80%89%E6%8B%A9/" title="关于OLED字模取模方式的选择">
+                        <span class="hidden-mobile">关于OLED字模取模方式的选择</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"vknpQgHbpd1oLUPUwwPbdY3B-gzGzoHsz","appKey":"1DCiNflrxTVqUxWR5T00HypH","path":"window.location.pathname","placeholder":"欢迎留言交流","avatar":"robohash","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":true,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <p <i class="iconfont icon-copyright"></i> <span>2023 | KayougZhang</span> </p> <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
