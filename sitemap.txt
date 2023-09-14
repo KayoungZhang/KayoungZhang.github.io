@@ -61,8 +61,8 @@ http://example.com/2023/08/03/stm32f1xx-hal-gpio%E5%BA%93%E7%9A%84%E4%BD%BF%E7%9
 http://example.com/2023/08/06/stm32f1xx-hal-hcd%E5%BA%93%E5%92%8Cpcd%E7%9A%84%E4%BD%BF%E7%94%A8/
 http://example.com/2023/08/05/stm32f1xx-hal-iwdg%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/
 http://example.com/2023/08/05/stm32f1xx-hal-crc%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/
-http://example.com/2023/08/04/stm32f1xx-hal-exti%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/
 http://example.com/2023/08/05/stm32f1xx-hal-dma%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/
+http://example.com/2023/08/04/stm32f1xx-hal-exti%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/
 http://example.com/2023/08/05/stm32f1xx-hal-flash%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/
 http://example.com/2023/08/06/stm32f1xx-hal-cec%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/
 http://example.com/2023/07/17/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E5%86%99C%E8%AF%AD%E8%A8%80%E9%93%BE%E8%A1%A8/
@@ -178,9 +178,9 @@ http://example.com/tags/can/
 http://example.com/tags/cec/
 http://example.com/tags/cortex/
 http://example.com/tags/dac/
+http://example.com/tags/dma/
 http://example.com/tags/eth/
 http://example.com/tags/exti/
-http://example.com/tags/dma/
 http://example.com/tags/flash/
 http://example.com/tags/gpio/
 http://example.com/tags/hcd/
