@@ -569,7 +569,7 @@
   </url>
   
   <url>
-    <loc>http://example.com/2023/08/05/stm32f1xx-hal-dma%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/</loc>
+    <loc>http://example.com/2023/08/04/stm32f1xx-hal-exti%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/</loc>
     
     <lastmod>2023-08-07</lastmod>
     
@@ -578,7 +578,7 @@
   </url>
   
   <url>
-    <loc>http://example.com/2023/08/04/stm32f1xx-hal-exti%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/</loc>
+    <loc>http://example.com/2023/08/05/stm32f1xx-hal-dma%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/</loc>
     
     <lastmod>2023-08-07</lastmod>
     
@@ -1550,13 +1550,6 @@
   </url>
   
   <url>
-    <loc>http://example.com/tags/dma/</loc>
-    <lastmod>2023-09-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>http://example.com/tags/eth/</loc>
     <lastmod>2023-09-14</lastmod>
     <changefreq>weekly</changefreq>
@@ -1565,6 +1558,13 @@
   
   <url>
     <loc>http://example.com/tags/exti/</loc>
+    <lastmod>2023-09-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://example.com/tags/dma/</loc>
     <lastmod>2023-09-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
