@@ -1319,13 +1319,6 @@
   </url>
   
   <url>
-    <loc>http://example.com/tags/bat/</loc>
-    <lastmod>2023-09-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>http://example.com/tags/%E8%8B%B1%E8%AF%AD/</loc>
     <lastmod>2023-09-19</lastmod>
     <changefreq>weekly</changefreq>
@@ -1334,6 +1327,13 @@
   
   <url>
     <loc>http://example.com/tags/%E7%8E%AF%E5%A2%83/</loc>
+    <lastmod>2023-09-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://example.com/tags/bat/</loc>
     <lastmod>2023-09-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
