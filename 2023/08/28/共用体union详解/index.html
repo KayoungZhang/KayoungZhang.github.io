@@ -23,15 +23,15 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="共用体（union），也叫 联合体，是C语言中一种常用的构造复合数据结构，这种类型定义的变量也包含一系列成员，这些成员共用同一块内存空间，所以在同一时间，只能使用一个共用体成员。 共用体的定义 #include &lt;stdio.h&gt;  &#x2F;* 创建共用体模板，然后定义变量 *&#x2F; union stu &amp;#123;   int age;   char name; &amp;#125;;  int">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="f:\KayoungZhang.github.io\source_posts\%E5%85%B1%E7%94%A8%E4%BD%93union%E8%AF%A6%E8%A7%A3.assets\image-20230828150049478.png">
-<meta property="og:image" content="f:\KayoungZhang.github.io\source_posts\%E5%85%B1%E7%94%A8%E4%BD%93union%E8%AF%A6%E8%A7%A3.assets\image-20230828172122333.png">
-<meta property="og:image" content="f:\KayoungZhang.github.io\source_posts\%E5%85%B1%E7%94%A8%E4%BD%93union%E8%AF%A6%E8%A7%A3.assets\image-20230828172218764.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230828150049478.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230828172122333.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230828172218764.png">
 <meta property="article:published_time" content="2023-08-28T03:41:03.000Z">
-<meta property="article:modified_time" content="2023-08-28T09:27:29.385Z">
+<meta property="article:modified_time" content="2023-09-19T00:07:54.866Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="union">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="f:\KayoungZhang.github.io\source_posts\%E5%85%B1%E7%94%A8%E4%BD%93union%E8%AF%A6%E8%A7%A3.assets\image-20230828150049478.png">
+<meta name="twitter:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230828150049478.png">
   
   
   
@@ -280,7 +280,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年8月28日 下午
+                    本文最后更新于：2023年9月19日 早上
                   
                 
               </p>
@@ -309,7 +309,7 @@
   <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
 &#125;</code></pre></div>
 <figure>
-<img src="F:\KayoungZhang.github.io\source_posts\共用体union详解.assets\image-20230828150049478.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20230828150049478</figcaption>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230828150049478.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20230828150049478</figcaption>
 </figure>
 <p>可以看到：它们共用同一个内存空间。</p>
 <h2 id="共用体的内存大小计算">共用体的内存大小计算</h2>
@@ -377,7 +377,7 @@
   
   <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
 &#125;</code></pre></div>
-<p><img src="F:\KayoungZhang.github.io\source_posts\共用体union详解.assets\image-20230828172122333.png" srcset="/img/loading.gif" lazyload alt="image-20230828172122333" /> <img src="F:\KayoungZhang.github.io\source_posts\共用体union详解.assets\image-20230828172218764.png" srcset="/img/loading.gif" lazyload alt="image-20230828172218764" /></p>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230828172122333.png" srcset="/img/loading.gif" lazyload alt="image-20230828172122333" /> <img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230828172218764.png" srcset="/img/loading.gif" lazyload alt="image-20230828172218764" /></p>
 <p>可以看到，它们之间相互转换是OK的，因为float类型在计算机中的存储位数和方式会导致精度的偏差，一般的偏差都很小，double的精度更高一些。</p>
 <p>参考链接：</p>
 <p>https://blog.csdn.net/m0_57180439/article/details/120417270</p>
