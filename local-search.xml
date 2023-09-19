@@ -448,31 +448,6 @@
   
   
   <entry>
-    <title>stm32f1xx_hal_pccard库的使用</title>
-    <link href="/2023/08/07/stm32f1xx-hal-pccard%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
-    <url>/2023/08/07/stm32f1xx-hal-pccard%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
-    
-    <content type="html"><![CDATA[<p>下面来看看HAL库关于PCCARD存储器的使用方法。</p><h3 id="pccard存储器外设库的使用">PCCARD存储器外设库的使用</h3><p>此驱动是一个通用的分层驱动程序，包含一组用于控制PCCARD/小型闪存的API。它使用FSMC层函数来连接PCCARD存储器。</p><ol type="1"><li><p>配置PCCARD/小型闪存的控制和时序参数。HAL_PCCARD_Init()/HAL_CF_Init()</p></li><li><p>读取PCCARD/小型闪存制造商和设备ID。HAL_PCCARD_Read_ID()/HAL_CF_Read_ID()</p><p>读取的信息存储在函数调用的CompactFlash_ID结构体中。</p></li><li><p>对PCCARD/小型闪存进行扇区读写操作：</p><ul><li><p>HAL_PCCARD_Read_Sector()/ HAL_PCCARD_Write_Sector()</p></li><li><p>HAL_CF_Read_Sector()/HAL_CF_Write_Sector()</p></li></ul></li><li><p>执行PCCARD/小型闪存复位操作。HAL_PCCARD_Reset()/HAL_CF_Reset()</p></li><li><p>执行PCCARD/小型闪存扇区擦除操作。 HAL_PCCARD_Erase_Sector()/HAL_CF_Erase_Sector()</p></li><li><p>读取PCCARD/小型闪存的状态。HAL_PCCARD_ReadStatus()/HAL_CF_ReadStatus()</p></li><li><p>监测PCCARD/小型闪存的状态。 HAL_PCCARD_GetState()/HAL_CF_GetState()</p></li></ol><p>此驱动是一套通用的用于控制普通PCCARD/小型闪存操作API。如果PCCARD/小型闪存设备包含不同的操作和方法，应该单独实施。</p><h3 id="pccard存储器回调函数的注册">PCCARD存储器回调函数的注册</h3><p>当 USE_HAL_PCCARD_REGISTER_CALLBACKS为 1时，允许用户注册或注销回调函数。HAL_PCCARD_RegisterCallback(), HAL_PCCARD_UnRegisterCallback()</p><p>回调函数：</p><ul><li>MspInitCallback : PCCARD 相关MCU初始化回调</li><li>MspDeInitCallback : PCCARD 相关MCU去初始化回调</li></ul><p>默认情况下, PCCARD 初始化（HAL_PCCARD_Init()）后，当状态是 HAL_PCCARD_STATE_RESET，所有的回调函数会被置为弱函数。</p><p>只有在 HAL_PCCARD_STATE_READY 状态下，回调函数才能被注册或注销。</p><p>当 USE_HAL_PCCARD_REGISTER_CALLBACKS 为0或未定义时，所有的回调函数已注册的特性不能使用，且都被置为弱函数。</p>]]></content>
-    
-    
-    <categories>
-      
-      <category>stm32</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>pccard</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
     <title>stm32f1xx_hal_nor库的使用</title>
     <link href="/2023/08/07/stm32f1xx-hal-nor%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
     <url>/2023/08/07/stm32f1xx-hal-nor%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
@@ -490,6 +465,31 @@
     <tags>
       
       <tag>nor</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>stm32f1xx_hal_pccard库的使用</title>
+    <link href="/2023/08/07/stm32f1xx-hal-pccard%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
+    <url>/2023/08/07/stm32f1xx-hal-pccard%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
+    
+    <content type="html"><![CDATA[<p>下面来看看HAL库关于PCCARD存储器的使用方法。</p><h3 id="pccard存储器外设库的使用">PCCARD存储器外设库的使用</h3><p>此驱动是一个通用的分层驱动程序，包含一组用于控制PCCARD/小型闪存的API。它使用FSMC层函数来连接PCCARD存储器。</p><ol type="1"><li><p>配置PCCARD/小型闪存的控制和时序参数。HAL_PCCARD_Init()/HAL_CF_Init()</p></li><li><p>读取PCCARD/小型闪存制造商和设备ID。HAL_PCCARD_Read_ID()/HAL_CF_Read_ID()</p><p>读取的信息存储在函数调用的CompactFlash_ID结构体中。</p></li><li><p>对PCCARD/小型闪存进行扇区读写操作：</p><ul><li><p>HAL_PCCARD_Read_Sector()/ HAL_PCCARD_Write_Sector()</p></li><li><p>HAL_CF_Read_Sector()/HAL_CF_Write_Sector()</p></li></ul></li><li><p>执行PCCARD/小型闪存复位操作。HAL_PCCARD_Reset()/HAL_CF_Reset()</p></li><li><p>执行PCCARD/小型闪存扇区擦除操作。 HAL_PCCARD_Erase_Sector()/HAL_CF_Erase_Sector()</p></li><li><p>读取PCCARD/小型闪存的状态。HAL_PCCARD_ReadStatus()/HAL_CF_ReadStatus()</p></li><li><p>监测PCCARD/小型闪存的状态。 HAL_PCCARD_GetState()/HAL_CF_GetState()</p></li></ol><p>此驱动是一套通用的用于控制普通PCCARD/小型闪存操作API。如果PCCARD/小型闪存设备包含不同的操作和方法，应该单独实施。</p><h3 id="pccard存储器回调函数的注册">PCCARD存储器回调函数的注册</h3><p>当 USE_HAL_PCCARD_REGISTER_CALLBACKS为 1时，允许用户注册或注销回调函数。HAL_PCCARD_RegisterCallback(), HAL_PCCARD_UnRegisterCallback()</p><p>回调函数：</p><ul><li>MspInitCallback : PCCARD 相关MCU初始化回调</li><li>MspDeInitCallback : PCCARD 相关MCU去初始化回调</li></ul><p>默认情况下, PCCARD 初始化（HAL_PCCARD_Init()）后，当状态是 HAL_PCCARD_STATE_RESET，所有的回调函数会被置为弱函数。</p><p>只有在 HAL_PCCARD_STATE_READY 状态下，回调函数才能被注册或注销。</p><p>当 USE_HAL_PCCARD_REGISTER_CALLBACKS 为0或未定义时，所有的回调函数已注册的特性不能使用，且都被置为弱函数。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>stm32</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>pccard</tag>
       
     </tags>
     
