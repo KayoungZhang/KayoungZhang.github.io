@@ -1634,14 +1634,14 @@
   </url>
   
   <url>
-    <loc>http://example.com/tags/nor/</loc>
+    <loc>http://example.com/tags/nand/</loc>
     <lastmod>2023-09-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://example.com/tags/nand/</loc>
+    <loc>http://example.com/tags/nor/</loc>
     <lastmod>2023-09-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1690,14 +1690,14 @@
   </url>
   
   <url>
-    <loc>http://example.com/tags/uart/</loc>
+    <loc>http://example.com/tags/tim/</loc>
     <lastmod>2023-09-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://example.com/tags/tim/</loc>
+    <loc>http://example.com/tags/uart/</loc>
     <lastmod>2023-09-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
