@@ -11,6 +11,15 @@
   </url>
   
   <url>
+    <loc>http://example.com/2023/07/05/Typora%E4%B8%AD%E5%B8%B8%E7%94%A8HTML%E6%A0%BC%E5%BC%8F%E8%AE%BE%E7%BD%AE/</loc>
+    
+    <lastmod>2023-09-20</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://example.com/2023/09/07/C%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0%E5%8F%8A%E4%BD%BF%E7%94%A8/</loc>
     
     <lastmod>2023-09-19</lastmod>
@@ -255,15 +264,6 @@
   
   <url>
     <loc>http://example.com/2023/04/24/Typora%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F%E6%A0%BC%E5%BC%8F%E7%BC%96%E8%BE%91%E6%B1%87%E6%80%BB/</loc>
-    
-    <lastmod>2023-08-28</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://example.com/2023/07/05/Typora%E4%B8%AD%E5%B8%B8%E7%94%A8HTML%E6%A0%BC%E5%BC%8F%E8%AE%BE%E7%BD%AE/</loc>
     
     <lastmod>2023-08-28</lastmod>
     
