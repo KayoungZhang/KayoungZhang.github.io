@@ -1,0 +1,861 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="在AD采集获取数据时，为避免干扰信号的影响，一般我们都会对获取的原始数据进行滤波处理，比较常见的做法是算术平均，即对N个数据进行平均求值，为了进一步优化这种简易的平均算法，我们可以采用以下方法：  算术平均的递推平滑滤波 算术平均的带阻平滑滤波 算术平均的阶梯平滑滤波 算术平均的中值滤波 算术平均的限幅滤波  下面分别来看看这几种算术平均滤波算法： 算术平均的递推平滑滤波 在简">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于算术平均算法的滤波器">
+<meta property="og:url" content="http://example.com/2023/09/22/%E5%9F%BA%E4%BA%8E%E7%AE%97%E6%9C%AF%E5%B9%B3%E5%9D%87%E7%AE%97%E6%B3%95%E7%9A%84%E6%BB%A4%E6%B3%A2%E5%99%A8/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="在AD采集获取数据时，为避免干扰信号的影响，一般我们都会对获取的原始数据进行滤波处理，比较常见的做法是算术平均，即对N个数据进行平均求值，为了进一步优化这种简易的平均算法，我们可以采用以下方法：  算术平均的递推平滑滤波 算术平均的带阻平滑滤波 算术平均的阶梯平滑滤波 算术平均的中值滤波 算术平均的限幅滤波  下面分别来看看这几种算术平均滤波算法： 算术平均的递推平滑滤波 在简">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-09-22T05:58:53.000Z">
+<meta property="article:modified_time" content="2023-09-25T05:48:10.424Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="算术平均">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"✍","loop":false,"scope":["home"]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":false},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":false,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+<meta name="referrer" content="no-referrer" />
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>My Tech Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/article.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.1)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle">基于算术平均算法的滤波器</span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-09-22 13:58" pubdate>
+          2023年9月22日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          7k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          24 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-12 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">基于算术平均算法的滤波器</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：2023年9月25日 下午
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <p>在AD采集获取数据时，为避免干扰信号的影响，一般我们都会对获取的原始数据进行滤波处理，比较常见的做法是算术平均，即对N个数据进行平均求值，为了进一步优化这种简易的平均算法，我们可以采用以下方法：</p>
+<ul>
+<li><strong>算术平均的递推平滑滤波</strong></li>
+<li><strong>算术平均的带阻平滑滤波</strong></li>
+<li><strong>算术平均的阶梯平滑滤波</strong></li>
+<li><strong>算术平均的中值滤波</strong></li>
+<li><strong>算术平均的限幅滤波</strong></li>
+</ul>
+<p>下面分别来看看这几种算术平均滤波算法：</p>
+<h2 id="算术平均的递推平滑滤波">算术平均的递推平滑滤波</h2>
+<p>在简易的平均算法中，取N个数计算后就会丢弃，如果N值较大，耗时就会较长，这样数据看起来可能就并不那么平滑，而递推平均算法则不存在这些问题。同样一个长度为N的数据队列，每新采样一次数据，就用此数据替换掉最老的数据，并输出算术平均值。实现如下：</p>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">/* 定义平滑滤波对象类型 */</span>
+<span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> _<span class="hljs-title">FilterObject</span>&#123;</span>
+  <span class="hljs-type">float</span> newValue;       <span class="hljs-comment">//最新测量值</span>
+  <span class="hljs-type">float</span> lastValue;      <span class="hljs-comment">//上一个输出值</span>
+  <span class="hljs-type">float</span> *buffer;        <span class="hljs-comment">//数据缓存区</span>
+  <span class="hljs-type">int16_t</span> position;     <span class="hljs-comment">//写操作位置</span>
+  <span class="hljs-type">uint16_t</span> bufCount;    <span class="hljs-comment">//滤波的数量</span>
+&#125;<span class="hljs-type">filter_t</span>;
+<span class="hljs-comment">/* 平滑滤波处理函数，返回滤波后的值 */</span>
+<span class="hljs-type">float</span> <span class="hljs-title function_">SmoothingFilter</span><span class="hljs-params">(<span class="hljs-keyword">struct</span> _FilterObject *filter)</span>
+&#123;
+  <span class="hljs-type">float</span> result=lastValue;
+ 
+  <span class="hljs-comment">/* 填充缓冲区 */</span>
+  <span class="hljs-keyword">if</span>(filter-&gt;position&gt;=filter-&gt;bufCount)
+  &#123;<span class="hljs-comment">/* 超出范围 */</span>
+    filter-&gt;position=<span class="hljs-number">0</span>;
+  &#125;
+  <span class="hljs-keyword">else</span>
+  &#123;
+    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;filter-&gt;bufCount;i++)
+    &#123;
+      filter-&gt;buffer[i]=filter-&gt;newValue;
+    &#125;
+    filter-&gt;position=<span class="hljs-number">0</span>;
+    filter-&gt;lastValue=filter-&gt;newValue;
+  &#125;
+ <span class="hljs-comment">/* 算法的关键处-&gt;类同变化率 */</span>
+  result = filter-&gt;lastValue - filter-&gt;buffer[filter-&gt;position]/filter-&gt;bufCount;
+  result += filter-&gt;newValue/filter-&gt;bufCount;
+  
+  filter-&gt;buffer[filter-&gt;position++] = filter-&gt;newValue;<span class="hljs-comment">//替换之后，位置后移</span>
+  filter-&gt;lastValue = result;
+  filter-&gt;newValue = <span class="hljs-number">0.0</span>;
+  
+  <span class="hljs-keyword">return</span> result;
+&#125;</code></pre></div>
+<p>特点：第一，对周期性干扰和高频的干扰都有一定的效果。第二，数据变化不明显，响应较慢，而且N越大越明显。第三，对偶然出现的脉冲性干扰的抑制作用较差。所以这种滤波器并不适用于脉冲干扰比较严重的场合。</p>
+<h2 id="算术平均的带阻平滑滤波">算术平均的带阻平滑滤波</h2>
+<p>这种方式是对比本次采集与上次采集数据的偏差值，如果偏差值大于设定的做大值则认为数据变化远超干扰的影响，忽略干扰，直接对数据进行更新。如果偏差值小于设定的最小值则认为数据稳定，不需要滤波。如果偏差值处于设定的最大最小值之间，则需要进行滤波处理。</p>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">/*定义平滑滤波对象类型*/</span>
+<span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">FilterObject</span>&#123;</span>
+  <span class="hljs-type">float</span> newValue;       <span class="hljs-comment">//最新测量值</span>
+  <span class="hljs-type">float</span> lastValue;      <span class="hljs-comment">//上一个输出值</span>
+  <span class="hljs-type">float</span> *buffer;        <span class="hljs-comment">//数据缓存区</span>
+  <span class="hljs-type">int16_t</span> position;    <span class="hljs-comment">//写操作位置指针</span>
+  <span class="hljs-type">uint16_t</span> bufCount;    <span class="hljs-comment">//滤波的数量</span>
+  <span class="hljs-type">uint16_t</span> delayCount;  <span class="hljs-comment">//延迟计数</span>
+  <span class="hljs-type">uint16_t</span> delayLimit;  <span class="hljs-comment">//延迟限值</span>
+  <span class="hljs-type">float</span> rangeLimit;     <span class="hljs-comment">//量程范围</span>
+  <span class="hljs-type">float</span> upperRario;     <span class="hljs-comment">//比例下限</span>
+  <span class="hljs-type">float</span> lowerRatio;     <span class="hljs-comment">//比例下限</span>
+&#125;FilterObjectType;
+<span class="hljs-comment">/* 带阻平滑滤波器，对指定区间滤波，返回滤波后的值*/</span>
+<span class="hljs-type">float</span> <span class="hljs-title function_">BandSmoothingFilter</span><span class="hljs-params">(FilterObjectType *filter)</span>
+&#123;
+  <span class="hljs-type">float</span> result=filter-&gt;lastValue;
+ 
+  <span class="hljs-comment">/* 填充缓冲区 */</span>
+  <span class="hljs-keyword">if</span>(filter-&gt;position&gt;=filter-&gt;bufCount)
+  &#123;
+    filter-&gt;position=<span class="hljs-number">0</span>;
+  &#125;
+  <span class="hljs-keyword">else</span>
+  &#123;
+    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;filter-&gt;bufCount;i++)
+    &#123;
+      filter-&gt;buffer[i]=filter-&gt;newValue;
+    &#125;
+    filter-&gt;position=<span class="hljs-number">0</span>;
+    filter-&gt;lastValue=filter-&gt;newValue;
+  &#125;
+ 
+  <span class="hljs-keyword">if</span>(<span class="hljs-built_in">fabs</span>(filter-&gt;newValue-filter-&gt;lastValue)&gt;=(filter-&gt;rangeLimit*filter-&gt;lowerRatio/<span class="hljs-number">100</span>))
+  &#123;<span class="hljs-comment">/* 范围之间 滤波 */</span>
+    result=filter-&gt;lastValue-filter-&gt;buffer[filter-&gt;position]/filter-&gt;bufCount;
+    result+=filter-&gt;newValue/filter-&gt;bufCount;
+  
+    filter-&gt;buffer[filter-&gt;position++]=filter-&gt;newValue;
+  &#125;
+  <span class="hljs-keyword">else</span>
+  &#123;<span class="hljs-comment">/* 不滤波 消抖 */</span>
+    filter-&gt;delayCount+=<span class="hljs-number">1</span>;
+    <span class="hljs-keyword">if</span>(filter-&gt;delayCount&gt;=filter-&gt;delayLimit)
+    &#123;
+      <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;filter-&gt;bufCount;i++)
+      &#123;
+        filter-&gt;buffer[i]=filter-&gt;newValue;
+      &#125;
+      filter-&gt;position++;
+      result=filter-&gt;newValue;
+      filter-&gt;delayCount=<span class="hljs-number">0</span>;
+    &#125;
+  &#125;
+  filter-&gt;lastValue=result;
+  filter-&gt;newValue=<span class="hljs-number">0.0</span>;
+  
+  <span class="hljs-keyword">return</span> result;
+&#125;</code></pre></div>
+<p>特点：通过区间滤波，对周期性干扰和小幅的噪声干扰均有较好的效果。如果出现持续性的高频大幅脉冲干扰，这一滤波器将变得无能为力。</p>
+<h2 id="算术平均的阶梯平滑滤波">算术平均的阶梯平滑滤波</h2>
+<p>对于一些情况，如小幅值干扰信号持续存在而被测信号也基本处于一个稳定的区间内。对比本次采集与上次采集数据的偏差值，如果偏差值大于设定的做大值则认为数据变化远超干扰的影响，忽略干扰，直接对数据进行更新。如果偏差值小于设定的最小值则认为数据稳定，这时的干扰于数据的变化不能忽略，我们需要采用完全滤波。如果偏差值处于设定的最大最小值之间，则干扰信号相比于数据的变化较小，但不可忽略，进行半滤波处理。</p>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">/*定义平滑滤波对象类型*/</span>
+<span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">FilterObject</span>&#123;</span>
+  <span class="hljs-type">float</span> newValue;       <span class="hljs-comment">//最新测量值</span>
+  <span class="hljs-type">float</span> lastValue;      <span class="hljs-comment">//上一个输出值</span>
+  <span class="hljs-type">float</span> *buffer;        <span class="hljs-comment">//数据缓存区</span>
+  <span class="hljs-type">int16_t</span> position;    <span class="hljs-comment">//写操作位置指针</span>
+  <span class="hljs-type">uint16_t</span> bufCount;    <span class="hljs-comment">//滤波的数量</span>
+  <span class="hljs-type">uint16_t</span> delayCount;  <span class="hljs-comment">//延迟计数</span>
+  <span class="hljs-type">uint16_t</span> delayLimit;  <span class="hljs-comment">//延迟限值</span>
+  <span class="hljs-type">float</span> rangeLimit;     <span class="hljs-comment">//量程范围</span>
+  <span class="hljs-type">float</span> upperRario;     <span class="hljs-comment">//比例下限</span>
+  <span class="hljs-type">float</span> lowerRatio;     <span class="hljs-comment">//比例下限</span>
+&#125;FilterObjectType;
+
+<span class="hljs-comment">/* 阶梯平滑滤波处理函数，返回滤波后的值*/</span>
+<span class="hljs-type">float</span> <span class="hljs-title function_">StepSmoothingFilter</span><span class="hljs-params">(FilterObjectType *filter)</span>
+&#123;
+  <span class="hljs-type">float</span> result=filter-&gt;lastValue;
+  <span class="hljs-comment">/* 填充缓冲区 */</span>
+  <span class="hljs-keyword">if</span>(filter-&gt;position&gt;=filter-&gt;bufCount)
+  &#123;
+    filter-&gt;position=<span class="hljs-number">0</span>;
+  &#125;
+  <span class="hljs-keyword">else</span>
+  &#123;
+    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;filter-&gt;bufCount;i++)
+    &#123;
+      filter-&gt;buffer[i]=filter-&gt;newValue;
+    &#125;
+    filter-&gt;position=<span class="hljs-number">0</span>;
+    filter-&gt;lastValue=filter-&gt;newValue;
+  &#125;
+ 
+  <span class="hljs-keyword">if</span>(<span class="hljs-built_in">fabs</span>(filter-&gt;newValue-filter-&gt;lastValue)&gt;(filter-&gt;rangeLimit*filter-&gt;upperRario/<span class="hljs-number">100</span>))
+  &#123;<span class="hljs-comment">/* 超过最大值直接更新值 消抖 */</span>
+    filter-&gt;delayCount+=<span class="hljs-number">1</span>;
+    <span class="hljs-keyword">if</span>(filter-&gt;delayCount&gt;=filter-&gt;delayLimit)
+    &#123;
+      <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;filter-&gt;bufCount;i++)
+      &#123;
+        filter-&gt;buffer[i]=filter-&gt;newValue;
+      &#125;
+      filter-&gt;position++;
+      result=filter-&gt;newValue;
+      filter-&gt;delayCount=<span class="hljs-number">0</span>;
+    &#125;
+  &#125;
+  <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(<span class="hljs-built_in">fabs</span>(filter-&gt;newValue-filter-&gt;lastValue)&gt;=(filter-&gt;rangeLimit*filter-&gt;lowerRatio/<span class="hljs-number">100</span>))
+  &#123;<span class="hljs-comment">/* 小于最小值 完全滤波 */</span>
+    result=filter-&gt;lastValue-filter-&gt;buffer[filter-&gt;position]/filter-&gt;bufCount;   
+    result+=filter-&gt;newValue/filter-&gt;bufCount;
+   
+    filter-&gt;buffer[filter-&gt;position++]=filter-&gt;newValue;
+    <span class="hljs-keyword">if</span>(filter-&gt;position&gt;=filter-&gt;bufCount)
+    &#123;
+      filter-&gt;position=<span class="hljs-number">0</span>;
+    &#125;
+   
+    result=result-filter-&gt;buffer[filter-&gt;position]/filter-&gt;bufCount;
+    result=result+filter-&gt;newValue/filter-&gt;bufCount;
+    filter-&gt;buffer[filter-&gt;position++]=filter-&gt;newValue;
+    filter-&gt;delayCount=<span class="hljs-number">0</span>;
+  &#125;
+  <span class="hljs-keyword">else</span>
+  &#123;<span class="hljs-comment">/* 范围之内 半滤波 */</span>
+    result=filter-&gt;lastValue-filter-&gt;buffer[filter-&gt;position]/filter-&gt;bufCount; 
+    result=result+filter-&gt;newValue/filter-&gt;bufCount;
+    filter-&gt;buffer[filter-&gt;position++]=filter-&gt;newValue;
+    filter-&gt;delayCount=<span class="hljs-number">0</span>;
+  &#125;
+ 
+  filter-&gt;lastValue=result;
+  filter-&gt;newValue=<span class="hljs-number">0.0</span>;
+  <span class="hljs-keyword">return</span> result;
+&#125;</code></pre></div>
+<h2 id="算术平均的中值滤波"><strong>算术平均的中值滤波</strong></h2>
+<p>中值滤波主要是去除相对频率较低的周期干扰和相对频率较高的非周期干扰。去掉最高和最低的数，中间的数更为接近真实值。这一滤波算法适用于高速采集，必须采集到一定数量的数据，一般一次采集几十个数然后再做此滤波是比较有效果的。</p>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">/* 中值平均滤波算法 */</span>
+<span class="hljs-comment">/* pData:采集的数据指针 */</span>
+<span class="hljs-comment">/* aSize:采集的数据长度 */</span>
+<span class="hljs-comment">/* eSize:各需要丢弃的极大值和极小值的数量 */</span>
+<span class="hljs-type">static</span> <span class="hljs-type">uint32_t</span> <span class="hljs-title function_">MedianMeanFilter</span><span class="hljs-params">(<span class="hljs-type">uint32_t</span> *pData,<span class="hljs-type">uint16_t</span> aSize,<span class="hljs-type">uint16_t</span> eSize)</span>
+&#123;
+    <span class="hljs-type">uint32_t</span> tData;
+    <span class="hljs-type">uint32_t</span> result=<span class="hljs-number">0</span>;
+    
+    <span class="hljs-keyword">if</span>(aSize&lt;=<span class="hljs-number">2</span>*eSize)
+    &#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+    &#125;
+    <span class="hljs-comment">/* 冒泡排序 */</span>
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>; i&lt;aSize<span class="hljs-number">-1</span>; i++)  <span class="hljs-comment">//比较n-1轮</span>
+    &#123;
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j=<span class="hljs-number">0</span>; j&lt;aSize<span class="hljs-number">-1</span>-i; j++)  <span class="hljs-comment">//每轮比较n-1-i次,</span>
+        &#123;
+            <span class="hljs-keyword">if</span> (pData[j] &lt; pData[j+<span class="hljs-number">1</span>])
+            &#123;
+                tData = pData[j];
+                pData[j] = pData[j+<span class="hljs-number">1</span>];
+                pData[j+<span class="hljs-number">1</span>] = tData;
+            &#125;
+        &#125;
+    &#125;
+    <span class="hljs-comment">/* 去掉首末端eSize数据，取平均值 */</span>
+    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j=eSize;j&lt;(aSize-eSize);j++)
+    &#123;
+        result+=pData[j];
+    &#125;    
+    result /= (aSize<span class="hljs-number">-2</span>*eSize);
+    
+    <span class="hljs-keyword">return</span> result;
+&#125;
+</code></pre></div>
+<h2 id="算术平均的限幅滤波"><strong>算术平均的限幅滤波</strong></h2>
+<p>此种算法就是在中值滤波的基础上剔除超出限幅的数据。</p>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">/*限幅平均滤波算法*/</span>
+<span class="hljs-comment">/* pData:采集的数据指针 */</span>
+<span class="hljs-comment">/* aSize:采集的数据长度 */</span>
+<span class="hljs-comment">/* eSize:各需要丢弃的极大值和极小值的数量 */</span>
+<span class="hljs-comment">/* rData:参考值 */</span>
+<span class="hljs-comment">/* lValue:偏离参考值的限幅 */</span>
+<span class="hljs-type">static</span> <span class="hljs-type">uint32_t</span> <span class="hljs-title function_">LimitedMeanFilter</span><span class="hljs-params">(<span class="hljs-type">uint32_t</span> *pData,<span class="hljs-type">uint16_t</span> aSize,<span class="hljs-type">uint16_t</span> eSize,<span class="hljs-type">uint32_t</span> rData,<span class="hljs-type">uint32_t</span> lValue)</span>
+&#123;
+  <span class="hljs-type">uint32_t</span> uResult=<span class="hljs-number">0</span>, mResult=<span class="hljs-number">0</span>, lResult=<span class="hljs-number">0</span>; <span class="hljs-comment">//求和值</span>
+  <span class="hljs-type">uint16_t</span> uNumber=<span class="hljs-number">0</span>, mNumber=<span class="hljs-number">0</span>, lNumber=<span class="hljs-number">0</span>; <span class="hljs-comment">//数量</span>
+
+  <span class="hljs-comment">/* 判断采集的数据量 */</span>
+  <span class="hljs-keyword">if</span>(aSize&lt;=<span class="hljs-number">2</span>*eSize)
+  &#123;
+     <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+  &#125;
+  <span class="hljs-comment">/* 冒泡排序 */</span>
+  <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>; i&lt;aSize<span class="hljs-number">-1</span>; i++) <span class="hljs-comment">//比较n-1轮</span>
+  &#123;
+     <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j=<span class="hljs-number">0</span>; j&lt;aSize<span class="hljs-number">-1</span>-i; j++) <span class="hljs-comment">//每轮比较n-1-i次,</span>
+     &#123;
+       <span class="hljs-keyword">if</span> (pData[j] &lt; pData[j+<span class="hljs-number">1</span>])
+       &#123;
+         pData[j]^=pData[j+<span class="hljs-number">1</span>];
+         pData[j+<span class="hljs-number">1</span>]^= pData[j];
+         pData[j]^=pData[j+<span class="hljs-number">1</span>];
+       &#125;
+     &#125;
+  &#125;
+  <span class="hljs-comment">/* 剔除极值后根据限幅值求和 */</span>
+  <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j=eSize;j&lt;(aSize-eSize);j++)
+  &#123;
+     <span class="hljs-keyword">if</span>(pData[j]&gt;(rData+lValue))
+     &#123;<span class="hljs-comment">/* 大于上限 */</span>
+       uResult+=pData[j];
+       uNumber++;
+     &#125;
+     <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(pData[j]&lt;(rData-lValue))
+     &#123;<span class="hljs-comment">/* 小于下限 */</span>
+       lResult+=pData[j];
+       lNumber++;
+     &#125;
+     <span class="hljs-keyword">else</span>
+     &#123;<span class="hljs-comment">/* 上下限之间 */</span>
+       mResult+=pData[j];
+       mNumber++;
+     &#125;
+  &#125;
+  <span class="hljs-comment">/* 求平均值 */</span>
+  <span class="hljs-keyword">if</span>((mNumber&gt;uNumber)&amp;&amp;(mNumber&gt;lNumber))
+  &#123;<span class="hljs-comment">/* 处于上下限之间的数据量较大时 */</span>
+     mResult = mResult/mNumber;
+  &#125;
+  <span class="hljs-keyword">else</span>
+  &#123;
+     mResult = (uResult+mResult+lResult)/(uNumber+mNumber+lNumber);
+  &#125;
+  
+  <span class="hljs-keyword">return</span> mResult;
+&#125;
+</code></pre></div>
+<p><strong>参考链接：</strong></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/foxclever/article/details/106038732">滤波器开发之一：基于算数平均的平滑滤波器_算术平均掩模_foxclever的博客-CSDN博客</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/foxclever/article/details/106296222">滤波器开发之二：基于算数平均的带阻平滑滤波器_用均值滤波实现带阻滤波-CSDN博客</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/foxclever/article/details/106448052">滤波器开发之三：基于算数平均的阶进平滑滤波器_阶梯平滑_foxclever的博客-CSDN博客</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/foxclever/article/details/120925665">滤波器开发之四：基于算术平均的中值滤波器_算术中值滤波_foxclever的博客-CSDN博客</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/foxclever/article/details/121191411">滤波器开发之五：基于算术平均的限幅滤波器-CSDN博客</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" class="category-chain-item">数据结构与算法</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E7%AE%97%E6%9C%AF%E5%B9%B3%E5%9D%87/">#算术平均</a>
+      
+    </div>
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/09/07/C%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0%E5%8F%8A%E4%BD%BF%E7%94%A8/" title="C语言中的回调函数及使用">
+                        <span class="hidden-mobile">C语言中的回调函数及使用</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"vknpQgHbpd1oLUPUwwPbdY3B-gzGzoHsz","appKey":"1DCiNflrxTVqUxWR5T00HypH","path":"window.location.pathname","placeholder":"欢迎留言交流","avatar":"robohash","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":true,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <p <i class="iconfont icon-copyright"></i> <span>2023 | KayougZhang</span> </p> <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
