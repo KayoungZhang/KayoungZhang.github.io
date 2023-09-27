@@ -16,20 +16,18 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="在某些PID应用场合，不同的对象就得采用不同的参数值，所以需要进行参数自整定。实质就是在首次使用时，通过N次测量得到一套PID参数。具体的整定方法有三种：临界比例度法、衰减曲线法、经验法。三种方法共同点都是通过试验，然后按照工程经验公式对控制器参数进行整定。现在一般采用比较多的是临界比例度法。 1、临界比例度法（Ziegler-Nichols） 1.1 操作方法 （1）将纯比例控制器接入到闭">
+    <meta name="description" content="PID算法中处理方式有：  pid算法巩固 https:&#x2F;&#x2F;blog.csdn.net&#x2F;foxclever&#x2F;article&#x2F;details&#x2F;80250994 积分分离 https:&#x2F;&#x2F;blog.csdn.net&#x2F;foxclever&#x2F;article&#x2F;details&#x2F;80274790 抗积分饱和 https:&#x2F;&#x2F;blog.csdn.net&#x2F;foxclever&#x2F;article&#x2F;detail">
 <meta property="og:type" content="article">
-<meta property="og:title" content="PID参数的自整定">
-<meta property="og:url" content="http://example.com/2023/04/24/PID%E5%8F%82%E6%95%B0%E7%9A%84%E8%87%AA%E6%95%B4%E5%AE%9A/index.html">
+<meta property="og:title" content="PID控制器算法进阶">
+<meta property="og:url" content="http://example.com/2023/09/25/PID%E6%8E%A7%E5%88%B6%E5%99%A8%E7%AE%97%E6%B3%95%E8%BF%9B%E9%98%B6/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="在某些PID应用场合，不同的对象就得采用不同的参数值，所以需要进行参数自整定。实质就是在首次使用时，通过N次测量得到一套PID参数。具体的整定方法有三种：临界比例度法、衰减曲线法、经验法。三种方法共同点都是通过试验，然后按照工程经验公式对控制器参数进行整定。现在一般采用比较多的是临界比例度法。 1、临界比例度法（Ziegler-Nichols） 1.1 操作方法 （1）将纯比例控制器接入到闭">
+<meta property="og:description" content="PID算法中处理方式有：  pid算法巩固 https:&#x2F;&#x2F;blog.csdn.net&#x2F;foxclever&#x2F;article&#x2F;details&#x2F;80250994 积分分离 https:&#x2F;&#x2F;blog.csdn.net&#x2F;foxclever&#x2F;article&#x2F;details&#x2F;80274790 抗积分饱和 https:&#x2F;&#x2F;blog.csdn.net&#x2F;foxclever&#x2F;article&#x2F;detail">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/v2-68670d44361ce32e7d24f695bd61c62c_720w.webp">
-<meta property="article:published_time" content="2023-04-24T07:21:27.000Z">
-<meta property="article:modified_time" content="2023-09-25T10:49:28.196Z">
+<meta property="article:published_time" content="2023-09-25T10:47:15.000Z">
+<meta property="article:modified_time" content="2023-09-27T01:46:42.940Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="pid">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/v2-68670d44361ce32e7d24f695bd61c62c_720w.webp">
   
   
   
@@ -201,7 +199,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle">PID参数的自整定</span>
+            <span id="subtitle">PID控制器算法进阶</span>
           
         </div>
 
@@ -212,8 +210,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-04-24 15:21" pubdate>
-          2023年4月24日 下午
+        <time datetime="2023-09-25 18:47" pubdate>
+          2023年9月25日 晚上
         </time>
       </span>
     
@@ -224,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.9k 字
+          1.1k 字
         
       </span>
     
@@ -235,7 +233,7 @@
         
         
         
-          7 分钟
+          4 分钟
         
       </span>
     
@@ -273,12 +271,12 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">PID参数的自整定</h1>
+            <h1 style="display: none">PID控制器算法进阶</h1>
             
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年9月25日 晚上
+                    本文最后更新于：2023年9月27日 上午
                   
                 
               </p>
@@ -286,127 +284,45 @@
             
               <div class="markdown-body">
                 
-                <p>在某些PID应用场合，不同的对象就得采用不同的参数值，所以需要进行参数自整定。实质就是在首次使用时，通过N次测量得到一套PID参数。具体的整定方法有三种：临界比例度法、衰减曲线法、经验法。三种方法共同点都是通过试验，然后按照工程经验公式对控制器参数进行整定。现在一般采用比较多的是临界比例度法。</p>
-<h4 id="临界比例度法ziegler-nichols">1、临界比例度法（Ziegler-Nichols）</h4>
-<h5 id="操作方法">1.1 操作方法</h5>
-<p>（1）将纯比例控制器接入到闭环控制系统中（设置控制器参数积分时间常数Ti=∞，实际微分时间常数Td=0）。</p>
-<p>（2）由小到大改变比例增益K，直到闭环系统出现持续等幅振荡。此时的增益为临界增益（Ku），振荡周期（波峰间的时间）为临界周期（Tu）。然后根据下表得出PID控制器参数。</p>
-<table>
-<thead>
-<tr class="header">
-<th>调节规律</th>
-<th>K</th>
-<th>Ti</th>
-<th>Td</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>P</strong></td>
-<td>0.5Ku</td>
-<td>-</td>
-<td>-</td>
-</tr>
-<tr class="even">
-<td><strong>PI</strong></td>
-<td>0.45Ku</td>
-<td>0.85Tu</td>
-<td>-</td>
-</tr>
-<tr class="odd">
-<td><strong>PD</strong></td>
-<td>0.65Ku</td>
-<td>-</td>
-<td>0.15Tu</td>
-</tr>
-<tr class="even">
-<td><strong>PID</strong></td>
-<td>0.6Ku</td>
-<td>0.5Tu</td>
-<td>0.125Tu</td>
-</tr>
-</tbody>
-</table>
-<h5 id="计算pid的三个参数值">1.2 计算PID的三个参数值：</h5>
-<p><strong>Kp = K；</strong></p>
-<p>**Ki = Kp*(T/Ti)；**</p>
-<p>**Kd = Kp*(Td/T)；**</p>
-<p>其中： <strong>T</strong> 是采样周期，也叫控制周期，每隔T时间段进行一次PID计算。</p>
-<h5 id="注意事项">1.3 注意事项：</h5>
-<p>（1）应使控制系统工作在线性区，不要使控制阀出现开、关的极端状态，否则得到的持续振荡曲线可能是“极限循环”，从线性系统概念上说系统早已处于发散振荡了。</p>
-<p>（2）由于被控对象特性的不同，应针对具体系统在实际运行过程中对上述求得的控制器参数进行在线校正。</p>
-<p>（3）适用于临界振幅不大、振荡周期较长的过程控制系统，但有些系统用纯比例控制时始终是稳定的，是无法用临界比例度法来进行参数整定的。</p>
-<p>（4）只适用于二阶以上的高阶对象，或一阶加纯滞后的对象，否则，在纯比例控制情况下，系统不会出现等幅振荡。</p>
-<h4 id="衰减曲线法">2、衰减曲线法</h4>
-<h5 id="整定步骤">2.1 整定步骤</h5>
-<p>（1）在纯比例控制器下，置比例增益K为较小值。系统稳定后，作设定值阶跃扰动，观察系统的响应。若系统响应衰减太快，则减小比例增益K；反之，应增大比例增益K。</p>
-<p>（2）直到系统出现如下图（a）所示的4:1衰减振荡过程，记下此时的比例增益Ks及和振荡周期Ts数值。同理，10：1衰减曲线如下图（b）所示。</p>
-<figure>
-<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/v2-68670d44361ce32e7d24f695bd61c62c_720w.webp" srcset="/img/loading.gif" lazyload alt="" /><figcaption>img</figcaption>
-</figure>
-<p>（3）利用Ks和Ts值，Tr值，按下表给出的经验公式，计算出控制器的参数整定值。</p>
-<table>
-<thead>
-<tr class="header">
-<th>衰减率</th>
-<th>调节规律</th>
-<th>K</th>
-<th>Ti</th>
-<th>Td</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>0.75（0.9）</strong></td>
-<td><strong>P</strong></td>
-<td>Ks</td>
-<td>-</td>
-<td>-</td>
-</tr>
-<tr class="even">
-<td><strong>0.75（0.9）</strong></td>
-<td><strong>PI</strong></td>
-<td>0.83Ks</td>
-<td>0.5Ts（2Tr）</td>
-<td>-</td>
-</tr>
-<tr class="odd">
-<td><strong>0.75（0.9）</strong></td>
-<td><strong>PID</strong></td>
-<td>1.25Ks</td>
-<td>0.3TS（1.2Tr）</td>
-<td>0.1Ts（0.4Tr</td>
-</tr>
-</tbody>
-</table>
-<h5 id="注意事项-1">2.2 注意事项</h5>
-<p>（1）加给定干扰不能太大，要根据生产操作要求来定，一般在5%左右，也有例外的情况。</p>
-<p>（2）必须在工艺参数稳定的情况下才能加给定干扰，否则得不到正确的整定参数。</p>
-<p>（3）对于反应快的系统，如流量、管道压力和小容量的液位调节等，要得到严格的4：1衰减曲线较困难，一般以被调参数来回波动两次达到稳定，就近似地认为达到4：1衰减过程了。</p>
-<p>（4）投运时，先将K放在较小的数值，把Ti减少到整定值，把Td逐步放大到整定值，然后把K拉到整定值（如果在K=整定值的条件下很快地把Td放到整定值，控制器的输出会剧烈变化）。</p>
-<h4 id="经验整定法">3、经验整定法</h4>
-<h5 id="方法一">3.1方法一</h5>
-<p>（1）确定比例增益</p>
-<p>使PID为纯比例调节,输入设定为系统允许最大值的60%~70%，由0逐渐加大比例增益至系统出现振荡；再逐渐减小比例增益至系统振荡消失，记录此时的比例增益，则设定PID的比例增益P为当前值的60%~70%。</p>
-<p>（2）确定积分时间常数Ti</p>
-<p>比例增益P确定后，设定一个较大的积分时间常数Ti的初值，逐渐减小Ti至系统出现振荡，之后逐渐加大Ti至振荡消失。记录此时的Ti，则设定PID的积分时间常数Ti为当前值的150%~180%。</p>
-<p>（3）确定积分时间常数Td</p>
-<p>积分时间常数Td一般不用设定，为0即可。若要设定，与确定 P和Ti的方法相同，取不振荡时的30%。</p>
-<p>（4）系统带载联调，再对PID参数进行微调，直至满足要求。</p>
-<h5 id="方法二">3.2 方法二</h5>
-<p>（1）在实际调试中，也可以先大致设定一个经验值，然后根据调节效果修改。</p>
-<p>　　流量系统：P（%）40~100，Ti（分）0.1~1</p>
-<p>　　压力系统：P（%）30~70， Ti（分）0.4~3</p>
-<p>　　液位系统：P（%）20~80， Ti（分）1~5</p>
-<p>　　温度系统：P（%）20~60， Ti（分）3~10，Td（分）0.5~3</p>
-<p>（2）以下整定的口诀：</p>
-<p>阶跃扰动投闭环，参数整定看曲线；先投比例后积分，最后再把微分加；</p>
-<p>理想曲线两个波，振幅衰减4比1；曲线震荡动作繁，微分时间要加长；</p>
-<p>曲线震荡很频繁，比例刻度要放大；曲线漂浮波动大，比例刻度要拉小；</p>
-<p>曲线波动周期长，积分时间要加长；偏离定值回复慢，积分时间往小降。</p>
-<h3 id="参考链接">参考链接</h3>
-<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/82344845">详细讲解PID控制</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/luckytimor/p/6881569.html">PID公式参数</a></p>
+                <p>PID算法中处理方式有：</p>
+<ul>
+<li><p>pid算法巩固</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/foxclever/article/details/80250994">https://blog.csdn.net/foxclever/article/details/80250994</a></p></li>
+<li><p>积分分离</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/foxclever/article/details/80274790">https://blog.csdn.net/foxclever/article/details/80274790</a></p></li>
+<li><p>抗积分饱和</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/foxclever/article/details/80294264">https://blog.csdn.net/foxclever/article/details/80294264</a></p></li>
+<li><p>梯形积分</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/foxclever/article/details/80297989">https://blog.csdn.net/foxclever/article/details/80297989</a></p></li>
+<li><p>变积分</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/foxclever/article/details/80466623">https://blog.csdn.net/foxclever/article/details/80466623</a></p></li>
+<li><p>不完全微分</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/foxclever/article/details/80551919">https://blog.csdn.net/foxclever/article/details/80551919</a></p></li>
+<li><p>微分先行</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/foxclever/article/details/80633275">https://blog.csdn.net/foxclever/article/details/80633275</a></p></li>
+<li><p>带死区pid</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/foxclever/article/details/80778748">https://blog.csdn.net/foxclever/article/details/80778748</a></p></li>
+<li><p>模糊pid</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/foxclever/article/details/83932107">https://blog.csdn.net/foxclever/article/details/83932107</a></p></li>
+<li><p>神经元网络pid</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/foxclever/article/details/84678393">https://blog.csdn.net/foxclever/article/details/84678393</a></p></li>
+<li><p>前馈补偿</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/foxclever/article/details/81048086">https://blog.csdn.net/foxclever/article/details/81048086</a></p></li>
+<li><p>手动自动切换</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/foxclever/article/details/105308284">https://blog.csdn.net/foxclever/article/details/105308284</a></p></li>
+<li><p>pid参数的动态调整</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/foxclever/article/details/105006205">https://blog.csdn.net/foxclever/article/details/105006205</a></p></li>
+<li><p>pid参数的选择设置</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/foxclever/article/details/122801130">https://blog.csdn.net/foxclever/article/details/122801130</a></p></li>
+<li><p>正反向的控制过程</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/foxclever/article/details/105613183">https://blog.csdn.net/foxclever/article/details/105613183</a></p></li>
+<li><p>串级pid</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/foxclever/article/details/105907982">https://blog.csdn.net/foxclever/article/details/105907982</a></p></li>
+<li><p>pid设定值相应</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/foxclever/article/details/105747647">https://blog.csdn.net/foxclever/article/details/105747647</a></p></li>
+<li><p>pid防超调设置</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/foxclever/article/details/126085428">https://blog.csdn.net/foxclever/article/details/126085428</a></p></li>
+</ul>
 
                 
               </div>
@@ -454,18 +370,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/04/24/PID%E7%90%86%E8%AE%BA%E5%8F%8A%E7%A8%8B%E5%BA%8F%E5%AE%9E%E7%8E%B0/" title="PID理论及程序实现">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">PID理论及程序实现</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/04/23/stc%E5%8D%95%E7%89%87%E6%9C%BA%E5%AD%98%E5%82%A8%E5%99%A8/" title="stc单片机存储器">
-                        <span class="hidden-mobile">stc单片机存储器</span>
+                      <a href="/2023/09/22/%E5%9F%BA%E4%BA%8E%E7%AE%97%E6%9C%AF%E5%B9%B3%E5%9D%87%E7%AE%97%E6%B3%95%E7%9A%84%E6%BB%A4%E6%B3%A2%E5%99%A8/" title="基于算术平均算法的滤波器">
+                        <span class="hidden-mobile">基于算术平均算法的滤波器</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

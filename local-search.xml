@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>PID控制器算法进阶</title>
+    <link href="/2023/09/25/PID%E6%8E%A7%E5%88%B6%E5%99%A8%E7%AE%97%E6%B3%95%E8%BF%9B%E9%98%B6/"/>
+    <url>/2023/09/25/PID%E6%8E%A7%E5%88%B6%E5%99%A8%E7%AE%97%E6%B3%95%E8%BF%9B%E9%98%B6/</url>
+    
+    <content type="html"><![CDATA[<p>PID算法中处理方式有：</p><ul><li><p>pid算法巩固</p><p><a href="https://blog.csdn.net/foxclever/article/details/80250994">https://blog.csdn.net/foxclever/article/details/80250994</a></p></li><li><p>积分分离</p><p><a href="https://blog.csdn.net/foxclever/article/details/80274790">https://blog.csdn.net/foxclever/article/details/80274790</a></p></li><li><p>抗积分饱和</p><p><a href="https://blog.csdn.net/foxclever/article/details/80294264">https://blog.csdn.net/foxclever/article/details/80294264</a></p></li><li><p>梯形积分</p><p><a href="https://blog.csdn.net/foxclever/article/details/80297989">https://blog.csdn.net/foxclever/article/details/80297989</a></p></li><li><p>变积分</p><p><a href="https://blog.csdn.net/foxclever/article/details/80466623">https://blog.csdn.net/foxclever/article/details/80466623</a></p></li><li><p>不完全微分</p><p><a href="https://blog.csdn.net/foxclever/article/details/80551919">https://blog.csdn.net/foxclever/article/details/80551919</a></p></li><li><p>微分先行</p><p><a href="https://blog.csdn.net/foxclever/article/details/80633275">https://blog.csdn.net/foxclever/article/details/80633275</a></p></li><li><p>带死区pid</p><p><a href="https://blog.csdn.net/foxclever/article/details/80778748">https://blog.csdn.net/foxclever/article/details/80778748</a></p></li><li><p>模糊pid</p><p><a href="https://blog.csdn.net/foxclever/article/details/83932107">https://blog.csdn.net/foxclever/article/details/83932107</a></p></li><li><p>神经元网络pid</p><p><a href="https://blog.csdn.net/foxclever/article/details/84678393">https://blog.csdn.net/foxclever/article/details/84678393</a></p></li><li><p>前馈补偿</p><p><a href="https://blog.csdn.net/foxclever/article/details/81048086">https://blog.csdn.net/foxclever/article/details/81048086</a></p></li><li><p>手动自动切换</p><p><a href="https://blog.csdn.net/foxclever/article/details/105308284">https://blog.csdn.net/foxclever/article/details/105308284</a></p></li><li><p>pid参数的动态调整</p><p><a href="https://blog.csdn.net/foxclever/article/details/105006205">https://blog.csdn.net/foxclever/article/details/105006205</a></p></li><li><p>pid参数的选择设置</p><p><a href="https://blog.csdn.net/foxclever/article/details/122801130">https://blog.csdn.net/foxclever/article/details/122801130</a></p></li><li><p>正反向的控制过程</p><p><a href="https://blog.csdn.net/foxclever/article/details/105613183">https://blog.csdn.net/foxclever/article/details/105613183</a></p></li><li><p>串级pid</p><p><a href="https://blog.csdn.net/foxclever/article/details/105907982">https://blog.csdn.net/foxclever/article/details/105907982</a></p></li><li><p>pid设定值相应</p><p><a href="https://blog.csdn.net/foxclever/article/details/105747647">https://blog.csdn.net/foxclever/article/details/105747647</a></p></li><li><p>pid防超调设置</p><p><a href="https://blog.csdn.net/foxclever/article/details/126085428">https://blog.csdn.net/foxclever/article/details/126085428</a></p></li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>数据结构与算法</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>pid</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>基于算术平均算法的滤波器</title>
     <link href="/2023/09/22/%E5%9F%BA%E4%BA%8E%E7%AE%97%E6%9C%AF%E5%B9%B3%E5%9D%87%E7%AE%97%E6%B3%95%E7%9A%84%E6%BB%A4%E6%B3%A2%E5%99%A8/"/>
     <url>/2023/09/22/%E5%9F%BA%E4%BA%8E%E7%AE%97%E6%9C%AF%E5%B9%B3%E5%9D%87%E7%AE%97%E6%B3%95%E7%9A%84%E6%BB%A4%E6%B3%A2%E5%99%A8/</url>
@@ -2882,7 +2907,7 @@
     
     <categories>
       
-      <category>单片机</category>
+      <category>数据结构与算法</category>
       
     </categories>
     
@@ -2907,7 +2932,7 @@
     
     <categories>
       
-      <category>单片机</category>
+      <category>数据结构与算法</category>
       
     </categories>
     

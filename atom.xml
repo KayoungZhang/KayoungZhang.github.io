@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2023-09-25T05:48:10.424Z</updated>
+  <updated>2023-09-27T01:46:42.940Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>PID控制器算法进阶</title>
+    <link href="http://example.com/2023/09/25/PID%E6%8E%A7%E5%88%B6%E5%99%A8%E7%AE%97%E6%B3%95%E8%BF%9B%E9%98%B6/"/>
+    <id>http://example.com/2023/09/25/PID%E6%8E%A7%E5%88%B6%E5%99%A8%E7%AE%97%E6%B3%95%E8%BF%9B%E9%98%B6/</id>
+    <published>2023-09-25T10:47:15.000Z</published>
+    <updated>2023-09-27T01:46:42.940Z</updated>
+    
+    <content type="html"><![CDATA[<p>PID算法中处理方式有：</p><ul><li><p>pid算法巩固</p><p><a href="https://blog.csdn.net/foxclever/article/details/80250994">https://blog.csdn.net/foxclever/article/details/80250994</a></p></li><li><p>积分分离</p><p><a href="https://blog.csdn.net/foxclever/article/details/80274790">https://blog.csdn.net/foxclever/article/details/80274790</a></p></li><li><p>抗积分饱和</p><p><a href="https://blog.csdn.net/foxclever/article/details/80294264">https://blog.csdn.net/foxclever/article/details/80294264</a></p></li><li><p>梯形积分</p><p><a href="https://blog.csdn.net/foxclever/article/details/80297989">https://blog.csdn.net/foxclever/article/details/80297989</a></p></li><li><p>变积分</p><p><a href="https://blog.csdn.net/foxclever/article/details/80466623">https://blog.csdn.net/foxclever/article/details/80466623</a></p></li><li><p>不完全微分</p><p><a href="https://blog.csdn.net/foxclever/article/details/80551919">https://blog.csdn.net/foxclever/article/details/80551919</a></p></li><li><p>微分先行</p><p><a href="https://blog.csdn.net/foxclever/article/details/80633275">https://blog.csdn.net/foxclever/article/details/80633275</a></p></li><li><p>带死区pid</p><p><a href="https://blog.csdn.net/foxclever/article/details/80778748">https://blog.csdn.net/foxclever/article/details/80778748</a></p></li><li><p>模糊pid</p><p><a href="https://blog.csdn.net/foxclever/article/details/83932107">https://blog.csdn.net/foxclever/article/details/83932107</a></p></li><li><p>神经元网络pid</p><p><a href="https://blog.csdn.net/foxclever/article/details/84678393">https://blog.csdn.net/foxclever/article/details/84678393</a></p></li><li><p>前馈补偿</p><p><a href="https://blog.csdn.net/foxclever/article/details/81048086">https://blog.csdn.net/foxclever/article/details/81048086</a></p></li><li><p>手动自动切换</p><p><a href="https://blog.csdn.net/foxclever/article/details/105308284">https://blog.csdn.net/foxclever/article/details/105308284</a></p></li><li><p>pid参数的动态调整</p><p><a href="https://blog.csdn.net/foxclever/article/details/105006205">https://blog.csdn.net/foxclever/article/details/105006205</a></p></li><li><p>pid参数的选择设置</p><p><a href="https://blog.csdn.net/foxclever/article/details/122801130">https://blog.csdn.net/foxclever/article/details/122801130</a></p></li><li><p>正反向的控制过程</p><p><a href="https://blog.csdn.net/foxclever/article/details/105613183">https://blog.csdn.net/foxclever/article/details/105613183</a></p></li><li><p>串级pid</p><p><a href="https://blog.csdn.net/foxclever/article/details/105907982">https://blog.csdn.net/foxclever/article/details/105907982</a></p></li><li><p>pid设定值相应</p><p><a href="https://blog.csdn.net/foxclever/article/details/105747647">https://blog.csdn.net/foxclever/article/details/105747647</a></p></li><li><p>pid防超调设置</p><p><a href="https://blog.csdn.net/foxclever/article/details/126085428">https://blog.csdn.net/foxclever/article/details/126085428</a></p></li></ul>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;PID算法中处理方式有：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;pid算法巩固&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://blog.csdn.net/foxclever/article/details/80250994&quot;&gt;https://blog.csdn.net/f</summary>
+      
+    
+    
+    
+    <category term="数据结构与算法" scheme="http://example.com/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    
+    <category term="pid" scheme="http://example.com/tags/pid/"/>
+    
+  </entry>
   
   <entry>
     <title>基于算术平均算法的滤波器</title>
@@ -493,32 +520,6 @@
     
     
     <category term="mmc" scheme="http://example.com/tags/mmc/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>stm32f1xx_hal_nor库的使用</title>
-    <link href="http://example.com/2023/08/07/stm32f1xx-hal-nor%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
-    <id>http://example.com/2023/08/07/stm32f1xx-hal-nor%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/</id>
-    <published>2023-08-07T04:15:11.000Z</published>
-    <updated>2023-08-14T00:03:33.347Z</updated>
-    
-    <content type="html"><![CDATA[<p>下面来看看HAL库关于Nor flash存储器的使用方法。</p><h3 id="nor存储器外设库的使用">NOR存储器外设库的使用</h3><p>此驱动是一个通用的分层驱动程序，包含一组用于控制NOR闪存的API。它使用FSMC层函数来连接NOR 闪存。</p><ol type="1"><li><p>配置NOR flash 存储器的控制和时序参数。HAL_NOR_Init()</p></li><li><p>读取NOR flash 存储器制造商和设备ID。HAL_NOR_Read_ID()</p><p>读取的信息存储在函数调用的NOR_ID_TypeDef类型结构体中。</p></li><li><p>对NOR flash存储器进行读写操作。HAL_NOR_Read(), HAL_NOR_Program()</p></li><li><p>执行NOR flash块擦除或芯片擦除操作。 HAL_NOR_Erase_Block() , HAL_NOR_Erase_Chip()</p></li><li><p>读取NOR flash的通用闪存接口ID（CFI IDs）。HAL_NOR_Read_CFI()</p><p>读取的信息存储在被上述函数调用的已声明NOR_CFI_TypeDef结构体中。</p></li><li><p>可分别通过调用 HAL_NOR_WriteOperation_Enable() / HAL_NOR_WriteOperation_Disable()函数来使能/禁止 NOR Flash的写操作，从而控制NOR Flash设备。</p></li><li><p>监测NOR设备状态。 HAL_NOR_GetState()</p></li></ol><p>此驱动是一套通用的用于控制普通NOR flash操作APIs。如果NOR flash设备包含不同的操作和方法，应该单独实施。</p><h3 id="nor存储器外设常用宏定义">NOR存储器外设常用宏定义</h3><ul><li>NOR_WRITE : NOR 存储器向指定的地址写入数据。</li></ul><h3 id="nor存储器回调函数的注册">NOR存储器回调函数的注册</h3><p>当 USE_HAL_NOR_REGISTER_CALLBACKS为 1时，允许用户注册或注销回调函数。HAL_NOR_RegisterCallback(), HAL_NOR_UnRegisterCallback()</p><p>回调函数：</p><ul><li>MspInitCallback : NOR 相关MCU初始化回调函数</li><li>MspDeInitCallback : NOR 相关MCU去初始化回调函数</li></ul><p>默认情况下, NOR 初始化（HAL_NOR_Init()）后，当状态是 HAL_NOR_STATE_RESET，所有的回调函数会被置为弱函数。</p><p>只有在 HAL_NOR_STATE_READY 状态下，回调函数才能被注册或注销。</p><p>当 USE_HAL_NOR_REGISTER_CALLBACKS 为0或未定义时，所有的回调函数已注册的特性不能使用，且都被置为弱函数。</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;下面来看看HAL库关于Nor flash存储器的使用方法。&lt;/p&gt;
-&lt;h3 id=&quot;nor存储器外设库的使用&quot;&gt;NOR存储器外设库的使用&lt;/h3&gt;
-&lt;p&gt;此驱动是一个通用的分层驱动程序，包含一组用于控制NOR闪存的API。它使用FSMC层函数来连接NOR 闪存。&lt;/p&gt;</summary>
-      
-    
-    
-    
-    <category term="stm32" scheme="http://example.com/categories/stm32/"/>
-    
-    
-    <category term="nor" scheme="http://example.com/tags/nor/"/>
     
   </entry>
   
