@@ -225,15 +225,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/05/28/STM32CubeMX%E4%B9%8BUART/" target="_self">
-          STM32CubeMX之UART
+        <a href="/2023/05/30/STM32CubeMX%E4%B9%8BFSMC-TFTLCD/" target="_self">
+          STM32CubeMX之FSMC_TFTLCD
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/28/STM32CubeMX%E4%B9%8BUART/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/30/STM32CubeMX%E4%B9%8BFSMC-TFTLCD/" target="_self">
         <div>
-          串口简介 STM32F103ZET6 最多可提供 5 路串口，有分数波特率发生器、支持同步单线通信和半双工单线通讯、支持 LIN、支持调制解调器操作、智能卡协议和 IrDA SIR ENDEC 规范、具有 DMA等。 我们通常使用的是异步通信，异步通信规定传输的数据格式由起始位（start bit）、数据位（data bit）、奇偶校验位（parity bit）和停止位（stop bit）组成
+          TFTLCD简介 TFT-LCD（thin film transistor-liquid crystal display）即薄膜晶体管液晶显示器。液晶显示屏的每一个像素上都设置有一个薄膜晶体管（TFT），每个像素都可以通过点脉冲直接控制。 常用的通信模式有6800模式和8080模式，本例程使用8080并口模式（简称80并口），8080接口有5条基本的控制线和多条数据线（8/9/16/18位）：
         </div>
       </a>
 
@@ -241,7 +241,495 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-05-28 11:53" pubdate>
+            <time datetime="2023-05-30 11:40" pubdate>
+              2023-05-30
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/stm32/" class="category-chain-item">stm32</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/stm32/">#stm32</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/05/30/STM32CubeMX%E4%B9%8BSPI-Flash/" target="_self">
+          STM32CubeMX之SPI_Flash
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/30/STM32CubeMX%E4%B9%8BSPI-Flash/" target="_self">
+        <div>
+          SPI 简介 SPI全称Serial Peripheral Interface，即串行外围设备接口。它是Motorola首先在其MC68HCXX系列处理器上定义的。SPI是一种高速的、全双工、同步通讯总线。 标准的SPI需要四根信号线： SS（Slave Select）：从设备选择，也称片选，master通过拉低slave的片选信号选择slave SCK（Serial Clock）：传输时钟
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-05-30 11:33" pubdate>
+              2023-05-30
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/stm32/" class="category-chain-item">stm32</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/stm32/">#stm32</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/05/30/STM32CubeMX%E4%B9%8BI2C-EEPROM/" target="_self">
+          STM32CubeMX之I2C_EEPROM
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/30/STM32CubeMX%E4%B9%8BI2C-EEPROM/" target="_self">
+        <div>
+          I2C 简介 I2C（Inter-Integrated Circuit）总线是由PHILIPS公司开发的由数据线SDA和时钟线SCL构成的两线式串行总线，用于连接微控制器及其外围I2C设备。 在物理层结构框图上：  img  它有如下特点：  在一个 I2C 通讯总线中，可连接多个 I2C 设备，支持多个通讯主机及多个通讯从机。每个连接到总线的设备都有一个独立的地址，主机利用这个地
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-05-30 11:32" pubdate>
+              2023-05-30
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/stm32/" class="category-chain-item">stm32</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/stm32/">#stm32</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/05/29/STM32CubeMX%E4%B9%8BMCU%E5%86%85%E9%83%A8%E6%B8%A9%E5%BA%A6%E4%BC%A0%E6%84%9F%E5%99%A8/" target="_self">
+          STM32CubeMX之MCU内部温度传感器
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/29/STM32CubeMX%E4%B9%8BMCU%E5%86%85%E9%83%A8%E6%B8%A9%E5%BA%A6%E4%BC%A0%E6%84%9F%E5%99%A8/" target="_self">
+        <div>
+          STM32F103 有一个内部的温度传感器，可以用来测量 CPU 及周围的温度(TA)。该温度传感器在内部和 ADCx_IN16 输入通道相连接，此通道把传感器输出的电压转换成数字值,这也属于ADC。此温度传感器官方推荐采样时间是 17.1 µs。 其内部框图：  温度公式： = (V25 - VSENSE) / Avg_Slope + 25 °C 其中：  V25 为 25°C时VS
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-05-29 21:15" pubdate>
+              2023-05-29
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/stm32/" class="category-chain-item">stm32</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/stm32/">#stm32</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/05/29/STM32CubeMX%E4%B9%8BDAC/" target="_self">
+          STM32CubeMX之DAC
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/29/STM32CubeMX%E4%B9%8BDAC/" target="_self">
+        <div>
+          DAC（digital to analog converter）即数模转换器，它可以将数字信号转换为模拟信号.在常见的数字信号系统中，大部分传感器信号被转化成电压信号，而ADC把电压模拟信号转换成易于计算机存储、处理的数字编码，由计算机处理完成后，再由DAC输出电压模拟信号来驱动某些执行器件，使人类易于感知。如音频信号的采集和还原就是这样的一个过程。 STM32F1的DAC模块是12位电压输出型
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-05-29 21:14" pubdate>
+              2023-05-29
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/stm32/" class="category-chain-item">stm32</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/stm32/">#stm32</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/05/29/STM32CubeMX%E4%B9%8BADC/" target="_self">
+          STM32CubeMX之ADC
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/29/STM32CubeMX%E4%B9%8BADC/" target="_self">
+        <div>
+          ADC简介 ADC（analog to digital converter）即模数转换器，它可以将模拟量信号转换为数字信号，按照转换原理主要分为逐次逼近型、双积分型、电压频率转换型三种。 STM32 的 ADC 是 12 位逐次逼近型的模拟数字转换器。它有 18 个通道，可测量 16 个外部和 2 个内部信号源。各通道的 A/D 转换模式有单次、连续、扫描或间断模式。ADC 的转换结果可以以左
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-05-29 21:14" pubdate>
+              2023-05-29
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/stm32/" class="category-chain-item">stm32</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/stm32/">#stm32</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/05/29/STM32CubeMX%E4%B9%8BRTC/" target="_self">
+          STM32CubeMX之RTC
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/29/STM32CubeMX%E4%B9%8BRTC/" target="_self">
+        <div>
+          STM32的实时时钟RTC是一个独立的定时器,RTC模块和时钟配置系统（RCC_BDCR寄存器）是在后背区域，即在系统复位或从待机模式唤醒后RTC的设置和事件维持不变。但是在系统复位后，会自动禁止访问后备寄存器和RTC，以防止对后备区域（BKP）的意外操作。所以在要设置时间之前，要先取消备份区域写保护。 RTC的功能框图如下：  RTC由两个主要部分组成：第一部分（APB1接口）用来和APB
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-05-29 21:11" pubdate>
+              2023-05-29
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/stm32/" class="category-chain-item">stm32</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/stm32/">#stm32</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/05/29/STM32CubeMX%E4%B9%8B%E4%BD%8E%E5%8A%9F%E8%80%97/" target="_self">
+          STM32CubeMX之低功耗
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/29/STM32CubeMX%E4%B9%8B%E4%BD%8E%E5%8A%9F%E8%80%97/" target="_self">
+        <div>
+          STM32F10xxx有三种低功耗模式:  睡眠模式(Sleep mode)（CM3 内核停止，外设包括核心外设如NVIC，SysTick等仍然运行，功耗最高） 停止模式(Stop mode)（所有时钟都停止，功耗中等） 待机模式(Standby mode)（1.8V 内核电源关闭，功耗最低）  此外，在运行模式下，为了降低功耗，可以通过降低系统时钟和关闭APB和AHB总线上未使用外设
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-05-29 16:08" pubdate>
+              2023-05-29
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/stm32/" class="category-chain-item">stm32</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/stm32/">#stm32</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/05/28/STM32CubeMX%E4%B9%8B%E8%BE%93%E5%85%A5%E6%8D%95%E8%8E%B7/" target="_self">
+          STM32CubeMX之输入捕获
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/28/STM32CubeMX%E4%B9%8B%E8%BE%93%E5%85%A5%E6%8D%95%E8%8E%B7/" target="_self">
+        <div>
+          输入捕获简介 输入捕获一般应用在两个方面，一是信号脉宽/频率的测量，二是 PWM 的输入测量。  脉宽/频率测量:   可以看到只需要一个捕获通道就可以根据捕获值的差值计算脉宽和频率。 捕获过程中，两次边沿捕获之间会产生N次定时器溢出，所以: 脉宽 = (N*ARR + (value2-value1))*CNT计数周期; 频率 = CNT计数周期/(N*ARR + (value3
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-05-28 22:00" pubdate>
               2023-05-28
             </time>
           </div>
@@ -286,15 +774,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/05/28/STM32CubeMX%E4%B9%8BEXTI/" target="_self">
-          STM32CubeMX之EXTI
+        <a href="/2023/05/28/STM32CubeMX%E4%B9%8BPWM%E8%BE%93%E5%87%BA/" target="_self">
+          STM32CubeMX之PWM输出
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/28/STM32CubeMX%E4%B9%8BEXTI/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/28/STM32CubeMX%E4%B9%8BPWM%E8%BE%93%E5%87%BA/" target="_self">
         <div>
-          EXTI介绍 STM32F103 的外部中断/事件控制器支持 19个外部中断/事件请求（互联网型产品支持20个）。每个中断设有状态位，每个中断/事件都有独立的触发和屏蔽设置。 STM32F103的19个外部中断为：  EXTI线0~15：对应外部IO口的输入中断 EXTI线16：连接到PVD输出 EXTI线17：连接到RTC闹钟事件 EXTI线18：连接到USB唤醒事件 EXTI线
+          PWM 简介 脉冲宽度调制（PWM,Pulse Width Modulation）简称脉宽调制，是利用微处理器的数字输出来对模拟电路进行控制的一种非常有效的技术。PWM 输出就是对外输出脉宽（即占空比）可调的方波信号，信号频率由自动重装寄存器 ARR 的值决定，占空比由比较寄存器 CCR 的值决定。 PWM 模式分为两种：mode1 和 mode2，它们的区别如下：    PWM模式
         </div>
       </a>
 
@@ -302,7 +790,7 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-05-28 11:51" pubdate>
+            <time datetime="2023-05-28 20:55" pubdate>
               2023-05-28
             </time>
           </div>
@@ -334,494 +822,6 @@
             <i class="iconfont icon-tags"></i>
             
               <a href="/tags/stm32/">#stm32</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/05/28/STM32CubeMX%E4%B9%8B%E6%8C%89%E9%94%AE%E8%BE%93%E5%85%A5/" target="_self">
-          STM32CubeMX之按键输入
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/28/STM32CubeMX%E4%B9%8B%E6%8C%89%E9%94%AE%E8%BE%93%E5%85%A5/" target="_self">
-        <div>
-          上一节介绍了GPIO的输出使用，这一节介绍一下GPIO的输入，GPIO口作为输入使用的时候，是通过读取GPIOx_IDR寄存器内容来获得IO口的状态。 硬件设计   image-20230528102842722  通过开发板上的4 个按钮（KEY_UP、KEY0、KEY1 和 KEY2）来控制板上的 2 个 LED（DS0 和 DS1）和蜂鸣器。  KEY_UP 控制蜂鸣器，按一
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-05-28 10:13" pubdate>
-              2023-05-28
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/stm32/" class="category-chain-item">stm32</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/stm32/">#stm32</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/05/27/STM32CubeMX%E4%B9%8BLED%E9%97%AA%E7%83%81/" target="_self">
-          STM32CubeMX之LED闪烁
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/27/STM32CubeMX%E4%B9%8BLED%E9%97%AA%E7%83%81/" target="_self">
-        <div>
-          下面结合正点原子战舰开发板，对多个外设介绍，并编程实验。 开发板使用的MCU是STM32F103ZET6，进入ST官网，下载其相关资料。STM32F103ZE  image-20230527225335619  GPIO口简介 每个GPIO端口有两个32位配置寄存器（GPIOx_CRL和GPIOx_CRH），两个32位数据寄存器（GPIOx_IDR和GPIOx_ODR），一个32位置位
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-05-27 22:39" pubdate>
-              2023-05-27
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/stm32/" class="category-chain-item">stm32</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/stm32/">#stm32</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/05/27/STM32CubeMX%E4%B9%8B%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E7%9A%84%E6%90%AD%E5%BB%BA/" target="_self">
-          STM32CubeMX之开发环境的搭建
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/27/STM32CubeMX%E4%B9%8B%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E7%9A%84%E6%90%AD%E5%BB%BA/" target="_self">
-        <div>
-          在ST公司推出HAL库之前，开发SMT32一般使用的是标准库，但后来为了便于移植程序，官方不再更新STM32标准库，而大力推崇HAL库，伴随HAL库的兴起，ST推出了STM32CubeMX开发工具，它是STM32芯片图形化配置工具， 允许用户使用图形化向导生成C 初始化代码，极大限度内减少了工程师的工作量，转而把工作重点放在项目逻辑层、应用层的实现。另外，ST也同时推出一整套IDE软件STM32C
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-05-27 20:39" pubdate>
-              2023-05-27
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/stm32/" class="category-chain-item">stm32</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/stm32/">#stm32</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/05/27/%E7%BB%8F%E5%85%B8%E8%BF%90%E6%94%BE%E7%94%B5%E8%B7%AF%E7%9A%84%E5%88%86%E6%9E%90%E4%B8%8E%E8%AE%A1%E7%AE%97/" target="_self">
-          经典运放电路的分析与计算
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/27/%E7%BB%8F%E5%85%B8%E8%BF%90%E6%94%BE%E7%94%B5%E8%B7%AF%E7%9A%84%E5%88%86%E6%9E%90%E4%B8%8E%E8%AE%A1%E7%AE%97/" target="_self">
-        <div>
-          基本运放电路是模拟电路的学习重点，复杂的模拟电路很多都是由基本运放电路组成的。在运放电路中，一般运用运放的“虚短”和“虚断”来进行分析，然后应用欧姆定律等电流电压关系，即可得输入输出的关系。 “虚短”是指在分析运算放大器处于线性状态时，可把两输入端视为等电位（V+ = V- ），这一特性称为虚假短路，简称虚短。显然不能将两输入端真正短路。 “虚断”是指在分析运放处于线性状态时，可以把两输入端视
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-05-27 12:36" pubdate>
-              2023-05-27
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E7%A1%AC%E4%BB%B6/" class="category-chain-item">硬件</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E7%94%B5%E8%B7%AF/">#电路</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/05/26/%E5%87%A0%E7%A7%8D%E5%B8%B8%E7%94%A8%E7%9A%84%E7%94%B5%E5%B9%B3%E8%BD%AC%E6%8D%A2%E6%96%B9%E6%B3%95/" target="_self">
-          几种常用的电平转换方法
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/26/%E5%87%A0%E7%A7%8D%E5%B8%B8%E7%94%A8%E7%9A%84%E7%94%B5%E5%B9%B3%E8%BD%AC%E6%8D%A2%E6%96%B9%E6%B3%95/" target="_self">
-        <div>
-          在电路设计时，有时会遇到电压域不匹配的问题，如外部接口芯片为1.8V供电，而MCU为3.3V供电。这时候就需要进行电平转换才能通讯。下面总结几种常用的电平转换电路。 二极管电平转换电路 一些通讯模块（4G、NB模块等）的串口是1.8V电平，与常用MCU的3.3V，这时就需要电平转换。需要注意转换的方向，高电压端和低电压端不可调换。  当TX为低电平时，D1导通，RX被拉低； 当TX为高电
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-05-26 22:48" pubdate>
-              2023-05-26
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E7%A1%AC%E4%BB%B6/" class="category-chain-item">硬件</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E7%94%B5%E8%B7%AF/">#电路</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/05/25/PT100%E6%B5%8B%E6%B8%A9%E7%94%B5%E8%B7%AF%E6%80%BB%E7%BB%93%E5%88%86%E6%9E%90/" target="_self">
-          PT100测温电路总结分析
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/25/PT100%E6%B5%8B%E6%B8%A9%E7%94%B5%E8%B7%AF%E6%80%BB%E7%BB%93%E5%88%86%E6%9E%90/" target="_self">
-        <div>
-          PT100 温度传感器是一种以铂(Pt)作成的电阻式温度传感器，属于正电阻系数,其电阻和温度变化的关系为：R=R0(1+αT) 其中α=0.003851,Ro 为 100Ω(在 0℃的电阻值),T 为摄氏温度。 PT100测温采样电路主要有电桥法、恒流源法、集成芯片法等，分别介绍如下： 一、惠斯通电桥法 惠斯通电桥（Wheatstone bridge）又称为惠斯登电桥，是一种测量工具，用来精
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-05-25 22:31" pubdate>
-              2023-05-25
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E7%A1%AC%E4%BB%B6/" class="category-chain-item">硬件</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E7%94%B5%E8%B7%AF/">#电路</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/05/25/pcb-layout-%E5%AE%A1%E6%A0%B8%E8%A1%A8/" target="_self">
-          pcb layout 审核表
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/25/pcb-layout-%E5%AE%A1%E6%A0%B8%E8%A1%A8/" target="_self">
-        <div>
-          PCB设计完成需要进行综合检查，除了设计软件设定的规则外，还需要手动确认一些其它重要的信息。 结构  PCB中的定位孔位置大小是否和结构的要求一致，旁边是否有挨得太近的器件（保留间距大于1mm）； 接插件的型号，方向，顺序是否和要求一致，位置是否合理； 母板，子板的连接座的方向，顺序是否一致，位置是否合理； 新器件的封装，脚位定义，电气连接都需校对；  原理图和PCB  确保从
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-05-25 17:32" pubdate>
-              2023-05-25
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E7%A1%AC%E4%BB%B6/" class="category-chain-item">硬件</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/pcb/">#pcb</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/05/24/PCB-layout-rules/" target="_self">
-          PCB layout rules
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/24/PCB-layout-rules/" target="_self">
-        <div>
-          PCB设计过程中，器件的整体布局和关键信号的layout至关重要，布局得当，信号线layout顺畅，就会在后续设计开发过程中，减少不必要的麻烦，相反，布局不当，layout失误，一是影响PCB整体的美观程度，二是在测试应用中带来诸多麻烦。为了减少不必要的设计麻烦，下面介绍一些常用的PCB设计的布局和layout规则： PCB布局  首先对结构有限高或位置要求的器件进行摆放。布局要美观，器件间
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-05-24 19:23" pubdate>
-              2023-05-24
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E7%A1%AC%E4%BB%B6/" class="category-chain-item">硬件</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/pcb/">#pcb</a>
             
           </div>
         
@@ -833,7 +833,7 @@
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/page/9/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/#board">8</a><a class="page-number" href="/page/9/#board">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/#board">11</a><a class="page-number" href="/page/12/#board">12</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/#board">15</a><a class="extend next" rel="next" href="/page/11/#board"><i class="iconfont icon-arrowright"></i></a>
+      <a class="extend prev" rel="prev" href="/page/9/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/#board">8</a><a class="page-number" href="/page/9/#board">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/#board">11</a><a class="page-number" href="/page/12/#board">12</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/#board">16</a><a class="extend next" rel="next" href="/page/11/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 

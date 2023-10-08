@@ -225,15 +225,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/08/26/%E5%8D%81%E5%A4%A7%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" target="_self">
-          十大排序算法
+        <a href="/2023/10/04/FreeRTOS%E5%8F%98%E9%87%8F%E3%80%81%E5%87%BD%E6%95%B0%E5%8F%8A%E5%AE%8F%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99/" target="_self">
+          FreeRTOS变量、函数及宏命名规则
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/08/26/%E5%8D%81%E5%A4%A7%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/04/FreeRTOS%E5%8F%98%E9%87%8F%E3%80%81%E5%87%BD%E6%95%B0%E5%8F%8A%E5%AE%8F%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99/" target="_self">
         <div>
-          排序算法是《数据结构与算法》中最基本的算法之一，常见的共有十种：  冒泡排序（Bubble Sort） 选择排序（Selection Sort） 插入排序（Insertion Sort） 希尔排序（Shell Sort） 归并排序（Merge Sort） 快速排序（Quick Sort） 堆排序（Heap Sort） 计数排序（Counting Sort） 桶排序（Bucket
+          在FreeRTOS内核和demo应用程序源代码中，会发现很多变量名、函数名、宏名前有很多小写字母的前缀。这是因为RTOS中重定义了很多数据类型，为了便于移植和快速知道变量、函数及宏的类型或定义的文件。 变量名 变量名称使用驼峰式大小写，具有明确的描述性的单词，变量名有前缀：    变量名前缀 含义 举例     ul unsigned long uint32_t ul
         </div>
       </a>
 
@@ -241,8 +241,191 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-08-26 22:31" pubdate>
-              2023-08-26
+            <time datetime="2023-10-04 22:57" pubdate>
+              2023-10-04
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/RTOS/" class="category-chain-item">RTOS</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/FreeRTOS/">#FreeRTOS</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/10/04/FreeRTOS%E9%87%8D%E5%AE%9A%E4%B9%89%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" target="_self">
+          FreeRTOS重定义的数据类型
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/04/FreeRTOS%E9%87%8D%E5%AE%9A%E4%B9%89%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" target="_self">
+        <div>
+          因为不同的数据类型在不同的架构平台上，它的长度是不一样的，为了便于移植，很多独立的流行代码程序都会采用相应的数据类型的重定义，FreeRTOS也不例外，它除了使用了标准的数据类型定义的头文件 &lt;stdint.h&gt; 外，源码中还重定义了很多数据类型，但都是由基本数据类型衍生而来，熟悉这些重定义的数据类型，对查看FreeRTOS源码和掌握与使用它有很大益处。下面具体来看看： cmsis_
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-10-04 22:31" pubdate>
+              2023-10-04
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/RTOS/" class="category-chain-item">RTOS</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/FreeRTOS/">#FreeRTOS</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/10/04/FreeRTOS%E5%B7%A5%E7%A8%8B%E7%9B%AE%E5%BD%95%E6%96%87%E4%BB%B6%E6%A6%82%E8%A7%88/" target="_self">
+          FreeRTOS工程目录文件概览
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/04/FreeRTOS%E5%B7%A5%E7%A8%8B%E7%9B%AE%E5%BD%95%E6%96%87%E4%BB%B6%E6%A6%82%E8%A7%88/" target="_self">
+        <div>
+          FreeRTOS 是市场领先的面向微控制器和小型微处理器的实时操作系统，通过 MIT 开源许可免费分发，包括一个内核和一组不断丰富的 IoT 库，适用于所有行业领域。FreeRTOS 因其免费开源和易用性而得到广泛应用。 FreeRTOS官网：https://www.freertos.org/ 官网上有专门的内核开发文档，这一节主要来看看在STM32开发过程中，使用STM32CubeMX创建F
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-10-04 22:09" pubdate>
+              2023-10-04
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/RTOS/" class="category-chain-item">RTOS</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/FreeRTOS/">#FreeRTOS</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/09/25/PID%E6%8E%A7%E5%88%B6%E5%99%A8%E7%AE%97%E6%B3%95%E8%BF%9B%E9%98%B6/" target="_self">
+          PID控制器算法进阶
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/09/25/PID%E6%8E%A7%E5%88%B6%E5%99%A8%E7%AE%97%E6%B3%95%E8%BF%9B%E9%98%B6/" target="_self">
+        <div>
+          PID算法中处理方式有：  pid算法巩固 https://blog.csdn.net/foxclever/article/details/80250994 积分分离 https://blog.csdn.net/foxclever/article/details/80274790 抗积分饱和 https://blog.csdn.net/foxclever/article/detail
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-09-25 18:47" pubdate>
+              2023-09-25
             </time>
           </div>
         
@@ -272,7 +455,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/%E6%8E%92%E5%BA%8F/">#排序</a>
+              <a href="/tags/pid/">#pid</a>
             
           </div>
         
@@ -286,15 +469,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/08/20/%E5%B8%B8%E8%A7%81%E7%9A%84%E5%BC%80%E5%8F%91%E6%A6%82%E5%BF%B5%E5%8F%8A%E5%BC%80%E6%BA%90%E8%B5%84%E6%BA%90/" target="_self">
-          常见的开发概念及开源资源
+        <a href="/2023/09/22/%E5%9F%BA%E4%BA%8E%E7%AE%97%E6%9C%AF%E5%B9%B3%E5%9D%87%E7%AE%97%E6%B3%95%E7%9A%84%E6%BB%A4%E6%B3%A2%E5%99%A8/" target="_self">
+          基于算术平均算法的滤波器
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/08/20/%E5%B8%B8%E8%A7%81%E7%9A%84%E5%BC%80%E5%8F%91%E6%A6%82%E5%BF%B5%E5%8F%8A%E5%BC%80%E6%BA%90%E8%B5%84%E6%BA%90/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/09/22/%E5%9F%BA%E4%BA%8E%E7%AE%97%E6%9C%AF%E5%B9%B3%E5%9D%87%E7%AE%97%E6%B3%95%E7%9A%84%E6%BB%A4%E6%B3%A2%E5%99%A8/" target="_self">
         <div>
-          GNU   GNU是一个开源组织，同时也是一个100%自由软件的操作系统，包含了所有的官方GNU软件包，也包括非GNU自由软件。 官网：https://www.gnu.org/  GCC/G++：GNU工具链中的编译器。 Make：GNU工具链中的构建生成器，搭配makefile文件使用。 GDB（GNU Debuger）：GNU 开源组织发布的一个强大的UNIX 下的
+          在AD采集获取数据时，为避免干扰信号的影响，一般我们都会对获取的原始数据进行滤波处理，比较常见的做法是算术平均，即对N个数据进行平均求值，为了进一步优化这种简易的平均算法，我们可以采用以下方法：  算术平均的递推平滑滤波 算术平均的带阻平滑滤波 算术平均的阶梯平滑滤波 算术平均的中值滤波 算术平均的限幅滤波  下面分别来看看这几种算术平均滤波算法： 算术平均的递推平滑滤波 在简
         </div>
       </a>
 
@@ -302,8 +485,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-08-20 12:09" pubdate>
-              2023-08-20
+            <time datetime="2023-09-22 13:58" pubdate>
+              2023-09-22
             </time>
           </div>
         
@@ -318,7 +501,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Linux/" class="category-chain-item">Linux</a>
+  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" class="category-chain-item">数据结构与算法</a>
   
   
 
@@ -333,7 +516,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/%E5%BC%80%E6%BA%90/">#开源</a>
+              <a href="/tags/%E7%AE%97%E6%9C%AF%E5%B9%B3%E5%9D%87/">#算术平均</a>
             
           </div>
         
@@ -347,15 +530,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/08/18/%E7%BC%96%E8%AF%91%E5%B7%A5%E5%85%B7%E9%93%BE/" target="_self">
-          编译工具链
+        <a href="/2023/09/07/C%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0%E5%8F%8A%E4%BD%BF%E7%94%A8/" target="_self">
+          C语言中的回调函数及使用
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/08/18/%E7%BC%96%E8%AF%91%E5%B7%A5%E5%85%B7%E9%93%BE/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/09/07/C%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0%E5%8F%8A%E4%BD%BF%E7%94%A8/" target="_self">
         <div>
-          在编写程序后，一般需要进行编译处理，生成可执行的程序文件，才能下载到芯片中运行，在IDE集成开发环境中，编译的过程都是由其内部的编译工具链进行处理。但在Linux开发过程中，一般需要自己进行编译器的配置等操作，下面简单了解下编译工具链的相关知识。 编译工具链简介 编译程序是一个由多个步骤组成的过程，每个步骤都需要使用不同的工具进行处理。这些工具紧密协作，前一个工具的输出会成为后一个工具的输入，
+          在开发过程中，我们会经常碰到回调函数的问题，那什么是回调函数？怎么使用回调函数呢？下面具体来看看。 什么是回调函数 回调函数就是一个通过函数指针调用的函数。 假如你把 函数A的指针 当作参数传给 函数B，然后在 函数B 中通过传进来的这个指针调用 函数A ，那么这就是回调机制，函数A 就是回调函数。 知乎上有个比较形象的比喻：你到商店买东西，刚好没货，于是留下了你的电话，有货后店员就打了你
         </div>
       </a>
 
@@ -363,69 +546,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-08-18 14:40" pubdate>
-              2023-08-18
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/Linux/" class="category-chain-item">Linux</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E7%BC%96%E8%AF%91/">#编译</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/08/13/%E5%86%85%E5%AD%98%E7%9A%84%E5%88%86%E5%8C%BA-%E6%A0%88%E5%8C%BA%E3%80%81%E5%A0%86%E5%8C%BA%E3%80%81%E5%85%A8%E5%B1%80%E5%8C%BA%E3%80%81%E5%B8%B8%E9%87%8F%E5%8C%BA%E5%92%8C%E4%BB%A3%E7%A0%81%E5%8C%BA/" target="_self">
-          内存的分区(栈区、堆区、全局区、常量区和代码区)
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/08/13/%E5%86%85%E5%AD%98%E7%9A%84%E5%88%86%E5%8C%BA-%E6%A0%88%E5%8C%BA%E3%80%81%E5%A0%86%E5%8C%BA%E3%80%81%E5%85%A8%E5%B1%80%E5%8C%BA%E3%80%81%E5%B8%B8%E9%87%8F%E5%8C%BA%E5%92%8C%E4%BB%A3%E7%A0%81%E5%8C%BA/" target="_self">
-        <div>
-          内存分区简介 内存一般分为四个区域：堆区、栈区、全局区（静态区）、代码区。而编译程序占用的内存分为以下五个部分：堆区、栈区、全局区（静态区）、常量区、代码区 。 C、C++程序在编译链接后生成的映像（image）中，将只包含 代码段(.Text)、只读数据段(.rodata) 和 读写数据段(.data) 。在程序运行之前，将生成 未初始化数据段(.bss)，在程序的运行时还将动态生成 堆(H
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-08-13 22:30" pubdate>
-              2023-08-13
+            <time datetime="2023-09-07 10:13" pubdate>
+              2023-09-07
             </time>
           </div>
         
@@ -455,7 +577,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/%E5%86%85%E5%AD%98/">#内存</a>
+              <a href="/tags/%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/">#回调函数</a>
             
           </div>
         
@@ -469,15 +591,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/08/13/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%93%E6%9E%84/" target="_self">
-          计算机结构
+        <a href="/2023/09/07/C%E8%AF%AD%E8%A8%80%E4%B8%AD%E5%87%A0%E4%B8%AA%E9%87%8D%E8%A6%81%E7%9A%84%E5%85%B3%E9%94%AE%E5%AD%97/" target="_self">
+          C语言中几个重要的关键字
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/08/13/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%93%E6%9E%84/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/09/07/C%E8%AF%AD%E8%A8%80%E4%B8%AD%E5%87%A0%E4%B8%AA%E9%87%8D%E8%A6%81%E7%9A%84%E5%85%B3%E9%94%AE%E5%AD%97/" target="_self">
         <div>
-          计算机的五个基本组成部分：运算器、控制器、存储器、输入设备、输出设备 。 计算机常见的两种结构，哈佛结构（Harvard Architecture）和 冯·诺依曼结构（Von Neumann Architecture）：  从这两种结构图上可以看出，它们的主要区别是内存存在方式的不同。 哈佛结构 哈佛结构是一种将程序指令储存和数据储存分开的存储器结构。每个存储器独立编址，使用两条独立的总
+          在了解关键字之前，先来了解变量或函数的“声明”与“定义”之间的区别： 声明：告诉编译器，声明的变量或函数在程序中的某个位置，数据类型，参数顺序及返回类型，但未为它们分配内存。 定义：编译器创建一个对象并分配一块内存并给取一个名字，这个名字就是变量名或对象名。 因此，我们可以将声明作为定义的子集。变量或函数可以声明多次，但只能定义一次。 由ANSI标准定义的C语言关键字共32个:  数据
         </div>
       </a>
 
@@ -485,8 +607,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-08-13 19:42" pubdate>
-              2023-08-13
+            <time datetime="2023-09-07 10:12" pubdate>
+              2023-09-07
             </time>
           </div>
         
@@ -501,61 +623,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E7%A1%AC%E4%BB%B6/" class="category-chain-item">硬件</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/08/09/stm32-sct%E5%88%86%E6%95%A3%E5%8A%A0%E8%BD%BD%E6%96%87%E4%BB%B6%E8%AF%A6%E8%A7%A3/" target="_self">
-          stm32 sct分散加载文件详解
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/08/09/stm32-sct%E5%88%86%E6%95%A3%E5%8A%A0%E8%BD%BD%E6%96%87%E4%BB%B6%E8%AF%A6%E8%A7%A3/" target="_self">
-        <div>
-          keil软件在编译过程中会生成分散加载文件（Scatter-Loading Description File），它可以用来描述链接器生成映像文件时需要的信息，通过这些信息分配 Code、RO-Data，RW-Data，ZI-Data 等数据的存放地址。 一个sct文件主要由一个加载区（load region）和多个执行区（execution region）构成。 加载区是用来保存永久性数据（程
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-08-09 18:28" pubdate>
-              2023-08-09
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/stm32/" class="category-chain-item">stm32</a>
+  <a href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/" class="category-chain-item">编程基础</a>
   
   
 
@@ -570,7 +638,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/sct/">#sct</a>
+              <a href="/tags/%E5%85%B3%E9%94%AE%E5%AD%97/">#关键字</a>
             
           </div>
         
@@ -584,15 +652,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/08/09/stm32-map%E6%96%87%E4%BB%B6%E8%AF%A6%E8%A7%A3/" target="_self">
-          stm32 map文件详解
+        <a href="/2023/09/04/Modbus%E9%80%9A%E8%AE%AF%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/" target="_self">
+          Modbus通讯协议详解
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/08/09/stm32-map%E6%96%87%E4%BB%B6%E8%AF%A6%E8%A7%A3/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/09/04/Modbus%E9%80%9A%E8%AE%AF%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/" target="_self">
         <div>
-          MDK-ARM在编译时会生成很多类型的中间文件，最终通过这些中间文件生成可下载到MCU的hex文件。.map 文件就是其中编译器链接时生成的一个文件，主要包含了交叉链接信息。 通过 .map 文件，可以知晓工程中函数的大小，入口地址，变量、调用关系、FLASH 和 RAM 占用空间大小等信息，根据这些信息，可以对代码进行优化。 要生成 .map 文件，需要在keil软件中进行如下相应设置。
+          Modbus协议简介 Modbus协议是一种通用的工业通讯总线协议，跟I2C、SPI总线类似，通讯的服务器端和客户端都在同一条总线上。 Modbus协议最初是Modicon公司（现在的施耐德电气 Schneider Electric）于1979年为使用可编程逻辑控制器（PLC）通信而开发的，现在已成为工业领域通信协议的业界标准。 Modbus官网：https://modbus.org/ 本
         </div>
       </a>
 
@@ -600,8 +668,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-08-09 18:25" pubdate>
-              2023-08-09
+            <time datetime="2023-09-04 10:44" pubdate>
+              2023-09-04
             </time>
           </div>
         
@@ -616,7 +684,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/stm32/" class="category-chain-item">stm32</a>
+  <a href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/" class="category-chain-item">编程基础</a>
   
   
 
@@ -631,7 +699,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/map/">#map</a>
+              <a href="/tags/Modbus/">#Modbus</a>
             
           </div>
         
@@ -645,15 +713,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/08/08/stm32%E5%90%AF%E5%8A%A8%E6%96%87%E4%BB%B6%E8%AF%A6%E8%A7%A3/" target="_self">
-          stm32启动文件详解
+        <a href="/2023/09/02/%E5%85%B3%E4%BA%8EOLED%E5%AD%97%E6%A8%A1%E5%8F%96%E6%A8%A1%E6%96%B9%E5%BC%8F%E7%9A%84%E9%80%89%E6%8B%A9/" target="_self">
+          关于OLED字模取模方式的选择
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/08/08/stm32%E5%90%AF%E5%8A%A8%E6%96%87%E4%BB%B6%E8%AF%A6%E8%A7%A3/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/09/02/%E5%85%B3%E4%BA%8EOLED%E5%AD%97%E6%A8%A1%E5%8F%96%E6%A8%A1%E6%96%B9%E5%BC%8F%E7%9A%84%E9%80%89%E6%8B%A9/" target="_self">
         <div>
-          我们知道程序一般是从main函数开始运行的，但在main函数运行之前，程序已经做了一些准备工作，对于STM32F1芯片，这些准备工作是通过启动文件来完成的。下面来详细看看stm32库中的启动代码文件（STM32Cube_FW_F1_V1.8.532F1xx_stm32f103xe.s）。 启动文件是由汇编语言编写，是系统上电复位后第一个执行的程序。首先我们来看看启动文件使用的ARM汇编指令：
+          OLED（Organic Light-Emitting Diode）,有机发光二极体，属于一种电流型的有机发光器件，当电流流动时就会自行发光。因其简单，使用方便，所以在开发过程中会经常使用到这种显示器件。 市面上有很多OLED显示模块，根据控制显示的驱动芯片的不同，有不同的连接接口，一般大体会有四种：  6800并行接口 8080并行接口 4线SPI串行接口 I2C接口  下面主要
         </div>
       </a>
 
@@ -661,8 +729,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-08-08 12:30" pubdate>
-              2023-08-08
+            <time datetime="2023-09-02 13:30" pubdate>
+              2023-09-02
             </time>
           </div>
         
@@ -677,7 +745,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/stm32/" class="category-chain-item">stm32</a>
+  <a href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/" class="category-chain-item">编程基础</a>
   
   
 
@@ -692,7 +760,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/startup/">#startup</a>
+              <a href="/tags/OLED/">#OLED</a>
             
           </div>
         
@@ -706,15 +774,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/08/07/stm32f1xx-hal-sd%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
-          stm32f1xx_hal_sd库的使用
+        <a href="/2023/08/29/cJSON%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/" target="_self">
+          cJSON使用教程
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/08/07/stm32f1xx-hal-sd%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/08/29/cJSON%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/" target="_self">
         <div>
-          Secure Digital,简称SD,SD内存卡是一种使用非常广泛的存储设备，以下来看看HAL库关于SD卡的使用方法。 SD外设库的使用 这是一个通用分层的SDIO存储驱动，它使用HAL SDIO驱动函数来连接SD内存卡。 1. 初始化SDIO底层。HAL_SD_MspInit()  使能SDIO接口时钟。__HAL_RCC_SDIO_CLK_ENABLE() 配置SDIO引脚
+          JSON (JavaScript Object Notation) 是一种轻量级的数据交换格式。它采用完全独立于编程语言的文本格式来存储和表示数据，语法简洁、层次结构清晰，易于人阅读和编写，同时也易于机器解析和生成，有效的提升了网络传输效率。 JSON 构建结构 JSON 构建结构主要有两种：  名称/值的集合。在不同的编程语言中，体现方式分别有 对象、记录、结构体、字典、哈希表、键值列表
         </div>
       </a>
 
@@ -722,8 +790,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-08-07 18:30" pubdate>
-              2023-08-07
+            <time datetime="2023-08-29 15:52" pubdate>
+              2023-08-29
             </time>
           </div>
         
@@ -738,7 +806,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/stm32/" class="category-chain-item">stm32</a>
+  <a href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/" class="category-chain-item">编程基础</a>
   
   
 
@@ -753,68 +821,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/sd/">#sd</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/08/07/stm32f1xx-hal-mmc%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
-          stm32f1xx_hal_mmc库的使用
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/08/07/stm32f1xx-hal-mmc%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
-        <div>
-          MultiMediaCard,简称MMC,它属于SD卡的一种，是一种一体化、可拆卸、多功能的内存卡,以下来看看HAL库关于MMC的使用方法。 MMC外设库的使用 这是一个通用分层的MMC存储器驱动，它使用HAL SDMMC 驱动函数来连接MMC和eMMC卡。 1. 初始化MMC底层。HAL_MMC_MspInit()  使能MMC接口时钟。__HAL_RCC_SDMMC_CLK_ENAB
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-08-07 17:30" pubdate>
-              2023-08-07
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/stm32/" class="category-chain-item">stm32</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/mmc/">#mmc</a>
+              <a href="/tags/JSON/">#JSON</a>
             
           </div>
         
@@ -826,7 +833,7 @@
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/#board">3</a><a class="page-number" href="/page/4/#board">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/#board">15</a><a class="extend next" rel="next" href="/page/3/#board"><i class="iconfont icon-arrowright"></i></a>
+      <a class="extend prev" rel="prev" href="/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/#board">3</a><a class="page-number" href="/page/4/#board">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/#board">16</a><a class="extend next" rel="next" href="/page/3/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 

@@ -1,0 +1,714 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="使用 FreeRTOS 的实时应用程序，我们可以在应用程序中创建多个独立任务(task)，也可称为线程(thread)。 任务的简介 在FreeRTOS中创建任务时，每个任务都分配有自己的堆栈，在自己的上下文（寄存器值、堆栈内容等）中执行，不依赖于系统内的其他任务或 RTOS 调度器本身。在任何时间点，应用程序中只能执行一个任务，由调度器决定所要执行的任务调入和调出。当任务调出时，执行上下文信">
+<meta property="og:type" content="article">
+<meta property="og:title" content="FreeRTOS中任务(Task)">
+<meta property="og:url" content="http://example.com/2023/10/05/FreeRTOS%E4%B8%AD%E4%BB%BB%E5%8A%A1(Task)/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="使用 FreeRTOS 的实时应用程序，我们可以在应用程序中创建多个独立任务(task)，也可称为线程(thread)。 任务的简介 在FreeRTOS中创建任务时，每个任务都分配有自己的堆栈，在自己的上下文（寄存器值、堆栈内容等）中执行，不依赖于系统内的其他任务或 RTOS 调度器本身。在任何时间点，应用程序中只能执行一个任务，由调度器决定所要执行的任务调入和调出。当任务调出时，执行上下文信">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231005180546855.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231005185629584.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231005212220169.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231005212233030.png">
+<meta property="article:published_time" content="2023-10-05T02:41:10.000Z">
+<meta property="article:modified_time" content="2023-10-07T05:27:42.353Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Task">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231005180546855.png">
+  
+  
+  
+  
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"✍","loop":false,"scope":["home"]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":false},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":false,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+<meta name="referrer" content="no-referrer" />
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>My Tech Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/article.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.1)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle">FreeRTOS中任务(Task)</span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-10-05 10:41" pubdate>
+          2023年10月5日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          4.4k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          15 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-12 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">FreeRTOS中任务(Task)</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：2023年10月7日 下午
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <p>使用 FreeRTOS 的实时应用程序，我们可以在应用程序中创建多个独立任务(task)，也可称为线程(thread)。</p>
+<h1 id="任务的简介">任务的简介</h1>
+<p>在FreeRTOS中创建任务时，每个任务都分配有自己的堆栈，在自己的上下文（寄存器值、堆栈内容等）中执行，不依赖于系统内的其他任务或 RTOS 调度器本身。在任何时间点，应用程序中只能执行一个任务，由调度器决定所要执行的任务调入和调出。当任务调出时，执行上下文信息被保存到该任务的堆栈中，以便再调入时可以正常恢复。</p>
+<h1 id="任务的创建">任务的创建</h1>
+<p>在 FreeRTOS 中，任务就是一个个独立且无法返回的函数，任务结构应如下：</p>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-type">void</span> <span class="hljs-title function_">vATask</span><span class="hljs-params">( <span class="hljs-type">void</span> *pvParameters )</span>
+&#123;
+    <span class="hljs-keyword">for</span>( ;; )
+    &#123;
+    	<span class="hljs-comment">/* 添加任务实现代码 */</span>
+    &#125;
+	vTaskDelete( <span class="hljs-literal">NULL</span> );<span class="hljs-comment">/* 如果任务需要退出，则删除该任务,NULL表示删除的是自己 /</span>
+<span class="hljs-comment">&#125;</span></code></pre></div>
+<p>如需创建任务，则调用 <code>xTaskCreate()</code>或 <code>xTaskCreateStatic()</code> ；如需删除任务，则调用 <code>vTaskDelete()</code> 。</p>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">/* 动态创建一个任务 */</span>
+BaseType_t <span class="hljs-title function_">xTaskCreate</span><span class="hljs-params">(	TaskFunction_t pxTaskCode,  <span class="hljs-comment">/* 任务函数，如 vATask */</span></span>
+<span class="hljs-params">                       <span class="hljs-type">const</span> <span class="hljs-type">char</span> * <span class="hljs-type">const</span> pcName,	<span class="hljs-comment">/* 任务名，自定义 */</span></span>
+<span class="hljs-params">                       <span class="hljs-type">const</span> configSTACK_DEPTH_TYPE usStackDepth, <span class="hljs-comment">/* 任务栈大小，单位为word,10表示40字节 */</span></span>
+<span class="hljs-params">                       <span class="hljs-type">void</span> * <span class="hljs-type">const</span> pvParameters,<span class="hljs-comment">/* 任务函数的参数 */</span></span>
+<span class="hljs-params">                       UBaseType_t uxPriority,<span class="hljs-comment">/* 任务优先级,数值越小优先级越低 */</span></span>
+<span class="hljs-params">                       TaskHandle_t * <span class="hljs-type">const</span> pxCreatedTask )</span> <span class="hljs-comment">/* 任务句柄,以后可用它来操作这个任务,如不使用该 handle，															     可以传入 NULL */</span>    
+<span class="hljs-comment">/* 静态创建一个任务 */</span>    
+TaskHandle_t <span class="hljs-title function_">xTaskCreateStatic</span><span class="hljs-params">(	TaskFunction_t pxTaskCode, <span class="hljs-comment">/* 任务函数，如 vATask */</span></span>
+<span class="hljs-params">                               <span class="hljs-type">const</span> <span class="hljs-type">char</span> * <span class="hljs-type">const</span> pcName,  <span class="hljs-comment">/* 任务名，自定义 */</span></span>
+<span class="hljs-params">                               <span class="hljs-type">const</span> <span class="hljs-type">uint32_t</span> ulStackDepth, <span class="hljs-comment">/* 任务栈大小，单位为word,10表示40字节 */</span></span>
+<span class="hljs-params">                               <span class="hljs-type">void</span> * <span class="hljs-type">const</span> pvParameters, <span class="hljs-comment">/* 任务函数的参数 */</span></span>
+<span class="hljs-params">                               UBaseType_t uxPriority,<span class="hljs-comment">/* 任务优先级,数值越小优先级越低 */</span></span>
+<span class="hljs-params">                               StackType_t * <span class="hljs-type">const</span> puxStackBuffer,<span class="hljs-comment">/* 静态分配的任务栈缓冲区数组 */</span></span>
+<span class="hljs-params">                               StaticTask_t * <span class="hljs-type">const</span> pxTaskBuffer )</span><span class="hljs-comment">/* 任务缓冲区句柄 */</span>
+<span class="hljs-comment">/* 删除一个任务 */</span>    
+<span class="hljs-type">void</span> <span class="hljs-title function_">vTaskDelete</span><span class="hljs-params">( TaskHandle_t xTaskToDelete )</span></code></pre></div>
+<p>以上API函数在 <code>task.h</code> 文件中有详细的使用说明。举例如下：</p>
+<ul>
+<li>动态创建任务</li>
+</ul>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">/* 具体的任务实现函数 */</span>  
+<span class="hljs-type">void</span> <span class="hljs-title function_">vStartLedTask</span><span class="hljs-params">(<span class="hljs-type">void</span> *pvParameters)</span>
+&#123;
+	 <span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>)
+	 &#123;
+		 HAL_GPIO_TogglePin(LED0_GPIO_Port, LED0_Pin);
+         vTaskDelay(<span class="hljs-number">500</span>);
+	 &#125;
+&#125;
+<span class="hljs-comment">/* 创建任务 */</span>
+<span class="hljs-type">void</span> <span class="hljs-title function_">vLedTask</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span>
+&#123;
+    <span class="hljs-type">static</span> <span class="hljs-type">uint8_t</span> ucParameterToPass;
+    TaskHandle_t xLedTaskHandle = <span class="hljs-literal">NULL</span>; <span class="hljs-comment">/* 任务句柄 */</span>
+    xTaskCreate(vStartLedTask, <span class="hljs-string">&quot;LEDTask&quot;</span>, <span class="hljs-number">128</span>, &amp;ucParameterToPass, osPriorityNormal, &amp;xLedTaskHandle);  
+    
+    <span class="hljs-keyword">if</span>(xLedTaskHandle != <span class="hljs-literal">NULL</span>)
+    &#123;
+        vTaskDelete(<span class="hljs-literal">NULL</span>); <span class="hljs-comment">/* 任务退出，则删除任务 */</span>
+    &#125;
+&#125;
+
+</code></pre></div>
+<ul>
+<li>静态创建任务</li>
+</ul>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">define</span> STACK_SIZE 200 <span class="hljs-comment">/* 200 word */</span></span>
+StackType_t xStack[ STACK_SIZE ]; <span class="hljs-comment">/* 分配的静态栈数组大小 */</span>
+StaticTask_t xTaskBuffer; <span class="hljs-comment">/* 任务结构体数据句柄 */</span>
+
+<span class="hljs-comment">/* 具体的任务实现函数 */</span>  
+<span class="hljs-type">void</span> <span class="hljs-title function_">vStartLedSaticTask</span><span class="hljs-params">(<span class="hljs-type">void</span> *pvParameters)</span>
+&#123;
+	 <span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>)
+	 &#123;
+		 HAL_GPIO_TogglePin(LED0_GPIO_Port, LED0_Pin);
+         vTaskDelay(<span class="hljs-number">500</span>);
+	 &#125;
+&#125;
+<span class="hljs-comment">/* 创建任务 */</span>
+<span class="hljs-type">void</span> <span class="hljs-title function_">vLedStaticTask</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span>
+&#123;
+    TaskHandle_t xReturnHandle = <span class="hljs-literal">NULL</span>; <span class="hljs-comment">/* 任务句柄 */</span>
+    xReturnHandle = xTaskCreateStatic(vStartLedSaticTask, <span class="hljs-string">&quot;LedStaticTask&quot;</span>, STACK_SIZE, <span class="hljs-literal">NULL</span>,                                                   osPriorityNormal, xStack, &amp;xTaskBuffer ); 
+    vTaskSuspend(xReturnHandle); <span class="hljs-comment">/* 挂起任务 */</span>
+&#125;</code></pre></div>
+<h1 id="任务的状态">任务的状态</h1>
+<p>Free RTOS中任务的状态有以下几种：</p>
+<ul>
+<li><p><strong>运行</strong></p>
+<p>当任务实际执行时，它被称为处于运行状态。 如果处理器只有一个内核， 那么在给定的任何时间内都只能有一个任务处于运行状态。</p></li>
+<li><p><strong>准备就绪</strong></p>
+<p>准备就绪任务指那些能够执行（它们不处于阻塞或挂起状态）， 但目前没有执行的任务， 因为同等或更高优先级的不同任务已经处于运行状态。</p></li>
+<li><p><strong>阻塞</strong></p>
+<p>如果任务当前正在等待外部事件，则该任务被认为处于阻塞状态。任务可以进入阻塞状态来等待两种不同类型的事件：</p>
+<ol type="1">
+<li>时间相关事件。可以是等待一段时间 <code>vTaskDelay()</code>，也可以是等到某个绝对时间。</li>
+<li>同步事件。事件由另一个任务或中断程序产生，可以由队列、信号量、事件组、通知或信号量等产生事件。如在一个队列中等待数据的到来。</li>
+</ol>
+<p>处于阻塞状态的任务通常有一个"超时"期，超时后任务将被退出阻塞状态， 即使该任务所等待的事件没有发生。“阻塞”状态下的任务不使用任何处理时间，不能进入运行状态。</p></li>
+<li><p><strong>挂起</strong></p>
+<p>“挂起”状态下（即暂停）的任务不能被选择调度器调用，只能通过 <code>vTaskSuspend()</code> 和 <code>xTaskResume()</code> 及 <code>xTaskResumeFromISR()</code> 函数进入或退出挂起状态。大部分的应用不会使用挂起状态。</p></li>
+</ul>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231005180546855.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></p>
+<h1 id="任务的优先级">任务的优先级</h1>
+<p>Free RTOS中每个任务都被分配了优先级：（<strong>0 ~ （configMAX_PRIORITIES - 1）</strong>），数值越大优先级越高，这与RT-Thread和μC/OS相反，<code>configMAX_PRIORITIES</code> 宏在 <code>FreeRTOSConfig.h</code>文件中进行配置定义。当 <code>configUSE_PORT_OPTIMIED_TASK_SELECTION = 1</code> 时，即使用端口优化任务选择机制，则 <code>configMAX_PRIORITIES</code> 配置不能大于32， 其它情况，为了RAM使用效率，应将其保持为实际所需的最小值。</p>
+<p>Free RTOS调度器会一直选择最高优先级的任务进入运行的状态。当多个任务处于同一优先级，调度器会使用时间切片轮询方式切换这些任务，此时宏 <code>configUSE_TIME_SLICING  = 1</code>。</p>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231005185629584.png" srcset="/img/loading.gif" lazyload alt="image-20231005185629584" style="zoom:80%;" /></p>
+<div class="code-wrapper"><pre><code class="hljs c">UBaseType_t <span class="hljs-title function_">uxTaskPriorityGet</span><span class="hljs-params">( TaskHandle_t xTask )</span>; <span class="hljs-comment">/* 获得任务的优先级 */</span>
+<span class="hljs-type">void</span> <span class="hljs-title function_">vTaskPrioritySet</span><span class="hljs-params">( TaskHandle_t xTask, UBaseType_t uxNewPriority )</span>; <span class="hljs-comment">/* 设置任务的优先级 */</span></code></pre></div>
+<h1 id="空闲任务和空闲任务钩子idle-task-hook">空闲任务和空闲任务钩子（Idle Task Hook）</h1>
+<p>RTOS 调度器启动时，会自动创建空闲任务，以确保始终存在一个能够运行的任务。它以最低优先级创建，要么处于就绪态，要么处于运行态，永远不会阻塞。空闲任务负责释放被删除任务的内存。</p>
+<p>空闲任务钩子是在空闲任务的每个周期中调用的函数，在没有能够运行的更高优先级的任务时，这种空闲钩子函数就会被执行。 它的作用主要有：</p>
+<ul>
+<li>执行一些低优先级的、后台的、需要连续执行的函数 。</li>
+<li>测量系统的空闲时间。</li>
+<li>让系统进入低功耗省电模式。</li>
+</ul>
+<p>要创建一个空闲钩子，需要在 <code>FreeRTOSConfig.h</code> 文件中将 <strong>configUSE_IDLE_HOOK</strong> 设置为 1，然后定义空闲钩子回调函数 <code>void vApplicationIdleHook( void );</code></p>
+<p><strong>需要注意的是</strong>：空闲钩子函数不调用任何可能导致其阻塞的 API 函数。 此外，如果应用程序使用 vTaskDelete() API 函数，则必须允许空闲任务钩子定期返回 。</p>
+<h1 id="任务的调度">任务的调度</h1>
+<p>FreeRTOS 调度算法主要针对单核、非对称多核 (AMP)、和对称多核 (SMP) RTOS的配置。在 AMP 中， 每个处理器核心运行自身的 FreeRTOS 实例。在 SMP 中， 存在一个 FreeRTOS 实例，可以跨多核调度 RTOS 任务 。FreeRTOS调度默认针对是单核，这里主要看看单核调度算法。</p>
+<p>调度算法，是指决定哪个就绪态的任务可以切换到运行态的程序。可通过 <code>FreeRTOSConfig.h</code> 中的三个配置项来改变调度算法 ：</p>
+<ul>
+<li><strong>configUSE_PREEMPTION</strong></li>
+</ul>
+<p>如果设置为 0，则关闭“抢占”， 只有当运行态的任务进入“阻塞”或“挂起”状态， 或调用 <code>taskYIELD()</code>， 或中断服务程序 (ISR) 手动请求上下文切换时，才会发生上下文切换。</p>
+<ul>
+<li><strong>configUSE_TIME_SLICING</strong></li>
+</ul>
+<p>如果设置为 0，则表示时间切片已关闭， 因此调度器不会在每个 tick 中断上在同等优先级的任务之间切换 。</p>
+<ul>
+<li><strong>configUSE_TICKLESS_IDLE</strong></li>
+</ul>
+<p>用于关闭Tick中断来实现省电。</p>
+<p>调度算法的行为主要体现在两方面：高优先级的任务先运行、同优先级的就绪态任务如何被选中。调度算法要确保同优先级的就绪态任务，能轮询运行，策略是"轮询调度"(Round Robin Scheduling)。</p>
+<p><strong>对于单核来讲，FreeRTOS 默认使用固定优先级的抢占式调度策略，对同等优先级的任务执行时间片轮询调度，即将上面的配置项设置为1。</strong></p>
+<p>使用抢占式优先级调度，避免了任务间的强盗行为，因为不进入“阻塞”或 “挂起”状态的高优先级任务会让其它低优先级任务不被执行。例如，一个高优先级任务正在等待一个事件， 它不应该处于事件的循环（轮询）中，因为它永远不会进入阻塞或挂起状态。任务应进入阻塞状态以等待事件，优先级较低的任务从而可以被调度执行，当使用任务间通信将事件发送给高优先级任务时，它会自动从“阻塞”状态进入再次运行状态。</p>
+<p>每个任务具有固定的优先级时，其时间片轮询调度时序图如下：</p>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231005212220169.png" srcset="/img/loading.gif" lazyload alt="image-20231005212220169" style="zoom:80%;" /></p>
+<p>当有两个任务优先级一样时，其时间片轮询调度时序图如下：</p>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231005212233030.png" srcset="/img/loading.gif" lazyload alt="image-20231005212233030" style="zoom:80%;" /></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/RTOS/" class="category-chain-item">RTOS</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Task/">#Task</a>
+      
+    </div>
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/10/05/FreeRTOS%E4%B8%AD%E9%98%9F%E5%88%97(Queue)/" title="FreeRTOS中队列(Queue)">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">FreeRTOS中队列(Queue)</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/10/04/FreeRTOS%E5%8F%98%E9%87%8F%E3%80%81%E5%87%BD%E6%95%B0%E5%8F%8A%E5%AE%8F%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99/" title="FreeRTOS变量、函数及宏命名规则">
+                        <span class="hidden-mobile">FreeRTOS变量、函数及宏命名规则</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"vknpQgHbpd1oLUPUwwPbdY3B-gzGzoHsz","appKey":"1DCiNflrxTVqUxWR5T00HypH","path":"window.location.pathname","placeholder":"欢迎留言交流","avatar":"robohash","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":true,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <p <i class="iconfont icon-copyright"></i> <span>2023 | KayougZhang</span> </p> <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

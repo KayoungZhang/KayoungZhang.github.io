@@ -225,15 +225,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/04/30/sht3x%E6%B8%A9%E6%B9%BF%E5%BA%A6%E4%BC%A0%E6%84%9F%E5%99%A8%E7%9A%84%E5%BC%80%E5%8F%91%E8%AE%BE%E8%AE%A1/" target="_self">
-          sht3x温湿度传感器的开发设计
+        <a href="/2023/05/25/PT100%E6%B5%8B%E6%B8%A9%E7%94%B5%E8%B7%AF%E6%80%BB%E7%BB%93%E5%88%86%E6%9E%90/" target="_self">
+          PT100测温电路总结分析
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/04/30/sht3x%E6%B8%A9%E6%B9%BF%E5%BA%A6%E4%BC%A0%E6%84%9F%E5%99%A8%E7%9A%84%E5%BC%80%E5%8F%91%E8%AE%BE%E8%AE%A1/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/25/PT100%E6%B5%8B%E6%B8%A9%E7%94%B5%E8%B7%AF%E6%80%BB%E7%BB%93%E5%88%86%E6%9E%90/" target="_self">
         <div>
-          国内市场碰到的温湿度传感器一般都采用的是瑞士公司Sensirion 生产的，像SHT2x 和 SHT3x和 SHTCx和 SHT4x等系列温湿度传感器。下面介绍一下其经典的数字温湿度传感器SHT31-DIS-B。 特点  电源电压：2.4 - 5.5V 相对湿度范围：0 - 100%RH 相对湿度精度：2%RH 工作温度范围：-40 - 125°C 温度精度：0.2°C 接口：I²C
+          PT100 温度传感器是一种以铂(Pt)作成的电阻式温度传感器，属于正电阻系数,其电阻和温度变化的关系为：R=R0(1+αT) 其中α=0.003851,Ro 为 100Ω(在 0℃的电阻值),T 为摄氏温度。 PT100测温采样电路主要有电桥法、恒流源法、集成芯片法等，分别介绍如下： 一、惠斯通电桥法 惠斯通电桥（Wheatstone bridge）又称为惠斯登电桥，是一种测量工具，用来精
         </div>
       </a>
 
@@ -241,8 +241,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-04-30 18:32" pubdate>
-              2023-04-30
+            <time datetime="2023-05-25 22:31" pubdate>
+              2023-05-25
             </time>
           </div>
         
@@ -257,7 +257,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E5%8D%95%E7%89%87%E6%9C%BA/" class="category-chain-item">单片机</a>
+  <a href="/categories/%E7%A1%AC%E4%BB%B6/" class="category-chain-item">硬件</a>
   
   
 
@@ -272,7 +272,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/%E6%B8%A9%E6%B9%BF%E5%BA%A6/">#温湿度</a>
+              <a href="/tags/%E7%94%B5%E8%B7%AF/">#电路</a>
             
           </div>
         
@@ -286,15 +286,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/04/28/%E6%B8%A9%E5%BA%A6%E4%BC%A0%E6%84%9F%E5%99%A8DS18B20%E7%9A%84%E5%BA%94%E7%94%A8/" target="_self">
-          温度传感器DS18B20的应用
+        <a href="/2023/05/25/pcb-layout-%E5%AE%A1%E6%A0%B8%E8%A1%A8/" target="_self">
+          pcb layout 审核表
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/04/28/%E6%B8%A9%E5%BA%A6%E4%BC%A0%E6%84%9F%E5%99%A8DS18B20%E7%9A%84%E5%BA%94%E7%94%A8/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/25/pcb-layout-%E5%AE%A1%E6%A0%B8%E8%A1%A8/" target="_self">
         <div>
-          DS18B20温度传感器在日常应用中，使用比较广泛，以下简单介绍一下： 特点：  单总线传输（1-Wire interface） 供电范围： 3.0V ~ 5.5V 测量温度范围：-55°C ~ +125°C 精度：-10°C ~ +85°C（±0.5°C） 分辨率： 9 ~ 12 bits 每一个 DS1820 有唯一的系列号，因此多个 DS1820 可以存在于同一条单线总线上。
+          PCB设计完成需要进行综合检查，除了设计软件设定的规则外，还需要手动确认一些其它重要的信息。 结构  PCB中的定位孔位置大小是否和结构的要求一致，旁边是否有挨得太近的器件（保留间距大于1mm）； 接插件的型号，方向，顺序是否和要求一致，位置是否合理； 母板，子板的连接座的方向，顺序是否一致，位置是否合理； 新器件的封装，脚位定义，电气连接都需校对；  原理图和PCB  确保从
         </div>
       </a>
 
@@ -302,8 +302,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-04-28 13:41" pubdate>
-              2023-04-28
+            <time datetime="2023-05-25 17:32" pubdate>
+              2023-05-25
             </time>
           </div>
         
@@ -318,7 +318,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E5%8D%95%E7%89%87%E6%9C%BA/" class="category-chain-item">单片机</a>
+  <a href="/categories/%E7%A1%AC%E4%BB%B6/" class="category-chain-item">硬件</a>
   
   
 
@@ -333,7 +333,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/%E6%B8%A9%E5%BA%A6%E4%BC%A0%E6%84%9F%E5%99%A8/">#温度传感器</a>
+              <a href="/tags/pcb/">#pcb</a>
             
           </div>
         
@@ -347,15 +347,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/04/27/%E4%BC%A0%E6%84%9F%E5%99%A8%E7%9A%84%E4%B8%89%E7%A7%8D%E5%B8%B8%E7%94%A8%E7%AE%97%E6%B3%95%E5%A4%84%E7%90%86/" target="_self">
-          传感器的三种常用算法处理
+        <a href="/2023/05/24/PCB-layout-rules/" target="_self">
+          PCB layout rules
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/04/27/%E4%BC%A0%E6%84%9F%E5%99%A8%E7%9A%84%E4%B8%89%E7%A7%8D%E5%B8%B8%E7%94%A8%E7%AE%97%E6%B3%95%E5%A4%84%E7%90%86/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/24/PCB-layout-rules/" target="_self">
         <div>
-          加权平滑：平滑和均衡传感器数据，减小偶然数据突变的影响。 抽取突变：去除静态和缓慢变化的数据背景，强调瞬间变化。 简单移动平均线：保留数据流最近的K个数据，取平均值。   加权平滑，使用算法如下： 新值 = 旧值(1 - a) + X  a；其中a为设置的权值，X为最新数据，程序实现如下： #define filter_coe 0.00001  //滤波系数 小于1 static
+          PCB设计过程中，器件的整体布局和关键信号的layout至关重要，布局得当，信号线layout顺畅，就会在后续设计开发过程中，减少不必要的麻烦，相反，布局不当，layout失误，一是影响PCB整体的美观程度，二是在测试应用中带来诸多麻烦。为了减少不必要的设计麻烦，下面介绍一些常用的PCB设计的布局和layout规则： PCB布局  首先对结构有限高或位置要求的器件进行摆放。布局要美观，器件间
         </div>
       </a>
 
@@ -363,8 +363,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-04-27 19:57" pubdate>
-              2023-04-27
+            <time datetime="2023-05-24 19:23" pubdate>
+              2023-05-24
             </time>
           </div>
         
@@ -379,7 +379,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" class="category-chain-item">数据结构与算法</a>
+  <a href="/categories/%E7%A1%AC%E4%BB%B6/" class="category-chain-item">硬件</a>
   
   
 
@@ -394,9 +394,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/sensor/">#sensor</a>
-            
-              <a href="/tags/%E7%AE%97%E6%B3%95/">#算法</a>
+              <a href="/tags/pcb/">#pcb</a>
             
           </div>
         
@@ -410,15 +408,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/04/27/STC%E8%8A%AF%E7%89%87%E5%86%85%E9%83%A8EEPROM%E7%9A%84%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" target="_self">
-          STC芯片内部EEPROM的程序设计
+        <a href="/2023/05/20/pcb%E8%AE%BE%E8%AE%A1%E4%B9%8B%E9%87%8D%E8%A6%81%E4%BF%A1%E5%8F%B7%E7%BA%BFlayout%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" target="_self">
+          pcb设计之重要信号线layout注意事项
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/04/27/STC%E8%8A%AF%E7%89%87%E5%86%85%E9%83%A8EEPROM%E7%9A%84%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/20/pcb%E8%AE%BE%E8%AE%A1%E4%B9%8B%E9%87%8D%E8%A6%81%E4%BF%A1%E5%8F%B7%E7%BA%BFlayout%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" target="_self">
         <div>
-          STC单片机内部集成了的EEPROM是与程序空间是分开的，利用ISP/IAP技术可将内部Data Flash当EEPROM，擦写次数在10万次以上。以下根据datasheet简单介绍一下单片机内部EEPROM的编程方式。 IAP及EEPROM特殊功能寄存器介绍  ISP/IAP数据寄存器IAP_DATA ISP/IAP地址寄存器IAP_ADDRH和IAP_ADDRL ISP/IAP命令寄
+          这一篇主要看看pcb设计中重要信号线的layout注意事项：  差分信号线尽量在一起同一层走线     差分间距无法满足20mil，最好进行包地   image-20230521104926751 - 副本   usb按90欧姆差分阻抗进行走线，等长处理    usb打孔换层应在旁边放置地过孔回流    网口按100欧姆差分阻抗走线，等长处理
         </div>
       </a>
 
@@ -426,8 +424,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-04-27 17:15" pubdate>
-              2023-04-27
+            <time datetime="2023-05-20 17:46" pubdate>
+              2023-05-20
             </time>
           </div>
         
@@ -442,7 +440,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E5%8D%95%E7%89%87%E6%9C%BA/" class="category-chain-item">单片机</a>
+  <a href="/categories/%E7%A1%AC%E4%BB%B6/" class="category-chain-item">硬件</a>
   
   
 
@@ -457,7 +455,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/stc/">#stc</a>
+              <a href="/tags/pcb/">#pcb</a>
             
           </div>
         
@@ -471,15 +469,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/04/26/%E5%85%B3%E4%BA%8ELCD1602%E7%9A%84%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91/" target="_self">
-          关于LCD1602的程序开发
+        <a href="/2023/05/20/pcb%E8%AE%BE%E8%AE%A1%E4%B9%8B%E6%99%AE%E9%80%9A%E4%BF%A1%E5%8F%B7%E7%BA%BFlayout%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" target="_self">
+          pcb设计之普通信号线layout注意事项
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/04/26/%E5%85%B3%E4%BA%8ELCD1602%E7%9A%84%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/20/pcb%E8%AE%BE%E8%AE%A1%E4%B9%8B%E6%99%AE%E9%80%9A%E4%BF%A1%E5%8F%B7%E7%BA%BFlayout%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" target="_self">
         <div>
-          LCD1602字符型显示屏在单片机程序开发中作为显示输出的器件，因为简单，成本低，被大量应用。在我们平时开发调试过程中，除了串口printf可以输出信息外，其实，LCD1602一样可以作为调试工具，用来输出一些重要信息。下面详细介绍一下它的程序设计。 1. LCD1602引脚信号  2. 基本操作时序  读状态：RS = L，RW = H， E = H 写指令：RS = L，RW =
+          这一篇主要看普通信号线的layout注意事项：  走线不要出现直角锐角     走线不要超过焊盘宽度，应以焊盘同宽出线，可出完焊盘后立即加粗    尽量减少环路      7个地焊盘只有两个地孔，最多最多三个焊盘一个过孔    所有层中间间距拉开一点，加到15mil~20mil    走线不要压到电源内缩层   202305201020202
         </div>
       </a>
 
@@ -487,8 +485,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-04-26 16:39" pubdate>
-              2023-04-26
+            <time datetime="2023-05-20 17:45" pubdate>
+              2023-05-20
             </time>
           </div>
         
@@ -503,7 +501,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E5%8D%95%E7%89%87%E6%9C%BA/" class="category-chain-item">单片机</a>
+  <a href="/categories/%E7%A1%AC%E4%BB%B6/" class="category-chain-item">硬件</a>
   
   
 
@@ -518,7 +516,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/lcd/">#lcd</a>
+              <a href="/tags/pcb/">#pcb</a>
             
           </div>
         
@@ -532,15 +530,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/04/24/Typora%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F%E6%A0%BC%E5%BC%8F%E7%BC%96%E8%BE%91%E6%B1%87%E6%80%BB/" target="_self">
-          Typora数学公式格式编辑汇总
+        <a href="/2023/05/20/pcb%E8%AE%BE%E8%AE%A1%E4%B9%8B%E7%94%B5%E6%BA%90layout%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" target="_self">
+          pcb设计之电源layout注意事项
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/04/24/Typora%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F%E6%A0%BC%E5%BC%8F%E7%BC%96%E8%BE%91%E6%B1%87%E6%80%BB/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/20/pcb%E8%AE%BE%E8%AE%A1%E4%B9%8B%E7%94%B5%E6%BA%90layout%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" target="_self">
         <div>
-          在Typora编辑中，会经常使用到数学公式，以下总结常用的公式编辑语法。 常用符号     类型及语法 显示 类型及语法 显示     上标 a^2 \(a^2\) 下标 A_2 \(A_2\)   正负号 2 \pm 3 \(2 \pm 3\) 分式 \frac{1}{2} \(\frac{1}{2}\)   根号 \sqrt[6]{2} \
+          pcb设计中，在layout时需要遵循一定规范，才会避免设计出不合格的pcb板，下面几篇文章主要总结一下layout过程中常见的问题，本篇是关于电源layout，内容主要来源自pcb联盟网论坛。  电源滤波电容尽量靠近IC管脚放置。    电源走线载流过小，加大铺铜宽度，保证载流量    image-20230520205310933   电源分割线20mil以上，分割的
         </div>
       </a>
 
@@ -548,8 +546,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-04-24 17:03" pubdate>
-              2023-04-24
+            <time datetime="2023-05-20 17:44" pubdate>
+              2023-05-20
             </time>
           </div>
         
@@ -564,7 +562,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E5%85%B6%E5%AE%83/" class="category-chain-item">其它</a>
+  <a href="/categories/%E7%A1%AC%E4%BB%B6/" class="category-chain-item">硬件</a>
   
   
 
@@ -579,7 +577,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/typora/">#typora</a>
+              <a href="/tags/pcb/">#pcb</a>
             
           </div>
         
@@ -593,15 +591,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/04/24/PID%E7%90%86%E8%AE%BA%E5%8F%8A%E7%A8%8B%E5%BA%8F%E5%AE%9E%E7%8E%B0/" target="_self">
-          PID理论及程序实现
+        <a href="/2023/05/19/Altium-Designer%E8%BD%AF%E4%BB%B6%E5%BA%94%E7%94%A8%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/" target="_self">
+          Altium Designer软件应用常见问题
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/04/24/PID%E7%90%86%E8%AE%BA%E5%8F%8A%E7%A8%8B%E5%BA%8F%E5%AE%9E%E7%8E%B0/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/19/Altium-Designer%E8%BD%AF%E4%BB%B6%E5%BA%94%E7%94%A8%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/" target="_self">
         <div>
-          PID控制的概念  PID 控制的整体框图：  PID是 Proportion Integration Differentiation 的缩写，由比例项（Proportion ），积分项（Integration ），微分项（Differentiation） 三个部分组成，具体形式就是下面的公式： \[ U(t) = Kp \{ err(t) + \frac{1}{Ti}*\int_0^t
+          使用Altium Designer时，有时候会碰到一些不常见的问题，以下总结几个，后续发现了问题，再增加。  高版本AD无法寻找系统设置项  解决方法： 高版本在软件右上角有个设置图标即是设置项或 Tools -&gt; Preferences.  在低版本AD，PCB中拖动元件，元件不显示。  解决方法：  Preferences -&gt; PCB Editor -&gt
         </div>
       </a>
 
@@ -609,8 +607,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-04-24 15:24" pubdate>
-              2023-04-24
+            <time datetime="2023-05-19 22:42" pubdate>
+              2023-05-19
             </time>
           </div>
         
@@ -625,7 +623,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" class="category-chain-item">数据结构与算法</a>
+  <a href="/categories/%E7%A1%AC%E4%BB%B6/" class="category-chain-item">硬件</a>
   
   
 
@@ -640,7 +638,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/pid/">#pid</a>
+              <a href="/tags/pcb/">#pcb</a>
             
           </div>
         
@@ -654,15 +652,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/04/24/PID%E5%8F%82%E6%95%B0%E7%9A%84%E8%87%AA%E6%95%B4%E5%AE%9A/" target="_self">
-          PID参数的自整定
+        <a href="/2023/05/18/Altium-Designer-Gerber-Files-%E7%94%9F%E6%88%90%E6%AD%A5%E9%AA%A4/" target="_self">
+          Altium Designer Gerber Files 生成步骤
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/04/24/PID%E5%8F%82%E6%95%B0%E7%9A%84%E8%87%AA%E6%95%B4%E5%AE%9A/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/18/Altium-Designer-Gerber-Files-%E7%94%9F%E6%88%90%E6%AD%A5%E9%AA%A4/" target="_self">
         <div>
-          在某些PID应用场合，不同的对象就得采用不同的参数值，所以需要进行参数自整定。实质就是在首次使用时，通过N次测量得到一套PID参数。具体的整定方法有三种：临界比例度法、衰减曲线法、经验法。三种方法共同点都是通过试验，然后按照工程经验公式对控制器参数进行整定。现在一般采用比较多的是临界比例度法。 1、临界比例度法（Ziegler-Nichols） 1.1 操作方法 （1）将纯比例控制器接入到闭
+          pcb layout完成后，然后就可以发送到PCB板厂进行生产制造了，一般为了保密性质，发送给厂商的是GerberFiles文件，所以，就需要生成GerberFiles。以下说一下Altium Designer生成GerberFiles的具体的操作步骤： 生成Gerber文件前，需要设置PCB原点，工艺边，定位孔，钻孔描述(drill层放置 '.legend')，尺寸标注(一般为mechanic
         </div>
       </a>
 
@@ -670,8 +668,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-04-24 15:21" pubdate>
-              2023-04-24
+            <time datetime="2023-05-18 21:35" pubdate>
+              2023-05-18
             </time>
           </div>
         
@@ -686,7 +684,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" class="category-chain-item">数据结构与算法</a>
+  <a href="/categories/%E7%A1%AC%E4%BB%B6/" class="category-chain-item">硬件</a>
   
   
 
@@ -701,7 +699,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/pid/">#pid</a>
+              <a href="/tags/pcb/">#pcb</a>
             
           </div>
         
@@ -715,15 +713,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/04/23/stc%E5%8D%95%E7%89%87%E6%9C%BA%E5%AD%98%E5%82%A8%E5%99%A8/" target="_self">
-          stc单片机存储器
+        <a href="/2023/05/17/Altium-Designer-%E5%BF%AB%E6%8D%B7%E9%94%AE%E6%B1%87%E6%80%BB/" target="_self">
+          Altium Designer 快捷键汇总
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/04/23/stc%E5%8D%95%E7%89%87%E6%9C%BA%E5%AD%98%E5%82%A8%E5%99%A8/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/17/Altium-Designer-%E5%BF%AB%E6%8D%B7%E9%94%AE%E6%B1%87%E6%80%BB/" target="_self">
         <div>
-          stc单片机存储器结构的主要特点是 程序存储器 和 数据存储器 是各自独立编址的。单片机内部在物理和逻辑上有三个独立的地址空间：flash ROM(内部集成EEPROM)，片内基本RAM(256字节)和片内扩展RAM(1024字节)。 程序存储器flash ROM： 程序存储器用于存放用户程序、数据和表格等信息。内部集成了的EEPROM是与程序空间是分开的，利用ISP/IAP技术可将内部Dat
+          最近新项目需要设计电路和PCB，刚好结合之前整理的Altium Designer快捷键汇总一下：  对齐     快捷键 功能     A 弹出对齐对话框   A+L 向左对齐   A+R 向右对齐   A+D 横向等间距   A+T 向上对齐   A+B 向下对齐   A+S 纵向等间距     元件调整
         </div>
       </a>
 
@@ -731,8 +729,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-04-23 19:46" pubdate>
-              2023-04-23
+            <time datetime="2023-05-17 20:42" pubdate>
+              2023-05-17
             </time>
           </div>
         
@@ -747,7 +745,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E5%8D%95%E7%89%87%E6%9C%BA/" class="category-chain-item">单片机</a>
+  <a href="/categories/%E7%A1%AC%E4%BB%B6/" class="category-chain-item">硬件</a>
   
   
 
@@ -762,9 +760,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/stc/">#stc</a>
-            
-              <a href="/tags/%E5%AD%98%E5%82%A8%E5%99%A8/">#存储器</a>
+              <a href="/tags/pcb/">#pcb</a>
             
           </div>
         
@@ -778,15 +774,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/04/23/STC12C5A60S2%E5%8D%95%E7%89%87%E6%9C%BA%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" target="_self">
-          STC12C5A60S2单片机注意事项
+        <a href="/2023/05/15/crc%E6%A0%A1%E9%AA%8C%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0/" target="_self">
+          crc校验及其实现
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/04/23/STC12C5A60S2%E5%8D%95%E7%89%87%E6%9C%BA%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/15/crc%E6%A0%A1%E9%AA%8C%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0/" target="_self">
         <div>
-          STC12C5A60S2单片机是stc12系列一款比较经典的MCU，下面对照它的参考手册，摘录其使用时注意事项：
+          在通信领域传输数据时，为了避免接收到错误的数据，一般会对源数据和接收到的数据进行特定的校验处理，如果一致，则说明传输正确，否则传输发生了错误。常用的校验算法有奇偶校验、校验和、CRC等，这里主要看看CRC校验。 CRC简介 循环冗余校验（Cyclic Redundancy Check， CRC），它是利用除法及余数的原理来作错误侦测的，对数据进行多项式计算，并将得到的结果附在帧的后面，接收设备
         </div>
       </a>
 
@@ -794,8 +790,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-04-23 18:25" pubdate>
-              2023-04-23
+            <time datetime="2023-05-15 21:33" pubdate>
+              2023-05-15
             </time>
           </div>
         
@@ -810,7 +806,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E5%8D%95%E7%89%87%E6%9C%BA/" class="category-chain-item">单片机</a>
+  <a href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/" class="category-chain-item">编程基础</a>
   
   
 
@@ -825,7 +821,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/stc/">#stc</a>
+              <a href="/tags/crc/">#crc</a>
             
           </div>
         
@@ -837,7 +833,7 @@
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/page/11/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/#board">10</a><a class="page-number" href="/page/11/#board">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/#board">13</a><a class="page-number" href="/page/14/#board">14</a><a class="page-number" href="/page/15/#board">15</a><a class="extend next" rel="next" href="/page/13/#board"><i class="iconfont icon-arrowright"></i></a>
+      <a class="extend prev" rel="prev" href="/page/11/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/#board">10</a><a class="page-number" href="/page/11/#board">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/#board">13</a><a class="page-number" href="/page/14/#board">14</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/#board">16</a><a class="extend next" rel="next" href="/page/13/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 
