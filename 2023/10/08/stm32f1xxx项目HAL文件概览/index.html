@@ -16,13 +16,15 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta property="og:type" content="article">
-<meta property="og:title" content="FreeRTOS中事件组(EventGroups)">
-<meta property="og:url" content="http://example.com/2023/10/06/FreeRTOS%E4%B8%AD%E4%BA%8B%E4%BB%B6%E7%BB%84-EventGroups/index.html">
+    <meta name="description" content="CMSIS  stm32f1xx.h  全局库文件的配置 1. 处理器芯片平台的选择及其头文件包含 2. CMSIS 版本 3. 平台共用宏： #define SET_BIT(REG, BIT)     ((REG) |&#x3D; (BIT)) #define CLEAR_BIT(REG, BIT)   ((REG) &amp;&#x3D; ~(BIT)) #define READ_BIT(REG, BIT">
+<meta property="og:type" content="article">
+<meta property="og:title" content="stm32f1xxx项目HAL文件概览">
+<meta property="og:url" content="http://example.com/2023/10/08/stm32f1xxx%E9%A1%B9%E7%9B%AEHAL%E6%96%87%E4%BB%B6%E6%A6%82%E8%A7%88/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="CMSIS  stm32f1xx.h  全局库文件的配置 1. 处理器芯片平台的选择及其头文件包含 2. CMSIS 版本 3. 平台共用宏： #define SET_BIT(REG, BIT)     ((REG) |&#x3D; (BIT)) #define CLEAR_BIT(REG, BIT)   ((REG) &amp;&#x3D; ~(BIT)) #define READ_BIT(REG, BIT">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-10-06T13:46:34.000Z">
-<meta property="article:modified_time" content="2023-10-07T05:27:42.353Z">
+<meta property="article:published_time" content="2023-10-08T07:11:36.000Z">
+<meta property="article:modified_time" content="2023-10-08T07:12:44.334Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -196,7 +198,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle">FreeRTOS中事件组(EventGroups)</span>
+            <span id="subtitle">stm32f1xxx项目HAL文件概览</span>
           
         </div>
 
@@ -207,8 +209,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-10-06 21:46" pubdate>
-          2023年10月6日 晚上
+        <time datetime="2023-10-08 15:11" pubdate>
+          2023年10月8日 下午
         </time>
       </span>
     
@@ -219,7 +221,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          0 字
+          2.7k 字
         
       </span>
     
@@ -230,7 +232,7 @@
         
         
         
-          1 分钟
+          10 分钟
         
       </span>
     
@@ -268,12 +270,12 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">FreeRTOS中事件组(EventGroups)</h1>
+            <h1 style="display: none">stm32f1xxx项目HAL文件概览</h1>
             
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年10月7日 下午
+                    本文最后更新于：2023年10月8日 下午
                   
                 
               </p>
@@ -281,7 +283,119 @@
             
               <div class="markdown-body">
                 
-                
+                <h3 id="cmsis">CMSIS</h3>
+<ul>
+<li><strong>stm32f1xx.h</strong></li>
+</ul>
+<div class="code-wrapper"><pre><code class="hljs c">全局库文件的配置
+<span class="hljs-number">1.</span> 处理器芯片平台的选择及其头文件包含
+<span class="hljs-number">2.</span> CMSIS 版本
+<span class="hljs-number">3.</span> 平台共用宏：
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> SET_BIT(REG, BIT)     ((REG) |= (BIT))</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> CLEAR_BIT(REG, BIT)   ((REG) &amp;= ~(BIT))</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> READ_BIT(REG, BIT)    ((REG) &amp; (BIT))</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> CLEAR_REG(REG)        ((REG) = (0x0))</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> WRITE_REG(REG, VAL)   ((REG) = (VAL))</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> READ_REG(REG)         ((REG))</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> MODIFY_REG(REG, CLEARMASK, SETMASK)  WRITE_REG((REG), (((READ_REG(REG)) &amp; (~(CLEARMASK))) | (SETMASK))) </span></code></pre></div>
+<ul>
+<li><strong>stm32f103xe.h</strong></li>
+</ul>
+<div class="code-wrapper"><pre><code class="hljs c">stm32f103xe 芯片外设寄存器定义及位定义和内存映射
+<span class="hljs-number">1.</span> CMSIS的配置和中断号定义
+<span class="hljs-number">2.</span> 外设寄存器结构体的定义
+<span class="hljs-number">3.</span> 外设内存表及外设声明   <span class="hljs-comment">//如：#define GPIOA  ((GPIO_TypeDef *)GPIOA_BASE)</span>
+<span class="hljs-number">4.</span> 外设寄存器位定义</code></pre></div>
+<ul>
+<li><strong>startup_stm32f103xe.s</strong></li>
+</ul>
+<div class="code-wrapper"><pre><code class="hljs armasm">针对MDK-<span class="hljs-meta">ARM</span>工具链STM32F103xE处理器的启动代码</code></pre></div>
+<ul>
+<li><strong>system_stm32f1xx.h/system_stm32f1xx.c</strong></li>
+</ul>
+<div class="code-wrapper"><pre><code class="hljs c">系统初始化及时钟配置
+<span class="hljs-keyword">extern</span> <span class="hljs-type">void</span> <span class="hljs-title function_">SystemInit</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span>;
+<span class="hljs-keyword">extern</span> <span class="hljs-type">void</span> <span class="hljs-title function_">SystemCoreClockUpdate</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span>;</code></pre></div>
+<h3 id="stm32f1xx_hal_driver">STM32F1xx_HAL_Driver</h3>
+<ul>
+<li><strong>stm32f1xx_hal.h/stm32f1xx_hal.c</strong></li>
+</ul>
+<div class="code-wrapper"><pre><code class="hljs c">HAL库初始化及SysTick时钟相关项和Debug模式下各外设启用和禁用
+<span class="hljs-comment">/* Peripheral Control functions  ************************************************/</span>
+HAL_StatusTypeDef <span class="hljs-title function_">HAL_Init</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span>;
+HAL_StatusTypeDef <span class="hljs-title function_">HAL_DeInit</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span>;
+<span class="hljs-type">void</span> <span class="hljs-title function_">HAL_MspInit</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span>;
+<span class="hljs-type">void</span> <span class="hljs-title function_">HAL_MspDeInit</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span>;
+HAL_StatusTypeDef <span class="hljs-title function_">HAL_InitTick</span><span class="hljs-params">(<span class="hljs-type">uint32_t</span> TickPriority)</span>;
+<span class="hljs-type">void</span> <span class="hljs-title function_">HAL_IncTick</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span>;
+<span class="hljs-type">void</span> <span class="hljs-title function_">HAL_Delay</span><span class="hljs-params">(<span class="hljs-type">uint32_t</span> Delay)</span>;
+<span class="hljs-type">uint32_t</span> <span class="hljs-title function_">HAL_GetTick</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span>;
+<span class="hljs-type">uint32_t</span> <span class="hljs-title function_">HAL_GetTickPrio</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span>;
+HAL_StatusTypeDef <span class="hljs-title function_">HAL_SetTickFreq</span><span class="hljs-params">(HAL_TickFreqTypeDef Freq)</span>;
+HAL_TickFreqTypeDef <span class="hljs-title function_">HAL_GetTickFreq</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span>;
+<span class="hljs-type">void</span> <span class="hljs-title function_">HAL_SuspendTick</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span>;
+<span class="hljs-type">void</span> <span class="hljs-title function_">HAL_ResumeTick</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span>;</code></pre></div>
+<ul>
+<li><strong>stm32f1xx_hal_cortex.h/stm32f1xx_hal_cortex.c</strong></li>
+</ul>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-number">1.</span> CORTEX M3 NVIC和SYSTICK相关项
+<span class="hljs-type">uint32_t</span> <span class="hljs-title function_">HAL_NVIC_GetPriorityGrouping</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span>;
+<span class="hljs-type">void</span> <span class="hljs-title function_">HAL_NVIC_GetPriority</span><span class="hljs-params">(IRQn_Type IRQn, <span class="hljs-type">uint32_t</span> PriorityGroup, <span class="hljs-type">uint32_t</span>* pPreemptPriority, <span class="hljs-type">uint32_t</span>* pSubPriority)</span>;
+<span class="hljs-type">uint32_t</span> <span class="hljs-title function_">HAL_NVIC_GetPendingIRQ</span><span class="hljs-params">(IRQn_Type IRQn)</span>;
+<span class="hljs-type">void</span> <span class="hljs-title function_">HAL_NVIC_SetPendingIRQ</span><span class="hljs-params">(IRQn_Type IRQn)</span>;
+<span class="hljs-type">void</span> <span class="hljs-title function_">HAL_NVIC_ClearPendingIRQ</span><span class="hljs-params">(IRQn_Type IRQn)</span>;
+<span class="hljs-type">uint32_t</span> <span class="hljs-title function_">HAL_NVIC_GetActive</span><span class="hljs-params">(IRQn_Type IRQn)</span>;
+<span class="hljs-type">void</span> <span class="hljs-title function_">HAL_SYSTICK_CLKSourceConfig</span><span class="hljs-params">(<span class="hljs-type">uint32_t</span> CLKSource)</span>;
+<span class="hljs-type">void</span> <span class="hljs-title function_">HAL_SYSTICK_IRQHandler</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span>;
+<span class="hljs-type">void</span> <span class="hljs-title function_">HAL_SYSTICK_Callback</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span>;
+<span class="hljs-number">2.</span> MPU相关项</code></pre></div>
+<ul>
+<li><strong>stm32f1xx_hal_msp.c</strong></li>
+</ul>
+<div class="code-wrapper"><pre><code class="hljs c">各外设与mcu相关项的初始化和复位，可在main.h中声明
+<span class="hljs-type">void</span> <span class="hljs-title function_">HAL_MspInit</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span></code></pre></div>
+<ul>
+<li><strong>stm32f1xx_hal_conf.h </strong></li>
+</ul>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-number">1.</span> 外设使能宏，不使用的外设，注释掉。
+<span class="hljs-number">2.</span> HAL System配置、回调使能配置。
+<span class="hljs-number">3.</span> Ethernet配置
+<span class="hljs-number">4.</span> HAL库头文件的配置
+<span class="hljs-number">5.</span> assert_param 断言宏的配置
+<span class="hljs-meta">#<span class="hljs-keyword">define</span>  VDD_VALUE           3300U <span class="hljs-comment">/*!&lt; Value of VDD in mv */</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span>  TICK_INT_PRIORITY   15U <span class="hljs-comment">/*!&lt; tick interrupt priority (lowest by default)  */</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span>  USE_RTOS            0U</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span>  PREFETCH_ENABLE     1U</span></code></pre></div>
+<ul>
+<li><strong>stm32f1xx_it.h/stm32f1xx_it.c</strong></li>
+</ul>
+<div class="code-wrapper"><pre><code class="hljs">中断和异常处理函数</code></pre></div>
+<ul>
+<li><strong>stm32f1xx_hal_def.h</strong></li>
+</ul>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-number">1.</span> HAL库共用项
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> HAL_MAX_DELAY      0xFFFFFFFFU</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> HAL_IS_BIT_SET(REG, BIT)         (((REG) &amp; (BIT)) != 0U)</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> HAL_IS_BIT_CLR(REG, BIT)         (((REG) &amp; (BIT)) == 0U)</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> __HAL_LINKDMA(__HANDLE__, __PPP_DMA_FIELD__, __DMA_HANDLE__)               \</span>
+<span class="hljs-meta">                        do&#123;                                                      \</span>
+<span class="hljs-meta">                              (__HANDLE__)-&gt;__PPP_DMA_FIELD__ = &amp;(__DMA_HANDLE__); \</span>
+<span class="hljs-meta">                              (__DMA_HANDLE__).Parent = (__HANDLE__);             \</span>
+<span class="hljs-meta">                          &#125; while(0U)</span>
+<span class="hljs-meta">#<span class="hljs-keyword">if</span> !defined(UNUSED)    #<span class="hljs-keyword">define</span> UNUSED(X) (void)X  <span class="hljs-comment">/* To avoid gcc/g++ warnings */</span></span>
+<span class="hljs-number">2.</span> 编译器配置项</code></pre></div>
+<ul>
+<li><strong>stm32f1xx_hal_gpio.h/stm32f1xx_hal_gpio.c</strong></li>
+</ul>
+<div class="code-wrapper"><pre><code class="hljs nginx"><span class="hljs-attribute">gpio</span> hal库操作函数</code></pre></div>
+<ul>
+<li><strong>stm32f1xx_ll_gpio.h/stm32f1xx_ll_gpio.c</strong></li>
+</ul>
+<div class="code-wrapper"><pre><code class="hljs nginx"><span class="hljs-attribute">gpio</span> ll库寄存器操作函数</code></pre></div>
+<ul>
+<li><strong>main.h/main.c</strong></li>
+</ul>
+<div class="code-wrapper"><pre><code class="hljs">主程序，及共用项定义头文件</code></pre></div>
 
                 
               </div>
@@ -289,6 +403,27 @@
             <hr/>
             <div>
               <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/stm32/" class="category-chain-item">stm32</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
   
   
 </div>
@@ -301,18 +436,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/10/06/FreeRTOS%E4%B8%AD%E4%B8%AD%E6%96%AD-Interrupt/" title="FreeRTOS中中断(Interrupt)">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">FreeRTOS中中断(Interrupt)</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/10/06/FreeRTOS%E4%B8%AD%E8%BD%AF%E4%BB%B6%E5%AE%9A%E6%97%B6%E5%99%A8-SoftwareTimer/" title="FreeRTOS中软件定时器(SoftwareTimer)">
-                        <span class="hidden-mobile">FreeRTOS中软件定时器(SoftwareTimer)</span>
+                      <a href="/2023/10/07/%E8%A7%A3%E5%86%B3Microsoft-Edge%E6%B5%8F%E8%A7%88%E5%99%A8%E5%85%B3%E4%BA%8E%E2%80%9C%E6%A0%B9%E6%8D%AE%E7%83%AD%E9%97%A8%E5%86%85%E5%AE%B9%E5%90%91%E4%BD%A0%E6%8E%A8%E8%8D%90%E2%80%9D%E7%9A%84%E9%97%AE%E9%A2%98/" title="解决Microsoft Edge浏览器关于“根据热门内容向你推荐”的问题">
+                        <span class="hidden-mobile">解决Microsoft Edge浏览器关于“根据热门内容向你推荐”的问题</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

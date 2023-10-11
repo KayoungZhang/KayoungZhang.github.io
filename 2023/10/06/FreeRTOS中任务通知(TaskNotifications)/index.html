@@ -16,15 +16,21 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta property="og:type" content="article">
-<meta property="og:title" content="FreeRTOS中内存管理(HeapMemory)">
-<meta property="og:url" content="http://example.com/2023/10/06/FreeRTOS%E4%B8%AD%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86-HeapMemory/index.html">
+    <meta name="description" content="在RTOS中，任务间的通信，可使用队列、信号量、事件组等方法，但这种方式需要通过中间媒介来完成，如下：  还有另一种直接通信的方式：任务通知，不需要中间的媒介对象，任务间直接通信，如下所示：  使用这种方式需要在配置文件(FreeRTOSConfig.h)中设置 configUSE_TASK_NOTIFICATIONS &#x3D; 1 。 任务通知的优势与劣势 优势  速度快：使用任务通知">
+<meta property="og:type" content="article">
+<meta property="og:title" content="FreeRTOS中任务通知(TaskNotifications)">
+<meta property="og:url" content="http://example.com/2023/10/06/FreeRTOS%E4%B8%AD%E4%BB%BB%E5%8A%A1%E9%80%9A%E7%9F%A5(TaskNotifications)/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="在RTOS中，任务间的通信，可使用队列、信号量、事件组等方法，但这种方式需要通过中间媒介来完成，如下：  还有另一种直接通信的方式：任务通知，不需要中间的媒介对象，任务间直接通信，如下所示：  使用这种方式需要在配置文件(FreeRTOSConfig.h)中设置 configUSE_TASK_NOTIFICATIONS &#x3D; 1 。 任务通知的优势与劣势 优势  速度快：使用任务通知">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-10-06T13:58:26.000Z">
-<meta property="article:modified_time" content="2023-10-07T05:27:42.353Z">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231011181422415.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231011181508166.png">
+<meta property="article:published_time" content="2023-10-06T13:45:01.000Z">
+<meta property="article:modified_time" content="2023-10-11T11:22:56.823Z">
 <meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Notification">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231011181422415.png">
   
   
   
@@ -196,7 +202,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle">FreeRTOS中内存管理(HeapMemory)</span>
+            <span id="subtitle">FreeRTOS中任务通知(TaskNotifications)</span>
           
         </div>
 
@@ -207,7 +213,7 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-10-06 21:58" pubdate>
+        <time datetime="2023-10-06 21:45" pubdate>
           2023年10月6日 晚上
         </time>
       </span>
@@ -219,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          0 字
+          1.2k 字
         
       </span>
     
@@ -230,7 +236,7 @@
         
         
         
-          1 分钟
+          5 分钟
         
       </span>
     
@@ -268,12 +274,12 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">FreeRTOS中内存管理(HeapMemory)</h1>
+            <h1 style="display: none">FreeRTOS中任务通知(TaskNotifications)</h1>
             
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年10月7日 下午
+                    本文最后更新于：2023年10月11日 晚上
                   
                 
               </p>
@@ -281,7 +287,60 @@
             
               <div class="markdown-body">
                 
-                
+                <p>在RTOS中，任务间的通信，可使用队列、信号量、事件组等方法，但这种方式需要通过中间媒介来完成，如下：</p>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231011181422415.png" srcset="/img/loading.gif" lazyload alt="image-20231011181422415" style="zoom:80%;" /></p>
+<p>还有另一种直接通信的方式：<strong>任务通知</strong>，不需要中间的媒介对象，任务间直接通信，如下所示：</p>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231011181508166.png" srcset="/img/loading.gif" lazyload alt="image-20231011181508166" style="zoom:80%;" /></p>
+<p>使用这种方式需要在配置文件(FreeRTOSConfig.h)中设置 <code>configUSE_TASK_NOTIFICATIONS = 1</code> 。</p>
+<h1 id="任务通知的优势与劣势">任务通知的优势与劣势</h1>
+<h3 id="优势">优势</h3>
+<ul>
+<li><p><strong>速度快</strong>：使用任务通知将事件或数据发送到任务要比使用队列、信号量、事件组快得多。</p></li>
+<li><p><strong>内存占用小</strong>：相比于要创建通信媒介对象，每个任务的任务通知只占用固定的 8 Bytes。</p></li>
+</ul>
+<h3 id="劣势">劣势</h3>
+<ul>
+<li><p>不能发送事件或数据到中断。</p></li>
+<li><p>不能有多个接收任务。</p></li>
+<li><p>不能缓存数据项</p></li>
+<li><p>不能广播到多个任务。</p></li>
+<li><p>在阻塞状态下不能等待发送完成。</p></li>
+</ul>
+<h1 id="任务通知的api函数">任务通知的API函数</h1>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">/* 发出通知(轻量版) */</span>
+BaseType_t <span class="hljs-title function_">xTaskNotifyGive</span><span class="hljs-params">( </span>
+<span class="hljs-params">  TaskHandle_t xTaskToNotify <span class="hljs-comment">/* 发送通知的任务句柄 */</span></span>
+<span class="hljs-params">)</span>;
+<span class="hljs-comment">/* 中断模式下发出通知(轻量版) */</span>
+<span class="hljs-type">void</span> <span class="hljs-title function_">vTaskNotifyGiveFromISR</span><span class="hljs-params">( </span>
+<span class="hljs-params">  TaskHandle_t xTaskToNotify,<span class="hljs-comment">/* 发送通知的任务句柄 */</span></span>
+<span class="hljs-params">  BaseType_t *pxHigherPriorityTaskWoken <span class="hljs-comment">/* 唤醒高优先级任务 */</span></span>
+<span class="hljs-params">)</span>;
+<span class="hljs-comment">/* 读取通知(轻量版) */</span>
+<span class="hljs-type">uint32_t</span> <span class="hljs-title function_">ulTaskNotifyTake</span><span class="hljs-params">( </span>
+<span class="hljs-params">  BaseType_t xClearCountOnExit, <span class="hljs-comment">/* pdTRUE or pdFALSE 任务通知值的变化 */</span></span>
+<span class="hljs-params">  TickType_t xTicksToWait <span class="hljs-comment">/* 任务在阻塞态下等待的最长时间 */</span></span>
+<span class="hljs-params">)</span>;</code></pre></div>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">/* 发出通知(高级版) */</span>
+BaseType_t <span class="hljs-title function_">xTaskNotify</span><span class="hljs-params">( </span>
+<span class="hljs-params">  TaskHandle_t xTaskToNotify,<span class="hljs-comment">/* 发送通知的任务句柄 */</span></span>
+<span class="hljs-params">  <span class="hljs-type">uint32_t</span> ulValue,<span class="hljs-comment">/* 通知的值 */</span></span>
+<span class="hljs-params">  eNotifyAction eAction <span class="hljs-comment">/* 枚举，更新任务的通知值 */</span></span>
+<span class="hljs-params">)</span>;
+<span class="hljs-comment">/* 中断模式下发出通知(高级版) */</span>
+BaseType_t <span class="hljs-title function_">xTaskNotifyFromISR</span><span class="hljs-params">( </span>
+<span class="hljs-params">  TaskHandle_t xTaskToNotify,<span class="hljs-comment">/* 发送通知的任务句柄 */</span></span>
+<span class="hljs-params">  <span class="hljs-type">uint32_t</span> ulValue,<span class="hljs-comment">/* 通知的值 */</span></span>
+<span class="hljs-params">  eNotifyAction eAction,<span class="hljs-comment">/* 枚举，更新任务的通知值 */</span></span>
+<span class="hljs-params">  BaseType_t *pxHigherPriorityTaskWoken <span class="hljs-comment">/* 唤醒高优先级任务 */</span></span>
+<span class="hljs-params">)</span>;
+<span class="hljs-comment">/* 读取通知(高级版) */</span>
+BaseType_t <span class="hljs-title function_">xTaskNotifyWait</span><span class="hljs-params">( </span>
+<span class="hljs-params">  <span class="hljs-type">uint32_t</span> ulBitsToClearOnEntry,<span class="hljs-comment">/* 位设置，在任务检查前清除不是挂起或阻塞态的任务通知 */</span></span>
+<span class="hljs-params">  <span class="hljs-type">uint32_t</span> ulBitsToClearOnExit,<span class="hljs-comment">/* 位设置，在函数退出前，传递通知值 */</span></span>
+<span class="hljs-params">  <span class="hljs-type">uint32_t</span> *pulNotificationValue,<span class="hljs-comment">/* 用来传递任务的通知值 */</span></span>
+<span class="hljs-params">  TickType_t xTicksToWait<span class="hljs-comment">/* 任务在阻塞态下等待的最长时间 */</span></span>
+<span class="hljs-params">)</span>;</code></pre></div>
 
                 
               </div>
@@ -290,6 +349,34 @@
             <div>
               <div class="post-metas my-3">
   
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/RTOS/" class="category-chain-item">RTOS</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Notification/">#Notification</a>
+      
+    </div>
   
 </div>
 
@@ -301,9 +388,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/10/07/%E8%A7%A3%E5%86%B3Microsoft-Edge%E6%B5%8F%E8%A7%88%E5%99%A8%E5%85%B3%E4%BA%8E%E2%80%9C%E6%A0%B9%E6%8D%AE%E7%83%AD%E9%97%A8%E5%86%85%E5%AE%B9%E5%90%91%E4%BD%A0%E6%8E%A8%E8%8D%90%E2%80%9D%E7%9A%84%E9%97%AE%E9%A2%98/" title="解决Microsoft Edge浏览器关于“根据热门内容向你推荐”的问题">
+                      <a href="/2023/10/06/FreeRTOS%E4%B8%AD%E8%BD%AF%E4%BB%B6%E5%AE%9A%E6%97%B6%E5%99%A8(SoftwareTimer)/" title="FreeRTOS中软件定时器(SoftwareTimer)">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">解决Microsoft Edge浏览器关于“根据热门内容向你推荐”的问题</span>
+                        <span class="hidden-mobile">FreeRTOS中软件定时器(SoftwareTimer)</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -311,8 +398,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/10/06/FreeRTOS%E4%B8%AD%E4%BA%92%E6%96%A5%E9%87%8F-Mutexes/" title="FreeRTOS中互斥量(Mutexes)">
-                        <span class="hidden-mobile">FreeRTOS中互斥量(Mutexes)</span>
+                      <a href="/2023/10/05/FreeRTOS%E4%B8%AD%E4%BF%A1%E5%8F%B7%E9%87%8F(Semaphore)/" title="FreeRTOS中信号量(Semaphore)">
+                        <span class="hidden-mobile">FreeRTOS中信号量(Semaphore)</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
