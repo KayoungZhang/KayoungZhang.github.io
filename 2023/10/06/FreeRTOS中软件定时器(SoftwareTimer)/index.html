@@ -16,15 +16,21 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta property="og:type" content="article">
+    <meta name="description" content="在FreeRTOS中，软件定时器由内核支配，不需要硬件支持，和硬件定时器无关，要使用软件定时器，需要在配置文件中设置configUSE_TIMERS 为 1。 软件定时器特性  回调函数  void ATimerCallback(TimerHandle_t xTimer); 回调函数尽可能短，一定不要进入阻塞状态。  定时周期  定时器启动到执行定时器回调函数之间的时间。">
+<meta property="og:type" content="article">
 <meta property="og:title" content="FreeRTOS中软件定时器(SoftwareTimer)">
 <meta property="og:url" content="http://example.com/2023/10/06/FreeRTOS%E4%B8%AD%E8%BD%AF%E4%BB%B6%E5%AE%9A%E6%97%B6%E5%99%A8(SoftwareTimer)/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="在FreeRTOS中，软件定时器由内核支配，不需要硬件支持，和硬件定时器无关，要使用软件定时器，需要在配置文件中设置configUSE_TIMERS 为 1。 软件定时器特性  回调函数  void ATimerCallback(TimerHandle_t xTimer); 回调函数尽可能短，一定不要进入阻塞状态。  定时周期  定时器启动到执行定时器回调函数之间的时间。">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231012105004755.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231012110049342.png">
 <meta property="article:published_time" content="2023-10-06T13:45:35.000Z">
-<meta property="article:modified_time" content="2023-10-07T05:27:42.353Z">
+<meta property="article:modified_time" content="2023-10-12T03:33:04.387Z">
 <meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Timer">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231012105004755.png">
   
   
   
@@ -219,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          0 字
+          1.7k 字
         
       </span>
     
@@ -230,7 +236,7 @@
         
         
         
-          1 分钟
+          6 分钟
         
       </span>
     
@@ -273,7 +279,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年10月7日 下午
+                    本文最后更新于：2023年10月12日 中午
                   
                 
               </p>
@@ -281,7 +287,85 @@
             
               <div class="markdown-body">
                 
-                
+                <p>在FreeRTOS中，软件定时器由内核支配，不需要硬件支持，和硬件定时器无关，要使用软件定时器，需要在配置文件中设置<code>configUSE_TIMERS</code> 为 1。</p>
+<h1 id="软件定时器特性">软件定时器特性</h1>
+<ul>
+<li>回调函数</li>
+</ul>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-type">void</span> <span class="hljs-title function_">ATimerCallback</span><span class="hljs-params">(TimerHandle_t xTimer)</span>;</code></pre></div>
+<p>回调函数尽可能短，一定不要进入阻塞状态。</p>
+<ul>
+<li>定时周期</li>
+</ul>
+<p>定时器启动到执行定时器回调函数之间的时间。</p>
+<ul>
+<li>定时器类型：一次性定时器和自动加载定时器</li>
+<li>定时器的状态：休眠态(Dormant)和运行态(Running)</li>
+</ul>
+<h1 id="软件定时器的上下文">软件定时器的上下文</h1>
+<ul>
+<li><strong>RTOS的后台守护任务（Daemon Task）</strong></li>
+</ul>
+<p>所有软件定时器的回调函数都在同一个RTOS守护任务（定时器服务）的上下文中执行。</p>
+<p>守护任务是一个标准的FreeRTOS任务，在调度器开启后自动创建，它的优先级和栈大小在配置文件中配置：<code>configTIMER_TASK_PRIORITY</code> 和 <code>configTIMER_TASK_STACK_DEPTH</code> 来设置。</p>
+<p>软件定时器回调函数一定不能调用FreeRTOS API函数，这会导致任务进入阻塞状态，即导致守护任务进入阻塞态。</p>
+<ul>
+<li><strong>定时器指令队列</strong></li>
+</ul>
+<p>软件定时器API函数从调用任务到守护任务发送指令的队列称为 <strong>定时器指令队列</strong> 。它也是在调度器开启后自动创建，它的长度在配置文件中配置：<code>configTIMER_QUEUE_LENGTH</code>。</p>
+<ul>
+<li><strong>守护任务调度</strong></li>
+</ul>
+<p>守护任务的调度跟其它任务的调度一样，不同的是，当它运行时处于最高优先级，它仅仅执行命令，或执行定时器回调函数。举例如下：</p>
+<figure>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231012105004755.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20231012105004755</figcaption>
+</figure>
+<figure>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231012110049342.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20231012110049342</figcaption>
+</figure>
+<h1 id="软件定时器的创建和启动api函数">软件定时器的创建和启动API函数</h1>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">/* 创建软件定时器 */</span>
+TimerHandle_t <span class="hljs-title function_">xTimerCreate</span><span class="hljs-params">(</span>
+<span class="hljs-params">  <span class="hljs-type">const</span> <span class="hljs-type">char</span> * <span class="hljs-type">const</span> pcTimerName, <span class="hljs-comment">/* 软件定时器名 */</span></span>
+<span class="hljs-params">  TickType_t xTimerPeriodInTicks,<span class="hljs-comment">/* 定时周期（ticks） */</span></span>
+<span class="hljs-params">  UBaseType_t uxAutoReload,<span class="hljs-comment">/* 是否自动重装载 */</span></span>
+<span class="hljs-params">  <span class="hljs-type">void</span> * pvTimerID,<span class="hljs-comment">/* 定时器ID */</span></span>
+<span class="hljs-params">  TimerCallbackFunction_t pxCallbackFunction <span class="hljs-comment">/* 定时器回调函数 */</span></span>
+<span class="hljs-params">)</span>;
+<span class="hljs-comment">/* 启动定时器 */</span>
+BaseType_t <span class="hljs-title function_">xTimerStart</span><span class="hljs-params">(</span>
+<span class="hljs-params">  TimerHandle_t xTimer, <span class="hljs-comment">/* 定时器句柄 */</span></span>
+<span class="hljs-params">  TickType_t xTicksToWait <span class="hljs-comment">/* 阻塞时间 */</span></span>
+<span class="hljs-params">)</span>;</code></pre></div>
+<h1 id="软件定时器id">软件定时器ID</h1>
+<p>每一个软件定时器都有一个ID，<strong>void*</strong> 类型，当创建定时器时，会指派一个定时器ID的初始值，可以通过<code>vTimerSetTimerID（）</code> 函数更新ID值，通过<code>pvTimerGetTimerID（）</code> 获取ID值，跟其它软件定时器的API函数不同的是，这两个函数直接访问定时器而不需要通过定时器命令队列传送命令。</p>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">/* 设置定时器ID */</span>
+<span class="hljs-type">void</span> <span class="hljs-title function_">vTimerSetTimerID</span><span class="hljs-params">( </span>
+<span class="hljs-params">  <span class="hljs-type">const</span> TimerHandle_t xTimer, <span class="hljs-comment">/* 定时器句柄 */</span></span>
+<span class="hljs-params">  <span class="hljs-type">void</span> *pvNewID <span class="hljs-comment">/* 定时器新的ID */</span></span>
+<span class="hljs-params">)</span>;
+<span class="hljs-comment">/* 获取定时器ID */</span>
+<span class="hljs-type">void</span> *<span class="hljs-title function_">pvTimerGetTimerID</span><span class="hljs-params">( </span>
+<span class="hljs-params">  TimerHandle_t xTimer <span class="hljs-comment">/* 定时器句柄 */</span></span>
+<span class="hljs-params">)</span>;</code></pre></div>
+<h1 id="软件定时器其它api函数">软件定时器其它API函数</h1>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">/* 改变定时器定时周期值 */</span>
+BaseType_t <span class="hljs-title function_">xTimerChangePeriod</span><span class="hljs-params">(</span>
+<span class="hljs-params">  TimerHandle_t xTime,<span class="hljs-comment">/* 定时器句柄 */</span></span>
+<span class="hljs-params">  TickType_t x NewTimerPeriodInTicks,<span class="hljs-comment">/* 新的定时周期 */</span></span>
+<span class="hljs-params">  TickType <span class="hljs-type">_t</span> xTicksToWait<span class="hljs-comment">/* 阻塞态下等待的时长 */</span></span>
+<span class="hljs-params">)</span>;
+<span class="hljs-comment">/* 中断模式下改变定时器定时周期值 */</span>
+BaseType_t <span class="hljs-title function_">xTimerChangePeriodFromISR</span><span class="hljs-params">( </span>
+<span class="hljs-params">  TimerHandle_t xTimer,<span class="hljs-comment">/* 定时器句柄 */</span></span>
+<span class="hljs-params">  TickType_t xNewPeriod,<span class="hljs-comment">/* 新的定时周期 */</span></span>
+<span class="hljs-params">  BaseType_t *pxHigherPriorityTaskWoken <span class="hljs-comment">/* 唤醒高优先级任务 */</span></span>
+<span class="hljs-params">)</span>;
+<span class="hljs-comment">/* 定时器复位 */</span>
+BaseType_t <span class="hljs-title function_">xTimerReset</span><span class="hljs-params">( </span>
+<span class="hljs-params">  TimerHandle_t xTimer, <span class="hljs-comment">/* 定时器句柄 */</span></span>
+<span class="hljs-params">  TickType_t xTicksToWait<span class="hljs-comment">/* 阻塞态下等待的时长 */</span></span>
+<span class="hljs-params">)</span>;</code></pre></div>
 
                 
               </div>
@@ -290,6 +374,34 @@
             <div>
               <div class="post-metas my-3">
   
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/RTOS/" class="category-chain-item">RTOS</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Timer/">#Timer</a>
+      
+    </div>
   
 </div>
 

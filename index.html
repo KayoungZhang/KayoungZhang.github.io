@@ -348,7 +348,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2023/10/06/FreeRTOS%E4%B8%AD%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86(HeapMemory)/" target="_self">
         <div>
-          
+          FreeRTOS在每次创建内核对象时分配内存，在每次删除内核对象时释放RAM。此策略减少了设计和规划工作，简化了API，并最大限度地减少了内存占用。 可以使用标准C库malloc()和free()函数分配内存，但有时它们可能不适用，因为：  在小型嵌入式系统上并不总是可用的。 函数实现比较复杂，占用了宝贵的代码空间。 并非都是安全线程。 运行时间不确定，执行函数所花费的时间因调用而异。
         </div>
       </a>
 
@@ -362,6 +362,34 @@
           </div>
         
         
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/RTOS/" class="category-chain-item">RTOS</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/RAM/">#RAM</a>
+            
+          </div>
         
       </div>
     </article>
@@ -381,7 +409,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2023/10/06/FreeRTOS%E4%B8%AD%E4%BA%92%E6%96%A5%E9%87%8F(Mutexes)/" target="_self">
         <div>
-          
+          互斥是一种特殊的二进制信号量，用于控制对两个或多个任务之间共享资源的访问。要使用它，需在配置文件中设置 configUSE_MUTEXES 为1。 用于互斥时，互斥锁就像用于保护资源的令牌。当访问资源时，必须首先获取 ('token') 令牌，使用资源后，必须“返回”令牌，这样其他任务就有机会访问此共享资源。  img  互斥优先级反转 高优先级的任务必须等待低优先级的任务放弃对互斥锁
         </div>
       </a>
 
@@ -395,6 +423,34 @@
           </div>
         
         
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/RTOS/" class="category-chain-item">RTOS</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Mutexes/">#Mutexes</a>
+            
+          </div>
         
       </div>
     </article>
@@ -414,7 +470,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2023/10/06/FreeRTOS%E4%B8%AD%E4%B8%AD%E6%96%AD-Interrupt/" target="_self">
         <div>
-          
+          在 RTOS 中，需要应对各类事件。在每种情况下，必须对最佳事件处理实现策略做出判断：  怎么检测事件的发生？通常使用中断，但也可以是轮询输入。 当使用中断时，中断服务程序中内外各需要执行多少操作？一般让中断服务程序尽可能的短。 事件怎么和main函数通信，如何构建此代码以最好地适应可能的异步事件的发生？  区分任务的优先级和中断的优先级是很重要的：  任务是FreeRTOS运行的
         </div>
       </a>
 
@@ -428,6 +484,34 @@
           </div>
         
         
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/RTOS/" class="category-chain-item">RTOS</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Interrupt/">#Interrupt</a>
+            
+          </div>
         
       </div>
     </article>
@@ -447,7 +531,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2023/10/06/FreeRTOS%E4%B8%AD%E4%BA%8B%E4%BB%B6%E7%BB%84(EventGroups)/" target="_self">
         <div>
-          
+          事件组是FreeRTOS的一大特点，它允许任务间的事件传输。它跟队列和信号量的不同之处是：  事件组允许任务在阻塞状态下等待一个或多个事件的组合发生。 当事件发生时，事件组将解除在等待同一事件或事件组合的所有任务的阻塞。  事件组的这些特性使得它们可以同步多个任务，将事件广播到多个任务，允许任务在阻塞状态下等待事件组中的任何一事件发生，以及允许任务在阻塞状态下等待多个操作的完成。 事件
         </div>
       </a>
 
@@ -461,6 +545,34 @@
           </div>
         
         
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/RTOS/" class="category-chain-item">RTOS</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/EventGroups/">#EventGroups</a>
+            
+          </div>
         
       </div>
     </article>
@@ -480,7 +592,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2023/10/06/FreeRTOS%E4%B8%AD%E8%BD%AF%E4%BB%B6%E5%AE%9A%E6%97%B6%E5%99%A8(SoftwareTimer)/" target="_self">
         <div>
-          
+          在FreeRTOS中，软件定时器由内核支配，不需要硬件支持，和硬件定时器无关，要使用软件定时器，需要在配置文件中设置configUSE_TIMERS 为 1。 软件定时器特性  回调函数  void ATimerCallback(TimerHandle_t xTimer); 回调函数尽可能短，一定不要进入阻塞状态。  定时周期  定时器启动到执行定时器回调函数之间的时间。
         </div>
       </a>
 
@@ -494,6 +606,34 @@
           </div>
         
         
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/RTOS/" class="category-chain-item">RTOS</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Timer/">#Timer</a>
+            
+          </div>
         
       </div>
     </article>
@@ -574,7 +714,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2023/10/05/FreeRTOS%E4%B8%AD%E4%BF%A1%E5%8F%B7%E9%87%8F(Semaphore)/" target="_self">
         <div>
-          
+          任务间数据传输可用队列，消息队列用于传输多个数据，但有时候我们只需传递状态，这个状态用一个 数值表示，此时使用信号量效率更高、更节省内存。 在FreeRTOS中，信号量有二进制信号量和计数信号量。下面分别来看看这两种信号量。 二进制信号量 二进制信号量用于互斥和同步目的，信号量 API 函数允许指定阻塞时间。 可将二进制信号量视为仅能容纳一个项目的队列。 因此，队列只能为空或满（因此称为二
         </div>
       </a>
 

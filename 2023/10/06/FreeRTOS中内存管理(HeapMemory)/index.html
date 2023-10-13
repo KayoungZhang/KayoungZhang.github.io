@@ -16,15 +16,22 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta property="og:type" content="article">
+    <meta name="description" content="FreeRTOS在每次创建内核对象时分配内存，在每次删除内核对象时释放RAM。此策略减少了设计和规划工作，简化了API，并最大限度地减少了内存占用。 可以使用标准C库malloc()和free()函数分配内存，但有时它们可能不适用，因为：  在小型嵌入式系统上并不总是可用的。 函数实现比较复杂，占用了宝贵的代码空间。 并非都是安全线程。 运行时间不确定，执行函数所花费的时间因调用而异。">
+<meta property="og:type" content="article">
 <meta property="og:title" content="FreeRTOS中内存管理(HeapMemory)">
 <meta property="og:url" content="http://example.com/2023/10/06/FreeRTOS%E4%B8%AD%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86(HeapMemory)/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="FreeRTOS在每次创建内核对象时分配内存，在每次删除内核对象时释放RAM。此策略减少了设计和规划工作，简化了API，并最大限度地减少了内存占用。 可以使用标准C库malloc()和free()函数分配内存，但有时它们可能不适用，因为：  在小型嵌入式系统上并不总是可用的。 函数实现比较复杂，占用了宝贵的代码空间。 并非都是安全线程。 运行时间不确定，执行函数所花费的时间因调用而异。">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231013133023140.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231013141830263.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231013142636425.png">
 <meta property="article:published_time" content="2023-10-06T13:58:26.000Z">
-<meta property="article:modified_time" content="2023-10-07T05:27:42.353Z">
+<meta property="article:modified_time" content="2023-10-13T06:53:06.029Z">
 <meta property="article:author" content="John Doe">
+<meta property="article:tag" content="RAM">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231013133023140.png">
   
   
   
@@ -219,7 +226,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          0 字
+          2.7k 字
         
       </span>
     
@@ -230,7 +237,7 @@
         
         
         
-          1 分钟
+          10 分钟
         
       </span>
     
@@ -273,7 +280,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年10月7日 下午
+                    本文最后更新于：2023年10月13日 下午
                   
                 
               </p>
@@ -281,7 +288,89 @@
             
               <div class="markdown-body">
                 
-                
+                <p>FreeRTOS在每次创建内核对象时分配内存，在每次删除内核对象时释放RAM。此策略减少了设计和规划工作，简化了API，并最大限度地减少了内存占用。</p>
+<p>可以使用标准C库malloc()和free()函数分配内存，但有时它们可能不适用，因为：</p>
+<ul>
+<li><p>在小型嵌入式系统上并不总是可用的。</p></li>
+<li><p>函数实现比较复杂，占用了宝贵的代码空间。</p></li>
+<li><p>并非都是安全线程。</p></li>
+<li><p>运行时间不确定，执行函数所花费的时间因调用而异。</p></li>
+<li><p>内存碎片化。</p></li>
+<li><p>使用不同的编译器时，需要进行复杂的配置。</p></li>
+<li><p>为其他变量使用的堆内存扩展，则可能出现难以调试的错误。</p></li>
+</ul>
+<p>早期版本的FreeRTOS使用内存池分配方案，即在编译时预先分配不同大小的内存块池，然后由内存分配函数返回。因为它不能有效地使用RAM，使其只在非常小的嵌入式系统中可行，因此该方案被放弃了。</p>
+<p>FreeRTOS提供了<code>pvPortMalloc()</code>和<code>vPortFree()</code>内存管理函数，它们具有与标准C库<code>malloc()</code>和<code>free()</code>函数相同的原型。FreeRTOS 提供了五种堆管理方案，其复杂性和功能各不相同，源码分别在<code>heap_1.c、heap_2.c、heap_3.c、heap_4.c、heap_5.c</code>源文件中，它们都位于<code>FreeRTOS/ source /portable/MemMang</code>目录中。</p>
+<p>每次一个项目中，只应包含其中一个源文件，这些可移植层函数定义的堆将由 RTOS 内核使用。</p>
+<p>它们的区别主要是：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.freertos.org/zh-cn-cmn-s/a00111.html#heap_1">heap_1</a> —— 最简单，不允许释放内存。</li>
+<li><a target="_blank" rel="noopener" href="https://www.freertos.org/zh-cn-cmn-s/a00111.html#heap_2">heap_2</a> —— 允许释放内存，但不会合并相邻的空闲块。</li>
+<li><a target="_blank" rel="noopener" href="https://www.freertos.org/zh-cn-cmn-s/a00111.html#heap_3">heap_3</a> —— 简单包装了标准 malloc() 和 free()，以保证线程安全。</li>
+<li><a target="_blank" rel="noopener" href="https://www.freertos.org/zh-cn-cmn-s/a00111.html#heap_4">heap_4</a> —— 合并相邻的空闲块以避免碎片化，包含绝对地址放置选项。</li>
+<li><a target="_blank" rel="noopener" href="https://www.freertos.org/zh-cn-cmn-s/a00111.html#heap_5">heap_5</a> —— 如同 heap_4，能够跨越多个不相邻内存区域的堆。</li>
+</ul>
+<p><strong>注意</strong>：</p>
+<ul>
+<li><strong>heap_1 不太有用，因为 FreeRTOS 添加了静态分配支持。</strong></li>
+<li><strong>heap_2 现在被视为旧版，较新的 heap_4 实现是首选。</strong></li>
+</ul>
+<h2 id="heap_1">Heap_1</h2>
+<p><code>heap_1.c</code> 实现了 <code>pvPortMalloc()</code>的一个非常基本的版本，并且没有实现<code>vPortFree()</code>。所以内存一经分配，就不允许释放。尽管如此，它还是适用于大量嵌入式应用程序，这是因为许多小型和深度嵌入的应用程序在系统启动时创建了所需的所有任务、队列、信号量等，并在程序的生命周期内使用所有这些对象（直到应用程序再次关闭或重新启动）。</p>
+<p>当调用<code>pvPortMalloc()</code>时，heap_1分配方案将一个单一数组细分为更小的块，这个数组被称为堆，堆内存空间的总量通过配置文件宏： <strong>configTOTAL_HEAP_SIZE</strong> 设置，堆内存地址设置通过配置文件宏： <strong>configAPPLICATION_ALLOCATED_HEAP</strong> 设置。每个创建的任务需要从堆中分配一个任务控制块(<strong>TCB</strong>)和一个堆栈。</p>
+<p>堆内存空间的总量通过配置文件宏： <strong>configTOTAL_HEAP_SIZE</strong> 设置。 堆内存地址设置通过配置文件宏： <strong>configAPPLICATION_ALLOCATED_HEAP</strong> 设置。</p>
+<figure>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231013133023140.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20231013133023140</figcaption>
+</figure>
+<p>Heap_1实现：</p>
+<ul>
+<li>如果您的应用程序不删除任务、队列、信号量、互斥锁等，则可以使用。</li>
+<li>始终具有确定性（总是需要相同的时间来执行）， 不会导致内存碎片化。</li>
+<li>非常简单，且从静态分配的数组分配内存，这意味着它通常适合用于不允许真实动态内存分配的应用程序 。</li>
+</ul>
+<h2 id="heap_2">Heap_2</h2>
+<p><code>heap_2.c</code> 使用最佳匹配算法来分配内存，允许释放内存。最佳匹配算法确保<code>pvPortMalloc()</code>使用大小最接近请求字节数的空闲内存块。Heap_2不会将相邻的空闲块合并，因此它更容易出现碎片。但是，如果分配和随后释放的内存块大小总是相同，那么就不会有碎片问题。</p>
+<p>堆内存空间的总量通过配置文件宏： <strong>configTOTAL_HEAP_SIZE</strong> 设置。 堆内存地址设置通过配置文件宏： <strong>configAPPLICATION_ALLOCATED_HEAP</strong> 设置。</p>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231013141830263.png" srcset="/img/loading.gif" lazyload /></p>
+<p>Heap_2实现：</p>
+<ul>
+<li><p>适用于应用程序重复创建和删除任务、队列、信号量、互斥锁等，前提是分配给已创建任务的堆栈大小不变。</p></li>
+<li><p>如果您应用程序的队列、任务、信号量、互斥锁等的顺序不可预测，可能会导致内存碎片化。</p></li>
+<li><p>非确定性，但比malloc()和free()的大多数标准库实现要快。</p></li>
+</ul>
+<h2 id="heap_3">Heap_3</h2>
+<p><code>heap_3.c</code>使用标准库 <code>malloc()</code>和<code>free()</code>函数，因此堆的大小由链接器配置，需要编译器库提供 <code>malloc()</code> 和 <code>free()</code> 实现,宏 <strong>configTOTAL_HEAP_SIZE</strong> 不起作用。Heap_3通过暂时挂起FreeRTOS调度器使malloc()和free()线程安全。</p>
+<h2 id="heap_4">Heap_4</h2>
+<p><code>heap_4.c</code> 是当前使用最多的方式，它使用第一拟合和内存合并算法,将相邻的空闲块合并(合并)成一个更大的块，从而最大限度地降低了碎片的风险，并使其适用于重复分配和释放不同大小的RAM块的应用程序。</p>
+<p>堆内存空间的总量通过配置文件宏： <strong>configTOTAL_HEAP_SIZE</strong> 设置。 堆内存地址设置通过配置文件宏： <strong>configAPPLICATION_ALLOCATED_HEAP</strong> 设置。</p>
+<figure>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231013142636425.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20231013142636425</figcaption>
+</figure>
+<p>heap_4实现：</p>
+<ul>
+<li>适用于应用程序重复创建和删除任务、队列、信号量、互斥锁等情况。</li>
+<li>非确定性，但比malloc()和free()的大多数标准库实现要快。</li>
+</ul>
+<h2 id="heap_5">Heap_5</h2>
+<p><code>heap_5.c</code>用于分配和释放内存的算法与heap_4使用的算法相同，允许堆跨越多个不相邻内存区域，但它并不局限于从单个静态声明的数组中分配内存，而是从多个独立的内存空间中分配内存。</p>
+<p>创建 RTOS 对象（任务、队列、信号量等）将调用 <code>pvPortMalloc()</code>，heap_5必须在调用<code>pvPortMalloc()</code>之前显式初始化，即使用<code>vPortDefineHeapRegions()</code> API函数初始化。</p>
+<p>heap_5实现：</p>
+<p>当运行FreeRTOS的系统提供的内存在系统内存映射中不是单个连续块。</p>
+<h1 id="heap相关api函数">Heap相关API函数</h1>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">/* 分配内存 */</span>
+<span class="hljs-type">void</span> * <span class="hljs-title function_">pvPortMalloc</span><span class="hljs-params">( </span>
+<span class="hljs-params">  <span class="hljs-type">size_t</span> xWantedSize <span class="hljs-comment">/* 分配的内存大小 */</span></span>
+<span class="hljs-params">)</span>;
+<span class="hljs-comment">/* 释放内存 */</span>
+<span class="hljs-type">void</span> <span class="hljs-title function_">vPortFree</span><span class="hljs-params">( </span>
+<span class="hljs-params">  <span class="hljs-type">void</span> * pv <span class="hljs-comment">/* 待释放的内存指针 */</span></span>
+<span class="hljs-params">)</span>;
+<span class="hljs-comment">/* 获取堆内存大小 */</span>
+<span class="hljs-type">size_t</span> <span class="hljs-title function_">xPortGetFreeHeapSize</span><span class="hljs-params">( <span class="hljs-type">void</span> )</span>;
+<span class="hljs-comment">/* 获取空闲内存容量的最小值 */</span>
+<span class="hljs-type">size_t</span> <span class="hljs-title function_">xPortGetMinimumEverFreeHeapSize</span><span class="hljs-params">( <span class="hljs-type">void</span> )</span>;
+<span class="hljs-comment">/* 内存分配失败钩子 */</span>
+<span class="hljs-type">void</span> <span class="hljs-title function_">vApplicationMallocFailedHook</span><span class="hljs-params">( <span class="hljs-type">void</span> )</span>;</code></pre></div>
 
                 
               </div>
@@ -290,6 +379,34 @@
             <div>
               <div class="post-metas my-3">
   
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/RTOS/" class="category-chain-item">RTOS</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/RAM/">#RAM</a>
+      
+    </div>
   
 </div>
 

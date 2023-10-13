@@ -73,19 +73,24 @@
     <link href="http://example.com/2023/10/06/FreeRTOS%E4%B8%AD%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86(HeapMemory)/"/>
     <id>http://example.com/2023/10/06/FreeRTOS%E4%B8%AD%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86(HeapMemory)/</id>
     <published>2023-10-06T13:58:26.000Z</published>
-    <updated>2023-10-07T05:27:42.353Z</updated>
+    <updated>2023-10-13T06:53:06.029Z</updated>
     
-    <content type="html"><![CDATA[]]></content>
+    <content type="html"><![CDATA[<p>FreeRTOS在每次创建内核对象时分配内存，在每次删除内核对象时释放RAM。此策略减少了设计和规划工作，简化了API，并最大限度地减少了内存占用。</p><p>可以使用标准C库malloc()和free()函数分配内存，但有时它们可能不适用，因为：</p><ul><li><p>在小型嵌入式系统上并不总是可用的。</p></li><li><p>函数实现比较复杂，占用了宝贵的代码空间。</p></li><li><p>并非都是安全线程。</p></li><li><p>运行时间不确定，执行函数所花费的时间因调用而异。</p></li><li><p>内存碎片化。</p></li><li><p>使用不同的编译器时，需要进行复杂的配置。</p></li><li><p>为其他变量使用的堆内存扩展，则可能出现难以调试的错误。</p></li></ul><p>早期版本的FreeRTOS使用内存池分配方案，即在编译时预先分配不同大小的内存块池，然后由内存分配函数返回。因为它不能有效地使用RAM，使其只在非常小的嵌入式系统中可行，因此该方案被放弃了。</p><p>FreeRTOS提供了<code>pvPortMalloc()</code>和<code>vPortFree()</code>内存管理函数，它们具有与标准C库<code>malloc()</code>和<code>free()</code>函数相同的原型。FreeRTOS 提供了五种堆管理方案，其复杂性和功能各不相同，源码分别在<code>heap_1.c、heap_2.c、heap_3.c、heap_4.c、heap_5.c</code>源文件中，它们都位于<code>FreeRTOS/ source /portable/MemMang</code>目录中。</p><p>每次一个项目中，只应包含其中一个源文件，这些可移植层函数定义的堆将由 RTOS 内核使用。</p><p>它们的区别主要是：</p><ul><li><a href="https://www.freertos.org/zh-cn-cmn-s/a00111.html#heap_1">heap_1</a> —— 最简单，不允许释放内存。</li><li><a href="https://www.freertos.org/zh-cn-cmn-s/a00111.html#heap_2">heap_2</a> —— 允许释放内存，但不会合并相邻的空闲块。</li><li><a href="https://www.freertos.org/zh-cn-cmn-s/a00111.html#heap_3">heap_3</a> —— 简单包装了标准 malloc() 和 free()，以保证线程安全。</li><li><a href="https://www.freertos.org/zh-cn-cmn-s/a00111.html#heap_4">heap_4</a> —— 合并相邻的空闲块以避免碎片化，包含绝对地址放置选项。</li><li><a href="https://www.freertos.org/zh-cn-cmn-s/a00111.html#heap_5">heap_5</a> —— 如同 heap_4，能够跨越多个不相邻内存区域的堆。</li></ul><p><strong>注意</strong>：</p><ul><li><strong>heap_1 不太有用，因为 FreeRTOS 添加了静态分配支持。</strong></li><li><strong>heap_2 现在被视为旧版，较新的 heap_4 实现是首选。</strong></li></ul><h2 id="heap_1">Heap_1</h2><p><code>heap_1.c</code> 实现了 <code>pvPortMalloc()</code>的一个非常基本的版本，并且没有实现<code>vPortFree()</code>。所以内存一经分配，就不允许释放。尽管如此，它还是适用于大量嵌入式应用程序，这是因为许多小型和深度嵌入的应用程序在系统启动时创建了所需的所有任务、队列、信号量等，并在程序的生命周期内使用所有这些对象（直到应用程序再次关闭或重新启动）。</p><p>当调用<code>pvPortMalloc()</code>时，heap_1分配方案将一个单一数组细分为更小的块，这个数组被称为堆，堆内存空间的总量通过配置文件宏： <strong>configTOTAL_HEAP_SIZE</strong> 设置，堆内存地址设置通过配置文件宏： <strong>configAPPLICATION_ALLOCATED_HEAP</strong> 设置。每个创建的任务需要从堆中分配一个任务控制块(<strong>TCB</strong>)和一个堆栈。</p><p>堆内存空间的总量通过配置文件宏： <strong>configTOTAL_HEAP_SIZE</strong> 设置。 堆内存地址设置通过配置文件宏： <strong>configAPPLICATION_ALLOCATED_HEAP</strong> 设置。</p><figure><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231013133023140.png" alt="" /><figcaption>image-20231013133023140</figcaption></figure><p>Heap_1实现：</p><ul><li>如果您的应用程序不删除任务、队列、信号量、互斥锁等，则可以使用。</li><li>始终具有确定性（总是需要相同的时间来执行）， 不会导致内存碎片化。</li><li>非常简单，且从静态分配的数组分配内存，这意味着它通常适合用于不允许真实动态内存分配的应用程序 。</li></ul><h2 id="heap_2">Heap_2</h2><p><code>heap_2.c</code> 使用最佳匹配算法来分配内存，允许释放内存。最佳匹配算法确保<code>pvPortMalloc()</code>使用大小最接近请求字节数的空闲内存块。Heap_2不会将相邻的空闲块合并，因此它更容易出现碎片。但是，如果分配和随后释放的内存块大小总是相同，那么就不会有碎片问题。</p><p>堆内存空间的总量通过配置文件宏： <strong>configTOTAL_HEAP_SIZE</strong> 设置。 堆内存地址设置通过配置文件宏： <strong>configAPPLICATION_ALLOCATED_HEAP</strong> 设置。</p><p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231013141830263.png" /></p><p>Heap_2实现：</p><ul><li><p>适用于应用程序重复创建和删除任务、队列、信号量、互斥锁等，前提是分配给已创建任务的堆栈大小不变。</p></li><li><p>如果您应用程序的队列、任务、信号量、互斥锁等的顺序不可预测，可能会导致内存碎片化。</p></li><li><p>非确定性，但比malloc()和free()的大多数标准库实现要快。</p></li></ul><h2 id="heap_3">Heap_3</h2><p><code>heap_3.c</code>使用标准库 <code>malloc()</code>和<code>free()</code>函数，因此堆的大小由链接器配置，需要编译器库提供 <code>malloc()</code> 和 <code>free()</code> 实现,宏 <strong>configTOTAL_HEAP_SIZE</strong> 不起作用。Heap_3通过暂时挂起FreeRTOS调度器使malloc()和free()线程安全。</p><h2 id="heap_4">Heap_4</h2><p><code>heap_4.c</code> 是当前使用最多的方式，它使用第一拟合和内存合并算法,将相邻的空闲块合并(合并)成一个更大的块，从而最大限度地降低了碎片的风险，并使其适用于重复分配和释放不同大小的RAM块的应用程序。</p><p>堆内存空间的总量通过配置文件宏： <strong>configTOTAL_HEAP_SIZE</strong> 设置。 堆内存地址设置通过配置文件宏： <strong>configAPPLICATION_ALLOCATED_HEAP</strong> 设置。</p><figure><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231013142636425.png" alt="" /><figcaption>image-20231013142636425</figcaption></figure><p>heap_4实现：</p><ul><li>适用于应用程序重复创建和删除任务、队列、信号量、互斥锁等情况。</li><li>非确定性，但比malloc()和free()的大多数标准库实现要快。</li></ul><h2 id="heap_5">Heap_5</h2><p><code>heap_5.c</code>用于分配和释放内存的算法与heap_4使用的算法相同，允许堆跨越多个不相邻内存区域，但它并不局限于从单个静态声明的数组中分配内存，而是从多个独立的内存空间中分配内存。</p><p>创建 RTOS 对象（任务、队列、信号量等）将调用 <code>pvPortMalloc()</code>，heap_5必须在调用<code>pvPortMalloc()</code>之前显式初始化，即使用<code>vPortDefineHeapRegions()</code> API函数初始化。</p><p>heap_5实现：</p><p>当运行FreeRTOS的系统提供的内存在系统内存映射中不是单个连续块。</p><h1 id="heap相关api函数">Heap相关API函数</h1><div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">/* 分配内存 */</span><span class="hljs-type">void</span> * <span class="hljs-title function_">pvPortMalloc</span><span class="hljs-params">( </span><span class="hljs-params">  <span class="hljs-type">size_t</span> xWantedSize <span class="hljs-comment">/* 分配的内存大小 */</span></span><span class="hljs-params">)</span>;<span class="hljs-comment">/* 释放内存 */</span><span class="hljs-type">void</span> <span class="hljs-title function_">vPortFree</span><span class="hljs-params">( </span><span class="hljs-params">  <span class="hljs-type">void</span> * pv <span class="hljs-comment">/* 待释放的内存指针 */</span></span><span class="hljs-params">)</span>;<span class="hljs-comment">/* 获取堆内存大小 */</span><span class="hljs-type">size_t</span> <span class="hljs-title function_">xPortGetFreeHeapSize</span><span class="hljs-params">( <span class="hljs-type">void</span> )</span>;<span class="hljs-comment">/* 获取空闲内存容量的最小值 */</span><span class="hljs-type">size_t</span> <span class="hljs-title function_">xPortGetMinimumEverFreeHeapSize</span><span class="hljs-params">( <span class="hljs-type">void</span> )</span>;<span class="hljs-comment">/* 内存分配失败钩子 */</span><span class="hljs-type">void</span> <span class="hljs-title function_">vApplicationMallocFailedHook</span><span class="hljs-params">( <span class="hljs-type">void</span> )</span>;</code></pre></div>]]></content>
     
     
       
       
-    <summary type="html">
-</summary>
+    <summary type="html">&lt;p&gt;FreeRTOS在每次创建内核对象时分配内存，在每次删除内核对象时释放RAM。此策略减少了设计和规划工作，简化了API，并最大限度地减少了内存占用。&lt;/p&gt;
+&lt;p&gt;可以使用标准C库malloc()和free()函数分配内存，但有时它们可能不适用，因为：&lt;/p&gt;
+&lt;ul&gt;</summary>
       
     
     
     
+    <category term="RTOS" scheme="http://example.com/categories/RTOS/"/>
+    
+    
+    <category term="RAM" scheme="http://example.com/tags/RAM/"/>
     
   </entry>
   
@@ -94,19 +99,23 @@
     <link href="http://example.com/2023/10/06/FreeRTOS%E4%B8%AD%E4%BA%92%E6%96%A5%E9%87%8F(Mutexes)/"/>
     <id>http://example.com/2023/10/06/FreeRTOS%E4%B8%AD%E4%BA%92%E6%96%A5%E9%87%8F(Mutexes)/</id>
     <published>2023-10-06T13:50:32.000Z</published>
-    <updated>2023-10-07T05:27:42.353Z</updated>
+    <updated>2023-10-12T14:35:09.248Z</updated>
     
-    <content type="html"><![CDATA[]]></content>
+    <content type="html"><![CDATA[<p>互斥是一种特殊的二进制信号量，用于控制对两个或多个任务之间共享资源的访问。要使用它，需在配置文件中设置 <code>configUSE_MUTEXES</code> 为1。</p><p>用于互斥时，互斥锁就像用于保护资源的令牌。当访问资源时，必须首先获取 ('token') 令牌，使用资源后，必须“返回”令牌，这样其他任务就有机会访问此共享资源。</p><figure><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/mutexes.gif" alt="" /><figcaption>img</figcaption></figure><h1 id="互斥优先级反转">互斥优先级反转</h1><p>高优先级的任务必须等待低优先级的任务放弃对互斥锁的控制，这种方式的延迟，称为“优先级反转”。如果中等优先级任务开始执行，而高优先级任务正在等待信号量，这会导致高优先级任务等待低优先级任务，而低优先级任务甚至无法执行。</p><figure><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231012203208837.png" alt="" /><figcaption>image-20231012203208837</figcaption></figure><p>优先级反转显然是一个严重的问题，但在小型嵌入式系统中，通过考虑如何访问资源，通常可以在系统设计时避免这个问题。</p><h1 id="互斥优先级继承">互斥优先级继承</h1><p>与二进制信号量不同的是互斥锁包含基本的“优先级继承”机制，优先级继承是一种将优先级反转的负面影响降至最低的方案。它并没有“修复”优先级反转，只是通过确保总是有时间限制反转来减少其影响。然而优先级继承使系统时序分析复杂化，并且依赖它来进行正确的系统操作并不是一个好的实践。</p><p>优先级继承的工作原理是临时将互斥锁持有者的优先级提高到最高优先级。持有互斥锁的低优先级任务“继承”等待互斥锁任务的优先级。当互斥锁返回时，互斥锁持有者的优先级自动重置为其原始值。</p><figure><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231012204245838.png" alt="" /><figcaption>image-20231012204245838</figcaption></figure><p>不应在中断中使用互斥锁，因为：</p><ul><li>互斥锁使用的优先级继承机制要求从任务中（而不是从中断中）拿走和放入互斥锁。</li><li>中断无法保持阻塞来等待一个被互斥锁保护的资源 由互斥锁保护的资源变为可用。</li></ul><h1 id="死锁">死锁</h1><p>“死锁”是使用互斥锁进行互斥的另一个潜在陷阱，当两个任务都在等待由另一个任务持有的资源而无法运行时，就会发生死锁。假设任务A和任务B都需要互斥锁X和互斥锁Y来完成操作：</p><ul><li>任务A执行并成功获取互斥锁X</li><li>任务B抢占任务A</li><li>任务B成功地获取了互斥锁Y，在尝试获取互斥锁X，但被任务A持有，所以任务B选择进入阻塞态等待互斥锁X的释放。</li><li>任务A继续运行，它尝试获取互斥锁Y，但被任务B持有，任务A选择进入阻塞态等待互斥锁Y的释放。</li></ul><p>这个场景的最后，任务A等待任务B持有的互斥锁，任务B也在等待任务A持有的互斥锁，这两个任务都无法运行，所以发生死锁。</p><p>与优先级反转一样，避免死锁的最佳方法是设计系统避免发生死锁。让任务无限等待(没有超时)来获取互斥锁通常是不好的做法，相反，使用比期望等待互斥锁的最大时间稍长一点的超时时间，在此时间内未能获得互斥锁将是错误设计的征兆（死锁）。</p><p>在实践中，死锁在小型嵌入式系统中不是一个大问题，因为系统设计人员可以很好地理解整个应用程序，能够辨别和移除发生死锁的区域。</p><h1 id="递归互斥锁">递归互斥锁</h1><p>任务本身也可能发生死锁，如果一个任务多次尝试使用同一个互斥锁，而没有首先返还互斥锁，就会发生这种情况。假设如下场景：</p><ol type="1"><li>一个任务成功获取互斥锁。</li><li>持有互斥锁的同时调用库函数。</li><li>库函数尝试获取同一个互斥锁，然后进入阻塞态等待互斥锁可用。</li></ol><p>在此场景结束时，任务处于阻塞状态等待互斥锁返回，但任务已是互斥锁的持有者。因为任务处于阻塞状态等待自己，所以发生自锁。</p><p>使用递归互斥锁替代标准互斥锁可避免这种死锁。一个递归互斥锁可以被同一个任务多次“获取”，仅在每次调用递归互斥锁时，执行“给予”递归互斥锁调用后返回。</p><p>标准互斥锁和递归互斥锁以类似的方式创建和使用：</p><table><thead><tr class="header"><th>功能</th><th>标准互斥锁</th><th>递归互斥锁</th></tr></thead><tbody><tr class="odd"><td>创建</td><td>xSemaphoreCreateMutex()</td><td>xSemaphoreCreateRecursiveMutex()</td></tr><tr class="even"><td>获取</td><td>xSemaphoreTake()</td><td>xSemaphoreTakeRecursive()</td></tr><tr class="odd"><td>给出</td><td>xSemaphoreGive()</td><td>xSemaphoreGiveRecursive()</td></tr></tbody></table>]]></content>
     
     
       
       
-    <summary type="html">
-</summary>
+    <summary type="html">&lt;p&gt;互斥是一种特殊的二进制信号量，用于控制对两个或多个任务之间共享资源的访问。要使用它，需在配置文件中设置 &lt;code&gt;configUSE_MUTEXES&lt;/code&gt; 为1。&lt;/p&gt;
+&lt;p&gt;用于互斥时，互斥锁就像用于保护资源的令牌。当访问资源时，必须首先获取 (&#39;token</summary>
       
     
     
     
+    <category term="RTOS" scheme="http://example.com/categories/RTOS/"/>
+    
+    
+    <category term="Mutexes" scheme="http://example.com/tags/Mutexes/"/>
     
   </entry>
   
@@ -115,19 +124,25 @@
     <link href="http://example.com/2023/10/06/FreeRTOS%E4%B8%AD%E4%B8%AD%E6%96%AD-Interrupt/"/>
     <id>http://example.com/2023/10/06/FreeRTOS%E4%B8%AD%E4%B8%AD%E6%96%AD-Interrupt/</id>
     <published>2023-10-06T13:47:57.000Z</published>
-    <updated>2023-10-07T05:27:42.353Z</updated>
+    <updated>2023-10-12T09:15:52.610Z</updated>
     
-    <content type="html"><![CDATA[]]></content>
+    <content type="html"><![CDATA[<p>在 RTOS 中，需要应对各类事件。在每种情况下，必须对最佳事件处理实现策略做出判断：</p><ul><li>怎么检测事件的发生？通常使用中断，但也可以是轮询输入。</li><li>当使用中断时，中断服务程序中内外各需要执行多少操作？一般让中断服务程序尽可能的短。</li><li>事件怎么和main函数通信，如何构建此代码以最好地适应可能的异步事件的发生？</li></ul><p>区分任务的优先级和中断的优先级是很重要的：</p><ul><li>任务是FreeRTOS运行的软件特性，跟硬件无关，任务的优先级通过程序员指定，在运行的状态，由调度器决定执行哪个任务。</li><li>尽管中断服务程序是通过软件写的，但它是一个硬件特性，因为中断服务程序在运行时，是由硬件控制运行的，只有当无ISR时，任务才会运行，最低优先级的中断会中断最高优先级的任务，任务无法抢占ISR，</li></ul><h1 id="isr中api函数">ISR中API函数</h1><p>很多 API 函数会导致任务进入阻塞状态，因此，FreeRTOS提供了两套API函数，一套在任务中使用，另一套在ISR中使用。<strong>注意</strong>：在FreeRTOS的ISR程序中，要调用后缀名为 <strong>FromISR</strong> 的API函数。</p><table style="width:100%;"><thead><tr class="header"><th>类型</th><th>在任务中</th><th>在ISR中</th></tr></thead><tbody><tr class="odd"><td>队列(Queue)</td><td>xQueueSendToBack()<br>xQueueSendToFront()<br>xQueueReceive()<br>xQueueOverwrite()<br>xQueuePeek()</td><td>xQueueSendToBackFromISR()<br>xQueueSendToFrontFromISR()<br>xQueueReceiveFromISR()<br>xQueueOverwriteFromISR()<br>xQueuePeekFromISR()</td></tr><tr class="even"><td>信号量(Semaphore)</td><td>xSemaphoreGive()<br>xSemaphoreTake()</td><td>xSemaphoreGiveFromISR()<br>xSemaphoreTakeFromISR()</td></tr><tr class="odd"><td>事件组(EventGroups)</td><td>xEventGroupSetBits()<br>xEventGroupGetBits()</td><td>xEventGroupSetBitsFromISR()<br>xEventGroupGetBitsFromISR()</td></tr><tr class="even"><td>任务通知(TaskNotification)</td><td>xTaskNotifyGive()<br>xTaskNotify()</td><td>vTaskNotifyGiveFromISR()<br>xTaskNotifyFromISR()</td></tr><tr class="odd"><td>软件定时器(SoftwareTimer)</td><td>xTimerStart()<br>xTimerStop()<br>xTimerReset()<br>xTimerChangePeriod()</td><td>xTimerStartFromISR()<br>xTimerStopFromISR()<br>xTimerResetFromISR()<br>xTimerChangePeriodFromISR()</td></tr></tbody></table><h3 id="两套api函数的优点">两套API函数的<strong>优点</strong>：</h3><ul><li>API函数不需要额外的逻辑判断是从任务中调用，还是从ISR中调用，额外的逻辑判断会让函数更长，更复杂，也更难测试。</li><li>在任务或ISR 中调用时，需要的参数不一样，不会导致参数无效。</li><li>不用每个FreeRTOS移植程序都提供一种机制来确定上下文的执行。</li><li>很容易确定执行的上下文体系，容易使用。</li></ul><p>使用两套函数可以让程序更高效，但是也有一些缺点，比如你要使用第三方库函数时，即会在任务中调用它，也会在ISR调用它。这个第三方库函数用到了FreeRTOS的API函数，你无法修改库函数。要解决这个问题，可通过以下方法：</p><ul><li>把中断的处理推迟到任务中执行，API函数只从任务的上下文中调用。</li><li>如果是支持中断嵌套的FreeRTOS移植，使用“FromISR”那一套API函数。</li><li>第三方代码一般会包含RTOS抽象层，用来测试调用函数（任务或ISR）的上下文，分别调用对应的函数。</li></ul><h3 id="xhigherprioritytaskwoken参数">xHigherPriorityTaskWoken参数</h3><p>如果中断执行上下文切换，那么在中断退出与进入时运行的任务可能不同——中断将中断一个任务，但返回到另一个任务。</p><p>一些FreeRTOS API函数可以将任务从阻塞态移到就绪态。如在<code>xQueueSendToBack()</code>函数中，如果有任务处于阻塞状态来等待当前队列上有可用的数据，则该函数将解除任务的阻塞。如果解除阻塞的任务优先级高于当前处于运行态的任务，那么根据FreeRTOS的调度策略，会切换到优先级更高的任务。切换到高优先级任务取决于调用的API函数的上下文：</p><ul><li>在任务中调用</li></ul><p>配置文件中<code>configUSE_PREEMPTION</code> 配置为1，自动切换到更高优先级任务</p><ul><li>在中断中调用</li></ul><p>设置 <code>*pxHigherPriorityTaskWoken</code> 为 <code>pdTRUE</code>,就可以切换到高优先级任务,第一次使用时要初始化为<code>pdFALSE</code>.</p><h3 id="portyield_from_isr宏">portYIELD_FROM_ISR()宏</h3><p>这个宏用于在中断中请求上下文切换，老版本中还有个汇编形式的宏：<code>portEND_SWITCHING_ISR()</code>。</p><div class="code-wrapper"><pre><code class="hljs c">portYIELD_FROM_ISR( xHigherPriorityTaskWoken );</code></pre></div><p>如果<code>xHigherPriorityTaskWoken</code> 为<code>pdFALSE</code>,则表示不请求上下文切换，宏无作用，如果为<code>pdTRUE</code>,则表示请求上下文切换，处于运行态的任务将会改变。中断始终返回到处于运行态的任务，即使中断执行时处于运行态的任务发生了改变。</p><h1 id="isr的延迟处理">ISR的延迟处理</h1><p>在实践中，尽可能的让ISR程序简短些，因为：</p><ul><li>尽管任务被分配一个高的优先级，它们只会在硬件不提供中断服务的情况下运行。</li><li>ISR可中断任务的起始时间和执行时间。</li><li>取决于运行FreeRTOS的架构平台，一个ISR执行时不可能再接收新的中断。</li><li>程序员需要同时考虑和防护一个任务或ISR访问的变量，外设和内存缓冲等资源的后果。</li><li>一些FreeRTOS端口允许中断嵌套，但这会增加复杂性并降低可预测性。中断越短，嵌套的可能性就越小。</li></ul><p>ISR必须记录中断的原因，并清除中断。中断所需的任何其他操作通常可以在任务中执行，从而使ISR能够尽快退出，这被称为“延迟中断处理”，因为中断所需的处理从ISR“延迟”到任务。</p><p>如果中断处理延迟到的任务的优先级高于任何其他任务的优先级，那么处理将立即执行，就像在ISR本身中执行处理一样。</p><figure><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231012165252137.png" alt="" /><figcaption>image-20231012165252137</figcaption></figure><p>中断延迟处理在以下情况会比较有用：</p><ul><li>中断所需的处理不是微不足道的。例如，如果中断只是存储ADC转换的结果，这最好在ISR内执行，但如果转换的结果通过软件滤波器，那么最好在任务中执行滤波器的操作。</li><li>中断处理可以方便地执行不能在ISR中执行的操作，例如向控制台写操作或分配内存。</li><li>中断处理是不确定的，这意味着不能预先知道处理将花费多长时间。</li></ul>]]></content>
     
     
       
       
-    <summary type="html">
-</summary>
+    <summary type="html">&lt;p&gt;在 RTOS 中，需要应对各类事件。在每种情况下，必须对最佳事件处理实现策略做出判断：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;怎么检测事件的发生？通常使用中断，但也可以是轮询输入。&lt;/li&gt;
+&lt;li&gt;当使用中断时，中断服务程序中内外各需要执行多少操作？一般让中断服务程序尽可能的短</summary>
       
     
     
     
+    <category term="RTOS" scheme="http://example.com/categories/RTOS/"/>
+    
+    
+    <category term="Interrupt" scheme="http://example.com/tags/Interrupt/"/>
     
   </entry>
   
@@ -136,19 +151,25 @@
     <link href="http://example.com/2023/10/06/FreeRTOS%E4%B8%AD%E4%BA%8B%E4%BB%B6%E7%BB%84(EventGroups)/"/>
     <id>http://example.com/2023/10/06/FreeRTOS%E4%B8%AD%E4%BA%8B%E4%BB%B6%E7%BB%84(EventGroups)/</id>
     <published>2023-10-06T13:46:34.000Z</published>
-    <updated>2023-10-07T05:27:42.353Z</updated>
+    <updated>2023-10-12T01:55:11.158Z</updated>
     
-    <content type="html"><![CDATA[]]></content>
+    <content type="html"><![CDATA[<p>事件组是FreeRTOS的一大特点，它允许任务间的事件传输。它跟队列和信号量的不同之处是：</p><ul><li>事件组允许任务在阻塞状态下等待一个或多个事件的组合发生。</li><li>当事件发生时，事件组将解除在等待同一事件或事件组合的所有任务的阻塞。</li></ul><p>事件组的这些特性使得它们可以同步多个任务，将事件广播到多个任务，允许任务在阻塞状态下等待事件组中的任何一事件发生，以及允许任务在阻塞状态下等待多个操作的完成。</p><p>事件组减少了内存占用，因为通常可以用单个事件组替换多个互斥信号量。事件组功能是可选项，要使用事件组功能，在工程中需要包含<code>event_groups.c</code>文件。</p><h1 id="事件组特性">事件组特性</h1><ul><li><strong>事件组、事件标志和事件控制位</strong></li></ul><p>事件标志就是一个布尔值（0或1）用来表示事件是否发生，事件组就是一个事件标志的集合。事件标志将事件标志的状态存储在单个bit位中，并将事件组中所有事件标志的状态存储在单个变量中。事件组每个事件标志的状态通过数据类型 <code>EventBits_t</code> 中的一个bit位来表示，如果这个bit位设置为1，代表事件发生，如果设置为0，代表事件没有发生。举例如下：</p><figure><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231012091104517.png" alt="" /><figcaption>image-20231012091104517</figcaption></figure><p>如果配置文件中 <code>configUSE_16_BIT_TICKS</code> 设置为1, 则每个事件组包含8个可用的bit位，如果设置为0,则包含24个可用的bit位。</p><ul><li><strong>事件组可被多个任务访问</strong></li></ul><p>事件组本身就是一个对象，可被任何知道其存在的任务或中断访问，同一个事件组可被任意一个任务访问。</p><h1 id="事件组api函数">事件组API函数</h1><div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">/* 动态创建事件组 */</span>EventGroupHandle_t <span class="hljs-title function_">xEventGroupCreate</span><span class="hljs-params">( <span class="hljs-type">void</span> )</span>;<span class="hljs-comment">/* 静态方法创建事件组 */</span>EventGroupHandle_t <span class="hljs-title function_">xEventGroupCreateStatic</span><span class="hljs-params">( </span><span class="hljs-params">  StaticEventGroup_t * pxEventGroupBuffer <span class="hljs-comment">/* 事件组缓存区指针 */</span></span><span class="hljs-params">)</span>;<span class="hljs-comment">/* 设置事件组中事件 */</span>EventBits_t <span class="hljs-title function_">xEventGroupSetBits</span><span class="hljs-params">( </span><span class="hljs-params">  EventGroupHandle_t xEventGroup,<span class="hljs-comment">/* 事件组句柄 */</span></span><span class="hljs-params">  <span class="hljs-type">const</span> EventBits_t uxBitsToSet <span class="hljs-comment">/* 设置的bit位 */</span></span><span class="hljs-params">)</span>;<span class="hljs-comment">/* 中断模式下设置事件组中事件 */</span>BaseType_t <span class="hljs-title function_">xEventGroupSetBitsFromISR</span><span class="hljs-params">(</span><span class="hljs-params">  EventGroupHandle_t xEventGroup，<span class="hljs-comment">/* 事件组句柄 */</span></span><span class="hljs-params">  <span class="hljs-type">const</span> EventBits_t uxBitsToSet，<span class="hljs-comment">/* 设置的bit位 */</span></span><span class="hljs-params">  BaseType_t*pxHigherPriorityTaskWoken<span class="hljs-comment">/* 唤醒高优先级任务 */</span></span><span class="hljs-params">)</span>;<span class="hljs-comment">/* 等待事件的到来 */</span>EventBits_t <span class="hljs-title function_">xEventGroupWaitBits</span><span class="hljs-params">( </span><span class="hljs-params">  <span class="hljs-type">const</span> EventGroupHandle_t xEventGroup,<span class="hljs-comment">/* 事件组句柄 */</span></span><span class="hljs-params">  <span class="hljs-type">const</span> EventBits_t uxBitsToWaitFor,<span class="hljs-comment">/* 等待的事件bit位 */</span></span><span class="hljs-params">  <span class="hljs-type">const</span> BaseType_t xClearOnExit,<span class="hljs-comment">/* 函数退出时清除事件bit位 */</span></span><span class="hljs-params">  <span class="hljs-type">const</span> BaseType_t xWaitForAllBits,<span class="hljs-comment">/* 等待的事件位 */</span></span><span class="hljs-params">  TickType_t xTicksToWait <span class="hljs-comment">/* 阻塞态等待的时间 */</span></span><span class="hljs-params">)</span>;</code></pre></div><h1 id="任务同步">任务同步</h1><p>有时任务间需要同步，如：任务A接收一个事件，然后将该事件所需的一些处理委托给其他三个任务：任务B，任务C和任务D，如果任务A直到任务B、C和D都完成了前一个事件的处理才能接收另一个事件，那么这四个任务就需要彼此同步。每个任务的同步点就在这个任务完成其处理过程之后，除非其他任务都完成了相同的操作，否则无法继续执行。当四个任务都达到了它们的同步点，任务A才能接收另一个事件。</p><p>事件组可以用来创建任务的同步点：</p><ul><li><strong>必须参与同步的每个任务在事件组中被分配唯一的一个事件位。</strong></li><li><strong>每个任务在到达同步点时设置自己的事件位。</strong></li><li><strong>设置好事件位之后，每个任务在事件组中处于阻塞状态，等待其它代表同步任务的事件位也设置好</strong></li></ul><p>这种情形下就不能使用<code>xEventGroupSetBits()</code> 和 <code>xEventGroupWaitBits()</code> API 函数，而要使用 <code>xEventGroupSync()</code>函数。</p><div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">/* 使用事件组进行任务间同步 */</span>EventBits_t <span class="hljs-title function_">xEventGroupSync</span><span class="hljs-params">( </span><span class="hljs-params">  EventGroupHandle_t xEventGroup, <span class="hljs-comment">/* 事件组句柄 */</span></span><span class="hljs-params">  <span class="hljs-type">const</span> EventBits_t uxBitsToSet,<span class="hljs-comment">/* 设置的bit位 */</span></span><span class="hljs-params">  <span class="hljs-type">const</span> EventBits_t uxBitsToWaitFor,<span class="hljs-comment">/* 等待的事件bit位 */</span></span><span class="hljs-params">  TickType_t xTicksToWait<span class="hljs-comment">/* 阻塞态下等待的时间 */</span></span><span class="hljs-params">)</span>;</code></pre></div>]]></content>
     
     
       
       
-    <summary type="html">
-</summary>
+    <summary type="html">&lt;p&gt;事件组是FreeRTOS的一大特点，它允许任务间的事件传输。它跟队列和信号量的不同之处是：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;事件组允许任务在阻塞状态下等待一个或多个事件的组合发生。&lt;/li&gt;
+&lt;li&gt;当事件发生时，事件组将解除在等待同一事件或事件组合的所有任务的阻塞。&lt;/l</summary>
       
     
     
     
+    <category term="RTOS" scheme="http://example.com/categories/RTOS/"/>
+    
+    
+    <category term="EventGroups" scheme="http://example.com/tags/EventGroups/"/>
     
   </entry>
   
@@ -157,19 +178,25 @@
     <link href="http://example.com/2023/10/06/FreeRTOS%E4%B8%AD%E8%BD%AF%E4%BB%B6%E5%AE%9A%E6%97%B6%E5%99%A8(SoftwareTimer)/"/>
     <id>http://example.com/2023/10/06/FreeRTOS%E4%B8%AD%E8%BD%AF%E4%BB%B6%E5%AE%9A%E6%97%B6%E5%99%A8(SoftwareTimer)/</id>
     <published>2023-10-06T13:45:35.000Z</published>
-    <updated>2023-10-07T05:27:42.353Z</updated>
+    <updated>2023-10-12T03:33:04.387Z</updated>
     
-    <content type="html"><![CDATA[]]></content>
+    <content type="html"><![CDATA[<p>在FreeRTOS中，软件定时器由内核支配，不需要硬件支持，和硬件定时器无关，要使用软件定时器，需要在配置文件中设置<code>configUSE_TIMERS</code> 为 1。</p><h1 id="软件定时器特性">软件定时器特性</h1><ul><li>回调函数</li></ul><div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-type">void</span> <span class="hljs-title function_">ATimerCallback</span><span class="hljs-params">(TimerHandle_t xTimer)</span>;</code></pre></div><p>回调函数尽可能短，一定不要进入阻塞状态。</p><ul><li>定时周期</li></ul><p>定时器启动到执行定时器回调函数之间的时间。</p><ul><li>定时器类型：一次性定时器和自动加载定时器</li><li>定时器的状态：休眠态(Dormant)和运行态(Running)</li></ul><h1 id="软件定时器的上下文">软件定时器的上下文</h1><ul><li><strong>RTOS的后台守护任务（Daemon Task）</strong></li></ul><p>所有软件定时器的回调函数都在同一个RTOS守护任务（定时器服务）的上下文中执行。</p><p>守护任务是一个标准的FreeRTOS任务，在调度器开启后自动创建，它的优先级和栈大小在配置文件中配置：<code>configTIMER_TASK_PRIORITY</code> 和 <code>configTIMER_TASK_STACK_DEPTH</code> 来设置。</p><p>软件定时器回调函数一定不能调用FreeRTOS API函数，这会导致任务进入阻塞状态，即导致守护任务进入阻塞态。</p><ul><li><strong>定时器指令队列</strong></li></ul><p>软件定时器API函数从调用任务到守护任务发送指令的队列称为 <strong>定时器指令队列</strong> 。它也是在调度器开启后自动创建，它的长度在配置文件中配置：<code>configTIMER_QUEUE_LENGTH</code>。</p><ul><li><strong>守护任务调度</strong></li></ul><p>守护任务的调度跟其它任务的调度一样，不同的是，当它运行时处于最高优先级，它仅仅执行命令，或执行定时器回调函数。举例如下：</p><figure><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231012105004755.png" alt="" /><figcaption>image-20231012105004755</figcaption></figure><figure><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231012110049342.png" alt="" /><figcaption>image-20231012110049342</figcaption></figure><h1 id="软件定时器的创建和启动api函数">软件定时器的创建和启动API函数</h1><div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">/* 创建软件定时器 */</span>TimerHandle_t <span class="hljs-title function_">xTimerCreate</span><span class="hljs-params">(</span><span class="hljs-params">  <span class="hljs-type">const</span> <span class="hljs-type">char</span> * <span class="hljs-type">const</span> pcTimerName, <span class="hljs-comment">/* 软件定时器名 */</span></span><span class="hljs-params">  TickType_t xTimerPeriodInTicks,<span class="hljs-comment">/* 定时周期（ticks） */</span></span><span class="hljs-params">  UBaseType_t uxAutoReload,<span class="hljs-comment">/* 是否自动重装载 */</span></span><span class="hljs-params">  <span class="hljs-type">void</span> * pvTimerID,<span class="hljs-comment">/* 定时器ID */</span></span><span class="hljs-params">  TimerCallbackFunction_t pxCallbackFunction <span class="hljs-comment">/* 定时器回调函数 */</span></span><span class="hljs-params">)</span>;<span class="hljs-comment">/* 启动定时器 */</span>BaseType_t <span class="hljs-title function_">xTimerStart</span><span class="hljs-params">(</span><span class="hljs-params">  TimerHandle_t xTimer, <span class="hljs-comment">/* 定时器句柄 */</span></span><span class="hljs-params">  TickType_t xTicksToWait <span class="hljs-comment">/* 阻塞时间 */</span></span><span class="hljs-params">)</span>;</code></pre></div><h1 id="软件定时器id">软件定时器ID</h1><p>每一个软件定时器都有一个ID，<strong>void*</strong> 类型，当创建定时器时，会指派一个定时器ID的初始值，可以通过<code>vTimerSetTimerID（）</code> 函数更新ID值，通过<code>pvTimerGetTimerID（）</code> 获取ID值，跟其它软件定时器的API函数不同的是，这两个函数直接访问定时器而不需要通过定时器命令队列传送命令。</p><div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">/* 设置定时器ID */</span><span class="hljs-type">void</span> <span class="hljs-title function_">vTimerSetTimerID</span><span class="hljs-params">( </span><span class="hljs-params">  <span class="hljs-type">const</span> TimerHandle_t xTimer, <span class="hljs-comment">/* 定时器句柄 */</span></span><span class="hljs-params">  <span class="hljs-type">void</span> *pvNewID <span class="hljs-comment">/* 定时器新的ID */</span></span><span class="hljs-params">)</span>;<span class="hljs-comment">/* 获取定时器ID */</span><span class="hljs-type">void</span> *<span class="hljs-title function_">pvTimerGetTimerID</span><span class="hljs-params">( </span><span class="hljs-params">  TimerHandle_t xTimer <span class="hljs-comment">/* 定时器句柄 */</span></span><span class="hljs-params">)</span>;</code></pre></div><h1 id="软件定时器其它api函数">软件定时器其它API函数</h1><div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">/* 改变定时器定时周期值 */</span>BaseType_t <span class="hljs-title function_">xTimerChangePeriod</span><span class="hljs-params">(</span><span class="hljs-params">  TimerHandle_t xTime,<span class="hljs-comment">/* 定时器句柄 */</span></span><span class="hljs-params">  TickType_t x NewTimerPeriodInTicks,<span class="hljs-comment">/* 新的定时周期 */</span></span><span class="hljs-params">  TickType <span class="hljs-type">_t</span> xTicksToWait<span class="hljs-comment">/* 阻塞态下等待的时长 */</span></span><span class="hljs-params">)</span>;<span class="hljs-comment">/* 中断模式下改变定时器定时周期值 */</span>BaseType_t <span class="hljs-title function_">xTimerChangePeriodFromISR</span><span class="hljs-params">( </span><span class="hljs-params">  TimerHandle_t xTimer,<span class="hljs-comment">/* 定时器句柄 */</span></span><span class="hljs-params">  TickType_t xNewPeriod,<span class="hljs-comment">/* 新的定时周期 */</span></span><span class="hljs-params">  BaseType_t *pxHigherPriorityTaskWoken <span class="hljs-comment">/* 唤醒高优先级任务 */</span></span><span class="hljs-params">)</span>;<span class="hljs-comment">/* 定时器复位 */</span>BaseType_t <span class="hljs-title function_">xTimerReset</span><span class="hljs-params">( </span><span class="hljs-params">  TimerHandle_t xTimer, <span class="hljs-comment">/* 定时器句柄 */</span></span><span class="hljs-params">  TickType_t xTicksToWait<span class="hljs-comment">/* 阻塞态下等待的时长 */</span></span><span class="hljs-params">)</span>;</code></pre></div>]]></content>
     
     
       
       
-    <summary type="html">
-</summary>
+    <summary type="html">&lt;p&gt;在FreeRTOS中，软件定时器由内核支配，不需要硬件支持，和硬件定时器无关，要使用软件定时器，需要在配置文件中设置&lt;code&gt;configUSE_TIMERS&lt;/code&gt; 为 1。&lt;/p&gt;
+&lt;h1 id=&quot;软件定时器特性&quot;&gt;软件定时器特性&lt;/h1&gt;
+&lt;ul&gt;
+&lt;l</summary>
       
     
     
     
+    <category term="RTOS" scheme="http://example.com/categories/RTOS/"/>
+    
+    
+    <category term="Timer" scheme="http://example.com/tags/Timer/"/>
     
   </entry>
   
@@ -203,15 +230,16 @@
     <link href="http://example.com/2023/10/05/FreeRTOS%E4%B8%AD%E4%BF%A1%E5%8F%B7%E9%87%8F(Semaphore)/"/>
     <id>http://example.com/2023/10/05/FreeRTOS%E4%B8%AD%E4%BF%A1%E5%8F%B7%E9%87%8F(Semaphore)/</id>
     <published>2023-10-05T13:47:08.000Z</published>
-    <updated>2023-10-07T05:27:42.353Z</updated>
+    <updated>2023-10-12T11:28:13.604Z</updated>
     
-    <content type="html"><![CDATA[]]></content>
+    <content type="html"><![CDATA[<p>任务间数据传输可用队列，消息队列用于传输多个数据，但有时候我们只需传递状态，这个状态用一个 数值表示，此时使用信号量效率更高、更节省内存。</p><p>在FreeRTOS中，信号量有二进制信号量和计数信号量。下面分别来看看这两种信号量。</p><h1 id="二进制信号量">二进制信号量</h1><p>二进制信号量用于互斥和同步目的，信号量 API 函数允许指定阻塞时间。</p><p>可将二进制信号量视为仅能容纳一个项目的队列。 因此，队列只能为空或满（因此称为二进制）。使用队列的任务和中断不在乎队列的内容，只在乎队列是空的还是满的。</p><p>轮询外围设备将会耗费 CPU 资源，阻止执行其他任务。 因此最好将大部分任务时间耗在阻塞状态（允许其他任务执行），仅在需要时再执行。 可以使用二进制信号量来实现同步任务与中断，“获取”信号量时使任务阻塞。 中断总是“给出”信号量（写入队列使其变满） ，但从不接收信号量，任务总是“接收”信号量（从队列中读取信号以使队列变空），但从不“给出”信号量。</p><figure><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/binary-semaphore.gif" alt="" /><figcaption>img</figcaption></figure><h1 id="计数信号量">计数信号量</h1><p>正如二进制信号量可以被认为是长度为 1 的队列那样，计数信号量也可以被认为是长度大于 1 的队列。</p><p>计数信号量通常用于两种情况：</p><ul><li><strong>计数事件</strong></li></ul><p>每次事件发生时，事件处理程序将“给出”一个信号量（信号量计数值递增），每次任务处理事件时，将“获取”一个信号量（信号量计数值递减）。计数值是已发生的事件数与已处理的事件数之间的差值。用来计数事件的计数信号量创建时初始为0。</p><figure><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231012185552265.png" alt="" /><figcaption>image-20231012185552265</figcaption></figure><ul><li><strong>资源管理</strong></li></ul><p>计数值表示可用资源的数量。要获得对资源的控制权，任务必须首先获取一个信号量（信号量计数值递减），当计数值为零时，表示没有空闲资源可用。当任务使用完资源时，“发回”一个信号量（信号量计数值递增）。用来管理资源的信号量值创建的初始值等于可用的资源数量。</p><h1 id="信号量api函数">信号量API函数</h1><div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">/* 动态创建二进制信号量 */</span>SemaphoreHandle_t <span class="hljs-title function_">xSemaphoreCreateBinary</span><span class="hljs-params">( <span class="hljs-type">void</span> )</span>;<span class="hljs-comment">/* 静态创建二进制信号量 */</span>SemaphoreHandle_t <span class="hljs-title function_">xSemaphoreCreateBinaryStatic</span><span class="hljs-params">( </span><span class="hljs-params">  StaticSemaphore_t *pxSemaphoreBuffer <span class="hljs-comment">/* 信号量缓存指针 */</span> </span><span class="hljs-params">)</span>;<span class="hljs-comment">/* 动态创建计数信号量 */</span>SemaphoreHandle_t <span class="hljs-title function_">xSemaphoreCreateCounting</span><span class="hljs-params">( </span><span class="hljs-params">  UBaseType_t uxMaxCount,<span class="hljs-comment">/* 最大计数值 */</span></span><span class="hljs-params">UBaseType_t uxInitialCount <span class="hljs-comment">/* 计数值初始值 */</span></span><span class="hljs-params">)</span>;<span class="hljs-comment">/* 静态创建计数信号量 */</span>SemaphoreHandle_t <span class="hljs-title function_">xSemaphoreCreateCountingStatic</span><span class="hljs-params">( </span><span class="hljs-params">  UBaseType_t uxMaxCount,<span class="hljs-comment">/* 最大计数值 */</span></span><span class="hljs-params">UBaseType_t uxInitialCount <span class="hljs-comment">/* 计数值初始值 */</span></span><span class="hljs-params">  StaticSemaphore_t *pxSemaphoreBuffer <span class="hljs-comment">/* 信号量缓存指针 */</span></span><span class="hljs-params">)</span>;<span class="hljs-comment">/* 获取信号量 */</span>BaseType_t <span class="hljs-title function_">xSemaphoreTake</span><span class="hljs-params">( </span><span class="hljs-params">  SemaphoreHandle_t xSemaphore, <span class="hljs-comment">/* 信号量句柄 */</span></span><span class="hljs-params">  TickType_t xTicksToWait <span class="hljs-comment">/* 阻塞时间 */</span></span><span class="hljs-params">)</span>;<span class="hljs-comment">/* 中断模式下获取信号量 */</span>BaseType_t <span class="hljs-title function_">xSemaphoreTakeFromISR</span><span class="hljs-params">(</span><span class="hljs-params">  SemaphoreHandle_t xSemaphore,<span class="hljs-comment">/* 信号量句柄 */</span></span><span class="hljs-params">  BaseType_t *pxHigherPriorityTaskWoken<span class="hljs-comment">/* 唤醒高优先级任务 */</span></span><span class="hljs-params">)</span>;<span class="hljs-comment">/* 给出一个信号量 */</span>BaseType_t <span class="hljs-title function_">xSemaphoreGive</span><span class="hljs-params">( </span><span class="hljs-params">  SemaphoreHandle_t xSemaphore <span class="hljs-comment">/* 信号量句柄 */</span></span><span class="hljs-params">)</span>;<span class="hljs-comment">/* 中断模式下给出一个信号量 */</span>BaseType_t <span class="hljs-title function_">xSemaphoreGiveFromISR</span><span class="hljs-params">( </span><span class="hljs-params">  SemaphoreHandle_t xSemaphore,<span class="hljs-comment">/* 信号量句柄 */</span></span><span class="hljs-params">BaseType_t *pxHigherPriorityTaskWoken <span class="hljs-comment">/* 唤醒高优先级任务 */</span></span><span class="hljs-params">)</span>;<span class="hljs-comment">/* 删除信号量 */</span><span class="hljs-type">void</span> <span class="hljs-title function_">vSemaphoreDelete</span><span class="hljs-params">( </span><span class="hljs-params">  SemaphoreHandle_t xSemaphore <span class="hljs-comment">/* 信号量句柄 */</span></span><span class="hljs-params">)</span>;</code></pre></div>]]></content>
     
     
       
       
-    <summary type="html">
-</summary>
+    <summary type="html">&lt;p&gt;任务间数据传输可用队列，消息队列用于传输多个数据，但有时候我们只需传递状态，这个状态用一个 数值表示，此时使用信号量效率更高、更节省内存。&lt;/p&gt;
+&lt;p&gt;在FreeRTOS中，信号量有二进制信号量和计数信号量。下面分别来看看这两种信号量。&lt;/p&gt;
+&lt;h1 id=&quot;二进制</summary>
       
     
     

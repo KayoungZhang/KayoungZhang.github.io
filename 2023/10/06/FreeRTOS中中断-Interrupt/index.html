@@ -16,15 +16,20 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta property="og:type" content="article">
+    <meta name="description" content="在 RTOS 中，需要应对各类事件。在每种情况下，必须对最佳事件处理实现策略做出判断：  怎么检测事件的发生？通常使用中断，但也可以是轮询输入。 当使用中断时，中断服务程序中内外各需要执行多少操作？一般让中断服务程序尽可能的短。 事件怎么和main函数通信，如何构建此代码以最好地适应可能的异步事件的发生？  区分任务的优先级和中断的优先级是很重要的：  任务是FreeRTOS运行的">
+<meta property="og:type" content="article">
 <meta property="og:title" content="FreeRTOS中中断(Interrupt)">
 <meta property="og:url" content="http://example.com/2023/10/06/FreeRTOS%E4%B8%AD%E4%B8%AD%E6%96%AD-Interrupt/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="在 RTOS 中，需要应对各类事件。在每种情况下，必须对最佳事件处理实现策略做出判断：  怎么检测事件的发生？通常使用中断，但也可以是轮询输入。 当使用中断时，中断服务程序中内外各需要执行多少操作？一般让中断服务程序尽可能的短。 事件怎么和main函数通信，如何构建此代码以最好地适应可能的异步事件的发生？  区分任务的优先级和中断的优先级是很重要的：  任务是FreeRTOS运行的">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231012165252137.png">
 <meta property="article:published_time" content="2023-10-06T13:47:57.000Z">
-<meta property="article:modified_time" content="2023-10-07T05:27:42.353Z">
+<meta property="article:modified_time" content="2023-10-12T09:15:52.610Z">
 <meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Interrupt">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231012165252137.png">
   
   
   
@@ -219,7 +224,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          0 字
+          2.7k 字
         
       </span>
     
@@ -230,7 +235,7 @@
         
         
         
-          1 分钟
+          9 分钟
         
       </span>
     
@@ -273,7 +278,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年10月7日 下午
+                    本文最后更新于：2023年10月12日 下午
                   
                 
               </p>
@@ -281,7 +286,104 @@
             
               <div class="markdown-body">
                 
-                
+                <p>在 RTOS 中，需要应对各类事件。在每种情况下，必须对最佳事件处理实现策略做出判断：</p>
+<ul>
+<li>怎么检测事件的发生？通常使用中断，但也可以是轮询输入。</li>
+<li>当使用中断时，中断服务程序中内外各需要执行多少操作？一般让中断服务程序尽可能的短。</li>
+<li>事件怎么和main函数通信，如何构建此代码以最好地适应可能的异步事件的发生？</li>
+</ul>
+<p>区分任务的优先级和中断的优先级是很重要的：</p>
+<ul>
+<li>任务是FreeRTOS运行的软件特性，跟硬件无关，任务的优先级通过程序员指定，在运行的状态，由调度器决定执行哪个任务。</li>
+<li>尽管中断服务程序是通过软件写的，但它是一个硬件特性，因为中断服务程序在运行时，是由硬件控制运行的，只有当无ISR时，任务才会运行，最低优先级的中断会中断最高优先级的任务，任务无法抢占ISR，</li>
+</ul>
+<h1 id="isr中api函数">ISR中API函数</h1>
+<p>很多 API 函数会导致任务进入阻塞状态，因此，FreeRTOS提供了两套API函数，一套在任务中使用，另一套在ISR中使用。<strong>注意</strong>：在FreeRTOS的ISR程序中，要调用后缀名为 <strong>FromISR</strong> 的API函数。</p>
+<table style="width:100%;">
+
+<thead>
+<tr class="header">
+<th>类型</th>
+<th>在任务中</th>
+<th>在ISR中</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>队列(Queue)</td>
+<td>xQueueSendToBack()<br>xQueueSendToFront()<br>xQueueReceive()<br>xQueueOverwrite()<br>xQueuePeek()</td>
+<td>xQueueSendToBackFromISR()<br>xQueueSendToFrontFromISR()<br>xQueueReceiveFromISR()<br>xQueueOverwriteFromISR()<br>xQueuePeekFromISR()</td>
+</tr>
+<tr class="even">
+<td>信号量(Semaphore)</td>
+<td>xSemaphoreGive()<br>xSemaphoreTake()</td>
+<td>xSemaphoreGiveFromISR()<br>xSemaphoreTakeFromISR()</td>
+</tr>
+<tr class="odd">
+<td>事件组(EventGroups)</td>
+<td>xEventGroupSetBits()<br>xEventGroupGetBits()</td>
+<td>xEventGroupSetBitsFromISR()<br>xEventGroupGetBitsFromISR()</td>
+</tr>
+<tr class="even">
+<td>任务通知(TaskNotification)</td>
+<td>xTaskNotifyGive()<br>xTaskNotify()</td>
+<td>vTaskNotifyGiveFromISR()<br>xTaskNotifyFromISR()</td>
+</tr>
+<tr class="odd">
+<td>软件定时器(SoftwareTimer)</td>
+<td>xTimerStart()<br>xTimerStop()<br>xTimerReset()<br>xTimerChangePeriod()</td>
+<td>xTimerStartFromISR()<br>xTimerStopFromISR()<br>xTimerResetFromISR()<br>xTimerChangePeriodFromISR()</td>
+</tr>
+</tbody>
+</table>
+<h3 id="两套api函数的优点">两套API函数的<strong>优点</strong>：</h3>
+<ul>
+<li>API函数不需要额外的逻辑判断是从任务中调用，还是从ISR中调用，额外的逻辑判断会让函数更长，更复杂，也更难测试。</li>
+<li>在任务或ISR 中调用时，需要的参数不一样，不会导致参数无效。</li>
+<li>不用每个FreeRTOS移植程序都提供一种机制来确定上下文的执行。</li>
+<li>很容易确定执行的上下文体系，容易使用。</li>
+</ul>
+<p>使用两套函数可以让程序更高效，但是也有一些缺点，比如你要使用第三方库函数时，即会在任务中调用它，也会在ISR调用它。这个第三方库函数用到了FreeRTOS的API函数，你无法修改库函数。要解决这个问题，可通过以下方法：</p>
+<ul>
+<li>把中断的处理推迟到任务中执行，API函数只从任务的上下文中调用。</li>
+<li>如果是支持中断嵌套的FreeRTOS移植，使用“FromISR”那一套API函数。</li>
+<li>第三方代码一般会包含RTOS抽象层，用来测试调用函数（任务或ISR）的上下文，分别调用对应的函数。</li>
+</ul>
+<h3 id="xhigherprioritytaskwoken参数">xHigherPriorityTaskWoken参数</h3>
+<p>如果中断执行上下文切换，那么在中断退出与进入时运行的任务可能不同——中断将中断一个任务，但返回到另一个任务。</p>
+<p>一些FreeRTOS API函数可以将任务从阻塞态移到就绪态。如在<code>xQueueSendToBack()</code>函数中，如果有任务处于阻塞状态来等待当前队列上有可用的数据，则该函数将解除任务的阻塞。如果解除阻塞的任务优先级高于当前处于运行态的任务，那么根据FreeRTOS的调度策略，会切换到优先级更高的任务。切换到高优先级任务取决于调用的API函数的上下文：</p>
+<ul>
+<li>在任务中调用</li>
+</ul>
+<p>配置文件中<code>configUSE_PREEMPTION</code> 配置为1，自动切换到更高优先级任务</p>
+<ul>
+<li>在中断中调用</li>
+</ul>
+<p>设置 <code>*pxHigherPriorityTaskWoken</code> 为 <code>pdTRUE</code>,就可以切换到高优先级任务,第一次使用时要初始化为<code>pdFALSE</code>.</p>
+<h3 id="portyield_from_isr宏">portYIELD_FROM_ISR()宏</h3>
+<p>这个宏用于在中断中请求上下文切换，老版本中还有个汇编形式的宏：<code>portEND_SWITCHING_ISR()</code>。</p>
+<div class="code-wrapper"><pre><code class="hljs c">portYIELD_FROM_ISR( xHigherPriorityTaskWoken );</code></pre></div>
+<p>如果<code>xHigherPriorityTaskWoken</code> 为<code>pdFALSE</code>,则表示不请求上下文切换，宏无作用，如果为<code>pdTRUE</code>,则表示请求上下文切换，处于运行态的任务将会改变。中断始终返回到处于运行态的任务，即使中断执行时处于运行态的任务发生了改变。</p>
+<h1 id="isr的延迟处理">ISR的延迟处理</h1>
+<p>在实践中，尽可能的让ISR程序简短些，因为：</p>
+<ul>
+<li>尽管任务被分配一个高的优先级，它们只会在硬件不提供中断服务的情况下运行。</li>
+<li>ISR可中断任务的起始时间和执行时间。</li>
+<li>取决于运行FreeRTOS的架构平台，一个ISR执行时不可能再接收新的中断。</li>
+<li>程序员需要同时考虑和防护一个任务或ISR访问的变量，外设和内存缓冲等资源的后果。</li>
+<li>一些FreeRTOS端口允许中断嵌套，但这会增加复杂性并降低可预测性。中断越短，嵌套的可能性就越小。</li>
+</ul>
+<p>ISR必须记录中断的原因，并清除中断。中断所需的任何其他操作通常可以在任务中执行，从而使ISR能够尽快退出，这被称为“延迟中断处理”，因为中断所需的处理从ISR“延迟”到任务。</p>
+<p>如果中断处理延迟到的任务的优先级高于任何其他任务的优先级，那么处理将立即执行，就像在ISR本身中执行处理一样。</p>
+<figure>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231012165252137.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20231012165252137</figcaption>
+</figure>
+<p>中断延迟处理在以下情况会比较有用：</p>
+<ul>
+<li>中断所需的处理不是微不足道的。例如，如果中断只是存储ADC转换的结果，这最好在ISR内执行，但如果转换的结果通过软件滤波器，那么最好在任务中执行滤波器的操作。</li>
+<li>中断处理可以方便地执行不能在ISR中执行的操作，例如向控制台写操作或分配内存。</li>
+<li>中断处理是不确定的，这意味着不能预先知道处理将花费多长时间。</li>
+</ul>
 
                 
               </div>
@@ -290,6 +392,34 @@
             <div>
               <div class="post-metas my-3">
   
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/RTOS/" class="category-chain-item">RTOS</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Interrupt/">#Interrupt</a>
+      
+    </div>
   
 </div>
 

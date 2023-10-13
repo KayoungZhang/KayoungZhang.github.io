@@ -16,15 +16,22 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta property="og:type" content="article">
+    <meta name="description" content="互斥是一种特殊的二进制信号量，用于控制对两个或多个任务之间共享资源的访问。要使用它，需在配置文件中设置 configUSE_MUTEXES 为1。 用于互斥时，互斥锁就像用于保护资源的令牌。当访问资源时，必须首先获取 (&#39;token&#39;) 令牌，使用资源后，必须“返回”令牌，这样其他任务就有机会访问此共享资源。  img  互斥优先级反转 高优先级的任务必须等待低优先级的任务放弃对互斥锁">
+<meta property="og:type" content="article">
 <meta property="og:title" content="FreeRTOS中互斥量(Mutexes)">
 <meta property="og:url" content="http://example.com/2023/10/06/FreeRTOS%E4%B8%AD%E4%BA%92%E6%96%A5%E9%87%8F(Mutexes)/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="互斥是一种特殊的二进制信号量，用于控制对两个或多个任务之间共享资源的访问。要使用它，需在配置文件中设置 configUSE_MUTEXES 为1。 用于互斥时，互斥锁就像用于保护资源的令牌。当访问资源时，必须首先获取 (&#39;token&#39;) 令牌，使用资源后，必须“返回”令牌，这样其他任务就有机会访问此共享资源。  img  互斥优先级反转 高优先级的任务必须等待低优先级的任务放弃对互斥锁">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/mutexes.gif">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231012203208837.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231012204245838.png">
 <meta property="article:published_time" content="2023-10-06T13:50:32.000Z">
-<meta property="article:modified_time" content="2023-10-07T05:27:42.353Z">
+<meta property="article:modified_time" content="2023-10-12T14:35:09.248Z">
 <meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Mutexes">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/mutexes.gif">
   
   
   
@@ -219,7 +226,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          0 字
+          1.6k 字
         
       </span>
     
@@ -230,7 +237,7 @@
         
         
         
-          1 分钟
+          6 分钟
         
       </span>
     
@@ -273,7 +280,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年10月7日 下午
+                    本文最后更新于：2023年10月12日 晚上
                   
                 
               </p>
@@ -281,7 +288,75 @@
             
               <div class="markdown-body">
                 
-                
+                <p>互斥是一种特殊的二进制信号量，用于控制对两个或多个任务之间共享资源的访问。要使用它，需在配置文件中设置 <code>configUSE_MUTEXES</code> 为1。</p>
+<p>用于互斥时，互斥锁就像用于保护资源的令牌。当访问资源时，必须首先获取 ('token') 令牌，使用资源后，必须“返回”令牌，这样其他任务就有机会访问此共享资源。</p>
+<figure>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/mutexes.gif" srcset="/img/loading.gif" lazyload alt="" /><figcaption>img</figcaption>
+</figure>
+<h1 id="互斥优先级反转">互斥优先级反转</h1>
+<p>高优先级的任务必须等待低优先级的任务放弃对互斥锁的控制，这种方式的延迟，称为“优先级反转”。如果中等优先级任务开始执行，而高优先级任务正在等待信号量，这会导致高优先级任务等待低优先级任务，而低优先级任务甚至无法执行。</p>
+<figure>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231012203208837.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20231012203208837</figcaption>
+</figure>
+<p>优先级反转显然是一个严重的问题，但在小型嵌入式系统中，通过考虑如何访问资源，通常可以在系统设计时避免这个问题。</p>
+<h1 id="互斥优先级继承">互斥优先级继承</h1>
+<p>与二进制信号量不同的是互斥锁包含基本的“优先级继承”机制，优先级继承是一种将优先级反转的负面影响降至最低的方案。它并没有“修复”优先级反转，只是通过确保总是有时间限制反转来减少其影响。然而优先级继承使系统时序分析复杂化，并且依赖它来进行正确的系统操作并不是一个好的实践。</p>
+<p>优先级继承的工作原理是临时将互斥锁持有者的优先级提高到最高优先级。持有互斥锁的低优先级任务“继承”等待互斥锁任务的优先级。当互斥锁返回时，互斥锁持有者的优先级自动重置为其原始值。</p>
+<figure>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231012204245838.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20231012204245838</figcaption>
+</figure>
+<p>不应在中断中使用互斥锁，因为：</p>
+<ul>
+<li>互斥锁使用的优先级继承机制要求从任务中（而不是从中断中）拿走和放入互斥锁。</li>
+<li>中断无法保持阻塞来等待一个被互斥锁保护的资源 由互斥锁保护的资源变为可用。</li>
+</ul>
+<h1 id="死锁">死锁</h1>
+<p>“死锁”是使用互斥锁进行互斥的另一个潜在陷阱，当两个任务都在等待由另一个任务持有的资源而无法运行时，就会发生死锁。假设任务A和任务B都需要互斥锁X和互斥锁Y来完成操作：</p>
+<ul>
+<li>任务A执行并成功获取互斥锁X</li>
+<li>任务B抢占任务A</li>
+<li>任务B成功地获取了互斥锁Y，在尝试获取互斥锁X，但被任务A持有，所以任务B选择进入阻塞态等待互斥锁X的释放。</li>
+<li>任务A继续运行，它尝试获取互斥锁Y，但被任务B持有，任务A选择进入阻塞态等待互斥锁Y的释放。</li>
+</ul>
+<p>这个场景的最后，任务A等待任务B持有的互斥锁，任务B也在等待任务A持有的互斥锁，这两个任务都无法运行，所以发生死锁。</p>
+<p>与优先级反转一样，避免死锁的最佳方法是设计系统避免发生死锁。让任务无限等待(没有超时)来获取互斥锁通常是不好的做法，相反，使用比期望等待互斥锁的最大时间稍长一点的超时时间，在此时间内未能获得互斥锁将是错误设计的征兆（死锁）。</p>
+<p>在实践中，死锁在小型嵌入式系统中不是一个大问题，因为系统设计人员可以很好地理解整个应用程序，能够辨别和移除发生死锁的区域。</p>
+<h1 id="递归互斥锁">递归互斥锁</h1>
+<p>任务本身也可能发生死锁，如果一个任务多次尝试使用同一个互斥锁，而没有首先返还互斥锁，就会发生这种情况。假设如下场景：</p>
+<ol type="1">
+<li>一个任务成功获取互斥锁。</li>
+<li>持有互斥锁的同时调用库函数。</li>
+<li>库函数尝试获取同一个互斥锁，然后进入阻塞态等待互斥锁可用。</li>
+</ol>
+<p>在此场景结束时，任务处于阻塞状态等待互斥锁返回，但任务已是互斥锁的持有者。因为任务处于阻塞状态等待自己，所以发生自锁。</p>
+<p>使用递归互斥锁替代标准互斥锁可避免这种死锁。一个递归互斥锁可以被同一个任务多次“获取”，仅在每次调用递归互斥锁时，执行“给予”递归互斥锁调用后返回。</p>
+<p>标准互斥锁和递归互斥锁以类似的方式创建和使用：</p>
+<table>
+<thead>
+<tr class="header">
+<th>功能</th>
+<th>标准互斥锁</th>
+<th>递归互斥锁</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>创建</td>
+<td>xSemaphoreCreateMutex()</td>
+<td>xSemaphoreCreateRecursiveMutex()</td>
+</tr>
+<tr class="even">
+<td>获取</td>
+<td>xSemaphoreTake()</td>
+<td>xSemaphoreTakeRecursive()</td>
+</tr>
+<tr class="odd">
+<td>给出</td>
+<td>xSemaphoreGive()</td>
+<td>xSemaphoreGiveRecursive()</td>
+</tr>
+</tbody>
+</table>
 
                 
               </div>
@@ -290,6 +365,34 @@
             <div>
               <div class="post-metas my-3">
   
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/RTOS/" class="category-chain-item">RTOS</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Mutexes/">#Mutexes</a>
+      
+    </div>
   
 </div>
 

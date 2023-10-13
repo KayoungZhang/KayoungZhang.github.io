@@ -16,16 +16,21 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta property="og:type" content="article">
+    <meta name="description" content="任务间数据传输可用队列，消息队列用于传输多个数据，但有时候我们只需传递状态，这个状态用一个 数值表示，此时使用信号量效率更高、更节省内存。 在FreeRTOS中，信号量有二进制信号量和计数信号量。下面分别来看看这两种信号量。 二进制信号量 二进制信号量用于互斥和同步目的，信号量 API 函数允许指定阻塞时间。 可将二进制信号量视为仅能容纳一个项目的队列。 因此，队列只能为空或满（因此称为二">
+<meta property="og:type" content="article">
 <meta property="og:title" content="FreeRTOS中信号量(Semaphore)">
 <meta property="og:url" content="http://example.com/2023/10/05/FreeRTOS%E4%B8%AD%E4%BF%A1%E5%8F%B7%E9%87%8F(Semaphore)/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="任务间数据传输可用队列，消息队列用于传输多个数据，但有时候我们只需传递状态，这个状态用一个 数值表示，此时使用信号量效率更高、更节省内存。 在FreeRTOS中，信号量有二进制信号量和计数信号量。下面分别来看看这两种信号量。 二进制信号量 二进制信号量用于互斥和同步目的，信号量 API 函数允许指定阻塞时间。 可将二进制信号量视为仅能容纳一个项目的队列。 因此，队列只能为空或满（因此称为二">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/binary-semaphore.gif">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231012185552265.png">
 <meta property="article:published_time" content="2023-10-05T13:47:08.000Z">
-<meta property="article:modified_time" content="2023-10-07T05:27:42.353Z">
+<meta property="article:modified_time" content="2023-10-12T11:28:13.604Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="Semaphore">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/binary-semaphore.gif">
   
   
   
@@ -220,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          0 字
+          1.7k 字
         
       </span>
     
@@ -231,7 +236,7 @@
         
         
         
-          1 分钟
+          6 分钟
         
       </span>
     
@@ -274,7 +279,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年10月7日 下午
+                    本文最后更新于：2023年10月12日 晚上
                   
                 
               </p>
@@ -282,7 +287,70 @@
             
               <div class="markdown-body">
                 
-                
+                <p>任务间数据传输可用队列，消息队列用于传输多个数据，但有时候我们只需传递状态，这个状态用一个 数值表示，此时使用信号量效率更高、更节省内存。</p>
+<p>在FreeRTOS中，信号量有二进制信号量和计数信号量。下面分别来看看这两种信号量。</p>
+<h1 id="二进制信号量">二进制信号量</h1>
+<p>二进制信号量用于互斥和同步目的，信号量 API 函数允许指定阻塞时间。</p>
+<p>可将二进制信号量视为仅能容纳一个项目的队列。 因此，队列只能为空或满（因此称为二进制）。使用队列的任务和中断不在乎队列的内容，只在乎队列是空的还是满的。</p>
+<p>轮询外围设备将会耗费 CPU 资源，阻止执行其他任务。 因此最好将大部分任务时间耗在阻塞状态（允许其他任务执行），仅在需要时再执行。 可以使用二进制信号量来实现同步任务与中断，“获取”信号量时使任务阻塞。 中断总是“给出”信号量（写入队列使其变满） ，但从不接收信号量，任务总是“接收”信号量（从队列中读取信号以使队列变空），但从不“给出”信号量。</p>
+<figure>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/binary-semaphore.gif" srcset="/img/loading.gif" lazyload alt="" /><figcaption>img</figcaption>
+</figure>
+<h1 id="计数信号量">计数信号量</h1>
+<p>正如二进制信号量可以被认为是长度为 1 的队列那样，计数信号量也可以被认为是长度大于 1 的队列。</p>
+<p>计数信号量通常用于两种情况：</p>
+<ul>
+<li><strong>计数事件</strong></li>
+</ul>
+<p>每次事件发生时，事件处理程序将“给出”一个信号量（信号量计数值递增），每次任务处理事件时，将“获取”一个信号量（信号量计数值递减）。计数值是已发生的事件数与已处理的事件数之间的差值。用来计数事件的计数信号量创建时初始为0。</p>
+<figure>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231012185552265.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20231012185552265</figcaption>
+</figure>
+<ul>
+<li><strong>资源管理</strong></li>
+</ul>
+<p>计数值表示可用资源的数量。要获得对资源的控制权，任务必须首先获取一个信号量（信号量计数值递减），当计数值为零时，表示没有空闲资源可用。当任务使用完资源时，“发回”一个信号量（信号量计数值递增）。用来管理资源的信号量值创建的初始值等于可用的资源数量。</p>
+<h1 id="信号量api函数">信号量API函数</h1>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">/* 动态创建二进制信号量 */</span>
+SemaphoreHandle_t <span class="hljs-title function_">xSemaphoreCreateBinary</span><span class="hljs-params">( <span class="hljs-type">void</span> )</span>;
+<span class="hljs-comment">/* 静态创建二进制信号量 */</span>
+SemaphoreHandle_t <span class="hljs-title function_">xSemaphoreCreateBinaryStatic</span><span class="hljs-params">( </span>
+<span class="hljs-params">  StaticSemaphore_t *pxSemaphoreBuffer <span class="hljs-comment">/* 信号量缓存指针 */</span> </span>
+<span class="hljs-params">)</span>;
+<span class="hljs-comment">/* 动态创建计数信号量 */</span>
+SemaphoreHandle_t <span class="hljs-title function_">xSemaphoreCreateCounting</span><span class="hljs-params">( </span>
+<span class="hljs-params">  UBaseType_t uxMaxCount,<span class="hljs-comment">/* 最大计数值 */</span></span>
+<span class="hljs-params">	UBaseType_t uxInitialCount <span class="hljs-comment">/* 计数值初始值 */</span></span>
+<span class="hljs-params">)</span>;
+<span class="hljs-comment">/* 静态创建计数信号量 */</span>
+SemaphoreHandle_t <span class="hljs-title function_">xSemaphoreCreateCountingStatic</span><span class="hljs-params">( </span>
+<span class="hljs-params">  UBaseType_t uxMaxCount,<span class="hljs-comment">/* 最大计数值 */</span></span>
+<span class="hljs-params">	UBaseType_t uxInitialCount <span class="hljs-comment">/* 计数值初始值 */</span></span>
+<span class="hljs-params">  StaticSemaphore_t *pxSemaphoreBuffer <span class="hljs-comment">/* 信号量缓存指针 */</span></span>
+<span class="hljs-params">)</span>;
+<span class="hljs-comment">/* 获取信号量 */</span>
+BaseType_t <span class="hljs-title function_">xSemaphoreTake</span><span class="hljs-params">( </span>
+<span class="hljs-params">  SemaphoreHandle_t xSemaphore, <span class="hljs-comment">/* 信号量句柄 */</span></span>
+<span class="hljs-params">  TickType_t xTicksToWait <span class="hljs-comment">/* 阻塞时间 */</span></span>
+<span class="hljs-params">)</span>;
+<span class="hljs-comment">/* 中断模式下获取信号量 */</span>
+BaseType_t <span class="hljs-title function_">xSemaphoreTakeFromISR</span><span class="hljs-params">(</span>
+<span class="hljs-params">  SemaphoreHandle_t xSemaphore,<span class="hljs-comment">/* 信号量句柄 */</span></span>
+<span class="hljs-params">  BaseType_t *pxHigherPriorityTaskWoken<span class="hljs-comment">/* 唤醒高优先级任务 */</span></span>
+<span class="hljs-params">)</span>;
+<span class="hljs-comment">/* 给出一个信号量 */</span>
+BaseType_t <span class="hljs-title function_">xSemaphoreGive</span><span class="hljs-params">( </span>
+<span class="hljs-params">  SemaphoreHandle_t xSemaphore <span class="hljs-comment">/* 信号量句柄 */</span></span>
+<span class="hljs-params">)</span>;
+<span class="hljs-comment">/* 中断模式下给出一个信号量 */</span>
+BaseType_t <span class="hljs-title function_">xSemaphoreGiveFromISR</span><span class="hljs-params">( </span>
+<span class="hljs-params">  SemaphoreHandle_t xSemaphore,<span class="hljs-comment">/* 信号量句柄 */</span></span>
+<span class="hljs-params">	BaseType_t *pxHigherPriorityTaskWoken <span class="hljs-comment">/* 唤醒高优先级任务 */</span></span>
+<span class="hljs-params">)</span>;
+<span class="hljs-comment">/* 删除信号量 */</span>
+<span class="hljs-type">void</span> <span class="hljs-title function_">vSemaphoreDelete</span><span class="hljs-params">( </span>
+<span class="hljs-params">  SemaphoreHandle_t xSemaphore <span class="hljs-comment">/* 信号量句柄 */</span></span>
+<span class="hljs-params">)</span>;</code></pre></div>
 
                 
               </div>
