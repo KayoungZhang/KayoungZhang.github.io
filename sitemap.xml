@@ -1666,13 +1666,6 @@
   </url>
   
   <url>
-    <loc>http://example.com/tags/Modbus/</loc>
-    <lastmod>2023-10-26</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>http://example.com/tags/pid/</loc>
     <lastmod>2023-10-26</lastmod>
     <changefreq>weekly</changefreq>
@@ -1688,6 +1681,13 @@
   
   <url>
     <loc>http://example.com/tags/Qt/</loc>
+    <lastmod>2023-10-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://example.com/tags/Modbus/</loc>
     <lastmod>2023-10-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
