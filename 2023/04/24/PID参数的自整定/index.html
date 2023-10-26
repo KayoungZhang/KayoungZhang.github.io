@@ -16,16 +16,19 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="在某些PID应用场合，不同的对象就得采用不同的参数值，所以需要进行参数自整定。实质就是在首次使用时，通过N次测量得到一套PID参数。具体的整定方法有三种：临界比例度法、衰减曲线法、经验法。三种方法共同点都是通过试验，然后按照工程经验公式对控制器参数进行整定。现在一般采用比较多的是临界比例度法。 1、临界比例度法（Ziegler-Nichols） 1.1 操作方法 （1）将纯比例控制器接入到闭">
+    <meta name="description" content="在某些PID应用场合，不同的对象就得采用不同的参数值，所以需要进行参数自整定。实质就是在首次使用时，通过N次测量得到一套PID参数。具体的整定方法有三种：临界比例度法、衰减曲线法、经验法。三种方法共同点都是通过试验，然后按照工程经验公式对控制器参数进行整定。现在一般采用比较多的是临界比例度法。 临界比例度法（Ziegler-Nichols）  操作方法  （1）将纯比例控制器接入到闭环控">
 <meta property="og:type" content="article">
 <meta property="og:title" content="PID参数的自整定">
 <meta property="og:url" content="http://example.com/2023/04/24/PID%E5%8F%82%E6%95%B0%E7%9A%84%E8%87%AA%E6%95%B4%E5%AE%9A/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="在某些PID应用场合，不同的对象就得采用不同的参数值，所以需要进行参数自整定。实质就是在首次使用时，通过N次测量得到一套PID参数。具体的整定方法有三种：临界比例度法、衰减曲线法、经验法。三种方法共同点都是通过试验，然后按照工程经验公式对控制器参数进行整定。现在一般采用比较多的是临界比例度法。 1、临界比例度法（Ziegler-Nichols） 1.1 操作方法 （1）将纯比例控制器接入到闭">
+<meta property="og:description" content="在某些PID应用场合，不同的对象就得采用不同的参数值，所以需要进行参数自整定。实质就是在首次使用时，通过N次测量得到一套PID参数。具体的整定方法有三种：临界比例度法、衰减曲线法、经验法。三种方法共同点都是通过试验，然后按照工程经验公式对控制器参数进行整定。现在一般采用比较多的是临界比例度法。 临界比例度法（Ziegler-Nichols）  操作方法  （1）将纯比例控制器接入到闭环控">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/v2-68670d44361ce32e7d24f695bd61c62c_720w.webp">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/110.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/640-16980297005852.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/640-16980297005874.png">
 <meta property="article:published_time" content="2023-04-24T07:21:27.000Z">
-<meta property="article:modified_time" content="2023-09-25T10:49:28.196Z">
+<meta property="article:modified_time" content="2023-10-23T08:37:16.179Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="pid">
 <meta name="twitter:card" content="summary_large_image">
@@ -224,7 +227,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.9k 字
+          2.4k 字
         
       </span>
     
@@ -235,7 +238,7 @@
         
         
         
-          7 分钟
+          8 分钟
         
       </span>
     
@@ -278,7 +281,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年9月25日 晚上
+                    本文最后更新于：2023年10月23日 下午
                   
                 
               </p>
@@ -287,8 +290,10 @@
               <div class="markdown-body">
                 
                 <p>在某些PID应用场合，不同的对象就得采用不同的参数值，所以需要进行参数自整定。实质就是在首次使用时，通过N次测量得到一套PID参数。具体的整定方法有三种：临界比例度法、衰减曲线法、经验法。三种方法共同点都是通过试验，然后按照工程经验公式对控制器参数进行整定。现在一般采用比较多的是临界比例度法。</p>
-<h4 id="临界比例度法ziegler-nichols">1、临界比例度法（Ziegler-Nichols）</h4>
-<h5 id="操作方法">1.1 操作方法</h5>
+<h1 id="临界比例度法ziegler-nichols">临界比例度法（Ziegler-Nichols）</h1>
+<ul>
+<li><strong>操作方法</strong></li>
+</ul>
 <p>（1）将纯比例控制器接入到闭环控制系统中（设置控制器参数积分时间常数Ti=∞，实际微分时间常数Td=0）。</p>
 <p>（2）由小到大改变比例增益K，直到闭环系统出现持续等幅振荡。此时的增益为临界增益（Ku），振荡周期（波峰间的时间）为临界周期（Tu）。然后根据下表得出PID控制器参数。</p>
 <table>
@@ -327,18 +332,24 @@
 </tr>
 </tbody>
 </table>
-<h5 id="计算pid的三个参数值">1.2 计算PID的三个参数值：</h5>
+<ul>
+<li><strong>计算PID的三个参数值：</strong></li>
+</ul>
 <p><strong>Kp = K；</strong></p>
-<p>**Ki = Kp*(T/Ti)；**</p>
-<p>**Kd = Kp*(Td/T)；**</p>
-<p>其中： <strong>T</strong> 是采样周期，也叫控制周期，每隔T时间段进行一次PID计算。</p>
-<h5 id="注意事项">1.3 注意事项：</h5>
+<p><strong>Ki = Kp*(T/Ti)；</strong></p>
+<p><strong>Kd = Kp*(Td/T)；</strong></p>
+<p>其中：<strong>T</strong> 是采样周期，也叫控制周期，每隔T时间段进行一次PID计算,根据控制对象这个值要在一个合理的区间。</p>
+<ul>
+<li><strong>注意事项：</strong></li>
+</ul>
 <p>（1）应使控制系统工作在线性区，不要使控制阀出现开、关的极端状态，否则得到的持续振荡曲线可能是“极限循环”，从线性系统概念上说系统早已处于发散振荡了。</p>
 <p>（2）由于被控对象特性的不同，应针对具体系统在实际运行过程中对上述求得的控制器参数进行在线校正。</p>
 <p>（3）适用于临界振幅不大、振荡周期较长的过程控制系统，但有些系统用纯比例控制时始终是稳定的，是无法用临界比例度法来进行参数整定的。</p>
 <p>（4）只适用于二阶以上的高阶对象，或一阶加纯滞后的对象，否则，在纯比例控制情况下，系统不会出现等幅振荡。</p>
-<h4 id="衰减曲线法">2、衰减曲线法</h4>
-<h5 id="整定步骤">2.1 整定步骤</h5>
+<h1 id="衰减曲线法">衰减曲线法</h1>
+<ul>
+<li><strong>整定步骤</strong></li>
+</ul>
 <p>（1）在纯比例控制器下，置比例增益K为较小值。系统稳定后，作设定值阶跃扰动，观察系统的响应。若系统响应衰减太快，则减小比例增益K；反之，应增大比例增益K。</p>
 <p>（2）直到系统出现如下图（a）所示的4:1衰减振荡过程，记下此时的比例增益Ks及和振荡周期Ts数值。同理，10：1衰减曲线如下图（b）所示。</p>
 <figure>
@@ -379,34 +390,58 @@
 </tr>
 </tbody>
 </table>
-<h5 id="注意事项-1">2.2 注意事项</h5>
+<ul>
+<li><strong>注意事项</strong></li>
+</ul>
 <p>（1）加给定干扰不能太大，要根据生产操作要求来定，一般在5%左右，也有例外的情况。</p>
 <p>（2）必须在工艺参数稳定的情况下才能加给定干扰，否则得不到正确的整定参数。</p>
 <p>（3）对于反应快的系统，如流量、管道压力和小容量的液位调节等，要得到严格的4：1衰减曲线较困难，一般以被调参数来回波动两次达到稳定，就近似地认为达到4：1衰减过程了。</p>
 <p>（4）投运时，先将K放在较小的数值，把Ti减少到整定值，把Td逐步放大到整定值，然后把K拉到整定值（如果在K=整定值的条件下很快地把Td放到整定值，控制器的输出会剧烈变化）。</p>
-<h4 id="经验整定法">3、经验整定法</h4>
-<h5 id="方法一">3.1方法一</h5>
-<p>（1）确定比例增益</p>
+<h1 id="经验整定法">经验整定法</h1>
+<ul>
+<li><strong>方法一</strong></li>
+</ul>
+<p>（1）<strong>确定比例增益</strong></p>
 <p>使PID为纯比例调节,输入设定为系统允许最大值的60%~70%，由0逐渐加大比例增益至系统出现振荡；再逐渐减小比例增益至系统振荡消失，记录此时的比例增益，则设定PID的比例增益P为当前值的60%~70%。</p>
-<p>（2）确定积分时间常数Ti</p>
+<p>（2）<strong>确定积分时间常数Ti</strong></p>
 <p>比例增益P确定后，设定一个较大的积分时间常数Ti的初值，逐渐减小Ti至系统出现振荡，之后逐渐加大Ti至振荡消失。记录此时的Ti，则设定PID的积分时间常数Ti为当前值的150%~180%。</p>
-<p>（3）确定积分时间常数Td</p>
+<p>（3）<strong>确定积分时间常数Td</strong></p>
 <p>积分时间常数Td一般不用设定，为0即可。若要设定，与确定 P和Ti的方法相同，取不振荡时的30%。</p>
 <p>（4）系统带载联调，再对PID参数进行微调，直至满足要求。</p>
-<h5 id="方法二">3.2 方法二</h5>
+<ul>
+<li><strong>方法二</strong></li>
+</ul>
 <p>（1）在实际调试中，也可以先大致设定一个经验值，然后根据调节效果修改。</p>
-<p>　　流量系统：P（%）40~100，Ti（分）0.1~1</p>
-<p>　　压力系统：P（%）30~70， Ti（分）0.4~3</p>
-<p>　　液位系统：P（%）20~80， Ti（分）1~5</p>
-<p>　　温度系统：P（%）20~60， Ti（分）3~10，Td（分）0.5~3</p>
+<p>　　<strong>流量系统：P（%）40~100，Ti（分）0.1~1</strong></p>
+<p>　　<strong>压力系统：P（%）30~70， Ti（分）0.4~3</strong></p>
+<p>　　<strong>液位系统：P（%）20~80， Ti（分）1~5</strong></p>
+<p>　　<strong>温度系统：P（%）20~60， Ti（分）3~10，Td（分）0.5~3</strong></p>
 <p>（2）以下整定的口诀：</p>
 <p>阶跃扰动投闭环，参数整定看曲线；先投比例后积分，最后再把微分加；</p>
 <p>理想曲线两个波，振幅衰减4比1；曲线震荡动作繁，微分时间要加长；</p>
 <p>曲线震荡很频繁，比例刻度要放大；曲线漂浮波动大，比例刻度要拉小；</p>
 <p>曲线波动周期长，积分时间要加长；偏离定值回复慢，积分时间往小降。</p>
+<h1 id="实际调参"><strong>实际调参</strong></h1>
+<p>① 先调整比例系数，此时的系统只有比例环节参与控制，此时系统的曲线出现大幅振荡。说明比例系数调节的过大了，把比例系数慢慢地减小，并同时观察曲线的变化。</p>
+<figure>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/110.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>图片</figcaption>
+</figure>
+<p>② 当调小比例系数之后，大幅度振荡现象消失，但是曲线依旧存在小幅度的超调现象，并且此时通过调节比例系数已经无法优化曲线。</p>
+<figure>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/640-16980297005852.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>图片</figcaption>
+</figure>
+<p>此时，可以慢慢地增大微分系数，如果此时曲线已经较为理想，则说明这个系统只需要比例和微分环节的控制。</p>
+<p>③ 如果在纯比例环节的控制下，系统的实际值始终达不到目标值，存在静态误差。</p>
+<figure>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/640-16980297005874.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>图片</figcaption>
+</figure>
+<p>此时，可以逐渐增大积分系数，并同时观察曲线的变化，如果消除静差的时间过长，则可以再适当增大积分系数，但是需要注意兼顾系统的超调量。如果系统的曲线已经较为理想，则说明这个系统只需要比例和积分环节的控制。</p>
+<p>④ 如果系统在比例和积分环节的控制下出现小幅度的超调现象，可以慢慢地增大微分系数，从而找到最合适的参数。</p>
+<p>以上就是在实际调参中经常遇到的一些问题以及解决方法。在实际应用中，控制系统是多样且复杂的，这一些方法只能作为参考，并不是通用的，因此在 PID 调参过程中，要注意经验的积累。</p>
 <h3 id="参考链接">参考链接</h3>
 <p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/82344845">详细讲解PID控制</a></p>
 <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/luckytimor/p/6881569.html">PID公式参数</a></p>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/w87ReExWKqmampwq6mBwOw">快速调试PID参数的3种方法。 (qq.com)</a></p>
 
                 
               </div>

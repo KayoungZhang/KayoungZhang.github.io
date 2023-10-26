@@ -1,0 +1,989 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="单片机程序的烧录方式主要有以下三种：  ICP（In Circuit Programming）线路途径烧录  烧录器Jlink、daplink等通过JTAG或SWD线路接口进行烧录。  ISP（In System Programming）系统途径烧录  通过BootLoader引导代码和外围uart或usb等接口引导进入Flash的System Memory区，进行程序的烧录。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="stm32 IAP在线升级详解">
+<meta property="og:url" content="http://example.com/2023/10/19/stm32-IAP%E5%9C%A8%E7%BA%BF%E5%8D%87%E7%BA%A7%E8%AF%A6%E8%A7%A3/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="单片机程序的烧录方式主要有以下三种：  ICP（In Circuit Programming）线路途径烧录  烧录器Jlink、daplink等通过JTAG或SWD线路接口进行烧录。  ISP（In System Programming）系统途径烧录  通过BootLoader引导代码和外围uart或usb等接口引导进入Flash的System Memory区，进行程序的烧录。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/66e1355f18e349069da43d2785c8237c.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231020085333996.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231019184549407.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231019191454635.png">
+<meta property="article:published_time" content="2023-10-19T05:01:39.000Z">
+<meta property="article:modified_time" content="2023-10-26T02:55:44.313Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="IAP">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/66e1355f18e349069da43d2785c8237c.png">
+  
+  
+  
+  
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"✍","loop":false,"scope":["home"]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":false},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":false,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+<meta name="referrer" content="no-referrer" />
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>My Tech Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/article.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.1)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle">stm32 IAP在线升级详解</span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-10-19 13:01" pubdate>
+          2023年10月19日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          12k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          40 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-12 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">stm32 IAP在线升级详解</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：2023年10月26日 上午
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <p>单片机程序的烧录方式主要有以下三种：</p>
+<ul>
+<li><span style="color:blue">ICP（In Circuit Programming）线路途径烧录</span></li>
+</ul>
+<p>烧录器Jlink、daplink等通过JTAG或SWD线路接口进行烧录。</p>
+<ul>
+<li><span style="color:blue">ISP（In System Programming）系统途径烧录</span></li>
+</ul>
+<p>通过BootLoader引导代码和外围uart或usb等接口引导进入Flash的System Memory区，进行程序的烧录。</p>
+<ul>
+<li><span style="color:blue">IAP（In Application Programming）应用程序途径烧录</span></li>
+</ul>
+<p>通过程序自身运行过程中，对flash进行程序烧录。</p>
+<p>在产品发布后，需要添加新功能或修复bug，而使用预留的通信接口（UART、USB、WIFI、4G、网口、蓝牙等）进行IAP程序的烧录升级，就可避免拆开机器使用下载器烧写程序，方便快捷，所以，IAP方式使用的越来越广泛，下面我们主要来看看IAP的烧录方式具体情况。</p>
+<h1 id="iap程序的组成">IAP程序的组成</h1>
+<p>要实现IAP功能一般要设计两个工程代码：</p>
+<ul>
+<li><strong><span style="color:blue">自定义BootLoader程序</span></strong></li>
+</ul>
+<p>BootLoader主要起引导作用，引导程序从哪一部分映射地址启动。在STM32中有两类，一类是芯片厂商固化到Flash中的自举程序，用作ISP串口下载程序；另一类属于用户自定义BootLoader程序，用于检测APP区代码是否需要更新，以及跳转到APP区执行APP程序。</p>
+<ul>
+<li><strong><span style="color:blue">APP应用程序</span></strong></li>
+</ul>
+<p>这个程序才是真正实现产品功能的程序。APP程序可分成APP1和APP2两部分，即双区模式，APP1用来存储用户程序，APP2用来当更新缓存和备份区域用。</p>
+<p><strong>IAP的实现流程</strong>：</p>
+<p>单片机上电后先运行BootLoader程序，检测程序更新条件是否被触发(如：<strong>上位机是否发生特定的数据、特定的按键是否按下、串口是否接收到特定数据、U盘是否插入</strong>等)，如果有则对APP应用程序进行擦除和重新写入新的用户程序，如果没有则直接跳转到APP应用程序执行应用。</p>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/66e1355f18e349069da43d2785c8237c.png" srcset="/img/loading.gif" lazyload alt="img" style="zoom:50%;" /></p>
+<h1 id="iap实现原理">IAP实现原理</h1>
+<p>STM32微控制器在硬件上通过<strong>boot0</strong>和<strong>boot1</strong>两个引脚的设置，可进入不同的启动模式，如下所示：</p>
+<figure>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231020085333996.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20231020085333996</figcaption>
+</figure>
+<p>微控制器进入不同的启动模式，就是改变了flash内部中断向量表起始地址的指向，<span style="color:green"><strong>IAP的本质其实是设置存放中断向量表的地址。</strong></span></p>
+<ul>
+<li><strong>正常程序上电执行流程</strong>：</li>
+</ul>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231019184549407.png" srcset="/img/loading.gif" lazyload /></p>
+<ul>
+<li><strong>加入IAP后上电执行流程</strong>：</li>
+</ul>
+<p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231019191454635.png" srcset="/img/loading.gif" lazyload /></p>
+<p>更新中断向量表的方法：</p>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">define</span> APPLICATION_ADDRESS   (uint32_t)0x08008000</span>
+SCB-&gt;VTOR = APPLICATION_ADDRESS;</code></pre></div>
+<h1 id="iap-flash分区">IAP flash分区</h1>
+<h1 id="程序的实现">程序的实现</h1>
+<p>程序实现主要是BootLoader程序和APP用户程序的编写。</p>
+<h4 id="bootloader程序">BootLoader程序</h4>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">enum</span> &#123;</span>
+	APPLICATION_NORMAL = <span class="hljs-number">0</span>,		<span class="hljs-comment">// APP能正常稳定运行</span>
+	APPLICATION_UPDATED,		<span class="hljs-comment">// APP刚更新完成，等待测试启动</span>
+	APPLICATION_ERROR,			<span class="hljs-comment">// APP错误，不能正常工作</span>
+&#125;Application_Status_t;
+ 
+<span class="hljs-keyword">typedef</span>	__PACKED_STRUCT&#123;
+	<span class="hljs-type">uint32_t</span> Device_id;					<span class="hljs-comment">// 设备号</span>
+	<span class="hljs-type">uint32_t</span> Hardware_Version;			<span class="hljs-comment">// 硬件版本信息</span>
+	<span class="hljs-type">uint32_t</span> Application0_Version;		<span class="hljs-comment">// APP0软件版本</span>
+	<span class="hljs-type">uint32_t</span> Application1_Version;		<span class="hljs-comment">// APP1软件版本</span>
+	<span class="hljs-type">uint32_t</span> Application0_Status;		<span class="hljs-comment">// APP0的状态. @Application_Status_t</span>
+	<span class="hljs-type">uint32_t</span> Application1_Status;		<span class="hljs-comment">// APP1的状态. @Application_Status_t</span>
+	<span class="hljs-type">uint8_t</span>  Server_Address[<span class="hljs-number">64</span>];		<span class="hljs-comment">// 服务器的地址</span>
+	<span class="hljs-type">uint32_t</span> Server_Port;				<span class="hljs-comment">// 服务器的端口号</span>
+	<span class="hljs-type">uint8_t</span>  Server_Key[<span class="hljs-number">4</span>];				<span class="hljs-comment">// 服务器的登录密钥，随时更新</span>
+	<span class="hljs-type">uint32_t</span> SystemParamCRC;
+&#125;SystemParamTypeDef;
+<span class="hljs-type">void</span> <span class="hljs-title function_">System_ParamReadCheck</span><span class="hljs-params">(SystemParamTypeDef *pData)</span>
+&#123;
+	<span class="hljs-type">uint32_t</span> crcdatalen = <span class="hljs-number">0</span>;
+	SystemParamTypeDef sysparam, sysparambackup;
+ 
+	<span class="hljs-comment">/* 读取主区和备份区的系统参数 */</span>
+	FLASH_If_Read(SYSTEMPARAM_ADDRESS, (<span class="hljs-type">uint32_t</span>*) &amp;sysparam, <span class="hljs-keyword">sizeof</span>(SystemParamTypeDef) / <span class="hljs-number">4</span>);
+	FLASH_If_Read(SYSTEMPARAM_BACKUPADDRESS, (<span class="hljs-type">uint32_t</span>*) &amp;sysparambackup, <span class="hljs-keyword">sizeof</span>(SystemParamTypeDef) / <span class="hljs-number">4</span>);
+ 
+	<span class="hljs-comment">// 去掉系统参数CRC的数据校验长度</span>
+	crcdatalen = <span class="hljs-keyword">sizeof</span>(SystemParamTypeDef) / <span class="hljs-number">4</span> - <span class="hljs-number">1</span>;
+	<span class="hljs-comment">/* 主系统参数区放的的数据CRC校验  */</span>
+	<span class="hljs-keyword">if</span> (HAL_CRC_Calculate(&amp;hcrc, (<span class="hljs-type">uint32_t</span>*) &amp;sysparam, crcdatalen)	== sysparam.SystemParamCRC)
+	&#123;
+		<span class="hljs-comment">/*</span>
+<span class="hljs-comment">		 *  @ 系统参数主存储区的数据校验正确，</span>
+<span class="hljs-comment">		 *  @ 开始校验系统参数备份区的数据：</span>
+<span class="hljs-comment">		 *    1、如果备份区的数据CRC校验正确，则进行对比数据一致性，不一致则将主区数据写入备份区</span>
+<span class="hljs-comment">		 *    2、如果备份区的数据CRC校验错误，则将主区的系统参数据写入备份区；</span>
+<span class="hljs-comment">		 * */</span>
+		<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;System parameter main sector data checked OK\r\n&quot;</span>);
+		<span class="hljs-keyword">if</span> (HAL_CRC_Calculate(&amp;hcrc, (<span class="hljs-type">uint32_t</span>*) &amp;sysparambackup, crcdatalen) == sysparambackup.SystemParamCRC)
+		&#123;
+			<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;System parameter backup sector data checked OK\r\n&quot;</span>);
+			<span class="hljs-keyword">if</span> (<span class="hljs-built_in">memcmp</span>(&amp;sysparam, &amp;sysparambackup, <span class="hljs-keyword">sizeof</span>(SystemParamTypeDef)) != <span class="hljs-number">0</span>)
+			&#123;
+				<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;System parameter main sector and backup sector data are different, update backup sector data\r\n&quot;</span>);
+				<span class="hljs-built_in">memcpy</span>(&amp;sysparambackup, &amp;sysparam, <span class="hljs-keyword">sizeof</span>(SystemParamTypeDef));
+				System_ParamUpdate(SYSTEMPARAM_BACKUPADDRESS, &amp;sysparambackup);
+			&#125;
+			<span class="hljs-keyword">else</span> <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;System parameter main sector and backup sector data are the same\r\n&quot;</span>);
+		&#125;
+		<span class="hljs-keyword">else</span>
+		&#123;
+			<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;System parameter backup sector data checked Fail, update backup sector data\r\n&quot;</span>);
+			<span class="hljs-built_in">memcpy</span>(&amp;sysparambackup, &amp;sysparam, <span class="hljs-keyword">sizeof</span>(SystemParamTypeDef));
+			System_ParamUpdate(SYSTEMPARAM_BACKUPADDRESS, &amp;sysparambackup);
+		&#125;
+	&#125;
+	<span class="hljs-keyword">else</span>
+	&#123;
+		<span class="hljs-comment">/*</span>
+<span class="hljs-comment">		 *  @ 系统参数主存储区的数据校验错误</span>
+<span class="hljs-comment">		 *  @ 开始校验系统参数备份区的数据：</span>
+<span class="hljs-comment">		 *    1、如果备份区的数据CRC校验正确，则将备份区数据写入主区</span>
+<span class="hljs-comment">		 *    2、如果备份区的数据CRC校验错误，则将默认系统参数数据写入两个区域，强行启动APP0；</span>
+<span class="hljs-comment">		 * */</span>
+		<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;System parameter main sector data checked Fail\r\n&quot;</span>);
+		<span class="hljs-keyword">if</span> (HAL_CRC_Calculate(&amp;hcrc, (<span class="hljs-type">uint32_t</span>*) &amp;sysparambackup, crcdatalen) == sysparambackup.SystemParamCRC)
+		&#123;
+			<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;System parameter backup sector data checked OK, update master sector data\r\n&quot;</span>);
+			<span class="hljs-built_in">memcpy</span>(&amp;sysparam, &amp;sysparambackup, <span class="hljs-keyword">sizeof</span>(SystemParamTypeDef));
+			System_ParamUpdate(SYSTEMPARAM_ADDRESS, &amp;sysparam);
+		&#125;
+		<span class="hljs-keyword">else</span>
+		&#123;
+			<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;System parameter main sector and backup sector data checked Fail, Restore defaults\r\n&quot;</span>);
+			SystemParam_default.SystemParamCRC = HAL_CRC_Calculate(&amp;hcrc, (<span class="hljs-type">uint32_t</span>*) &amp;SystemParam_default, crcdatalen);
+			<span class="hljs-built_in">memcpy</span>(&amp;sysparam, &amp;SystemParam_default, <span class="hljs-keyword">sizeof</span>(SystemParamTypeDef));
+			<span class="hljs-built_in">memcpy</span>(&amp;sysparambackup, &amp;SystemParam_default, <span class="hljs-keyword">sizeof</span>(SystemParamTypeDef));
+			System_ParamUpdate(SYSTEMPARAM_ADDRESS, &amp;sysparam);
+			System_ParamUpdate(SYSTEMPARAM_BACKUPADDRESS, &amp;sysparambackup);
+		&#125;
+	&#125;
+ 
+	<span class="hljs-built_in">memcpy</span>(pData, &amp;sysparam, <span class="hljs-keyword">sizeof</span>(SystemParamTypeDef));
+	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Hardware_Version = 0x%08lX\r\n&quot;</span>, pData-&gt;Hardware_Version);
+	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Application0_Version = 0x%08lX\r\n&quot;</span>, pData-&gt;Application0_Version);
+	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Application0_Status  = 0x%08lX\r\n&quot;</span>, pData-&gt;Application0_Status);
+	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Application1_Version = 0x%08lX\r\n&quot;</span>, pData-&gt;Application1_Version);
+	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Application1_Status  = 0x%08lX\r\n&quot;</span>, pData-&gt;Application1_Status);
+&#125;
+<span class="hljs-type">uint32_t</span> <span class="hljs-title function_">System_SelectBootAddress</span><span class="hljs-params">(SystemParamTypeDef *pData)</span>
+&#123;
+	<span class="hljs-type">uint32_t</span> BootAddress = <span class="hljs-number">0</span>;
+ 
+	<span class="hljs-keyword">if</span> (pData-&gt;Application0_Version &gt;= pData-&gt;Application1_Version)
+	&#123;
+		<span class="hljs-keyword">if</span> (pData-&gt;Application0_Status == APPLICATION_NORMAL)
+		&#123;
+			<span class="hljs-comment">/* 正常启动 */</span>
+			<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;APP0 APPLICATION_NORMAL. Run the APP0.\r\n&quot;</span>);
+			BootAddress = APPLICATION0_ADDRESS;
+		&#125;
+		<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (pData-&gt;Application0_Status == APPLICATION_UPDATED)
+		&#123;
+			<span class="hljs-comment">/*</span>
+<span class="hljs-comment">			 * 刚IAP更新的程序固件，把APP的status改成 错误标志位 @APPLICATION_ERROR，</span>
+<span class="hljs-comment">			 * 1、若APP跳转运行正常后会修改成正常启动标志 @APPLICATION_NORMAL。</span>
+<span class="hljs-comment">			 * 2、若APP跳转运行失败（跑飞），那么看门狗会复位，重启后该APP是错误标志不会启动。</span>
+<span class="hljs-comment">			 * 3、清空版本信息，待启动修正。</span>
+<span class="hljs-comment">			 * 4、更新系统参数，写入flash</span>
+<span class="hljs-comment">			 * */</span>
+			<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;APP0 APPLICATION_UPDATED. Clear APP0 system parameters, Run the APP0.\r\n&quot;</span>);
+			pData-&gt;Application0_Version = <span class="hljs-number">0</span>;
+			pData-&gt;Application0_Status = APPLICATION_ERROR;
+			System_ParamUpdate(SYSTEMPARAM_ADDRESS, pData);
+			System_ParamUpdate(SYSTEMPARAM_BACKUPADDRESS, pData);
+			BootAddress = APPLICATION0_ADDRESS;
+		&#125;
+		<span class="hljs-keyword">else</span>
+		&#123;
+			<span class="hljs-comment">/* 由于APP0信息错误，强制启动APP1 */</span>
+			<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;APP0 APPLICATION_ERROR. Forced the APP1 to run.\r\n&quot;</span>);
+			BootAddress = APPLICATION1_ADDRESS;
+		&#125;
+	&#125;
+	<span class="hljs-keyword">else</span>
+	&#123;
+		<span class="hljs-keyword">if</span> (pData-&gt;Application1_Status == APPLICATION_NORMAL)
+		&#123;
+			<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;APP1 APPLICATION_NORMAL. Run the APP1.\r\n&quot;</span>);
+			BootAddress = APPLICATION1_ADDRESS;
+		&#125;
+		<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (pData-&gt;Application1_Status == APPLICATION_UPDATED)
+		&#123;
+			<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;APP1 APPLICATION_UPDATED. Clear APP1 system parameters, Run the APP1.\r\n&quot;</span>);
+			pData-&gt;Application1_Version = <span class="hljs-number">0</span>;
+			pData-&gt;Application1_Status = APPLICATION_ERROR;
+			System_ParamUpdate(SYSTEMPARAM_ADDRESS, pData);
+			System_ParamUpdate(SYSTEMPARAM_BACKUPADDRESS, pData);
+			BootAddress = APPLICATION1_ADDRESS;
+		&#125;
+		<span class="hljs-keyword">else</span>
+		&#123;
+			<span class="hljs-comment">/* 由于APP1信息错误，强制启动APP0 */</span>
+			<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;APP1 APPLICATION_ERROR. Forced the APP0 to run.\r\n&quot;</span>);
+			BootAddress = APPLICATION0_ADDRESS;
+		&#125;
+	&#125;
+ 
+	<span class="hljs-keyword">return</span> BootAddress;
+&#125;
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span>
+&#123;
+  <span class="hljs-comment">/* USER CODE BEGIN 1 */</span>
+ 
+  <span class="hljs-comment">/* USER CODE END 1 */</span>
+ 
+  <span class="hljs-comment">/* MCU Configuration--------------------------------------------------------*/</span>
+ 
+  <span class="hljs-comment">/* Reset of all peripherals, Initializes the Flash interface and the Systick. */</span>
+  HAL_Init();
+ 
+  <span class="hljs-comment">/* USER CODE BEGIN Init */</span>
+ 
+  <span class="hljs-comment">/* USER CODE END Init */</span>
+ 
+  <span class="hljs-comment">/* Configure the system clock */</span>
+  SystemClock_Config();
+ 
+  <span class="hljs-comment">/* USER CODE BEGIN SysInit */</span>
+ 
+  <span class="hljs-comment">/* USER CODE END SysInit */</span>
+ 
+  <span class="hljs-comment">/* Initialize all configured peripherals */</span>
+  MX_GPIO_Init();
+  MX_USART1_UART_Init();
+  MX_CRC_Init();
+  MX_IWDG_Init();
+  <span class="hljs-comment">/* USER CODE BEGIN 2 */</span>
+  <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;\r\nSudaroot, This is a advanced bootloader\r\n&quot;</span>);
+  <span class="hljs-comment">/* system param read check */</span>
+  System_ParamReadCheck(&amp;SystemParam);
+  <span class="hljs-comment">/* execute the new program */</span>
+  HAL_IWDG_Refresh(&amp;hiwdg);
+  JumpAddress = System_SelectBootAddress(&amp;SystemParam);
+  JumpAddress = *(__IO <span class="hljs-type">uint32_t</span>*) (JumpAddress + <span class="hljs-number">4</span>);
+  <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Start program execution......\r\n\n\n&quot;</span>);
+  <span class="hljs-comment">/*</span>
+<span class="hljs-comment">   * 关闭或反初始化前面用到的外设和中断</span>
+<span class="hljs-comment">   * 1、反初始化UART</span>
+<span class="hljs-comment">   * 2、关闭系统滴答定时器中断</span>
+<span class="hljs-comment">   * */</span>
+  HAL_UART_DeInit(&amp;huart1);
+  HAL_SuspendTick();
+  <span class="hljs-comment">/* Refresh the IWDG. */</span>
+  HAL_IWDG_Refresh(&amp;hiwdg);
+  <span class="hljs-comment">/* Jump to user application */</span>
+  JumpToApplication = (pFunction) JumpAddress;
+  <span class="hljs-comment">/* Initialize user application&#x27;s Stack Pointer */</span>
+  __set_MSP(*(__IO <span class="hljs-type">uint32_t</span>*) (JumpAddress - <span class="hljs-number">4</span>));
+  JumpToApplication();
+  <span class="hljs-comment">/* USER CODE END 2 */</span>
+ 
+  <span class="hljs-comment">/* Infinite loop */</span>
+  <span class="hljs-comment">/* USER CODE BEGIN WHILE */</span>
+  <span class="hljs-keyword">while</span> (<span class="hljs-number">1</span>)
+  &#123;
+    <span class="hljs-comment">/* USER CODE END WHILE */</span>
+ 
+    <span class="hljs-comment">/* USER CODE BEGIN 3 */</span>
+  &#125;
+  <span class="hljs-comment">/* USER CODE END 3 */</span>
+&#125;</code></pre></div>
+<h3 id="app程序">APP程序</h3>
+<p>这部分可使用 <strong>YModem协议</strong>，也可不使用，</p>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">/* Define APP0 software version */</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span>	APPLICATION0_VERSION		0x00000010U</span>
+
+<span class="hljs-type">void</span> <span class="hljs-title function_">System_ParamReadCheckUpdate</span><span class="hljs-params">(SystemParamTypeDef *pData)</span>
+&#123;
+	<span class="hljs-type">uint32_t</span> flash_update = <span class="hljs-number">0</span>;
+ 
+	FLASH_If_Read(SYSTEMPARAM_ADDRESS, (<span class="hljs-type">uint32_t</span>*)pData, <span class="hljs-keyword">sizeof</span>(SystemParamTypeDef) / <span class="hljs-number">4</span>);
+ 
+	<span class="hljs-comment">/* APP0的软件版本号与固件内部软件版本号不一致，更新版本号并写入Flash */</span>
+	<span class="hljs-keyword">if</span>(pData-&gt;Application0_Version != APPLICATION0_VERSION)
+	&#123;
+		flash_update = <span class="hljs-number">1</span>;
+		<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Update APP0 Software Version : 0x%08X\r\n&quot;</span>, APPLICATION0_VERSION);
+		pData-&gt;Application0_Version = APPLICATION0_VERSION;
+	&#125;
+ 
+	<span class="hljs-comment">/* APP0 启动了，但是APP0的状态是错误标志.</span>
+<span class="hljs-comment">	 * 可能是由于更新完成后，第一次启动标记的，</span>
+<span class="hljs-comment">	 * 修正为APPLICATION_NORMAL，重新写入flash</span>
+<span class="hljs-comment">	 * */</span>
+	<span class="hljs-keyword">if</span>(pData-&gt;Application0_Status != APPLICATION_NORMAL)
+	&#123;
+		flash_update = <span class="hljs-number">1</span>;
+		<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Update APP0 Status, APPLICATION_NORMAL\r\n&quot;</span>);
+		pData-&gt;Application0_Status = APPLICATION_NORMAL;
+	&#125;
+ 
+	<span class="hljs-comment">/* 如果flash_update 等于 1， 即flash需要更新主存储区和备份区的系统参数数据</span>
+<span class="hljs-comment">	 * 更新数据后，需要重启</span>
+<span class="hljs-comment">	 * 注意：更新数据时，必须擦除一个扇区后写入完成后，才能更新另一个区域数据，否则有概率丢失两个扇区数据</span>
+<span class="hljs-comment">	 * */</span>
+	<span class="hljs-keyword">if</span>(flash_update == <span class="hljs-number">1</span>)
+	&#123;
+		pData-&gt;SystemParamCRC = HAL_CRC_Calculate(&amp;hcrc, (<span class="hljs-type">uint32_t</span> *)pData, <span class="hljs-keyword">sizeof</span>(SystemParamTypeDef) / <span class="hljs-number">4</span> - <span class="hljs-number">1</span>);
+		System_ParamUpdate(SYSTEMPARAM_ADDRESS, pData);
+		System_ParamUpdate(SYSTEMPARAM_BACKUPADDRESS, pData);
+		<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;device reboot\r\n&quot;</span>);
+		HAL_NVIC_SystemReset();
+	&#125;
+&#125;
+<span class="hljs-type">void</span> <span class="hljs-title function_">SystemParam_IAP</span><span class="hljs-params">(SystemParamTypeDef *pData)</span>
+&#123;
+	<span class="hljs-type">uint32_t</span> temp = <span class="hljs-number">0</span>;
+	<span class="hljs-type">uint32_t</span> file_length= <span class="hljs-number">0</span>;
+	<span class="hljs-type">uint32_t</span> timeout = HAL_MAX_DELAY;
+ 
+	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;System IAP start, update APP1\r\n&quot;</span>);
+	<span class="hljs-comment">/* Download user application in the Flash */</span>
+	<span class="hljs-comment">/* 1. erase user application1 area */</span>
+	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Wait for the internal Flash erase to complete\r\n&quot;</span>);
+	<span class="hljs-keyword">if</span>(FLASH_If_Erase(APPLICATION1_ADDRESS, APPLICATION1_SECTOR_NUM) == <span class="hljs-number">1</span>)
+	&#123;
+		<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Erase the internal Flash is fail\r\n&quot;</span>);
+		Error_Handler();
+	&#125;
+	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Erase the internal Flash is complete\r\n&quot;</span>);
+ 
+	<span class="hljs-comment">/* 2. download a file via serial port */</span>
+	<span class="hljs-comment">/* Clean the input path */</span>
+	__HAL_UART_FLUSH_DRREGISTER(&amp;huart1);
+	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Waiting for the file to be sent ... \r\n&quot;</span>);
+ 
+	<span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>)
+	&#123;
+		<span class="hljs-keyword">if</span>(HAL_UART_Receive(&amp;huart1, uart_buf, UART_BUF_SIZE, timeout) != HAL_OK)
+		&#123;
+			temp = UART_BUF_SIZE - (huart1.RxXferCount + <span class="hljs-number">1</span>);
+			FLASH_If_Write(APPLICATION1_ADDRESS + file_length, (<span class="hljs-type">uint32_t</span>*)uart_buf, file_length / <span class="hljs-number">4</span>);
+			file_length = file_length + temp;
+			<span class="hljs-keyword">break</span>;
+		&#125;
+		timeout = <span class="hljs-number">1000</span>;
+		FLASH_If_Write(APPLICATION1_ADDRESS + file_length, (<span class="hljs-type">uint32_t</span>*)uart_buf, UART_BUF_SIZE / <span class="hljs-number">4</span>);
+		file_length = file_length + UART_BUF_SIZE;
+	&#125;
+	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Programming Completed Successfully! %ldBtye\r\n&quot;</span>, file_length);
+	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Update system parameters\r\n&quot;</span>);
+	pData-&gt;Application1_Version = <span class="hljs-number">0xFFFFFFFF</span>;
+	pData-&gt;Application1_Status  = APPLICATION_UPDATED;
+	pData-&gt;SystemParamCRC = HAL_CRC_Calculate(&amp;hcrc, (<span class="hljs-type">uint32_t</span> *)pData, <span class="hljs-keyword">sizeof</span>(SystemParamTypeDef) / <span class="hljs-number">4</span> - <span class="hljs-number">1</span>);
+	System_ParamUpdate(SYSTEMPARAM_ADDRESS, pData);
+	System_ParamUpdate(SYSTEMPARAM_BACKUPADDRESS, pData);
+ 
+	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;device reboot\r\n&quot;</span>);
+	HAL_NVIC_SystemReset();
+&#125;
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span>
+&#123;
+  <span class="hljs-comment">/* USER CODE BEGIN 1 */</span>
+	<span class="hljs-type">uint8_t</span> key = <span class="hljs-number">0</span>;
+ 
+	SCB-&gt;VTOR = APPLICATION0_ADDRESS;
+  <span class="hljs-comment">/* USER CODE END 1 */</span>
+ 
+  <span class="hljs-comment">/* MCU Configuration--------------------------------------------------------*/</span>
+ 
+  <span class="hljs-comment">/* Reset of all peripherals, Initializes the Flash interface and the Systick. */</span>
+  HAL_Init();
+ 
+  <span class="hljs-comment">/* USER CODE BEGIN Init */</span>
+ 
+  <span class="hljs-comment">/* USER CODE END Init */</span>
+ 
+  <span class="hljs-comment">/* Configure the system clock */</span>
+  SystemClock_Config();
+ 
+  <span class="hljs-comment">/* USER CODE BEGIN SysInit */</span>
+ 
+  <span class="hljs-comment">/* USER CODE END SysInit */</span>
+ 
+  <span class="hljs-comment">/* Initialize all configured peripherals */</span>
+  MX_GPIO_Init();
+  MX_USART1_UART_Init();
+  MX_IWDG_Init();
+  MX_CRC_Init();
+  MX_TIM2_Init();
+  <span class="hljs-comment">/* USER CODE BEGIN 2 */</span>
+  HAL_TIM_Base_Start_IT(&amp;htim2);
+  <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;\r\nSudaroot, This is IAP Application0\r\n&quot;</span>);
+  System_ParamReadCheckUpdate(&amp;SystemParam);
+  <span class="hljs-comment">/* USER CODE END 2 */</span>
+ 
+  <span class="hljs-comment">/* Infinite loop */</span>
+  <span class="hljs-comment">/* USER CODE BEGIN WHILE */</span>
+  <span class="hljs-keyword">while</span> (<span class="hljs-number">1</span>)
+  &#123;
+	  <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;\r\n=================== Main Menu ============================\r\n\n&quot;</span>);
+	  <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;  IAP:Download user application to the internal Flash ----- 1\r\n\n&quot;</span>);
+	  <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;  Current System APP0 Version: 0x%08lX\r\n&quot;</span>, SystemParam.Application0_Version);
+	  <span class="hljs-comment">/* Clean the input path */</span>
+	  __HAL_UART_FLUSH_DRREGISTER(&amp;huart1);
+	  <span class="hljs-keyword">if</span>(HAL_UART_Receive(&amp;huart1, &amp;key, <span class="hljs-number">1</span>, HAL_MAX_DELAY) == HAL_OK)
+	  &#123;
+		  <span class="hljs-keyword">if</span>(key == <span class="hljs-string">&#x27;1&#x27;</span>)
+		  &#123;
+			  SystemParam_IAP(&amp;SystemParam);
+		  &#125;
+	  &#125;
+    <span class="hljs-comment">/* USER CODE END WHILE */</span>
+ 
+    <span class="hljs-comment">/* USER CODE BEGIN 3 */</span>
+  &#125;
+  <span class="hljs-comment">/* USER CODE END 3 */</span>
+&#125;</code></pre></div>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/xys430381_1/article/details/105409808">stm32-IAP（在线升级程序）_stm32 在线升级-CSDN博客</a></p>
+<p><strong>参考链接：</strong></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/sudaroot/article/details/106932736">STM32CubeIDE IAP原理讲解，及UART双APP交替升级IAP实现-CSDN博客</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_41294615/article/details/104669766">STM32CubeMx开发之路—在线升级OTA_stm32ota升级例程-CSDN博客</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/stm32/" class="category-chain-item">stm32</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/IAP/">#IAP</a>
+      
+    </div>
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/10/22/%E9%98%85%E8%AF%BB%E6%91%98%E5%BD%95/" title="阅读摘录">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">阅读摘录</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/10/18/%E5%85%B3%E4%BA%8E%E8%BF%87%E9%9B%B6%E6%A3%80%E6%B5%8B%E7%94%B5%E8%B7%AF/" title="关于过零检测电路">
+                        <span class="hidden-mobile">关于过零检测电路</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"vknpQgHbpd1oLUPUwwPbdY3B-gzGzoHsz","appKey":"1DCiNflrxTVqUxWR5T00HypH","path":"window.location.pathname","placeholder":"欢迎留言交流","avatar":"robohash","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":true,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <p <i class="iconfont icon-copyright"></i> <span>2023 | KayougZhang</span> </p> <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

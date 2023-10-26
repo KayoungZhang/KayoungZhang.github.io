@@ -225,6 +225,311 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2023/10/06/FreeRTOS%E4%B8%AD%E4%BA%92%E6%96%A5%E9%87%8F(Mutexes)/" target="_self">
+          FreeRTOS中互斥量(Mutexes)
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/06/FreeRTOS%E4%B8%AD%E4%BA%92%E6%96%A5%E9%87%8F(Mutexes)/" target="_self">
+        <div>
+          互斥是一种特殊的二进制信号量，用于控制对两个或多个任务之间共享资源的访问。要使用它，需在配置文件中设置 configUSE_MUTEXES 为1。 用于互斥时，互斥锁就像用于保护资源的令牌。当访问资源时，必须首先获取 ('token') 令牌，使用资源后，必须“返回”令牌，这样其他任务就有机会访问此共享资源。  img  互斥优先级反转 高优先级的任务必须等待低优先级的任务放弃对互斥锁
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-10-06 21:50" pubdate>
+              2023-10-06
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/RTOS/" class="category-chain-item">RTOS</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Mutexes/">#Mutexes</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/10/06/FreeRTOS%E4%B8%AD%E4%B8%AD%E6%96%AD-Interrupt/" target="_self">
+          FreeRTOS中中断(Interrupt)
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/06/FreeRTOS%E4%B8%AD%E4%B8%AD%E6%96%AD-Interrupt/" target="_self">
+        <div>
+          在 RTOS 中，需要应对各类事件。在每种情况下，必须对最佳事件处理实现策略做出判断：  怎么检测事件的发生？通常使用中断，但也可以是轮询输入。 当使用中断时，中断服务程序中内外各需要执行多少操作？一般让中断服务程序尽可能的短。 事件怎么和main函数通信，如何构建此代码以最好地适应可能的异步事件的发生？  区分任务的优先级和中断的优先级是很重要的：  任务是FreeRTOS运行的
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-10-06 21:47" pubdate>
+              2023-10-06
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/RTOS/" class="category-chain-item">RTOS</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Interrupt/">#Interrupt</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/10/06/FreeRTOS%E4%B8%AD%E4%BA%8B%E4%BB%B6%E7%BB%84(EventGroups)/" target="_self">
+          FreeRTOS中事件组(EventGroups)
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/06/FreeRTOS%E4%B8%AD%E4%BA%8B%E4%BB%B6%E7%BB%84(EventGroups)/" target="_self">
+        <div>
+          事件组是FreeRTOS的一大特点，它允许任务间的事件传输。它跟队列和信号量的不同之处是：  事件组允许任务在阻塞状态下等待一个或多个事件的组合发生。 当事件发生时，事件组将解除在等待同一事件或事件组合的所有任务的阻塞。  事件组的这些特性使得它们可以同步多个任务，将事件广播到多个任务，允许任务在阻塞状态下等待事件组中的任何一事件发生，以及允许任务在阻塞状态下等待多个操作的完成。 事件
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-10-06 21:46" pubdate>
+              2023-10-06
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/RTOS/" class="category-chain-item">RTOS</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/EventGroups/">#EventGroups</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/10/06/FreeRTOS%E4%B8%AD%E8%BD%AF%E4%BB%B6%E5%AE%9A%E6%97%B6%E5%99%A8(SoftwareTimer)/" target="_self">
+          FreeRTOS中软件定时器(SoftwareTimer)
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/06/FreeRTOS%E4%B8%AD%E8%BD%AF%E4%BB%B6%E5%AE%9A%E6%97%B6%E5%99%A8(SoftwareTimer)/" target="_self">
+        <div>
+          在FreeRTOS中，软件定时器由内核支配，不需要硬件支持，和硬件定时器无关，要使用软件定时器，需要在配置文件中设置configUSE_TIMERS 为 1。 软件定时器特性  回调函数  void ATimerCallback(TimerHandle_t xTimer); 回调函数尽可能短，一定不要进入阻塞状态。  定时周期  定时器启动到执行定时器回调函数之间的时间。
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-10-06 21:45" pubdate>
+              2023-10-06
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/RTOS/" class="category-chain-item">RTOS</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Timer/">#Timer</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/10/06/FreeRTOS%E4%B8%AD%E4%BB%BB%E5%8A%A1%E9%80%9A%E7%9F%A5(TaskNotifications)/" target="_self">
+          FreeRTOS中任务通知(TaskNotifications)
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/06/FreeRTOS%E4%B8%AD%E4%BB%BB%E5%8A%A1%E9%80%9A%E7%9F%A5(TaskNotifications)/" target="_self">
+        <div>
+          在RTOS中，任务间的通信，可使用队列、信号量、事件组等方法，但这种方式需要通过中间媒介来完成，如下：  还有另一种直接通信的方式：任务通知，不需要中间的媒介对象，任务间直接通信，如下所示：  使用这种方式需要在配置文件(FreeRTOSConfig.h)中设置 configUSE_TASK_NOTIFICATIONS = 1 。 任务通知的优势与劣势 优势  速度快：使用任务通知
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-10-06 21:45" pubdate>
+              2023-10-06
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/RTOS/" class="category-chain-item">RTOS</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Notification/">#Notification</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2023/10/05/FreeRTOS%E4%B8%AD%E4%BF%A1%E5%8F%B7%E9%87%8F(Semaphore)/" target="_self">
           FreeRTOS中信号量(Semaphore)
         </a>
@@ -524,316 +829,11 @@
     </article>
   </div>
 
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/10/04/FreeRTOS%E5%B7%A5%E7%A8%8B%E7%9B%AE%E5%BD%95%E6%96%87%E4%BB%B6%E6%A6%82%E8%A7%88/" target="_self">
-          FreeRTOS工程目录文件概览
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/04/FreeRTOS%E5%B7%A5%E7%A8%8B%E7%9B%AE%E5%BD%95%E6%96%87%E4%BB%B6%E6%A6%82%E8%A7%88/" target="_self">
-        <div>
-          FreeRTOS 是市场领先的面向微控制器和小型微处理器的实时操作系统，通过 MIT 开源许可免费分发，包括一个内核和一组不断丰富的 IoT 库，适用于所有行业领域。FreeRTOS 因其免费开源和易用性而得到广泛应用。 FreeRTOS官网：https://www.freertos.org/ 官网上有专门的内核开发文档，这一节主要来看看在STM32开发过程中，使用STM32CubeMX创建F
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-10-04 22:09" pubdate>
-              2023-10-04
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/RTOS/" class="category-chain-item">RTOS</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/FreeRTOS/">#FreeRTOS</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/09/25/PID%E6%8E%A7%E5%88%B6%E5%99%A8%E7%AE%97%E6%B3%95%E8%BF%9B%E9%98%B6/" target="_self">
-          PID控制器算法进阶
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/09/25/PID%E6%8E%A7%E5%88%B6%E5%99%A8%E7%AE%97%E6%B3%95%E8%BF%9B%E9%98%B6/" target="_self">
-        <div>
-          PID算法中处理方式有：  pid算法巩固 https://blog.csdn.net/foxclever/article/details/80250994 积分分离 https://blog.csdn.net/foxclever/article/details/80274790 抗积分饱和 https://blog.csdn.net/foxclever/article/detail
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-09-25 18:47" pubdate>
-              2023-09-25
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" class="category-chain-item">数据结构与算法</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/pid/">#pid</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/09/22/%E5%9F%BA%E4%BA%8E%E7%AE%97%E6%9C%AF%E5%B9%B3%E5%9D%87%E7%AE%97%E6%B3%95%E7%9A%84%E6%BB%A4%E6%B3%A2%E5%99%A8/" target="_self">
-          基于算术平均算法的滤波器
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/09/22/%E5%9F%BA%E4%BA%8E%E7%AE%97%E6%9C%AF%E5%B9%B3%E5%9D%87%E7%AE%97%E6%B3%95%E7%9A%84%E6%BB%A4%E6%B3%A2%E5%99%A8/" target="_self">
-        <div>
-          在AD采集获取数据时，为避免干扰信号的影响，一般我们都会对获取的原始数据进行滤波处理，比较常见的做法是算术平均，即对N个数据进行平均求值，为了进一步优化这种简易的平均算法，我们可以采用以下方法：  算术平均的递推平滑滤波 算术平均的带阻平滑滤波 算术平均的阶梯平滑滤波 算术平均的中值滤波 算术平均的限幅滤波  下面分别来看看这几种算术平均滤波算法： 算术平均的递推平滑滤波 在简
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-09-22 13:58" pubdate>
-              2023-09-22
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" class="category-chain-item">数据结构与算法</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E7%AE%97%E6%9C%AF%E5%B9%B3%E5%9D%87/">#算术平均</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/09/07/C%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0%E5%8F%8A%E4%BD%BF%E7%94%A8/" target="_self">
-          C语言中的回调函数及使用
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/09/07/C%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0%E5%8F%8A%E4%BD%BF%E7%94%A8/" target="_self">
-        <div>
-          在开发过程中，我们会经常碰到回调函数的问题，那什么是回调函数？怎么使用回调函数呢？下面具体来看看。 什么是回调函数 回调函数就是一个通过函数指针调用的函数。 假如你把 函数A的指针 当作参数传给 函数B，然后在 函数B 中通过传进来的这个指针调用 函数A ，那么这就是回调机制，函数A 就是回调函数。 知乎上有个比较形象的比喻：你到商店买东西，刚好没货，于是留下了你的电话，有货后店员就打了你
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-09-07 10:13" pubdate>
-              2023-09-07
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/" class="category-chain-item">编程基础</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/">#回调函数</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/09/07/C%E8%AF%AD%E8%A8%80%E4%B8%AD%E5%87%A0%E4%B8%AA%E9%87%8D%E8%A6%81%E7%9A%84%E5%85%B3%E9%94%AE%E5%AD%97/" target="_self">
-          C语言中几个重要的关键字
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/09/07/C%E8%AF%AD%E8%A8%80%E4%B8%AD%E5%87%A0%E4%B8%AA%E9%87%8D%E8%A6%81%E7%9A%84%E5%85%B3%E9%94%AE%E5%AD%97/" target="_self">
-        <div>
-          在了解关键字之前，先来了解变量或函数的“声明”与“定义”之间的区别： 声明：告诉编译器，声明的变量或函数在程序中的某个位置，数据类型，参数顺序及返回类型，但未为它们分配内存。 定义：编译器创建一个对象并分配一块内存并给取一个名字，这个名字就是变量名或对象名。 因此，我们可以将声明作为定义的子集。变量或函数可以声明多次，但只能定义一次。 由ANSI标准定义的C语言关键字共32个:  数据
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-09-07 10:12" pubdate>
-              2023-09-07
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/" class="category-chain-item">编程基础</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E5%85%B3%E9%94%AE%E5%AD%97/">#关键字</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
 
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/#board">3</a><a class="page-number" href="/page/4/#board">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/#board">16</a><a class="extend next" rel="next" href="/page/3/#board"><i class="iconfont icon-arrowright"></i></a>
+      <a class="extend prev" rel="prev" href="/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/#board">3</a><a class="page-number" href="/page/4/#board">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/#board">17</a><a class="extend next" rel="next" href="/page/3/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 
