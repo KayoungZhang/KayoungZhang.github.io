@@ -16,28 +16,20 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="在嵌入式产品开发中，会经常碰到温度检测的时候，在成本比较敏感而精度要求较低时，可采用热敏电阻来进行温度的检测。 热敏电阻简介 热敏电阻作用有点像电阻器，但对温度比较敏感。它可用于产生随环境温度变化的模拟输出电压，这是因为由于热量变化会导致其电气特性发生变化。随着它的温度变化，它的电阻也会发生变化。 热敏电阻的主要用途是作为电阻式温度传感器，但它们也可以用作热敏限流器件。 随着温度的变化增加">
+    <meta name="description" content="在写 markdown 文档时，有时需要对文档进行格式处理，如字体大小，颜色设置，加粗等等，像在typora软件中，会有部分设置类型，通过鼠标右键或快捷键的方式可以很方便的操作，但有些常用的一些格式设置，软件中就没有。如果你懂些html的语法，也可以进行设置，在之前的文章中有分享，但总归感觉不太方便。 前段时间，在 github 上看到个typora插件（https:&#x2F;&#x2F;github.com&#x2F;o">
 <meta property="og:type" content="article">
-<meta property="og:title" content="热敏电阻原理与代码实现">
-<meta property="og:url" content="http://example.com/2023/10/25/%E7%83%AD%E6%95%8F%E7%94%B5%E9%98%BB%E5%8E%9F%E7%90%86%E4%B8%8E%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0/index.html">
+<meta property="og:title" content="typora插件">
+<meta property="og:url" content="http://example.com/2023/11/10/typora%E6%8F%92%E4%BB%B6/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="在嵌入式产品开发中，会经常碰到温度检测的时候，在成本比较敏感而精度要求较低时，可采用热敏电阻来进行温度的检测。 热敏电阻简介 热敏电阻作用有点像电阻器，但对温度比较敏感。它可用于产生随环境温度变化的模拟输出电压，这是因为由于热量变化会导致其电气特性发生变化。随着它的温度变化，它的电阻也会发生变化。 热敏电阻的主要用途是作为电阻式温度传感器，但它们也可以用作热敏限流器件。 随着温度的变化增加">
+<meta property="og:description" content="在写 markdown 文档时，有时需要对文档进行格式处理，如字体大小，颜色设置，加粗等等，像在typora软件中，会有部分设置类型，通过鼠标右键或快捷键的方式可以很方便的操作，但有些常用的一些格式设置，软件中就没有。如果你懂些html的语法，也可以进行设置，在之前的文章中有分享，但总归感觉不太方便。 前段时间，在 github 上看到个typora插件（https:&#x2F;&#x2F;github.com&#x2F;o">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231026113905028.png">
-<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231026114506698.png">
-<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231026120408078.png">
-<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/72ac09cc4e50c51a63870bf9401d3a51.png">
-<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231026174558208.png">
-<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231026173537979.png">
-<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/641.png">
-<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/640-16983137350834.png">
-<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/640-16983137798156.png">
-<meta property="article:published_time" content="2023-10-25T07:29:47.000Z">
-<meta property="article:modified_time" content="2023-10-26T10:11:18.617Z">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231113143517868.png">
+<meta property="article:published_time" content="2023-11-10T07:20:16.000Z">
+<meta property="article:modified_time" content="2023-11-13T06:42:14.383Z">
 <meta property="article:author" content="John Doe">
-<meta property="article:tag" content="NTC">
+<meta property="article:tag" content="typora">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231026113905028.png">
+<meta name="twitter:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231113143517868.png">
   
   
   
@@ -209,7 +201,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle">热敏电阻原理与代码实现</span>
+            <span id="subtitle">typora插件</span>
           
         </div>
 
@@ -220,8 +212,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-10-25 15:29" pubdate>
-          2023年10月25日 下午
+        <time datetime="2023-11-10 15:20" pubdate>
+          2023年11月10日 下午
         </time>
       </span>
     
@@ -232,7 +224,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.5k 字
+          722 字
         
       </span>
     
@@ -243,7 +235,7 @@
         
         
         
-          5 分钟
+          3 分钟
         
       </span>
     
@@ -281,12 +273,12 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">热敏电阻原理与代码实现</h1>
+            <h1 style="display: none">typora插件</h1>
             
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年10月26日 晚上
+                    本文最后更新于：2023年11月13日 下午
                   
                 
               </p>
@@ -294,67 +286,37 @@
             
               <div class="markdown-body">
                 
-                <p>在嵌入式产品开发中，会经常碰到温度检测的时候，在成本比较敏感而精度要求较低时，可采用热敏电阻来进行温度的检测。</p>
-<h1 id="热敏电阻简介">热敏电阻简介</h1>
-<p>热敏电阻作用有点像电阻器，但对温度比较敏感。它可用于产生随环境温度变化的模拟输出电压，这是因为由于热量变化会导致其电气特性发生变化。随着它的温度变化，它的电阻也会发生变化。</p>
-<p>热敏电阻的主要用途是作为电阻式温度传感器，但它们也可以用作热敏限流器件。</p>
-<p>随着温度的变化增加，电阻值有的是增大，有的是减小。所以对应了两种类型的热敏电阻：<strong>电阻的负温度系数（NTC）和电阻的正温度系数（PTC）。</strong>工程应用中，NTC热敏电阻使用更广泛一些，下面主要来看看NTC的相关内容。</p>
-<h1 id="ntc的功能概述">NTC的功能概述</h1>
-<p>NTC的性性是阻值随温度的升高而降低，变化率极大的半导体电阻器。NTC的电阻与温度存在如下关系曲线：</p>
+                <p>在写 <code>markdown</code> 文档时，有时需要对文档进行格式处理，如字体大小，颜色设置，加粗等等，像在typora软件中，会有部分设置类型，通过鼠标右键或快捷键的方式可以很方便的操作，但有些常用的一些格式设置，软件中就没有。如果你懂些html的语法，也可以进行设置，在之前的文章中有分享，但总归感觉不太方便。</p>
+<p>前段时间，在 <code>github</code> 上看到个typora插件（<a target="_blank" rel="noopener" href="https://github.com/obgnail/typora_plugin">https://github.com/obgnail/typora_plugin</a>），在使用软件时，增加了很多功能，有些功能也比较实用。</p>
+<p>使用之后，我发现有些增强功能我使用不到，typora软件的打开速度也变慢了，通过插件里面的配置文档，我删除了插件里面的部分增强功能，对自己经常用到的功能进行了更改和保留。如下所示：</p>
 <figure>
-<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231026113905028.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20231026113905027</figcaption>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231113143517868.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20231113143517868</figcaption>
 </figure>
-<p>对于NTC的这种电阻与温度的关系可以使用近似的公式来表示：</p>
-<figure>
-<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231026114506698.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20231026114506699</figcaption>
-</figure>
-<p>其中：</p>
-<p><strong>R</strong>: 当前温度（K）零负荷电阻</p>
-<p><strong>T：</strong> 当前温度（K）</p>
-<p><strong>R0:</strong> T0(K)温度下标称电阻，一般是25℃。</p>
-<p><strong>B:</strong> 热敏电阻材料常数，标称温度不同，B值也不同</p>
-<p>有的NTC厂商会给出B值公式，只是上面那个公式的不同转换形式而已：</p>
-<figure>
-<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231026120408078.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20231026120408077</figcaption>
-</figure>
-<p>由以上公式就可以推出温度与电阻的关系（<strong>℃</strong>）：</p>
-<figure>
-<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/72ac09cc4e50c51a63870bf9401d3a51.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>img</figcaption>
-</figure>
-<h1 id="电路原理及程序实现">电路原理及程序实现</h1>
-<p>热敏电阻的本质就是一个电阻，我们通过测量电阻的变化即可测量出来温度。最简单的方法是使用热敏电阻作为分压电路的一部分，测量电阻两端的电压变化，就可以得出温度的变化。</p>
-<p>将电压值转变为对应的温度值，一般有两种方法：<strong>查表法</strong>和<strong>公式计算法（如上公式）</strong>，比较常用的是查表法。</p>
-<figure>
-<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231026174558208.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20231026174558207</figcaption>
-</figure>
-<p>可以看出，只要知道了当前的电阻，就可以得出ADC的值，以<a target="_blank" rel="noopener" href="https://atta.szlcsc.com/upload/public/pdf/source/20170728/C123387_1501225826403848951.pdf">南京时恒的MF58-103F3435</a>为例：</p>
-<figure>
-<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231026173537979.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20231026173537976</figcaption>
-</figure>
-<p>由上图可以看出，每个温度下都有对应的电阻值，通过上面的公式，就可以计算出对应的电阻值下的ADC采集值。</p>
-<figure>
-<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/641.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>图片</figcaption>
-</figure>
-<p>将所有AD值转换为HEX格式后，保存到一个一维数组中：</p>
-<figure>
-<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/640-16983137350834.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>图片</figcaption>
-</figure>
-<p>然后用单片机采集到的AD值，一个个从头开始去查找对比就能知道温度了。（由于AD值是按照由大到小的顺序排列的，可以采用更高效的二分法查找，这里不再赘述）</p>
-<p>单片机采集到的AD值一般落在了某个区间，所以要处理的数据基本上在两个温度的区间，如果要显示小数，两个温度区间可以看成是线性的，通过局部线性化就可以计算出温度的值。</p>
-<p>什么是局部线性化，有网友解释的很清楚，这里直接搬过来，假如ADC采样的数字量为 0x80C，十进制是2060，对应在数据表的2048(25℃)和2095(24℃)中间，计算方式按照线性处理如下：</p>
-<figure>
-<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/640-16983137798156.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>图片</figcaption>
-</figure>
-<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-type">uint16_t</span> ntc_ad;
-<span class="hljs-type">uint16_t</span> temp_index;
-<span class="hljs-type">float</span> temperature = <span class="hljs-number">0.0</span>;
-ntc_ad = GetADCResult();<span class="hljs-comment">//获取ADC值</span>
-temp_index = NTCADBinarySearch(ntc_ad);<span class="hljs-comment">//搜索NTC_AD温度表（得到数组标号）</span>
-temp_integer = temp_index - <span class="hljs-number">30</span>; <span class="hljs-comment">//最低温度-30℃</span>
-temperature = temp_integer+(<span class="hljs-type">float</span>)(NTC_AD[temp]-ntc_ad)/(<span class="hljs-type">float</span>)(NTC_AD[temp]-NTC_AD[temp+<span class="hljs-number">1</span>]);
-temperature = temperature * <span class="hljs-number">10</span>;</code></pre></div>
-<p><strong>参考链接：</strong></p>
-<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/9gCKO-IeI86xJqkxHSZyNg">热敏电阻测温：原理讲解（附送电路图和程序） (qq.com)</a></p>
+<ul>
+<li><strong>只读模式 Ctrl+Shift+R</strong></li>
+</ul>
+<p>使用鼠标右键或快捷键 <code>Ctrl+Shift+R</code> 可以快速进入或退出<strong>只读模式</strong>，<strong>只读模式</strong>下，无法编辑，且文章右下角显示只读标志。</p>
+<ul>
+<li><strong>表格调整</strong></li>
+</ul>
+<p>创建表格后，使用 <code>ctrl+鼠标拖动</code> 可以修改表格的行高列宽。</p>
+<ul>
+<li><strong>文字颜色 Ctrl+Shift+C</strong></li>
+</ul>
+<p>使用鼠标右键或快捷键 <code>Ctrl+Shift+C</code> 可以弹出或退出文字颜色设置框，选中需要改变颜色的文字，即可进行颜色的设置。</p>
+<ul>
+<li><strong>右键菜单</strong></li>
+</ul>
+<p>这个主要是打开配置文件夹和github上的帮助文档。</p>
+<ul>
+<li><strong>白天/暗夜模式切换</strong></li>
+</ul>
+<p>文档右下角直接有 <strong>白天/暗夜模式切换</strong> 图标，鼠标左键点击即可进行不同模式的切换，比较实用。</p>
+<ul>
+<li><strong>快读返回顶底部</strong></li>
+</ul>
+<p>文档右下角直接有 <strong>快速返回顶/底部</strong> 图标，对于长文档的阅读，比较方便快捷。</p>
+<p>以上就是我写文档会经常使用到的一些功能，已上传到<a target="_blank" rel="noopener" href="https://gitee.com/kayoungzhang/my_codehub/blob/master/plugins/typora%E6%8F%92%E4%BB%B6%E7%B2%BE%E7%AE%80%E7%89%88.zip">gitee</a>，至于其它的功能，可以参考<a target="_blank" rel="noopener" href="https://github.com/obgnail/typora_plugin">原插件</a>，感兴趣可以下载下来使用看看。</p>
 
                 
               </div>
@@ -373,7 +335,7 @@ temperature = temperature * <span class="hljs-number">10</span>;</code></pre></d
     
       <span class="category-chain">
         
-  <a href="/categories/%E5%8D%95%E7%89%87%E6%9C%BA/" class="category-chain-item">单片机</a>
+  <a href="/categories/%E5%85%B6%E5%AE%83/" class="category-chain-item">其它</a>
   
   
 
@@ -388,7 +350,7 @@ temperature = temperature * <span class="hljs-number">10</span>;</code></pre></d
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/NTC/">#NTC</a>
+        <a href="/tags/typora/">#typora</a>
       
     </div>
   
@@ -402,9 +364,9 @@ temperature = temperature * <span class="hljs-number">10</span>;</code></pre></d
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/11/10/typora%E6%8F%92%E4%BB%B6/" title="typora插件">
+                      <a href="/2023/11/13/%E7%BD%91%E9%A1%B5%E5%B8%83%E5%B1%80%E8%B0%83%E6%95%B4%E6%8F%92%E4%BB%B6/" title="网页布局调整插件">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">typora插件</span>
+                        <span class="hidden-mobile">网页布局调整插件</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -412,8 +374,8 @@ temperature = temperature * <span class="hljs-number">10</span>;</code></pre></d
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/10/25/RS485%E6%80%BB%E7%BB%93/" title="RS485总结">
-                        <span class="hidden-mobile">RS485总结</span>
+                      <a href="/2023/10/25/%E7%83%AD%E6%95%8F%E7%94%B5%E9%98%BB%E5%8E%9F%E7%90%86%E4%B8%8E%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0/" title="热敏电阻原理与代码实现">
+                        <span class="hidden-mobile">热敏电阻原理与代码实现</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

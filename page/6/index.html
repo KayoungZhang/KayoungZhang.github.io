@@ -225,6 +225,130 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2023/08/06/stm32f1xx-hal-sram%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
+          stm32f1xx_hal_sram库的使用
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/08/06/stm32f1xx-hal-sram%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
+        <div>
+          下面来看看HAL库关于SRAM 内存的使用方法。 SRAM外设库的使用 这是一个通用的分层驱动，包含一套控制SRAM内存的API。它使用FSMC层函数与SRAM设备进行连接。要配置FSMC与SRAM/PSRAM的连接，应遵循以下顺序：  声明一个SRAM_HandleTypeDef类型结构体。如：SRAM_HandleTypeDef hsram;  对SRAM_HandleTypeDe
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-08-06 19:20" pubdate>
+              2023-08-06
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/stm32/" class="category-chain-item">stm32</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/sram/">#sram</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/08/06/stm32f1xx-hal-hcd%E5%BA%93%E5%92%8Cpcd%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
+          stm32f1xx_hal_hcd库和pcd的使用
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/08/06/stm32f1xx-hal-hcd%E5%BA%93%E5%92%8Cpcd%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
+        <div>
+          Host Controller Driver 和 Peripheral Controller Driver，分别简称HCD，PCD，它们是USB外设控制器相关驱动，下面来看看HAL库关于HCD和PCD的使用方法介绍。 HCD外设库的使用  声明一个 HCD_HandleTypeDef 类型结构体。如：HCD_HandleTypeDef hhcd; 对hhcd结构体的各参数进行赋值。 初始
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-08-06 18:30" pubdate>
+              2023-08-06
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/stm32/" class="category-chain-item">stm32</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/hcd/">#hcd</a>
+            
+              <a href="/tags/pcd/">#pcd</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2023/08/06/stm32f1xx-hal-eth%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
           stm32f1xx_hal_eth库的使用
         </a>
@@ -700,128 +824,6 @@
             <i class="iconfont icon-tags"></i>
             
               <a href="/tags/crc/">#crc</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/08/05/stm32f1xx-hal-iwdg%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
-          stm32f1xx_hal_iwdg库的使用
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/08/05/stm32f1xx-hal-iwdg%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
-        <div>
-          下面来看看 IWDG HAL库关于 独立看门狗的特性和使用方法。 IWDG外设库的一般特性  独立看门狗可以通过软件或硬件开启。 (通过可选字节（option byte）进行配置) 独立看门狗时钟时LSI提供（Low-Speed Internal clock），即使没有主时钟，它也能维持运行。 一旦独立看门狗开启，LSI 时钟就会被强制打开，这两者就不会关闭。计数值从复位值（0xFFF）
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-08-05 13:12" pubdate>
-              2023-08-05
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/stm32/" class="category-chain-item">stm32</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/iwdg/">#iwdg</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/08/05/stm32f1xx-hal-wwdg%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
-          stm32f1xx_hal_wwdg库的使用
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/08/05/stm32f1xx-hal-wwdg%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
-        <div>
-          下面来看看 WWDG HAL库关于窗口看门狗的特性和使用方法。 WWDG外设库的一般特性 WWDG一旦使能，在超过规定的时间段就会产生系统复位，除非在计数器值达到0x3F之前，应用程序刷新计数器的值（T[6:0] 向下计数）。 例如：当计数器值从0x40下降到0x3F时，就会产生复位。  如果计数器值在计数器达到刷新窗口值之前被刷新，也会产生MCU复位。这意味着必须在限制的窗口中刷新计数器
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-08-05 13:12" pubdate>
-              2023-08-05
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/stm32/" class="category-chain-item">stm32</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/wwdg/">#wwdg</a>
             
           </div>
         

@@ -225,6 +225,128 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2023/10/04/FreeRTOS%E5%8F%98%E9%87%8F%E3%80%81%E5%87%BD%E6%95%B0%E5%8F%8A%E5%AE%8F%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99/" target="_self">
+          FreeRTOS变量、函数及宏命名规则
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/04/FreeRTOS%E5%8F%98%E9%87%8F%E3%80%81%E5%87%BD%E6%95%B0%E5%8F%8A%E5%AE%8F%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99/" target="_self">
+        <div>
+          在FreeRTOS内核和demo应用程序源代码中，会发现很多变量名、函数名、宏名前有很多小写字母的前缀。这是因为RTOS中重定义了很多数据类型，为了便于移植和快速知道变量、函数及宏的类型或定义的文件。 变量名 变量名称使用驼峰式大小写，具有明确的描述性的单词，变量名有前缀：    变量名前缀 含义 举例     ul unsigned long uint32_t ul
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-10-04 22:57" pubdate>
+              2023-10-04
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/RTOS/" class="category-chain-item">RTOS</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/FreeRTOS/">#FreeRTOS</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/10/04/FreeRTOS%E9%87%8D%E5%AE%9A%E4%B9%89%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" target="_self">
+          FreeRTOS重定义的数据类型
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/04/FreeRTOS%E9%87%8D%E5%AE%9A%E4%B9%89%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" target="_self">
+        <div>
+          因为不同的数据类型在不同的架构平台上，它的长度是不一样的，为了便于移植，很多独立的流行代码程序都会采用相应的数据类型的重定义，FreeRTOS也不例外，它除了使用了标准的数据类型定义的头文件 &lt;stdint.h&gt; 外，源码中还重定义了很多数据类型，但都是由基本数据类型衍生而来，熟悉这些重定义的数据类型，对查看FreeRTOS源码和掌握与使用它有很大益处。下面具体来看看： cmsis_
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-10-04 22:31" pubdate>
+              2023-10-04
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/RTOS/" class="category-chain-item">RTOS</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/FreeRTOS/">#FreeRTOS</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2023/10/04/FreeRTOS%E5%B7%A5%E7%A8%8B%E7%9B%AE%E5%BD%95%E6%96%87%E4%BB%B6%E6%A6%82%E8%A7%88/" target="_self">
           FreeRTOS工程目录文件概览
         </a>
@@ -700,128 +822,6 @@
             <i class="iconfont icon-tags"></i>
             
               <a href="/tags/JSON/">#JSON</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/08/28/%E5%9B%BD%E5%86%85%E5%BC%80%E6%BA%90%E9%95%9C%E5%83%8F%E7%AB%99%E6%B1%87%E6%80%BB/" target="_self">
-          国内开源镜像站汇总
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/08/28/%E5%9B%BD%E5%86%85%E5%BC%80%E6%BA%90%E9%95%9C%E5%83%8F%E7%AB%99%E6%B1%87%E6%80%BB/" target="_self">
-        <div>
-          国内开源镜像站汇总 企业站点  网易开源镜像站：http://mirrors.163.com/ 搜狐开源镜像站：https://mirrors.sohu.com/ 阿里云开源镜像站：https://mirrors.aliyun.com/ 腾讯软件源：https://mirrors.cloud.tencent.com/ 华为开源镜像源：https://mirrors.huaweiclo
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-08-28 22:12" pubdate>
-              2023-08-28
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E5%85%B6%E5%AE%83/" class="category-chain-item">其它</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E5%BC%80%E6%BA%90/">#开源</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/08/28/%E7%BB%93%E6%9E%84%E4%BD%93struct%E8%AF%A6%E8%A7%A3/" target="_self">
-          结构体struct详解
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/08/28/%E7%BB%93%E6%9E%84%E4%BD%93struct%E8%AF%A6%E8%A7%A3/" target="_self">
-        <div>
-          结构体(struct)是 C 编程中一种用户自定义的数据结构，它可以包含不同基本类型(char,int,float...)的数据项，在结构体中的变量，可以是相同、部分相同，或完全不同的数据类型。需要注意的是，结构体是创建变量的模板，不占用内存空间；结构体变量才包含了实实在在的数据，会占用内存空间。 在实际应用中，我们一般会使用结构体将某个对象的属性和行为进行封装声明，然后定义一个独立的整体变量进
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-08-28 11:41" pubdate>
-              2023-08-28
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" class="category-chain-item">数据结构与算法</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/struct/">#struct</a>
             
           </div>
         
