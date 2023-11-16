@@ -16,19 +16,26 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="浏览网页时，一般网页上会出现很多附带花哨的内容，看起来很影响视觉效果，且都是些无用信息，网上看到个博主写了个网页插件，使用后，屏蔽了这些无用信息，整个页面看起来清爽很多。 插件GitHub地址： https:&#x2F;&#x2F;github.com&#x2F;Camio1945&#x2F;adjust_website_chrome_extension 插件屏蔽了指定网页上大部分内容，可以根据自己的需要进行相应的修改和调整。虽然">
+    <meta name="description" content="微信公众号历史文章有很多，不想总是不停一篇一篇滑动浏览，然后在网上找到了一种提取方法：Python爬虫+Fiddler抓取 。具体操作如下： 下载项目源码 项目地址： https:&#x2F;&#x2F;github.com&#x2F;LeLe86&#x2F;vWeChatCrawl.git 前提是电脑安装有python软件，打开 git bash 下载项目源码： git clone https:&#x2F;&#x2F;github.com&#x2F;Le">
 <meta property="og:type" content="article">
-<meta property="og:title" content="网页布局调整插件">
-<meta property="og:url" content="http://example.com/2023/11/13/%E7%BD%91%E9%A1%B5%E5%B8%83%E5%B1%80%E8%B0%83%E6%95%B4%E6%8F%92%E4%BB%B6/index.html">
+<meta property="og:title" content="批量获取微信公众号的历史消息">
+<meta property="og:url" content="http://example.com/2023/11/16/%E6%89%B9%E9%87%8F%E8%8E%B7%E5%8F%96%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7%E7%9A%84%E5%8E%86%E5%8F%B2%E6%B6%88%E6%81%AF/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="浏览网页时，一般网页上会出现很多附带花哨的内容，看起来很影响视觉效果，且都是些无用信息，网上看到个博主写了个网页插件，使用后，屏蔽了这些无用信息，整个页面看起来清爽很多。 插件GitHub地址： https:&#x2F;&#x2F;github.com&#x2F;Camio1945&#x2F;adjust_website_chrome_extension 插件屏蔽了指定网页上大部分内容，可以根据自己的需要进行相应的修改和调整。虽然">
+<meta property="og:description" content="微信公众号历史文章有很多，不想总是不停一篇一篇滑动浏览，然后在网上找到了一种提取方法：Python爬虫+Fiddler抓取 。具体操作如下： 下载项目源码 项目地址： https:&#x2F;&#x2F;github.com&#x2F;LeLe86&#x2F;vWeChatCrawl.git 前提是电脑安装有python软件，打开 git bash 下载项目源码： git clone https:&#x2F;&#x2F;github.com&#x2F;Le">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231113154847896.png">
-<meta property="article:published_time" content="2023-11-13T06:49:19.000Z">
-<meta property="article:modified_time" content="2023-11-13T08:02:22.969Z">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231116152054397.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231116152400300.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231116152722265.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231116152851584.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231116153410980.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231116154034375.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231116154743433.png">
+<meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231116160112140.png">
+<meta property="article:published_time" content="2023-11-16T06:43:13.000Z">
+<meta property="article:modified_time" content="2023-11-16T08:11:10.395Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231113154847896.png">
+<meta name="twitter:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231116152054397.png">
   
   
   
@@ -200,7 +207,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle">网页布局调整插件</span>
+            <span id="subtitle">批量获取微信公众号的历史消息</span>
           
         </div>
 
@@ -211,8 +218,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-11-13 14:49" pubdate>
-          2023年11月13日 下午
+        <time datetime="2023-11-16 14:43" pubdate>
+          2023年11月16日 下午
         </time>
       </span>
     
@@ -223,7 +230,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          342 字
+          1.2k 字
         
       </span>
     
@@ -234,7 +241,7 @@
         
         
         
-          2 分钟
+          4 分钟
         
       </span>
     
@@ -272,12 +279,12 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">网页布局调整插件</h1>
+            <h1 style="display: none">批量获取微信公众号的历史消息</h1>
             
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年11月13日 下午
+                    本文最后更新于：2023年11月16日 下午
                   
                 
               </p>
@@ -285,15 +292,63 @@
             
               <div class="markdown-body">
                 
-                <p>浏览网页时，一般网页上会出现很多附带花哨的内容，看起来很影响视觉效果，且都是些无用信息，网上看到个博主写了个网页插件，使用后，屏蔽了这些无用信息，整个页面看起来清爽很多。</p>
-<p>插件GitHub地址：</p>
-<div class="code-wrapper"><pre><code class="hljs awk">https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/Camio1945/</span>adjust_website_chrome_extension</code></pre></div>
-<p>插件屏蔽了指定网页上大部分内容，可以根据自己的需要进行相应的修改和调整。虽然插件是用在谷歌浏览器上的，但我的Microsoft Edge浏览器好像也能正常使用，以下是我调整修改后CSDN网页上的显示：</p>
+                <p>微信公众号历史文章有很多，不想总是不停一篇一篇滑动浏览，然后在网上找到了一种提取方法：<strong>Python爬虫+Fiddler抓取</strong> 。具体操作如下：</p>
+<h2 id="下载项目源码">下载项目源码</h2>
+<p>项目地址：</p>
+<div class="code-wrapper"><pre><code class="hljs awk">https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/LeLe86/</span>vWeChatCrawl.git</code></pre></div>
+<p><font color="#FF0000">前提是电脑安装有<strong>python软件</strong></font>，打开 <code>git bash</code> 下载项目源码：</p>
+<div class="code-wrapper"><pre><code class="hljs awk">git clone https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/LeLe86/</span>vWeChatCrawl.git</code></pre></div>
+<h2 id="安装python包">安装python包</h2>
+<p>在 <code>git bash</code> 中，输入</p>
+<div class="code-wrapper"><pre><code class="hljs c">cd vWeChatCrawl
+python setupPackage.py</code></pre></div>
+<p>等待安装完成。</p>
+<h2 id="安装fiddler抓包工具">安装Fiddler抓包工具</h2>
+<p><a target="_blank" rel="noopener" href="https://www.telerik.com/fiddler/fiddler-classic">Fiddler的官网</a>有时会连不上，可去 <strong>pc.qq.com</strong> 搜索 <strong>Fiddler4</strong> 下载并安装。</p>
+<h2 id="fiddler软件设置">Fiddler软件设置</h2>
+<p>打开Fiddler软件，设置如下：</p>
 <figure>
-<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231113154847896.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20231113154847896</figcaption>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231116152054397.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20231116152054397</figcaption>
 </figure>
-<p>调整修改后的插件，我已上传：<a target="_blank" rel="noopener" href="https://gitee.com/kayoungzhang/my_codehub/blob/master/plugins/adjust_website%E6%8F%92%E4%BB%B6.zip">gitee</a></p>
-<p>具体内容，请查看原插件说明文档，感兴趣的可以下载来使用看看，并根据自己的需要进行修改调整。</p>
+<p>然后在主窗口右侧选择 <strong>Filters</strong>，在需要填的URL为：<code>mp.weixin.qq.com/mp/profile_ext?action=getmsg</code> ,如下图所示：</p>
+<figure>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231116152400300.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20231116152400300</figcaption>
+</figure>
+<p>点软件左下角的方块，会显示 <strong>Capturing</strong> ，表示它此时处在抓取数据的状态，再点一下会停止抓取。</p>
+<figure>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231116152722265.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20231116152722265</figcaption>
+</figure>
+<h2 id="获取公众号历史消息">获取公众号历史消息</h2>
+<p>登录电脑端微信，我这里版本（<strong>V2.9.5.41</strong>），选择一个公众号，查看历史消息，如：</p>
+<figure>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231116152851584.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20231116152851584</figcaption>
+</figure>
+<p>进入后缓慢向下滑动，页面显示 <strong>正在加载</strong> ，即可看到抓包软件捕捉到信息。</p>
+<figure>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231116153410980.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20231116153410980</figcaption>
+</figure>
+<p>把这些json文件保存下来，</p>
+<figure>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231116154034375.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20231116154034375</figcaption>
+</figure>
+<h2 id="下载文章html或pdf文档">下载文章html或pdf文档</h2>
+<p>打开项目中的 <strong>config.json</strong> 文件，进行设置并保存。</p>
+<ul>
+<li><strong>jsonDir</strong>：上面在Fiddler中保存的文件目录<br />
+</li>
+<li><strong>htmlDir</strong>：保存html的目录，路径中不能有空格<br />
+</li>
+<li><strong>pdfDir</strong>：保存pdf的目录，路径中不能有空格</li>
+</ul>
+<figure>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231116154743433.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20231116154743433</figcaption>
+</figure>
+<p>一般只需要设置 <strong>jsonDir</strong> ，另外两个默认即可。</p>
+<p>设置完成后，在 <code>git bash</code> 中， 运行 <code>python start.py</code> ,即可下载html文件，等待下载完成，可看到html文件夹下的html文件和imsges文件夹，但这种html文件都是以数字命名的，查看不方便，所以，可以运行 <code>python start.py pdf</code> ,等待全部转化成pdf文件即可，后面就可以离线查看各个文章了。</p>
+<figure>
+<img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231116160112140.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image-20231116160112140</figcaption>
+</figure>
+<p>以上就是分享的全部内容，这中间试了很多爬虫方式，找了很多第三方工具，都没法提取，在本项目实施过程中也并非一帆风顺，碰到了各种莫名其妙的问题，折腾好久，但最终都一一解决了，在此记录一下。</p>
 
                 
               </div>
@@ -334,9 +389,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/11/16/%E5%85%B3%E4%BA%8EFiddler%E7%B3%BB%E7%BB%9F%E4%BB%A3%E7%90%86%E6%80%BB%E6%98%AF%E8%A2%AB%E6%9B%B4%E6%94%B9%E7%9A%84issue/" title="关于Fiddler系统代理总是被更改的issue">
+                      <a href="/2023/11/16/%E9%94%82%E7%94%B5%E6%B1%A0%E5%85%85%E6%94%BE%E7%94%B5%E6%96%B9%E6%A1%88/" title="锂电池充放电方案">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">关于Fiddler系统代理总是被更改的issue</span>
+                        <span class="hidden-mobile">锂电池充放电方案</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -344,8 +399,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/11/10/typora%E6%8F%92%E4%BB%B6/" title="typora插件">
-                        <span class="hidden-mobile">typora插件</span>
+                      <a href="/2023/11/16/%E5%85%B3%E4%BA%8EFiddler%E7%B3%BB%E7%BB%9F%E4%BB%A3%E7%90%86%E6%80%BB%E6%98%AF%E8%A2%AB%E6%9B%B4%E6%94%B9%E7%9A%84issue/" title="关于Fiddler系统代理总是被更改的issue">
+                        <span class="hidden-mobile">关于Fiddler系统代理总是被更改的issue</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

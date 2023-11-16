@@ -4,6 +4,69 @@
   
   
   <entry>
+    <title>锂电池充放电方案</title>
+    <link href="/2023/11/16/%E9%94%82%E7%94%B5%E6%B1%A0%E5%85%85%E6%94%BE%E7%94%B5%E6%96%B9%E6%A1%88/"/>
+    <url>/2023/11/16/%E9%94%82%E7%94%B5%E6%B1%A0%E5%85%85%E6%94%BE%E7%94%B5%E6%96%B9%E6%A1%88/</url>
+    
+    <content type="html"><![CDATA[<p>对于便携式设备来讲，锂电池作为电源，在应用中必不可少，一般锂电池标称电压3.7V,充满电后4.2V，我们在设计锂电池充放电功能的时候需要考虑其保护电路、充电电路、电量检测电路、电源转换电路。</p><h1 id="保护电路的设计">保护电路的设计</h1><p>锂电池保护电路主要过充和过放保护，使用集成芯片对锂电池进行保护，如深圳富满的 <strong>DW03D芯片</strong>，它具有过充，过放，过流，短路等所有电池所需保护功能，采用TSSOP-8封装，面积占用小，外围电路也非常简单。</p><figure><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231116211206743.png" alt="" /><figcaption>image-20231116211206743</figcaption></figure><figure><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231116211127222.png" alt="" /><figcaption>image-20231116211127222</figcaption></figure><p>这是消费电子产品中常用的锂电池保护芯片，还有其它保护芯片，一般电池都自带有保护电路，为了方便，选用时可选带有保护电路的锂电池。</p><h1 id="充电电路的设计">充电电路的设计</h1><p>锂电池充电芯片非常多，有TI、ADI、MPS这些大厂的充电芯片，国内也有很多充电芯片，像南京拓品微、上海贝岭、深圳富满电子、英集芯等。这些充电芯片有的也包含有保护电路的部分。</p><ul><li><strong>充电电流小</strong></li></ul><p>如果充电电流较小，可以选用 <strong>线性充电芯片</strong>，比如 <strong>TP4056、TC4056、TC4054</strong> 等，这类充电芯片最大电流1A，外围电路简单，但发热比较大。</p><figure><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231116213108065.png" alt="" /><figcaption>image-20231116213108065</figcaption></figure><ul><li><strong>充电电流大</strong></li></ul><p>如果充电电流较大，就必须要用 <strong>开关降压型芯片</strong>，这类芯片充电电流大，可达2A或更高，但发热量小，典型的有 <strong>TP5000、IP5306</strong> 等。</p><figure><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231116213150850.png" alt="" /><figcaption>image-20231116213150850</figcaption></figure><h1 id="电量检测电路设计">电量检测电路设计</h1><p>在使用的时候需要对电池的电量做检测，防止设备欠压，出现故障。</p><ul><li><strong>电阻分压的方案</strong></li></ul><p>对电池电压使用分压电阻分压，然后直接使用AD进行检测，根据其一个周期的放电曲线和AD值计算出简单的电量，这种方法成本低。（<a href="https://blog.csdn.net/switch_love_case/article/details/113553837">低功耗产品ADC精确测量电池电压（电量）_adc电池电量采集</a>）</p><p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231116215139377.png" alt="image-20231116215139377" style="zoom: 67%;" /></p><ul><li><strong>芯片方案</strong></li></ul><p>使用专业的库仑计IC检测电量，这类芯片通过I2C总线来传输电量信息，检测比较准确，如<strong>TI的BQ27541</strong>、<strong>美信的MAX17043</strong>、还有<strong>凌特的LTC2644</strong>，国内的如大疆和智能手机都在使用的 <strong>CW2015</strong> 。</p><figure><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231116220010964.png" alt="" /><figcaption>image-20231116220010964</figcaption></figure><figure><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231116220316629.png" alt="" /><figcaption>image-20231116220316629</figcaption></figure><figure><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231116220534950.png" alt="" /><figcaption>image-20231116220534950</figcaption></figure><figure><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231116220550595.png" alt="" /><figcaption>image-20231116220550595</figcaption></figure><h1 id="电源转换电路的设计">电源转换电路的设计</h1><p>电池供电一般都比较小，要给后端设备提供稳定的电压，就需要进行转换处理。</p><ul><li><strong>PMIC电池电源管理</strong></li></ul><p>在一些复杂的设备中，一般会有一颗PMIC电池电源管理芯片，这类芯片集成了多路DCDC、多路LDO、电源路径管理、锂电池充放电管理，锂电池电量检测等。一般多数情况下使用不到。如ST的 <strong>STPMIC1</strong></p><figure><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231116221514278.png" alt="" /><figcaption>image-20231116221514278</figcaption></figure><ul><li><strong>升降压转换</strong></li></ul><p>使用升压或降压芯片对锂电池电压进行处理。</p><figure><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231116221733398.png" alt="" /><figcaption>image-20231116221733398</figcaption></figure><ul><li><strong>充电升压一体集成芯片</strong></li></ul><p>用集成的充电和升压一体IC进行升压，然后使用DCDC进行降压，如 <strong>TP5400、IP5109、IP5318、IP5306</strong> 等。这类IC有放电保护，一般放电截止电压在3V左右。</p><figure><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231116222607678.png" alt="" /><figcaption>image-20231116222607678</figcaption></figure><figure><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231116222628162.png" alt="" /><figcaption>image-20231116222628162</figcaption></figure><figure><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231116222937890.png" alt="" /><figcaption>image-20231116222937890</figcaption></figure><p>锂电池相关的芯片有很多，对于产品不同的需求，可根据应用进行不同的取舍，有的芯片在使用过程中，也会出现各种问题，所以，在选择时也需要认真考虑。</p><p><strong>参考链接：</strong></p><p><a href="https://mp.weixin.qq.com/s/WkLsDG0sdHt2pWuwGOsb6g">折腾一下锂电池供电方案 (qq.com)</a></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>硬件</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>锂电池</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>批量获取微信公众号的历史消息</title>
+    <link href="/2023/11/16/%E6%89%B9%E9%87%8F%E8%8E%B7%E5%8F%96%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7%E7%9A%84%E5%8E%86%E5%8F%B2%E6%B6%88%E6%81%AF/"/>
+    <url>/2023/11/16/%E6%89%B9%E9%87%8F%E8%8E%B7%E5%8F%96%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7%E7%9A%84%E5%8E%86%E5%8F%B2%E6%B6%88%E6%81%AF/</url>
+    
+    <content type="html"><![CDATA[<p>微信公众号历史文章有很多，不想总是不停一篇一篇滑动浏览，然后在网上找到了一种提取方法：<strong>Python爬虫+Fiddler抓取</strong> 。具体操作如下：</p><h2 id="下载项目源码">下载项目源码</h2><p>项目地址：</p><div class="code-wrapper"><pre><code class="hljs awk">https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/LeLe86/</span>vWeChatCrawl.git</code></pre></div><p><font color="#FF0000">前提是电脑安装有<strong>python软件</strong></font>，打开 <code>git bash</code> 下载项目源码：</p><div class="code-wrapper"><pre><code class="hljs awk">git clone https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/LeLe86/</span>vWeChatCrawl.git</code></pre></div><h2 id="安装python包">安装python包</h2><p>在 <code>git bash</code> 中，输入</p><div class="code-wrapper"><pre><code class="hljs c">cd vWeChatCrawlpython setupPackage.py</code></pre></div><p>等待安装完成。</p><h2 id="安装fiddler抓包工具">安装Fiddler抓包工具</h2><p><a href="https://www.telerik.com/fiddler/fiddler-classic">Fiddler的官网</a>有时会连不上，可去 <strong>pc.qq.com</strong> 搜索 <strong>Fiddler4</strong> 下载并安装。</p><h2 id="fiddler软件设置">Fiddler软件设置</h2><p>打开Fiddler软件，设置如下：</p><figure><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231116152054397.png" alt="" /><figcaption>image-20231116152054397</figcaption></figure><p>然后在主窗口右侧选择 <strong>Filters</strong>，在需要填的URL为：<code>mp.weixin.qq.com/mp/profile_ext?action=getmsg</code> ,如下图所示：</p><figure><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231116152400300.png" alt="" /><figcaption>image-20231116152400300</figcaption></figure><p>点软件左下角的方块，会显示 <strong>Capturing</strong> ，表示它此时处在抓取数据的状态，再点一下会停止抓取。</p><figure><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231116152722265.png" alt="" /><figcaption>image-20231116152722265</figcaption></figure><h2 id="获取公众号历史消息">获取公众号历史消息</h2><p>登录电脑端微信，我这里版本（<strong>V2.9.5.41</strong>），选择一个公众号，查看历史消息，如：</p><figure><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231116152851584.png" alt="" /><figcaption>image-20231116152851584</figcaption></figure><p>进入后缓慢向下滑动，页面显示 <strong>正在加载</strong> ，即可看到抓包软件捕捉到信息。</p><figure><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231116153410980.png" alt="" /><figcaption>image-20231116153410980</figcaption></figure><p>把这些json文件保存下来，</p><figure><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231116154034375.png" alt="" /><figcaption>image-20231116154034375</figcaption></figure><h2 id="下载文章html或pdf文档">下载文章html或pdf文档</h2><p>打开项目中的 <strong>config.json</strong> 文件，进行设置并保存。</p><ul><li><strong>jsonDir</strong>：上面在Fiddler中保存的文件目录<br /></li><li><strong>htmlDir</strong>：保存html的目录，路径中不能有空格<br /></li><li><strong>pdfDir</strong>：保存pdf的目录，路径中不能有空格</li></ul><figure><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231116154743433.png" alt="" /><figcaption>image-20231116154743433</figcaption></figure><p>一般只需要设置 <strong>jsonDir</strong> ，另外两个默认即可。</p><p>设置完成后，在 <code>git bash</code> 中， 运行 <code>python start.py</code> ,即可下载html文件，等待下载完成，可看到html文件夹下的html文件和imsges文件夹，但这种html文件都是以数字命名的，查看不方便，所以，可以运行 <code>python start.py pdf</code> ,等待全部转化成pdf文件即可，后面就可以离线查看各个文章了。</p><figure><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231116160112140.png" alt="" /><figcaption>image-20231116160112140</figcaption></figure><p>以上就是分享的全部内容，这中间试了很多爬虫方式，找了很多第三方工具，都没法提取，在本项目实施过程中也并非一帆风顺，碰到了各种莫名其妙的问题，折腾好久，但最终都一一解决了，在此记录一下。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>其它</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>关于Fiddler系统代理总是被更改的issue</title>
+    <link href="/2023/11/16/%E5%85%B3%E4%BA%8EFiddler%E7%B3%BB%E7%BB%9F%E4%BB%A3%E7%90%86%E6%80%BB%E6%98%AF%E8%A2%AB%E6%9B%B4%E6%94%B9%E7%9A%84issue/"/>
+    <url>/2023/11/16/%E5%85%B3%E4%BA%8EFiddler%E7%B3%BB%E7%BB%9F%E4%BB%A3%E7%90%86%E6%80%BB%E6%98%AF%E8%A2%AB%E6%9B%B4%E6%94%B9%E7%9A%84issue/</url>
+    
+    <content type="html"><![CDATA[<p>在使用Fiddler Web Debugger抓取网页内容时，会经常弹出如下错误：</p><figure><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231116113625585.png" alt="" /><figcaption>image-20231116113625585</figcaption></figure><p>在网上看到很多人都碰到有这个问题，产生的原因也有多种，我把这些可能得原因都看了看，排除了自己电脑可能的问题，但还是没法解决。</p><p>突然想到一个博主说的：“一定有一个程序在修改系统的代理”，问题的关键就在于其它软件的影响，于是，从网上下载了 <code>Process Monitor(进程监测软件)</code>(<font color="purple">Win7系统无法使用新版本,我这里使用的是V3.2版本</font>)，通过监测软件搜索 <code>ProxyEnable</code> ,说不定就可以揪出作怪的进程。操作如下：</p><figure><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231116121107282.png" alt="" /><figcaption>image-20231116121107282</figcaption></figure><p>明明我多年前都卸载了这个网银助手软件，也完整看了卸载软件列表中，没有网银或VPN的相关信息，但现在系统中还是残留有网银的进程，折腾了许久，原来是这个潜藏进程的影响。</p><p>此时是没法直接删除这个进程的，双击这个网银的软件，打开任务管理器，找到这个网银进程，结束它的进程，再直接删除，OK。</p><p>再次在 <strong>Fiddler</strong> 软件中，开启捕捉，就不会弹出系统代理更改的错误，问题解决。</p><p><strong>参考：</strong></p><p><a href="https://blog.csdn.net/zwyzzz888/article/details/126426761">解决fiddler 系统代理已更改的问题-CSDN博客</a></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>其它</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>网页布局调整插件</title>
     <link href="/2023/11/13/%E7%BD%91%E9%A1%B5%E5%B8%83%E5%B1%80%E8%B0%83%E6%95%B4%E6%8F%92%E4%BB%B6/"/>
     <url>/2023/11/13/%E7%BD%91%E9%A1%B5%E5%B8%83%E5%B1%80%E8%B0%83%E6%95%B4%E6%8F%92%E4%BB%B6/</url>
