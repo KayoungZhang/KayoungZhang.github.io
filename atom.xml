@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2023-11-16T14:34:12.990Z</updated>
+  <updated>2024-01-02T05:15:53.875Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,112 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>tkinter widgets 窗口管理</title>
+    <link href="http://example.com/2024/01/02/tkinter-widgets-%E7%AA%97%E5%8F%A3%E7%AE%A1%E7%90%86/"/>
+    <id>http://example.com/2024/01/02/tkinter-widgets-%E7%AA%97%E5%8F%A3%E7%AE%A1%E7%90%86/</id>
+    <published>2024-01-02T02:36:14.000Z</published>
+    <updated>2024-01-02T05:15:53.875Z</updated>
+    
+    <content type="html"><![CDATA[<p>Tkinter 多个控件被摆放到父窗口时，就需要进行布局管理（<font color="#0000FF">geometry management</font>），tkinter中提供了三种管理方法，分别如下：</p><ul><li>pack()</li></ul><p>按照控件的添加顺序从上到下依次排列，通过代码可以直观知道摆放情况。</p><ul><li>grid()</li></ul><p>以行列网格形式进行排列。</p><ul><li>pace()</li></ul><p>精确指定控件的摆放位置。</p><h1 id="pack方法">pack()方法</h1><p>属性参数有：</p><table><thead><tr class="header"><th>属性</th><th>说明</th></tr></thead><tbody><tr class="odd"><td>anchor</td><td>控件在窗口中的对齐方位："n"/"w"/"s"/"e"/"ne"/"nw"/"sw"/"se"/"center"</td></tr><tr class="even"><td><strong>expand</strong></td><td>控件是否随着窗口扩展，参数值： True / False，默认为 False</td></tr><tr class="odd"><td><strong>fill</strong></td><td>控件可在水平/垂直/同时在两个方向上进行拉伸，参数值： X/Y/BOTH/NONE</td></tr><tr class="even"><td>ipadx,ipady</td><td>控件边框与内容的距离（内边距），单位为像素</td></tr><tr class="odd"><td>padx,pady</td><td>控件之间的上下、左右的距离（外边距），单位为像素</td></tr><tr class="even"><td><strong>side</strong></td><td>控件在窗口的位置，参数值： 'top','bottom','left','right'。</td></tr></tbody></table><h1 id="grid方法">grid()方法</h1><p>属性参数有：</p><table><thead><tr class="header"><th>属性</th><th>说明</th></tr></thead><tbody><tr class="odd"><td><strong>column</strong></td><td>控件位于表格中列数，默认为第 0 列</td></tr><tr class="even"><td><strong>columnspan</strong></td><td>控件所跨的列数，默认为 1 列，通过该参数可以合并一行中多个单元格。</td></tr><tr class="odd"><td>ipadx,ipady</td><td>用于控制内边距，在单元格内部，左右、上下方向上填充指定大小的空间。</td></tr><tr class="even"><td>padx,pady</td><td>用于控制外边距，在单元格外部，左右、上下方向上填充指定大小的空间。</td></tr><tr class="odd"><td><strong>row</strong></td><td>控件位于表格中行数，默认为第 0 行</td></tr><tr class="even"><td><strong>rowspan</strong></td><td>控件所跨的行数，默认为 1 行，通过该参数可以合并一列中多个单元格。</td></tr><tr class="odd"><td><strong>sticky</strong></td><td>功能类似于 anchor，参数：N/S/W/E,即上下左右对齐，或组合使用，默认居中对齐。</td></tr></tbody></table><h1 id="place方法">place()方法</h1><p>属性参数有：</p><table><thead><tr class="header"><th>属性</th><th>说明</th></tr></thead><tbody><tr class="odd"><td>anchor</td><td>控件在窗口中的对齐方位："n"/"w"/"s"/"e"/"ne"/"nw"/"sw"/"se"/"center"</td></tr><tr class="even"><td><strong>x,y</strong></td><td>定义控件在窗体中左上方位置</td></tr><tr class="odd"><td><strong>relx,rely</strong></td><td>相对于父窗口的位置比例，取值范围： 0.0~1.0</td></tr><tr class="even"><td>height,width</td><td>控件的高度和宽度（单位为像素）</td></tr><tr class="odd"><td><strong>relheight,relwidth</strong></td><td>相对于父窗口的大小比例，取值范围： 0.0~1.0</td></tr></tbody></table><p><span style="color:red"><strong>注意：</strong></span>在一个父窗口中，place()可以和grid()或pack()方法混合使用，但grid()和pack()方法不能混合使用。</p><p>一般在应用中使用pack()和grid()方法比较多。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;Tkinter 多个控件被摆放到父窗口时，就需要进行布局管理（&lt;font color=&quot;#0000FF&quot;&gt;geometry management&lt;/font&gt;），tkinter中提供了三种管理方法，分别如下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;pack()&lt;/li&gt;
+&lt;/ul</summary>
+      
+    
+    
+    
+    <category term="python" scheme="http://example.com/categories/python/"/>
+    
+    
+    <category term="layout" scheme="http://example.com/tags/layout/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Python tkinter 主窗口与控件</title>
+    <link href="http://example.com/2024/01/01/Python-tkinter-%E4%B8%BB%E7%AA%97%E5%8F%A3%E4%B8%8E%E6%8E%A7%E4%BB%B6/"/>
+    <id>http://example.com/2024/01/01/Python-tkinter-%E4%B8%BB%E7%AA%97%E5%8F%A3%E4%B8%8E%E6%8E%A7%E4%BB%B6/</id>
+    <published>2024-01-01T12:54:24.000Z</published>
+    <updated>2024-01-02T02:29:24.800Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="tkinter-主窗口">Tkinter 主窗口</h1><p>Hardware --&gt; OS --&gt; Tcl/Tk --&gt; tkinter --&gt; Python</p><p><font color="#FF33FF">tkinter module(Python 3.x --&gt; tkinter, Python 2.x --&gt; Tkinter)</font></p><p>导入 tkinter module： <code>from tkinter import *</code> or <code>import tkinter</code></p><p>创建主窗口,如: <code>window = Tk()</code> or <code>window = tkinter.Tk()</code></p><div class="code-wrapper"><pre><code class="hljs python">Tk(screenName=<span class="hljs-literal">None</span>, baseName=<span class="hljs-literal">None</span>, className=<span class="hljs-string">&#x27;Tk’, useTk=1)</span></code></pre></div><p>窗口的相关方法：</p><table><thead><tr class="header"><th>函数</th><th>说明</th></tr></thead><tbody><tr class="odd"><td>window.title("my title")</td><td>接受一个字符串参数，为窗口起一个标题</td></tr><tr class="even"><td>window.resizable()</td><td>是否允许用户拉伸主窗口大小，默认为可更改，当设置为 resizable(0,0)或者resizable(False,False)时不可更改,help(tkinter.Tk().resizable)</td></tr><tr class="odd"><td>window.geometry("widthxheight+x+y")</td><td>设定主窗口的大小以及位置，当参数值为 None 时表示获取窗口的大小和位置信息。</td></tr><tr class="even"><td>window.quit()</td><td>关闭当前窗口</td></tr><tr class="odd"><td>window.update()</td><td>刷新当前窗口</td></tr><tr class="even"><td>window.mainloop()</td><td>设置窗口主循环，使窗口循环显示（一直显示，指导窗口被关闭）</td></tr><tr class="odd"><td>window.iconbitmap('xx.ico')</td><td>设置窗口左上角的图标（图标是.ico文件类型）</td></tr><tr class="even"><td>window.config(background ="red")</td><td>设置窗口的背景色为红色，也可以接受 16 进制的颜色值</td></tr><tr class="odd"><td>window.minsize(50,50)</td><td>设置窗口被允许调整的最小范围，即宽和高各50</td></tr><tr class="even"><td>window.maxsize(400,400)</td><td>设置窗口被允许调整的最大范围，即宽和高各400</td></tr><tr class="odd"><td>window.attributes("-alpha",0.5)</td><td>用来设置窗口的一些属性，比如透明度（-alpha）、是否置顶（-topmost）即将主屏置于其他图标之上、是否全屏（-fullscreen）全屏显示等</td></tr><tr class="even"><td>window.state("normal")</td><td>用来设置窗口的显示状态，参数值 normal（正常显示），icon（最小化），zoomed（最大化），</td></tr><tr class="odd"><td>window.withdraw()</td><td>用来隐藏主窗口，但不会销毁窗口。</td></tr><tr class="even"><td>window.iconify()</td><td>设置窗口最小化</td></tr><tr class="odd"><td>window.deiconify()</td><td>将窗口从隐藏状态还原</td></tr><tr class="even"><td>window.winfo_screenwidth() window.winfo_screenheight()</td><td>获取电脑屏幕的分辨率（尺寸）</td></tr><tr class="odd"><td>window.winfo_width() window.winfo_height()</td><td>获取窗口的大小，同样也适用于其他控件，但是使用前需要使用 window.update() 刷新屏幕，否则返回值为1</td></tr><tr class="even"><td>window.protocol("协议名",回调函数)</td><td>启用协议处理机制，常用协议有 WN_DELETE_WINDOW，当用户点击关闭窗口时，窗口不会关闭，而是触发回调函数。</td></tr></tbody></table><h1 id="tkinter常用widgets">Tkinter常用widgets</h1><table><thead><tr class="header"><th>序号</th><th>控件类型</th><th>控件名称</th><th>控件作用</th></tr></thead><tbody><tr class="odd"><td>1</td><td>Button</td><td>按钮</td><td>点击按钮时触发/执行一些事件（函数）</td></tr><tr class="even"><td>2</td><td>Canvas</td><td>画布</td><td>提供绘制图，比如直线、矩形、多边形等</td></tr><tr class="odd"><td>3</td><td>Checkbutton</td><td>复选框</td><td>多项选择按钮，用于在程序中提供多项选择框</td></tr><tr class="even"><td>4</td><td>Entry</td><td>文本框输入框</td><td>用于接收单行文本输入</td></tr><tr class="odd"><td>5</td><td>Frame</td><td>框架（容器）</td><td>定义一个窗体（根窗口也是一个窗体），用于承载其他控件，作为其他控件的容器</td></tr><tr class="even"><td>6</td><td>Label</td><td>标签</td><td>用于显示单行文本或者图片</td></tr><tr class="odd"><td>7</td><td>LabelFrame</td><td>便签框架</td><td><font color="#FFCCE5">一个简单的容器控件，常用于复杂的窗口布局。？</font></td></tr><tr class="even"><td>8</td><td>Listbox</td><td>列表框</td><td>以列表的形式显示文本</td></tr><tr class="odd"><td>9</td><td>Menu</td><td>菜单</td><td>菜单组件（下拉菜单和弹出菜单）</td></tr><tr class="even"><td>10</td><td>MenuButton</td><td>菜单按钮</td><td>用于显示菜单项</td></tr><tr class="odd"><td>11</td><td>Message</td><td>信息</td><td>用于显示多行不可编辑的文本，与 Label控件类似，增加了自动分行的功能</td></tr><tr class="even"><td>12</td><td>MessageBox</td><td>消息框</td><td>定义与用户交互的消息对话框</td></tr><tr class="odd"><td>13</td><td>OptionMenu</td><td>选项菜单</td><td>下拉菜单</td></tr><tr class="even"><td>14</td><td>PanedWindow</td><td>面板</td><td>为组件提供一个框架，允许用户自己划分窗口空间</td></tr><tr class="odd"><td>15</td><td>Radiobutton</td><td>单选框</td><td>单项选择按钮，只允许从多个选项中选择一项</td></tr><tr class="even"><td>16</td><td>Scale</td><td>进度条</td><td>定义一个线性“滑块”用来控制范围，可以设定起始值和结束值，并显示当前位置的精确值</td></tr><tr class="odd"><td>17</td><td>Spinbox</td><td>微调输入框</td><td>Entry 控件的升级版，可以通过该组件的上、下箭头选择不同的值</td></tr><tr class="even"><td>18</td><td>Scrollbar</td><td>滚动条</td><td>默认垂直方向，鼠标拖动改变数值，可以和 Text、Listbox、Canvas等控件配合使用</td></tr><tr class="odd"><td>19</td><td>Text</td><td>多行文本框</td><td>接收或输出多行文本内容</td></tr><tr class="even"><td>20</td><td>Toplevel</td><td>上层窗口</td><td>在创建一个独立于主窗口之外的子窗口，位于主窗口的上一层，可作为其他控件的容器</td></tr></tbody></table><h1 id="widgets共同属性与方法">widgets共同属性与方法</h1><table><thead><tr class="header"><th>属性名称</th><th>说明</th></tr></thead><tbody><tr class="odd"><td>anchor</td><td>定义控件或者文字信息在窗口内的位置("n" 、"ne" 、"e" 、"se" 、"s" 、"sw" 、"w" 、"nw" 和 "center")</td></tr><tr class="even"><td>bg</td><td>bg 是 background 的缩写，用来定义控件的背景颜色，参数值可以颜色的十六进制数，或者颜色英文单词</td></tr><tr class="odd"><td>bitmap</td><td>定义显示在控件内的位图文件</td></tr><tr class="even"><td>borderwidth (bd)</td><td>定于控件的边框宽度，单位是像素</td></tr><tr class="odd"><td>command</td><td>该参数用于执行事件函数，比如单击按钮时执行特定的动作，可将执行用户自定义的函数</td></tr><tr class="even"><td>cursor</td><td>当鼠标指针移动到控件上时，定义鼠标指针的类型，字符换格式，参数值有 crosshair（十字光标）watch（待加载圆圈）plus（加号）arrow（箭头）等</td></tr><tr class="odd"><td>font</td><td>若控件支持设置标题文字，就可以使用此属性来定义，它是一个数组格式的参数 (字体,大小，字体样式)</td></tr><tr class="even"><td>fg</td><td>fg 是 foreground 的缩写，用来定义控件的前景色，也就是字体的颜色</td></tr><tr class="odd"><td>height</td><td>该参数值用来设置控件的高度，文本控件以字符的数目为高度（px），其他控件则以像素为单位</td></tr><tr class="even"><td>image</td><td>定义显示在控件内的图片文件</td></tr><tr class="odd"><td>justify</td><td>定义多行文字的排列方式，此属性可以是 LEFT/CENTER/RIGHT</td></tr><tr class="even"><td>padx/pady</td><td>定义控件内的文字或者图片与控件边框之间的水平/垂直距离</td></tr><tr class="odd"><td>relief</td><td>定义控件的边框样式，参数值为FLAT（平的）/RAISED（凸起的）/SUNKEN（凹陷的）/GROOVE（沟槽桩边缘）/RIDGE（脊状边缘）</td></tr><tr class="even"><td>text 文本</td><td>定义控件的标题文字</td></tr><tr class="odd"><td>state 状态</td><td>控制控件是否处于可用状态，参数值默认为 NORMAL/DISABLED，默认为 NORMAL（正常的）</td></tr><tr class="even"><td>width</td><td>用于设置控件的宽度，使用方法与 height 相同</td></tr><tr class="odd"><td>config(option=value)</td><td>设置属性</td></tr><tr class="even"><td>cget(''option')</td><td>取得option参数值</td></tr><tr class="odd"><td>keys()</td><td>获取该widget参数</td></tr><tr class="even"><td>quit()</td><td>python shell窗口结束，但所建窗口继续执行</td></tr><tr class="odd"><td>update()</td><td>更新窗口画面</td></tr><tr class="even"><td>bind(event, callback)</td><td>事件绑定</td></tr><tr class="odd"><td>unbind(event)</td><td>解除事件绑定</td></tr><tr class="even"><td>after(time, callback)</td><td>间隔指定时间后，调用callback()方法</td></tr></tbody></table><h1 id="tkinter.ttk模块增加的widgets">tkinter.ttk模块增加的widgets</h1><table><thead><tr class="header"><th>序号</th><th>控件类型</th><th>控件名称</th><th>控件作用</th></tr></thead><tbody><tr class="odd"><td>1</td><td>Combobox</td><td>组合框</td><td>Entry与下拉菜单组合的控件</td></tr><tr class="even"><td>2</td><td>Notebook</td><td>选项卡容器</td><td>可有多个选项卡，承载不同的子控件内容</td></tr><tr class="odd"><td>3</td><td>Progressbar</td><td>进度条</td><td>通过进度指针显示当前阶段</td></tr><tr class="even"><td>4</td><td>Separator</td><td>分割线</td><td>增加视觉效果</td></tr><tr class="odd"><td>5</td><td>Sizegrip</td><td>大小控制</td><td>拖拽更改窗口大小</td></tr><tr class="even"><td>6</td><td>Treeview</td><td>树状表格视图</td><td>将内容分层隐藏与显示</td></tr></tbody></table>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;tkinter-主窗口&quot;&gt;Tkinter 主窗口&lt;/h1&gt;
+&lt;p&gt;Hardware --&amp;gt; OS --&amp;gt; Tcl/Tk --&amp;gt; tkinter --&amp;gt; Python&lt;/p&gt;
+&lt;p&gt;&lt;font color=&quot;#FF33FF&quot;&gt;tkinte</summary>
+      
+    
+    
+    
+    <category term="python" scheme="http://example.com/categories/python/"/>
+    
+    
+    <category term="python" scheme="http://example.com/tags/python/"/>
+    
+    <category term="tkinter" scheme="http://example.com/tags/tkinter/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>关于Python的基本知识点</title>
+    <link href="http://example.com/2024/01/01/%E5%85%B3%E4%BA%8EPython%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86%E7%82%B9/"/>
+    <id>http://example.com/2024/01/01/%E5%85%B3%E4%BA%8EPython%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86%E7%82%B9/</id>
+    <published>2024-01-01T09:44:15.000Z</published>
+    <updated>2024-01-02T02:38:25.861Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="python的基本知识点">Python的基本知识点</h1><ul><li><p>Python Shell环境输入<code>import this</code> 可看到经典名句，代表研读Python的意境。</p></li><li><p>注释符：</p><ul><li>单行注释：<code>#</code></li><li>多行注释：<code>'''</code> or <code>"""</code></li></ul></li><li><p>```python help('modules') # 查看python所有modules help('topics') # 查看python常见的topics <div class="code-wrapper"><pre><code class="hljs python">- ```python  <span class="hljs-keyword">import</span> os.path  <span class="hljs-built_in">help</span>(<span class="hljs-string">&#x27;os.path&#x27;</span>)    <span class="hljs-comment"># 查看python标准库中的modules</span></code></pre></div></p></li><li><div class="sourceCode" id="cb1"><div class="code-wrapper"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a>  <span class="bu">dir</span>(__builtins__)  <span class="co"># 列出Python内置函数</span></span><span id="cb1-2"><a href="#cb1-2"></a>  <span class="bu">dir</span>(<span class="st">&#39;&#39;</span>) <span class="co"># 列出字符串对象方法</span></span><span id="cb1-3"><a href="#cb1-3"></a>  <span class="bu">dir</span>(<span class="dv">0</span>) <span class="co"># 列出整数对象方法</span></span><span id="cb1-4"><a href="#cb1-4"></a>  <span class="bu">dir</span>([]) <span class="co">#列出列表的方法</span></span><span id="cb1-5"><a href="#cb1-5"></a>  <span class="bu">dir</span>(()) <span class="co"># 列出元组的方法</span></span><span id="cb1-6"><a href="#cb1-6"></a>  <span class="bu">dir</span>(&#123;&#125;) <span class="co"># 列出字典的方法</span></span><span id="cb1-7"><a href="#cb1-7"></a>  <span class="bu">dir</span>(<span class="bu">set</span>()) <span class="co"># 列出集合的方法</span></span></code></pre></div></div></li><li><p>Python运算优先级：次方(**) &gt; 乘除，求余(%)，求整(//) &gt; 加减</p></li><li><p><code>divmod()</code> 函数可以一次获得商和余数</p></li><li><p><code>id()</code> 可查看变量十进制地址。</p></li><li><p><code>type()</code> 函数可列出变量的数据类型</p></li><li><p>字符串前加 <code>r</code> ,可取消转义字符含义</p></li><li><p><code>chr()</code> # 回传ASCII字符</p></li><li><p><code>ord()</code> # 回传Unicode码</p></li><li><p><code>bytes()</code> # 回传bytes数据，内容不可变</p></li><li><p><code>bytearray()</code> # 回传bytearray数据，内容可变</p></li><li><p>字符串格式输出</p><ul><li><code>print('%s - %d - %f' % (str1, num, score))</code></li><li><code>print('&#123;&#125; - &#123;&#125; - &#123;&#125;'.format(str1, num, score))</code></li><li><code>print(f'&#123;score&#125;')</code> # v3.6版本后</li></ul></li><li><p><code>eval(input(''))</code> 可处理字符串中数学表达式</p></li><li><p><code>enumerate(iterable, start = 0)</code> # 可迭代对象更改索引值</p></li><li><p><code>新列表 = [表达式 for 项目 in 可迭代对象]</code> # 生成式列表</p></li><li><p>元组内只有一个元素，在定义时要在右边加上逗号</p></li><li><p><code>zip()</code> # 对多个可迭代对象打包</p></li><li><p><code>zip(*)</code> # unzip</p></li></ul>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;python的基本知识点&quot;&gt;Python的基本知识点&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Python Shell环境输入&lt;code&gt;import this&lt;/code&gt; 可看到经典名句，代表研读Python的意境。&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;注释符：&lt;</summary>
+      
+    
+    
+    
+    <category term="python" scheme="http://example.com/categories/python/"/>
+    
+    
+    <category term="python" scheme="http://example.com/tags/python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>STM32CubeMX+VScode搭建STM32开发环境</title>
+    <link href="http://example.com/2023/11/18/STM32CubeMX-VScode%E6%90%AD%E5%BB%BASTM32%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/"/>
+    <id>http://example.com/2023/11/18/STM32CubeMX-VScode%E6%90%AD%E5%BB%BASTM32%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</id>
+    <published>2023-11-18T07:19:27.000Z</published>
+    <updated>2023-11-20T08:51:45.735Z</updated>
+    
+    <content type="html"><![CDATA[<p>市面上开发STM32使用的IDE软件有很多，像常用的 <strong>Keil</strong> 和 <strong>IAR</strong>，国外比较流行的 <strong>mikroC PRO</strong> ，以及ST公司自己推出的免费 <strong>STM32CubeIDE</strong> ，前面三款软件牵涉到版权收费问题，虽说 <strong>STM32CubeIDE</strong> 是免费的，但体积比较大，启动比较慢，所以，很多开发人员选择微软的 <strong>VSCode</strong> 来进行开发，而开发环境需要自己来进行配置，具体配置如下：</p><h2 id="下载开发软件">下载开发软件</h2><p>现在很多软件和插件对windows电脑的<font color="#FF007F"><strong>最低要求是Win10</strong></font>，所以这里以我的电脑Win10 64位来进行操作。</p><p>下载的软件有：</p><ul><li><a href="https://code.visualstudio.com/">Visual Studio Code</a></li></ul><p>主要的文本编辑软件，官网下载比较慢，可以进入 <strong><a href="https://code.visualstudio.com/updates/">Updates</a></strong> 栏进行下载。</p><p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231118160017135.png" alt="image-20231118160017135" style="zoom:50%;" /></p><ul><li><a href="https://www.st.com/zh/development-tools/stm32cubemx.html">STM32cubeMX</a></li></ul><p>ST推出的图形化配置工具，注册后即可下载。操作说明：<a href="https://www.stmcu.com.cn/ecosystem/Cube/STM32cubemx">生态系统 | STMCU中文官网</a></p><p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231118155902022.png" alt="image-20231118155902022" style="zoom:50%;" /></p><ul><li><a href="%5BArm%20GNU%20Toolchain%20Downloads%20–%20Arm%20Developer%5D(https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads)">arm-gnu-toolchain</a></li></ul><p>Windows (mingw-w64-i686)下交叉编译工具链，主要使用里面的gcc工具链。</p><p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231118155746858.png" alt="image-20231118155746858" style="zoom:50%;" /></p><ul><li><a href="https://www.gnutoolchains.com/arm-eabi/openocd/">OpenOCD</a></li></ul><p>开源的GDB调试软件。</p><p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231118160350697.png" alt="image-20231118160350697" style="zoom:50%;" /></p><ul><li><a href="https://gnuwin32.sourceforge.net/packages/make.htm">GNU make</a></li></ul><p>工程的构建工具，通过 <strong>makefile</strong> 脚本文件，自动进行编译处理过程。</p><p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231118160902580.png" alt="image-20231118160902580" style="zoom:50%;" /></p><h1 id="软件安装与环境变量配置">软件安装与环境变量配置</h1><p><strong>VS Code</strong> 和 <strong>STM32CubeMX</strong> 及 <strong>GNU make</strong> 按照正常方式安装即可，<strong>arm-gnu-toolchain</strong> 和 <strong>OpenOCD</strong> 是压缩包，将它们解压到某个盘（如：<strong>D:\Program Files (x86)文件夹下</strong>）， 然后将它们的<font color="#FF00FF"><strong>bin文件夹路径</strong></font>添加到环境变量的<strong>PATH</strong>中。</p><figure><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231118161850553.png" alt="" /><figcaption>image-20231118161850553</figcaption></figure><h1 id="vs-code插件安装">VS Code插件安装</h1><p>打开 <strong>VS code</strong> ，安装以下插件：</p><ul><li><strong>C/C++</strong></li></ul><p>VS code中对C和C++的支持</p><ul><li><strong>Cortex-Debug</strong></li></ul><p>调试功能，支持寄存器查看、内存查看、断点调试、变量观察等功能。</p><ul><li><strong>stm32-for-vscode</strong></li></ul><p>编译、调试和烧录STM32项目的扩展，自动完成 <strong>.vscode文件夹</strong> json文件的编写。</p><ul><li><strong>aiXcoder Code Completer 或 Tabnine</strong></li></ul><p>代码提示扩展</p><h1 id="创建stm32-hal工程">创建STM32 HAL工程</h1><p>通过STM32CubeMX新建一个工程，正常创建即可，只需要注意选择工具链为 <strong><font color="#FF3333">Makefile</font></strong></p><p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231118163633024.png" alt="image-20231118163633024" style="zoom:67%;" /></p><h1 id="vs-code编译下载">VS Code编译下载</h1><p>进入刚刚创建的STM32工程文件夹，使用VS Code打开文件夹。</p><p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231118164336856.png" alt="image-20231118164336856" style="zoom:67%;" /></p><p>工程打开后，左侧会出现 <strong>stm32-for-vscode</strong> 插件，如果环境变量配置OK，它会自动进行适配，如下：</p><p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231118165358844.png" alt="image-20231118165358844" style="zoom:50%;" /></p><p>如果没有出现以上画面，则需要自己进入插件设置，进行路径的配置。</p><p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231118165049806.png" alt="image-20231118165049806" style="zoom:50%;" /></p><p>点击 <strong>Build</strong> ，即可看到 <strong>TERMINAL</strong> 栏的编译过程，如果一切正常，最终会生成hex和bin文件。</p><p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231118165612525.png" alt="image-20231118165612525" style="zoom:80%;" /></p><p>需要烧录程序时，因为默认的烧录器是 <strong>stlink</strong>， 我这里是 <strong>daplink</strong> ，点击 <strong>Change Programmer</strong> ，选择 <strong>daplink</strong> ，插上烧录器，上电，然后点击 <strong>Flash STM32</strong> 即可完成程序的下载。</p><p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231118170208735.png" alt="image-20231118170208735" style="zoom:67%;" /></p><p>至于调试，点击 <strong>Debug STM32</strong> ，弹出调试界面，进行openocd的调试即可， 好了，以上就是 VS code 开发STM32环境的搭建过程。</p><p>另外，在keil中调用printf 需要重载<code>putc</code>函数，这里因为使用的是gcc编译器，所以需要重载 <code>_write</code> 函数：</p><div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-type">int</span> _write(<span class="hljs-type">int</span> fd, <span class="hljs-type">char</span> *ch, <span class="hljs-type">int</span> len)&#123;  HAL_UART_Transmit(&amp;huart1, (<span class="hljs-type">uint8_t</span>*)ch, len, <span class="hljs-number">0xFFFF</span>);  <span class="hljs-keyword">return</span> len;&#125;</code></pre></div><p><strong>参考链接：</strong></p><p><a href="https://blog.csdn.net/gorgeousa/article/details/129525234">vscode stm32cubemx 优雅开发stm32，最简单步骤教程_vscode怎么开发stm32_合理说明的博客-CSDN博客</a></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;市面上开发STM32使用的IDE软件有很多，像常用的 &lt;strong&gt;Keil&lt;/strong&gt; 和 &lt;strong&gt;IAR&lt;/strong&gt;，国外比较流行的 &lt;strong&gt;mikroC PRO&lt;/strong&gt; ，以及ST公司自己推出的免费 &lt;strong&gt;STM32C</summary>
+      
+    
+    
+    
+    <category term="stm32" scheme="http://example.com/categories/stm32/"/>
+    
+    
+    <category term="stm32" scheme="http://example.com/tags/stm32/"/>
+    
+  </entry>
   
   <entry>
     <title>锂电池充放电方案</title>
@@ -416,112 +522,6 @@
     
     
     <category term="Mutexes" scheme="http://example.com/tags/Mutexes/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>FreeRTOS中中断(Interrupt)</title>
-    <link href="http://example.com/2023/10/06/FreeRTOS%E4%B8%AD%E4%B8%AD%E6%96%AD-Interrupt/"/>
-    <id>http://example.com/2023/10/06/FreeRTOS%E4%B8%AD%E4%B8%AD%E6%96%AD-Interrupt/</id>
-    <published>2023-10-06T13:47:57.000Z</published>
-    <updated>2023-10-12T09:15:52.610Z</updated>
-    
-    <content type="html"><![CDATA[<p>在 RTOS 中，需要应对各类事件。在每种情况下，必须对最佳事件处理实现策略做出判断：</p><ul><li>怎么检测事件的发生？通常使用中断，但也可以是轮询输入。</li><li>当使用中断时，中断服务程序中内外各需要执行多少操作？一般让中断服务程序尽可能的短。</li><li>事件怎么和main函数通信，如何构建此代码以最好地适应可能的异步事件的发生？</li></ul><p>区分任务的优先级和中断的优先级是很重要的：</p><ul><li>任务是FreeRTOS运行的软件特性，跟硬件无关，任务的优先级通过程序员指定，在运行的状态，由调度器决定执行哪个任务。</li><li>尽管中断服务程序是通过软件写的，但它是一个硬件特性，因为中断服务程序在运行时，是由硬件控制运行的，只有当无ISR时，任务才会运行，最低优先级的中断会中断最高优先级的任务，任务无法抢占ISR，</li></ul><h1 id="isr中api函数">ISR中API函数</h1><p>很多 API 函数会导致任务进入阻塞状态，因此，FreeRTOS提供了两套API函数，一套在任务中使用，另一套在ISR中使用。<strong>注意</strong>：在FreeRTOS的ISR程序中，要调用后缀名为 <strong>FromISR</strong> 的API函数。</p><table style="width:100%;"><thead><tr class="header"><th>类型</th><th>在任务中</th><th>在ISR中</th></tr></thead><tbody><tr class="odd"><td>队列(Queue)</td><td>xQueueSendToBack()<br>xQueueSendToFront()<br>xQueueReceive()<br>xQueueOverwrite()<br>xQueuePeek()</td><td>xQueueSendToBackFromISR()<br>xQueueSendToFrontFromISR()<br>xQueueReceiveFromISR()<br>xQueueOverwriteFromISR()<br>xQueuePeekFromISR()</td></tr><tr class="even"><td>信号量(Semaphore)</td><td>xSemaphoreGive()<br>xSemaphoreTake()</td><td>xSemaphoreGiveFromISR()<br>xSemaphoreTakeFromISR()</td></tr><tr class="odd"><td>事件组(EventGroups)</td><td>xEventGroupSetBits()<br>xEventGroupGetBits()</td><td>xEventGroupSetBitsFromISR()<br>xEventGroupGetBitsFromISR()</td></tr><tr class="even"><td>任务通知(TaskNotification)</td><td>xTaskNotifyGive()<br>xTaskNotify()</td><td>vTaskNotifyGiveFromISR()<br>xTaskNotifyFromISR()</td></tr><tr class="odd"><td>软件定时器(SoftwareTimer)</td><td>xTimerStart()<br>xTimerStop()<br>xTimerReset()<br>xTimerChangePeriod()</td><td>xTimerStartFromISR()<br>xTimerStopFromISR()<br>xTimerResetFromISR()<br>xTimerChangePeriodFromISR()</td></tr></tbody></table><h3 id="两套api函数的优点">两套API函数的<strong>优点</strong>：</h3><ul><li>API函数不需要额外的逻辑判断是从任务中调用，还是从ISR中调用，额外的逻辑判断会让函数更长，更复杂，也更难测试。</li><li>在任务或ISR 中调用时，需要的参数不一样，不会导致参数无效。</li><li>不用每个FreeRTOS移植程序都提供一种机制来确定上下文的执行。</li><li>很容易确定执行的上下文体系，容易使用。</li></ul><p>使用两套函数可以让程序更高效，但是也有一些缺点，比如你要使用第三方库函数时，即会在任务中调用它，也会在ISR调用它。这个第三方库函数用到了FreeRTOS的API函数，你无法修改库函数。要解决这个问题，可通过以下方法：</p><ul><li>把中断的处理推迟到任务中执行，API函数只从任务的上下文中调用。</li><li>如果是支持中断嵌套的FreeRTOS移植，使用“FromISR”那一套API函数。</li><li>第三方代码一般会包含RTOS抽象层，用来测试调用函数（任务或ISR）的上下文，分别调用对应的函数。</li></ul><h3 id="xhigherprioritytaskwoken参数">xHigherPriorityTaskWoken参数</h3><p>如果中断执行上下文切换，那么在中断退出与进入时运行的任务可能不同——中断将中断一个任务，但返回到另一个任务。</p><p>一些FreeRTOS API函数可以将任务从阻塞态移到就绪态。如在<code>xQueueSendToBack()</code>函数中，如果有任务处于阻塞状态来等待当前队列上有可用的数据，则该函数将解除任务的阻塞。如果解除阻塞的任务优先级高于当前处于运行态的任务，那么根据FreeRTOS的调度策略，会切换到优先级更高的任务。切换到高优先级任务取决于调用的API函数的上下文：</p><ul><li>在任务中调用</li></ul><p>配置文件中<code>configUSE_PREEMPTION</code> 配置为1，自动切换到更高优先级任务</p><ul><li>在中断中调用</li></ul><p>设置 <code>*pxHigherPriorityTaskWoken</code> 为 <code>pdTRUE</code>,就可以切换到高优先级任务,第一次使用时要初始化为<code>pdFALSE</code>.</p><h3 id="portyield_from_isr宏">portYIELD_FROM_ISR()宏</h3><p>这个宏用于在中断中请求上下文切换，老版本中还有个汇编形式的宏：<code>portEND_SWITCHING_ISR()</code>。</p><div class="code-wrapper"><pre><code class="hljs c">portYIELD_FROM_ISR( xHigherPriorityTaskWoken );</code></pre></div><p>如果<code>xHigherPriorityTaskWoken</code> 为<code>pdFALSE</code>,则表示不请求上下文切换，宏无作用，如果为<code>pdTRUE</code>,则表示请求上下文切换，处于运行态的任务将会改变。中断始终返回到处于运行态的任务，即使中断执行时处于运行态的任务发生了改变。</p><h1 id="isr的延迟处理">ISR的延迟处理</h1><p>在实践中，尽可能的让ISR程序简短些，因为：</p><ul><li>尽管任务被分配一个高的优先级，它们只会在硬件不提供中断服务的情况下运行。</li><li>ISR可中断任务的起始时间和执行时间。</li><li>取决于运行FreeRTOS的架构平台，一个ISR执行时不可能再接收新的中断。</li><li>程序员需要同时考虑和防护一个任务或ISR访问的变量，外设和内存缓冲等资源的后果。</li><li>一些FreeRTOS端口允许中断嵌套，但这会增加复杂性并降低可预测性。中断越短，嵌套的可能性就越小。</li></ul><p>ISR必须记录中断的原因，并清除中断。中断所需的任何其他操作通常可以在任务中执行，从而使ISR能够尽快退出，这被称为“延迟中断处理”，因为中断所需的处理从ISR“延迟”到任务。</p><p>如果中断处理延迟到的任务的优先级高于任何其他任务的优先级，那么处理将立即执行，就像在ISR本身中执行处理一样。</p><figure><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231012165252137.png" alt="" /><figcaption>image-20231012165252137</figcaption></figure><p>中断延迟处理在以下情况会比较有用：</p><ul><li>中断所需的处理不是微不足道的。例如，如果中断只是存储ADC转换的结果，这最好在ISR内执行，但如果转换的结果通过软件滤波器，那么最好在任务中执行滤波器的操作。</li><li>中断处理可以方便地执行不能在ISR中执行的操作，例如向控制台写操作或分配内存。</li><li>中断处理是不确定的，这意味着不能预先知道处理将花费多长时间。</li></ul>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;在 RTOS 中，需要应对各类事件。在每种情况下，必须对最佳事件处理实现策略做出判断：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;怎么检测事件的发生？通常使用中断，但也可以是轮询输入。&lt;/li&gt;
-&lt;li&gt;当使用中断时，中断服务程序中内外各需要执行多少操作？一般让中断服务程序尽可能的短</summary>
-      
-    
-    
-    
-    <category term="RTOS" scheme="http://example.com/categories/RTOS/"/>
-    
-    
-    <category term="Interrupt" scheme="http://example.com/tags/Interrupt/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>FreeRTOS中事件组(EventGroups)</title>
-    <link href="http://example.com/2023/10/06/FreeRTOS%E4%B8%AD%E4%BA%8B%E4%BB%B6%E7%BB%84(EventGroups)/"/>
-    <id>http://example.com/2023/10/06/FreeRTOS%E4%B8%AD%E4%BA%8B%E4%BB%B6%E7%BB%84(EventGroups)/</id>
-    <published>2023-10-06T13:46:34.000Z</published>
-    <updated>2023-10-12T01:55:11.158Z</updated>
-    
-    <content type="html"><![CDATA[<p>事件组是FreeRTOS的一大特点，它允许任务间的事件传输。它跟队列和信号量的不同之处是：</p><ul><li>事件组允许任务在阻塞状态下等待一个或多个事件的组合发生。</li><li>当事件发生时，事件组将解除在等待同一事件或事件组合的所有任务的阻塞。</li></ul><p>事件组的这些特性使得它们可以同步多个任务，将事件广播到多个任务，允许任务在阻塞状态下等待事件组中的任何一事件发生，以及允许任务在阻塞状态下等待多个操作的完成。</p><p>事件组减少了内存占用，因为通常可以用单个事件组替换多个互斥信号量。事件组功能是可选项，要使用事件组功能，在工程中需要包含<code>event_groups.c</code>文件。</p><h1 id="事件组特性">事件组特性</h1><ul><li><strong>事件组、事件标志和事件控制位</strong></li></ul><p>事件标志就是一个布尔值（0或1）用来表示事件是否发生，事件组就是一个事件标志的集合。事件标志将事件标志的状态存储在单个bit位中，并将事件组中所有事件标志的状态存储在单个变量中。事件组每个事件标志的状态通过数据类型 <code>EventBits_t</code> 中的一个bit位来表示，如果这个bit位设置为1，代表事件发生，如果设置为0，代表事件没有发生。举例如下：</p><figure><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231012091104517.png" alt="" /><figcaption>image-20231012091104517</figcaption></figure><p>如果配置文件中 <code>configUSE_16_BIT_TICKS</code> 设置为1, 则每个事件组包含8个可用的bit位，如果设置为0,则包含24个可用的bit位。</p><ul><li><strong>事件组可被多个任务访问</strong></li></ul><p>事件组本身就是一个对象，可被任何知道其存在的任务或中断访问，同一个事件组可被任意一个任务访问。</p><h1 id="事件组api函数">事件组API函数</h1><div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">/* 动态创建事件组 */</span>EventGroupHandle_t <span class="hljs-title function_">xEventGroupCreate</span><span class="hljs-params">( <span class="hljs-type">void</span> )</span>;<span class="hljs-comment">/* 静态方法创建事件组 */</span>EventGroupHandle_t <span class="hljs-title function_">xEventGroupCreateStatic</span><span class="hljs-params">( </span><span class="hljs-params">  StaticEventGroup_t * pxEventGroupBuffer <span class="hljs-comment">/* 事件组缓存区指针 */</span></span><span class="hljs-params">)</span>;<span class="hljs-comment">/* 设置事件组中事件 */</span>EventBits_t <span class="hljs-title function_">xEventGroupSetBits</span><span class="hljs-params">( </span><span class="hljs-params">  EventGroupHandle_t xEventGroup,<span class="hljs-comment">/* 事件组句柄 */</span></span><span class="hljs-params">  <span class="hljs-type">const</span> EventBits_t uxBitsToSet <span class="hljs-comment">/* 设置的bit位 */</span></span><span class="hljs-params">)</span>;<span class="hljs-comment">/* 中断模式下设置事件组中事件 */</span>BaseType_t <span class="hljs-title function_">xEventGroupSetBitsFromISR</span><span class="hljs-params">(</span><span class="hljs-params">  EventGroupHandle_t xEventGroup，<span class="hljs-comment">/* 事件组句柄 */</span></span><span class="hljs-params">  <span class="hljs-type">const</span> EventBits_t uxBitsToSet，<span class="hljs-comment">/* 设置的bit位 */</span></span><span class="hljs-params">  BaseType_t*pxHigherPriorityTaskWoken<span class="hljs-comment">/* 唤醒高优先级任务 */</span></span><span class="hljs-params">)</span>;<span class="hljs-comment">/* 等待事件的到来 */</span>EventBits_t <span class="hljs-title function_">xEventGroupWaitBits</span><span class="hljs-params">( </span><span class="hljs-params">  <span class="hljs-type">const</span> EventGroupHandle_t xEventGroup,<span class="hljs-comment">/* 事件组句柄 */</span></span><span class="hljs-params">  <span class="hljs-type">const</span> EventBits_t uxBitsToWaitFor,<span class="hljs-comment">/* 等待的事件bit位 */</span></span><span class="hljs-params">  <span class="hljs-type">const</span> BaseType_t xClearOnExit,<span class="hljs-comment">/* 函数退出时清除事件bit位 */</span></span><span class="hljs-params">  <span class="hljs-type">const</span> BaseType_t xWaitForAllBits,<span class="hljs-comment">/* 等待的事件位 */</span></span><span class="hljs-params">  TickType_t xTicksToWait <span class="hljs-comment">/* 阻塞态等待的时间 */</span></span><span class="hljs-params">)</span>;</code></pre></div><h1 id="任务同步">任务同步</h1><p>有时任务间需要同步，如：任务A接收一个事件，然后将该事件所需的一些处理委托给其他三个任务：任务B，任务C和任务D，如果任务A直到任务B、C和D都完成了前一个事件的处理才能接收另一个事件，那么这四个任务就需要彼此同步。每个任务的同步点就在这个任务完成其处理过程之后，除非其他任务都完成了相同的操作，否则无法继续执行。当四个任务都达到了它们的同步点，任务A才能接收另一个事件。</p><p>事件组可以用来创建任务的同步点：</p><ul><li><strong>必须参与同步的每个任务在事件组中被分配唯一的一个事件位。</strong></li><li><strong>每个任务在到达同步点时设置自己的事件位。</strong></li><li><strong>设置好事件位之后，每个任务在事件组中处于阻塞状态，等待其它代表同步任务的事件位也设置好</strong></li></ul><p>这种情形下就不能使用<code>xEventGroupSetBits()</code> 和 <code>xEventGroupWaitBits()</code> API 函数，而要使用 <code>xEventGroupSync()</code>函数。</p><div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">/* 使用事件组进行任务间同步 */</span>EventBits_t <span class="hljs-title function_">xEventGroupSync</span><span class="hljs-params">( </span><span class="hljs-params">  EventGroupHandle_t xEventGroup, <span class="hljs-comment">/* 事件组句柄 */</span></span><span class="hljs-params">  <span class="hljs-type">const</span> EventBits_t uxBitsToSet,<span class="hljs-comment">/* 设置的bit位 */</span></span><span class="hljs-params">  <span class="hljs-type">const</span> EventBits_t uxBitsToWaitFor,<span class="hljs-comment">/* 等待的事件bit位 */</span></span><span class="hljs-params">  TickType_t xTicksToWait<span class="hljs-comment">/* 阻塞态下等待的时间 */</span></span><span class="hljs-params">)</span>;</code></pre></div>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;事件组是FreeRTOS的一大特点，它允许任务间的事件传输。它跟队列和信号量的不同之处是：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;事件组允许任务在阻塞状态下等待一个或多个事件的组合发生。&lt;/li&gt;
-&lt;li&gt;当事件发生时，事件组将解除在等待同一事件或事件组合的所有任务的阻塞。&lt;/l</summary>
-      
-    
-    
-    
-    <category term="RTOS" scheme="http://example.com/categories/RTOS/"/>
-    
-    
-    <category term="EventGroups" scheme="http://example.com/tags/EventGroups/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>FreeRTOS中软件定时器(SoftwareTimer)</title>
-    <link href="http://example.com/2023/10/06/FreeRTOS%E4%B8%AD%E8%BD%AF%E4%BB%B6%E5%AE%9A%E6%97%B6%E5%99%A8(SoftwareTimer)/"/>
-    <id>http://example.com/2023/10/06/FreeRTOS%E4%B8%AD%E8%BD%AF%E4%BB%B6%E5%AE%9A%E6%97%B6%E5%99%A8(SoftwareTimer)/</id>
-    <published>2023-10-06T13:45:35.000Z</published>
-    <updated>2023-10-12T03:33:04.387Z</updated>
-    
-    <content type="html"><![CDATA[<p>在FreeRTOS中，软件定时器由内核支配，不需要硬件支持，和硬件定时器无关，要使用软件定时器，需要在配置文件中设置<code>configUSE_TIMERS</code> 为 1。</p><h1 id="软件定时器特性">软件定时器特性</h1><ul><li>回调函数</li></ul><div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-type">void</span> <span class="hljs-title function_">ATimerCallback</span><span class="hljs-params">(TimerHandle_t xTimer)</span>;</code></pre></div><p>回调函数尽可能短，一定不要进入阻塞状态。</p><ul><li>定时周期</li></ul><p>定时器启动到执行定时器回调函数之间的时间。</p><ul><li>定时器类型：一次性定时器和自动加载定时器</li><li>定时器的状态：休眠态(Dormant)和运行态(Running)</li></ul><h1 id="软件定时器的上下文">软件定时器的上下文</h1><ul><li><strong>RTOS的后台守护任务（Daemon Task）</strong></li></ul><p>所有软件定时器的回调函数都在同一个RTOS守护任务（定时器服务）的上下文中执行。</p><p>守护任务是一个标准的FreeRTOS任务，在调度器开启后自动创建，它的优先级和栈大小在配置文件中配置：<code>configTIMER_TASK_PRIORITY</code> 和 <code>configTIMER_TASK_STACK_DEPTH</code> 来设置。</p><p>软件定时器回调函数一定不能调用FreeRTOS API函数，这会导致任务进入阻塞状态，即导致守护任务进入阻塞态。</p><ul><li><strong>定时器指令队列</strong></li></ul><p>软件定时器API函数从调用任务到守护任务发送指令的队列称为 <strong>定时器指令队列</strong> 。它也是在调度器开启后自动创建，它的长度在配置文件中配置：<code>configTIMER_QUEUE_LENGTH</code>。</p><ul><li><strong>守护任务调度</strong></li></ul><p>守护任务的调度跟其它任务的调度一样，不同的是，当它运行时处于最高优先级，它仅仅执行命令，或执行定时器回调函数。举例如下：</p><figure><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231012105004755.png" alt="" /><figcaption>image-20231012105004755</figcaption></figure><figure><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231012110049342.png" alt="" /><figcaption>image-20231012110049342</figcaption></figure><h1 id="软件定时器的创建和启动api函数">软件定时器的创建和启动API函数</h1><div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">/* 创建软件定时器 */</span>TimerHandle_t <span class="hljs-title function_">xTimerCreate</span><span class="hljs-params">(</span><span class="hljs-params">  <span class="hljs-type">const</span> <span class="hljs-type">char</span> * <span class="hljs-type">const</span> pcTimerName, <span class="hljs-comment">/* 软件定时器名 */</span></span><span class="hljs-params">  TickType_t xTimerPeriodInTicks,<span class="hljs-comment">/* 定时周期（ticks） */</span></span><span class="hljs-params">  UBaseType_t uxAutoReload,<span class="hljs-comment">/* 是否自动重装载 */</span></span><span class="hljs-params">  <span class="hljs-type">void</span> * pvTimerID,<span class="hljs-comment">/* 定时器ID */</span></span><span class="hljs-params">  TimerCallbackFunction_t pxCallbackFunction <span class="hljs-comment">/* 定时器回调函数 */</span></span><span class="hljs-params">)</span>;<span class="hljs-comment">/* 启动定时器 */</span>BaseType_t <span class="hljs-title function_">xTimerStart</span><span class="hljs-params">(</span><span class="hljs-params">  TimerHandle_t xTimer, <span class="hljs-comment">/* 定时器句柄 */</span></span><span class="hljs-params">  TickType_t xTicksToWait <span class="hljs-comment">/* 阻塞时间 */</span></span><span class="hljs-params">)</span>;</code></pre></div><h1 id="软件定时器id">软件定时器ID</h1><p>每一个软件定时器都有一个ID，<strong>void*</strong> 类型，当创建定时器时，会指派一个定时器ID的初始值，可以通过<code>vTimerSetTimerID（）</code> 函数更新ID值，通过<code>pvTimerGetTimerID（）</code> 获取ID值，跟其它软件定时器的API函数不同的是，这两个函数直接访问定时器而不需要通过定时器命令队列传送命令。</p><div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">/* 设置定时器ID */</span><span class="hljs-type">void</span> <span class="hljs-title function_">vTimerSetTimerID</span><span class="hljs-params">( </span><span class="hljs-params">  <span class="hljs-type">const</span> TimerHandle_t xTimer, <span class="hljs-comment">/* 定时器句柄 */</span></span><span class="hljs-params">  <span class="hljs-type">void</span> *pvNewID <span class="hljs-comment">/* 定时器新的ID */</span></span><span class="hljs-params">)</span>;<span class="hljs-comment">/* 获取定时器ID */</span><span class="hljs-type">void</span> *<span class="hljs-title function_">pvTimerGetTimerID</span><span class="hljs-params">( </span><span class="hljs-params">  TimerHandle_t xTimer <span class="hljs-comment">/* 定时器句柄 */</span></span><span class="hljs-params">)</span>;</code></pre></div><h1 id="软件定时器其它api函数">软件定时器其它API函数</h1><div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">/* 改变定时器定时周期值 */</span>BaseType_t <span class="hljs-title function_">xTimerChangePeriod</span><span class="hljs-params">(</span><span class="hljs-params">  TimerHandle_t xTime,<span class="hljs-comment">/* 定时器句柄 */</span></span><span class="hljs-params">  TickType_t x NewTimerPeriodInTicks,<span class="hljs-comment">/* 新的定时周期 */</span></span><span class="hljs-params">  TickType <span class="hljs-type">_t</span> xTicksToWait<span class="hljs-comment">/* 阻塞态下等待的时长 */</span></span><span class="hljs-params">)</span>;<span class="hljs-comment">/* 中断模式下改变定时器定时周期值 */</span>BaseType_t <span class="hljs-title function_">xTimerChangePeriodFromISR</span><span class="hljs-params">( </span><span class="hljs-params">  TimerHandle_t xTimer,<span class="hljs-comment">/* 定时器句柄 */</span></span><span class="hljs-params">  TickType_t xNewPeriod,<span class="hljs-comment">/* 新的定时周期 */</span></span><span class="hljs-params">  BaseType_t *pxHigherPriorityTaskWoken <span class="hljs-comment">/* 唤醒高优先级任务 */</span></span><span class="hljs-params">)</span>;<span class="hljs-comment">/* 定时器复位 */</span>BaseType_t <span class="hljs-title function_">xTimerReset</span><span class="hljs-params">( </span><span class="hljs-params">  TimerHandle_t xTimer, <span class="hljs-comment">/* 定时器句柄 */</span></span><span class="hljs-params">  TickType_t xTicksToWait<span class="hljs-comment">/* 阻塞态下等待的时长 */</span></span><span class="hljs-params">)</span>;</code></pre></div>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;在FreeRTOS中，软件定时器由内核支配，不需要硬件支持，和硬件定时器无关，要使用软件定时器，需要在配置文件中设置&lt;code&gt;configUSE_TIMERS&lt;/code&gt; 为 1。&lt;/p&gt;
-&lt;h1 id=&quot;软件定时器特性&quot;&gt;软件定时器特性&lt;/h1&gt;
-&lt;ul&gt;
-&lt;l</summary>
-      
-    
-    
-    
-    <category term="RTOS" scheme="http://example.com/categories/RTOS/"/>
-    
-    
-    <category term="Timer" scheme="http://example.com/tags/Timer/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>FreeRTOS中任务通知(TaskNotifications)</title>
-    <link href="http://example.com/2023/10/06/FreeRTOS%E4%B8%AD%E4%BB%BB%E5%8A%A1%E9%80%9A%E7%9F%A5(TaskNotifications)/"/>
-    <id>http://example.com/2023/10/06/FreeRTOS%E4%B8%AD%E4%BB%BB%E5%8A%A1%E9%80%9A%E7%9F%A5(TaskNotifications)/</id>
-    <published>2023-10-06T13:45:01.000Z</published>
-    <updated>2023-10-11T11:22:56.823Z</updated>
-    
-    <content type="html"><![CDATA[<p>在RTOS中，任务间的通信，可使用队列、信号量、事件组等方法，但这种方式需要通过中间媒介来完成，如下：</p><p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231011181422415.png" alt="image-20231011181422415" style="zoom:80%;" /></p><p>还有另一种直接通信的方式：<strong>任务通知</strong>，不需要中间的媒介对象，任务间直接通信，如下所示：</p><p><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231011181508166.png" alt="image-20231011181508166" style="zoom:80%;" /></p><p>使用这种方式需要在配置文件(FreeRTOSConfig.h)中设置 <code>configUSE_TASK_NOTIFICATIONS = 1</code> 。</p><h1 id="任务通知的优势与劣势">任务通知的优势与劣势</h1><h3 id="优势">优势</h3><ul><li><p><strong>速度快</strong>：使用任务通知将事件或数据发送到任务要比使用队列、信号量、事件组快得多。</p></li><li><p><strong>内存占用小</strong>：相比于要创建通信媒介对象，每个任务的任务通知只占用固定的 8 Bytes。</p></li></ul><h3 id="劣势">劣势</h3><ul><li><p>不能发送事件或数据到中断。</p></li><li><p>不能有多个接收任务。</p></li><li><p>不能缓存数据项</p></li><li><p>不能广播到多个任务。</p></li><li><p>在阻塞状态下不能等待发送完成。</p></li></ul><h1 id="任务通知的api函数">任务通知的API函数</h1><div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">/* 发出通知(轻量版) */</span>BaseType_t <span class="hljs-title function_">xTaskNotifyGive</span><span class="hljs-params">( </span><span class="hljs-params">  TaskHandle_t xTaskToNotify <span class="hljs-comment">/* 发送通知的任务句柄 */</span></span><span class="hljs-params">)</span>;<span class="hljs-comment">/* 中断模式下发出通知(轻量版) */</span><span class="hljs-type">void</span> <span class="hljs-title function_">vTaskNotifyGiveFromISR</span><span class="hljs-params">( </span><span class="hljs-params">  TaskHandle_t xTaskToNotify,<span class="hljs-comment">/* 发送通知的任务句柄 */</span></span><span class="hljs-params">  BaseType_t *pxHigherPriorityTaskWoken <span class="hljs-comment">/* 唤醒高优先级任务 */</span></span><span class="hljs-params">)</span>;<span class="hljs-comment">/* 读取通知(轻量版) */</span><span class="hljs-type">uint32_t</span> <span class="hljs-title function_">ulTaskNotifyTake</span><span class="hljs-params">( </span><span class="hljs-params">  BaseType_t xClearCountOnExit, <span class="hljs-comment">/* pdTRUE or pdFALSE 任务通知值的变化 */</span></span><span class="hljs-params">  TickType_t xTicksToWait <span class="hljs-comment">/* 任务在阻塞态下等待的最长时间 */</span></span><span class="hljs-params">)</span>;</code></pre></div><div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">/* 发出通知(高级版) */</span>BaseType_t <span class="hljs-title function_">xTaskNotify</span><span class="hljs-params">( </span><span class="hljs-params">  TaskHandle_t xTaskToNotify,<span class="hljs-comment">/* 发送通知的任务句柄 */</span></span><span class="hljs-params">  <span class="hljs-type">uint32_t</span> ulValue,<span class="hljs-comment">/* 通知的值 */</span></span><span class="hljs-params">  eNotifyAction eAction <span class="hljs-comment">/* 枚举，更新任务的通知值 */</span></span><span class="hljs-params">)</span>;<span class="hljs-comment">/* 中断模式下发出通知(高级版) */</span>BaseType_t <span class="hljs-title function_">xTaskNotifyFromISR</span><span class="hljs-params">( </span><span class="hljs-params">  TaskHandle_t xTaskToNotify,<span class="hljs-comment">/* 发送通知的任务句柄 */</span></span><span class="hljs-params">  <span class="hljs-type">uint32_t</span> ulValue,<span class="hljs-comment">/* 通知的值 */</span></span><span class="hljs-params">  eNotifyAction eAction,<span class="hljs-comment">/* 枚举，更新任务的通知值 */</span></span><span class="hljs-params">  BaseType_t *pxHigherPriorityTaskWoken <span class="hljs-comment">/* 唤醒高优先级任务 */</span></span><span class="hljs-params">)</span>;<span class="hljs-comment">/* 读取通知(高级版) */</span>BaseType_t <span class="hljs-title function_">xTaskNotifyWait</span><span class="hljs-params">( </span><span class="hljs-params">  <span class="hljs-type">uint32_t</span> ulBitsToClearOnEntry,<span class="hljs-comment">/* 位设置，在任务检查前清除不是挂起或阻塞态的任务通知 */</span></span><span class="hljs-params">  <span class="hljs-type">uint32_t</span> ulBitsToClearOnExit,<span class="hljs-comment">/* 位设置，在函数退出前，传递通知值 */</span></span><span class="hljs-params">  <span class="hljs-type">uint32_t</span> *pulNotificationValue,<span class="hljs-comment">/* 用来传递任务的通知值 */</span></span><span class="hljs-params">  TickType_t xTicksToWait<span class="hljs-comment">/* 任务在阻塞态下等待的最长时间 */</span></span><span class="hljs-params">)</span>;</code></pre></div>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;在RTOS中，任务间的通信，可使用队列、信号量、事件组等方法，但这种方式需要通过中间媒介来完成，如下：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231</summary>
-      
-    
-    
-    
-    <category term="RTOS" scheme="http://example.com/categories/RTOS/"/>
-    
-    
-    <category term="Notification" scheme="http://example.com/tags/Notification/"/>
     
   </entry>
   
