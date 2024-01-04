@@ -16,15 +16,15 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Python的基本知识点  Python官方文档：3.12.1 Documentation (python.org) Python 中文文档(全) Python Shell环境输入import this ， 可显示Python编程的理念，简约而清晰。 注释符：  单行注释：# 多行注释：&#39;&#39;&#39; or &quot;&quot;&quot;  Python中特有的数据结构：列表、元组、字典、集合 &#96;&#96;&#96;pyt">
+    <meta name="description" content="Python的基本知识点  Python官方文档：3.12.1 Documentation (python.org) Python 中文文档(全) Python Shell环境输入import this ， 可显示Python编程的理念，简约而清晰。 注释符：  单行注释：# 多行注释：&#39;&#39;&#39; or &quot;&quot;&quot;  ptpython 是一个增强型交互 python shell， 具有">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Python基础">
 <meta property="og:url" content="http://example.com/2024/01/01/Python-%E5%9F%BA%E7%A1%80/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Python的基本知识点  Python官方文档：3.12.1 Documentation (python.org) Python 中文文档(全) Python Shell环境输入import this ， 可显示Python编程的理念，简约而清晰。 注释符：  单行注释：# 多行注释：&#39;&#39;&#39; or &quot;&quot;&quot;  Python中特有的数据结构：列表、元组、字典、集合 &#96;&#96;&#96;pyt">
+<meta property="og:description" content="Python的基本知识点  Python官方文档：3.12.1 Documentation (python.org) Python 中文文档(全) Python Shell环境输入import this ， 可显示Python编程的理念，简约而清晰。 注释符：  单行注释：# 多行注释：&#39;&#39;&#39; or &quot;&quot;&quot;  ptpython 是一个增强型交互 python shell， 具有">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-01-01T09:44:15.000Z">
-<meta property="article:modified_time" content="2024-01-04T03:28:28.727Z">
+<meta property="article:modified_time" content="2024-01-04T09:22:40.459Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="python">
 <meta name="twitter:card" content="summary_large_image">
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          925 字
+          1.1k 字
         
       </span>
     
@@ -276,7 +276,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2024年1月4日 上午
+                    本文最后更新于：2024年1月4日 下午
                   
                 
               </p>
@@ -294,17 +294,30 @@
 <li>单行注释：<code>#</code></li>
 <li>多行注释：<code>'''</code> or <code>"""</code></li>
 </ul></li>
-<li><p>Python中特有的数据结构：列表、元组、字典、集合</p></li>
-<li><p>```python help('modules') # 查看python所有modules help('topics') # 查看python常见的topics</p>
-<p>import os.path help('os.path') # 查看python标准库中的modules <div class="code-wrapper"><pre><code class="hljs bash">
+<li><p><strong>ptpython</strong> 是一个增强型交互 python shell， 具有 <strong>语法高亮、自动补全、自动建议、自动缩进</strong> 等便捷功能，<code>pip install ptpython</code></p></li>
+<li><p>Python中主要的数据结构：列表、元组、字典、集合</p></li>
+<li><p>```python help('modules') # 查看python所有modules <div class="code-wrapper"><pre><code class="hljs bash">  
 - ```python
-  <span class="hljs-built_in">dir</span>(__builtins__)  <span class="hljs-comment"># 列出Python内置函数</span>
-  <span class="hljs-built_in">dir</span>(<span class="hljs-string">&#x27;&#x27;</span>) <span class="hljs-comment"># 列出字符串对象方法</span>
-  <span class="hljs-built_in">dir</span>(0) <span class="hljs-comment"># 列出整数对象方法</span>
-  <span class="hljs-built_in">dir</span>([]) <span class="hljs-comment">#列出列表的方法</span>
-  <span class="hljs-built_in">dir</span>(()) <span class="hljs-comment"># 列出元组的方法</span>
-  <span class="hljs-built_in">dir</span>(&#123;&#125;) <span class="hljs-comment"># 列出字典的方法</span>
-  <span class="hljs-built_in">dir</span>(<span class="hljs-built_in">set</span>()) <span class="hljs-comment"># 列出集合的方法</span></code></pre></div></p></li>
+  <span class="hljs-built_in">dir</span>(__builtins__)  <span class="hljs-comment"># 查看Python所有内置函数,表达式及其它对象</span>
+  <span class="hljs-built_in">help</span>(__builtins__) <span class="hljs-comment"># 内置函数、表达式及其它对象详细描述</span>
+  
+  <span class="hljs-built_in">dir</span>(<span class="hljs-string">&#x27;&#x27;</span>) <span class="hljs-comment"># 查看内置模块字符串类方法</span>
+  <span class="hljs-built_in">help</span>(<span class="hljs-string">&#x27;&#x27;</span>) <span class="hljs-comment"># 字符串类详细描述</span>
+  
+  <span class="hljs-built_in">dir</span>(0) <span class="hljs-comment"># 查看整数对象方法</span>
+  <span class="hljs-built_in">help</span>(0) <span class="hljs-comment"># 整数对象详细描述</span>
+  
+  <span class="hljs-built_in">dir</span>([]) <span class="hljs-comment"># 查看列表对象的方法</span>
+  <span class="hljs-built_in">help</span>([]) <span class="hljs-comment"># 列表对象详细描述</span>
+  
+  <span class="hljs-built_in">dir</span>(()) <span class="hljs-comment"># 查看元组对象的方法</span>
+  <span class="hljs-built_in">help</span>(()) <span class="hljs-comment"># 元组对象详细描述</span>
+  
+  <span class="hljs-built_in">dir</span>(&#123;&#125;) <span class="hljs-comment"># 查看字典对象的方法</span>
+  <span class="hljs-built_in">help</span>(&#123;&#125;) <span class="hljs-comment"># 字典对象详细描述</span>
+  
+  <span class="hljs-built_in">dir</span>(<span class="hljs-built_in">set</span>()) <span class="hljs-comment"># 查看集合对象的方法</span>
+  <span class="hljs-built_in">help</span>(<span class="hljs-built_in">set</span>()) <span class="hljs-comment"># 集合对象详细描述</span></code></pre></div></p></li>
 <li><p>Python运算优先级：次方(**) &gt; 乘除，求余(%)，求整(//) &gt; 加减</p></li>
 <li><p><code>divmod()</code> 函数可以一次获得商和余数</p></li>
 <li><p><code>id()</code> 可查看变量十进制地址。</p></li>
