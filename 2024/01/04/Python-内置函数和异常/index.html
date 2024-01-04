@@ -1,0 +1,1022 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Python 内置函数 官方文档内置函数（中文）：     内置函数        Aabs()aiter()all()anext()any()ascii() Bbin()bool()breakpoint()bytearray()bytes() Ccallable()chr()classmethod()compile()complex() Ddelattr()dict(">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python 内置函数和异常">
+<meta property="og:url" content="http://example.com/2024/01/04/Python-%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B0%E5%92%8C%E5%BC%82%E5%B8%B8/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Python 内置函数 官方文档内置函数（中文）：     内置函数        Aabs()aiter()all()anext()any()ascii() Bbin()bool()breakpoint()bytearray()bytes() Ccallable()chr()classmethod()compile()complex() Ddelattr()dict(">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-01-04T03:01:25.000Z">
+<meta property="article:modified_time" content="2024-01-04T03:50:08.031Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="内置函数">
+<meta property="article:tag" content="异常">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"✍","loop":false,"scope":["home"]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":false},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":false,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+<meta name="referrer" content="no-referrer" />
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>My Tech Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/article.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.1)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle">Python 内置函数和异常</span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-01-04 11:01" pubdate>
+          2024年1月4日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.9k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          10 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-12 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Python 内置函数和异常</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：2024年1月4日 中午
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="python-内置函数">Python 内置函数</h1>
+<p><strong>官方文档内置函数（中文）</strong>：</p>
+<table>
+
+<thead>
+<tr class="header">
+<th style="text-align: left;">内置函数</th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>A</strong><a target="_blank" rel="noopener" href="https://www.bookstack.cn/read/python-3.12.0-zh/a4e24e7dfe75b271.md#abs">abs()</a><a target="_blank" rel="noopener" href="https://www.bookstack.cn/read/python-3.12.0-zh/a4e24e7dfe75b271.md#aiter">aiter()</a><a target="_blank" rel="noopener" href="https://www.bookstack.cn/read/python-3.12.0-zh/a4e24e7dfe75b271.md#all">all()</a><a target="_blank" rel="noopener" href="https://www.bookstack.cn/read/python-3.12.0-zh/a4e24e7dfe75b271.md#anext">anext()</a><a target="_blank" rel="noopener" href="https://www.bookstack.cn/read/python-3.12.0-zh/a4e24e7dfe75b271.md#any">any()</a><a target="_blank" rel="noopener" href="https://www.bookstack.cn/read/python-3.12.0-zh/a4e24e7dfe75b271.md#ascii">ascii()</a> <strong>B</strong><a target="_blank" rel="noopener" href="https://www.bookstack.cn/read/python-3.12.0-zh/a4e24e7dfe75b271.md#bin">bin()</a><a target="_blank" rel="noopener" href="https://www.bookstack.cn/read/python-3.12.0-zh/a4e24e7dfe75b271.md#bool">bool()</a><a target="_blank" rel="noopener" href="https://www.bookstack.cn/read/python-3.12.0-zh/a4e24e7dfe75b271.md#breakpoint">breakpoint()</a><a target="_blank" rel="noopener" href="https://www.bookstack.cn/read/python-3.12.0-zh/a4e24e7dfe75b271.md#func-bytearray">bytearray()</a><a target="_blank" rel="noopener" href="https://www.bookstack.cn/read/python-3.12.0-zh/a4e24e7dfe75b271.md#func-bytes">bytes()</a> <strong>C</strong><a target="_blank" rel="noopener" href="https://www.bookstack.cn/read/python-3.12.0-zh/a4e24e7dfe75b271.md#callable">callable()</a><a target="_blank" rel="noopener" href="https://www.bookstack.cn/read/python-3.12.0-zh/a4e24e7dfe75b271.md#chr">chr()</a><a target="_blank" rel="noopener" href="https://www.bookstack.cn/read/python-3.12.0-zh/a4e24e7dfe75b271.md#classmethod">classmethod()</a><a target="_blank" rel="noopener" href="https://www.bookstack.cn/read/python-3.12.0-zh/a4e24e7dfe75b271.md#compile">compile()</a><a target="_blank" rel="noopener" href="https://www.bookstack.cn/read/python-3.12.0-zh/a4e24e7dfe75b271.md#complex">complex()</a> <strong>D</strong><a target="_blank" rel="noopener" href="https://www.bookstack.cn/read/python-3.12.0-zh/a4e24e7dfe75b271.md#delattr">delattr()</a><a target="_blank" rel="noopener" href="https://www.bookstack.cn/read/python-3.12.0-zh/a4e24e7dfe75b271.md#func-dict">dict()</a><a target="_blank" rel="noopener" href="https://www.bookstack.cn/read/python-3.12.0-zh/a4e24e7dfe75b271.md#dir">dir()</a><a target="_blank" rel="noopener" href="https://www.bookstack.cn/read/python-3.12.0-zh/a4e24e7dfe75b271.md#divmod">divmod()</a></td>
+<td><strong>E</strong><a target="_blank" rel="noopener" href="https://www.bookstack.cn/read/python-3.12.0-zh/a4e24e7dfe75b271.md#enumerate">enumerate()</a><a target="_blank" rel="noopener" href="https://www.bookstack.cn/read/python-3.12.0-zh/a4e24e7dfe75b271.md#eval">eval()</a><a target="_blank" rel="noopener" href="https://www.bookstack.cn/read/python-3.12.0-zh/a4e24e7dfe75b271.md#exec">exec()</a> <strong>F</strong><a target="_blank" rel="noopener" href="https://www.bookstack.cn/read/python-3.12.0-zh/a4e24e7dfe75b271.md#filter">filter()</a><a target="_blank" rel="noopener" href="https://www.bookstack.cn/read/python-3.12.0-zh/a4e24e7dfe75b271.md#float">float()</a><a target="_blank" rel="noopener" href="https://www.bookstack.cn/read/python-3.12.0-zh/a4e24e7dfe75b271.md#format">format()</a><a target="_blank" rel="noopener" href="https://www.bookstack.cn/read/python-3.12.0-zh/a4e24e7dfe75b271.md#func-frozenset">frozenset()</a> <strong>G</strong><a target="_blank" rel="noopener" href="https://www.bookstack.cn/read/python-3.12.0-zh/a4e24e7dfe75b271.md#getattr">getattr()</a><a target="_blank" rel="noopener" href="https://www.bookstack.cn/read/python-3.12.0-zh/a4e24e7dfe75b271.md#globals">globals()</a> <strong>H</strong><a target="_blank" rel="noopener" href="https://www.bookstack.cn/read/python-3.12.0-zh/a4e24e7dfe75b271.md#hasattr">hasattr()</a><a target="_blank" rel="noopener" href="https://www.bookstack.cn/read/python-3.12.0-zh/a4e24e7dfe75b271.md#hash">hash()</a><a target="_blank" rel="noopener" href="https://www.bookstack.cn/read/python-3.12.0-zh/a4e24e7dfe75b271.md#help">help()</a><a target="_blank" rel="noopener" href="https://www.bookstack.cn/read/python-3.12.0-zh/a4e24e7dfe75b271.md#hex">hex()</a> <strong>I</strong><a target="_blank" rel="noopener" href="https://www.bookstack.cn/read/python-3.12.0-zh/a4e24e7dfe75b271.md#id">id()</a><a target="_blank" rel="noopener" href="https://www.bookstack.cn/read/python-3.12.0-zh/a4e24e7dfe75b271.md#input">input()</a><a target="_blank" rel="noopener" href="https://www.bookstack.cn/read/python-3.12.0-zh/a4e24e7dfe75b271.md#int">int()</a><a target="_blank" rel="noopener" href="https://www.bookstack.cn/read/python-3.12.0-zh/a4e24e7dfe75b271.md#isinstance">isinstance()</a><a target="_blank" rel="noopener" href="https://www.bookstack.cn/read/python-3.12.0-zh/a4e24e7dfe75b271.md#issubclass">issubclass()</a><a target="_blank" rel="noopener" href="https://www.bookstack.cn/read/python-3.12.0-zh/a4e24e7dfe75b271.md#iter">iter()</a></td>
+<td><strong>L</strong><a target="_blank" rel="noopener" href="https://www.bookstack.cn/read/python-3.12.0-zh/a4e24e7dfe75b271.md#len">len()</a><a target="_blank" rel="noopener" href="https://www.bookstack.cn/read/python-3.12.0-zh/a4e24e7dfe75b271.md#func-list">list()</a><a target="_blank" rel="noopener" href="https://www.bookstack.cn/read/python-3.12.0-zh/a4e24e7dfe75b271.md#locals">locals()</a> <strong>M</strong><a target="_blank" rel="noopener" href="https://www.bookstack.cn/read/python-3.12.0-zh/a4e24e7dfe75b271.md#map">map()</a><a target="_blank" rel="noopener" href="https://www.bookstack.cn/read/python-3.12.0-zh/a4e24e7dfe75b271.md#max">max()</a><a target="_blank" rel="noopener" href="https://www.bookstack.cn/read/python-3.12.0-zh/a4e24e7dfe75b271.md#func-memoryview">memoryview()</a><a target="_blank" rel="noopener" href="https://www.bookstack.cn/read/python-3.12.0-zh/a4e24e7dfe75b271.md#min">min()</a> <strong>N</strong><a target="_blank" rel="noopener" href="https://www.bookstack.cn/read/python-3.12.0-zh/a4e24e7dfe75b271.md#next">next()</a> <strong>O</strong><a target="_blank" rel="noopener" href="https://www.bookstack.cn/read/python-3.12.0-zh/a4e24e7dfe75b271.md#object">object()</a><a target="_blank" rel="noopener" href="https://www.bookstack.cn/read/python-3.12.0-zh/a4e24e7dfe75b271.md#oct">oct()</a><a target="_blank" rel="noopener" href="https://www.bookstack.cn/read/python-3.12.0-zh/a4e24e7dfe75b271.md#open">open()</a><a target="_blank" rel="noopener" href="https://www.bookstack.cn/read/python-3.12.0-zh/a4e24e7dfe75b271.md#ord">ord()</a> <strong>P</strong><a target="_blank" rel="noopener" href="https://www.bookstack.cn/read/python-3.12.0-zh/a4e24e7dfe75b271.md#pow">pow()</a><a target="_blank" rel="noopener" href="https://www.bookstack.cn/read/python-3.12.0-zh/a4e24e7dfe75b271.md#print">print()</a><a target="_blank" rel="noopener" href="https://www.bookstack.cn/read/python-3.12.0-zh/a4e24e7dfe75b271.md#property">property()</a></td>
+<td><strong>R</strong><a target="_blank" rel="noopener" href="https://www.bookstack.cn/read/python-3.12.0-zh/a4e24e7dfe75b271.md#func-range">range()</a><a target="_blank" rel="noopener" href="https://www.bookstack.cn/read/python-3.12.0-zh/a4e24e7dfe75b271.md#repr">repr()</a><a target="_blank" rel="noopener" href="https://www.bookstack.cn/read/python-3.12.0-zh/a4e24e7dfe75b271.md#reversed">reversed()</a><a target="_blank" rel="noopener" href="https://www.bookstack.cn/read/python-3.12.0-zh/a4e24e7dfe75b271.md#round">round()</a> <strong>S</strong><a target="_blank" rel="noopener" href="https://www.bookstack.cn/read/python-3.12.0-zh/a4e24e7dfe75b271.md#func-set">set()</a><a target="_blank" rel="noopener" href="https://www.bookstack.cn/read/python-3.12.0-zh/a4e24e7dfe75b271.md#setattr">setattr()</a><a target="_blank" rel="noopener" href="https://www.bookstack.cn/read/python-3.12.0-zh/a4e24e7dfe75b271.md#slice">slice()</a><a target="_blank" rel="noopener" href="https://www.bookstack.cn/read/python-3.12.0-zh/a4e24e7dfe75b271.md#sorted">sorted()</a><a target="_blank" rel="noopener" href="https://www.bookstack.cn/read/python-3.12.0-zh/a4e24e7dfe75b271.md#staticmethod">staticmethod()</a><a target="_blank" rel="noopener" href="https://www.bookstack.cn/read/python-3.12.0-zh/a4e24e7dfe75b271.md#func-str">str()</a><a target="_blank" rel="noopener" href="https://www.bookstack.cn/read/python-3.12.0-zh/a4e24e7dfe75b271.md#sum">sum()</a><a target="_blank" rel="noopener" href="https://www.bookstack.cn/read/python-3.12.0-zh/a4e24e7dfe75b271.md#super">super()</a> <strong>T</strong><a target="_blank" rel="noopener" href="https://www.bookstack.cn/read/python-3.12.0-zh/a4e24e7dfe75b271.md#func-tuple">tuple()</a><a target="_blank" rel="noopener" href="https://www.bookstack.cn/read/python-3.12.0-zh/a4e24e7dfe75b271.md#type">type()</a> <strong>V</strong><a target="_blank" rel="noopener" href="https://www.bookstack.cn/read/python-3.12.0-zh/a4e24e7dfe75b271.md#vars">vars()</a> <strong>Z</strong><a target="_blank" rel="noopener" href="https://www.bookstack.cn/read/python-3.12.0-zh/a4e24e7dfe75b271.md#zip">zip()</a> <em><a target="_blank" rel="noopener" href="https://www.bookstack.cn/read/python-3.12.0-zh/a4e24e7dfe75b271.md#import__">*_import*</a></em><a target="_blank" rel="noopener" href="https://www.bookstack.cn/read/python-3.12.0-zh/a4e24e7dfe75b271.md#import__">()</a></td>
+</tr>
+</tbody>
+</table>
+<p><strong>第三方文档：</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">函数</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_func_abs.html">abs()</a></td>
+<td style="text-align: left;">返回数的绝对值</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_func_all.html">all()</a></td>
+<td style="text-align: left;">如果可迭代对象中的所有项均为 true，则返回 True。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_func_any.html">any()</a></td>
+<td style="text-align: left;">如果可迭代对象中的任何项为 true，则返回 True。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_func_ascii.html">ascii()</a></td>
+<td style="text-align: left;">返回对象的可读版本。用转义字符替换 none-ascii 字符。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_func_bin.html">bin()</a></td>
+<td style="text-align: left;">返回数的二进制版本。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_func_bool.html">bool()</a></td>
+<td style="text-align: left;">返回指定对象的布尔值。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_func_bytearray.html">bytearray()</a></td>
+<td style="text-align: left;">返回字节数组。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_func_bytes.html">bytes()</a></td>
+<td style="text-align: left;">返回字节对象。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_func_callable.html">callable()</a></td>
+<td style="text-align: left;">如果指定的对象是可调用的，则返回 True，否则返回 False。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_func_chr.html">chr()</a></td>
+<td style="text-align: left;">返回指定 Unicode 代码中的字符。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">classmethod()</td>
+<td style="text-align: left;">把方法转换为类方法。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_func_compile.html">compile()</a></td>
+<td style="text-align: left;">把指定的源作为对象返回，准备执行。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_func_complex.html">complex()</a></td>
+<td style="text-align: left;">返回复数。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_func_delattr.html">delattr()</a></td>
+<td style="text-align: left;">从指定的对象中删除指定的属性（属性或方法）。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_func_dict.html">dict()</a></td>
+<td style="text-align: left;">返回字典（数组）。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_func_dir.html">dir()</a></td>
+<td style="text-align: left;">返回指定对象的属性和方法的列表。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_func_divmod.html">divmod()</a></td>
+<td style="text-align: left;">当参数1除以参数2时，返回商和余数。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_func_enumerate.html">enumerate()</a></td>
+<td style="text-align: left;">获取集合（例如元组）并将其作为枚举对象返回。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_func_eval.html">eval()</a></td>
+<td style="text-align: left;">评估并执行表达式。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_func_exec.html">exec()</a></td>
+<td style="text-align: left;">执行指定的代码（或对象）。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_func_filter.html">filter()</a></td>
+<td style="text-align: left;">使用过滤器函数排除可迭代对象中的项目。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_func_float.html">float()</a></td>
+<td style="text-align: left;">返回浮点数。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_func_format.html">format()</a></td>
+<td style="text-align: left;">格式化指定值。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_func_frozenset.html">frozenset()</a></td>
+<td style="text-align: left;">返回 frozenset 对象。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_func_getattr.html">getattr()</a></td>
+<td style="text-align: left;">返回指定属性的值（属性或方法）。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_func_globals.html">globals()</a></td>
+<td style="text-align: left;">以字典返回当前全局符号表。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_func_hasattr.html">hasattr()</a></td>
+<td style="text-align: left;">如果指定的对象拥有指定的属性（属性/方法），则返回 True。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">hash()</td>
+<td style="text-align: left;">返回指定对象的哈希值。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">help()</td>
+<td style="text-align: left;">执行内建的帮助系统。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_func_hex.html">hex()</a></td>
+<td style="text-align: left;">把数字转换为十六进制值。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_func_id.html">id()</a></td>
+<td style="text-align: left;">返回对象的 id。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_func_input.html">input()</a></td>
+<td style="text-align: left;">允许用户输入。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_func_int.html">int()</a></td>
+<td style="text-align: left;">返回整数。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_func_isinstance.html">isinstance()</a></td>
+<td style="text-align: left;">如果指定的对象是指定对象的实例，则返回 True。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_func_issubclass.html">issubclass()</a></td>
+<td style="text-align: left;">如果指定的类是指定对象的子类，则返回 True。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_func_iter.html">iter()</a></td>
+<td style="text-align: left;">返回迭代器对象。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_func_len.html">len()</a></td>
+<td style="text-align: left;">返回对象的长度。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_func_list.html">list()</a></td>
+<td style="text-align: left;">返回列表。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_func_locals.html">locals()</a></td>
+<td style="text-align: left;">返回当前本地符号表的更新字典。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_func_map.html">map()</a></td>
+<td style="text-align: left;">返回指定的迭代器，其中指定的函数应用于每个项目。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_func_max.html">max()</a></td>
+<td style="text-align: left;">返回可迭代对象中的最大项目。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_func_memoryview.html">memoryview()</a></td>
+<td style="text-align: left;">返回内存视图（memory view）对象。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_func_min.html">min()</a></td>
+<td style="text-align: left;">返回可迭代对象中的最小项目。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_func_next.html">next()</a></td>
+<td style="text-align: left;">返回可迭代对象中的下一项。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_func_object.html">object()</a></td>
+<td style="text-align: left;">返回新对象。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_func_oct.html">oct()</a></td>
+<td style="text-align: left;">把数转换为八进制。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_func_open.html">open()</a></td>
+<td style="text-align: left;">打开文件并返回文件对象。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_func_ord.html">ord()</a></td>
+<td style="text-align: left;">转换表示指定字符的 Unicode 的整数。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_func_pow.html">pow()</a></td>
+<td style="text-align: left;">返回 x 的 y 次幂的值。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_func_print.html">print()</a></td>
+<td style="text-align: left;">打印标准输出设备。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">property()</td>
+<td style="text-align: left;">获取、设置、删除属性。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_func_range.html">range()</a></td>
+<td style="text-align: left;">返回数字序列，从 0 开始且以 1 为增量（默认地）。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">repr()</td>
+<td style="text-align: left;">返回对象的可读版本。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_func_reversed.html">reversed()</a></td>
+<td style="text-align: left;">返回反转的迭代器。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_func_round.html">round()</a></td>
+<td style="text-align: left;">对数进行舍入。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_func_set.html">set()</a></td>
+<td style="text-align: left;">返回新的集合对象。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_func_setattr.html">setattr()</a></td>
+<td style="text-align: left;">设置对象的属性（属性/方法）。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_func_slice.html">slice()</a></td>
+<td style="text-align: left;">返回 slice 对象。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_func_sorted.html">sorted()</a></td>
+<td style="text-align: left;">返回排序列表。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="citation" data-cites="staticmethod">@staticmethod</span>()</td>
+<td style="text-align: left;">把方法转换为静态方法。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_func_str.html">str()</a></td>
+<td style="text-align: left;">返回字符串对象。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_func_sum.html">sum()</a></td>
+<td style="text-align: left;">对迭代器的项目进行求和。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_func_super.html">super()</a></td>
+<td style="text-align: left;">返回表示父类的对象。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_func_tuple.html">tuple()</a></td>
+<td style="text-align: left;">返回元组。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_func_type.html">type()</a></td>
+<td style="text-align: left;">返回对象的类型。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_func_vars.html">vars()</a></td>
+<td style="text-align: left;">返回对象的 <strong>dict</strong> 属性。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_func_zip.html">zip()</a></td>
+<td style="text-align: left;">从两个或多个迭代器返回一个迭代器。</td>
+</tr>
+</tbody>
+</table>
+<h1 id="section"></h1>
+<h1 id="python-内置异常">Python 内置异常</h1>
+<p>Python中所有内置异常的基类是 <strong>BaseException</strong>，常见的内置异常有：</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">异常</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">ArithmeticError</td>
+<td style="text-align: left;">数值计算发生错误时引发</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">AssertionError</td>
+<td style="text-align: left;">在断言语句失败时引发</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">AttributeError</td>
+<td style="text-align: left;">属性引用或赋值失败时触发</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Exception</td>
+<td style="text-align: left;">所有异常的基类</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">EOFError</td>
+<td style="text-align: left;">当 input() 方法遇到"文件结尾"时引发条件（EOF）</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">FloatingPointError</td>
+<td style="text-align: left;">浮点计算失败时引发</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">GeneratorExit</td>
+<td style="text-align: left;">在生成器关闭时引发（使用 close() 方法）</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ImportError</td>
+<td style="text-align: left;">当导入的模块不存在时引发</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">IndentationError</td>
+<td style="text-align: left;">缩进不正确时引发</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">IndexError</td>
+<td style="text-align: left;">当序列的索引不存在时引发</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">KeyError</td>
+<td style="text-align: left;">在字典中不存在键时引发</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">KeyboardInterrupt</td>
+<td style="text-align: left;">当用户按下 Ctrl+c、Ctrl+z 或 Delete 时触发</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">LookupError</td>
+<td style="text-align: left;">在找不到引发的错误时引发</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">MemoryError</td>
+<td style="text-align: left;">当程序内存不足时引发</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">NameError</td>
+<td style="text-align: left;">当变量不存在时引发</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NotImplementedError</td>
+<td style="text-align: left;">当抽象方法需要继承的类来覆盖该方法时引发</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">OSError</td>
+<td style="text-align: left;">当系统相关操作导致错误时引发</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">OverflowError</td>
+<td style="text-align: left;">数值计算结果过大时引发</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ReferenceError</td>
+<td style="text-align: left;">当弱引用对象不存在时引发</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">RuntimeError</td>
+<td style="text-align: left;">发生不属于任何特定期望的错误时引发</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">StopIteration</td>
+<td style="text-align: left;">当迭代器的 next() 方法没有更多值时引发</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">SyntaxError</td>
+<td style="text-align: left;">发生语法错误时引发</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">TabError</td>
+<td style="text-align: left;">缩进包含制表符或空格时引发</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">SystemError</td>
+<td style="text-align: left;">发生系统错误时引发</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">SystemExit</td>
+<td style="text-align: left;">在调用 sys.exit() 函数时引发</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">TypeError</td>
+<td style="text-align: left;">两种不同类型组合时引发</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">UnboundLocalError</td>
+<td style="text-align: left;">在赋值前引用局部变量时引发</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">UnicodeError</td>
+<td style="text-align: left;">发生 unicode 问题时引发</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">UnicodeEncodeError</td>
+<td style="text-align: left;">发生 unicode 编码问题时引发</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">UnicodeDecodeError</td>
+<td style="text-align: left;">发生 unicode 解码问题时引发</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">UnicodeTranslateError</td>
+<td style="text-align: left;">发生 unicode 转换问题时引发</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ValueError</td>
+<td style="text-align: left;">在指定数据类型中存在错误值时引发</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ZeroDivisionError</td>
+<td style="text-align: left;">当除法中的第二个运算符为零时引发</td>
+</tr>
+</tbody>
+</table>
+<p><strong>链接参考：</strong></p>
+<p>https://w3schools.cn/</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/python/" class="category-chain-item">python</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B0/">#内置函数</a>
+      
+        <a href="/tags/%E5%BC%82%E5%B8%B8/">#异常</a>
+      
+    </div>
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/01/04/Python-%E5%88%97%E8%A1%A8%E6%96%B9%E6%B3%95/" title="">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile"></span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/01/04/Python-%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%96%B9%E6%B3%95/" title="Python 字符串方法">
+                        <span class="hidden-mobile">Python 字符串方法</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"vknpQgHbpd1oLUPUwwPbdY3B-gzGzoHsz","appKey":"1DCiNflrxTVqUxWR5T00HypH","path":"window.location.pathname","placeholder":"欢迎留言交流","avatar":"robohash","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":true,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <p <i class="iconfont icon-copyright"></i> <span>2023 | KayougZhang</span> </p> <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

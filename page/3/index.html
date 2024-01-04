@@ -225,6 +225,426 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2023/10/19/stm32-IAP%E5%9C%A8%E7%BA%BF%E5%8D%87%E7%BA%A7%E8%AF%A6%E8%A7%A3/" target="_self">
+          stm32 IAP在线升级详解
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/19/stm32-IAP%E5%9C%A8%E7%BA%BF%E5%8D%87%E7%BA%A7%E8%AF%A6%E8%A7%A3/" target="_self">
+        <div>
+          单片机程序的烧录方式主要有以下三种：  ICP（In Circuit Programming）线路途径烧录  烧录器Jlink、daplink等通过JTAG或SWD线路接口进行烧录。  ISP（In System Programming）系统途径烧录  通过BootLoader引导代码和外围uart或usb等接口引导进入Flash的System Memory区，进行程序的烧录。
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-10-19 13:01" pubdate>
+              2023-10-19
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/stm32/" class="category-chain-item">stm32</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/IAP/">#IAP</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/10/18/%E5%85%B3%E4%BA%8E%E8%BF%87%E9%9B%B6%E6%A3%80%E6%B5%8B%E7%94%B5%E8%B7%AF/" target="_self">
+          关于过零检测电路
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/18/%E5%85%B3%E4%BA%8E%E8%BF%87%E9%9B%B6%E6%A3%80%E6%B5%8B%E7%94%B5%E8%B7%AF/" target="_self">
+        <div>
+          在电力工程中，会经常用到过零检测技术，如在智能开关产品中通过零点电压检测技术来实现在零电压时导通，从而抑制了开机时浪涌电流冲击，达到保护继电器触点等器件的目的；在调光开关/调光器、电机调速产品中，通过零点电压检测技术对可控硅从零点开始控制交流电导通角的大小，实现调光灯具亮度、电机速度的调节。 过零检测的概念 什么是过零检测呢？在交流回路中，电压随时间成正弦波变化，当波形由正负半周交替转换时，电
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-10-18 18:43" pubdate>
+              2023-10-18
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%A1%AC%E4%BB%B6/" class="category-chain-item">硬件</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E8%BF%87%E9%9B%B6%E6%A3%80%E6%B5%8B/">#过零检测</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/10/17/%E7%BA%A2%E5%A4%96%E9%81%A5%E6%8E%A7NEC%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/" target="_self">
+          红外遥控NEC协议详解
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/17/%E7%BA%A2%E5%A4%96%E9%81%A5%E6%8E%A7NEC%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/" target="_self">
+        <div>
+          红外遥控（IR）一般由发射和接收两部分组成，发射元件为红外发射管（遥控器），接收一般采用一体化红外接收头，发射载波频率与接收头固定频率需一致才能正确接收数据。 发射 红外遥控是以调制方式发射数据，将数据调制到固定的载波上发送，调制发送抗干扰能力更强，传送距离也更远。常用的红外传输协议有很多，最常见的为NEC协议，红外遥控NEC传输协议采用脉冲位置调制(pulse distance encodi
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-10-17 10:31" pubdate>
+              2023-10-17
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/" class="category-chain-item">编程基础</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/NEC/">#NEC</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/10/08/stm32f1xxx%E9%A1%B9%E7%9B%AEHAL%E6%96%87%E4%BB%B6%E6%A6%82%E8%A7%88/" target="_self">
+          stm32f1xxx项目HAL文件概览
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/08/stm32f1xxx%E9%A1%B9%E7%9B%AEHAL%E6%96%87%E4%BB%B6%E6%A6%82%E8%A7%88/" target="_self">
+        <div>
+          CMSIS  stm32f1xx.h  全局库文件的配置 1. 处理器芯片平台的选择及其头文件包含 2. CMSIS 版本 3. 平台共用宏： #define SET_BIT(REG, BIT)     ((REG) |= (BIT)) #define CLEAR_BIT(REG, BIT)   ((REG) &amp;= ~(BIT)) #define READ_BIT(REG, BIT
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-10-08 15:11" pubdate>
+              2023-10-08
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/stm32/" class="category-chain-item">stm32</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/10/07/%E8%A7%A3%E5%86%B3Microsoft-Edge%E6%B5%8F%E8%A7%88%E5%99%A8%E5%85%B3%E4%BA%8E%E2%80%9C%E6%A0%B9%E6%8D%AE%E7%83%AD%E9%97%A8%E5%86%85%E5%AE%B9%E5%90%91%E4%BD%A0%E6%8E%A8%E8%8D%90%E2%80%9D%E7%9A%84%E9%97%AE%E9%A2%98/" target="_self">
+          解决Microsoft Edge浏览器关于“根据热门内容向你推荐”的问题
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/07/%E8%A7%A3%E5%86%B3Microsoft-Edge%E6%B5%8F%E8%A7%88%E5%99%A8%E5%85%B3%E4%BA%8E%E2%80%9C%E6%A0%B9%E6%8D%AE%E7%83%AD%E9%97%A8%E5%86%85%E5%AE%B9%E5%90%91%E4%BD%A0%E6%8E%A8%E8%8D%90%E2%80%9D%E7%9A%84%E9%97%AE%E9%A2%98/" target="_self">
+        <div>
+          在使用微软的Edge浏览器搜索时，当我们点开某个页面后，它会自动在原网页弹出推荐的内容，如下所示：  通常情况下，它占用了屏幕大部分空间，且弹出的内容好多并无作用，浪费了浏览时间。在浏览器的设置中，并没有这个设置项。因为这个是点击所触发的情况，所以可以利用广告拦截的方式进行处理，具体操作如下：  在浏览器扩展应用商店中搜索“广告拦截”,安装一个广告拦截器插件（我这里选择 AdGuard）:
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-10-07 13:32" pubdate>
+              2023-10-07
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%85%B6%E5%AE%83/" class="category-chain-item">其它</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Edge/">#Edge</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/10/06/FreeRTOS%E4%B8%AD%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86(HeapMemory)/" target="_self">
+          FreeRTOS中内存管理(HeapMemory)
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/06/FreeRTOS%E4%B8%AD%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86(HeapMemory)/" target="_self">
+        <div>
+          FreeRTOS在每次创建内核对象时分配内存，在每次删除内核对象时释放RAM。此策略减少了设计和规划工作，简化了API，并最大限度地减少了内存占用。 可以使用标准C库malloc()和free()函数分配内存，但有时它们可能不适用，因为：  在小型嵌入式系统上并不总是可用的。 函数实现比较复杂，占用了宝贵的代码空间。 并非都是安全线程。 运行时间不确定，执行函数所花费的时间因调用而异。
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-10-06 21:58" pubdate>
+              2023-10-06
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/RTOS/" class="category-chain-item">RTOS</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/RAM/">#RAM</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/10/06/FreeRTOS%E4%B8%AD%E4%BA%92%E6%96%A5%E9%87%8F(Mutexes)/" target="_self">
+          FreeRTOS中互斥量(Mutexes)
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/06/FreeRTOS%E4%B8%AD%E4%BA%92%E6%96%A5%E9%87%8F(Mutexes)/" target="_self">
+        <div>
+          互斥是一种特殊的二进制信号量，用于控制对两个或多个任务之间共享资源的访问。要使用它，需在配置文件中设置 configUSE_MUTEXES 为1。 用于互斥时，互斥锁就像用于保护资源的令牌。当访问资源时，必须首先获取 ('token') 令牌，使用资源后，必须“返回”令牌，这样其他任务就有机会访问此共享资源。  img  互斥优先级反转 高优先级的任务必须等待低优先级的任务放弃对互斥锁
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-10-06 21:50" pubdate>
+              2023-10-06
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/RTOS/" class="category-chain-item">RTOS</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Mutexes/">#Mutexes</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2023/10/06/FreeRTOS%E4%B8%AD%E4%B8%AD%E6%96%AD-Interrupt/" target="_self">
           FreeRTOS中中断(Interrupt)
         </a>
@@ -395,433 +815,6 @@
             <i class="iconfont icon-tags"></i>
             
               <a href="/tags/Timer/">#Timer</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/10/06/FreeRTOS%E4%B8%AD%E4%BB%BB%E5%8A%A1%E9%80%9A%E7%9F%A5(TaskNotifications)/" target="_self">
-          FreeRTOS中任务通知(TaskNotifications)
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/06/FreeRTOS%E4%B8%AD%E4%BB%BB%E5%8A%A1%E9%80%9A%E7%9F%A5(TaskNotifications)/" target="_self">
-        <div>
-          在RTOS中，任务间的通信，可使用队列、信号量、事件组等方法，但这种方式需要通过中间媒介来完成，如下：  还有另一种直接通信的方式：任务通知，不需要中间的媒介对象，任务间直接通信，如下所示：  使用这种方式需要在配置文件(FreeRTOSConfig.h)中设置 configUSE_TASK_NOTIFICATIONS = 1 。 任务通知的优势与劣势 优势  速度快：使用任务通知
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-10-06 21:45" pubdate>
-              2023-10-06
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/RTOS/" class="category-chain-item">RTOS</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Notification/">#Notification</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/10/05/FreeRTOS%E4%B8%AD%E4%BF%A1%E5%8F%B7%E9%87%8F(Semaphore)/" target="_self">
-          FreeRTOS中信号量(Semaphore)
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/05/FreeRTOS%E4%B8%AD%E4%BF%A1%E5%8F%B7%E9%87%8F(Semaphore)/" target="_self">
-        <div>
-          任务间数据传输可用队列，消息队列用于传输多个数据，但有时候我们只需传递状态，这个状态用一个 数值表示，此时使用信号量效率更高、更节省内存。 在FreeRTOS中，信号量有二进制信号量和计数信号量。下面分别来看看这两种信号量。 二进制信号量 二进制信号量用于互斥和同步目的，信号量 API 函数允许指定阻塞时间。 可将二进制信号量视为仅能容纳一个项目的队列。 因此，队列只能为空或满（因此称为二
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-10-05 21:47" pubdate>
-              2023-10-05
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/RTOS/" class="category-chain-item">RTOS</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Semaphore/">#Semaphore</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/10/05/FreeRTOS%E4%B8%AD%E9%98%9F%E5%88%97(Queue)/" target="_self">
-          FreeRTOS中队列(Queue)
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/05/FreeRTOS%E4%B8%AD%E9%98%9F%E5%88%97(Queue)/" target="_self">
-        <div>
-          在Free RTOS中，队列是任务间通信的主要形式。它们可以用于在任务之间、中断和任务之间发送消息。下面来看看队列的相关内容。 队列特性  数据存储（Data Storage）  队列通常用作先进先出（FIFO）缓冲区，其中数据被写入队列的末尾（尾部），并从队列的前端（头部）移除。队列可以容纳有限数量（长度）的固定大小的数据项。每个数据项的长度和大小都是在创建队列时设置的。  img
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-10-05 21:46" pubdate>
-              2023-10-05
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/RTOS/" class="category-chain-item">RTOS</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/queue/">#queue</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/10/05/FreeRTOS%E4%B8%AD%E4%BB%BB%E5%8A%A1(Task)/" target="_self">
-          FreeRTOS中任务(Task)
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/05/FreeRTOS%E4%B8%AD%E4%BB%BB%E5%8A%A1(Task)/" target="_self">
-        <div>
-          使用 FreeRTOS 的实时应用程序，我们可以在应用程序中创建多个独立任务(task)，也可称为线程(thread)。 任务的简介 在FreeRTOS中创建任务时，每个任务都分配有自己的堆栈，在自己的上下文（寄存器值、堆栈内容等）中执行，不依赖于系统内的其他任务或 RTOS 调度器本身。在任何时间点，应用程序中只能执行一个任务，由调度器决定所要执行的任务调入和调出。当任务调出时，执行上下文信
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-10-05 10:41" pubdate>
-              2023-10-05
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/RTOS/" class="category-chain-item">RTOS</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Task/">#Task</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/10/04/FreeRTOS%E5%8F%98%E9%87%8F%E3%80%81%E5%87%BD%E6%95%B0%E5%8F%8A%E5%AE%8F%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99/" target="_self">
-          FreeRTOS变量、函数及宏命名规则
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/04/FreeRTOS%E5%8F%98%E9%87%8F%E3%80%81%E5%87%BD%E6%95%B0%E5%8F%8A%E5%AE%8F%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99/" target="_self">
-        <div>
-          在FreeRTOS内核和demo应用程序源代码中，会发现很多变量名、函数名、宏名前有很多小写字母的前缀。这是因为RTOS中重定义了很多数据类型，为了便于移植和快速知道变量、函数及宏的类型或定义的文件。 变量名 变量名称使用驼峰式大小写，具有明确的描述性的单词，变量名有前缀：    变量名前缀 含义 举例     ul unsigned long uint32_t ul
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-10-04 22:57" pubdate>
-              2023-10-04
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/RTOS/" class="category-chain-item">RTOS</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/FreeRTOS/">#FreeRTOS</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/10/04/FreeRTOS%E9%87%8D%E5%AE%9A%E4%B9%89%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" target="_self">
-          FreeRTOS重定义的数据类型
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/04/FreeRTOS%E9%87%8D%E5%AE%9A%E4%B9%89%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" target="_self">
-        <div>
-          因为不同的数据类型在不同的架构平台上，它的长度是不一样的，为了便于移植，很多独立的流行代码程序都会采用相应的数据类型的重定义，FreeRTOS也不例外，它除了使用了标准的数据类型定义的头文件 &lt;stdint.h&gt; 外，源码中还重定义了很多数据类型，但都是由基本数据类型衍生而来，熟悉这些重定义的数据类型，对查看FreeRTOS源码和掌握与使用它有很大益处。下面具体来看看： cmsis_
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-10-04 22:31" pubdate>
-              2023-10-04
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/RTOS/" class="category-chain-item">RTOS</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/FreeRTOS/">#FreeRTOS</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/10/04/FreeRTOS%E5%B7%A5%E7%A8%8B%E7%9B%AE%E5%BD%95%E6%96%87%E4%BB%B6%E6%A6%82%E8%A7%88/" target="_self">
-          FreeRTOS工程目录文件概览
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/04/FreeRTOS%E5%B7%A5%E7%A8%8B%E7%9B%AE%E5%BD%95%E6%96%87%E4%BB%B6%E6%A6%82%E8%A7%88/" target="_self">
-        <div>
-          FreeRTOS 是市场领先的面向微控制器和小型微处理器的实时操作系统，通过 MIT 开源许可免费分发，包括一个内核和一组不断丰富的 IoT 库，适用于所有行业领域。FreeRTOS 因其免费开源和易用性而得到广泛应用。 FreeRTOS官网：https://www.freertos.org/ 官网上有专门的内核开发文档，这一节主要来看看在STM32开发过程中，使用STM32CubeMX创建F
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-10-04 22:09" pubdate>
-              2023-10-04
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/RTOS/" class="category-chain-item">RTOS</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/FreeRTOS/">#FreeRTOS</a>
             
           </div>
         

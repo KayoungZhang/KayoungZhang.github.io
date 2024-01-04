@@ -1,0 +1,795 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Python字符串基础知识 可参考：  https:&#x2F;&#x2F;www.runoob.com&#x2F;python3&#x2F;python3-string.html https:&#x2F;&#x2F;w3schools.cn&#x2F;python&#x2F;python_strings.html  Python 字符串的内置函数    函数 描述     len(string) 返回字符串长度   max(str)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python 字符串方法">
+<meta property="og:url" content="http://example.com/2024/01/04/Python-%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%96%B9%E6%B3%95/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Python字符串基础知识 可参考：  https:&#x2F;&#x2F;www.runoob.com&#x2F;python3&#x2F;python3-string.html https:&#x2F;&#x2F;w3schools.cn&#x2F;python&#x2F;python_strings.html  Python 字符串的内置函数    函数 描述     len(string) 返回字符串长度   max(str)">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-01-04T02:30:56.000Z">
+<meta property="article:modified_time" content="2024-01-04T04:59:21.417Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="字符串">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"✍","loop":false,"scope":["home"]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":false},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":false,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+<meta name="referrer" content="no-referrer" />
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>My Tech Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/article.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.1)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle">Python 字符串方法</span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-01-04 10:30" pubdate>
+          2024年1月4日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.6k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          6 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-12 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Python 字符串方法</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：2024年1月4日 下午
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="python字符串基础知识">Python字符串基础知识</h1>
+<p>可参考：</p>
+<ul>
+<li><p><a target="_blank" rel="noopener" href="https://www.runoob.com/python3/python3-string.html">https://www.runoob.com/python3/python3-string.html</a></p></li>
+<li><p><a target="_blank" rel="noopener" href="https://w3schools.cn/python/python_strings.html">https://w3schools.cn/python/python_strings.html</a></p></li>
+</ul>
+<h1 id="python-字符串的内置函数">Python 字符串的内置函数</h1>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">函数</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python3/python3-string-len.html">len(string)</a></td>
+<td style="text-align: left;">返回字符串长度</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python3/python3-string-max.html">max(str)</a></td>
+<td style="text-align: left;">返回字符串 str 中最大的字母。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python3/python3-string-min.html">min(str)</a></td>
+<td style="text-align: left;">返回字符串 str 中最小的字母。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_func_str.html">str(obj)</a></td>
+<td style="text-align: left;">将指定的值转换为字符串</td>
+</tr>
+</tbody>
+</table>
+<h1 id="python-字符串的内置方法">Python 字符串的内置方法</h1>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">方法</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_string_capitalize.html">str.capitalize()</a></td>
+<td style="text-align: left;">把首字符转换为大写。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_string_casefold.html">str.casefold()</a></td>
+<td style="text-align: left;">把字符串转换为小写。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_string_center.html">str.center()</a></td>
+<td style="text-align: left;">返回居中的字符串。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_string_count.html">str.count()</a></td>
+<td style="text-align: left;">返回指定值在字符串中出现的次数。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_string_encode.html">str.encode()</a></td>
+<td style="text-align: left;">返回字符串的编码版本。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_string_endswith.html">str.endswith()</a></td>
+<td style="text-align: left;">如果字符串以指定值结尾，则返回 true。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_string_expandtabs.html">str.expandtabs()</a></td>
+<td style="text-align: left;">设置字符串的 tab 尺寸。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_string_find.html">str.find()</a></td>
+<td style="text-align: left;">在字符串中搜索指定的值并返回它被找到的位置。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_string_format.html">str.format()</a></td>
+<td style="text-align: left;">格式化字符串中的指定值。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">str.format_map()</td>
+<td style="text-align: left;">格式化字符串中的指定值。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_string_index.html">str.index()</a></td>
+<td style="text-align: left;">在字符串中搜索指定的值并返回它被找到的位置。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_string_isalnum.html">str.isalnum()</a></td>
+<td style="text-align: left;">如果字符串中的所有字符都是字母数字，则返回 True。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_string_isalpha.html">str.isalpha()</a></td>
+<td style="text-align: left;">如果字符串中的所有字符都在字母表中，则返回 True。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_string_isdecimal.html">str.isdecimal()</a></td>
+<td style="text-align: left;">如果字符串中的所有字符都是小数，则返回 True。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_string_isdigit.html">str.isdigit()</a></td>
+<td style="text-align: left;">如果字符串中的所有字符都是数字，则返回 True。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_string_isidentifier.html">str.isidentifier()</a></td>
+<td style="text-align: left;">如果字符串是标识符，则返回 True。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_string_islower.html">str.islower()</a></td>
+<td style="text-align: left;">如果字符串中的所有字符都是小写，则返回 True。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_string_isnumeric.html">str.isnumeric()</a></td>
+<td style="text-align: left;">如果字符串中的所有字符都是数，则返回 True。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_string_isprintable.html">str.isprintable()</a></td>
+<td style="text-align: left;">如果字符串中的所有字符都是可打印的，则返回 True。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_string_isspace.html">str.isspace()</a></td>
+<td style="text-align: left;">如果字符串中的所有字符都是空白字符，则返回 True。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_string_istitle.html">str.istitle()</a></td>
+<td style="text-align: left;">如果字符串遵循标题规则，则返回 True。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_string_isupper.html">str.isupper()</a></td>
+<td style="text-align: left;">如果字符串中的所有字符都是大写，则返回 True。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_string_join.html">str.join()</a></td>
+<td style="text-align: left;">把可迭代对象的元素连接到字符串的末尾。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_string_ljust.html">str.ljust()</a></td>
+<td style="text-align: left;">返回字符串的左对齐版本。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_string_lower.html">str.lower()</a></td>
+<td style="text-align: left;">把字符串转换为小写。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_string_lstrip.html">str.lstrip()</a></td>
+<td style="text-align: left;">返回字符串的左修剪版本。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_string_maketrans.html">str.maketrans()</a></td>
+<td style="text-align: left;">返回在转换中使用的转换表。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_string_partition.html">str.partition()</a></td>
+<td style="text-align: left;">返回元组，其中的字符串被分为三部分。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_string_replace.html">str.replace()</a></td>
+<td style="text-align: left;">返回字符串，其中指定的值被替换为指定的值。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_string_rfind.html">str.rfind()</a></td>
+<td style="text-align: left;">在字符串中搜索指定的值，并返回它被找到的最后位置。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_string_rindex.html">str.rindex()</a></td>
+<td style="text-align: left;">在字符串中搜索指定的值，并返回它被找到的最后位置。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_string_rjust.html">str.rjust()</a></td>
+<td style="text-align: left;">返回字符串的右对齐版本。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_string_rpartition.html">str.rpartition()</a></td>
+<td style="text-align: left;">返回元组，其中字符串分为三部分。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_string_rsplit.html">str.rsplit()</a></td>
+<td style="text-align: left;">在指定的分隔符处拆分字符串，并返回列表。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_string_rstrip.html">str.rstrip()</a></td>
+<td style="text-align: left;">返回字符串的右边修剪版本。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_string_split.html">str.split()</a></td>
+<td style="text-align: left;">在指定的分隔符处拆分字符串，并返回列表。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_string_splitlines.html">str.splitlines()</a></td>
+<td style="text-align: left;">在换行符处拆分字符串并返回列表。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_string_startswith.html">str.startswith()</a></td>
+<td style="text-align: left;">如果以指定值开头的字符串，则返回 true。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_string_strip.html">str.strip()</a></td>
+<td style="text-align: left;">返回字符串的剪裁版本。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_string_swapcase.html">str.swapcase()</a></td>
+<td style="text-align: left;">切换大小写，小写成为大写，反之亦然。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_string_title.html">str.title()</a></td>
+<td style="text-align: left;">把每个单词的首字符转换为大写。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_string_translate.html">str.translate()</a></td>
+<td style="text-align: left;">返回被转换的字符串。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_string_upper.html">str.upper()</a></td>
+<td style="text-align: left;">把字符串转换为大写。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://w3schools.cn/python/ref_string_zfill.html">str.zfill()</a></td>
+<td style="text-align: left;">在字符串的开头填充指定数量的 0 值。</td>
+</tr>
+</tbody>
+</table>
+<p><span style="color:red"><strong>Note:</strong> 所有字符串方法都返回新值，不会更改原始字符串。</span></p>
+<p><strong>参考链接：</strong></p>
+<p>https://w3schools.cn/</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/python/" class="category-chain-item">python</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/">#字符串</a>
+      
+    </div>
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/01/04/Python-%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B0%E5%92%8C%E5%BC%82%E5%B8%B8/" title="Python 内置函数和异常">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Python 内置函数和异常</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/01/02/tkinter-widgets-%E7%AA%97%E5%8F%A3%E7%AE%A1%E7%90%86/" title="tkinter widgets 窗口管理">
+                        <span class="hidden-mobile">tkinter widgets 窗口管理</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"vknpQgHbpd1oLUPUwwPbdY3B-gzGzoHsz","appKey":"1DCiNflrxTVqUxWR5T00HypH","path":"window.location.pathname","placeholder":"欢迎留言交流","avatar":"robohash","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":true,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <p <i class="iconfont icon-copyright"></i> <span>2023 | KayougZhang</span> </p> <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
