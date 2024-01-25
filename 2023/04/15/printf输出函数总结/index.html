@@ -24,7 +24,7 @@
 <meta property="og:description" content="在调试程序时，会经常需要将某些信息输出到电脑，便于查找问题原因，快速解决问题。printf函数作为已经封装好的信息输出函数，会被经常使用到，下面介绍一些它的使用方式： C库函数-printf()： 函数声明原型： int printf(const char * format, ...); 发送格式化输出到标准输出stdout。 返回值：正确返回输出的字符总数，错误返回负值。  for">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-04-15T03:32:36.000Z">
-<meta property="article:modified_time" content="2023-10-16T03:25:59.709Z">
+<meta property="article:modified_time" content="2024-01-25T10:50:47.676Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="printf">
 <meta name="twitter:card" content="summary_large_image">
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          4.2k 字
+          2.8k 字
         
       </span>
     
@@ -233,7 +233,7 @@
         
         
         
-          14 分钟
+          10 分钟
         
       </span>
     
@@ -276,7 +276,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年10月16日 上午
+                    本文最后更新于：2024年1月25日 晚上
                   
                 
               </p>
@@ -291,8 +291,8 @@
 <p>发送格式化输出到标准输出stdout。</p>
 <p>返回值：正确返回输出的字符总数，错误返回负值。</p>
 <ul>
-<li><p><strong>format</strong> -- 即是格式化字符串，包含：（1）字符串常量；（2）格式控制字符串；（3）转义字符。</p></li>
-<li><p><strong>...</strong> -- 可变参数，根据不同的 format 字符串，函数可能需要一系列的可变参数，每个参数包含了一个要被插入的值，替换了 format 参数中指定的每个 % 标签。参数的个数应与 % 标签的个数相同。</p></li>
+<li><p><strong>format</strong> : 格式化字符串，包含：（1）字符串常量；（2）格式控制字符串；（3）转义字符。</p></li>
+<li><p><strong>...</strong> : 可变参数，根据不同的 format 字符串，函数可能需要一系列的可变参数，每个参数包含了一个要被插入的值，替换了 format 参数中指定的每个 % 标签。参数的个数应与 % 标签的个数相同。</p></li>
 </ul>
 <p><strong>格式控制字符串形式</strong>:</p>
 <div class="code-wrapper"><pre><code class="hljs c">%[flags][width][.prec][length]type  <span class="hljs-comment">//%[标志][最小宽度][.精度][类型长度]类型</span></code></pre></div>
@@ -335,7 +335,6 @@
 <li><strong>类型长度</strong></li>
 </ul>
 <table>
-
 <thead>
 <tr class="header">
 <th>类型长度</th>
@@ -350,9 +349,19 @@
 <td><code>char</code></td>
 </tr>
 <tr class="even">
-<td><code>h``     |</code>d<code>,</code>i<code>,</code>o<code>,</code>u<code>,</code>x<code>|</code>short int<code>| |</code>l`<code>|</code>d<code>,</code>i<code>,</code>o<code>,</code>u<code>,</code>x<code>|</code>long int<code>| |</code>ll<code>|</code>d<code>,</code>i<code>,</code>o<code>,</code>u<code>,</code>x<code>|</code>long long int`</td>
-<td></td>
-<td></td>
+<td><code>h</code></td>
+<td><code>d</code>,<code>i</code>,<code>o</code>,<code>u</code>,<code>x</code></td>
+<td><code>short int</code></td>
+</tr>
+<tr class="odd">
+<td><code>l</code></td>
+<td><code>d</code>,<code>i</code>,<code>o</code>,<code>u</code>,<code>x</code></td>
+<td><code>long int</code></td>
+</tr>
+<tr class="even">
+<td><code>ll</code></td>
+<td><code>d</code>,<code>i</code>,<code>o</code>,<code>u</code>,<code>x</code></td>
+<td><code>long long int</code></td>
 </tr>
 </tbody>
 </table>
@@ -430,117 +439,6 @@
 字符串型数据： <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%s&quot;</span>,<span class="hljs-string">&quot;测试test&quot;</span>);<span class="hljs-comment">//输出：测试test</span>
 单精度浮点数： <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%.9f&quot;</span>,<span class="hljs-number">0.000000123</span>);<span class="hljs-comment">//输出0.000000123</span>
 科学计数法：  <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%e %E&quot;</span>,<span class="hljs-number">0.000000123</span>,<span class="hljs-number">0.000000123</span>);<span class="hljs-comment">//输出1.230000e-07 1.230000E-07</span></code></pre></div>
-<h1 id="c库中常用预定义宏">C库中常用预定义宏</h1>
-<table>
-<thead>
-<tr class="header">
-<th>预定义宏</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code>__LINE__</code></td>
-<td>当前的函数行 (int)</td>
-</tr>
-<tr class="even">
-<td><code>__FILE__</code></td>
-<td>当前程序源文件 (char*)</td>
-</tr>
-<tr class="odd">
-<td><code>__DATE__</code></td>
-<td>当前的编译日期</td>
-</tr>
-<tr class="even">
-<td><code>__TIME__</code></td>
-<td>当前编译时间</td>
-</tr>
-<tr class="odd">
-<td><code>__STDC__</code></td>
-<td>遵循ANSI C标准时该标识被赋值为1</td>
-</tr>
-<tr class="even">
-<td><code>__FUNCTION__</code></td>
-<td>当前运行的函数 (char*)</td>
-</tr>
-<tr class="odd">
-<td><code>__VA_ARGS__</code></td>
-<td>C99标准中可变参数<strong>宏</strong>，<strong>目前似乎只有 <code>gcc</code> 支持</strong></td>
-</tr>
-<tr class="even">
-<td><code>##__VA_ARGS__</code></td>
-<td>当可变参数的个数为0时，去掉多余 <code>,</code> ,防止编译出错</td>
-</tr>
-</tbody>
-</table>
-<p>如：</p>
-<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;file: %s\n&quot;</span>, __FILE__);
-<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;function: %s\n&quot;</span>, __FUNCTION__);
-<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;line: %d\n&quot;</span>, __LINE__);</code></pre></div>
-<h1 id="字符串化操作符-与-连接操作符"><code>#</code> 字符串化操作符 与 <code>##</code> 连接操作符</h1>
-<ul>
-<li><strong>字符串化操作符 <code>#</code></strong></li>
-</ul>
-<p>可以使用 <strong>#</strong> 将当前的内容转换成字符串。如：</p>
-<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
-<span class="hljs-meta">#<span class="hljs-keyword">define</span> print(a) printf(<span class="hljs-string">&quot;%s = %d\n&quot;</span>, #a, a);</span>
-<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span>
-&#123;
-    <span class="hljs-type">int</span> x = <span class="hljs-number">3</span>;
-    <span class="hljs-type">int</span> y = <span class="hljs-number">5</span>;
-
-    print(x / y);
-    print(x + y);
-    print(x * y);
-
-    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
-&#125;
-
-<span class="hljs-comment">/* 执行结果 */</span>
-x / y = <span class="hljs-number">0</span>
-x + y = <span class="hljs-number">8</span>
-x * y = <span class="hljs-number">15</span></code></pre></div>
-<ul>
-<li><strong>连接操作符 <code>##</code></strong></li>
-</ul>
-<p>主要在编译的预处理阶段宏函数实现字符串连接的操作，常用的方式如下：</p>
-<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">define</span> DEBUG(fmt, args…) printf(fmt, ##args)</span></code></pre></div>
-<p>armcc编译器器宏调试开关实例：</p>
-<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
-
-<span class="hljs-meta">#<span class="hljs-keyword">define</span> USE_DEBUG  <span class="hljs-comment">//开启DEBUG宏 #undef DEBUG （不开启宏）</span></span>
-
-<span class="hljs-meta">#<span class="hljs-keyword">if</span> USE_DEBUG</span>
-<span class="hljs-meta">#<span class="hljs-keyword">define</span> DEBUG(fmt, args...) 	do&#123;\</span>
-<span class="hljs-meta">                              printf(<span class="hljs-string">&quot;file:%s function: %s line: %d &quot;</span> \</span>
-<span class="hljs-meta">   						 								fmt, __FILE__, __FUNCTION__, __LINE__, ##args)\</span>
-<span class="hljs-meta">   						 								&#125;while(0)</span>
-<span class="hljs-meta">#<span class="hljs-keyword">else</span></span>
-<span class="hljs-meta">#<span class="hljs-keyword">define</span> DEBUG(fmt, args...)</span>
-
-<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">int</span> argc, <span class="hljs-type">char</span> **argv)</span> &#123;
-        <span class="hljs-type">char</span> str[]=<span class="hljs-string">&quot;Hello World&quot;</span>;
-        DEBUG(<span class="hljs-string">&quot;%s&quot;</span>,str);
-        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
-&#125;</code></pre></div>
-<p>gcc编译器宏调试开关可使用<code>__VA_ARGS__</code>可变参数宏：</p>
-<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
-
-<span class="hljs-meta">#<span class="hljs-keyword">define</span> USE_DEBUG  <span class="hljs-comment">//开启DEBUG宏 #undef DEBUG （不开启宏）</span></span>
-
-<span class="hljs-meta">#<span class="hljs-keyword">if</span> USE_DEBUG</span>
-<span class="hljs-meta">#<span class="hljs-keyword">define</span> DEBUG(fmt, ...) 	do&#123;\</span>
-<span class="hljs-meta">                              printf(<span class="hljs-string">&quot;file:%s function: %s line: %d &quot;</span> \</span>
-<span class="hljs-meta">   						 								fmt, __FILE__, __FUNCTION__, __LINE__, ##__VA_ARGS__)\</span>
-<span class="hljs-meta">   						 								&#125;while(0)</span>
-<span class="hljs-meta">#<span class="hljs-keyword">else</span></span>
-<span class="hljs-meta">#<span class="hljs-keyword">define</span> DEBUG(fmt, ...)</span>
-
-<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">int</span> argc, <span class="hljs-type">char</span> **argv)</span> &#123;
-        <span class="hljs-type">char</span> str[]=<span class="hljs-string">&quot;Hello World&quot;</span>;
-        DEBUG(<span class="hljs-string">&quot;%s&quot;</span>,str);
-        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
-&#125;</code></pre></div>
 <h1 id="printf重定向">printf()重定向</h1>
 <p>在C语言中 <strong>printf </strong>函数已经定义为默认输出到显示器的，在单片机中若要想在串口上显示，那就需要重定向 <strong>printf</strong>。例如将 <strong>printf</strong> 函数重定向到 <strong>USART1</strong> ，这样就可以利用printf函数将单片机的数据通过串口调试助手打印到PC上。</p>
 <p>printf函数底层实际是调用 <strong>fputc</strong> 函数，所以重定向 <strong>printf</strong> 函数，就是重新写 <strong>fputc</strong> 函数。</p>
@@ -580,7 +478,7 @@ x * y = <span class="hljs-number">15</span></code></pre></div>
   HAL_UART_Transmit(&amp;huartx, (<span class="hljs-type">uint8_t</span> *)&amp;ch, <span class="hljs-number">1</span>, <span class="hljs-number">0xffff</span>);
   <span class="hljs-keyword">return</span> ch;
 &#125;</code></pre></div>
-<p>此外，<strong>正点原子</strong> 有另外一种半主机模式，也可以实现printf输出，只做了解：</p>
+<p>此外，<strong>正点原子</strong> 有另外一种半主机模式，也可以实现printf输出，可做了解：</p>
 <div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">pragma</span>   import (__use_no_semihosting)</span>
 <span class="hljs-class"><span class="hljs-keyword">struct</span>  __<span class="hljs-title">FILE</span></span>
 <span class="hljs-class">&#123;</span>
