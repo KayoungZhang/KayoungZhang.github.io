@@ -16,12 +16,12 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Modbus协议简介 Modbus协议是一种通用的工业通讯总线协议，跟I2C、SPI总线类似，通讯的服务器端和客户端都在同一条总线上。 Modbus协议最初是Modicon公司（现在的施耐德电气 Schneider Electric）于1979年为使用可编程逻辑控制器（PLC）通信而开发的，现在已成为工业领域通信协议的业界标准。 Modbus官网：https:&#x2F;&#x2F;modbus.org&#x2F; 本">
+    <meta name="description" content="Modbus协议简介 Modbus协议是一种通用的工业通讯总线协议，跟I2C、SPI总线类似，通讯的服务器端和客户端都在同一条总线上。 Modbus协议最初是Modicon公司（现在的施耐德电气 Schneider Electric）于1979年为使用可编程逻辑控制器（PLC）通信而开发的，现在已成为工业领域通信协议的业界标准。 Modbus官网：https:&#x2F;&#x2F;modbus.org&#x2F; 国">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Modbus通讯协议详解">
 <meta property="og:url" content="http://example.com/2023/09/04/Modbus%E9%80%9A%E8%AE%AF%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Modbus协议简介 Modbus协议是一种通用的工业通讯总线协议，跟I2C、SPI总线类似，通讯的服务器端和客户端都在同一条总线上。 Modbus协议最初是Modicon公司（现在的施耐德电气 Schneider Electric）于1979年为使用可编程逻辑控制器（PLC）通信而开发的，现在已成为工业领域通信协议的业界标准。 Modbus官网：https:&#x2F;&#x2F;modbus.org&#x2F; 本">
+<meta property="og:description" content="Modbus协议简介 Modbus协议是一种通用的工业通讯总线协议，跟I2C、SPI总线类似，通讯的服务器端和客户端都在同一条总线上。 Modbus协议最初是Modicon公司（现在的施耐德电气 Schneider Electric）于1979年为使用可编程逻辑控制器（PLC）通信而开发的，现在已成为工业领域通信协议的业界标准。 Modbus官网：https:&#x2F;&#x2F;modbus.org&#x2F; 国">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230904153822090.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230904155252355.png">
@@ -33,7 +33,7 @@
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230904182705385.png">
 <meta property="og:image" content="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20230904184016458.png">
 <meta property="article:published_time" content="2023-09-04T02:44:48.000Z">
-<meta property="article:modified_time" content="2023-09-06T14:37:48.858Z">
+<meta property="article:modified_time" content="2024-03-11T11:19:43.154Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="Modbus">
 <meta name="twitter:card" content="summary_large_image">
@@ -232,7 +232,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.9k 字
+          2k 字
         
       </span>
     
@@ -286,7 +286,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年9月6日 晚上
+                    本文最后更新于：2024年3月11日 晚上
                   
                 
               </p>
@@ -298,7 +298,9 @@
 <p>Modbus协议是一种通用的工业通讯总线协议，跟I2C、SPI总线类似，通讯的服务器端和客户端都在同一条总线上。</p>
 <p>Modbus协议最初是Modicon公司（现在的施耐德电气 Schneider Electric）于1979年为使用可编程逻辑控制器（PLC）通信而开发的，现在已成为工业领域通信协议的业界标准。</p>
 <p>Modbus官网：<a target="_blank" rel="noopener" href="https://modbus.org/">https://modbus.org/</a></p>
-<p>本文主要以modbus官方文档（<a target="_blank" rel="noopener" href="https://modbus.org/specs.php">Modbus Specifications and Implementation Guides</a>）进行说明。</p>
+<p>国内Modbus官网：<a target="_blank" rel="noopener" href="https://www.modbus.cn/">https://www.modbus.cn/</a></p>
+<p>本文主要以Modbus官方文档（<a target="_blank" rel="noopener" href="https://modbus.org/specs.php">Modbus Specifications and Implementation Guides</a>）进行说明。</p>
+<p><a target="_blank" rel="noopener" href="https://image.modbus.cn/wp-content/uploads/2022/03/2022031708564080.pdf">Modbus协议中文版</a></p>
 <h1 id="modbus协议传输方式">Modbus协议传输方式</h1>
 <p>Modbus协议主要有以下几种传输方式：</p>
 <ul>
@@ -368,7 +370,7 @@
 <p><strong>响应</strong>：1byte设备地址 + 1byte功能代码 + 2bytes寄存器起始地址 + 2bytes数据 + 2bytes CRC校验</p>
 <h1 id="modbus协议应用">Modbus协议应用</h1>
 <p><a target="_blank" rel="noopener" href="https://www.modbus.cn/11740.html">格力中央空调多联机 Modbus 通讯协议 | Modbus物联网云平台</a></p>
-<p>Modbus官网有个外链驱动库：<a target="_blank" rel="noopener" href="https://libmodbus.org/">libmodbus驱动库</a> ，在应用中可以直接移植到程序中，而不用自己重复的编写驱动。具体移植过程可参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/whik1194/article/details/119010616?spm=1001.2014.3001.5501">Modbus驱动库—libmodbus驱动库的使用_whik1194的博客-CSDN博客</a>）</p>
+<p>Modbus官网有个外链驱动库：<a target="_blank" rel="noopener" href="https://libmodbus.org/">libmodbus驱动库</a> ，在应用中可以直接移植到程序中，而不用自己重复的编写驱动。具体移植过程可参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/whik1194/article/details/119010616?spm=1001.2014.3001.5501">Modbus驱动库—libmodbus驱动库的使用_whik1194的博客-CSDN博客</a></p>
 <p><strong>链接：</strong></p>
 <p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/38920259">Modbus RTU/TCP协议解析 - 知乎 (zhihu.com)</a></p>
 
