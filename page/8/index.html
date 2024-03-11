@@ -225,6 +225,128 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2023/08/06/stm32f1xx-hal-tim%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
+          stm32f1xx_hal_tim库的使用
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/08/06/stm32f1xx-hal-tim%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
+        <div>
+          timer, 简称TIM，定时器是MCU控制中使用最广泛的外设，STM32中有多个TIM，下面来看看HAL库关于TIM的介绍和使用方法。 TIM外设库的一般特性  16位向上，向下，向上向下自动重装载计数器 16位可编程预分频系数，允许对计数器时钟进行 1 ~ 65536 的分频。 多达4各独立的通道：  输入捕获 Input Capture 输出比较 Output Compare
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-08-06 20:20" pubdate>
+              2023-08-06
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/stm32/" class="category-chain-item">stm32</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/tim/">#tim</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/08/06/stm32f1xx-hal-sram%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
+          stm32f1xx_hal_sram库的使用
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/08/06/stm32f1xx-hal-sram%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
+        <div>
+          下面来看看HAL库关于SRAM 内存的使用方法。 SRAM外设库的使用 这是一个通用的分层驱动，包含一套控制SRAM内存的API。它使用FSMC层函数与SRAM设备进行连接。要配置FSMC与SRAM/PSRAM的连接，应遵循以下顺序：  声明一个SRAM_HandleTypeDef类型结构体。如：SRAM_HandleTypeDef hsram;  对SRAM_HandleTypeDe
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-08-06 19:20" pubdate>
+              2023-08-06
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/stm32/" class="category-chain-item">stm32</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/sram/">#sram</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2023/08/06/stm32f1xx-hal-hcd%E5%BA%93%E5%92%8Cpcd%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
           stm32f1xx_hal_hcd库和pcd的使用
         </a>
@@ -702,128 +824,6 @@
             <i class="iconfont icon-tags"></i>
             
               <a href="/tags/flash/">#flash</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/08/05/stm32f1xx-hal-crc%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
-          stm32f1xx_hal_crc库的使用
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/08/05/stm32f1xx-hal-crc%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
-        <div>
-          Cyclic Redundancy Check，简称CRC，冗余循环校验，ST官方库关于CRC的介绍很简单，下面来看看 Cyclic Redundancy Check HAL库关于CRC校验库的使用方法。 CRC外设库的使用  使能CRC AHB时钟。__HAL_RCC_CRC_CLK_ENABLE() 初始化CRC计算器  指定生成的多项式polynomial（外设默认或非默认）
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-08-05 15:17" pubdate>
-              2023-08-05
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/stm32/" class="category-chain-item">stm32</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/crc/">#crc</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/08/05/stm32f1xx-hal-iwdg%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
-          stm32f1xx_hal_iwdg库的使用
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/08/05/stm32f1xx-hal-iwdg%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
-        <div>
-          下面来看看 IWDG HAL库关于 独立看门狗的特性和使用方法。 IWDG外设库的一般特性  独立看门狗可以通过软件或硬件开启。 (通过可选字节（option byte）进行配置) 独立看门狗时钟时LSI提供（Low-Speed Internal clock），即使没有主时钟，它也能维持运行。 一旦独立看门狗开启，LSI 时钟就会被强制打开，这两者就不会关闭。计数值从复位值（0xFFF）
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-08-05 13:12" pubdate>
-              2023-08-05
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/stm32/" class="category-chain-item">stm32</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/iwdg/">#iwdg</a>
             
           </div>
         
