@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>Excel中提取数字的常用函数</title>
+    <link href="/2024/04/10/Excel%E4%B8%AD%E6%8F%90%E5%8F%96%E6%95%B0%E5%AD%97%E7%9A%84%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/"/>
+    <url>/2024/04/10/Excel%E4%B8%AD%E6%8F%90%E5%8F%96%E6%95%B0%E5%AD%97%E7%9A%84%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/</url>
+    
+    <content type="html"><![CDATA[<p>在Excel中，有时需要从单元格中提取数字，利用Excel中内置函数，可以快速实现这个目的。下面针对几种不同的情况分别进行说明：</p><h2 id="数字与汉字">数字与汉字</h2><ol type="1"><li><strong>数字与汉字之间有分隔符</strong></li></ol><p>利用 <code>FIND 函数</code> 找到分隔符的位置，再使用 <code>LEFT 函数</code> 或 <code>RIGHT 函数</code> 从左边或右边提取数字。</p><p><code>FIND 函数</code> 有三个参数，第一个参数是查找的内容，第二个参数是查找的位置，第三个参数是查找的开始位置（从左边算起），省略时则从左边第一位开始查找。</p><figure><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/fa229857-5b2a-4562-a3b9-291d5a100374.png" alt="" /><figcaption>img</figcaption></figure><ol start="2" type="1"><li><strong>数字与汉字之间没有分隔符</strong></li></ol><ul><li><strong>数字在汉字左侧</strong></li></ul><figure><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/9f85ccd4-f8e3-4ae0-957c-ea561c1d8fa8.png" alt="" /><figcaption>img</figcaption></figure><p>利用 <code>LEN 函数</code>、<code>LENB 函数</code>、<code>LEFT 函数</code> 进行组合提取，其中，<code>LEN 函数</code> 将一个汉字作为 1 个字节，而 <code>LENB 函数</code> 将一个汉字（全角）作为 2 个字节。<code>LEN(E2)*2 - LENB(E2)</code> 就能获取左边数字的个数。</p><ul><li><strong>数字在汉字右侧</strong></li></ul><figure><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/4c5285de-da8b-48a0-a3e6-901906f90840.png" alt="" /><figcaption>img</figcaption></figure><p>利用 <code>LENB(H2) - LEN(H2)</code> 获得左边文本个数，加上 <code>1</code> 后就是首个数字出现的位置。从首个位置开始截取到 99 位（具体提取的位数只要大于等于数字的最大位数即可）。</p><ul><li><strong>数字在汉字中间</strong></li></ul><figure><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20240410095555571.png" alt="" /><figcaption>image-20240410095555571</figcaption></figure><p>这里的公式复杂点，利用了 <code>LOOKUP 函数</code> 查找功能和 <code>MIDB 函数</code> 提取指定的字符串及 <code>SEARCHB 函数</code> 的通配符查找功能，查找字符串中的数字，<code>ROW 函数</code> 在这里表示要提取数字的位数。</p><h2 id="数字与字母汉字混合"><strong>数字与字母汉字混合</strong></h2><ol type="1"><li><strong>提取字符串在左右侧的连续数字</strong></li></ol><ul><li><strong>数字在最右侧</strong></li></ul><p><code>=-LOOKUP(1,-RIGHT(O2,ROW($1:$15)))</code></p><figure><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/cf9aada5-aaab-4ed0-baca-e62b014c4590.png" alt="" /><figcaption>img</figcaption></figure><ul><li><strong>数字在最左侧</strong></li></ul><p><code>=-LOOKUP(1,-LEFT(R2,ROW($1:$15)))</code></p><figure><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/bcd041b0-7904-4cf8-ae6f-51944f8a4624.png" alt="" /><figcaption>img</figcaption></figure><p>这里 <code>LEFT 函数</code>前的负号是为了将文本转换为错误值，将数值转换为负数。</p><ol start="2" type="1"><li><strong>数字在任意位置</strong></li></ol><p><code>=-LOOKUP(0,-MID(K2,MIN(FIND(ROW($1:$10)-1,K2&amp;1/17)),ROW($1:$15)))</code></p><figure><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/fb327c5e-31d7-4176-9437-fb80efe3d60d.png" alt="" /><figcaption>img</figcaption></figure><p>这个函数较复杂，分析如下：</p><p>❶ 首先构造 0-9 的数字数组：<code>ROW($1:$10)-1</code></p><p>❷ 「1/17」等于 0.0588235294117647，它是一个包含 0-9 所有数字的值，连接在文本的尾部是避免 FIND 函数在查找数字时，因文本缺少相应数字而返回错误值。</p><p>❸ 用 FIND 函数查找 10 个数字在文本中的位置，利用 MIN 函数返回文本中出现数字的最小位置，即可以得到首个数字的位置。</p><p>❹ 利用 MID 函数从首个数字位置开始，依次向右截取长度为 1~15 的 15 个子字符串，加上负号，将数字转化为负数，文本转化为错误值。</p><p>最后利用 LOOKUP 函数返回最大的数字，再使用负号将负数转化为正数。</p><h2 id="参考链接">参考链接</h2><p><a href="https://www.ithome.com/0/646/177.htm">Excel 中 8 个必会的高效提取数字法，你知道几个？ - IT之家 (ithome.com)</a></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>其它</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Excel</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>风扇转速的测量</title>
     <link href="/2024/03/11/%E9%A3%8E%E6%89%87%E8%BD%AC%E9%80%9F%E7%9A%84%E6%B5%8B%E9%87%8F/"/>
     <url>/2024/03/11/%E9%A3%8E%E6%89%87%E8%BD%AC%E9%80%9F%E7%9A%84%E6%B5%8B%E9%87%8F/</url>

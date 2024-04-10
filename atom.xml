@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2024-03-11T10:55:48.254Z</updated>
+  <updated>2024-04-10T02:31:12.489Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Excel中提取数字的常用函数</title>
+    <link href="http://example.com/2024/04/10/Excel%E4%B8%AD%E6%8F%90%E5%8F%96%E6%95%B0%E5%AD%97%E7%9A%84%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/"/>
+    <id>http://example.com/2024/04/10/Excel%E4%B8%AD%E6%8F%90%E5%8F%96%E6%95%B0%E5%AD%97%E7%9A%84%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/</id>
+    <published>2024-04-10T00:08:01.000Z</published>
+    <updated>2024-04-10T02:31:12.489Z</updated>
+    
+    <content type="html"><![CDATA[<p>在Excel中，有时需要从单元格中提取数字，利用Excel中内置函数，可以快速实现这个目的。下面针对几种不同的情况分别进行说明：</p><h2 id="数字与汉字">数字与汉字</h2><ol type="1"><li><strong>数字与汉字之间有分隔符</strong></li></ol><p>利用 <code>FIND 函数</code> 找到分隔符的位置，再使用 <code>LEFT 函数</code> 或 <code>RIGHT 函数</code> 从左边或右边提取数字。</p><p><code>FIND 函数</code> 有三个参数，第一个参数是查找的内容，第二个参数是查找的位置，第三个参数是查找的开始位置（从左边算起），省略时则从左边第一位开始查找。</p><figure><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/fa229857-5b2a-4562-a3b9-291d5a100374.png" alt="" /><figcaption>img</figcaption></figure><ol start="2" type="1"><li><strong>数字与汉字之间没有分隔符</strong></li></ol><ul><li><strong>数字在汉字左侧</strong></li></ul><figure><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/9f85ccd4-f8e3-4ae0-957c-ea561c1d8fa8.png" alt="" /><figcaption>img</figcaption></figure><p>利用 <code>LEN 函数</code>、<code>LENB 函数</code>、<code>LEFT 函数</code> 进行组合提取，其中，<code>LEN 函数</code> 将一个汉字作为 1 个字节，而 <code>LENB 函数</code> 将一个汉字（全角）作为 2 个字节。<code>LEN(E2)*2 - LENB(E2)</code> 就能获取左边数字的个数。</p><ul><li><strong>数字在汉字右侧</strong></li></ul><figure><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/4c5285de-da8b-48a0-a3e6-901906f90840.png" alt="" /><figcaption>img</figcaption></figure><p>利用 <code>LENB(H2) - LEN(H2)</code> 获得左边文本个数，加上 <code>1</code> 后就是首个数字出现的位置。从首个位置开始截取到 99 位（具体提取的位数只要大于等于数字的最大位数即可）。</p><ul><li><strong>数字在汉字中间</strong></li></ul><figure><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20240410095555571.png" alt="" /><figcaption>image-20240410095555571</figcaption></figure><p>这里的公式复杂点，利用了 <code>LOOKUP 函数</code> 查找功能和 <code>MIDB 函数</code> 提取指定的字符串及 <code>SEARCHB 函数</code> 的通配符查找功能，查找字符串中的数字，<code>ROW 函数</code> 在这里表示要提取数字的位数。</p><h2 id="数字与字母汉字混合"><strong>数字与字母汉字混合</strong></h2><ol type="1"><li><strong>提取字符串在左右侧的连续数字</strong></li></ol><ul><li><strong>数字在最右侧</strong></li></ul><p><code>=-LOOKUP(1,-RIGHT(O2,ROW($1:$15)))</code></p><figure><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/cf9aada5-aaab-4ed0-baca-e62b014c4590.png" alt="" /><figcaption>img</figcaption></figure><ul><li><strong>数字在最左侧</strong></li></ul><p><code>=-LOOKUP(1,-LEFT(R2,ROW($1:$15)))</code></p><figure><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/bcd041b0-7904-4cf8-ae6f-51944f8a4624.png" alt="" /><figcaption>img</figcaption></figure><p>这里 <code>LEFT 函数</code>前的负号是为了将文本转换为错误值，将数值转换为负数。</p><ol start="2" type="1"><li><strong>数字在任意位置</strong></li></ol><p><code>=-LOOKUP(0,-MID(K2,MIN(FIND(ROW($1:$10)-1,K2&amp;1/17)),ROW($1:$15)))</code></p><figure><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/fb327c5e-31d7-4176-9437-fb80efe3d60d.png" alt="" /><figcaption>img</figcaption></figure><p>这个函数较复杂，分析如下：</p><p>❶ 首先构造 0-9 的数字数组：<code>ROW($1:$10)-1</code></p><p>❷ 「1/17」等于 0.0588235294117647，它是一个包含 0-9 所有数字的值，连接在文本的尾部是避免 FIND 函数在查找数字时，因文本缺少相应数字而返回错误值。</p><p>❸ 用 FIND 函数查找 10 个数字在文本中的位置，利用 MIN 函数返回文本中出现数字的最小位置，即可以得到首个数字的位置。</p><p>❹ 利用 MID 函数从首个数字位置开始，依次向右截取长度为 1~15 的 15 个子字符串，加上负号，将数字转化为负数，文本转化为错误值。</p><p>最后利用 LOOKUP 函数返回最大的数字，再使用负号将负数转化为正数。</p><h2 id="参考链接">参考链接</h2><p><a href="https://www.ithome.com/0/646/177.htm">Excel 中 8 个必会的高效提取数字法，你知道几个？ - IT之家 (ithome.com)</a></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;在Excel中，有时需要从单元格中提取数字，利用Excel中内置函数，可以快速实现这个目的。下面针对几种不同的情况分别进行说明：&lt;/p&gt;
+&lt;h2 id=&quot;数字与汉字&quot;&gt;数字与汉字&lt;/h2&gt;
+&lt;ol type=&quot;1&quot;&gt;
+&lt;li&gt;&lt;strong&gt;数字与汉字之间有分隔符&lt;/</summary>
+      
+    
+    
+    
+    <category term="其它" scheme="http://example.com/categories/%E5%85%B6%E5%AE%83/"/>
+    
+    
+    <category term="Excel" scheme="http://example.com/tags/Excel/"/>
+    
+  </entry>
   
   <entry>
     <title>风扇转速的测量</title>
@@ -519,31 +546,6 @@
     
     
     <category term="锂电池" scheme="http://example.com/tags/%E9%94%82%E7%94%B5%E6%B1%A0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>批量获取微信公众号的历史消息</title>
-    <link href="http://example.com/2023/11/16/%E6%89%B9%E9%87%8F%E8%8E%B7%E5%8F%96%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7%E7%9A%84%E5%8E%86%E5%8F%B2%E6%B6%88%E6%81%AF/"/>
-    <id>http://example.com/2023/11/16/%E6%89%B9%E9%87%8F%E8%8E%B7%E5%8F%96%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7%E7%9A%84%E5%8E%86%E5%8F%B2%E6%B6%88%E6%81%AF/</id>
-    <published>2023-11-16T06:43:13.000Z</published>
-    <updated>2023-11-16T08:11:10.395Z</updated>
-    
-    <content type="html"><![CDATA[<p>微信公众号历史文章有很多，不想总是不停一篇一篇滑动浏览，然后在网上找到了一种提取方法：<strong>Python爬虫+Fiddler抓取</strong> 。具体操作如下：</p><h2 id="下载项目源码">下载项目源码</h2><p>项目地址：</p><div class="code-wrapper"><pre><code class="hljs awk">https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/LeLe86/</span>vWeChatCrawl.git</code></pre></div><p><font color="#FF0000">前提是电脑安装有<strong>python软件</strong></font>，打开 <code>git bash</code> 下载项目源码：</p><div class="code-wrapper"><pre><code class="hljs awk">git clone https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/LeLe86/</span>vWeChatCrawl.git</code></pre></div><h2 id="安装python包">安装python包</h2><p>在 <code>git bash</code> 中，输入</p><div class="code-wrapper"><pre><code class="hljs c">cd vWeChatCrawlpython setupPackage.py</code></pre></div><p>等待安装完成。</p><h2 id="安装fiddler抓包工具">安装Fiddler抓包工具</h2><p><a href="https://www.telerik.com/fiddler/fiddler-classic">Fiddler的官网</a>有时会连不上，可去 <strong>pc.qq.com</strong> 搜索 <strong>Fiddler4</strong> 下载并安装。</p><h2 id="fiddler软件设置">Fiddler软件设置</h2><p>打开Fiddler软件，设置如下：</p><figure><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231116152054397.png" alt="" /><figcaption>image-20231116152054397</figcaption></figure><p>然后在主窗口右侧选择 <strong>Filters</strong>，在需要填的URL为：<code>mp.weixin.qq.com/mp/profile_ext?action=getmsg</code> ,如下图所示：</p><figure><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231116152400300.png" alt="" /><figcaption>image-20231116152400300</figcaption></figure><p>点软件左下角的方块，会显示 <strong>Capturing</strong> ，表示它此时处在抓取数据的状态，再点一下会停止抓取。</p><figure><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231116152722265.png" alt="" /><figcaption>image-20231116152722265</figcaption></figure><h2 id="获取公众号历史消息">获取公众号历史消息</h2><p>登录电脑端微信，我这里版本（<strong>V2.9.5.41</strong>），选择一个公众号，查看历史消息，如：</p><figure><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231116152851584.png" alt="" /><figcaption>image-20231116152851584</figcaption></figure><p>进入后缓慢向下滑动，页面显示 <strong>正在加载</strong> ，即可看到抓包软件捕捉到信息。</p><figure><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231116153410980.png" alt="" /><figcaption>image-20231116153410980</figcaption></figure><p>把这些json文件保存下来，</p><figure><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231116154034375.png" alt="" /><figcaption>image-20231116154034375</figcaption></figure><h2 id="下载文章html或pdf文档">下载文章html或pdf文档</h2><p>打开项目中的 <strong>config.json</strong> 文件，进行设置并保存。</p><ul><li><strong>jsonDir</strong>：上面在Fiddler中保存的文件目录<br /></li><li><strong>htmlDir</strong>：保存html的目录，路径中不能有空格<br /></li><li><strong>pdfDir</strong>：保存pdf的目录，路径中不能有空格</li></ul><figure><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231116154743433.png" alt="" /><figcaption>image-20231116154743433</figcaption></figure><p>一般只需要设置 <strong>jsonDir</strong> ，另外两个默认即可。</p><p>设置完成后，在 <code>git bash</code> 中， 运行 <code>python start.py</code> ,即可下载html文件，等待下载完成，可看到html文件夹下的html文件和imsges文件夹，但这种html文件都是以数字命名的，查看不方便，所以，可以运行 <code>python start.py pdf</code> ,等待全部转化成pdf文件即可，后面就可以离线查看各个文章了。</p><figure><img src="https://gitee.com/kayoungzhang/picgo_res/raw/master/img/image-20231116160112140.png" alt="" /><figcaption>image-20231116160112140</figcaption></figure><p>以上就是分享的全部内容，这中间试了很多爬虫方式，找了很多第三方工具，都没法提取，在本项目实施过程中也并非一帆风顺，碰到了各种莫名其妙的问题，折腾好久，但最终都一一解决了，在此记录一下。</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;微信公众号历史文章有很多，不想总是不停一篇一篇滑动浏览，然后在网上找到了一种提取方法：&lt;strong&gt;Python爬虫+Fiddler抓取&lt;/strong&gt; 。具体操作如下：&lt;/p&gt;
-&lt;h2 id=&quot;下载项目源码&quot;&gt;下载项目源码&lt;/h2&gt;
-&lt;p&gt;项目地址：&lt;/p&gt;
-&lt;</summary>
-      
-    
-    
-    
-    <category term="其它" scheme="http://example.com/categories/%E5%85%B6%E5%AE%83/"/>
-    
     
   </entry>
   
